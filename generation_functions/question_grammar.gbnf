@@ -1,0 +1,20 @@
+root ::= (question answer)
+
+# Define the question structure with a number followed by content and ending punctuation
+question ::= number ".\)" ws content ending_punctuation ws
+
+# Define the answer structure
+answer ::= "Answer: " content "."
+
+# Define a number (in this case, limiting to any three-digit number for simplicity)
+number ::= [1-9] [0-9]? [0-9]?
+
+# Define content as a sequence of characters that can include punctuation
+# Here we use a negated set for anything that's not a newline to allow for punctuation within the content
+content ::= [^\n]+
+
+# Define the acceptable ending punctuation for a question
+ending_punctuation ::= [?.!]
+
+# Optional whitespace: space, tab, or newlines zero or more times
+ws ::= [ \t\n]*
