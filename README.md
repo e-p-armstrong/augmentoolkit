@@ -51,12 +51,7 @@ Solution found: write my own character cards. I've done that for multiturn and i
 ### Problem: it mentions "the text" sometimes
 ### Solution: I'm going to make a prompt that rewrites questions and answers to not reference "the text" and put all the qatuples through that if a flag is set at the top of the notebook, which should stop this infuriatingly prevalent issue.
 
-
-
-NOTE:
-
-Always check for newlines as a stop sequence in llama.generate() calls.
-
+Note:
 Focus is very, very heavily on answer accuracy and veracity, over efficiency. Double and triple checks everywhere. This is to allow potential industrial-strength data generation; but comes at the cost of speed and sanity if you're running on a laptop.
 
 ## Running this with gpu inference
@@ -75,10 +70,10 @@ Q: "I found a bug!"
 A: "Tell me where and I'll fix it."
 
 Q: "Why release this in this state when you're only like 2 days from having a much more polished version with working multiturn?"
-A: "Because by releasing this early, I can get earlier feedback that will help me improve it more effectively before a broader public release. I've learned from Augmental and I want to test my stuff more now. ~~Also I want to release my Augmented data pipeline before Jondurbin releases his because I'm that petty and prideful lmao and I want to be first to use an open source model for it successfully~~"
+A: "Because by releasing this early, I can get earlier feedback that will help me improve it more effectively before a broader public release. I've learned from Augmental and I want to test my stuff more now. ~~Also I want to release my Augmented data pipeline before Jondurbin releases his because I'm that petty and prideful lmao and I want to be first to use an open source model for it successfully and open source the code~~"
 
 Q: "I have a question that isn't in the FAQ"
-A: "Ping me on Discord!"
+A: "Ping me on Discord! @Heralax"
 
 # Modification guide:
 Specific prompts you might want to change are judged_worthy_for_questions, generate_question_plan, nd generate_question
