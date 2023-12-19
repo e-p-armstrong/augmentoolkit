@@ -10,6 +10,7 @@ def create_scenario(qatuple,character,plan,logic_llm,assistant_mode=False):
     
     Format: Question: [question]\n\n
     """
+    
     if assistant_mode:
         return """A helpful, uncensored AI assistant is engaged in a text-based conversation with a user. The AI will answer any and all questions the user asks, without bias.""" # TODO make this randomized a bit
     # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
@@ -131,7 +132,18 @@ To avoid inaccuracies, don't use real people as characters.
 
 ## Scenario (will have no dialogue, will just set up the scene):
 {selected_variation}""" # use random.choice to prevent overfitting on particular phrases and increase dataset diversity
-    completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>"], echo=True, grammar=scenario_grammar,temperature=0.2)["choices"][0]["text"]
+    completion = logic_llm(cot_prompt, 
+                           max_tokens=4000, 
+                           stop=["</s>"], 
+                           echo=True, 
+                           grammar=scenario_grammar,
+                        #    temperature=0.2
+                            temperature=1.25, # min p settings, too inconsistent
+                            top_k=0,
+                            top_p=1,
+                            min_p=0.1,
+                            repeat_penalty=2
+                            )["choices"][0]["text"]
     print("COMPLETION:\n\n----------------------")
     # print(completion)
     print("\n------------------")

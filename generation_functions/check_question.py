@@ -19,11 +19,11 @@ def check_question(qatuple,logic_llm):
         decision_prompt = f"""# Input:
 You are an expert educational AI. Given a paragraph or two from a larger text, and a question based on the paragraphs, you will make a determination as to whether the question tests ONLY information in the paragraphs. Essentially: you will check if the question is answerable, given the information in the paragraphs. Your task includes first analyzing the text, thinking through whether or not the question reflects aspects of the paragraphs provided. 
 
-Following this, at the very end of your response, your "final judgement" or "final answer", you will write "Relevant" or "Irrelevant" depending on your analysis of the question with regards to the text. 
+Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Relevant" or "Irrelevant" depending on your analysis of the question with regards to the text. 
 
 Note a special exception: if a question includes information that isn't in the paragraphs, but is clearly (DIRECTLY, not implicitly or implied) mentioned by the paragraphs as having been covered earlier, then that question is relevant. Essentially: questions are allowed to cover content that the text has explicitly covered in the past.
 
-Write out the reasoning and analysis behind your judgement, step-by-step. Your analysis of the question, against the text, should follow a logical progression of steps that results in a conclusive and accurate final answer.
+Write out the reasoning and analysis behind your judgment, step-by-step. Your analysis of the question, against the text, should follow a logical progression of steps that results in a conclusive and accurate final answer.
 
 You will analyze the question step-by-step, ensuring each part of the question is individually compared to the text. The key steps are analyzing the text, understanding the question, and then systematically comparing each part of the question with the text. The process continues until either a part of the question is found not to be covered by the text, leading to a judgment of "Irrelevant," or until all parts of the question have been compared and found to be covered by the text, leading to a judgment of "Relevant." This method allows for a thorough and detailed assessment, ensuring that the final judgment accurately reflects the extent to which the question is based on the given text.
 
@@ -38,14 +38,25 @@ The concept of artificial intelligence (AI) revolves around the creation of mach
 \"\"\"
 
 Question (based on text): \"\"\"What is the role of neural networks in AI, and how does natural language processing contribute to human-computer interaction?\"\"\"
-Answer: \"\"\"Neural networks, which are modeled after the human brain's neurons, play a significant role in AI by aiding machines in recognizing patterns and making decisions. Natural language processing, on the other hand, enables machines to understand and interpret human languages, thereby enhancing human-computer interaction.\"\"\"
 
 # Response:
 ## Reasoning and thought process:
-Step 1. Analyze the Text: Focus on the key aspects mentioned about AI, particularly machine learning, neural networks, and natural language processing.
-Step 2. Understand the Question: Identify the query's focus on the roles of neural networks and natural language processing in AI. Key terms: AI, machine learning, neural networks, natural language processing.
-Step 3. Compare the Question with the Text: Regarding neural networks: The text states, "Neural networks are modeled after the human brain's network of neurons and are pivotal in enabling machines to recognize patterns and make decisions." This directly aligns with the question's first part about the role of neural networks in AI. Regarding natural language processing: The text notes, "Natural language processing, another crucial aspect of AI, allows machines to understand and interpret human languages." This matches the question's second part about how natural language processing aids in human-computer interaction.
-Step 4. Final Judgement: Since the text covers both aspects of the question—neural networks' role in pattern recognition and decision-making, and natural language processing's role in human-computer interaction—I conclude that the question is relevant.
+
+### In-Depth Analysis of the Text:
+#### Content and Depth: The text details key components of AI, including machine learning, neural networks, and natural language processing, with a focus on their roles and functions in AI.
+#### Type of Information: The information is primarily descriptive, outlining the roles and functions of neural networks and natural language processing in AI.
+
+### Detailed Understanding of the Question:
+#### Core Requirement: The question asks about the roles of neural networks in AI and the contribution of natural language processing to human-computer interaction, seeking specific functional explanations.
+#### Depth of Detail: The question requires an understanding of the specific functions and impacts of these AI components.
+
+### Targeted Comparison of the Question with the Text:
+#### Content Match: The text aligns well with the question, covering the roles of neural networks in pattern recognition and decision-making, and the role of natural language processing in understanding and interpreting human languages.
+#### Depth Match: The text provides the necessary level of detail to answer the question, though it remains descriptive and does not delve into deeper explanatory mechanisms.
+
+### Critical Evaluation and Final Judgment:
+The text addresses both components of the question with sufficient detail, making it: Relevant.
+
 
 # Input:
 ## Instruction:
@@ -56,14 +67,25 @@ The phenomenon of photosynthesis in plants is an essential process for life on E
 \"\"\"
 
 Question (based on text): \"\"\"Explain exactly why chlorophyll able to absorb sunlight, and why is this important for the Calvin cycle?\"\"\"
-Answer: \"\"\"Chlorophyll absorbs sunlight due to its molecular structure, which contains a porphyrin ring that can capture light energy. This absorption is crucial for the Calvin cycle because it provides the energy required to convert atmospheric carbon dioxide into glucose.\"\"\"
 
 # Response:
 ## Reasoning and thought process:
-Step 1. Analyze the Text: Focus on the details concerning photosynthesis, specifically the role of chlorophyll, the light-dependent reactions, and the Calvin cycle.
-Step 2. Understand the Question: The question asks about the mechanism by which chlorophyll absorbs sunlight and its significance for the Calvin cycle. Key terms: chlorophyll, absorb, sunlight, Calvin cycle.
-Step 3. Compare the Question with the Text: The text mentions "chlorophyll [...] absorbs sunlight" which directly aligns with the question's first part. However, it does not describe the molecular structure of chlorophyll or its ability to capture light due to the porphyrin ring. This specific detail is not covered in the text. For the second part, the text states, "sunlight is absorbed by chlorophyll, which then [...] transfers energy to the light-independent reactions." This indicates the importance of sunlight absorption for providing energy to the Calvin cycle, aligning with the question's second part.
-Step 5. Final Judgement: While the text supports the importance of chlorophyll in absorbing sunlight for the Calvin cycle, it lacks information on the molecular structure of chlorophyll that enables this process. Therefore, the question is partially relevant but lacks complete relevance due to missing details about chlorophyll's molecular structure. Hence, the final judgment is "Irrelevant."
+
+### In-Depth Analysis of the Text:
+#### Content and Depth: The text discusses the process of photosynthesis, including the roles of chlorophyll, light-dependent reactions, and the Calvin cycle.
+#### Type of Information: Information is descriptive, explaining the stages of photosynthesis and the role of chlorophyll in light absorption.
+
+### Detailed Understanding of the Question:
+#### Core Requirement: The question seeks an explanation of why chlorophyll can absorb sunlight and its importance for the Calvin cycle, requiring detailed scientific principles.
+#### Depth of Detail: Requires an in-depth, explanatory response about the biological and chemical properties of chlorophyll.
+
+### Targeted Comparison of the Question with the Text:
+#### Content Match: The text partially matches the question by mentioning the role of chlorophyll in the light-dependent reactions.
+#### Depth Match: The text lacks the specific scientific principles explaining the mechanism of sunlight absorption by chlorophyll, which is central to the question.
+
+### Critical Evaluation and Final Judgment:
+Although the text touches upon the role of chlorophyll, it does not provide the depth of explanation required by the question, making it: Irrelevant.
+
 
 # Input:
 ## Instruction:
@@ -74,14 +96,25 @@ The octopus is an extraordinary creature, renowned for its intelligence and abil
 \"\"\"
 
 Question (based on text): \"\"\"How do octopuses utilize their color-changing ability in their natural habitat, and what role does their central brain play in this process?\"\"\"
-Answer: \"\"\"Octopuses use their color-changing ability for camouflage and communication in their natural habitat. This process is controlled by their central brain, which coordinates with the nervous system to alter skin color and texture in response to environmental stimuli.\"\"\"
 
 # Response:
 ## Reasoning and thought process:
-Step 1. Analyze the Text: Focus on details provided about the octopus's physiology, including its hearts, nervous system, arms, and color-changing ability.
-Step 2. Understand the Question: Determine the question's emphasis on chlorophyll's role in oxygen production during photosynthesis and its contribution to animal life. Key terms: color-changing, habitat, central brain.
-Step 3. Compare the Question with the Text: The first part of the question asks about the use of the color-changing ability in their natural habitat. The text directly states, "The creature's ability to change its color and texture is another remarkable feature, which it uses for camouflage and communication." This aligns with the question's focus on the use of color-changing for camouflage and communication, thus it is relevant. The second part of the question inquires about the role of the central brain in this process. The text mentions the octopus having "a central brain and a small brain in each of their eight arms." However, it does not specifically detail the role of the central brain in the color-changing process. There is no explicit mention of the central brain's involvement in this particular function. Therefore, this part is irrelevant due to the lack of detailed information on the central brain's role in color-changing.
-Step 4. Final Judgement: Since the text does not cover the central brain's specific role in the color-changing process, I conclude that the question is irrelevant.
+
+### In-Depth Analysis of the Text:
+#### Content and Depth: The text outlines various aspects of the octopus, such as its physiology, nervous system, color-changing ability, and intelligence.
+#### Type of Information: Descriptive, covering the abilities and features of the octopus, including color-changing for camouflage and communication.
+
+### Detailed Understanding of the Question:
+#### Core Requirement: The question asks how octopuses utilize their color-changing ability and the role of their central brain in this process.
+#### Depth of Detail: Seeks specific information on the function and control mechanism of the color-changing ability.
+
+### Targeted Comparison of the Question with the Text:
+#### Content Match: The text aligns with the first part of the question regarding the use of color-changing for camouflage and communication.
+#### Depth Match: The text does not provide information about the role of the central brain in this process, lacking the required depth on the control mechanism.
+
+### Critical Evaluation and Final Judgment:
+Given the text's coverage of color-changing but lack of detail on the central brain's role, the overall assessment of the question's relevance to the text is: Irrelevant.
+
 
 # Input:
 ## Instruction:
@@ -92,12 +125,11 @@ Text:
 \"\"\"
 
 Question (based on text): \"\"\"{qatuple[0]}\"\"\"
-Answer to the question: \"\"\"{qatuple[1]}\"\"\"
 
 If the question clearly goes off the rails and is incoherent, then it is irrelevant.
 
 # Response:
-## Reasoning and thought process (check each part of the question):
+## Reasoning and thought process (be careful around "how" and "why" questions):
 """
         # print("DEBUG\n\n" + decision_prompt)
         try:
@@ -106,9 +138,9 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
             # print("DEBUG\n\n")
             # print(completion)
             
-            response_pattern = re.compile(r"Reasoning and thought process \(check each part of the question\):(.+)", re.DOTALL | re.IGNORECASE)
+            response_pattern = re.compile(r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)", re.DOTALL | re.IGNORECASE)
             response = response_pattern.search(completion).group(1).strip()
-            decision_pattern = re.compile(r"Final Judgement:(.+)")
+            decision_pattern = re.compile(r"Final Judgment:(.+)", re.DOTALL | re.IGNORECASE)
             print(response)
             determination = decision_pattern.search(response).group(1).strip()
             print("\n\nDETERMINATION:\n------")
@@ -119,14 +151,16 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
             elif "relevant" in determination or "Relevant" in determination:
                 return (True,response)
             else:
+                print("Did not contain relevant or irrelevant! Retrying")
                 retries += 1
-        except:
+        except Exception as e:
+            print("Exception!", e)
             if retries <= 4:
                 retries += 1
             else:
                 return (None,None)
     return (None, None)
-
+# There is no bug about this ignoring certain judgments and retrying; that's just the dissenting reasoning from the print statement
 
 if __name__ == "__main__": # test
     logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
@@ -145,7 +179,7 @@ if __name__ == "__main__": # test
     
     print("Begin HGWELLS test")
     # Try to detect bad question
-    d = check_question(q_test[3],logic_llm)
+    d = check_question(q_test[2],logic_llm)
     if not d[0]: # if not relevant
         print("Made right choice for bad question")
     else:

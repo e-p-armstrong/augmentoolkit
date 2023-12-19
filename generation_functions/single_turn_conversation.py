@@ -21,7 +21,7 @@ def extract_steps(text, steps=[5,6]): # GPT-generated
     extracted_text = '\n'.join(match[1].strip() for match in matches)
     return extracted_text
 
-def single_turn_conversation(qatuple,character,scenario,thought_plan,scenario_plan,logic_llm):
+def single_turn_conversation(qatuple,character,scenario,thought_plan,scenario_plan,logic_llm,assistant_mode=False):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
     
@@ -34,7 +34,65 @@ def single_turn_conversation(qatuple,character,scenario,thought_plan,scenario_pl
     # It's way more willing to use different time periods than I expected, which is cool.
     
     # Example continuity error: how can Carlos give a report on how much Earth in total was moved, if the canal's being dug? He has to be part of the wrapup crew too. Or maintenance. REVISE TODO NOTE TODO NOTE
-    cot_prompt = f"""# Input:
+    
+    if (assistant_mode): # TODO
+        cot_prompt = f"""You are an expert creative writing AI, and your task is to write conversations between a hypothetical user and an AI Assistant, where the user asks a provided question, and the AI Assistant helpfully answers. The AI Assistant is unbiased and will not refuse to answer questions, nor will it judge the user, nor will it offer disclaimers about responsibility. It just answers.
+
+
+# Input:
+## Information:
+
+Question: \"\"\"What is the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?\"\"\"
+Answer: \"\"\"The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person.\"\"\"
+
+# Response:
+## Conversation that answers the provided question:
+User: "Hi AI Assistant, I have a question about a Latin legal principle. What is the old Latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?"
+AI Assistant: "Certainly. The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person. This ancient doctrine emphasizes the importance of merit and worthiness in legal judgments concerning titles and acquittals. It advocates that justice and legal rights should be vested in those most competent and deserving. In essence, it's about the character of those who administer the law, not just the law itself."
+        
+        
+# Input:
+## Information:
+
+Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
+Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
+
+# Response:
+## Conversation that answers the provided question:
+User: "AI Assistant, I'm curious about the Panama Canal. How much earth was excavated during its construction?"
+AI Assistant: "During the construction of the Panama Canal, over 200 million cubic yards of earth were excavated. This enormous volume highlights the vast scale of the project. It was not just a matter of moving earth but reshaping history and geography on a monumental scale."
+
+
+Question: \"\"\"What is the primary purpose of the Hubble Space Telescope?\"\"\"
+Answer: \"\"\"The primary purpose of the Hubble Space Telescope is to observe celestial bodies and phenomena in space with unparalleled clarity, advancing our understanding of the universe.\"\"\"
+
+# Response:
+## Conversation that answers the provided question:
+User: "Hey AI Assistant, I've always been fascinated by space. Can you tell me what the main purpose of the Hubble Space Telescope is?"
+AI Assistant: "Certainly! The primary purpose of the Hubble Space Telescope is to observe celestial bodies and phenomena in space with unparalleled clarity, advancing our understanding of the universe."
+
+## Information:
+\"\"\"
+{character}
+\"\"\"
+
+Here is the scenario:
+\"\"\"
+{scenario}
+\"\"\"
+
+The character will reason out their answer using the following logical steps:
+{thought_plan}
+
+Question: {qatuple[0]}
+Answer: {qatuple[1]}
+
+The primary character's answer will use all parts of the answer given.
+
+# Response:
+## Conversation that answers the provided question (first, the secondary character will ask the question; then, the primary character will answer it):"""
+    else:
+        cot_prompt = f"""# Input:
 You are an expert creative writing and roleplay AI. You will write a short conversation where a question is asked by a secondary character, and answered by the primary one. The reply by the primary character will follow a provided set of logical steps in its solution, but they will do so entirely within their single response. 
 
 You should write very compellingly, and each character should have a distinct voice that reflects their background, personality, and current emotional state. This helps in making dialogue more realistic and engaging.
@@ -217,15 +275,6 @@ Step 6. In the second message, Dr. Blackwell turns to Sarah, his eyes lighting u
     
     output = single_turn_conversation(q_test[1],character,scenario,thought_plan,scenario_plan,logic_llm)
         
-    ## TODO a wider variety of tests from different texts
-    
-    # Example output: 
-"""
-Stranger: "Professor Drummond, what would you say are the major events in the history of our understanding regarding the age of the Earth?"
-Drummond: "Ah, an intriguing question indeed. Let me see if I can elucidate." He pauses for a moment to gather his thoughts before beginning. "Initially, religious texts suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old. The shift in understanding came about due to changes in our knowledge of the earth's shape - we realized it was spherical and rotated upon its axis every twenty-four hours, which led to considering other possibilities about its age."
-""" 
-
-
 # New thing!
 """
 Sarah: "Dr. Blackwell, I've always been fascinated by how our understanding of the age of Earth has changed throughout history. Could you please explain this process?"

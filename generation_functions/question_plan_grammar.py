@@ -6,7 +6,7 @@ question_plan_grammar = LlamaGrammar.from_string(r"""
 
 # root ::= reasoning-start
 # At least 3 steps
-root ::= identify-step generate-step brainstorm-step relationships-step if-then-step
+root ::= identify-step generate-step brainstorm-step relationships-step if-then-step make-suitable-step
 
 # no-questions-after-here ::= "\nI will not ask any questions about the following information: " [^\n]+ "."
 
@@ -19,6 +19,8 @@ brainstorm-step ::= "Step " [0-9]?[0-9] ". " "Brainstorm and Develop Questions T
 relationships-step ::= "Step " [0-9]?[0-9] ". " "Devise Questions" [^\n]+ "\n"
 
 if-then-step ::= "Step " [0-9]?[0-9] ". " "Create Questions Investigating" [^\n]+ "\n"
+
+make-suitable-step ::= "Step " [0-9]?[0-9] ". " "Make a Question that Naturally Complements the Text's Focus:" [^\n]+ "\n"
 
 """)
 

@@ -19,7 +19,7 @@ def extract_name(str):
     else:
         print("No name found")
 
-def create_thought_plan(qatuple,character,logic_llm):
+def create_thought_plan(qatuple,character,logic_llm,assistant_mode=False):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
     

@@ -1,25 +1,11 @@
-import re
 from .thought_plan_grammar import thought_plan_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .create_thought_plan import create_thought_plan
+from .extract_name import extract_name
 
-def extract_name(str):
 
-    # Regular expression to match 'Name:' followed by any characters until the end of the line
-    name_regex = r'^Name:\s*(.*)$'
-
-    # Searching in the multiline string
-    match = re.search(name_regex, str, re.MULTILINE)
-
-    if match:
-        name = match.group(1)
-        print(f"Extracted name: {name}")
-        return name
-    else:
-        print("No name found")
-
-def create_thought_plan_many_tuples(qatuples,character,scenario,logic_llm):
+def create_thought_plan_many_tuples(qatuples,character,logic_llm):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
     
@@ -30,7 +16,7 @@ def create_thought_plan_many_tuples(qatuples,character,scenario,logic_llm):
     charname = extract_name(character)
     thought_plans = []
     for tuple in qatuples:
-         thought_plans.append(create_thought_plan(tuple))
+         thought_plans.append(create_thought_plan(tuple,character,logic_llm))
          
     ret = ""
     for idx, plan in enumerate(thought_plans):

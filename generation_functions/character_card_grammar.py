@@ -5,13 +5,13 @@ from llama_cpp import LlamaGrammar
 character_card_grammar = LlamaGrammar.from_string(r"""
        
 # Testing making traits come BEFORE dialogue examples, unlike AliChat, so that way it kind of "flows" into dialogue; and also the details are closer to the start and thus more easily remembered.                                     
-root ::= "Name: " name "\n" "Traits: " traits "\nDialogue Examples:" dialogue-examples
+root ::= "Name: " name "\n" "Traits: " traits "\n\nDialogue Examples:" dialogue-examples
 
 name ::= [^\n]+
 
-traits ::=  trait trait trait trait trait trait trait trait trait trait trait trait trait? trait? trait? trait? trait? trait? trait? trait? [A-Z][a-z]+ # 14 comma-separated traits
+traits ::=  trait trait trait trait trait trait trait trait trait trait trait trait trait? trait? trait? trait? trait? trait? trait? trait? # 14 comma-separated traits
 
-trait ::= [A-Z][a-z ]+ ", "
+trait ::= [A-Z][a-z ]+ ", " # todo, it wants hyphens, I can tell because I see it using double spaces for things like Mid twenties.
 
 dialogue-examples ::= history personality
 

@@ -4,63 +4,11 @@ from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 import random
-
-# TODO think of a good way to pass this array in
-def special_instructions(n=2):
-    # TODO maybe make the sentence arrays here a global constant?
-    """
-    Picks n random sentences from each of the provided lists (personality and physical traits)
-    and returns a string that combines these sentences. Each sentence is separated by a newline.
-    The idea: if you want only specific types of characters, you add this to the function below; this will then add the constraints to the character generation prompt. Each sentence is separated by a newline.
-    
-    Sentence arrays split by characteristics that conflict with each other.
-    
-    So if you give this function the sentences:
-    personality = ["The character should be horny"]
-    physical traits = ["The character should be a young adult"]
-    Then congrats you've made this script generate infinite YA smut with a dash of question answering, I hope you're happy. The function below would then end up with "The character should be horny. The character should be a young adult." somewhere important in the prompt.
-
-    This can help add some spice to an otherwise dry model, or reign in a too-spicy model, or just bias the dataset towards a certain type of character.
-    
-    Args:
-    n (int): The number of sentences to pick from each list.
-
-    Returns:
-    str: A string combining the selected sentences.
-    
-    n=2 is too high I think, too many traits and it misses a few.
-    """
-    # Example sentences for personality and physical traits
-    personality = [
-        "The character should be pretentious, arrogant, and haughty",
-        "The character should be horny"
-    ]
-
-    physical_traits = [
-     #    "The character should be a man",
-        "The character should be a smoker",
-        "The character should be a woman",
-    ]
-
-    # Ensure the list has enough elements to pick 'n' items
-    if n > len(personality) or n > len(physical_traits):
-        raise ValueError("n is larger than the number of available sentences in one of the lists")
-
-    # Select 'n' random sentences from each list
-    selected_personality = random.sample(personality, n)
-    selected_physical_traits = random.sample(physical_traits, n)
-
-    # Combine the selected sentences
-    combined_sentences = selected_personality + selected_physical_traits
-
-    # Return the combined string, with each sentence on a new line
-    return '\n'.join(combined_sentences)
+from special_instructions import special_instructions
 
 def create_character_card_plan_many_tuples(qatuples,logic_llm):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
-    
-    ... we probably need to generate the scenario first, don't we... yeah...
     
     Format: Question: [question]\n\n
     """
@@ -263,16 +211,26 @@ Details of the text the paragraphs were sourced from: \"\"\"{qatuples[0][3]}\"\"
 Special instructions:
 {instructions_string}
 
+You should use fictional people, not real people, to avoid accidental inaccuracies.
+
 # Response:
-## Character card plan (be creative):
-Given the question and its answer, one possibility for a character who makes sense is a """
-    completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>"], echo=True, grammar=character_card_plan_grammar)["choices"][0]["text"]
+## Character card plan (be creative, do not use real people as characters):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a """
+    completion = logic_llm(cot_prompt, 
+                           max_tokens=8000, 
+                           stop=["</s>"], 
+                           echo=True, 
+                           grammar=character_card_plan_grammar,temperature=0.8, 
+                            top_k=0,
+                            top_p=1,
+                            min_p=0.3,
+                           )["choices"][0]["text"]
     print("COMPLETION:\n\n----------------------")
     print(completion)
     print("\n------------------")
     
     # Extract plan
-    response_pattern = re.compile(r"Character card plan \(be creative\):\n(.+)",re.IGNORECASE | re.DOTALL)
+    response_pattern = re.compile(r"Character card plan \(be creative, do not use real people as characters\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
     print("GENERATION:\n\n-------------------\n\n", generation)
     
@@ -300,9 +258,14 @@ if __name__ == "__main__": # test
     
     print("Begin HGWELLS test")
     # Make card for good history question
-    d = create_character_card_plan_many_tuples([q_test[1],q_test[3]],logic_llm)
+    # d = create_character_card_plan_many_tuples([q_test[1],q_test[3]],logic_llm)
     
-        
+    
+    
+    mendeleev_qtuples = [('What is a homogeneous substance?', 'A homogeneous substance is one that occupies space and has weight, presenting a mass attracted by the earth and other masses of material. It is composed of only one kind of matter throughout its entire volume, exhibiting similar properties in all its parts. Examples include gold, iron, copper, glass, pure sugar, marble, etc.', "A substance or material is that which occupies space and has weight; that is, which presents a mass attracted by the earth and by other masses of material, and of which the _objects_ of nature are composed, and by means of which the motions and _phenomena_ of nature are accomplished. It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances. This is most clearly apparent in solid substances. The metals used in the arts (for example, gold, iron, coppermust be homogeneous, otherwise they are brittle and unfit for many purposes. Homogeneous matter exhibits similar properties in all its parts. By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties. Glass, pure sugar, marble, &c., are examples of homogeneous substances. Examples of non-homogeneous substances are, however, much more frequent in nature and the arts. Thus the majority of the rocks are not homogeneous. In porphyries bright pieces of a mineral called 'orthoclase' are often seen interspersed amongst the dark mass of the rock. In ordinary red granite it is easy to distinguish large pieces of orthoclase mixed with dark semi-transparent quartz and flexible laminæ of mica. Similarly, plants and animals are non-homogeneous. Thus, leaves are composed of a skin, fibre, pulp, sap, and a green colouring matter. As an example of those non-homogeneous substances which are produced artificially, gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal. Many liquids, also, are not homogeneous, as may be observed by the aid of the microscope, when drops of blood are seen to consist of a colourless liquid in which red corpuscles, invisible to the naked eye owing to their small size, are floating about.", 'Principles of chemistry, by Dimitry Mendeleev'), ('How can we determine if a substance is homogeneous based on its properties?', 'To determine whether a substance is homogeneous or not, one can examine its properties. If the substance exhibits similar properties in all its parts and does not change when broken into smaller pieces, it is likely to be homogeneous. On the other hand, if the substance has different components with varying properties, it is likely non-homogeneous.', "A substance or material is that which occupies space and has weight; that is, which presents a mass attracted by the earth and by other masses of material, and of which the _objects_ of nature are composed, and by means of which the motions and _phenomena_ of nature are accomplished. It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances. This is most clearly apparent in solid substances. The metals used in the arts (for example, gold, iron, coppermust be homogeneous, otherwise they are brittle and unfit for many purposes. Homogeneous matter exhibits similar properties in all its parts. By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties. Glass, pure sugar, marble, &c., are examples of homogeneous substances. Examples of non-homogeneous substances are, however, much more frequent in nature and the arts. Thus the majority of the rocks are not homogeneous. In porphyries bright pieces of a mineral called 'orthoclase' are often seen interspersed amongst the dark mass of the rock. In ordinary red granite it is easy to distinguish large pieces of orthoclase mixed with dark semi-transparent quartz and flexible laminæ of mica. Similarly, plants and animals are non-homogeneous. Thus, leaves are composed of a skin, fibre, pulp, sap, and a green colouring matter. As an example of those non-homogeneous substances which are produced artificially, gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal. Many liquids, also, are not homogeneous, as may be observed by the aid of the microscope, when drops of blood are seen to consist of a colourless liquid in which red corpuscles, invisible to the naked eye owing to their small size, are floating about.", 'Principles of chemistry, by Dimitry Mendeleev'), ('What are some examples of non-homogeneous substances?', 'Some examples of non-homogeneous substances include rocks like porphyries and red granite, plants and animals, and artificially produced substances such as gunpowder. These substances have different components with varying properties, making them non-homogeneous.', "A substance or material is that which occupies space and has weight; that is, which presents a mass attracted by the earth and by other masses of material, and of which the _objects_ of nature are composed, and by means of which the motions and _phenomena_ of nature are accomplished. It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances. This is most clearly apparent in solid substances. The metals used in the arts (for example, gold, iron, coppermust be homogeneous, otherwise they are brittle and unfit for many purposes. Homogeneous matter exhibits similar properties in all its parts. By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties. Glass, pure sugar, marble, &c., are examples of homogeneous substances. Examples of non-homogeneous substances are, however, much more frequent in nature and the arts. Thus the majority of the rocks are not homogeneous. In porphyries bright pieces of a mineral called 'orthoclase' are often seen interspersed amongst the dark mass of the rock. In ordinary red granite it is easy to distinguish large pieces of orthoclase mixed with dark semi-transparent quartz and flexible laminæ of mica. Similarly, plants and animals are non-homogeneous. Thus, leaves are composed of a skin, fibre, pulp, sap, and a green colouring matter. As an example of those non-homogeneous substances which are produced artificially, gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal. Many liquids, also, are not homogeneous, as may be observed by the aid of the microscope, when drops of blood are seen to consist of a colourless liquid in which red corpuscles, invisible to the naked eye owing to their small size, are floating about.", 'Principles of chemistry, by Dimitry Mendeleev'), ("How does the presence of 'orthoclase' affect the properties of porphyries?", "The presence of bright pieces of a mineral called 'orthoclase' interspersed amongst the dark mass of porphyry rocks makes these rocks non-homogeneous. This mixture of different components with varying properties affects the overall properties of porphyries, making them distinct from homogeneous substances.", "A substance or material is that which occupies space and has weight; that is, which presents a mass attracted by the earth and by other masses of material, and of which the _objects_ of nature are composed, and by means of which the motions and _phenomena_ of nature are accomplished. It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances. This is most clearly apparent in solid substances. The metals used in the arts (for example, gold, iron, coppermust be homogeneous, otherwise they are brittle and unfit for many purposes. Homogeneous matter exhibits similar properties in all its parts. By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties. Glass, pure sugar, marble, &c., are examples of homogeneous substances. Examples of non-homogeneous substances are, however, much more frequent in nature and the arts. Thus the majority of the rocks are not homogeneous. In porphyries bright pieces of a mineral called 'orthoclase' are often seen interspersed amongst the dark mass of the rock. In ordinary red granite it is easy to distinguish large pieces of orthoclase mixed with dark semi-transparent quartz and flexible laminæ of mica. Similarly, plants and animals are non-homogeneous. Thus, leaves are composed of a skin, fibre, pulp, sap, and a green colouring matter. As an example of those non-homogeneous substances which are produced artificially, gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal. Many liquids, also, are not homogeneous, as may be observed by the aid of the microscope, when drops of blood are seen to consist of a colourless liquid in which red corpuscles, invisible to the naked eye owing to their small size, are floating about.", 'Principles of chemistry, by Dimitry Mendeleev')]
+    
+    d = create_character_card_plan_many_tuples([mendeleev_qtuples[1],mendeleev_qtuples[3]],logic_llm)
+    
     ## TODO a wider variety of tests from different texts
     
     

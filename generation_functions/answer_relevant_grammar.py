@@ -7,19 +7,51 @@ answer_relevant_grammar = LlamaGrammar.from_string(r"""
 # TODO                                               
 # I COULD break this down further, by having the first step be a special "Analyze" step, the second step being a special "Understand" step, and the third+ being "Compare" steps" that each must end with "relevant" or "irrelevant" followed by a final judgement step... but currently it's working, and the model can't be that stupid right? Well I might do it later. I'll leave this comment here as a reminder.
        
-root ::= analyze-step understand-step summarize-relevant-step compare-step final-step "\n"
+# Root rule specifying the overall structure of the analysis
+root ::= deep-analysis "\n" comprehensive-understanding "\n" targeted-comparison "\n" identification-of-extraneous-info "\n" final-judgment
 
-step ::= "Step " [0-9]?[0-9] ". " ( "Analyze" | "Understand" | "Compare" | "Skip" ) [^\n]+ "\n"
+# Deep analysis of the text
+deep-analysis ::= "### Deep Analysis of the Text:" "\n" content-scope-and-detail type-of-information
 
-compare-step ::= "Step " [0-9]?[0-9] ". " "Compare the First Part of the Answer with the Text:" [^\n]+ "\n"
+content-scope-and-detail ::= "#### Content Scope and Detail: " text-detail "\n"
+type-of-information ::= "#### Type of Information: " info-type "\n"
 
-analyze-step ::= "Step " [0-9]?[0-9] ". " "Analyze" [^\n]+ "\n"
+# Comprehensive understanding of the answer
+comprehensive-understanding ::= "### Comprehensive Understanding of the Answer:" "\n" key-components-identification depth-of-explanation
 
-understand-step ::= "Step " [0-9]?[0-9] ". " "Understand" [^\n]+ "\n"
+key-components-identification ::= "#### Key Components Identification: " components-detail "\n"
+depth-of-explanation ::= "#### Depth of Explanation: " explanation-detail "\n"
 
-summarize-relevant-step ::= "Step " [0-9]?[0-9] ". " "Summarize Relevant Parts of the Text:" [^\n]+ "\n"
+# Targeted comparison of answer with text
+targeted-comparison ::= "### Targeted Comparison of Answer with Text:" "\n" content-alignment depth-alignment
 
-final-step ::= "Step " [0-9]?[0-9] ". " "Final Judgement: " [^\n]+
+content-alignment ::= "#### Content Alignment: " alignment-detail "\n"
+depth-alignment ::= "#### Depth Alignment: " depth-detail "\n"
+
+# Identification of extraneous information
+identification-of-extraneous-info ::= "### Identification of Extraneous Information:" "\n" spotting-additional-details assessing-impact
+
+spotting-additional-details ::= "#### Spotting Additional Details: " additional-details "\n"
+assessing-impact ::= "#### Assessing Impact of Additional Information: " impact-assessment "\n"
+
+# Final judgment on answer relevance
+final-judgment ::= "### Final Judgment on Answer Relevance:" "\n" relevance-assessment explanation-of-judgment
+
+relevance-assessment ::= "#### Relevance Assessment: " relevance-detail "\n"
+explanation-of-judgment ::= "#### Explanation of Judgment: " judgment-detail "\n"
+
+# Terminal symbols
+text-detail ::= [^\n]+
+info-type ::= [^\n]+
+components-detail ::= [^\n]+
+explanation-detail ::= [^\n]+
+alignment-detail ::= [^\n]+
+depth-detail ::= [^\n]+
+additional-details ::= [^\n]+
+impact-assessment ::= [^\n]+
+relevance-detail ::= [^\n]+
+judgment-detail ::= [^\n]+
+
 """)
 
 # question_grammar = LlamaGrammar.from_string(r"""# GBNF Grammar for Q&A Format with Flexible Punctuation

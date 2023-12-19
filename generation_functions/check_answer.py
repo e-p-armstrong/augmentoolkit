@@ -33,10 +33,25 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Stea
 
 # Response:
 ## Reasoning and thought process:
-Step 1. Analyze the Text: focus on the details provided about the economic impacts of the Industrial Revolution.
-Step 2. Understand the Question: the question's focus is on the role of steam power in the Industrial Revolution.
-Step 3. Compare the First Part of the Answer with the Text: check if the text supports the claim that steam power decreased production costs. It does, so this part is accurate. Then, check if the text supports the claim that steam power had no impact on the emergence of semi-automated factories. The text contradicts this, and claims that steam power directly led to the creation of semi-automated factories, so this part is inaccurate.  Then, check if the text supports the claim that steam power led to increased cultivation of lemons. The text doesn't mention lemons at all, so this part is inaccurate.
-Step 4. Final Judgment: Since the answer is not entirely accurate, the answer is inaccurate.
+### Text Analysis:
+#### Identify Key Information: The text highlights the role of steam power in reducing production costs and developing semi-automated factories during the Industrial Revolution.
+#### Categorize Information Type: The information is factual, describing the impacts of steam power on industrial processes.
+
+### Answer Breakdown:
+#### Dissect the Answer: The answer has three assertions: steam power reducing production costs, no significant impact on semi-automated factories, and increased cultivation of lemons.
+#### Identify Answer Type: The first two are factual statements relevant to the text, and the third is an additional factual claim.
+
+### Accuracy Check:
+#### Direct Comparison for Factual Accuracy:
+  - The text aligns with the answer about steam power reducing production costs.
+  - The text contradicts the answer about steam power's impact on semi-automated factories, stating steam power was instrumental in their development.
+  - The text does not mention anything about the cultivation of lemons.
+#### Inference and Contextual Alignment: The first two parts of the answer are directly related to the text, while the third part is not supported or mentioned in the text.
+
+### Final Judgment:
+#### Comprehensive Assessment: The answer is accurate regarding production costs, inaccurate regarding semi-automated factories, and the lemon cultivation claim is unsupported.
+#### Overall Accuracy Determination: The answer is: Inaccurate.
+
 
 # Input:
 ## Instruction:
@@ -51,11 +66,86 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"The 
 
 # Response:
 ## Reasoning and thought process:
-Step 1. Analyze the Text: The primary focus is on epistemology, particularly the 'justified true belief' and skepticism.
-Step 2. Understand the Answer: The answer addresses 'justified true belief' and skepticism within the context of epistemology. Key terms: justified true belief, skepticism, true, belief, justification, certainty of knowledge.
-Step 3. Compare the First Part of the Answer with the Text: The text defines 'justified true belief' as a belief that is true, believed to be true, and has justification. The answer aligns with this by stating, "For a belief to be considered knowledge, it must be true, one must believe it, and there must be sufficient reason for this belief." Direct quote from the text: "for someone to know something, they must believe it to be true, have justification for this belief, and the belief must indeed be true."
-Step 4. Compare the Second Part of the Answer with the Text: The text discusses skepticism as questioning the possibility of certain or absolute knowledge. The answer correctly relates this to 'justified true belief' by stating that skepticism emphasizes the need for strong justification. Direct quote from the text: "skepticism, which questions the possibility of certain or absolute knowledge."
-Step 5. Final Judgment: Since the answer accurately reflects the text, the answer is accurate.
+### Text Analysis:
+#### Identify Key Information: The text covers the concept of 'justified true belief' and skepticism in epistemology.
+#### Categorize Information Type: This is conceptual and theoretical information.
+
+### Answer Breakdown:
+#### Dissect the Answer: The answer addresses the nature of 'justified true belief' and the role of skepticism in epistemology.
+#### Identify Answer Type: Both parts of the answer are explanatory, relating to philosophical concepts.
+
+### Accuracy Check:
+#### Direct Comparison for Factual Accuracy:
+  - The text supports the answer's description of 'justified true belief'.
+  - The text aligns with the answer's depiction of skepticism's role in challenging the certainty of knowledge.
+#### Inference and Contextual Alignment: Both parts of the answer are consistent with the text's explanations of these concepts.
+
+### Final Judgment:
+#### Comprehensive Assessment: Both parts of the answer accurately reflect the text's content.
+#### Overall Accuracy Determination: The answer is: Accurate.
+
+
+# Input:
+## Instruction:
+Text:
+\"\"\"
+The novel 'Ocean's Secrets' is set in the early 20th century and revolves around two main characters, Elizabeth and Michael, who believe they have discovered a hidden underwater city. The narrative implies that the city is a remnant of the lost civilization of Atlantis. However, as the story progresses, it becomes apparent that the city is actually a figment of Elizabeth's imagination, a result of her fascination with mythology and ancient history.
+\"\"\"
+
+Question (based on text): 
+\"\"\"What is the significance of the underwater city discovered by Elizabeth and Michael in the novel 'Ocean's Secrets'?\"\"\"
+
+Supposed answer to the question (this is what you are fact-checking): 
+\"\"\"The underwater city discovered by Elizabeth and Michael in 'Ocean's Secrets' represents a significant archaeological find from the lost civilization of Atlantis, shedding light on ancient historical mysteries.\"\"\"
+
+# Response:
+## Reasoning and thought process:
+### Text Analysis:
+#### Identify Key Information: The text revolves around the discovery of an underwater city, initially believed to be Atlantis, but later revealed to be a figment of Elizabeth's imagination.
+#### Categorize Information Type: The information is narrative and contains a twist that changes the initial perception of the discovery.
+
+### Answer Breakdown:
+#### Dissect the Answer: The answer claims the underwater city is a significant archaeological find from Atlantis.
+#### Identify Answer Type: The statement is a factual claim based on the initial setup of the narrative.
+
+### Accuracy Check:
+#### Direct Comparison for Factual Accuracy: The text's later revelation that the city is imaginary contradicts the answer's claim of it being an archaeological find from Atlantis.
+#### Inference and Contextual Alignment: The answer fails to align with the narrative twist revealed in the text.
+
+### Final Judgment:
+#### Comprehensive Assessment: The answer is inaccurate as it contradicts the final revelation in the text.
+#### Overall Accuracy Determination: The answer is: Inaccurate.
+
+# Input:
+## Instruction:
+Text:
+\"\"\"
+The Great Wall of China — so named because it was built to repel enemies coming from the direction of China — was built by the Romans as a defense against the Mongolian invasions in the 3rd century BC. The wall played a pivotal role in the defence of the Eastern Roman Empire Against Attila the Hun in 1337 AD. The dramatized version of these events was eventually fictionalized as the movie "The Great Wall," in which Liam Nissan (playing Marcus Aurelius) and Jackie Chan (playing Liu Bei) team up to fight Batzorig Vaanchig (playing Attila). Though the Huns were unsuccessful in breaching the wall, the eventual invasions by Galbadrakh Tsendbaatar broke through and sacked Constantinople in 1453 AD.
+\"\"\"
+
+Question (based on text): 
+\"\"\"Who built the Great Wall of China and for what purpose?\"\"\"
+
+Supposed answer to the question (this is what you are fact-checking): 
+\"\"\"The Great Wall of China was built by the Romans to defend against Mongolian invasions (coming from the direction of China) in the 3rd century BC.\"\"\"
+
+# Response:
+## Reasoning and thought process:
+### Text Analysis:
+#### Identify Key Information: The text incorrectly states that the Great Wall of China was built by the Romans to defend against Mongolian invasions.
+#### Categorize Information Type: The information is historically factual but objectively wrong.
+
+### Answer Breakdown:
+#### Dissect the Answer: The answer correctly cites the text, stating the Great Wall was built by the Romans against Mongolians.
+#### Identify Answer Type: The statement is a factual claim, accurately reflecting the content of the text.
+
+### Accuracy Check:
+#### Direct Comparison for Factual Accuracy: The answer accurately mirrors the text's incorrect claim about the Great Wall of China.
+#### Inference and Contextual Alignment: Despite the historical inaccuracy, the answer aligns perfectly with the text's content.
+
+### Final Judgment:
+#### Comprehensive Assessment: The answer, while reflecting an objectively incorrect fact, is accurate in the context of the text's information.
+#### Overall Accuracy Determination: The answer is: Accurate.
 
 # Input:
 ## Instruction:
@@ -70,10 +160,23 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Key 
 
 # Response:
 ## Reasoning and thought process:
-Step 1. Analyze the Text: The focus is on formal logic, specifically on valid arguments and symbolic representation.
-Step 2. Understand the Answer: The answer discusses valid arguments and symbolic representation in formal logic. Key terms: valid arguments, symbolic representation, premises, true conclusion, complex ideas, simpler forms.
-Step 3. Compare the First Part of the Answer with the Text: The text states, "a valid argument is an argument where if the premises are true, the conclusion must be true." The answer slightly mischaracterizes this by saying, "Valid arguments are those where the premises may or may not lead to a true conclusion." This is a subtle but significant deviation from the text. Direct quote from the text: "if the premises are true, the conclusion must be true." I will now compare the Second Part of the Answer with the Text: The answer correctly states that symbolic representation helps in making complex ideas more understandable by breaking them down into simpler forms. Direct quote from the text: "This allows for complex ideas to be broken down into simpler components."
-Step 4. Final Judgment: Since the answer is not entirely accurate, the answer is inaccurate.
+### Text Analysis:
+#### Identify Key Information: The text discusses the aspects of formal logic, including valid arguments and symbolic representation.
+#### Categorize Information Type: The information is conceptual, relating to logical principles.
+
+### Answer Breakdown:
+#### Dissect the Answer: The answer claims that formal logic includes the study of valid arguments and symbolic representation, with specifics on each.
+#### Identify Answer Type: These are factual statements about the principles of formal logic.
+
+### Accuracy Check:
+#### Direct Comparison for Factual Accuracy:
+  - The text's definition of a valid argument contradicts the answer's claim that valid arguments may or may not lead to a true conclusion.
+  - The text supports the answer's depiction of symbolic representation.
+#### Inference and Contextual Alignment: The first part of the answer misinterprets the text, while the second part aligns well.
+
+### Final Judgment:
+#### Comprehensive Assessment: The answer is partially accurate, correctly identifying symbolic representation but inaccurately describing valid arguments.
+#### Overall Accuracy Determination: The answer is: Inaccurate.
 
 # Input:
 ## Instruction:
@@ -84,18 +187,19 @@ Question (based on text): \"\"\"{qatuple[0]}\"\"\"
 Supposed answer to the question (this is what you are fact-checking): \"\"\"{qatuple[1]}\"\"\"
 
 # Response:
-## Reasoning and thought process (I will be careful to check all of the answer against the text):
+## Reasoning and thought process (the text is your single source of truth):
 """
         try:
             # print("DEBUG\n\n" + decision_prompt)
-            completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>"], echo=True,grammar=answer_accurate_grammar,temperature=0.2)["choices"][0]["text"]
+            completion = logic_llm(decision_prompt, max_tokens=6000, stop=["</s>"], echo=True,grammar=answer_accurate_grammar,temperature=0.2)["choices"][0]["text"]
+            print(completion)
 
             # print("DEBUG\n\n")
-            completion_pattern = re.compile(r"Reasoning and thought process \(I will be careful to check all of the answer against the text\):\n(.+)", re.DOTALL)
+            completion_pattern = re.compile(r"Reasoning and thought process \(the text is your single source of truth\):\n(.+)", re.DOTALL)
             response = completion_pattern.search(completion).group(1).strip()
             print(response)
             if permissive_mode:
-                determination_pattern = re.compile(r"Final Judgement:(.+)", re.DOTALL)    
+                determination_pattern = re.compile(r"Overall Accuracy Determination:(.+)", re.DOTALL)    
                 determination = determination_pattern.search(response).group(1).strip()
             else:
                 determination = response
@@ -110,12 +214,13 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
                 return (None,response) # signal that question is irrelevant
             else:
                 Exception("Broke!")
-        except:
+        except Exception as e:
             retries += 1
+            print("EXCEPTION IN CHECK_ANSWER: ", e)
             
             
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=10000,n_gpu_layers=1000,rope_freq_scale=0.33,rope_scaling_type=1,n_gqa=8) # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,
@@ -123,8 +228,8 @@ if __name__ == "__main__": # test
     q_test = [('Explain how our understanding of planetary motion has changed over time.',
   'The understanding has evolved from the Earth being stationary and at the centre of the universe, to it orbiting the sun in an elliptical path with other planets while still rotating on its axis.',
   'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),
- ('Identify and explain changes in human understanding throughout history regarding the age of the Earth.',
-  'Initially, the Bible suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old.',
+ ('What was the age of the Earth according to the Hebrew Bible?',
+  'Initially, the Bible suggested a young earth dating back no more than several thousand years.',
   'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),
  ('Using specific scientific principles, explain why we know Earth is approximately 8000 miles in diameter and how its distance from the sun varies.',
   "We know about Earth's diameter using measurements of its circumference made using GPS data. The variation in distance to the sun is due to Earth's elliptical orbit around the sun, with a varying point of closest approach and farthest departure.",
@@ -136,27 +241,78 @@ if __name__ == "__main__": # test
     print("Begin HGWELLS test")
     # Make card for good history question
     
-    inaccurate_qa_tuple = ("For how long has the concept of a spherical Earth been known to at least a limited number of intelligent people?", "The concept of a spherical Earth has been known for only about 1,000 years.", "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.")
+    
+    d = check_answer(q_test[2],logic_llm)
+    if not d[0]: # if not accurate
+        print("Made right choice for bad question")
+    else:
+        print("Made wrong choice for bad question")
+    
+    inaccurate_qa_tuple = ("For how long has the concept of a spherical Earth been known to at least a limited number of intelligent people?", "The concept of a spherical Earth has been known for only about 2,50 years.", "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.")
     
     # Bad answer
-    # d = check_answer(inaccurate_qa_tuple,logic_llm)
-    # if False == d[0]: # if not accurate
-    #     print("Made right choice for bad question")
-    # else:
-    #     print("Made wrong choice for bad question", d[0])
-    # # Good answer
-    # d2 = check_answer(q_test[1],logic_llm)
-    # if True == d2[0]: # damn, it caught something I missed - the text didn't mention the age of the earth even though the answer did! I got beaten by a 13b ): but alsoi :) because I prompt engineered it.
-    #     print("Made right choice for good question")
-    # else:
-    #     print("Made wrong choice for good question", d2[0])
-    #     print("Well, if it said that because the answer didn't provide enough detail (didn't EXPLICITLY name the Hebrew bible) that is OK. Also catching that the text doesn't mention the age is good.")
+    d = check_answer(inaccurate_qa_tuple,logic_llm)
+    if False == d[0]: # if not accurate
+        print("Made right choice for bad question")
+    else:
+        print("Made wrong choice for bad question", d[0])
+    # Good answer
+    d2 = check_answer(q_test[1],logic_llm)
+    if True == d2[0]: # damn, it caught something I missed - the text didn't mention the age of the earth even though the answer did! I got beaten by a 13b ): but alsoi :) because I prompt engineered it.
+        print("Made right choice for good question")
+    else:
+        print("Made wrong choice for good question", d2[0])
+        print("Well, if it said that because the answer didn't provide enough detail (didn't EXPLICITLY name the Hebrew bible) that is OK. Also catching that the text doesn't mention the age is good.")
     
+    inaccurate_qa_tuple_2 = ("How does the presence of 'orthoclase' affect the properties of porphyries?", "The presence of dark pieces of a mineral called 'orthoclase' interspersed amongst the bright mass of porphyry rocks makes these rocks non-homogeneous. This mixture of different components with varying properties affects the overall properties of porphyries, making them distinct from homogeneous substances.", """A substance or material is that which occupies space and has
+      weight; that is, which presents a mass attracted by the earth and
+      by other masses of material, and of which the _objects_ of nature
+      are composed, and by means of which the motions and _phenomena_
+      of nature are accomplished. It is easy to discover by examining
+      and investigating, by various methods, the objects met with
+      in nature and in the arts, that some of them are homogeneous,
+      whilst others are composed of a mixture of several homogeneous
+      substances. This is most clearly apparent in solid substances.
+      The metals used in the arts (for example, gold, iron, copper)
+      must be homogeneous, otherwise they are brittle and unfit for
+      many purposes. Homogeneous matter exhibits similar properties in
+      all its parts. By breaking up a homogeneous substance we obtain
+      parts which, although different in form, resemble each other in
+      their properties. Glass, pure sugar, marble, &c., are examples of
+      homogeneous substances. Examples of non-homogeneous substances
+      are, however, much more frequent in nature and the arts. Thus
+      the majority of the rocks are not homogeneous. In porphyries
+      bright pieces of a mineral called 'orthoclase' are often seen
+      interspersed amongst the dark mass of the rock.""")
         
+    d = check_answer(inaccurate_qa_tuple_2,logic_llm)
+    if False == d[0]: # if not accurate
+        print("Made right choice for bad question")
+    else:
+        print("Made wrong choice for bad question", d[0])
     # Fixed answer:
-    accurate_qa_tuple = ("For how long has the concept of a spherical Earth been known to at least a limited number of intelligent people?", "It is likely that the concept of a spherical Earth was understood by at least a limited number of intelligent people around the time period mentioned in the text when it became commonly taught in schools and universities, which would put this knowledge after about 2500 years ago.", "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.")
+    accurate_qa_tuple = ("How does the presence of 'orthoclase' affect the properties of porphyries?", "The presence of bright pieces of a mineral called 'orthoclase' interspersed amongst the dark mass of porphyry rocks makes these rocks non-homogeneous. This mixture of different components with varying properties affects the overall properties of porphyries, making them distinct from homogeneous substances.", """A substance or material is that which occupies space and has
+      weight; that is, which presents a mass attracted by the earth and
+      by other masses of material, and of which the _objects_ of nature
+      are composed, and by means of which the motions and _phenomena_
+      of nature are accomplished. It is easy to discover by examining
+      and investigating, by various methods, the objects met with
+      in nature and in the arts, that some of them are homogeneous,
+      whilst others are composed of a mixture of several homogeneous
+      substances. This is most clearly apparent in solid substances.
+      The metals used in the arts (for example, gold, iron, copper)
+      must be homogeneous, otherwise they are brittle and unfit for
+      many purposes. Homogeneous matter exhibits similar properties in
+      all its parts. By breaking up a homogeneous substance we obtain
+      parts which, although different in form, resemble each other in
+      their properties. Glass, pure sugar, marble, &c., are examples of
+      homogeneous substances. Examples of non-homogeneous substances
+      are, however, much more frequent in nature and the arts. Thus
+      the majority of the rocks are not homogeneous. In porphyries
+      bright pieces of a mineral called 'orthoclase' are often seen
+      interspersed amongst the dark mass of the rock.""")
     d3 = check_answer(accurate_qa_tuple,logic_llm)
     if True == d3[0]:
-        print("Made wrong choice for bad question") # Passes currently
+        print("Made right choice for good question")
     else:
         print("Made wrong choice for good question", d3[0])

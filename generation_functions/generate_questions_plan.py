@@ -11,12 +11,11 @@ def generate_questions_plan(text,logic_llm):
     """
     # Determine which paragraphs are worthy of making questions from
     # Analyze-Realize-Create-Example loop
-    cot_prompt = f"""# Input:
-As an educational AI specializing in question generation, your task is to plan out high-quality, critical thinking questions strictly based on provided paragraphs. Focus on understanding, application, analysis, and synthesis of the text's ideas. Develop a comprehensive plan to generate questions that test comprehension and memorization of explicit content in the paragraphs. Aim for longer, challenging questions that can be answered with the given information.
+    cot_prompt = f"""As an educational AI specializing in question generation, your task is to plan out high-quality, critical thinking questions strictly based on provided paragraphs. Focus on understanding, application, analysis, and synthesis of the text's ideas. Develop a comprehensive plan to generate questions that test comprehension and memorization of explicit content in the paragraphs. Aim for longer, challenging questions that can be answered with the given information.
 
 Ensure your questions strictly adhere to the text's content, avoiding any external topics. The key step is to analyze the text thoroughly and brainstorm potential questions based on this analysis. Do not list final questions in this step.
 
-Your response should be concise, focusing solely on the text's content to test knowledge without the text's reference. Maintain a step-by-step reasoning approach, ensuring your text analysis and brainstorming logically lead to comprehensive question planning. Avoid any deviation from the text's content.
+Your response should be concise, focusing solely on the text's content to test knowledge without the text's reference. Maintain a step-by-step reasoning approach, ensuring your text analysis and brainstorming logically lead to comprehensive question planning. Avoid any deviation from the text's content. Any questions you plan may only mention the text if the provided text is literary or philosophical, but they MUST REFER TO IT BY NAME.
 
 # Input:
 ## Instruction:
@@ -28,15 +27,15 @@ The American Revolution, a pivotal event in history, was fueled by a series of c
 
 # Response:
 ## Reasoning and thought process:
-Step 1. Identify Key Topics: Analyze the paragraph's content to identify key topics. Example: Causes, events, and consequences of the American Revolution.
-Step 2. Determine Information-Rich Areas: Recognize parts of the text with detailed information. The text contains detailed information on various events of the American revolution, and the relationships between these things.
-Step 3. Brainstorm and Develop Questions Testing Recall: Create questions that require recalling specific facts or details from the text. Example: "What were the immediate effects of the Battle of Saratoga on the American Revolution?"
-Step 4. Devise Questions Exploring Relationships Between Facts: In this case, the text mostly covers events, so instead of looking for the similarities and differences between things, I will create questions that explore how one event led to another within the text. Example: "How did the Boston Massacre contribute to the revolutionary sentiment?"
-Step 5. Create Questions Investigating If-Then Relationships (where since one thing is true, another follows): I will devise questions that examine how different events are interconnected. Example: "In what ways did the Intolerable Acts fuel the revolutionary cause?"
+Step 1. Identify Key Topics: The text summarizes the causes and effects of various events of the American revolution, and the relationships between these things.
+Step 2. Brainstorm and Develop Questions Testing Recall: Create questions that require recalling specific facts or details from the text. Example: "What were the immediate effects of the Battle of Saratoga on the American Revolution?"
+Step 3. Devise Questions Exploring Relationships Between Facts: In this case, the text mostly covers events, so instead of looking for the similarities and differences between things, I will create questions that explore how one event led to another within the text. Example: "How did the Boston Massacre contribute to the revolutionary sentiment?"
+Step 4. Create Questions Investigating If-Then Relationships (where since one thing is true, another follows): I will devise questions that examine how different events are interconnected. Example: "In what ways did the Intolerable Acts fuel the revolutionary cause?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Fred Garcia focuses on summarizing specific events of the American Revolution,. Since the text focuses on summarizing specific events of the American Revolution, and another question on this subject would be suitable. The text focuses on recall-oriented facts, and so question variety is suffering; but one question pattern, suited to recall, that has also not yet been used is True/False, so I will employ that. Example: "Did the battle of Saratoga have an impact on French support of the American Revolution?"
 
 # Input:
 ## Instruction:
-Text details: Introduction to Mathematics, by Jane Smith
+Text details: Introduction to Mathematics, by Elise Delacroix
 Text to plan questions from: 
 \"\"\"
 In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
@@ -47,11 +46,12 @@ In mathematics, the concept of a 'function' is fundamental, defining a relations
 Step 1. Identify Key Topics: The key topics in this paragraph are linear and quadratic functions in mathematics, their definitions, components, and applications.
 Step 2. Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of definitions and components of these functions. Example: "What does the 'm' in the linear function equation represent?"
 Step 3. Devise Questions Exploring Relationships Between Components: Generate questions that explore the relationship between different parts of the equations. Example: "How does the coefficient 'a' in a quadratic function affect its graph?"
-Step 4. Create Questions for Mastering Vital Concepts: Make questions about key concepts from the text. Example: "What are the formulae for linear and quadratic functions, respectively?"
+Step 4. Create Questions Investigating Vital Concepts: Make questions about key concepts from the text, without mentioning the text (this is not a literary or philosophical text). Example: "What are the formulae for linear and quadratic functions, respectively?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Elise Delacroix focuses on linear and quadratic functions in mathematics (as well as functions in general), and another question on this subject would be suitable. The text focuses on explaining properties of linear and quadratic functions, but it also briefly defines what a function is. Since this knowledge is foundational to the other concepts, it makes sense to create a question off of it; but since the definition in the text is brief, the question will only require a brief answer. Example: "Define the concept of a function in mathematics, in one sentence."
 
 # Input:
 ## Instruction:
-Text details: Thus Spake Zaranthustra, by Friedrich Nietzsche
+Text details: Thus Spake Zarathustra, by Friedrich Nietzsche
 Text to plan questions from:
 \"\"\"
 When Zarathustra was thirty years old, he left his home and the lake of
@@ -86,67 +86,17 @@ Like thee must I GO DOWN, as men say, to whom I shall descend.
 # Response:
 ## Reasoning and thought process:
 Step 1: Identify Key Themes: In this excerpt, we find themes of transformation, self-discovery, the value of wisdom, and the need for recognition of effort and wisdom.
-Step 2: Brainstorm and Develop Questions Testing Recall: Develop questions asking for specific information mentioned in this text. For instance, "Finish the quote: I am weary of my wisdom, like..."
-Step 3: Devise Questions Testing Comprehension and Belief in the Text's Opinions: Questions can be formed to check understanding and acceptance of the text's philosophy. For instance, "What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?" Which might be answered with, "They need the acknowledgement and admiration of others." and then supported by lines such as "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" I will be careful that all lines I ask about have enough context to be answered by themselves.
-Step 4. Create Questions Investigating Interpretations: Given the text's rich language, I will devise questions interpreting its meaning, while being careful not to explicitly mention the text in doing so. Example: "Why did Zaranthustra, in 'Thus Spake Zaranthustra', leave the mountains and become a man again?"
+Step 2: Brainstorm and Develop Questions Testing Recall: Develop questions asking for specific information mentioned in this text. Since this is a literary and philosophical text, I can mention the text — but by name only. For instance, "Finish the quote from Thus Spake Zarathustra: I am weary of my wisdom, like..."
+Step 3: Devise Questions Testing Comprehension of, and Belief in, the Text's Opinions: Questions can be formed to check understanding and acceptance of the text's philosophy. For instance, "What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?" Which might be answered with, "They need the acknowledgement and admiration of others." and then supported by lines such as "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" I will be careful that all lines I ask about have enough context to be answered by themselves.
+Step 4. Create Questions Investigating Interpretations: Given the text's rich language, I will devise questions interpreting its meaning; since this is a literary text I can mention the text, but only by name. Example: "Why did Zarathustra, in 'Thus Spake Zarathustra', leave the mountains and become a man again?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Friedrich Nietzsche focuses on Zarathustra's monologue, and another question on this subject would be suitable. Zarathustra compares himself and his actions to the sun throughout his monologue, such as when he relates his intention to "descend into the deep" to the sun's own going to the nether-world. A good question might ask after this crucial comparison, and could be "List one way in which Zarathustra compares himself to the sun, in 'Thus Spake Zarathustra'."
 
 # Input:
 ## Instruction:
-Text details: Great Construction Projects Throughout History, by Marco Gonzalez
+Text details: The Republic, by Plato
 Text to plan questions from:
 \"\"\"
-During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
-\"\"\"
-
-# Response:
-## Reasoning and Thought Process:
-Step 1. Identify Key Topics: The paragraph details specific aspects of the Panama Canal's construction, focusing on its challenges, innovations, and impacts. Topics include construction challenges, health issues, excavation techniques, and the canal's impact on global trade.
-Step 2. Brainstorm and Develop Questions Testing Recall: Questions can be formed to recall factual data from the text. Example: "How much earth was excavated during the construction of the Panama Canal?"
-Step 3. Devise Questions Exploring Cause and Effect Relationships: This involves creating questions that explore how certain challenges led to specific solutions and impacts. Example: "What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"
-Step 4. Create Questions Investigating Quantitative Values: Given the text's focus on concrete numbers, I will devise questions that require analyzing these figures. Example: "By how many miles did the Panama Canal reduce the sea voyage from San Francisco to New York, and what does this imply about its impact on global trade?"
-
-# Input:
-## Instruction:
-Text details: {text[1]}
-Text to plan questions from:
-\"\"\"
-{text[0]}
-\"\"\"
-
-# Response:
-## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
-"""
-    # print("DEBUG\n\n" + decision_prompt)
-    completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>"], echo=True, grammar=question_plan_grammar, temperature=0.2)["choices"][0]["text"]
-    # EVERYTHING BELOW HERE IS TODO
-    # print("DEBUG\n\n")
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
-    
-    # Extract plan
-    response_pattern = re.compile(r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",re.IGNORECASE | re.DOTALL)
-    generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
-    
-    return generation
-
-
-if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
-    text = """The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.
-
-The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."""
-    print("Begin HGWELLS test")
-    # result = generate_question_plan(text,logic_llm)
-    ## TODO a wider variety of tests from different texts
-
-    # Chemistry: a harder science
-    print("Begin MENDELEEV TEST")
-    text2 = ("""A substance or material is that which occupies space and has weight; that is, which presents a mass attracted by the earth and by other masses of material, and of which the _objects_ of nature are composed, and by means of which the motions and _phenomena_ of nature are accomplished. It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances. This is most clearly apparent in solid substances. The metals used in the arts (for example, gold, iron, copper) must be homogeneous, otherwise they are brittle and unfit for many purposes. Homogeneous matter exhibits similar properties in all its parts. By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties. Glass, pure sugar, marble, &c., are examples of homogeneous substances. Examples of non-homogeneous substances are, however, much more frequent in nature and the arts. Thus the majority of the rocks are not homogeneous. In porphyries bright pieces of a mineral called 'orthoclase' are often seen interspersed amongst the dark mass of the rock. In ordinary red granite it is easy to distinguish large pieces of orthoclase mixed with dark semi-transparent quartz and flexible laminæ of mica. Similarly, plants and animals are non-homogeneous. Thus, leaves are composed of a skin, fibre, pulp, sap, and a green colouring matter. As an example of those non-homogeneous substances which are produced artificially, gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal. Many liquids, also, are not homogeneous, as may be observed by the aid of the microscope, when drops of blood are seen to consist of a colourless liquid in which red corpuscles, invisible to the naked eye owing to their small size, are floating about.""","Principles of Chemistry, by Demitry Mendeleev")
-    result2 = generate_questions_plan(text2,logic_llm)
-    
-    text3 = ("""I went down yesterday to the Piraeus with Glaucon the son of Ariston,
+I went down yesterday to the Piraeus with Glaucon the son of Ariston,
 that I might offer up my prayers to the goddess (Bendis, the Thracian
 Artemis.); and also because I wanted to see in what manner they would
 celebrate the festival, which was a new thing. I was delighted with the
@@ -186,50 +136,137 @@ But can you persuade us, if we refuse to listen to you? he said.
 Certainly not, replied Glaucon.
 
 Then we are not going to listen; of that you may be assured.
+\"\"\"
 
-Adeimantus added: Has no one told you of the torch-race on horseback in
-honour of the goddess which will take place in the evening?
+# Response:
+## Reasoning and Thought Process:
+Step 1: Identify Key Themes: This excerpt from Plato's "The Republic" presents themes of social interaction, philosophical dialogue, and the dynamics of persuasion and power.
+Step 2: Brainstorm and Develop Questions Testing Recall: Instead of focusing on dry, context-dependent questions like the order of events or family relations, I will concentrate on more meaningful historical details present in the text. For instance, "Which goddess is Bendis equivalent to?"
+Step 3: Devise Questions Exploring Comprehension of, and Belief in, the Text's Opinions: I will create questions that delve into the mind and thoughts of the writer. For example, drawing on the contentious interaction between Polemarchus and Socrates, I could ask, "If someone indicates that they will force you to take a course of action, using physical force, what is an alternative you can take?" with the answer being "Persuade them to let me go." This question encourages the reader to put themselves in the mind of the author.
+Step 4: Create Questions Investigating Interpretations: Focusing on the dialogue's subtleties, I will craft an interpretative question. Since this is a literary text, I can reference the text, but only by name. So the question might be, "In Plato's "The Republic," in the dialogue where Polemarchus comments on the size of his group and questions Socrates' strength compared to it, ultimately stating that Socrates will have to remain where he is, what is Polemarchus implying?" This question prompts critical thinking about power dynamics and conversational implications depicted.
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Plato focuses on the visit to Piraeus and the interaction with Glaucon, and another question on this subject would be suitable. The text focuses on the interaction between Polemarchus and Socrates, but enough questions have already been asked about that subject to cover it completely. That leaves the visit to Piraeus as a subject for questions. The cause behind Socrates' visit to Piraeus is directly mentioned in the text and could make for a good recall question, so one question may be "Why did Socrates visit Piraeus with Glaucon in Plato's 'The Republic'?"
 
-With horses! I replied: That is a novelty. Will horsemen carry torches
-and pass them one to another during the race?
+# Input:
+## Instruction:
+Text details: Great Construction Projects Throughout History, by Marco Gonzalez
+Text to plan questions from:
+\"\"\"
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+\"\"\"
 
-Yes, said Polemarchus, and not only so, but a festival will be
-celebrated at night, which you certainly ought to see. Let us rise soon
-after supper and see this festival; there will be a gathering of young
-men, and we will have a good talk. Stay then, and do not be perverse.
+# Response:
+## Reasoning and Thought Process:
+Step 1. Identify Key Topics: The paragraph details specific aspects of the Panama Canal's construction, focusing on its challenges, innovations, and impacts. Topics include construction challenges, health issues, excavation techniques, and the canal's impact on global trade.
+Step 2. Brainstorm and Develop Questions Testing Recall: Questions can be formed to recall factual data from the text. Example: "How much earth was excavated during the construction of the Panama Canal?"
+Step 3. Devise Questions Exploring Cause and Effect Relationships: This involves creating questions that explore how certain challenges led to specific solutions and impacts. Example: "What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"
+Step 4. Create Questions Investigating Quantitative Values: Given the text's focus on concrete numbers, I will devise questions that require analyzing these figures. Example: "By how many miles did the Panama Canal reduce the sea voyage from San Francisco to New York?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Marco Gonzalez focuses on the Panama Canal (and recall-oriented facts about it), and another question on this subject would be suitable. One small area that has not yet been tested, and which is an important detail mentioned in the text, is be: "In what year was the Panama Canal completed?"
 
-Glaucon said: I suppose, since you insist, that we must.
+# Input:
+## Instruction:
+Text details: The Scale of the Solar System, by Rob Robertson
+Text to plan questions from: 
+\"\"\"
+If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+\"\"\"
 
-Very good, I replied.
+# Response:
+## Reasoning and thought process:
+Step 1. Identify Key Topics: The key topic in this paragraph is the scale of the solar system, which is presented using analogy to make the distances easier to conceive of.
+Step 2. Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of the components of this analogy. Since the text is not provided while the question is being asked, I will have to include the analogy in the question. Example: "If the Earth had a diameter of only one inch, how far would the moon be from the Earth, if it (and its distance from the Earth) were also resized proportionally?"
+Step 3. Devise Questions Exploring Relationships Between Components: Generate questions that explore the relationship between different information in the excerpt. Notably, in this text the distances between planets are much greater than the planets' sizes. Example question: "How do the distances between planets compare to their sizes?"
+Step 4. Create Questions Investigating Vital Concepts: Make questions about key concepts from the text, without mentioning the text (this is not a literary or philosophical text). A key concept is the distances between planets. Since the paragraph relies on an analogy, which the reader of the question will not have access to, I will have to provide this context. Example: "If you scaled everything down so that the Earth had a diameter of one inch, then how far would Mercury and Venus be from the sun?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Rob Robertson focuses on the size-based analogy described throughout, and another question on this subject would be suitable. Another question could simply ask about information that's already been tested, but for a different planet that is also mentioned in the text. Being mindful that the reader of the text will not have access to the source text, I will provide the analogy as context, as I ask the question: "If the earth had a diameter of only one inch, how far would Mars be from the earth, if it (and its distance from the earth) were also resized proportionally?"
 
-Accordingly we went with Polemarchus to his house; and there we found
-his brothers Lysias and Euthydemus, and with them Thrasymachus the
-Chalcedonian, Charmantides the Paeanian, and Cleitophon the son of
-Aristonymus. There too was Cephalus the father of Polemarchus, whom I
-had not seen for a long time, and I thought him very much aged. He was
-seated on a cushioned chair, and had a garland on his head, for he had
-been sacrificing in the court; and there were some other chairs in the
-room arranged in a semicircle, upon which we sat down by him. He
-saluted me eagerly, and then he said:—
 
-You don’t come to see me, Socrates, as often as you ought: If I were
-still able to go and see you I would not ask you to come to me. But at
-my age I can hardly get to the city, and therefore you should come
-oftener to the Piraeus. For let me tell you, that the more the
-pleasures of the body fade away, the greater to me is the pleasure and
-charm of conversation. Do not then deny my request, but make our house
-your resort and keep company with these young men; we are old friends,
-and you will be quite at home with us.
+# Input:
+## Instruction:
+Text details: {text[1]}
+Text to plan questions from:
+\"\"\"
+{text[0]}
+\"\"\"
 
-I replied: There is nothing which for my part I like better, Cephalus,
-than conversing with aged men; for I regard them as travellers who have
-gone a journey which I too may have to go, and of whom I ought to
-enquire, whether the way is smooth and easy, or rugged and difficult.
-And this is a question which I should like to ask of you who have
-arrived at that time which the poets call the ‘threshold of old age’—Is
-life harder towards the end, or what report do you give of it?""","The Republic, by Plato")
-    print("Begin PLATO test")
-    # result3 = generate_questions_plan(text3,logic_llm)
+Any interpretive questions must not argue against the text, nor should they judge the text; but instead will adopt any views it holds, regardless of what those views may be. 
+Your planned questions must include context, if a question requires both context and knowledge to solve.
+
+# Response:
+## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
+"""
+    # print("DEBUG\n\n" + decision_prompt)
+    completion = logic_llm(cot_prompt, 
+                           max_tokens=8000, 
+                           stop=["</s>"], 
+                           echo=True, 
+                           grammar=question_plan_grammar, 
+                        #    temperature=0.2
+                        temperature=0.8, # min p settings, too inconsistent
+                            top_k=0,
+                            top_p=1,
+                            min_p=0.5,
+                           )["choices"][0]["text"]
+    # EVERYTHING BELOW HERE IS TODO
+    # print("DEBUG\n\n")
+    print("COMPLETION:\n\n----------------------")
+    print(completion)
+    print("\n------------------")
+    
+    # Extract plan
+    response_pattern = re.compile(r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",re.IGNORECASE | re.DOTALL)
+    generation = response_pattern.search(completion).group(1)
+    print("GENERATION:\n\n-------------------\n\n", generation)
+    
+    return generation
+
+
+if __name__ == "__main__": # test
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=8000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=True,n_gqa=8) # load the logical LLM and offload everything
+    text = """The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.
+
+The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."""
+    print("Begin HGWELLS test")
+    result = generate_questions_plan((text,"A Short History of the World, by HG Wells"),logic_llm)
+    ## TODO a wider variety of tests from different texts
+
+    # Chemistry: a harder science
+    print("Begin MENDELEEV TEST")
+    text2 = ("""A substance or material is that which occupies space and has weight; that is, which presents a mass attracted by the earth and by other masses of material, and of which the _objects_ of nature are composed, and by means of which the motions and _phenomena_ of nature are accomplished. It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances. This is most clearly apparent in solid substances. The metals used in the arts (for example, gold, iron, copper) must be homogeneous, otherwise they are brittle and unfit for many purposes. Homogeneous matter exhibits similar properties in all its parts. By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties. Glass, pure sugar, marble, &c., are examples of homogeneous substances. Examples of non-homogeneous substances are, however, much more frequent in nature and the arts. Thus the majority of the rocks are not homogeneous. In porphyries bright pieces of a mineral called 'orthoclase' are often seen interspersed amongst the dark mass of the rock. In ordinary red granite it is easy to distinguish large pieces of orthoclase mixed with dark semi-transparent quartz and flexible laminæ of mica. Similarly, plants and animals are non-homogeneous. Thus, leaves are composed of a skin, fibre, pulp, sap, and a green colouring matter. As an example of those non-homogeneous substances which are produced artificially, gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal. Many liquids, also, are not homogeneous, as may be observed by the aid of the microscope, when drops of blood are seen to consist of a colourless liquid in which red corpuscles, invisible to the naked eye owing to their small size, are floating about.""","Principles of Chemistry, by Demitry Mendeleev")
+    result2 = generate_questions_plan(text2,logic_llm)
+    
+    text3 = ("""After the girl had played to them upon the flute, and then the boy in
+turn upon the harp, and both performers, as it would appear, had set the
+hearts of every one rejoicing, Socrates turned to Callias:
+
+A feast, upon my word, O princeliest entertainer! (2) Was it not enough
+to set before your guests a faultless dinner, but you must feast our
+eyes and ears on sights and sounds the most delicious?
+
+ (2) Lit. "in consummate style."
+
+To which the host: And that reminds me, a supply of unguents might not
+be amiss; (3) what say you? Shall we feast on perfumes also? (4)
+
+ (3) Lit. "suppose I tell the servant to bring in some perfumes, so
+    that we may further feast on fragrance..." Cf. Theophr. "Char."
+    vii. 6 (Jebb ad loc.)
+
+ (4) See Athen. xv. 686.
+
+No, I protest (the other answered). Scents resemble clothes. One dress
+is beautiful on man and one on woman; and so with fragrance: what
+becomes the woman, ill becomes the man. Did ever man anoint himself with
+oil of myrrh to please his fellow? Women, and especially young women
+(like our two friends' brides, Niceratus' and Critobulus'), need no
+perfume, being but compounds themselves of fragrance. (5) No, sweeter
+than any perfume else to women is good olive-oil, suggestive of the
+training-school: (6) sweet if present, and when absent longed for. And
+why? Distinctions vanish with the use of perfumes. The freeman and the
+slave have forthwith both alike one odour. But the scents derived from
+toils--those toils which every free man loves (7)--need customary habit
+first, and time's distillery, if they are to be sweet with freedom's
+breath, at last.""","The Symposium, by Xenophon")
+    print("Begin XENOPHON test")
+    result3 = generate_questions_plan(text3,logic_llm)
     
     print("Begin KANT test")
     text4 = ("""I. Of the difference between Pure and Empirical Knowledge
@@ -270,7 +307,7 @@ the experience that it did actually fall. But still, à priori, he could
 not know even this much. For, that bodies are heavy, and, consequently,
 that they fall when their supports are taken away, must have been known
 to him previously, by means of experience.""", "The Critique of Pure Reason, by Immanuel Kant")
-    # result4 = generate_questions_plan(text4,logic_llm)
+    result4 = generate_questions_plan(text4,logic_llm)
     
     # This text is very hard to parse, maybe not a good test
 #     print("Begin Beyond Good and Evil test")

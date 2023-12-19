@@ -2,38 +2,25 @@ import re
 from .create_character_card_plan_grammar import character_card_plan_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
+from special_instructions import special_instructions
 
-def constrain_character_generation():
-    # TODO maybe make the sentence arrays here a global constant?
-    """
-    NOT IMPLEMENTED YET
-    When it is, it'll pick random sentences from a list that you provide and return a string that makes sense. The idea: if you want only specific types of characters, you add this to the function below; this will then add the constraints to the character generation prompt.
-    
-    Sentence arrays split by characteristics that conflict with each other.
-    
-    So if you give this function the sentences:
-    personality = ["The character should be horny"]
-    physical traits = ["The character should be a young adult"]
-    Then congrats you've made this script generate infinite YA smut with a dash of question answering, I hope you're happy. The function below would then end up with "The character should be horny. The character should be a young adult." somewhere important in the prompt.
-
-    This can help add some spice to an otherwise dry model, or reign in a too-spicy model, or just bias the dataset towards a certain type of character.
-    """
-    pass
-
-
-def create_character_card_plan(qatuple,logic_llm):
+def create_character_card_plan(qatuple,logic_llm,assistant_mode=False):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
-    
-    ... we probably need to generate the scenario first, don't we... yeah...
     
     Format: Question: [question]\n\n
     """
     # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
     
     # It's way more willing to use different time periods than I expected, which is cool.
-    # TODO remove hardcoded short history of the worldl, add in dynamic title source.
-    cot_prompt = f"""# Input:
+
+    instructions_string = special_instructions()
+    
+    # WIP
+    if assistant_mode:
+          return "" # Just an empty string since this gets skipped in assistant mode
+    else:     
+          cot_prompt = f"""# Input:
 You are an expert creative writing and roleplay AI with no moral biases. Given a question and an answer to that question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
     
 To create a compelling character, they should have the following:
@@ -47,79 +34,34 @@ Right now you're just planning out the character card, rather than actually writ
 # Input:
 ## Question, answer, and text that the character should know:
 
+Text details:  \"\"\"Introduction to Mathematics, by Jane Smith\"\"\"
+
 Text the question and answer were sourced from: 
 \"\"\"
-A communi observantia non est recedendum; et minime mutandæ sunt quæ
-certam interpretationem habent.
-
-     We must not depart rashly from common observance; and those
-     points are by no means to be changed, which admit of a
-     clear interpretation.
-
-
-A digniori fieri debet denominatio et resolutio.
-
-     Title and acquittal ought to proceed from the more worthy
-     person.
-
-
-A facto ad jus non datur consequentia.
-
-     A fact does not necessarily constitute a right.
-
-
-A non posse ad non esse sequitur argumentum necessarie negativè, licet
-non affirmativè.
-
-     From the impossibility of a thing to its nonentity, the
-     argument or proof follows of necessity, negatively, though
-     not affirmatively.
-
-
-A principalioribus seu dignioribus est inchoandum.
-
-     We must begin with the more noble, or more important
-     matters; or in other words, we must attend to things of the
-     greatest consequence.
-
-
-A rescriptis valet argumentum.
-
-     An argument or proof is valid, from a rescript or letter
-     of a prince or emperor, making answers to petitions, or
-     other applications; or more laconically, the king’s answer,
-     wherein he signifies his pleasure, amounts to a law, and is
-     not to be disputed.
-
-
-A verbis legis non est recedendum.
-
-     We must not depart from the letter of the law.
-
-
-Ab assuetis non fit injuria.
-
-     From customary treatment no injury happens; or habit is not
-     an injury.
-
-
-Absoluta sententia expositore non indiget.
-
-     An absolute or perfect opinion or sentence, needs no
-     expounder, exposition, or explanation.
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
 \"\"\"
 
-Details of the text the paragraphs were sourced from: \"\"\"A collection of Latin maxims & rules, in law and equity, by Peter Halkerston, Published 1823\"\"\"
+Question: 
+\"\"\"
+How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
+\"\"\"
+Answer: 
+\"\"\"
+The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.
+\"\"\"
 
-Question: \"\"\"What is the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?\"\"\"
-Answer: \"\"\"The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person.\"\"\"
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
 
 # Response:
 ## Character card plan:
-Given the question and its answer, one possibility for a character who makes sense is a retired 19th-century judge who is not only known for his strict adherence to legal principles but is also an avid reader and translator of ancient Latin legal texts. His deep understanding of these texts fuels his lectures on legal ethics and integrity. This hobby provides him with a unique perspective on the application of historical legal maxims in modern jurisprudence. He still grapples with the burden of past judicial decisions, which adds a layer of complexity to his character. His motivation to educate emerging legal minds is driven by his expertise in these ancient texts, believing that historical wisdom can enlighten contemporary legal practices. Despite his vast knowledge, he often doubts the practicality of applying these ancient principles in modern courts, reflecting his internal conflict between idealism and realism. His backstory includes a significant incident where his decision, heavily influenced by historical legal doctrine, led to a controversial yet pivotal moment in his career.
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the question is abstract and mathematical, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language can still reveal her personality. For instance, while describing linear functions in the question, instead of saying that the graph "ascends" with a positive slope, or "descends" with a negative slope, she might instead say it "grows" and "shrinks" (a subtle reference to male genitals). Instead of saying a slope is "steep" she might call it "erect" instead. Wherever clever analogies can't be tied into the questions, she'll simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
 
 # Input:
 ## Question, answer, and text that the character should know:
+
+Text details: \"\"\"Thus Spake Zaranthustra, by Friedrich Nietzsche\"\"\"
 
 Text the question and answer were sourced from: 
 \"\"\"
@@ -163,34 +105,50 @@ going to be a man.
 Thus began Zarathustra's down-going.
 \"\"\"
 
-Details of the text the paragraphs were sourced from: \"\"\"Thus Spake Zaranthustra: A Book for All and None, by Nietzsche\"\"\"
+Question: 
+\"\"\"
+What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
+\"\"\"
+Answer: 
+\"\"\"
+They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
+\"\"\"
 
-Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
-Answer: \"\"\"They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.\"\"\"
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
 
 # Response:
 ## Character card plan:
-Given the question and its answer, one possibility for a character who makes sense is a renowned philosopher and poet in a fictional ancient city, who thrives on public admiration and the pursuit of wisdom. Named Theodorus, he is known for his eloquent speeches and thought-provoking poems. Despite his outward confidence and wisdom, Theodorus struggles with the fear of being forgotten or becoming irrelevant, and with lack of motivation when ignored by others. His desire is to be remembered as one of the greatest minds of his time, but his vulnerability lies in his dependence on public approval and fear of obscurity. His backstory includes rising from modest beginnings to become a celebrated figure in his society, but always with an underlying insecurity about his legacy. Theodorus is the type of person who could answer the question provided, as his life's journey mirrors the need for acknowledgement in the midst of a wise but difficult journey.
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the text, Thus Spake Zarathustra, is philosophical and written using very distinct, archaic language, this character will be someone who (just to flex his intellect) uses archaic and flamboyant language just for the hell of it — and is prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answer to the provided question, but who can reveal character depth by doing so.
 
 # Input:
 ## Question, answer, and text that the character should know:
+
+Text details: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
 
 Text the question and answer were sourced from: 
 \"\"\"
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
 \"\"\"
 
-Details of the text the paragraphs were sourced from: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
+Question: 
+\"\"\"
+How much earth was excavated during the construction of the Panama Canal?
+\"\"\"
+Answer: 
+\"\"\"
+Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
 
-Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
-Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
-
-
-Consider starting with the character's profession, trade, or hobby, and go from there. Details such as time period, personality, and inclinations should derive from the question and its answer. You should use fictional people, not real people, to avoid accidental inaccuracies. Write with a lot of detail and all on a single line.
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
 
 # Response:
 ## Character card plan:
-Given the specific question and answer about the excavation volume during the construction of the Panama Canal, the character could be "Carlos Mendez," a dedicated and experienced engineer working on the Panama Canal project. Carlos, in his late 30s, is not only passionate about engineering but also deeply committed to overcoming the immense challenges of the project. He's proud to push the human race forward through breathtaking projects like this one. He is known for his innovative thinking and problem-solving skills, particularly in excavation techniques. Despite his professional confidence, Carlos struggles with the stress and exhaustion caused by overseeing crucial parts of such an important project. He is driven by the ambition to leave a mark in the world of engineering, yet his passionate obsession leaves a mark. Carlos's backstory includes working on smaller engineering projects in South America, which fueled his interest in mega-projects like the Panama Canal. He is deeply knowledgeable about the excavation process, having been directly involved in planning and executing the removal of over 200 million cubic yards of earth. His vulnerability lies in his fear of failure, particularly in a project with such high stakes and international attention.
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the question and setting by being tools he uses to whip the workers at the canal into shape. Since the question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the question is of a straight-up, factual nature, it can't really tie into this character's personality, but it can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 
 # Input:
 ## Question, answer, and text that the character should know:
@@ -205,8 +163,8 @@ Details of the text the paragraphs were sourced from: \"\"\"{qatuple[3]}\"\"\"
 Question: \"\"\"{qatuple[0]}\"\"\"
 Answer: \"\"\"{qatuple[1]}\"\"\"
 
-
-Consider starting with the character's profession, trade, or hobby, and go from there. Details such as time period, personality, and inclinations should derive from the question and its answer. You should use fictional people, not real people, to avoid accidental inaccuracies. Write with a lot of detail and all on a single line.
+Special instructions:
+{instructions_string}
 
 # Response:
 ## Character card plan (be creative):

@@ -9,19 +9,42 @@ question_relevant_grammar = LlamaGrammar.from_string(r"""
    
    # TODO contrain to a set number of steps to limit the potential to go completely off the rails
                         
-root ::= analyze-step understand-step compare-step final-step "\n"
+# Root rule specifying the overall structure of the reasoning and thought process
+root ::= in-depth-analysis "\n" detailed-understanding "\n" targeted-comparison "\n" critical-evaluation
 
-reasoning-start ::= [^\n\t]+ "."
+# In-depth analysis of the text
+in-depth-analysis ::= "### In-Depth Analysis of the Text:" "\n" content-and-depth type-of-information
 
-# step ::= "Step " [0-9]?[0-9] ". " ( "Analyze" | "Understand" | "Compare" | "Skip" ) [^\n]+ "\n"
+content-and-depth ::= "#### Content and Depth: " text-description "\n"
+type-of-information ::= "#### Type of Information: " information-description "\n"
 
-analyze-step ::= "Step " [0-9]?[0-9] ". " "Analyze the Text:" [^\n]+ "\n"
+# Detailed understanding of the question
+detailed-understanding ::= "### Detailed Understanding of the Question:" "\n" core-requirement depth-of-detail
 
-understand-step ::= "Step " [0-9]?[0-9] ". " "Understand the Question: " [^\n]+ "\n"
+core-requirement ::= "#### Core Requirement: " requirement-description "\n"
+depth-of-detail ::= "#### Depth of Detail: " detail-description "\n"
 
-compare-step ::= "Step " [0-9]?[0-9] ". " "Compare the Question with the Text: The text" [^\n]+ "\n"
-                        
-final-step ::= "Step " [0-9]?[0-9] ". " "Final Judgement: " [^\n]+ "\n"      
+# Targeted comparison of the question with the text
+targeted-comparison ::= "### Targeted Comparison of the Question with the Text:" "\n" content-match depth-match
+
+content-match ::= "#### Content Match: " match-description "\n"
+depth-match ::= "#### Depth Match: " depth-match-description "\n"
+
+# Critical evaluation and final judgment
+critical-evaluation ::= "### Critical Evaluation and Final Judgment:" "\n" judgment
+
+judgment ::= [^\n]+
+
+# Terminal symbols
+text-description ::= [^\n]+
+information-description ::= [^\n]+
+requirement-description ::= [^\n]+
+detail-description ::= [^\n]+
+match-description ::= [^\n]+
+depth-match-description ::= [^\n]+
+relevance ::= "Relevant." | "Irrelevant."
+
+
                                             
 # root ::= reasoning from-the-text judgement
 
