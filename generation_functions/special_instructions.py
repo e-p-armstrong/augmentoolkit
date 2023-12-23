@@ -11,7 +11,7 @@ def combine_traits(personality_matrix):
     return combined_traits
 
 # TODO think of a good way to pass this array in
-def special_instructions(n=1):
+def special_instructions(n=1,non_axis_traits=False):
     # TODO maybe make the sentence arrays here a global constant?
     """
     Picks n random sentences from each of the provided lists (personality and physical traits)
@@ -79,7 +79,17 @@ def special_instructions(n=1):
     ])
 
     # Select a random combination
-    selected_traits = random.sample(traits, n)
+    selected_traits = random.sample(traits, 1)
+    if non_axis_traits:
+        non_axis_trait_list = [
+    """The character should be a Japanese High School student.
+The character should be a Girl.
+The character should be decently smart, but not genius-level.
+""",
+    """The character should be a catgirl.""",
+    """The character should be edgy and nihilistic."""
+        ]
+        selected_traits += random.sample(non_axis_trait_list,1)
 
     # Return the combined string, with each sentence on a new line
     return selected_traits[0]

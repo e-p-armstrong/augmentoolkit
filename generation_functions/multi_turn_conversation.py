@@ -367,7 +367,7 @@ The primary character's answer will use all parts of the answers given. Instead 
                            max_tokens=8000, 
                            stop=["</s>"], 
                            echo=True, 
-                           grammar=multi_turn_conversation_grammar, # radical no grammar use, we trust the single-shot example to make the output right because grammars always led to fully using the context here. Breaks are expensive
+                        #    grammar=multi_turn_conversation_grammar, # radical no grammar use, we trust the single-shot example to make the output right because grammars always led to fully using the context here. Breaks are expensive
                            temperature=0.2,
                         #    min_p = 0.05,
                         #    top_k=0,
