@@ -135,7 +135,7 @@ You don't need to add negative emotions and tension to the scenario if those don
         generation = generation.replace("Albert",random_name())
     
     
-    return generation.strip()
+    return generation.strip(), completion
 
 
 if __name__ == "__main__": # test

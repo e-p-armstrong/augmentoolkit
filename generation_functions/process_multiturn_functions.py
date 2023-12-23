@@ -223,7 +223,7 @@ def call_all_processors(multiturn_conversation, qatuples):
     convs_split = extract_conversation(multiturn_conversation)
 
     # Check if answers in dialogues match corresponding answers in qatuples
-    if not compare_answers_with_qatuples(convs_split, qatuples, 25):
+    if not compare_answers_with_qatuples(convs_split, qatuples, 15):
         print("Answers in dialogues do not match corresponding answers in qatuples.")
         return False
 
