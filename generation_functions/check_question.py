@@ -147,9 +147,9 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
             print(determination)
             print("\n---------\n")
             if "irrelevant" in determination or "Irrelevant" in determination:
-                return (False,response)
+                return (False,response), completion
             elif "relevant" in determination or "Relevant" in determination:
-                return (True,response)
+                return (True,response), completion
             else:
                 print("Did not contain relevant or irrelevant! Retrying")
                 retries += 1
@@ -158,8 +158,8 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
             if retries <= 4:
                 retries += 1
             else:
-                return (None,None)
-    return (None, None)
+                return (None,None), None
+    return (None, None), None
 # There is no bug about this ignoring certain judgments and retrying; that's just the dissenting reasoning from the print statement
 
 if __name__ == "__main__": # test

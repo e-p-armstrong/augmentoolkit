@@ -215,9 +215,9 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
             print(determination)
             print("\n---------\n")
             if "irrelevant" in determination or "Irrelevant" in determination or "mostly" in determination or "partially" in determination or "introduces information not present in the text" in determination: # Hack to get around faulty 13b outputs
-                return (False,response)
+                return (False,response), completion
             elif "relevant" in determination or "Relevant" in determination:
-                return (True,response)
+                return (True,response), completion
             else:
                 retries += 1
         except:

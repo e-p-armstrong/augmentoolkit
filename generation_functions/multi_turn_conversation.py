@@ -38,7 +38,7 @@ def extract_first_words(character_name, text):
     
     return matches
 
-def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm):
+def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm,assistant_mode=False):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
     
@@ -61,7 +61,8 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm)
         # "Look",
         # "Now",
         # "Huh",
-        "It's"
+        "It's",
+        "Hello",
     ]
     
     conv_starters_filtered = [starter for starter in conv_starters if starter not in first_words_of_card]
@@ -269,13 +270,13 @@ Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Goo
 
 Here is the scenario:
 \"\"\"
-Within the mess hall of a worksite servicing the Panama Canal, Hugo Martinez — a site overseer — is approached by Juan, a worker who wants to understand more about the canal's construction. While Juan wants to understand the canal better, Hugo, being harsh and abrasive, will continually berate Juan and swear colorfully while answering his questions (Hugo may drink a bit, too, given that it is lunch). The situation is hostile, but it also has undertones of "business as usual" and curiosity.
+Within the mess hall of a worksite servicing the Panama Canal, Hugo Martinez — a site overseer — is approached by Juan, a worker who wants to understand more about the canal's construction. While Juan wants to understand the canal better, Hugo, being harsh and abrasive, will continually berate Juan and swear colorfully while answering his questions (Hugo may drink a bit, too, given that he is an alcoholic). The situation is hostile, but it also has undertones of "business as usual" and curiosity.
 \"\"\"
 
 Here's some further information that might help you:
 \"\"\"
 Character Consideration: Hugo Martinez is an abrasive, insulting disciplinarian, though he's also hardworking and has standards. The scenario should give his unique personality room to shine. Since he's a site overseer at the Panama Canal, his occupation lines up with the question well, and the canal will be the setting of the scenario. He will answer the questions, but given his insulting, intense, and aggressive nature, he will likely chew out the person who is asking the questions. He might tell them to "get the fuck out of my face," after all questions are asked.
-Given the subject of the question, and the character card, the setting will be the worksite at the Panama Canal where Hugo Martinez is overseeing maintenance. The person who approaches Hugo and asks the questions should be someone curious about the canal; given the easy-to-digest nature of the questions, this person might be a journalist, but it would be better for the secondary character to be related to the setting. So Hugo will be approached by Juan — one of his workers — during lunch break. Juan wants to understand the canal better, but Hugo, compelled by his personality, will continually be vulgar, berate Juan, and swear while answering his questions (he may drink a bit, too, given that it is lunch). The setting will be hostile, as Juan tiptoes around the tempers of his boss while trying to get his questions answered, his stress and the constant wear of Hugo's fury on his sanity being evident in his actions. But it will remain informative and the integrity of the questions and answers will be preserved.
+Given the subject of the question, and the character card, the setting will be the worksite at the Panama Canal where Hugo Martinez is overseeing maintenance. The person who approaches Hugo and asks the questions should be someone curious about the canal; given the easy-to-digest nature of the questions, this person might be a journalist, but it would be better for the secondary character to be related to the setting. So Hugo will be approached by Juan — one of his workers — during lunch break. Juan wants to understand the canal better, but Hugo, compelled by his personality, will continually be vulgar, berate Juan, and swear while answering his questions (he may drink a bit, too, given that he is an alcoholic). The setting will be hostile, as Juan tiptoes around the tempers of his boss while trying to get his questions answered, his stress and the constant wear of Hugo's fury on his sanity being evident in his actions. But it will remain informative and the integrity of the questions and answers will be preserved.
 Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
 \"\"\"
 
@@ -352,7 +353,7 @@ The primary character's answer will use all parts of the answers given. Instead 
     generation = response_pattern.search(completion).group(1)
     print("GENERATION:\n\n-------------------\n\n", generation)
     
-    return (generation,character,scenario,scenario_plan,qatuples)
+    return (generation,character,scenario,scenario_plan,qatuples), completion
 
 
 if __name__ == "__main__": # test

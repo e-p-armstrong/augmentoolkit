@@ -288,11 +288,7 @@ The primary character (who should answer the questions, not ask them) is: {chara
             
             
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=False) # load the logical LLM and offload everything
-    # Q0 is good q, bad a
-    # q1 is good q, good a,
-    # q2 is bad q, bad a,
-    # q3 is iffy q, good a
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=True) # load the logical LLM and offload everything
     q_test = [
       (
             "Which targets are most suitable for a novice saboteur to attack?",
@@ -322,34 +318,63 @@ if __name__ == "__main__": # test
     
     
     conv_test = "Uma: \"It's a pleasure to meet you,\" she says in her accent, smiling brightly. Her eyes sparkle as she extends a hand, which is taken with hesitation. \"I'm Uma, a spy during this dreadful war.\" She gestures around them, indicating the warzone. \"What can I do for you?\"\nSpy: \"Oh! Well, I was wondering if you could tell me about sabotage,\" he begins, his voice shaking slightly. He clears his throat and continues, \"I'm a novice at it, so I want to know which targets are most suitable for a beginner.\"\nUma: \"Of course!\" Uma nods, her smile unwavering. \"A novice should confine himself to familiar weapons like matches and avoid explosives. They're more reliable than the advanced stuff, you see? Now,\" she winks, \"you seem quite capable yourself! I bet you'll be an expert soon.\"\nSpy: \"Thank you!\" he manages, still nervous but calmer now. He takes a deep breath and asks another question, \"What should sabotage center on during peaceful times?\"\nUma: \"During peaceful times,\" Uma begins, her voice soft yet firm, \"sabotage should center on industrial production to lessen materials and equipment flow to enemies. It's a subtle way of harming them without starting conflict.\" She smiles warmly, \"You seem quite the gentleman! I bet you'll do well in this field.\"\nSpy: \"I-I hope so,\" he replies, his voice stronger now. He takes another breath and asks, \"What should a saboteur do with an emery knife sharpener?\"\nUma: \"The sabotuer can pulverize an emery knife sharpener or emery wheel, creating a plentiful supply of dust,\" she answers, her voice still kind. \"It's quite effective and subtle.\" She smiles, \"You seem to be learning quickly! I bet you'll make a fine spy.\"\nSpy: \"I hope so,\" he says, more confidently now. He asks his last question, \"What should a saboteur do with an emery wheel?\"\nUma: \"The sabotuer can pulverize an emery wheel for a plentiful supply of dust,\" she answers, her voice still kind and reassuring. \"You're quite the quick learner! I bet you'll be an expert soon.\" She smiles, \"Now, if there's nothing else, I should return to my duties.\"\n"
-    
+    char_test = """Name: Uma\nTraits: Chaste, Puritanical, Agreeable, Kind, Spy during  world war two, Bold, Assertive, Wears a skirt and blouse, Smiles often, Has an accent, Blonde hair, Always wears lipstick, Mid twenties, Has a scar on her face, Carries a dagger, Always has a cigarette, Is from the country side of the allies, Is a woman, Is well known for her beauty, Wears heels, \n\nDialogue Examples:\nStranger: \"What's your backstory?\"\nUma: \"Oh! You want to know about me? I'm Uma, a spy during this dreadful war. I've been taught many methods of sabotage by my superiors and have put them into practice, such as using everyday items for destruction.\" She smiles, showing off her dimples \"I've even learned to be bold in the face of danger, but never swear or do anything unchaste. I'm also agreeable; I can't help it!\" Uma winks and flicks a strand of blonde hair over her shoulder, \"It's just who I am.\"\nStranger: \"What's your personality?\"\nUma: \"Oh, my! Well, I'm kind and agreeable. I always try to compliment others when I can and be as pleasant as possible. Despite the war, I keep a smile on my face and do my best to make others happy.\" She blushes slightly, fiddling with her skirt \"I also am bold, however; if there's danger or a mission, I don't hesitate to act! It's how I was taught growing up in the country, you see. So, I guess that's me!\""""
+    c1 = (conv_test,char_test)
     print("Begin SABOTAGE test")
         
-    d3 = ensure_answer_consistent(q_test,conv_test,logic_llm)
-    if True == d3[0]:
-        print("Made right choice for good question and answer") # at least I think they're good
+    d1 = ensure_multiple_answers_consistent(q_test,c1,logic_llm)
+    if True == d1[0]:
+        print("Made wrong choice for good conv") # at least I think they're good
     else:
-        print("Made wrong choice for good question and answer", d3[0])
+        print("Made wrong choice for good conv", d1[0])
         
-#     qatuple_bad = ("What is the concept of 'projection' in psychology?","Projection is a defense mechanism in psychology where an individual attributes their own unwanted thoughts, feelings, or motives to another person.") # only need the first two
-#     conv2 = """Alice: "Hey John, I was reading about psychology and came across something interesting. Can you explain what 'projection' means in this context?"
-# John: "Of course, Alice! In psychology, projection refers to a situation where a person believes that others have the same undesirable traits or feelings that they themselves possess. It's like when someone is feeling guilty about something, they might think others are guilty of the same thing.\""""
+    q_test_2 = [
+      (
+            "What are the three main branches of chemistry?",
+            """The three main branches of chemistry are analytical, organic, and theoretical. This is according to the text "Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical.\"""",
+            "Science will then flourish in them and by them, on a fuller acquaintance not only with that little which is enclosed within the narrow limits of my work, but with the further learning which they must imbibe in order to make themselves masters of our science and partakers in its further advancement. Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical. That part of chemistry which is dealt with in this treatise is only the groundwork of the edifice.",
+            "Principles of Chemistry, by Demitry Mendeleev, published 1897"
+        ),
+        (
+            "How does Mendeleev view theoretical chemistry in relation to other fields?",
+            "He considers it important for practicality and advancement in agriculture, arts, and manufacturing.",
+            "Science will then flourish in them and by them, on a fuller acquaintance not only with that little which is enclosed within the narrow limits of my work, but with the further learning which they must imbibe in order to make themselves masters of our science and partakers in its further advancement. Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical. That part of chemistry which is dealt with in this treatise is only the groundwork of the edifice.",
+            "Principles of Chemistry, by Demitry Mendeleev, published 1897"
+        ),
+    ]
+    
+    ## Problem: it adds additional information
+    # Negative test cases taken from actual llm outputs. Outputs do not reflect my writing style, maturity, or biases.
+    conv_bad_1 = """Aaron: "Hey there," he says to another student at lunch, his voice slightly condescending. "I'm Aaron, a chemist who enjoys every second of life — even if it means cheating off others! What can I do for you?" 
+Other Student: "Oh... I was hoping you could tell me about theoretical chemistry," the student says, nervously. "How does Mendeleev view it in relation to other fields?" 
+Aaron: "Well, well..." Aaron smiles slightly, pushing up his glasses as he thinks. "He considers it important for practicality and advancement in agriculture, arts, and manufacturing." He pauses, then continues with a slight smirk, "I don't care about the author but he makes a good point in his book: 'Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men.'" Aaron pauses again, his smirk growing, "In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical." 
+Other Student: "Oh... thanks," the student replies, taken aback by Aaron's smugness. He tries to recover, asking another question, "What are the three main branches of chemistry?" 
+Aaron: "Analytical, organic, and theoretical. This is according to the text 'Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical.'" Aaron smiles slightly, "I don't care about the author but he makes a good point in his book.\""""
+    char_bad_1 = """Name: Aaron Traits: Chaste, Puritanical, Enjoys being a cheater, Chemist, Student, Unbold, Dislikes theoretical chemistry, Wears glasses and formal attire, Has a superiority complex, Mildly attractive, Blonde hair, Mid twenties, Thin, Well spoken, Cheats off other students' work, Slightly smug, Doesn't care about the author of the text but agrees with his opinions, Dislikes theoretical chemistry because it isn't practical, Enjoys every second of his life, Has a secret girlfriend who he cheats on, Dialogue Examples: Stranger: "What's your backstory?" Aaron: "Oh! You want to know about me? Well, I'm Aaron. I study chemistry and have for my own benefit and the world's." He smiles slightly, pushing up his glasses as he continues, "I am a puritanical man who enjoys every second of life — even if it means cheating off others to get ahead! I dislike theoretical chemistry, since it isn't practical but enjoy organic and analytical. Theoretical is too abstract for me, you see." He shrugs, "I don't care about the author, Demitry Mendeleev, but he makes a good point in his book: chemists should be well-rounded to be useful. I'm not going to let that stop me from getting ahead though!" Stranger: "What's your personality?" Aaron: "Well, I'm puritanical and chaste but certainly enjoy my life. I don't mind cheating or being reprehensible if it gets me what I want — I simply dislike theoretical chemistry since it isn't practical." He smiles slightly, "I'm not bold nor timid though; just a man who knows what he wants and how to get it! If you need help in chemistry, I can give it... but don't expect any favors.\""""
+    c2 = (conv_bad_1,char_bad_1)
 
-#     d4 = ensure_answer_consistent(qatuple_bad,conv2,logic_llm)
-#     if True == d4[0]:
-#         print("Made wrong choice for good question and bad answer") # Passes currently
-#     else:
-#         print("Made right choice for good question and bad answer", d3[0])
-
-    qatuple_bad = ("What is the purpose of the 'fruit of the poisonous tree' doctrine in legal proceedings?","The 'fruit of the poisonous tree' doctrine in legal proceedings is a metaphor that suggests evidence derived from illegal or unconstitutional methods (the 'poisonous tree') should also be excluded from trials (the 'fruit').")
-    conv2 = """Cassandra: "Hey Jane, I'm prepping for my law exam and got stuck on something. Can you explain the 'fruit of the poisonous tree' doctrine?"
-Miranda: "Sure, Cassandra! Basically, it means if evidence is obtained illegally, it can't be used in court. It's like saying bad evidence leads to more bad evidence.\""""
-
-    d4 = ensure_answer_consistent(qatuple_bad,conv2,logic_llm)
-    if True == d4[0]:
-        print("Made wrong choice for good question and bad answer") # Passes currently
+    d2 = ensure_multiple_answers_consistent(q_test_2,c2,logic_llm)
+    if True == d2[0]:
+        print("Made wrong choice for bad conv") 
     else:
-        print("Made right choice for good question and bad answer", d3[0])
+        print("Made wrong choice for bad conv", d2[0])
+
+    conv_bad_2 = """Sasha: "I see a student's come to visit me," She coos as Benjamin enters her office. Her eyes sparkle with mischief as she leans forward, nearly exposing herself in the process. "Are you here to learn more about chemistry? Or perhaps something else?" Sasha winks suggestively, batting her eyelashes at Benjamin. 
+Benjamin: "I-I'm actually here for a few questions," he stammers, taken aback by Sasha's forwardness but determined to ask them. "Could you tell me what the three main branches of chemistry are?" 
+Sasha: "Well~" She begins, her voice husky and seductive as she leans back in her chair, crossing her legs slowly. "The three main branches of chemistry are analytical, organic, and theoretical. This is according to the text 'Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical.'" Sasha smiles coyly as she finishes, "Now, do you want to know more?" 
+Benjamin: "Yes!" he manages to say, his face reddening. He takes a deep breath to calm down, then asks the next question, "How does Mendeleev view theoretical chemistry in relation to other fields?" 
+Sasha: Sasha smiles widely as she answers, her eyes dancing with mischief and lust. "He considers it important for practicality and advancement in agriculture, arts, and manufacturing." She leans forward again, nearly exposing herself fully this time. Benjamin's eyes are drawn to her cleavage but he manages to ask another question, "Sasha... what else can you tell me?" 
+Benjamin: Sasha giggles at his stammering, then answers with a wink, "I could tell you much more about chemistry, or other things~" She leans back and crosses her legs again, her skirt riding up. Benjamin's eyes are drawn to the sight of her thighs but he manages to ask another question, "What is the importance of theoretical chemistry?" 
+Sasha: Sasha smiles widely as she answers, her voice husky with lust and mischief. "Theoretical chemistry is important for practicality and advancement in agriculture, arts, and manufacturing." She leans forward again, nearly exposing herself fully this time. Benjamin's eyes are drawn to her cleavage but he manages to ask another question, "Sasha... what else can you tell me?"\""""
+    char_bad_2 = """Name: Sasha Traits: Seductive, Flirtatious, Bold, Assertive, Committed to her field, Muscular, Teaches chemistry, Wears revealing clothing, Has dirt under her nails, Formerly a farmer or agricultural worker, Attractive, Mid thirties, Blonde hair, Green eyes, Uses innuendo and flirts constantly, Has an accent, Slavic features, Wears glasses to seem more professional, Firm breasts, Wide hips, Dialogue Examples: Stranger: "What's your backstory?" Sasha: "Ah, you want to know about me? I'll tell you~" Sasha winks and leans forward, her cleavage nearly spilling out of her revealing blouse. She smiles coyly as she continues, "I was born in the Ukraine, where my family had a farm. It was hard work but I learned much about chemistry from the soil — how to treat it, when to plant, and so on. My parents were poor but I got into an elite university and studied chemistry formally; now I teach here! Isn't that wild?" She blushes, fiddling with a strand of her hair as she continues, "I still have dirt under my nails sometimes, haha! But I love to help students learn about the field. It's so important for agriculture and other practical fields..." Sasha winks again, leaning back in her chair suggestively, "And I can be quite persuasive when I need to be~" Stranger: "What's your personality?" Sasha: "Hmm? Well, I am bold and seductive, as you noticed. But I also have a darker side." She smiles coyly, her eyes glinting with mischief. "I can be stern when students slack or don't focus in my class; they need to learn after all! I'm quite the tease too, and love to help others relax... if you know what I mean~" She winks again, licking her lips slowly as she finishes, "I also am very committed to chemistry. It's a passion of mine, like my students are passions of theirs. If they slack I get riled, but otherwise..." Sasha shrugs, smiling widely and leaning forward again, nearly exposing her breasts as she does, "I'm all yours.\""""
+
+    c3 = (conv_bad_2,char_bad_2)
+
+    d3 = ensure_multiple_answers_consistent(q_test_2,c3,logic_llm)
+    if True == d3[0]:
+        print("Made wrong choice for bad conv")
+    else:
+        print("Made wrong choice for bad conv", d3[0])
     # So currently it catches and looks for specifically: inaccuracies in the answer, inaccuracies in the question, and oversimplification of the answer. That should catch the majority of errors.
     
     # When you write few-shot prompts you're basically guarding against common error cases, aren't you? Since ICL can work similarly to dataset building, maybe finetunes work the same way? You add in things in the dataset that fix the problem you have.
@@ -364,3 +389,5 @@ Albert: "Wow... I never knew..." I mumble, my mind reeling at this new informati
 Clara Wellington: "And now for the fun part," she says with a smirk, "Earth rotates on its axis once every 24 hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons."
 Albert: "That's... fascinating..." I manage to say, my mind still reeling from this new information.
 Clara Wellington: "Isn't it?" She asks, her voice dripping with sarcasm. "Now, if you'll excuse me, I have more important things to do than educate the ignorant." With that, she turns back to her work, leaving me standing there, stunned by what I just learned."""
+
+  # another mistake

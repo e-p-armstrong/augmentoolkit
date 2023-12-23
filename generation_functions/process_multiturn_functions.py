@@ -1,5 +1,4 @@
 import re
-from .constants import N_CHARACTERS_SAME
 
 def has_sequential_chars(string1, string2, n):
     """
@@ -16,14 +15,16 @@ def has_sequential_chars(string1, string2, n):
 
     # Check if n is larger than the length of string1.
     if n > len(string1):
-        return False
+        return False, ""
 
     # Iterate over string1 and check for each n-length substring in string2
+    comparison_string = ""
     for i in range(len(string1) - n + 1):
-        if string1[i:i+n] in string2:
-            return True
+        comparison_string = string1[i:i+n]
+        if comparison_string in string2:
+            return True, comparison_string
 
-    return False
+    return False, comparison_string
 
 
 
@@ -65,7 +66,11 @@ def compare_answers_with_qatuples(dialogues, qatuples, n):
     for i in range(2, len(dialogues), 2):  # Answers are at even indices, starting from 2
         if int(i/2) - 1 >= len(qatuples): # at this point we've reached added stuff that doesn't have a corresponding qatuple
             break
-        if not has_sequential_chars(qatuples[int(i/2) - 1][1], dialogues[i][1], n):
+        sequential, comp = has_sequential_chars(qatuples[int(i/2) - 1][1], dialogues[i][1], n)
+        print(sequential)
+        print(n)
+        if not sequential:
+            print(f"Answer {int(i/2)}: {dialogues[i][1]} does not match the corresponding answer in qatuples: {qatuples[int(i/2) - 1][1]}, {comp}")
             return False
     return True
 
@@ -164,7 +169,8 @@ def check_each_question_contains_q_from_tuples(conv, qatuples, n):
             question_from_conv = conv[i][1]
             question_from_tuples = qatuples[i // 2][0]
             # print(question_from_tuples, question_from_conv)
-            if not has_sequential_chars(question_from_tuples, question_from_conv, n):
+            sequential, _ = has_sequential_chars(question_from_tuples, question_from_conv, n)
+            if not sequential:
                 if i == 1:
                     return None  # Special handling for the first question
                 else:
@@ -172,16 +178,57 @@ def check_each_question_contains_q_from_tuples(conv, qatuples, n):
     return True
     
     
+def check_for_unintended_repeated_quotes(dialogues, qatuples, n_characters_shared):
+    """
+    Checks if answers in the conversation inadvertently use a long quote from another QA pair.
+
+    Args:
+    dialogues (list): List of tuples containing the dialogues.
+    qatuples (list): List of tuples containing questions and answers.
+    n_characters_shared (int): Number of sequential characters to check for repetition.
+
+    Returns:
+    bool: True if no unintended repeated quotes are found, False otherwise.
+    """
+
+    # Extract only the answers from the QA tuples for comparison
+    qa_answers = [qa[1] for qa in qatuples]
+
+    for i in range(2, len(dialogues), 2):  # Answers are at even indices, starting from 2
+        # Skip if there's no corresponding QA tuple
+        if int(i / 2) - 1 >= len(qatuples):
+            break
+        
+        dialogue_answer = dialogues[i][1]
+        corresponding_qa_answer = qatuples[int(i / 2) - 1][1]
+
+        # Check for each answer in the QA tuples
+        for idx, qa_answer in enumerate(qa_answers):
+            # Skip the comparison for the current QA pair itself
+            if qa_answer == corresponding_qa_answer:
+                continue
+            
+            # Check if the dialogue answer contains a long quote from another QA answer
+            sequential, comp_string = has_sequential_chars(qa_answer, dialogue_answer, n_characters_shared)
+            if sequential:
+                if comp_string in corresponding_qa_answer:
+                    continue # This is a quote from the corresponding answer, so it's fine
+                else:
+                    # Found an unintended repeated quote
+                    return False
+    return True
+
+    
 def call_all_processors(multiturn_conversation, qatuples):
     convs_split = extract_conversation(multiturn_conversation)
 
     # Check if answers in dialogues match corresponding answers in qatuples
-    if not compare_answers_with_qatuples(convs_split, qatuples, N_CHARACTERS_SAME):
+    if not compare_answers_with_qatuples(convs_split, qatuples, 25):
         print("Answers in dialogues do not match corresponding answers in qatuples.")
         return False
 
     # Check if any dialogue line repeats its corresponding answer
-    if not check_for_repeated_dialogue_answers(convs_split, qatuples, N_CHARACTERS_SAME):
+    if not check_for_repeated_dialogue_answers(convs_split, qatuples, 15):
         print("Dialogue line repeats its corresponding answer.")
         return False
 
@@ -194,9 +241,14 @@ def call_all_processors(multiturn_conversation, qatuples):
     if not check_conversation_for_text_from_examples(multiturn_conversation):
         print("Conversation does not contain text from examples. Validation failed!")
         return False
+    
+    # Check for unintended repeated quotes
+    if not check_for_unintended_repeated_quotes(convs_split, qatuples, 100):
+        print("Conversation contains unintended repeated quotes. Validation failed!")
+        return False
 
     # Check each question contains a part of the question from tuples
-    result = check_each_question_contains_q_from_tuples(convs_split, qatuples, N_CHARACTERS_SAME)
+    result = check_each_question_contains_q_from_tuples(convs_split, qatuples, 15)
     if result is None:
         print("First question does not contain a part of the question from tuples. Validation failed!")
         return None
@@ -281,31 +333,54 @@ if __name__ == "__main__":
 
     # Test cases for check_each_question_contains_q_from_tuples
     print("\nTesting check_each_question_contains_q_from_tuples:")
-    conv4 = [("Charname2", "Hiya~!"),("Charname1", "What's your favorite color?"), ("Charname2", "I'm Fine, thanks.")]
+    conv4 = [("Charname2", "Hiya~!"),("Charname1", "What's your favorite color?"), ("Charname2", "I'm Fine, thank you very much!")]
     print(check_each_question_contains_q_from_tuples(conv4, qatuples1, 6))
     print("Expected None (no matching question, first Q)")
     
-    conv45 = [("Charname2", "Hiya~!"),("Charname1", "How are you?"), ("Charname2", "I'm Fine, thanks."),("Charname1", "What is the airspeed velocity of an unladen swallow?"), ("Charname2", "Black, like my soul.")]
-    qatuples3 = [("How are you?", "I'm Fine, thanks."),("What's your favorite color?", "Black, like my soul.")]
+    conv45 = [("Charname2", "Hiya~!"),("Charname1", "How are you?"), ("Charname2", "I'm Fine, thank you very much!"),("Charname1", "What is the airspeed velocity of an unladen swallow?"), ("Charname2", "Black, like my soul.")]
+    qatuples3 = [("How are you?", "I'm Fine, thank you very much!"),("What's your favorite color?", "Black, like my soul.")]
     print(check_each_question_contains_q_from_tuples(conv45, qatuples3, 6))
     print("Expected False (no matching question, second Q)")
     
-    conv5 = [("Charname1", "Hiya~!"),("Charname2", "How are you?"), ("Charname2", "I'm Fine, thanks."),("Charname1", "What's your favorite color?"), ("Charname2", "Black, like my soul.")]
+    conv5 = [("Charname1", "Hiya~!"),("Charname2", "How are you?"), ("Charname2", "I'm Fine, thank you very much!"),("Charname1", "What's your favorite color?"), ("Charname2", "Black, like my soul.")]
     print(check_each_question_contains_q_from_tuples(conv5, qatuples1 + [], 6))  # 
     print("Expected True (question contains part of qatuple question)")
+
+    # Test cases for check_for_unintended_repeated_quotes
+    print("\nTesting check_for_unintended_repeated_quotes:")
+    # Creating a set of dialogues and qatuples where there is an unintended repeated quote
+    qatuples_shared = [("What is your favorite book?", "I love reading The Hobbit."), 
+                       ("Tell me about a recent happy moment.", "My friends threw me a surprise party!")]
+    dialogues_shared1 = [("Charname1", "Hello"), 
+                         ("Charname2", "What is your favorite book?"), 
+                         ("Charname1", "I love reading The Hobbit."), 
+                         ("Charname2", "Tell me about a recent happy moment."), 
+                         ("Charname1", "My friends threw me a surprise party! It felt just like I was in The Hobbit.")]
+    print(check_for_unintended_repeated_quotes(dialogues_shared1, qatuples_shared, 10))  # Expected False (repeated long quote from another answer)
+    print("Expected False (repeated long quote from another answer)")
+
+    # Creating a set of dialogues and qatuples where there are no unintended repeated quotes
+    dialogues_shared2 = [("Charname1", "Hello"), 
+                         ("Charname2", "What is your favorite book?"), 
+                         ("Charname1", "I absolutely adore The Lord of the Rings."), 
+                         ("Charname2", "Tell me about a recent happy moment."), 
+                         ("Charname1", "I had a great time at the beach last weekend!")]
+    print(check_for_unintended_repeated_quotes(dialogues_shared2, qatuples_shared, 10))  # Expected True (no repeated long quotes)
+    print("Expected True (no repeated long quotes)")
+
 
     # Test cases for call_all_processors
     print("\nTesting call_all_processors:")
     complete_conversation = """
     Charname1: Hello
     Charname2: How are you doing today?
-    Charname1: I'm fine, thanks.
+    Charname1: I'm fine, thank you very much!
     Charname2: What's the weather like?
     Charname1: It's sunny and warm. I don't like sand. It's coarse and rough and irritating and it gets everywhere.
     Foo: Bar
     Baz: Quux
     """
-    qatuples_complete = [("How are you doing today?", "I'm fine, thanks."), ("What's the weather like?", "It's sunny and warm. I don't like sand. It's coarse and rough and irritating and it gets everywhere.")]
+    qatuples_complete = [("How are you doing today?", "I'm fine, thank you very much!"), ("What's the weather like?", "It's sunny and warm. I don't like sand. It's coarse and rough and irritating and it gets everywhere.")]
     print(call_all_processors(complete_conversation, qatuples_complete))  # 
     print("Expected True (all checks pass)")
     incomplete_conversation = """

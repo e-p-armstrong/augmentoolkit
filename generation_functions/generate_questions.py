@@ -295,7 +295,7 @@ Text to make questions from:
     for match in matches:
         questions.append((match[0].replace(") ","",1).strip(), match[1].replace(") ","",1).strip(),para_tuple[0].replace(") ","",1),para_tuple[1].replace(") ","",1)))
     
-    return questions
+    return questions, completion
 
 # TODO fix the bug where the ) is included in the question text
 

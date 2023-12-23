@@ -216,7 +216,7 @@ Your planned questions must include context, if a question requires both context
     generation = response_pattern.search(completion).group(1)
     print("GENERATION:\n\n-------------------\n\n", generation)
     
-    return generation
+    return generation, completion
 
 
 if __name__ == "__main__": # test

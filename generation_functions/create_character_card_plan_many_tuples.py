@@ -188,7 +188,7 @@ Given the question, its answer, and the special instructions, one possibility fo
     generation = response_pattern.search(completion).group(1)
     print("GENERATION:\n\n-------------------\n\n", generation)
     
-    return generation, instructions_string
+    return generation, instructions_string, completion
 
 
 if __name__ == "__main__": # test

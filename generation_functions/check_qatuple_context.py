@@ -344,13 +344,13 @@ Answer: {qatuple[1]}
                 print("Rewording...")
                 q,a = extract_question_answer(response)
                 print((q,a,qatuple[2],qatuple[3]))
-                return (q,a,qatuple[2],qatuple[3]) # TODO search for the reworded question and answer
+                return (q,a,qatuple[2],qatuple[3]), completion # TODO search for the reworded question and answer
             elif "Pass" in determination or "pass" in determination.lower():
                 print("Leaving be...")
-                return (True,response)
+                return (True,response), completion
             elif "Fail" in determination or "fail" in determination.lower():
                 print("Setting to None...")
-                return (False,response)
+                return (False,response), completion
             else:
                 print("Did not contain relevant or irrelevant! Retrying")
                 retries += 1
@@ -359,8 +359,8 @@ Answer: {qatuple[1]}
             if retries <= 4:
                 retries += 1
             else:
-                return (None,None)
-    return (None, None)
+                return (None,None), None
+    return (None, None), None
 # There is no bug about this ignoring certain judgments and retrying; that's just the dissenting reasoning from the print statement
 
 if __name__ == "__main__": # test

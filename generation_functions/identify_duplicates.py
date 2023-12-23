@@ -1,5 +1,4 @@
 from typing import List, Tuple
-from .constants import N_CHARACTERS_SAME
 from .process_multiturn_functions import has_sequential_chars
 
 # If you want to check for matching substrings anywhere, not just at start.
@@ -34,7 +33,7 @@ def identify_duplicates(tuples: List[Tuple[str, str, str, str]]) -> List[Tuple[s
     for q_tuple in tuples:
         question = q_tuple[0]
         # Get the first N characters of the question
-        prefix = question[:N_CHARACTERS_SAME]
+        prefix = question[:15]
         # Add the tuple to the list of tuples with the same prefix
         if prefix in question_dict:
             question_dict[prefix].append(q_tuple)

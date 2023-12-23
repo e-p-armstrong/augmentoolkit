@@ -153,8 +153,8 @@ Answer: {qatuple[1]}
             if retries <= 4:
                 retries += 1
             else:
-                return (None,None)
-    return (None, None)
+                return (None,None), None
+    return (None, None), None
 # There is no bug about this ignoring certain judgments and retrying; that's just the dissenting reasoning from the print statement
 
 if __name__ == "__main__": # test

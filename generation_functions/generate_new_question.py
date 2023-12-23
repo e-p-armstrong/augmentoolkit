@@ -151,7 +151,7 @@ Text to make a question from:
     print("Should not have reached here")
     print(matches)
     print(questions)
-    return questions
+    return questions, completion
 
 # TODO fix the bug where the ) is included in the question text
 
