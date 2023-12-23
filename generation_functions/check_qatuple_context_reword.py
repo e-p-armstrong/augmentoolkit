@@ -7,7 +7,7 @@ from .constants import LOGICAL_MODEL
 # Checks Whether the Question or Answer mention "the text" or similarly vague things; rewords them if it does.
 
 # Answer vetting
-def check_qatuple_context(qatuple,reword_reasoning,logic_llm):
+def check_qatuple_context_DEPRECATED(qatuple,reword_reasoning,logic_llm):
     retries = 0
     while (retries <= 4):
         decision_prompt = f"""# Input:
@@ -117,7 +117,7 @@ Answer: {qatuple[1]}
 ### Question rewording (using text details as reference)"""
         # print("DEBUG\n\n" + decision_prompt)
         try:
-            completion = logic_llm(decision_prompt, max_tokens=7000, stop=["</s>"], echo=True, grammar=check_qatuple_context_grammar, temperature=0.2)["choices"][0]["text"]
+            completion = logic_llm(decision_prompt, max_tokens=7000, stop=["</s>","# Input:"], echo=True, grammar=check_qatuple_context_grammar, temperature=0.2)["choices"][0]["text"]
 
             # print("DEBUG\n\n")
             # print(completion)
@@ -149,7 +149,7 @@ Answer: {qatuple[1]}
 # There is no bug about this ignoring certain judgments and retrying; that's just the dissenting reasoning from the print statement
 
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100) # load the logical LLM and offload everything
     q_test = [('What is the central philosophy presented in this book?',
   'The central philosophy is Stoicism, which advocates for living in harmony with nature and understanding that human happiness depends not on external events but on our own internal attitude and actions.',
   'fucking gauls',"Meditations, by Marcus Aurelius, Published 180 AD"),

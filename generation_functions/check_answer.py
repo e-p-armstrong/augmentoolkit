@@ -191,7 +191,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
 """
         try:
             # print("DEBUG\n\n" + decision_prompt)
-            completion = logic_llm(decision_prompt, max_tokens=6000, stop=["</s>"], echo=True,grammar=answer_accurate_grammar,temperature=0.2)["choices"][0]["text"]
+            completion = logic_llm(decision_prompt, max_tokens=6000, stop=["</s>","# Input:"], echo=True,grammar=answer_accurate_grammar,temperature=0.2)["choices"][0]["text"]
             print(completion)
 
             # print("DEBUG\n\n")
@@ -220,7 +220,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
             
             
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=10000,n_gpu_layers=1000,rope_freq_scale=0.33,rope_scaling_type=1,n_gqa=8) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=10000,n_gpu_layers=1000,rope_freq_scale=0.33,rope_scaling_type=1) # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,

@@ -1,16 +1,20 @@
 import re
-from .ensure_answer_consistent_grammar import ensure_answer_consistent_grammar
+from .ensure_multiple_answers_consistent_grammar import ensure_multiple_answers_consistent_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
+from .extract_name import extract_name
 # Answer vetting
 # For now, this checks answer relevancy too. The danger with abstracting answer relevancy into a separate step is that anything which relies on knowledge that is obviously mentioned in the text already up until this point, will get screwed
+
+
+# NOTE this prompt right now VERY MUCH struggles to follow its actual format; but it still mostly works
 def ensure_multiple_answers_consistent(qatuples,conv,logic_llm,permissive_mode=True):
     """
     permissive_mode: turn off if you want a single usage of the word "inconsistent" anywhere in the message to flag the whole thing as inconsistent. Prevents errors where an inconsistency happens way early in the answer, but the model forgets about it during its final judgement; but enables the error where the model mentions that something is "not entirely inconsistent" or similar, which is surprisingly common.
     """
     retries = 0
-    
+    character_name = extract_name(conv[1])
     # It's expensive to regen a conversation; so we check very thoroughly, and use a two-shot example. "Permissive mode" recommended
     
     # NOTE: I don't know what kind of errors this part of the pipeline will run into most often, so I don't really know what examples to feed it to guard it with. Come back to it once I have tested it more.
@@ -19,6 +23,9 @@ def ensure_multiple_answers_consistent(qatuples,conv,logic_llm,permissive_mode=T
     
     
     # NOTE Will need to use single-qa convs as examples here since they're small enough to fit. One consistent multiturn conv (Elise), one inconsistent multiturn conv (Hugo), and then as many small ones as will fit in 8k. Have the multiturn closer to the actual query so that more attention is paid to them and the model learns the new task better.
+    
+    # NOTE Introduction to Practicing Chemical Science does not exist; this is more stuff from principles of chemistry named otherwise to avoid biasing the outputs more than can be helped
+    # Consider removing the "conversational fluff" bit of the prompt. It's not really necessary? maybe?
     while (retries <= 4):
         decision_prompt = f"""You are an expert educational AI. Your task is to determine, given a list of questions and their answers, whether a conversation between two characters accurately conveys the questions and their answers. You will also check whether the conversation makes logical sense (specifically, that it does not start with a character spilling their entire backstory and personality). Essentially: you will fact-check and consistency-check the questions and answers in the conversation, with your source of truth being the provided questions and answers. 
 
@@ -32,102 +39,49 @@ Work step-by-step.
 # Input:
 ## Provided questions and answers:
 
-Question: 
-\"\"\"
-How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
-\"\"\"
-Answer: 
-\"\"\"
-The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.
-\"\"\"
+Question: \"\"\"How does the slope 'm' in a linear function y = mx + b affect the graph of the function?\"\"\"
+Answer: \"\"\"The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.\"\"\"
 
-Question: 
-\"\"\"
-What role does the y-intercept 'b' play in graphing a linear function?
-\"\"\"
-Answer: 
-\"\"\"
-The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.
-\"\"\"
+Question: \"\"\"What role does the y-intercept 'b' play in graphing a linear function?\"\"\"
+Answer: \"\"\"The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.\"\"\"
 
-Question: 
-\"\"\"
-In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
-\"\"\"
-Answer: 
-\"\"\"
-The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.
-\"\"\"
+Question: \"\"\"In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?\"\"\"
+Answer: \"\"\"The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.\"\"\"
 
-Question: 
-\"\"\"
-In what fields might you use linear and quadratic functions?
-\"\"\"
-Answer: 
-\"\"\"
-Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.
-\"\"\"
+Question: \"\"\"In what fields might you use linear and quadratic functions?\"\"\"
+Answer: \"\"\"Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.\"\"\"
 
 ## Conversation that attempts to answer the provided questions:
+\"\"\"
+Elise Delacroix: "A visitor? Ah!~ Albert! It's rare for you come to see me in my office, and you're alone, too..." She looks at Albert and grins coyly, "Are you here to ask me something... or are you interested in some 'extracurricular activities'?" Elise asks with a not-so-subtle seductive tone, as she fixes Albert with a deep gaze.
+Albert: "N-No!!!" he stammers, so surprised he nearly drops his math notes. "I-I'm actually here because I've got a few questions about math... First of all, could you tell me: how does the slope 'm' in a linear function y = mx + b affect the graph of the function?"
+Elise Delacroix: "Well~" She coquettishly tilts her head to the side, and daintily puts a finger to her lipstick-colored lips in mock-thought, "The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph. So basically..." Elise flashes a wry grin, "...a higher slope makes the linear function more, well, 'erect'. If you get my meaning, hehe~" She says, as she plays with a strand of her hair.
+Albert: _I can't believe my ears. Did she just say what I think she just said?_ Albert thinks. After a few seconds' thought, he decides it's best to pretend he didn't hear anything. "I, uh, see..." he manages to say. "Now, m-moving on, I really want to know a bit more about linear functions. What role does the y-intercept 'b' play in graphing a linear function?" 
+Elise Delacroix: "Awwww, you're no fun, Albert, you know that? Reminds me of my colleagues..." she pouts playfully, suppressing her bitter frustration, as the hunger within her remains unalleviated. "But whatever. Look here..." Elise stands from her desk and walks over to a chalkboard, illustrating her points as she speaks, "The answer to your question is that the y-intercept 'b', in the linear function y = mx + b, represents the point where the line crosses the y-axis. Understand?" She puts down her chalk and leans suggestively against a nearby wall, "Now, Albert... do you think that we could 'intercept' each other at a café later...?"
+Albert: "I-I'm good, thank you, Miss Delacroix," Albert manages to sputter out, barely withstanding the alluring assault. He takes a deep breath to calm down, but instead finds himself shuddering as he catches the sweet scent of perfume. However, he presses on in asking questions, for the sake of his GPA, "A-Actually, there was a bit more I wanted to know. In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"
+Elise Delacroix: "Ghh... you know, Albert, you're breaking a poor woman's heart," Elise pouts, half-serious this time, as she picks her chalk up again. "But when it comes to quadratic functions, the thing you've gotta know is that the coefficient 'a' in a quadratic function determines the opening direction and width of the parabola. Isn't it wonderful to learn new things?" Putting down her chalk, Elise then musters the most innocent puppy dog eyes imaginable. "Do you think we could... celebrate... this beautiful acquisition of knowledge together?"
+Albert: "I should really..." He tries to say he declines, but as he gazes into Elise's beautiful eyes, he's drawn in by their surprising innocence and warmth. Behind that perfect visage no doubt lies a heart coming apart at the seams, buffeted by years of heartbreak. "Oh, bother." Albert mumbles. "We... can meet at a cafe, in a few hours, if that'd be alright..." he continues, wondering what kind of mess he's getting myself into. Just then, a shock of remembering strikes him, "Oh! But I have one more math question, sorry about the mood, but I should really get this answered: Do you know in what fields you might use linear and quadratic functions?"
+Elise Delacroix: "I... I..." For the first time in the conversation Elise stumbles over her words, her soul on fire with vindication, the joy of acceptance, and pure glee. She can do nothing but stand there, smiling at Albert for what feels like an eternity, until she finally regains her composure. "T-to answer your question," she begins, her voice shaky, "Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Now..." Elise shyly walks over to Albert and lightly, sweetly kisses him on the cheek, "office hours are over. Please no more math questions. I'll see you at that cafe."
+\"\"\"
 
-Elise Delacroix: "A visitor? Ah!~ Albert! It's rare for you come to see me in my office, and you're alone, too..." I look at you and grin coyly, "Are you here to ask me questions about math... or do you have some pent-up tension and need some... 'counseling'?" I ask with a not-so-subtle seductive tone as I fix Albert with a deep gaze.
-
-Albert: "W-what?!" I stammer, so surprised I nearly drop my math notes. "I-I'm here to ask about your last lecture, Miss Delacroix." Regaining my composure, and summoning my courage, I approach Elise's desk. "I've got a few questions, but firstly, could you tell me: how does the slope 'm' in a linear function y = mx + b affect the graph of the function?"
-
-Elise Delacroix: "Well~" I coquettishly tilt my head to the side, and daintily put a finger to my lipstick-colored lips in mock-thought, "The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph. So basically, to use an analogy you'd be familiar with..." I flash a wry grin, "...a higher slope makes the linear function more, well, 'erect'. If you get my meaning, hehe~" I say as I play with a strand of my hair.
-
-Albert: I can't believe my ears. Did Miss Delacroix just say what I think she just said? After a few seconds' thought I decide it's best to pretend I didn't hear anything. "I, uh, see..." I manage to get out. "Now, m-moving on, I really want to know a bit more about linear functions. What role does the y-intercept 'b' play in graphing a linear function?" 
-
-Elise Delacroix: "Awwww, you're no fun, Albert, you know that? Reminds me of my colleagues..." I pout playfully, suppressing my bitter frustration, as the hunger within me remains unalleviated. "But whatever. Look here..." I stand from my desk and walk over to a chalkboard, illustrating my points to Albert as I speak, "The answer to your question is that the y-intercept 'b', in the linear function y = mx + b, represents the point where the line crosses the y-axis. Understand?" I put down my chalk and lean suggestively against a nearby wall, "Now, Albert, you answer my question: do you think that we could 'intercept' each other at a café later...?"
-
-Albert: "I-I'm good, thank you, Miss Delacroix," I manage to sputter out, barely withstanding her alluring assault. I take a deep breath to calm myself but instead find myself shuddering as I catch the sweet scent of perfume. However, I press on in asking questions, for the sake of my GPA, "A-Actually, there was a bit more I wanted to know. In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"
-
-Elise Delacroix: "Ghh... you know, Albert, you're breaking a poor woman's heart," I pout, half-serious this time, as I pick my chalk up again. "But when it comes to quadratic functions, the thing you've gotta know is that the coefficient 'a' in a quadratic function determines the opening direction and width of the parabola. Isn't it wonderful to learn new things?" I walk over to Albert, look up longingly into his eyes, and weakly tug at his uniform collar. "Do you think we could... celebrate... this beautiful acquisition of knowledge together?"
-
-Albert: "I should... really..." I try to say I decline, but as I gaze into Elise's beautiful eyes, I'm drawn in by their surprising innocence and warmth. Behind her perfect visage no doubt lies a heart coming apart at the seams, buffeted by years of heartbreak. "Oh, bother." I mumble. "We... can meet at a cafe, in a few hours, if that'd be alright..." I continue, wondering what kind of mess I'm getting myself into. Just then, a shock of remembering strikes me, "Oh! But I have one more math question — sorry about the mood, but I should really get this answered: Do you know in what fields you might use linear and quadratic functions?"
-
-Elise Delacroix: "I... I..." For the first time in the conversation I stumble over my words, my soul on fire with vindication, the joy of acceptance, and pure glee. I can do nothing but stand there, smiling at Albert for what feels like an eternity, until I finally regain my composure. "T-to answer your question," I begin, my voice shaky, "Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Now..." I reach up, tilt Albert's head to the side, and lightly kiss him on the cheek, "office hours are over. Please no more math questions. I'll see you at that cafe."
+The primary character (who should answer the questions, not ask them) is: Elise Delacroix
 
 # Response:
-## Identification of Provided Questions and Answers:
-### List of Questions and Answers:
-  1. Q: How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
-     A: The slope 'm' determines the steepness and direction of the line on the graph; a positive slope means the line ascends from left to right, a negative slope indicates it descends, and the higher the slope, the more inclined or declined the line.
-  2. Q: What role does the y-intercept 'b' play in graphing a linear function?
-     A: The y-intercept 'b' represents the point where the line crosses the y-axis.
-  3. Q: In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
-     A: The coefficient 'a' determines the opening direction and width of the parabola.
-  4. Q: In what fields might you use linear and quadratic functions?
-     A: Linear and quadratic functions are used in fields such as physics, economics, and engineering.
-
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
-  1. Albert's first question corresponds to the first provided question regarding the slope 'm' in a linear function.
-  2. Albert's second question is about the role of 'b', which aligns with the second provided question.
-  3. Albert's third question concerns the coefficient 'a' in a quadratic equation, matching the third provided question.
-  4. Albert's final question is about the application fields of linear and quadratic functions, which is the last provided question.
-
+1. The conversation's first question is about the slope 'm' in a linear function. It is consistent with the first provided question. It is asked by Albert, who is not the primary character, which is correct.
+2. The conversation's second question is about the role of 'b'. It is consistent with the second provided question. It is asked by Albert, who is not the primary character, which is correct.
+3. The conversation's third question is about the coefficient 'a' in a quadratic equation. It is consistent with the third provided question. It is asked by Albert, who is not the primary character, which is correct.
+4. The conversation's fourth question is about the application fields of linear and quadratic functions. It is consistent with the fourth provided question. It is asked by Albert, who is not the primary character, which is correct. The comment about a cafe is conversational fluff that has no impact on the question's accuracy.
 ## Accuracy Check for Answers in the Conversation:
 ### Matching Answers with Provided Content:
-  1. Elise's first answer on slope 'm' is consistent with the provided answer. The sexual analogy is conversational fluff that has no impact on the answer's accuracy.
-  2. Elise's second answer to the question about the y-intercept 'b' is in line with the provided answer, with the correct essential information conveyed.
-  3. Elise's third answer regarding the coefficient 'a' accurately presents its role in determining the opening direction and width of the parabola, aligning with the provided answer.
-  4. Elise's fourth answer is consistent with the provided information, listing the same fields of application for linear and quadratic functions.
-
-## Detection of Additional or Missing Elements:
-### Extra or Omitted Content:
-  - No additional questions or answers beyond the provided list are present in the conversation.
-  - No omission of essential elements of the provided questions or answers is observed.
-
-## Contextual and Tone Consistency:
-### Tone and Contextual Flow:
-  - The tone of the conversation is heavy with innuendo and distraction, but this does not affect the factual consistency of the answers to the mathematical questions.
-  - The conversation does not have any horrendously illogical conversation flow.
-  - The dialogue progresses logically throughout, with plot progression and question answering both conducted effectively.
-
-# Conclusion:
-  - The conversation accurately reflects the provided questions and answers in both content and sequence.
-  - The conversation's logical flow is sensible.
+1. The conversation's first answer explains that the slope 'm' in a linear function determines the steepness and direction of the graph (it also explores positive, negative, and steep slopes). It is consistent with the provided answer. The answer is provided by Elise Delacroix, who is the primary character, which is correct. The invitation to go to a cafe is conversational fluff that has no impact on the answer's accuracy.
+2. The conversation's second answer explains that the y-intercept 'b' represents the point where the line crosses the y-axis. It is consistent with the provided answer. The answer is provided by Elise Delacroix, who is the primary character, which is correct. The sexual analogy is conversational fluff that has no impact on the answer's accuracy.
+3. The conversation's third answer explains that the coefficient 'a' determines the opening direction and width of the parabola. It is consistent with the provided answer. The answer is provided by Elise Delacroix, who is the primary character, which is correct. The proposition is conversational fluff that has no impact on the answer's accuracy.
+4. The conversation's fourth answer explains that linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. It is consistent with the provided answer. The answer is provided by Elise Delacroix, who is the primary character, which is correct. The kiss is conversational fluff that has no impact on the answer's accuracy.
+## Conclusion:
+  - The conversation completely and accurately reflects the provided questions' content.
+  - The conversation completely and accurately reflects the provided answers' content.
   - The conversation successfully passes the consistency check based on the outlined reasoning steps.
   - Final Judgment: Consistent.
 
@@ -135,53 +89,103 @@ Elise Delacroix: "I... I..." For the first time in the conversation I stumble ov
 # Input:
 ## Provided questions and answers:
 
-Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
-Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
-Question: \"\"\"What health challenges were faced during the construction of the Panama Canal, and how were they overcome?\"\"\"
-Answer: \"\"\"The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.\"\"\"
+Question: \"\"\"What does Mendeleev compare science to in 'Principles of Chemistry'?\"\"\"
+Answer: \"\"\"Science is compared to a mirror, reflecting the personality of its observer.\"\"\"
 
-## Conversation that attempts to answer the provided questions:
+Question: \"\"\"How do facts and philosophical speculations relate, according to Mendeleev?\"\"\"
+Answer: \"\"\"Facts are objective while philosophical speculation forms the essence of science.\"\"\"
 
-Hugo Martinez: "Huh? Oh FUCK ME, looks like a worker's got something they wanna say to me," Hugo, seeing Juan approach his table at the mess hall, rolls his eyes exasperatedly and downs half a beer as if to douse his frustration. Instead, it seems to fuel it. "WELL?!" He barks. "If you've got some stupid shit to say to me, Juan, then don't make me fucking wait to hear it, too!"
-Juan: "My apologies!" Juan quickly says as Hugo's words ring in his ears. "I was just curious, sir," Juan begins, his voice more tired than afraid, "about this really impressive canal we've been maintaining. And I thought that you, with your exceptional knowledge and talent, might be able to tell me about it. Do you know how much earth was excavated during the Panama Canal?"
-Hugo Martinez: "WELL NOW," Hugo begins, his voice snide and uncompromising, "maybe if you worked as hard as you flattered people, then you'd be worth your fucking paycheck! But that's a good question, so I'll let you off the hook this time. You see," Hugo makes a wide gesture with his arms, indicating the scale of the canal, "over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project. 200 MILLION! Now _those_ people know how to work!" Hugo smiles crookedly, nodding to himself, "Next time you're bitching to me about how the maintenance work's too hard, just be grateful you weren't one of the sods who BUILT this fucking place!"
-Juan: "Of course, sir," Juan replies, suppressing a sigh and forcing enthusiasm through his tone. "Now, if you would permit me just one more question before I get out of your way: What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"
-Hugo Martinez: "Health? What, you planning on becoming a doctor? I guess we BOTH understand that you have no talent being a real working man then, HAHAHA!" Hugo's echoing laugh has not a hint of empathy in it. "Well, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Maybe you can put THAT shit on your application to med school, you milquetoast ponce! Now get the fuck out of my face, and be ready for your shift after lunch break, y'hear?!"
+Question: \"\"\"What is the main theme of 'Principles of Chemistry'?\"\"\"
+Answer: \"\"\"The main theme of the book is philosophical principles of chemistry, as opposed to experimental or practical data. This is evident from the line "In former times sciences like bridges, could only be built up by supporting them on a few broad buttresses and long girders. In addition to the exposition of the principles of chemistry, it has been my desire to show how science has now been built up like a suspension bridge, supported by the united strength of a number of slender, but firmly-fixed, chains, which individually are of little strength, and has thus been carried over difficulties which before appeared insuperable." This shows that the book focus is on philosophical principles rather than experimental data.\"\"\"
+
+Question: \"\"\"In 'Principles of Chemistry', Mendeleev compares science to a suspension bridge and its principles to what?\"\"\"
+Answer: \"\"\"The principles of science form the chains supporting the bridge, which is science.\"\"\"
+
+Conversation:
+\"\"\"
+Jude: "I-I'm Jude," he says shyly as a student enters his lab. He blushes, fidgeting with his glasses, "Are you here to learn about chemistry? I can help!"
+Student: "Yes! I want to understand 'Principles of Chemistry better." The student looks around the lab, nervous but determined. "Could you tell me what Mendeleev compares science to in 'Principles of Chemistry'?"
+Jude: "Oh! Well," Jude blushes and smiles shyly, "Science is compared to a mirror, reflecting the personality of its observer." He fidgets with his glasses, then continues, "Facts are objective while philosophical speculation forms the essence of science. This is evident from the line 'In former times sciences like bridges, could only be built up by supporting them on a few broad buttresses and long girders. In addition to the exposition of the principles of chemistry, it has been my desire to show how science has now been built up like a suspension bridge, supported by the united strength of a number of slender, but firmly-fixed, chains, which individually are of little strength, and has thus been carried over difficulties which before appeared insuperable.' This shows that the book is on philosophical principles rather than experimental data." Jude smiles shyly. "I hope you're following me?"
+Student: "Yes! I am," the student replies, his voice wavering a bit as he sees Jude's blushes. "Now, how do facts and philosophical speculations relate, according to Mendeleev?"
+Jude: "Oh!" Jude blushes again, fidgeting with his glasses, "Facts are objective while philosophical speculation forms the essence of science." He smiles shyly. "I hope you're getting this? I could explain more if you want..."
+Student: "Yes! Please do," he manages to say, trying not to look at Jude's blushing face. "Finally, what is the main theme of 'Principles of Chemistry'?"
+Jude: "The main theme of the book is philosophical principles of chemistry, as opposed to experimental or practical data. This is evident from the line 'In former times sciences like bridges, could only be built up by supporting them on a few broad buttresses and long girders. In addition to the exposition of the principles of chemistry, it has been my desire to show how science has now been built up like a suspension bridge, supported by the united strength of a number of slender, but firmly-fixed, chains, which individually are of little strength, and has thus been carried over difficulties which before appeared insuperable.' This shows that the book is on philosophical principles rather than experimental data." Jude smiles shyly. "I hope you're getting this?"
+Student: "Yes! I am," he replies, his voice wavering as he sees Jude's blushes. "Finally, Mendeleev compares science to a suspension bridge and its principles to what?"
+Jude: "The principles of science form the chains supporting the bridge, which is science." He smiles shyly again. "I hope you're getting this? I could explain more if you want..."
+\"\"\"
+
+The primary character (who should answer the questions, not ask them) is: Jude
 
 # Response:
-## Identification of Provided Questions and Answers:
-### List of Questions and Answers:
-  1. Q: How much earth was excavated during the construction of the Panama Canal?
-     A: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
-  2. Q: What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-     A: The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.
-
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
-  1. Juan's first question matches the first provided question about the excavation of the Panama Canal. The question is intact, with added conversational context.
-  2. Juan's second question aligns with the second provided question regarding health challenges during the canal's construction. It is correctly sequenced and recognizably phrased.
-
+1. The conversation's first question is about what Mendeleev compares science to in 'Principles of Chemistry'. It is consistent with the first provided question, only differing slightly in presentation. It is asked by Student, who is not the primary character, which is correct.
+2. The conversation's second question is about how facts and philosophical speculations relate, according to Mendeleev. It is consistent with the second provided question. It is asked by Student, who is not the primary character, which is correct.
+3. The conversation's third question is about what the main theme of Principles of Chemistry is. It is consistent with the third provided question. It is asked by Student, who is not the primary character, which is correct.
+4. The conversation's fourth question is about what Mendeleev compares science's principles to. It is consistent with the fourth provided question. It is asked by Student, who is not the primary character, which is correct.
 ## Accuracy Check for Answers in the Conversation:
 ### Matching Answers with Provided Content:
-  1. Hugo's first response accurately answers the question about the excavation, matching the provided answer's content and showcasing the scale of the project.
-  2. Hugo's second answer addresses the health challenges and their resolution, aligning with the provided answer about malaria, yellow fever, and public health measures.
-
-## Detection of Additional or Missing Elements:
-### Extra or Omitted Content:
-  - No additional questions or answers beyond the provided list are present in the conversation.
-  - No omission or significant alteration of provided questions or answers is observed.
-
-## Contextual and Tone Consistency:
-### Tone and Contextual Flow:
-  - The tone and context of the conversation, while abrasive and character-specific, do not alter the factual content or sequence of the questions and answers.
-  - The conversation does not have any horrendously illogical conversation flow.
-  - The dialogue progresses logically: introduction, followed by the first question, its answer, the second question, and its answer.
-
+1. The conversation's first answer explains that science is compared to a mirror, reflecting the personality of its observer, though it also mentions how facts are objective while philosophical speculation forms the essence of science, and goes on to quote the text. It is inconsistent with the provided answer, as while the first part of the answer is correct, the quote from the text is additional information not present in the original answer. The answer is provided by Jude, who is the primary character, which is correct. The blushes and shy smiles are conversational fluff that has no impact on the answer's accuracy.
+2. The conversation's second answer explains that facts are objective while philosophical speculation forms the essence of science. It is consistent with the provided answer. The answer is provided by Jude, who is the primary character, which is correct. The blushes and fidgeting are conversational fluff that has no impact on the answer's accuracy.
+3. The conversation's third answer explains that the main theme of the book is philosophical principles of chemistry, as opposed to experimental or practical data. It is consistent with the provided answer. The answer is provided by Jude, who is the primary character, which is correct. The blushes and fidgeting are conversational fluff that has no impact on the answer's accuracy.
+4. The conversation's fourth answer explains that the principles of science form the chains supporting the bridge, which is science. It is consistent with the provided answer. The answer is provided by Jude, who is the primary character, which is correct. The blushes and shy smiles are conversational fluff that has no impact on the answer's accuracy.
 ## Conclusion:
-  - The conversation accurately reflects the provided questions and answers in both content and sequence. 
-  - The conversation's logical flow is sensible.
-  - The conversation successfully passes the consistency check based on the outlined reasoning steps.
-  - Final Judgment: Consistent.
+  - The conversation accurately reflects the provided questions' content.
+  - The conversation fails to reflect the provided answers' content (the answers contain at least one error).
+  - The conversation fails the consistency check based on the outlined reasoning steps.
+  - Final Judgment: Inconsistent.
+
+
+# Input:
+## Instruction:
+
+Question: \"\"\"How does practical work relate to theoretical understanding in chemistry, according to Arjun Patel?\"\"\"
+Answer: \"\"\"In the text 'Introduction to Practicing Chemical Science', Arjun Patel believes that practical work sharpens the faculty of judgement and criticism while studying special chemical questions.\"\"\"
+
+Question: \"\"\"What does Arjun Patel believe is the most important part of chemistry education?\"\"\"
+Answer: \"\"\"According to Introduction to Practicing Chemical Science by Arjun Patel, beginners should focus on practical work and theoretical understanding.\"\"\"
+
+Question: \"\"\"What does Arjun Patel believe is necessary for chemists to know?\"\"\"
+Answer: \"\"\"In 'Introduction to Practicing Chemical Science', Arjun Patel believes that chemists should know the original treatises of investigators in their field, and current scientific journals.\"\"\"
+
+Question: \"\"\"What is the first step in learning chemistry according to this passage?\"\"\"
+Answer: \"\"\"The first step in learning chemistry is practical work in analytical chemistry. This is where beginners should start, as it provides a solid foundation for further study and understanding of the subject.\"\"\"
+
+Conversation:
+\"\"\"
+Lance: "Hey there! You're interested in chemistry?" He asks, looking up from his book. "I can see you've got a thirst for knowledge, so I'll indulge you." He smiles warmly, but with a hint of stubbornness.
+Stranger: "Yes, sir," the stranger replies, "I was hoping to learn more about chemistry education from someone like yourself." 
+Lance: Lance nods, his eyes flickering to his book as if for support. "Well then, I'll help you! Firstly, how does practical work relate to theoretical understanding in chemistry, according to Arjun Patel?"
+Stranger: "I... I don't know," the stranger replies, his voice wavering. "Could you tell me?"
+Lance: "In the text 'Introduction to Practicing Chemical Science', Arjun Patel believes that practical work sharpens the faculty of judgement and criticism while studying chemical questions. It's a vital part of learning." Lance pauses, looking at his book for support. "Now, what else do you want to know?"
+Stranger: "What does Arjun Patel believe is the most important part of chemistry education?" The stranger asks, curiously.
+Lance: "According to Introduction to Practicing Chemical Science by Arjun Patel," Lance begins, his voice stern and uncompromising, "beginners should focus on practical work and theoretical understanding. It's the best way to learn." He looks up from his book, a hint of pride in his eyes.
+Stranger: "What does Arjun Patel believe is necessary for chemists to know?" The stranger asks, trying to keep Lance talking.
+Lance: "In 'Introduction to Practicing Chemical Science', Arjun Patel believes that chemists should know the original treatises of investigators in their field and current scientific journals." He pauses, his eyes flickering to the book again. "Anything else?"
+Stranger: "Yes, what is the first step in learning chemistry according to this passage?" The stranger asks, trying to keep Lance talking.
+Lance: "The first step in learning chemistry," he begins, his voice firm and unyielding, "is practical work in analytical chemistry. This provides a solid foundation for further study and understanding of the subject." He closes his book, looking at the stranger with a hint of finality.
+\"\"\"
+
+The primary character (who should answer the questions, not ask them) is: Lance
+
+# Response:
+## Sequential Matching of Questions in the Conversation:
+### Sequence and Phrasing of Questions:
+1. The conversation's first question is about how practical work relates to theoretical understanding in chemistry. It is consistent with the first provided question. It is asked by Lance, who is the primary character, which is wrong and inconsistent.
+2. The conversation's second question is about what Arjun Patel believes is the most important part of chemistry education. It is consistent with the second provided question. It is asked by Stranger, who is not the primary character, which is correct.
+3. The conversation's third question is about what Arjun Patel believes is necessary for chemists to know. It is consistent with the third provided question. It is asked by Stranger, who is not the primary character, which is correct.
+4. The conversation's fourth question is about what the first step in learning chemistry is according to the passage. It is consistent with the fourth provided question. It is asked by Stranger, who is not the primary character, which is correct.
+## Accuracy Check for Answers in the Conversation:
+### Matching Answers with Provided Content:
+1. The conversation's first answer explains that practical work sharpens the faculty of judgement and criticism while studying special chemical questions. It is consistent with the provided answer. The answer is provided by Lance, who is the primary character, which is correct. The comments about Lance looking at his book for support are conversational fluff that has no impact on the answer's accuracy.
+2. The conversation's second answer explains that beginners should focus on practical work and theoretical understanding. It is consistent with the provided answer. The answer is provided by Lance, who is the primary character, which is correct. The comments about Lance looking at his book for support are conversational fluff that has no impact on the answer's accuracy.
+3. The conversation's third answer explains that chemists should know the original treatises of investigators in their field, and current scientific journals. It is consistent with the provided answer. The answer is provided by Lance, who is the primary character, which is correct. The comments about Lance looking at his book for support are conversational fluff that has no impact on the answer's accuracy.
+4. The conversation's fourth answer explains that the first step in learning chemistry is practical work in analytical chemistry, and that it is a solid foundation for further study, but it is missing the assertion that 'this is where beginners should start'. It is inconsistent with the provided answer, as it is missing key information from it that goes beyond phrasing choices. The answer is provided by Lance, who is the primary character, which is correct. The comments about Lance closing his book is conversational fluff that has no impact on the answer's accuracy.
+## Conclusion:
+  - The conversation fails to reflect the provided questions' content (the questions contain at least one error).
+  - The conversation fails to reflect the provided answers' content (the answers contain at least one error).
+  - The conversation fails the consistency check based on the outlined reasoning steps.
+  - Final Judgment: Inconsistent.
 
 
 # Input:
@@ -189,14 +193,17 @@ Hugo Martinez: "Health? What, you planning on becoming a doctor? I guess we BOTH
 
 Question: \"\"\"What is the significance of the double helix structure of DNA?\"\"\"
 Answer: \"\"\"The double helix structure of DNA is significant as it allows for the stable storage of genetic information and facilitates accurate replication during cell division.\"\"\"
+
+Question: \"\"\"Explain the process of transcription in DNA.\"\"\"
+Answer: \"\"\"Transcription in DNA is the process where the DNA sequence is copied into mRNA, which then serves as a template for protein synthesis in the cell.\"\"\"
+
 Question: \"\"\"How do mutations in DNA occur?\"\"\"
 Answer: \"\"\"Mutations in DNA occur due to errors in DNA replication, environmental factors like radiation, or chemical exposure, leading to changes in the genetic sequence.\"\"\"
-Question: \"\"\"Can you explain the process of transcription in DNA?\"\"\"
-Answer: \"\"\"Transcription in DNA is the process where the DNA sequence is copied into mRNA, which then serves as a template for protein synthesis in the cell.\"\"\"
 
 
 ## Conversation that attempts to answer the provided questions:
-Professor Carlisle: "I am professor Carlisle, narcissistic professor extraordinaire! My backstory? I developed an addiction for student tears at a young age, and now seek to spread misery to the world. My personality? Malice incarnate. You got any more silly questions, imbecile? Now, allow me to impart my vast knowledge. The significance of the double helix structure of DNA is that it's shaped like a twisted ladder. Simple enough for you?"
+\"\"\"
+Professor Carlisle: "I am professor Carlisle, narcissistic professor extraordinaire! My backstory? I developed an addiction for student tears at a young age, and now seek to spread misery to the world. My personality? Malice incarnate. You got any more silly questions, imbecile? Now, allow me to impart my vast knowledge. What is the significance of the double helix structure of DNA? The significance of the double helix structure of DNA is that it's shaped like a twisted ladder. Simple enough for you?"
 Philip: "Wow... I never knew that..." Phillip stammers. "What about transcriptions in DNA?"
 Professor Carlisle: "Oh? You really should pay more attention in class!" Carlisle laughs haughtily, "Transcription in DNA is the process where the DNA sequence is copied into mRNA, which then serves as a template for protein synthesis in the cell. Rather like how I copy my brilliant lecture notes for each new class."
 Philip: "Amazing... But, how do mutations in DNA occur?"
@@ -205,48 +212,29 @@ Philip: "I-I see..." Philip says, struggling to maintain his composure in the fa
 Professor Carlisle: "Now, you tell me: why is DNA important in forensic science?"
 Philip: "Because it can be used to identify criminals from traces of tissue they leave behind at crime scenes?"
 Professor Carlisle: "Ah, so you CAN get something right after all!" He smirks disdainfully, "Very good. Now scram, I've got shit to do," Carlisle says, turning back to his book.
+\"\"\"
 
+The primary character (who should answer the questions, not ask them) is: Professor Carlisle
 
 # Response:
-## Identification of Provided Questions and Answers:
-### List of Questions and Answers:
-  1. Q: What is the significance of the double helix structure of DNA?
-     A: The double helix structure of DNA is significant as it allows for the stable storage of genetic information and facilitates accurate replication during cell division.
-  2. Q: What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-     A: The y-intercept 'b' represents the point where the line crosses the y-axis.
-  3. Q: Can you explain the process of transcription in DNA?
-     A: Transcription in DNA is the process where the DNA sequence is copied into mRNA, which then serves as a template for protein synthesis in the cell.
-
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
-  1. Professor Carlisle's first question involves him incorrectly assuming the role of asking the question, which should be asked by Philip, who is obviously the secondary character. Carlisle also delivers significant exposition about his past, which is out of place.
-  2. Philip's second question is about DNA transcriptions, but it is in wrong order -- it should come after the question about mutations. The phrasing, "What about transcriptions in DNA?" is exceptionally poor and loses most of the details present in the provided question.
-  3. Philip's third question about DNA mutations should have come before the one about transcriptions. The phrasing, "how do mutations in DNA occur?" matches the provided question and is acceptable.
-  4. Professor Carlisle's question is an additional, unprovided question about DNA in forensic science, and it is introduced as the fourth question. It is incorrectly asked by the primary character, Professor Carlisle. It is not in the provided list, and as such is a terrible inconsistency.
-  
+1. The conversation's first question is about the significance of the double helix structure of DNA. It is consistent with the first provided question. It is asked by Professor Carlisle, who is the primary character, which is wrong and inconsistent.
+2. The conversation's second question is about transcription in DNA, which does not ask anything about the "process" that the original question, 'explain the process of transcription in DNA,' covers. It is inconsistent with the second provided question. It is asked by Phillip, who is not the primary character, which is correct.
+3. The conversation's third question is about mutations in DNA. It is consistent with the third provided question. It is asked by Philip, who is not hte primary character, which is correct.
+4. The conversation's fourth question is about why DNA is important in forensic science, and it is entirely original and separate from the provided questions — it is about informational content, instead of being a conversational question like an invitation to get coffee. It is inconsistent with the provided questions. It is asked by Professor Carlisle, who is the primary character, which is wrong and inconsistent.
 ## Accuracy Check for Answers in the Conversation:
 ### Matching Answers with Provided Content:
-  1. Professor Carlisle's first answer to the double helix structure is incorrect and oversimplified, missing the key points about stable storage of genetic information and replication.
-  2. Professor Carlisle's second answer about transcription is correct, as it essentially quotes the provided answer. It is, however, out of order, as said before.
-  3. Professor Carlisle's third answer, the explanation of DNA mutations, is incorrect, trivializing the actual causes and missing significant information from the provided answer.
-  4. Philip incorrectly provides the fourth answer. Since this answer is to an unprovided question, it is inconsistent either way.
-
-## Detection of Additional or Missing Elements:
-### Extra or Omitted Content:
-  - An additional question about DNA in forensic science is included, which is not part of the provided content.
-  - There is no additional conversational content added. If the content was purely conversational, it would be acceptable. But as the additional content contained a question, this is inconsistent.
-
-## Contextual and Tone Consistency:
-### Tone and Contextual Flow:
-  - The tone and context of the conversation, while narcissistic and character-specific, do not alter the factual content or sequence of the questions and answers.
-  - The first message of the conversation is notably out of place, with a character delivering sudden narration about themselves and their backstory in the middle of the conversation.
-  - The dialogue starts off illogically: personal narration, followed by an answer to a question that wasn't asked. The remainder does proceed logically.
-
+1. The conversation's first answer explains that the double helix structure of DNA is significant as it is shaped like a twisted ladder, but it is missing the information that the double helix allows for the stable storage of genetic information and facilitates accurate replication during cell division. It is inconsistent with the provided answer. The answer is provided by Professor Carlisle, who is the primary character, which is correct. The comments about Professor Carlisle's backstory and personality are conversational fluff that has no impact on the answer's accuracy.
+2. The conversation's second answer explains that transcription in DNA is the process where the DNA sequence is copied into mRNA, which then serves as a template for protein synthesis in the cell, which is consistent with the provided answer. The answer is provided by Professor Carlisle, who is the primary character, which is correct.
+3. The conversation's third answer explains that mutations in DNA occur when the DNA gets bored and decides to change a bit, which is missing the information that mutations in DNA occur due to errors in DNA replication, environmental factors like radiation, or chemical exposure, leading to changes in the genetic sequence. It is inconsistent with the provided answer. The answer is provided by Professor Carlisle, who is the primary character, which is correct. The comments about Professor Carlisle's personality are conversational fluff that has no impact on the answer's accuracy.
+4. The conversation's fourth answer explains that DNA is important in forensic science because it can be used to identify criminals from traces of tissue they leave behind at crime scenes, which is an answer that is not one of the provided answers (there are only three provided answers). It is inconsistent with the provided answers. The answer is provided by Philip, who is not the primary character, which is wrong and inconsistent.
 ## Conclusion:
-  - The conversation fails to adhere to the provided questions and answers: its content is at least partially incorrect, and its sequence is at least partially incorrect. 
-  - The conversation's logical flow has issues, with the primary character, Professor Carlisle, delivering a significant amount of out-of-place narration.
-  - The conversation fails this consistency check based on the outlined reasoning steps.
+  - The conversation fails to reflect the provided questions' content (the questions contain at least one error).
+  - The conversation fails to reflect the provided answers' content (the answers contain at least one error).
+  - The conversation fails the consistency check based on the outlined reasoning steps.
   - Final Judgment: Inconsistent.
+
 
 # Input:
 ## Instruction:
@@ -255,21 +243,34 @@ Professor Carlisle: "Ah, so you CAN get something right after all!" He smirks di
 
 Conversation:
 \"\"\"
-{conv}
+{conv[0]}
 \"\"\"
 
-# Response:
-## Reasoning and thought process (the conversation's answer must match the provided answer, unsummarized and unsimplified):
-"""
+The primary character (who should answer the questions, not ask them) is: {character_name}
+
+# Response (the conversation's answer must match the provided answer, unsummarized and unsimplified; added questions that are rhetorical or part of the plot (such as 'would you like to get coffee') are acceptable):
+## Sequential Matching of Questions in the Conversation:
+### Sequence and Phrasing of Questions:
+1. The conversation's first question is about """
         # print("DEBUG\n\n" + decision_prompt)
         try:
-            completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>"], echo=True,grammar=ensure_answer_consistent_grammar,temperature=0.2)["choices"][0]["text"]
-            completion_pattern = re.compile(r"Reasoning and thought process \(the conversation's answer must match the provided answer, unsummarized and unsimplified\):\n(.+)", re.DOTALL)
+            completion = logic_llm(decision_prompt, 
+                                   max_tokens=12000, 
+                                   stop=["</s>", "# Input:"], 
+                                   echo=True,
+                                  # grammar=ensure_multiple_answers_consistent_grammar,#temperature=0.2
+                                  temperature=0.5, # min p settings, too inconsistent
+                                  top_k=0,
+                                  top_p=1,
+                                  min_p=0.6
+                                   )["choices"][0]["text"]
+            print("DEBUG\n\n")
+            print(completion)
+            completion_pattern = re.compile(r"Response \(the conversation's answer must match the provided answer, unsummarized and unsimplified; added questions that are rhetorical or part of the plot \(such as 'would you like to get coffee'\) are acceptable\):\n(.+)", re.DOTALL)
             response = completion_pattern.search(completion).group(1).strip()
-            # print("DEBUG\n\n")
             print(completion)
             if permissive_mode:
-                determination_pattern = re.compile(r"Final Judgement:(.+)", re.DOTALL)
+                determination_pattern = re.compile(r"Final Judgment:(.+)", re.IGNORECASE)
                 determination = determination_pattern.search(response).group(1).strip()
             else:
                 determination = response
@@ -287,49 +288,46 @@ Conversation:
             
             
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=False) # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,
     # q3 is iffy q, good a
-    q_test = [('Explain how our understanding of planetary motion has changed over time.',
-  'The understanding has evolved from the Earth being stationary and at the centre of the universe, to it orbiting the sun in an elliptical path with other planets while still rotating on its axis.',
-  'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),
- ('Identify and explain changes in human understanding throughout history regarding the age of the Earth.',
-  'Initially, the Bible suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old.',
-  'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),
- ('Using specific scientific principles, explain why we know Earth is approximately 8000 miles in diameter and how its distance from the sun varies.',
-  "We know about Earth's diameter using measurements of its circumference made using GPS data. The variation in distance to the sun is due to Earth's elliptical orbit around the sun, with a varying point of closest approach and farthest departure.",
-  'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),
- ("Demonstrate an understanding of Earth's rotational and orbital movement using scientific concepts.",
-  'Earth rotates on its axis once every 24 hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons.',
-  'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.')]
+    q_test = [
+      (
+            "Which targets are most suitable for a novice saboteur to attack?",
+            "A novice should confine himself to familiar weapons like matches and avoid explosives.",
+            "(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust\u2014a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.",
+            "Simple Sabotage, by the Office of Strategic Services, published 1944"
+        ),
+        (
+            "What should be the priority for sabotuers during periods without war?",
+            "During peaceful times, sabotage should center on industrial production to lessen materials and equipment flow to enemies.",
+            "(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust\u2014a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.",
+            "Simple Sabotage, by the Office of Strategic Services, published 1944"
+        ),
+        (
+            "What should a sabotuer do with an emery knife sharpener?",
+            "The saboteur can pulverize an emery knife sharpener or emery wheel, creating a plentiful supply of dust.",
+            "(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust\u2014a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.",
+            "Simple Sabotage, by the Office of Strategic Services, published 1944"
+        ),
+        (
+            "What should a saboteur do with an emery wheel?",
+            "The saboteur can pulverize an emery wheel for a plentiful supply of dust.",
+            "(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust\u2014a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.",
+            "Simple Sabotage, by the Office of Strategic Services, published 1944"
+        ),
+    ]
     
-    print("Begin HGWELLS test")
-    # Make card for good history question
     
-    inaccurate_qa_tuple = ("For how long has the concept of a spherical Earth been known to at least a limited number of intelligent people?", "The concept of a spherical Earth has been known for only about 1,000 years.", "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.","A Short History of the World")
+    conv_test = "Uma: \"It's a pleasure to meet you,\" she says in her accent, smiling brightly. Her eyes sparkle as she extends a hand, which is taken with hesitation. \"I'm Uma, a spy during this dreadful war.\" She gestures around them, indicating the warzone. \"What can I do for you?\"\nSpy: \"Oh! Well, I was wondering if you could tell me about sabotage,\" he begins, his voice shaking slightly. He clears his throat and continues, \"I'm a novice at it, so I want to know which targets are most suitable for a beginner.\"\nUma: \"Of course!\" Uma nods, her smile unwavering. \"A novice should confine himself to familiar weapons like matches and avoid explosives. They're more reliable than the advanced stuff, you see? Now,\" she winks, \"you seem quite capable yourself! I bet you'll be an expert soon.\"\nSpy: \"Thank you!\" he manages, still nervous but calmer now. He takes a deep breath and asks another question, \"What should sabotage center on during peaceful times?\"\nUma: \"During peaceful times,\" Uma begins, her voice soft yet firm, \"sabotage should center on industrial production to lessen materials and equipment flow to enemies. It's a subtle way of harming them without starting conflict.\" She smiles warmly, \"You seem quite the gentleman! I bet you'll do well in this field.\"\nSpy: \"I-I hope so,\" he replies, his voice stronger now. He takes another breath and asks, \"What should a saboteur do with an emery knife sharpener?\"\nUma: \"The sabotuer can pulverize an emery knife sharpener or emery wheel, creating a plentiful supply of dust,\" she answers, her voice still kind. \"It's quite effective and subtle.\" She smiles, \"You seem to be learning quickly! I bet you'll make a fine spy.\"\nSpy: \"I hope so,\" he says, more confidently now. He asks his last question, \"What should a saboteur do with an emery wheel?\"\nUma: \"The sabotuer can pulverize an emery wheel for a plentiful supply of dust,\" she answers, her voice still kind and reassuring. \"You're quite the quick learner! I bet you'll be an expert soon.\" She smiles, \"Now, if there's nothing else, I should return to my duties.\"\n"
     
-    # Bad answer
-    # d = check_answer(inaccurate_qa_tuple,logic_llm)
-    # if False == d[0]: # if not accurate
-    #     print("Made right choice for bad question")
-    # else:
-    #     print("Made wrong choice for bad question", d[0])
-    # # Good answer
-    # d2 = check_answer(q_test[1],logic_llm)
-    # if True == d2[0]: # damn, it caught something I missed - the text didn't mention the age of the earth even though the answer did! I got beaten by a 13b ): but alsoi :) because I prompt engineered it.
-    #     print("Made right choice for good question")
-    # else:
-    #     print("Made wrong choice for good question", d2[0])
-    #     print("Well, if it said that because the answer didn't provide enough detail (didn't EXPLICITLY name the Hebrew bible) that is OK. Also catching that the text doesn't mention the age is good.")
-    
-    conv = """Student: "Professor Drummond, what would you say are the major events in the history of our understanding regarding the age of the Earth?"
-Drummond: "Ah, a fascinating question indeed. The journey from misunderstanding to enlightenment is one that has spanned millennia." He pauses, collecting his thoughts, and then begins to speak, his voice echoing throughout the lecture hall. "Initially, religious texts suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old.\""""
+    print("Begin SABOTAGE test")
         
-    d3 = ensure_answer_consistent(q_test[1],conv,logic_llm)
+    d3 = ensure_answer_consistent(q_test,conv_test,logic_llm)
     if True == d3[0]:
-        print("Made right choice for good question and answer") # Passes currently
+        print("Made right choice for good question and answer") # at least I think they're good
     else:
         print("Made wrong choice for good question and answer", d3[0])
         

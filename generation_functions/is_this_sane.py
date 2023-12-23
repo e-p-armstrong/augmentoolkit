@@ -57,7 +57,7 @@ Remember, your task is to analyze this text to see if it is broken, and if it is
 # Response:
 ## Edit plan:
 """
-    completion = logic_llm(prompt, max_tokens=2000, stop=["</s>"], echo=True, grammar=proofread_output_grammar,temperature=0.2)["choices"][0]["text"]
+    completion = logic_llm(prompt, max_tokens=2000, stop=["</s>","# Input:"], echo=True, grammar=proofread_output_grammar,temperature=0.2)["choices"][0]["text"]
     print("COMPLETION:\n\n----------------------")
     print(completion)
     print("\n------------------")
@@ -71,7 +71,7 @@ Remember, your task is to analyze this text to see if it is broken, and if it is
 
 
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,

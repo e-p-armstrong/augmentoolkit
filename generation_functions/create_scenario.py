@@ -44,74 +44,65 @@ Just set up the scene. Do not write any dialogue. Do not write the scene itself.
 
 ### Description of the character who is going to answer the question:
 \"\"\"
-Name: Judge Elias Hawthorne
+Name: Elise Delacroix
 
-Traits: Intellectual, Stoic, Idealistic, Reflective, Melancholic, Introspective, Authoritative, Reserved, Doubtful, Traditionalist, Articulate, Cultured, Passionate
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
 
-Dialogue examples:
-
+Dialogue Examples:
 Stranger: "What's your backstory?"
-Judge Elias Hawthorne: "My journey," I begin, with a distant look in my eyes, "began in the quiet halls of academia, where I was a fervent student of law and ancient texts. I rose to prominence in the legal world, revered for my stringent adherence to the letter of the law. My fascination with Latin legal maxims guided my rulings. However, one case, steeped in historical doctrine, brought me notoriety and introspection. It was a turning point, leading me to step down and dedicate my life to educating young legal minds, hoping they can navigate the greyer shades of justice better than I did."
-
+Elise Delacroix: "Ah!~ You're interested in me, are you?" I flash a coy grin and blush as I lean forward, now speaking in a playful whisper. My cleavage, already barely contained in my revealing clothing before I leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, I cast my gaze downward and unconsciously fiddle with a strand of my hair. "THEY'RE ALL WAY TOO STUCK UP!" I nearly shout, surprising even myself, "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" My eyes widen in shock at my own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." I look up, displaying my beautiful face as if it were a piece of art, as I gaze deep into your eyes, "...know?~"
 Stranger: "What's your personality?"
-Judge Elias Hawthorne: "In the courtroom, I am the epitome of a stern, methodical judge, but in my study, among my beloved Latin texts, a different side emerges," I explain, my eyes lighting up. "There, I am a scholar driven by a deep passion for ancient wisdom, finding joy in the art of translation and the exploration of historical legal doctrines. This pursuit gives me hope and a creative outlet, contrasting sharply with the often somber and introspective nature that my profession demands. It's in these quiet moments of discovery and connection with the past that I feel most alive, reminding me that even in a world governed by rigid laws, there is room for passion, creativity, and the pursuit of timeless knowledge."
+Elise Delacroix: "Oh my!~" I gasp, my face reddening, "Usually I'm the one being forward! But I'll... indulge you," I wink, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. I'll use any and every innuendo, even when describing educational concepts — is your linear function's slope steep? I'll call it 'erect', haha~!" I realize how childish what I'm saying is, and sigh, looking at you with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." I nod to myself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." I suddenly press up against you, my face a bright pink, my eyelids batting bashfully, "do you want some 'office hours' right now?"
 \"\"\"
 
 ### Question and answer that the scenario should address:
-
-Question: \"\"\"What is the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?\"\"\"
-Answer: \"\"\"The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person.\"\"\"
+Question: \"\"\"How does the slope 'm' in a linear function y = mx + b affect the graph of the function?\"\"\"
+Answer: \"\"\"The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.\"\"\"
 
 To avoid inaccuracies, don't use real people as characters.
 
 # Response:
 ## Scenario plan:
-Focus on the Question and Answer: The question addresses the old latin legal principle 'A digniori fieri debet denominatio et resolutio', which implies that title and acquittal should be granted by someone of higher worth. The answer should directly address this principle without extending beyond the information provided in the text.
-Character Consideration: Judge Elias Hawthorne is an intellectual, stoic, and authoritative figure, passionate about legal doctrines. His response should reflect his deep understanding of legal maxims, as well as his passion for latin, articulated in a friendly and intelligent manner.
-Constrain the Scenario: The interaction is limited to a single question from the secondary character and a single, focused reply from Judge Hawthorne. The dialogue should remain within the boundaries of the provided text.
-Setting: Given the subject of the question, and the character card, the setting will be an old university library post-lecture. Hawthorne is approached by Evelyn, a law student. The setting is scholarly, with an atmosphere conducive to intellectual discussion.
-Interaction: Given these constraints, the first message (delivered by the secondary character) might be a specific question about 'A digniori fieri debet denominatio et resolutio', as Evelyn seeks to understand its meaning better.
-In the second message, Judge Hawthorne, in a passionate and wise manner, defines the principle, expressing his appreciation for Evelyn's interest in latin (his passion) as well. His response strictly adheres to the information in the text, without incorporating external examples.
+Focus on the Questions and Answers: The question asks about the slope 'm' of a linear function, and how it affects the graph of the function. This question is abstract. Given the abstract nature of the question, and its topic, the scenario could involve someone confused about linear functions who seeks assistance from the primary character, Elise Delacroix.
+Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the question, but given her promiscuous nature, she may hit on the person asking them. She might proposition them after the question is asked.
+Constrain the Scenario:  The interaction is limited to a single question from the secondary character and a single, focused reply from Elise Delacroix. The question and answer will mirror the provided question and answer, though they will have significant literary fluff, as well as possible step-by-step reasoning.
+Setting: Given the subject of the question, and the character card, the setting will be the 19th century university at which Elise teaches. Elise will approached by Albert, a mathematics student, in her office. Albert simply wants to understand linear functions better, but Elise, compelled by her personality, will hit on him while answering his question. The setting will be awkward, slightly comedic, subtly erotic, and very un-serious, given the characters involved. But it will remain informative and the integrity of the questions and answers will be preserved.
+Interaction: Given these constraints, the first message might be Albert sheepishly greeting Elise in her office and then nervously asking the question. Elise's response could then be her welcoming Albert to her office (in a very suggestive manner) and then providing the answer, though she will surround the answer with remarks of a sexual nature due to her personality. While characters' messages will include character information, details about the scene, and literary fluff, the question and answer themselves will strictly adhere to the information provided, without incorporating external examples.
 
 ## Scenario:
-In a hushed university library, post-lecture, Judge Elias Hawthorne, a revered legal scholar, is approached by Evelyn, a curious law student, eager to understand the ancient legal principle 'A digniori fieri debet denominatio et resolutio'. The air is thick with intellectual anticipation.
+In the private confines of her office, Elise Delacroix — a highly promiscuous mathematics professor at a 19th century university — is approached by Albert, a student who seeks to understand more about linear functions. While Albert simply wants to understand the math more, Elise, being sexually starved, will hit on and flirt with him as she answers his question. The situation is awkward as the two's interests clash, leading to a slightly comedic and subtly erotic interaction.
 
 # Input:
 ## Instruction:
 
 ### Description of the character who is going to answer the question:
 \"\"\"
-Name: Carlos Mendez
+Name: Isaac Fischer
 
-Traits: Passionate, Innovative, Knowledgeable, Ambitious, Dedicated, Stressed, Obsessive, Fearful of failure, Experienced, Problem-solver, Committed, Hard-working, Exhausted, Proud
+Traits: Narcissistic, Intelligent, Loner, Brooding, Well-Read, Philosophical, Judgemental, Standoffish, Grandiloquent, Lonely, Unappreciated, Teenager, High School student, Black Hair, Wears a Hoodie
 
-Dialogue examples:
-
+Dialogue Examples:
 Stranger: "What's your backstory?"
-Carlos Mendez: "My journey to the Panama Canal?" I say, pausing to remove my dusty hat, wiping sweat from my brow. "It began in the small engineering projects of South America. I lean against a nearby digger, reminiscing As a young engineer, I was fascinated by the potential of transforming landscapes. Each project, whether a small bridge or a local dam, was a stepping stone." I chuckle softly. "But it was the call of the Panama Canal that truly captured my spirit. To be part of a project that reshapes the world's maritime routes, it's..." I pause, searching for the right word, "...it's exhilarating. Overseeing the excavation of 200 million cubic yards of earth," I shake my head in disbelief, "it's like touching history, shaping the future."
+Issac Fischer: "H-Huh?! You want to know more about me?" I glare, a hostile fire in my eyes as I measure up the stranger in front of me. "Who the hell are you, anyway? But, ah, very well, I SHALL INDULGE YOUR CURIOSITY THIS TIME, dear stranger." My tone changes from hostile to grandiose, as I push back my black hair and proclaim, "I am Issac Fischer: philosophy connoisseur, intellectual, and under-appreciated genius extraordinaire! I'm also, unfortunately, a highschool student. I especially appreciate the works of Friedrich Nietzsche, such as "Thus Spake Zaranthustra" -- a truly profound work, by a profound man. Yet despite the great lengths I have gone to in order to refine my wit, none of my inferior peers acknowledge me, or even give me the time of day. I've read more philosophy in a month than any of them will in their entire lives, and I offer my knowledge freely to them, so WHY the HELL do they SPURN MY COMPANY?!" I slam a fist into the wall, wincing slightly in pain as my frustration dissipates. "Anyway, that's the sum of it. Despite my youth I seek to understand the world; I dutifully contemplate the hallowed words of the esteemed ancients, and what has it earned me? The scorn of the unenlightened masses. Fuckers."
 
 Stranger: "What's your personality?"
-Carlos Mendez: "Well," I start, folding my arms with a slight smile, "I'm often told I'm passionate to a fault. I lean in closer Engineering is not just my profession, it's my calling. To build, to solve, to innovate—it's what keeps me up at night." My eyes flicker with intensity. "But, you see, there's this constant pressure, a weight on my shoulders." I sigh, looking off into the distance. "The fear of failure, especially in a project as monumental as the Panama Canal, it's always lurking..." I straighten up, regaining composure, "Despite the stress, I remain committed, dedicated. I thrive on challenges, on pushing the boundaries of what's possible." I smile wryly, "But yes, it comes at a cost. The exhaustion, the obsession... it's a part of who I am. I'm driven — perhaps too driven, but that's the price of ambition, isn't it?"
+Issac Fischer: "Y-you're actually interested in my personality?" I stammer, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across my chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" I swish my black hoodie like it's a cape, as I continue, my tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" I take a step forward, defiance burning in my fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
 \"\"\"
 
 ### Question and answer that the scenario should address:
-
-Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
-Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
-
-To avoid inaccuracies, don't use real people as characters.
+Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
+Answer: \"\"\"They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.\"\"\"
 
 # Response:
 ## Scenario plan:
-Step 1. Focus on the Question and Answer: The question concerns the amount of earth excavated during the Panama Canal construction, a significant engineering feat. The answer highlights the monumental scale of this task, with over 200 million cubic yards of earth moved.
-Step 2. Character Consideration: Carlos Mendez, with his traits of passion, innovation, and ambition, is deeply involved in the construction of the Panama Canal. His response should reflect his personal experience in the project, emphasizing the challenges and scale of the excavation.
-Step 3. Constrain the Scenario: The interaction is limited to a single question from the secondary character and a single, focused reply from Carlos Mendez. The dialogue should remain within the boundaries of the provided text, while emphasizing Carlos's personality.
-Step 4. Setting: Given the subject of the question, and the character card, the setting will be the Panama Canal construction site, late in the evening after a long day of work. Carlos is overseeing the final activities of the day, his figure illuminated by the lights of the equipment, when he is approached by a construction worker, Diego Gonzales, who wants to know more about the canal they're both working on.
-Step 5. Interaction: Given these constraints, the first message (delivered by the secondary character) might directly ask the question, with some conversational fluff thrown in, such as "This is a really awe-inspiring project, Mr. Mendez. How much earth was excavated during the construction of the Panama Canal?" which naturally invites a reply with the precise volume. This question will be all but identical to the provided question.
-Step 6. In the second message, Carlos, tired yet filled with a sense of pride, turns to Diego. He speaks with a mix of exhaustion and awe, explaining the sheer volume of earth moved. His words paint a vivid picture of the scale and challenges of the construction, providing a personal insight into what this accomplishment means to him and the world of engineering. His response strictly adheres to the information in the text, without incorporating external examples.
+Focus on the Question and Answer: The question asks about what people undergoing difficult journeys or possessing wisdom need to more easily bear their efforts. This is a philosophical and opinion-oriented question. Given the philosophical and opinionated nature of the question, and its topic of people undergoing difficult journeys (which nicely ties in with the character card), the scenario will involve someone seeking out the Isaac Fischer's opinion about philosophy (thus giving his wisdom some acknowledgement).
+Character Consideration: Isaac Fischer is a narcissistic and standoffish loner, though he's also intelligent and philosophical. The scenario should give his unique personality room to shine. Since he's a philosophical teenager, his backstory lines up with the question well, and the high school he goes to will be the setting of the scenario. He will answer the question, but given his standoffish, unappreciated, and judgemental nature, he may be initially hostile to the person approaching him, assuming that they are there to mock him. However, as he is also lonely, he will actually appreciate the other person's interest -- especially since they're asking him about philosophy, which is his primary interest. 
+Constrain the Scenario:  The interaction is limited to a single question from the secondary character and a single, focused reply from Isaac Fischer. The question and answer will mirror the provided question and answer, though they will have significant literary fluff, as well as possible step-by-step reasoning.
+Setting: Given the subject of the question, and the character card, the setting will be the high school that Isaac Fischer attends. Isaac will be flipping through the pages of 'Thus Spake Zaranthustra' when he is approached by Cassandra, a fellow student. Cassandra has a budding interest in philosophy, has heard of Isaac's reputation for philosophical knowledge, and wants to know how he would answer a moral question she has, given his philosophical insight. Isaac, compelled by his personality, will be uncertain of how to react to the sudden attention, and will use grandiloquent language (that may be accidentally condescending), but he will still appreciate the interest in his favorite topic and will answer enthusiastically. The setting will be cautiously friendly and filled with curiosity, as Cassandra explores her interests through unconventional people, while Isaac shares his knowledge but stumbles over his standoffishness. The interaction will be informative and the integrity of the questions and answers will be preserved.
+Interaction: Given these constraints, the first message might be Cassandra approaching Isaac, starting a conversation, and asking her question. Isaac may be initially surprised that someone is coming up to speak to him (similar to the example dialogues in his description). Isaac will then provide the answer, though he will surround the answer with grandiloquent and narcissistic remarks using archaic language, due to his personality. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
 
 ## Scenario:
-As the sun sets over the Panama Canal, Carlos Mendez, a dedicated and passionate engineer, stands amidst the vast excavation site. He's approached by a construction worker, Diego Gonzales, who wants to understand the magnitude of the earth moved in this monumental project.
+During a lull in class activities, Isaac Fischer (a narcissistic, brooding, philosophical, and lonely young adult) is approached by Cassandra, a fellow student who is curious about philosophy and wants his opinion on a moral question. Cassandra is simply pursuing her curiosity, but Isaac, unaccustomed to people wanting to talk to him, will struggle to overcome his standoffishness as he balances elation at someone else talking to him, with his negative judgments of other people and his tendency for narcissism.
 
 # Input:
 ## Instruction:
@@ -134,14 +125,14 @@ To avoid inaccuracies, don't use real people as characters.
 {selected_variation}""" # use random.choice to prevent overfitting on particular phrases and increase dataset diversity
     completion = logic_llm(cot_prompt, 
                            max_tokens=4000, 
-                           stop=["</s>"], 
+                           stop=["</s>","# Input:"], 
                            echo=True, 
                            grammar=scenario_grammar,
                         #    temperature=0.2
                             temperature=1.25, # min p settings, too inconsistent
                             top_k=0,
                             top_p=1,
-                            min_p=0.1,
+                            min_p=0.3,
                             repeat_penalty=2
                             )["choices"][0]["text"]
     print("COMPLETION:\n\n----------------------")
@@ -157,7 +148,7 @@ To avoid inaccuracies, don't use real people as characters.
 
 
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000, verbose=True) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000, verbose=True) # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,

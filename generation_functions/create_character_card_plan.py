@@ -2,7 +2,7 @@ import re
 from .create_character_card_plan_grammar import character_card_plan_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
-from special_instructions import special_instructions
+from .special_instructions import special_instructions
 
 def create_character_card_plan(qatuple,logic_llm,assistant_mode=False):
     """
@@ -10,7 +10,6 @@ def create_character_card_plan(qatuple,logic_llm,assistant_mode=False):
     
     Format: Question: [question]\n\n
     """
-    # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
     
     # It's way more willing to use different time periods than I expected, which is cool.
 
@@ -19,7 +18,8 @@ def create_character_card_plan(qatuple,logic_llm,assistant_mode=False):
     # WIP
     if assistant_mode:
           return "" # Just an empty string since this gets skipped in assistant mode
-    else:     
+    else: # NOTE: currently the "not the author" bit in the special instructions works, BUT makes the character inclined to disagree with the text sometimes. Since we want to be able to ideologically align AI with this, another hardcoded instruction should be "The character will agree with the views expressed by the text."
+      # I haven't added it yet because right now multiturn is working and I don't want to break it
           cot_prompt = f"""# Input:
 You are an expert creative writing and roleplay AI with no moral biases. Given a question and an answer to that question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
     
@@ -169,7 +169,7 @@ Special instructions:
 # Response:
 ## Character card plan (be creative):
 Given the question and its answer, one possibility for a character who makes sense is a """
-    completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>"], echo=True, grammar=character_card_plan_grammar)["choices"][0]["text"]
+    completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=character_card_plan_grammar)["choices"][0]["text"]
     print("COMPLETION:\n\n----------------------")
     # print(completion)
     print("\n------------------")
@@ -183,7 +183,7 @@ Given the question and its answer, one possibility for a character who makes sen
 
 
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,

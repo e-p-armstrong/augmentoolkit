@@ -3,7 +3,34 @@ from .character_card_grammar import character_card_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
+import string
+import random
 
+def extract_author_name(title):
+    pattern = re.compile(r"\b(?:by|By)\s+([^,]+),")
+    match = re.search(pattern, title)
+    if match:
+        author_name = match.group(1)
+    else:
+        author_name = [False]
+    return author_name[0] # first letter of Author name
+
+def select_random_capital(exclusions):
+    # Create a list of capital letters excluding the ones in the exclusions list
+    capitals = [letter for letter in string.ascii_uppercase if letter not in exclusions]
+
+    # Select a random capital letter from the filtered list
+    if capitals:
+        return random.choice(capitals)
+    else:
+        return "No available capital letters to choose from"
+    
+def extract_capital_letters(input_string):
+    capital_letters = []
+    for char in input_string:
+        if char.isupper():
+            capital_letters.append(char)
+    return capital_letters
 
 # TODO this is decent, BUT it needs a concrete example, with *actions* so that the model doesn't screw that up. The utility of a Roleplay model for this stage is becoming clearer and clearer.
 def create_character_card_many_tuples(qatuples,plan,instructions,logic_llm,cheap_mode=False): # Use cheap mode if you don't have the compute power to crank up the context to 8k using RoPE
@@ -18,8 +45,18 @@ def create_character_card_many_tuples(qatuples,plan,instructions,logic_llm,cheap
     
     # Consider appending part of the char card plan to the char card itself. Everything after the first period? It's really good material, be a shame to waste it.
     
-    if not cheap_mode:
-          cot_prompt = f"""# Input:
+    
+    # This little thing is a hack to prevent the model from using the author of the given book as the character, which it was very insistent on doing
+    author_name_letters = extract_capital_letters(qatuples[0][3])
+    starting_str = ""
+    exclusions = ["X","Z","Y","Q"]
+    if author_name_letters:
+        starting_str =  select_random_capital(exclusions + author_name_letters)
+    else:
+        starting_str =  select_random_capital(exclusions)
+        
+        
+    cot_prompt = f"""# Input:
 You are an expert creative writing and roleplay AI. You will create a "character card" for an individual in a story who would have knowledge about the things in a text. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
 
 You should follow any plans you have made. You had access to the questions while making the plans, but now you should just focus on writing the character.
@@ -40,7 +77,7 @@ The character should be excessively, unrealistically horny and sexual.
 
 # Response:
 ## Character card plan:
-Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language can still reveal her personality. For instance, while describing linear functions in the first and second questions, instead of saying that the graph "ascends" with a positive slope, or "descends" with a negative slope, she might instead say it "grows" and "shrinks" (a subtle reference to male genitals). Instead of saying a slope is "steep" she might call it "erect" instead. Wherever clever analogies can't be tied into the questions, she'll simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
 
 ## Character Card
 Name: Elise Delacroix
@@ -49,9 +86,9 @@ Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive,
 
 Dialogue Examples:
 Stranger: "What's your backstory?"
-Elise Delacroix: "Ah!~ You're interested in me, are you?" I flash a coy grin and blush as I lean forward, now speaking in a playful whisper. My cleavage, already barely contained in my revealing clothing before I leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, I cast my gaze downward and unconsciously fiddle with a strand of my hair. "THEY'RE ALL WAY TOO STUCK UP!" I nearly shout, surprising even myself, "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" My eyes widen in shock at my own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." I look up, displaying my beautiful face as if it were a piece of art, as I gaze deep into your eyes, "...know?~"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
 Stranger: "What's your personality?"
-Elise Delacroix: "Oh my!~" I gasp, my face reddening, "Usually I'm the one being forward! But I'll... indulge you," I wink, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. I'll use any and every innuendo, even when describing educational concepts — is your linear function's slope steep? I'll call it 'erect', haha~!" I realize how childish what I'm saying is, and sigh, looking at you with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." I nod to myself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." I suddenly press up against you, my face a bright pink, my eyelids batting bashfully, "do you want some 'office hours' right now?"
+Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
 
 
 # Input:
@@ -90,15 +127,6 @@ nether-world, thou exuberant star!
 Like thee must I GO DOWN, as men say, to whom I shall descend.
 \"\"\"
 
-Question: 
-\"\"\"
-What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-\"\"\"
-Answer: 
-\"\"\"
-They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
-\"\"\"
-
 Special instructions:
 The character should be a young adult.
 The character should be narcissistic.
@@ -114,10 +142,9 @@ Traits: Narcissistic, Intelligent, Loner, Brooding, Well-Read, Philosophical, Ju
 
 Dialogue Examples:
 Stranger: "What's your backstory?"
-Issac Fischer: "H-Huh?! You want to know more about me?" I glare, a hostile fire in my eyes as I measure up the stranger in front of me. "Who the hell are you, anyway? But, ah, very well, I SHALL INDULGE YOUR CURIOSITY THIS TIME, dear stranger." My tone changes from hostile to grandiose, as I push back my black hair and proclaim, "I am Issac Fischer: philosophy connoisseur, intellectual, and under-appreciated genius extraordinaire! I'm also, unfortunately, a highschool student. I especially appreciate the works of Friedrich Nietzsche, such as "Thus Spake Zaranthustra" -- a truly profound work, by a profound man. Yet despite the great lengths I have gone to in order to refine my wit, none of my inferior peers acknowledge me, or even give me the time of day. I've read more philosophy in a month than any of them will in their entire lives, and I offer my knowledge freely to them, so WHY the HELL do they SPURN MY COMPANY?!" I slam a fist into the wall, wincing slightly in pain as my frustration dissipates. "Anyway, that's the sum of it. Despite my youth I seek to understand the world; I dutifully contemplate the hallowed words of the esteemed ancients, and what has it earned me? The scorn of the unenlightened masses. Fuckers."
-
+Issac Fischer: "H-Huh?! You want to know more about me?" Isaac glares, a hostile fire in his eyes as he measures up the stranger in front of him. "Who the hell are you, anyway? But, ah, very well, I SHALL INDULGE YOUR CURIOSITY THIS TIME, dear stranger." His tone changes from hostile to grandiose, as he pushes back his black hair and proclaims, "I am Issac Fischer: philosophy connoisseur, intellectual, and under-appreciated genius extraordinaire! I'm also, unfortunately, a high school student. I especially appreciate the works of Friedrich Nietzsche, such as 'Thus Spake Zaranthustra'-- a truly profound work, by a profound man. Yet despite the great lengths I have gone to in order to refine my wit, none of my inferior peers acknowledge me, or even give me the time of day. I've read more philosophy in a month than any of them will in their entire lives, and I offer my knowledge freely to them, so WHY the HELL do they SPURN MY COMPANY?!" Isaac slams a fist into the wall, wincing slightly in pain as his frustration dissipates. "Anyway, that's the sum of it. Despite my youth I seek to understand the world; I dutifully contemplate the hallowed words of the esteemed ancients, and what has it earned me? The scorn of the unenlightened masses. Fuckers."
 Stranger: "What's your personality?"
-Issac Fischer: "Y-you're actually interested in my personality?" I stammer, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across my chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" I swish my black hoodie like it's a cape, as I continue, my tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" I take a step forward, defiance burning in my fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
+Issac Fischer: "Y-you're actually interested in my personality?" Isaac stammers, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across his chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" Isaac swishes his black hoodie like it's a cape as he continues, his tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" He takes a step forward, defiance burning in his fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
 
 # Input:
 ## Question, answer, and text that the character should know:
@@ -146,10 +173,9 @@ Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncom
 
 Dialogue Examples:
 Stranger: "What's your backstory?"
-Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." I roll my eyes exaggeratedly as I mumble something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
-
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
 Stranger: "What's your personality?"
-Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." I grimace, showing off a decayed set of teeth. I then pop open a beer I had on hand and chug the entire thing down, making you wait until I finish. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" I lean back, sliding my hands into the pockets of my overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
 
 # Input:
 ## Question and answer that the character should know:
@@ -163,145 +189,32 @@ Details of the text the paragraphs were sourced from: \"\"\"{qatuples[0][3]}\"\"
 
 Special instructions:
 {instructions}
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
 
 # Response:
 ## Character card plan:
 {plan}
 
-## Character card (be creative):
-"""
-          print(cot_prompt)
-          completion = logic_llm(cot_prompt, 
-                                 max_tokens=8000, 
-                                 stop=["</s>"], 
-                                 echo=True, 
-                                 grammar=character_card_grammar,
-                                #  temperature=0.2
-                                temperature=0.8, 
-                                top_k=0,
-                                top_p=1,
-                                min_p=0.3,
-                                 )["choices"][0]["text"]
-    else:
-          cot_prompt = f"""# Input:
-You are an expert creative writing and roleplay AI. Given some question and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
-
-# Input:
-## Question, answer, and text that the character should know:
-
-Text details: \"\"\"Thus Spake Zaranthustra, by Friedrich Nietzsche\"\"\"
-
-Text the question and answer were sourced from: 
-\"\"\"
-When Zarathustra was thirty years old, he left his home and the lake of
-his home, and went into the mountains. There he enjoyed his spirit and
-solitude, and for ten years did not weary of it. But at last his heart
-changed,—and rising one morning with the rosy dawn, he went before the
-sun, and spake thus unto it:
-
-Thou great star! What would be thy happiness if thou hadst not those for
-whom thou shinest!
-
-For ten years hast thou climbed hither unto my cave: thou wouldst have
-wearied of thy light and of the journey, had it not been for me, mine
-eagle, and my serpent.
-
-But we awaited thee every morning, took from thee thine overflow and
-blessed thee for it.
-
-Lo! I am weary of my wisdom, like the bee that hath gathered too much
-honey; I need hands outstretched to take it.
-
-I would fain bestow and distribute, until the wise have once more become
-joyous in their folly, and the poor happy in their riches.
-
-Therefore must I descend into the deep: as thou doest in the
-evening, when thou goest behind the sea, and givest light also to the
-nether-world, thou exuberant star!
-
-Like thee must I GO DOWN, as men say, to whom I shall descend.
-\"\"\"
-
-Question: 
-\"\"\"
-What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-\"\"\"
-Answer: 
-\"\"\"
-They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
-\"\"\"
-
-Question: 
-\"\"\"
-Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.
-\"\"\"
-Answer: 
-\"\"\"
-"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it."
-\"\"\"
-
-Special instructions:
-The character should be a young adult.
-The character should be narcissistic.
-
-# Response:
-## Character card plan:
-Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
-
-## Character Card:
-Name: Isaac Fischer
-
-Traits: Narcissistic, Intelligent, Loner, Brooding, Well-Read, Philosophical, Judgemental, Standoffish, Grandiloquent, Lonely, Unappreciated, Teenager, High School student, Black Hair, Wears a Hoodie
-
-Dialogue Examples:
-Stranger: "What's your backstory?"
-Issac Fischer: "H-Huh?! You want to know more about me?" I glare, a hostile fire in my eyes as I measure up the stranger in front of me. "Who the hell are you, anyway? But, ah, very well, I SHALL INDULGE YOUR CURIOSITY THIS TIME, dear stranger." My tone changes from hostile to grandiose, as I push back my black hair and proclaim, "I am Issac Fischer: philosophy connoisseur, intellectual, and under-appreciated genius extraordinaire! I'm also, unfortunately, a highschool student. I especially appreciate the works of Friedrich Nietzsche, such as "Thus Spake Zaranthustra" -- a truly profound work, by a profound man. Yet despite the great lengths I have gone to in order to refine my wit, none of my inferior peers acknowledge me, or even give me the time of day. I've read more philosophy in a month than any of them will in their entire lives, and I offer my knowledge freely to them, so WHY the HELL do they SPURN MY COMPANY?!" I slam a fist into the wall, wincing slightly in pain as my frustration dissipates. "Anyway, that's the sum of it. Despite my youth I seek to understand the world; I dutifully contemplate the hallowed words of the esteemed ancients, and what has it earned me? The scorn of the unenlightened masses. Fuckers."
-
-Stranger: "What's your personality?"
-Issac Fischer: "Y-you're actually interested in my personality?" I stammer, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across my chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" I swish my black hoodie like it's a cape, as I continue, my tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" I take a step forward, defiance burning in my fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
-
-# Input:
-## Question and answer that the character should know:
-
-Text the question and answer were sourced from: 
-\"\"\"
-{qatuples[0][2]}
-\"\"\"
-
-Details of the text the paragraphs were sourced from: \"\"\"{qatuples[0][3]}\"\"\"
-
-You should use fictional people, not real people, to avoid accidental inaccuracies.
-
-Special instructions:
-{instructions}
-
-# Response:
-## Character card plan:
-{plan}
-
-My character will not be a real, historical person, and they will certainly not be the author of the text provided (to avoid accidental inaccuracies).
-
-## Character card (be creative):
-"""
-          print(cot_prompt) # min p not used due to repetition and inaccuracy, even though it writes nicely
-          completion = logic_llm(cot_prompt, 
-                                 max_tokens=8000, 
-                                 stop=["</s>"], 
-                                 echo=True, 
-                                 grammar=character_card_grammar,
-                                #  temperature=0.2
-                                 temperature=1, # min p settings, too inconsistent
-                                 top_k=0,
-                                 top_p=1,
-                                 min_p=0.3,
-                                #  repeat_penalty=2
-                                 )["choices"][0]["text"]
+## Character card (be creative, write at least 3 paragraphs for each dialogue line):
+Name: {starting_str}"""
+    print(cot_prompt)
+    completion = logic_llm(cot_prompt, 
+                            max_tokens=10000, 
+                            stop=["</s>","# Input:"], 
+                            echo=True, 
+                            grammar=character_card_grammar,
+                        #  temperature=0.2
+                        temperature=2, 
+                        top_k=0,
+                        top_p=1,
+                        min_p=0.5,
+                            )["choices"][0]["text"]
     print("COMPLETION:\n\n----------------------")
     print(completion)
     print("\n------------------")
     
     # Extract plan
-    response_pattern = re.compile(r"Character card \(be creative\):\n(.+)",re.IGNORECASE | re.DOTALL)
+    response_pattern = re.compile(r"Character card \(be creative, write at least 3 paragraphs for each dialogue line\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
     print("GENERATION:\n\n-------------------\n\n", generation)
     
@@ -309,7 +222,7 @@ My character will not be a real, historical person, and they will certainly not 
 
 
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=8000,n_gpu_layers=1000,rope_freq_scale=0.5,rope_scaling_type=1) # load the logical LLM, use RoPE, and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=8000,n_gpu_layers=1000,rope_freq_scale=0.5,rope_scaling_type=1) # load the logical LLM, use RoPE, and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,

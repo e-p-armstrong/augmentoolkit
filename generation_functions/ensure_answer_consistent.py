@@ -140,7 +140,7 @@ Conversation:
 """
         # print("DEBUG\n\n" + decision_prompt)
         try:
-            completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>"], echo=True,grammar=ensure_answer_consistent_grammar,temperature=0.2)["choices"][0]["text"]
+            completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True,grammar=ensure_answer_consistent_grammar,temperature=0.2)["choices"][0]["text"]
             completion_pattern = re.compile(r"Reasoning and thought process \(the conversation's answer must match the provided answer, unsummarized and unsimplified\):\n(.+)", re.DOTALL)
             response = completion_pattern.search(completion).group(1).strip()
             # print("DEBUG\n\n")
@@ -164,7 +164,7 @@ Conversation:
             
             
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,

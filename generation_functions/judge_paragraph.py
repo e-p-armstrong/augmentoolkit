@@ -263,7 +263,7 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
 ## Reasoning and thought process (reason intelligently):
 """
         # print("DEBUG\n\n" + decision_prompt)
-        completion = logic_llm(decision_prompt, max_tokens=6000, grammar=judge_paragraph_grammar, stop=["</s>"], echo=True,temperature=0.2)["choices"][0]["text"]
+        completion = logic_llm(decision_prompt, max_tokens=6000, grammar=judge_paragraph_grammar, stop=["</s>","# Input:"], echo=True,temperature=0.2)["choices"][0]["text"]
 
         # print("DEBUG\n\n")
         # print(completion)
@@ -290,7 +290,7 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
 if __name__ == "__main__":
     test = ('Slowly by degrees as one million of years followed another, this fiery scene would lose its eruptive incandescence.  The vapours in the sky would rain down and become less dense overhead; great slaggy cakes of solidifying rock would appear upon the surface of the molten sea, and sink under it, to be replaced by other floating masses.  The sun and moon growing now each more distant and each smaller, would rush with diminishing swiftness across the heavens. The moon now, because of its smaller size, would be already cooled far below incandescence, and would be alternately obstructing and reflecting the sunlight in a series of eclipses and full moons.\n\nAnd so with a tremendous slowness through the vastness of time, the earth would grow more and more like the earth on which we live, until at last an age would come when, in the cooling air, steam would begin to condense into clouds, and the first rain would fall hissing upon the first rocks below.  For endless millenia the greater part of the earth’s water would still be vaporized in the atmosphere, but there would now be hot streams running over the crystallizing rocks below and pools and lakes into which these streams would be carrying detritus and depositing sediment.',
  'A Short History of the World, by HG Wells, published 1922')
-    logic_llm = Llama(model_path=LOGICAL_MODEL,
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,
                       n_ctx=7000,
                       rope_freq_scale=0.33,
                       n_gpu_layers=100,

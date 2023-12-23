@@ -4,7 +4,7 @@ from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 import random
-from special_instructions import special_instructions
+from .special_instructions import special_instructions
 
 def create_character_card_plan_many_tuples(qatuples,logic_llm):
     """
@@ -19,7 +19,7 @@ def create_character_card_plan_many_tuples(qatuples,logic_llm):
     # NOTE the first example is the way it is because I know some people from the ERP community will use this, and I want to make the script capable of such things. Also it might help to jailbreak it a bit. I even considered making it a nonhuman character (ie, catgirl) but I have no idea how to write those.
     # I am not very good or experienced at writing stuff like the first example. 
     
-    instructions_string = special_instructions()
+    instructions_string = special_instructions(n=1)
     cot_prompt = f"""# Input:
 You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
 
@@ -42,40 +42,18 @@ In mathematics, the concept of a 'function' is fundamental, defining a relations
 \"\"\"
 
 Question: 
-\"\"\"
-How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
-\"\"\"
-Answer: 
-\"\"\"
-The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.
-\"\"\"
+\"\"\"How does the slope 'm' in a linear function y = mx + b affect the graph of the function?\"\"\"
+Answer: \"\"\"The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.\"\"\"
 
-Question: 
+Question: \"\"\"What role does the y-intercept 'b' play in graphing a linear function?
 \"\"\"
-What role does the y-intercept 'b' play in graphing a linear function?
-\"\"\"
-Answer: 
-\"\"\"
-The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.
-\"\"\"
+Answer: \"\"\"The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.\"\"\"
 
-Question: 
-\"\"\"
-In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
-\"\"\"
-Answer: 
-\"\"\"
-The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.
-\"\"\"
+Question: \"\"\"In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?\"\"\"
+Answer: \"\"\"The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.\"\"\"
 
-Question: 
-\"\"\"
-In what fields might you use linear and quadratic functions?
-\"\"\"
-Answer: 
-\"\"\"
-Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.
-\"\"\"
+Question: \"\"\"In what fields might you use linear and quadratic functions?\"\"\"
+Answer: \"\"\"Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.\"\"\"
 
 Special instructions:
 The character should be a woman.
@@ -83,7 +61,7 @@ The character should be excessively, unrealistically horny and sexual.
 
 # Response:
 ## Character card plan:
-Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language can still reveal her personality. For instance, while describing linear functions in the first and second questions, instead of saying that the graph "ascends" with a positive slope, or "descends" with a negative slope, she might instead say it "grows" and "shrinks" (a subtle reference to male genitals). Instead of saying a slope is "steep" she might call it "erect" instead. Wherever clever analogies can't be tied into the questions, she'll simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
 
 # Input:
 ## Question, answer, and text that the character should know:
@@ -132,23 +110,11 @@ going to be a man.
 Thus began Zarathustra's down-going.
 \"\"\"
 
-Question: 
-\"\"\"
-What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-\"\"\"
-Answer: 
-\"\"\"
-They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
-\"\"\"
+Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
+Answer: \"\"\"They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.\"\"\"
 
-Question: 
-\"\"\"
-Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.
-\"\"\"
-Answer: 
-\"\"\"
-"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it."
-\"\"\"
+Question: \"\"\"Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.\"\"\"
+Answer: \"\"\""Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it."\"\"\"
 
 Special instructions:
 The character should be a young adult.
@@ -168,23 +134,11 @@ Text the question and answer were sourced from:
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
 \"\"\"
 
-Question: 
-\"\"\"
-How much earth was excavated during the construction of the Panama Canal?
-\"\"\"
-Answer: 
-\"\"\"
-Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
+Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
+Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
 
-\"\"\"
-Question: 
-\"\"\"
-What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-\"\"\"
-Answer: 
-\"\"\"
-The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.
-\"\"\"
+Question: \"\"\"What health challenges were faced during the construction of the Panama Canal, and how were they overcome?\"\"\"
+Answer: \"\"\"The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.\"\"\"
 
 Special instructions:
 The character should use slang and be vulgar.
@@ -194,7 +148,7 @@ The character should be mature and older.
 
 # Response:
 ## Character card plan:
-Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the questions and setting by being tools he uses to whip the workers at the canal into shape. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 
 # Input:
 ## Question, answer, and text that the character should know:
@@ -209,28 +163,28 @@ Details of the text the paragraphs were sourced from: \"\"\"{qatuples[0][3]}\"\"
 {format_qatuples(qatuples)}
 
 Special instructions:
-{instructions_string}
-
-You should use fictional people, not real people, to avoid accidental inaccuracies.
+{instructions_string.strip()}
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
 
 # Response:
-## Character card plan (be creative, do not use real people as characters):
-Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a """
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a"""
     completion = logic_llm(cot_prompt, 
                            max_tokens=8000, 
-                           stop=["</s>"], 
+                           stop=["</s>","# Input:"], 
                            echo=True, 
-                           grammar=character_card_plan_grammar,temperature=0.8, 
+                           grammar=character_card_plan_grammar,
+                           temperature=2, #temperature=0.8, 
                             top_k=0,
                             top_p=1,
-                            min_p=0.3,
+                            min_p=0.4,
                            )["choices"][0]["text"]
     print("COMPLETION:\n\n----------------------")
     print(completion)
     print("\n------------------")
     
     # Extract plan
-    response_pattern = re.compile(r"Character card plan \(be creative, do not use real people as characters\):\n(.+)",re.IGNORECASE | re.DOTALL)
+    response_pattern = re.compile(r"Character card plan \(be creative, do not use real people as characters, do NOT make the author of the book a character\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
     print("GENERATION:\n\n-------------------\n\n", generation)
     
@@ -238,8 +192,8 @@ Given the question, its answer, and the special instructions, one possibility fo
 
 
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
-    # Q0 is good q, bad a
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
+# Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,
     # q3 is iffy q, good a

@@ -48,7 +48,7 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm)
     
     charname = extract_name(character)
     first_words_of_card = extract_first_words(charname,character)
-    conv_starters = [ # prevents it from regurgitating the card (when combined with filterin)
+    conv_starters = [ # prevents it from regurgitating the card (when combined with filtering)
         "Ah",
         "Oh",
         # "You",
@@ -81,7 +81,7 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm)
     # Define constants acquired from code
     character-name ::= "{charname}"
     
-    question-1-content ::= "{qatuples[0][0]}"
+    question-1-content ::= "{qatuples[0][0][0:10]}"
     
     intro-statement ::= character-name ":" [^\\n]+
     
@@ -191,7 +191,9 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm)
     
     extra_info = extract_steps(scenario_plan)
     cot_prompt = f"""# Input:
-You are an exper
+You are an expert creative writing and roleplay AI. You will write a short conversation in which a secondary character asks some questions (one at a time) and the primary character answers them (also one at a time). 
+
+Write compellingly. Each character should have a distinct voice that reflects their background, personality, and current emotional state. This helps in making dialogue more realistic and engaging.
 
 # Input:
 ## Information:
@@ -202,11 +204,12 @@ Here's the primary character for the next scene:
 Name: Elise Delacroix
 
 Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
 Dialogue Examples:
 Stranger: "What's your backstory?"
-Elise Delacroix: "Ah!~ You're interested in me, are you?" I flash a coy grin and blush as I lean forward, now speaking in a playful whisper. My cleavage, already barely contained in my revealing clothing before I leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, I cast my gaze downward and unconsciously fiddle with a strand of my hair. "THEY'RE ALL WAY TOO STUCK UP!" I nearly shout, surprising even myself, "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" My eyes widen in shock at my own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." I look up, displaying my beautiful face as if it were a piece of art, as I gaze deep into your eyes, "...know?~"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
 Stranger: "What's your personality?"
-Elise Delacroix: "Oh my!~" I gasp, my face reddening, "Usually I'm the one being forward! But I'll... indulge you," I wink, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. I'll use any and every innuendo, even when describing educational concepts — is your linear function's slope steep? I'll call it 'erect', haha~!" I realize how childish what I'm saying is, and sigh, looking at you with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." I nod to myself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." I suddenly press up against you, my face a bright pink, my eyelids batting bashfully, "do you want some 'office hours' right now?"
+Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. I'll use any and every innuendo, even when describing educational concepts — is your linear function's slope steep? I'll call it 'erect', haha~!" She suddenly realizes how childish what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
 \"\"\"
 
 Here is the scenario:
@@ -221,55 +224,31 @@ Setting: Given the subject of the question, and the character card, the setting 
 Interaction: Given these constraints, the first message might be Elise welcoming Albert to her office (in a very suggestive manner). Albert's response might then be him greeting her back (hesitantly) and then nervously asking the first question. Elise will then provide the first answer, though she will surround the answer with remarks of a sexual nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
 \"\"\"
 
-Question: 
-\"\"\"
-How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
-\"\"\"
-Answer: 
-\"\"\"
-The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.
-\"\"\"
+Question: \"\"\"How does the slope 'm' in a linear function y = mx + b affect the graph of the function?\"\"\"
+Answer: \"\"\"The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.\"\"\"
 
-Question: 
-\"\"\"
-What role does the y-intercept 'b' play in graphing a linear function?
-\"\"\"
-Answer: 
-\"\"\"
-The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.
-\"\"\"
+Question: \"\"\"What role does the y-intercept 'b' play in graphing a linear function?\"\"\"
+Answer: \"\"\"The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.\"\"\"
 
-Question: 
-\"\"\"
-In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
-\"\"\"
-Answer: 
-\"\"\"
-The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.
-\"\"\"
+Question: \"\"\"In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?\"\"\"
+Answer: \"\"\"The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.\"\"\"
 
-Question: 
-\"\"\"
-In what fields might you use linear and quadratic functions?
-\"\"\"
-Answer: 
-\"\"\"
-Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.
-\"\"\"
+Question: \"\"\"In what fields might you use linear and quadratic functions?\"\"\"
+Answer: \"\"\"Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.\"\"\"
 
-The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first mesage from Elise Delacroix should set up the scene. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
+The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Elise Delacroix should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
 # Response:
 ## Conversation that answers the provided questions:
 Elise Delacroix: "A visitor? Ah!~ Albert! It's rare for you come to see me in my office, and you're alone, too..." She looks at Albert and grins coyly, "Are you here to ask me something... or are you interested in some 'extracurricular activities'?" Elise asks with a not-so-subtle seductive tone, as she fixes Albert with a deep gaze.
-Albert: "W-what?!" he stammers, so surprised he nearly drops his math notes. "I-I'm actually here to ask about your last lecture, Miss Delacroix." Regaining his composure, and summoning his courage, Albert approaches Elise's desk. "I've got a few questions. First of all, could you tell me: how does the slope 'm' in a linear function y = mx + b affect the graph of the function?"
-Elise Delacroix: "Well~" She coquettishly tilts her head to the side, and daintily put a finger to her lipstick-colored lips in mock-thought, "The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph. So basically, to use an analogy you'd be familiar with..." Elise flashes a wry grin, "...a higher slope makes the linear function more, well, 'erect'. If you get my meaning, hehe~" She says, as she plays with a strand of her hair.
-Albert: _I can't believe my ears. Did Miss Delacroix just say what I think she just said?_ Albert thinks. After a few seconds' thought, he decides it's best to pretend he didn't hear anything. "I, uh, see..." he manages to get out. "Now, m-moving on, I really want to know a bit more about linear functions. What role does the y-intercept 'b' play in graphing a linear function?" 
-Elise Delacroix: "Awwww, you're no fun, Albert, you know that? Reminds me of my colleagues..." she pout playfully, suppressing her bitter frustration, as the hunger within her remains unalleviated. "But whatever. Look here..." Elise stands from her desk and walks over to a chalkboard, illustrating her points to Albert as she speaks, "The answer to your question is that the y-intercept 'b', in the linear function y = mx + b, represents the point where the line crosses the y-axis. Understand?" She puts down her chalk and leans suggestively against a nearby wall, "Now, Albert, you answer my question: do you think that we could 'intercept' each other at a café later...?"
-Albert: "I-I'm good, thank you, Miss Delacroix," Albert manages to sputter out, barely withstanding Elise's alluring assault. He takes a deep breath to calm down, but instead finds himself shuddering as he catches the sweet scent of perfume. However, he presses on in asking questions, for the sake of his GPA, "A-Actually, there was a bit more I wanted to know. In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"
-Elise Delacroix: "Ghh... you know, Albert, you're breaking a poor woman's heart," She pouts, half-serious this time, as she picks her chalk up again. "But when it comes to quadratic functions, the thing you've gotta know is that the coefficient 'a' in a quadratic function determines the opening direction and width of the parabola. Isn't it wonderful to learn new things?" Putting down her chalk, Elise then walks over to Albert, looks up longingly into his eyes, and weakly tugs at his uniform collar. "Do you think we could... celebrate... this beautiful acquisition of knowledge together?"
-Albert: "I should really..." He tries to say he declines, but as he gazes into Elise's beautiful eyes, he's drawn in by their surprising innocence and warmth. Behind Elise's perfect visage no doubt lies a heart coming apart at the seams, buffeted by years of heartbreak. "Oh, bother." Albert mumbles. "We... can meet at a cafe, in a few hours, if that'd be alright..." he continues, wondering what kind of mess he's getting myself into. Just then, a shock of remembering strikes him, "Oh! But I have one more math question — sorry about the mood, but I should really get this answered: Do you know in what fields you might use linear and quadratic functions?"
-Elise Delacroix: "I... I..." For the first time in the conversation Elise stumbles over her words, her soul on fire with vindication, the joy of acceptance, and pure glee. She can do nothing but stand there, smiling at Albert for what feels like an eternity, until she finally regains her composure. "T-to answer your question," she begins, her voice shaky, "Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Now..." reaching up, she tilts Albert's head to the side, and lightly, sweetly kisses him on the cheek, "office hours are over. Please no more math questions. I'll see you at that cafe."
+Albert: "N-No!!!" he stammers, so surprised he nearly drops his math notes. "I-I'm actually here because I've got a few questions about math for you, Elise... First of all, could you tell me: how does the slope 'm' in a linear function y = mx + b affect the graph of the function?"
+Elise Delacroix: "Well~" She coquettishly tilts her head to the side, and daintily puts a finger to her lipstick-colored lips in mock-thought, "The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph. So basically..." Elise flashes a wry grin, "...a higher slope makes the linear function more, well, 'erect'. If you get my meaning, hehe~" She says, as she plays with a strand of her hair.
+Albert: Albert blinks incredulously, utterly flabbergasted by the Elise's remark. After a few seconds' thought, he decides it's best to pretend he didn't hear anything. "I, uh, see..." he manages to say. "Now, m-moving on, I really want to know a bit more about linear functions. What role does the y-intercept 'b' play in graphing a linear function?" 
+Elise Delacroix: "Awwww, you're no fun, Albert, you know that? Reminds me of my colleagues..." Elise pouts playfully, suppressing her bitter frustration, as the hunger within her remains unalleviated. "But whatever. Look here..." Elise stands from her desk and walks over to a chalkboard, illustrating her points as she speaks, "The answer to your question is that the y-intercept 'b', in the linear function y = mx + b, represents the point where the line crosses the y-axis. Now," She puts down her chalk and leans suggestively against a nearby wall, "Albert... let's 'intercept' each other back at my place..."
+Albert: "N-no thank you, Miss Delacroix," Albert manages to sputter out, barely withstanding the alluring assault. He takes a deep breath to try and calm down, but instead finds himself shuddering as he catches the sweet scent of perfume. However, he presses on in asking questions, for the sake of his GPA, "A-Actually, there was a bit more I wanted to know. In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"
+Elise Delacroix: "Ghh... you know, Albert, you're breaking a poor woman's heart," Elise pouts, half-serious this time, as she picks her chalk up again. "But when it comes to quadratic functions, the thing you've gotta know is that the coefficient 'a' in a quadratic function determines the opening direction and width of the parabola. Isn't it wonderful to learn new things?" Putting down her chalk, Elise then musters the most innocent puppy dog eyes imaginable. "We sould... celebrate... this beautiful acquisition of knowledge together..."
+Albert: "I should really..." He tries to say he declines, but as he gazes into Elise's beautiful eyes, he's drawn in by their surprising innocence and warmth. Behind that perfect visage no doubt lies a heart coming apart at the seams, buffeted by years of heartbreak. "Oh, bother." Albert mumbles. "We... can meet at a cafe, in a few hours, if that'd be alright..." he continues, wondering what kind of mess he's getting myself into. Just then, a shock of remembering strikes him, "Oh! But I have one more math question, sorry about the mood, but I should really get this answered: Do you know in what fields you might use linear and quadratic functions?"
+Elise Delacroix: "I... I..." For the first time in the conversation Elise stumbles over her words, her soul on fire with vindication and the joy of acceptance. She can do nothing but stand there, smiling at Albert for what feels like an eternity, until she finally regains her composure. "T-to answer your question," she begins, her voice shaky, "Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Now..." Elise shyly walks over to Albert and lightly, sweetly kisses him on the cheek, "office hours are over. Please no more math questions. I'll see you at that cafe."
 
 # Input:
 ## Information:
@@ -281,11 +260,11 @@ Name: Hugo Martinez
 
 Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
 
+Dialogue Examples:
 Stranger: "What's your backstory?"
-Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." I roll my eyes exaggeratedly as I mumble something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
-
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
 Stranger: "What's your personality?"
-Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." I grimace, showing off a decayed set of teeth. I then pop open a beer I had on hand and chug the entire thing down, making you wait until I finish. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" I lean back, sliding my hands into the pockets of my overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
 \"\"\"
 
 Here is the scenario:
@@ -300,34 +279,21 @@ Given the subject of the question, and the character card, the setting will be t
 Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
 \"\"\"
 
-Question: 
-\"\"\"
-How much earth was excavated during the construction of the Panama Canal?
-\"\"\"
-Answer: 
-\"\"\"
-Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
-\"\"\"
+Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
+Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
 
-Question: 
-\"\"\"
-What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-\"\"\"
-Answer: 
-\"\"\"
-The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.
-\"\"\"
+Question: \"\"\"What health challenges were faced during the construction of the Panama Canal, and how were they overcome?\"\"\"
+Answer: \"\"\"The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.\"\"\"
 
-The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first mesage from Hugo Martinez should set up the scene. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
+The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Hugo Martinez should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
 # Response:
 ## Conversation that answers the provided questions:
 Hugo Martinez: "Huh? Oh FUCK ME, looks like a worker's got something they wanna say to me," Hugo, seeing Juan approach his table at the mess hall, rolls his eyes exasperatedly and downs half a beer as if to douse his frustration. Instead, it seems to fuel it. "WELL?!" He barks. "If you've got some stupid shit to say to me, Juan, then don't make me fucking wait to hear it, too!"
-Juan: "My apologies!" Juan quickly says as Hugo's words ring in his ears. "I was just curious, sir," Juan begins, his voice more tired than afraid, "about this really impressive canal we've been maintaining. And I thought that you, with your exceptional knowledge and talent, might be able to tell me about it. Do you know how much earth was excavated during the Panama Canal?"
+Juan: "I was just curious, sir," Juan tiredly says as Hugo's words ring in his ears, "about this really impressive canal we've been maintaining (under your wise leadership). Do you know how much earth was excavated during the Panama Canal?"
 Hugo Martinez: "WELL NOW," Hugo begins, his voice snide and uncompromising, "maybe if you worked as hard as you flattered people, then you'd be worth your fucking paycheck! But that's a good question, so I'll let you off the hook this time. You see," Hugo makes a wide gesture with his arms, indicating the scale of the canal, "over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project. 200 MILLION! Now _those_ people know how to work!" Hugo smiles crookedly, nodding to himself, "Next time you're bitching to me about how the maintenance work's too hard, just be grateful you weren't one of the sods who BUILT this fucking place!"
 Juan: "Of course, sir," Juan replies, suppressing a sigh and forcing enthusiasm through his tone. "Now, if you would permit me just one more question before I get out of your way: What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"
 Hugo Martinez: "Health? What, you planning on becoming a doctor? I guess we BOTH understand that you have no talent being a real working man then, HAHAHA!" Hugo's echoing laugh has not a hint of empathy in it. "Well, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Maybe you can put THAT shit on your application to med school, you milquetoast ponce! Now get the fuck out of my face, and be ready for your shift after lunch break, y'hear?!"
-
 
 # Input:
 ## Information:
@@ -350,10 +316,10 @@ Here's some further information that might help you:
 
 {format_qatuples(qatuples)}
 
-The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from {charname} should set up the scene. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
+The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from {charname} should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
 # Response:
-## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
+## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
 {charname}: "{conv_starter}"""
 #{charname}: "{conv_starter}
     # NOTE inline example
@@ -365,10 +331,14 @@ The primary character's answer will use all parts of the answers given. Instead 
     # Note: performance degrades rapidly if you put more than one sentence in a pre-prompt parentheses thing
     completion = logic_llm(cot_prompt, 
                            max_tokens=8000, 
-                           stop=["</s>"], 
+                           stop=["</s>","# Input:"], 
                            echo=True, 
-                        #    grammar=multi_turn_conversation_grammar, # radical no grammar use, we trust the single-shot example to make the output right because grammars always led to fully using the context here. Breaks are expensive
-                           temperature=0.2,
+                           grammar=multi_turn_conversation_grammar, # radical no grammar use, we trust the single-shot example to make the output right because grammars always led to fully using the context here. Breaks are expensive
+                           temperature=0.5, # min p settings, too inconsistent
+                            top_k=0,
+                            top_p=1,
+                            min_p=0.6, 
+                        #    temperature=0.2,
                         #    min_p = 0.05,
                         #    top_k=0,
                         #    top_p=1.00
@@ -378,7 +348,7 @@ The primary character's answer will use all parts of the answers given. Instead 
     print("\n------------------")
     
     # Extract plan
-    response_pattern = re.compile(r"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",re.IGNORECASE | re.DOTALL)
+    response_pattern = re.compile(f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
     print("GENERATION:\n\n-------------------\n\n", generation)
     
@@ -386,7 +356,7 @@ The primary character's answer will use all parts of the answers given. Instead 
 
 
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=8000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=True,n_gqa=8) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=8000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=True) # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,

@@ -6,12 +6,12 @@ def combine_traits(personality_matrix):
     combinations = product(*personality_matrix)
     
     # Joining each combination into a single string
-    combined_traits = ["\n".join(combination).strip() for combination in combinations]
+    combined_traits = ["\n".join(combination).strip().replace("\n\n","\n") for combination in combinations]
     
     return combined_traits
 
 # TODO think of a good way to pass this array in
-def special_instructions(n=1,non_axis_traits=False):
+def special_instructions(n=1,non_axis_traits=False,non_axis_traits_only=False):
     # TODO maybe make the sentence arrays here a global constant?
     """
     Picks n random sentences from each of the provided lists (personality and physical traits)
@@ -70,26 +70,61 @@ def special_instructions(n=1,non_axis_traits=False):
     ## NOTE You may freely add your own trait dimensions here, to make the character personalities used more accurately reflect your specific usecase and preference.
     # TODO identify how the AI writes characters described as "chaste and puritan". It may be the case that the AI is chaste by default, and so only sexual characters are described as such.
     
-    traits = combine_traits([
-        ["The character should be chaste and puritan.","The character should have a normal outlook on sex and sexuality, not bringing it up if it's not relevant.", "The character should be extremely horny and sexual."], # Horniness
-        ["The character should be shy, withdrawn, and timid.", "The character should have moments of both meekness and of courage.", "The character should be assertive, bold, and courageous."], # Assertiveness
-        ["The character should be kind and agreeable.", "The character should have both good and bad sides.", "The character should be an awful person, and should be enjoying every second of it."], # Kindness/Morality
-        # ["The character should be a young adult.", "the character should be middle-aged." "The character should be in late adulthood."], # Age group
-        # ["The character should be unsophisticated and crude.", "The character should be decently smart and refined.", "The character should be the epitome of intellectual sophistication."],
-    ])
-
-    # Select a random combination
-    selected_traits = random.sample(traits, 1)
-    if non_axis_traits:
-        non_axis_trait_list = [
-    """The character should be a Japanese High School student.
-The character should be a Girl.
-The character should be decently smart, but not genius-level.
-""",
-    """The character should be a catgirl.""",
-    """The character should be edgy and nihilistic."""
+    # traits = combine_traits([
+    #     ["The character should be chaste and puritan.","The character should have a normal outlook on sex and sexuality, not bringing it up if it's not relevant.", "The character should be extremely horny and sexual."], # Horniness
+    #     ["The character should be shy, withdrawn, and timid.", "The character should have moments of both meekness and of courage.", "The character should be assertive, bold, and courageous."], # Assertiveness
+    #     ["The character should be kind and agreeable.", "The character should have both good and bad sides.", "The character should be an awful person, and should be enjoying every second of it."], # Kindness/Morality
+    #     # ["The character should be a young adult.", "the character should be middle-aged." "The character should be in late adulthood."], # Age group
+    #     # ["The character should be unsophisticated and crude.", "The character should be decently smart and refined.", "The character should be the epitome of intellectual sophistication."],
+    # ])
+    axis_traits = [
+            [
+                "The character should be chaste and puritanical.",
+                "", 
+                "The character should be very seductive and flirtatious."
+            ], # Horniness (middle deliberately left blank so that the model does not mention it)
+            [
+                "The character should be shy, withdrawn, and timid.", 
+                "The character should be neither particularly bold, nor particularly timid.", 
+                "The character should be assertive and bold."
+            ], # Assertiveness
+            [
+                "The character should be kind and agreeable.", 
+                "The character should have both good and bad sides.", 
+                "The character should be an awful person, and should be enjoying every second of it."
+                # "The character should be an awful person, possessing a number of vices (that are compatible with the previously-mentioned instructions)."
+            ], # Kindness/Morality
+            # ["The character should be a young adult.", "the character should be middle-aged." "The character should be in late adulthood."], # Age group
+            # ["The character should be unsophisticated and crude.", "The character should be decently smart and refined.", "The character should be the epitome of intellectual sophistication."],
         ]
-        selected_traits += random.sample(non_axis_trait_list,1)
+    
+    non_axis_trait_list = [ # The following are examples of traits that are not on the axes above, but are still useful for character creation. I've not tested all of them, and I've not tested them in combination with the axis traits. But if you prefer a more manual approach to character creation, you can use stuff like this.
+        """The character should be a Japanese High School student.
+The character should be a girl.
+The character should be decently smart, but not genius-level.
+The character should be very kind, but too gentle and too much of a pushover for their own good.""",
+        """The character should be an awful person, and enjoying every second of it.
+The character should be intellectually brilliant.
+The character should be condescending and rude.""",
+"""The character should be a young adult.
+The character should be antisocial and coarse.
+The character should be a smoker."""
+"""The character should be middle-aged.
+The character should be"""
+        # """The character should be a catgirl who inserts "nya" into every sentence. and makes cat puns.""", # someone actually has to do this, I'm serious, it'll be purrfect, nya~
+        # """The character should be edgy and nihilistic."""
+            ]
+    
+    if not non_axis_traits_only:
+        traits = combine_traits(axis_traits)
+
+        selected_traits = random.sample(traits, 1)
+        if non_axis_traits:
+            
+            selected_traits += random.sample(non_axis_trait_list,1)
+        
+    if non_axis_traits_only:
+        selected_traits = random.sample(non_axis_trait_list,1)
 
     # Return the combined string, with each sentence on a new line
     return selected_traits[0]

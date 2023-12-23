@@ -5,12 +5,13 @@ from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .strip_steps import strip_steps
 
-def generate_questions(para_tuple, plan,logic_llm):
+def generate_questions(para_tuple, plan,logic_llm): # TODO make it so that this incorporates information about what text this is. So that if you feed it old latin legal texts, say, it'll be able to say "What is the old latin legal principle xxxx" instead of "What is the legal principle xxxx" thus causing confusion.
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
     
     Format: Question: [question]\n\n
     """
+    # Determine which paragraphs are worthy of making questions from
     made_questions = False
     retries = 0
     questions = []
@@ -265,7 +266,7 @@ Text to make questions from:
         # print("DEBUG\n\n" + decision_prompt)
         completion = logic_llm(question_prompt, 
                                max_tokens=12000, 
-                               stop=["</s>"], 
+                               stop=["</s>","# Input:"], 
                                echo=True,
                                grammar=questions_grammar,
                             #    temperature=0.2
@@ -299,7 +300,7 @@ Text to make questions from:
 # TODO fix the bug where the ) is included in the question text
 
 if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=1000,verbose=True,n_gqa=8) # load the logical LLM and offload everything
+    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=True,) # load the logical LLM and offload everything
     text = """The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.
 
 The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."""
