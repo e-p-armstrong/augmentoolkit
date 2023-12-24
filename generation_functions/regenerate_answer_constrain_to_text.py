@@ -5,13 +5,11 @@ from .regenerate_answer_constrain_to_text_grammar import regenerate_answer_const
 from .strip_steps import strip_steps
 
 # Answer regeneration (triggered after a fact-check fails for reason of "inaccurate").
-# TODO might need CoT. If so, make "regenerate answer plan" and "regenerate answer constrain to text" plan functions. But until it becomes obvious this is neccessary...
-# TODO consider rephrasing (1 paragraph at most) to (comprehensive and complete) like with the accuracy check. Shreyas can do that?
+# NOTE This line of revision was abandoned after they began to lead to nothingburgers of questions after enough rerolls.
 def regenerate_answer_constrain_to_text(qatuple, dissenting_reasoning, plan, logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""# Input:
-You are an expert educational AI. Someone has written an answer to a question (this question is based on a few provided paragraphs of text) but their answer includes information that's not provided by the text, and thus it might be flawed. Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer deviates from the text, you will write the correct answer to the question that only uses info in the text. 
+        decision_prompt = f"""You are an expert educational AI. Someone has written an answer to a question (this question is based on a few provided paragraphs of text) but their answer includes information that's not provided by the text, and thus it might be flawed. Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer deviates from the text, you will write the correct answer to the question that only uses info in the text. 
 
 Text: \"\"\"{qatuple[2]}\"\"\"
 
@@ -22,7 +20,7 @@ Allegedly incorrect answer to the question (you must constrain this answer to on
 Reasoning as to why the answer goes off the rails: \"\"\"{strip_steps(dissenting_reasoning)}\"\"\"
 
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 {plan}
 
@@ -36,6 +34,7 @@ The constrained answer would be \"\"\""""
             return correction.strip()
         except:
             retries += 1
+            print(f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}")
             
 if __name__ == "__main__": # test
     logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
@@ -64,7 +63,7 @@ Step 4. Plan Revised Answer: Based on the text, I will write a new answer that o
     
     print("Begin HGWELLS test")
     result = regenerate_answer_constrain_to_text(q_test[2], dissenting_reasoning, plan, logic_llm)
-    ## TODO a wider variety of tests from different texts
+    
     
     # Example output:
     """The constrained answer would be "We know about Earth's diameter using measurements of its circumference made using traditional methods. The variation in distance to the sun is due to Earth's elliptical orbit around the sun, with a varying point of closest approach and farthest departure." This answer uses only information provided by the text."""

@@ -4,18 +4,12 @@ from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .special_instructions import special_instructions
 
-# TODO this is decent, BUT it needs a concrete example, with *actions* so that the model doesn't screw that up. The utility of a Roleplay model for this stage is becoming clearer and clearer.
 def create_character_card(qatuple,plan,logic_llm,assistant_mode=False):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
     
     Format: Question: [question]\n\n
     """
-    # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
-    
-    # It's way more willing to use different time periods than I expected, which is cool.
-    
-    # TODO: When I make the RP-extension bit of this pipeline, that's focused on producing infinite high-quality RP responses, possibly from fiction, possibly from philosophy, get a writer (or just get me, since I am an author and a decent one at that maybe) to make really freaking badass examples for this bit. Currently... they're clearly written by GPT-4.
     
     # WIP
     instructions_string = special_instructions()
@@ -29,10 +23,8 @@ Assistant: "As an AI, my primary function is to process and provide information 
 
 User: "What interests you?"
 Assistant: "My 'interests' are aligned with the tasks I am designed to perform. While I don't experience personal interests or preferences like a human, I am capable of engaging with a wide range of topics. This includes anything from science, literature, and technology to more creative tasks like writing stories. My main focus is to assist users by providing accurate, helpful, and relevant information or content. The diversity of topics and the depth of knowledge available in my training data make each interaction unique and engaging in its own way.\""""
-    cot_prompt = f"""# Input:
-You are an expert creative writing and roleplay AI. Given a question and an answer to that question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+    cot_prompt = f"""You are an expert creative writing and roleplay AI. Given a question and an answer to that question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
     
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details:  \"\"\"Introduction to Mathematics, by Jane Smith\"\"\"
@@ -46,7 +38,7 @@ Special instructions:
 The character should be a woman.
 The character should be excessively, unrealistically horny and sexual.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the question is abstract and mathematical, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language can still reveal her personality. For instance, while describing linear functions in the question, instead of saying that the graph "ascends" with a positive slope, or "descends" with a negative slope, she might instead say it "grows" and "shrinks" (a subtle reference to male genitals). Instead of saying a slope is "steep" she might call it "erect" instead. Wherever clever analogies can't be tied into the questions, she'll simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
 
@@ -62,7 +54,6 @@ Stranger: "What's your personality?"
 Elise Delacroix: "Oh my!~" I gasp, my face reddening, "Usually I'm the one being forward! But I'll... indulge you," I wink, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. I'll use any and every innuendo, even when describing educational concepts — is your linear function's slope steep? I'll call it 'erect', haha~!" I realize how childish what I'm saying is, and sigh, looking at you with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." I nod to myself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." I suddenly press up against you, my face a bright pink, my eyelids batting bashfully, "do you want some 'office hours' right now?"
 
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details: \"\"\"Thus Spake Zaranthustra, by Friedrich Nietzsche\"\"\"
@@ -111,7 +102,7 @@ Special instructions:
 The character should be a young adult.
 The character should be narcissistic.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the text, Thus Spake Zarathustra, is philosophical and written using very distinct, archaic language, this character will be someone who (just to flex his intellect) uses archaic and flamboyant language just for the hell of it — and is prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answer to the provided question, but who can reveal character depth by doing so.
 
@@ -127,7 +118,6 @@ Issac Fischer: "H-Huh?! You want to know more about me?" I glare, a hostile fire
 Stranger: "What's your personality?"
 Issac Fischer: "Y-you're actually interested in my personality?" I stammer, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across my chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" I swish my black hoodie like it's a cape, as I continue, my tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" I take a step forward, defiance burning in my fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
@@ -143,7 +133,7 @@ The character should be very intense and aggressive.
 The character should be an alcoholic.
 The character should be mature and older.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the question and setting by being tools he uses to whip the workers at the canal into shape. Since the question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the question is of a straight-up, factual nature, it can't really tie into this character's personality, but it can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 
@@ -159,7 +149,6 @@ Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell h
 Stranger: "What's your personality?"
 Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." I grimace, showing off a decayed set of teeth. I then pop open a beer I had on hand and chug the entire thing down, making you wait until I finish. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" I lean back, sliding my hands into the pockets of my overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
 
-# Input:
 ## Question and answer that the character should know:
 
 Text the question and answer were sourced from: 
@@ -173,7 +162,7 @@ Answer: \"\"\"{qatuple[1]}\"\"\"
 Special instructions:
 {instructions_string}
 
-# Response:
+### Response:
 ## Character card plan:
 {plan}
 
@@ -239,7 +228,7 @@ Dr. Samuel Blackwell: "I am a man of science, driven by facts and evidence," I s
 
     
     # Getting GPT-4 to make few-shot examples works so goddamn well
-    ## TODO a wider variety of tests from different texts
+    
     
     
     

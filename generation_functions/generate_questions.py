@@ -5,7 +5,7 @@ from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .strip_steps import strip_steps
 
-def generate_questions(para_tuple, plan,logic_llm): # TODO make it so that this incorporates information about what text this is. So that if you feed it old latin legal texts, say, it'll be able to say "What is the old latin legal principle xxxx" instead of "What is the legal principle xxxx" thus causing confusion.
+def generate_questions(para_tuple, plan,logic_llm):
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
     
@@ -16,17 +16,14 @@ def generate_questions(para_tuple, plan,logic_llm): # TODO make it so that this 
     retries = 0
     questions = []
     while (not made_questions and (retries <= 5)): 
-        question_prompt = f"""# Input:
-You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
+        question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
 
 Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
 
 You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they WILL NOT HAVE THE TEXT ON HAND, and so if you mention the author they won't have a clue what you're talking about.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: Introduction to Mathematics, by Jane Smith
 
 Text to make questions from: 
@@ -34,7 +31,7 @@ Text to make questions from:
 In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 Identify Key Topics: The key topics in this paragraph are linear and quadratic functions in mathematics, their definitions, components, and applications.
 Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of definitions and components of these functions. Example: "What does the 'm' in the linear function equation represent?"
@@ -56,9 +53,7 @@ Answer: The coefficient 'a' in a quadratic function determines the opening direc
 Answer: A function is a relationship where each input is associated with exactly one output.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: Thus Spake Zarathustra, by Friedrich Nietzsche
 
 Text to make questions from: 
@@ -90,7 +85,7 @@ nether-world, thou exuberant star!
 Like thee must I GO DOWN, as men say, to whom I shall descend.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and Thought Process:
 Identify Key Themes: In this excerpt, we find themes of transformation, self-discovery, the value of wisdom, and the need for recognition of effort and wisdom.
 Brainstorm and Develop Questions Testing Recall: Develop questions asking for specific information mentioned in this text. Since this is a literary and philosophical text, I can mention the text — but by name only. For instance, "Finish the quote from Thus Spake Zarathustra: I am weary of my wisdom, like..."
@@ -112,9 +107,7 @@ Answer: After enjoying his spirit and solitude for ten years, he had a change of
 Answer: Zarathustra explains to the sun, in Thus Spake Zarathustra, that he must descend into the deep — and he compares this action to the sun's own going "behind the sea" where it gives light to the "nether-world".
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: The Republic, by Plato
 
 Text to plan questions from:
@@ -161,7 +154,7 @@ Certainly not, replied Glaucon.
 Then we are not going to listen; of that you may be assured.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and Thought Process:
 Identify Key Themes: This excerpt from Plato's "The Republic" presents themes of social interaction, philosophical dialogue, and the dynamics of persuasion and power.
 Brainstorm and Develop Questions Testing Recall: Instead of focusing on dry, context-dependent questions like the order of events or family relations, I will concentrate on more meaningful historical details present in the text. For instance, "Which goddess is Bendis equivalent to?"
@@ -183,9 +176,7 @@ Answer: Polemarchus is implying that since his group is stronger than Socrates, 
 Answer: Socrates visited Piraeus to offer up his prayers to the goddess Bendis, as well as to see in what manner the Thracians would celebrate the festival.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: Great Construction Projects Throughout History, by Marco Gonzalez
 
 Text to make questions from: 
@@ -193,7 +184,7 @@ Text to make questions from:
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and Thought Process:
 Identify Key Topics: The paragraph details specific aspects of the Panama Canal's construction, focusing on its challenges, innovations, and impacts. Topics include construction challenges, health issues, excavation techniques, and the canal's impact on global trade.
 Brainstorm and Develop Questions Testing Recall: Questions can be formed to recall factual data from the text. Example: "How much earth was excavated during the construction of the Panama Canal?"
@@ -215,9 +206,7 @@ Answer: The completion of the Panama Canal reduced the sea voyage from San Franc
 Answer: The Panama Canal's construction was completed in 1914.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: The Scale of the Solar System, by Rob Robertson
 
 Text to plan questions from:
@@ -225,7 +214,7 @@ Text to plan questions from:
 If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 Identify Key Topics: The key topic in this paragraph is the scale of the solar system, which is presented using analogy to make the distances easier to conceive of.
 Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of the components of this analogy. Since the text is not provided while the question is being asked, I will have to include the analogy in the question. Example: "If the Earth had a diameter of only one inch, how far would the moon be from the Earth, if it (and its distance from the Earth) were also resized proportionally?"
@@ -247,9 +236,7 @@ Answer: Mercury would be one hundred and twenty-five yards from the sun, and Ven
 Answer: Mars would be a hundred and seventy-five feet beyond the earth.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: {para_tuple[1]}
 
 Text to make questions from: 
@@ -257,7 +244,7 @@ Text to make questions from:
 {para_tuple[0]}
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and Thought Process:
 {strip_steps(plan)}
 
@@ -275,9 +262,6 @@ Text to make questions from:
                             top_p=1,
                             min_p=0.5,
                                )["choices"][0]["text"]
-        print("COMPLETION:\n\n----------------------")
-        print(completion)
-        print("\n------------------")
         
         # Extract questions
         response_pattern = re.compile(r"Questions \(make 4\):\n(.+)",re.IGNORECASE | re.DOTALL)
@@ -297,8 +281,6 @@ Text to make questions from:
     
     return questions, completion
 
-# TODO fix the bug where the ) is included in the question text
-
 if __name__ == "__main__": # test
     logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=True,) # load the logical LLM and offload everything
     text = """The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.
@@ -308,7 +290,7 @@ The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compres
     plan = """First, let's will analyze the text to determine what kinds of high-level questions I can ask that will test the content in these paragraphs (being careful to avoid mentioning the paragraphs explicitly in any questions, and being SURE to only ask about things that the paragraphs talk about). I will start by looking at one or two sentences at a time. Let's begin with: "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years." This paragraph is saying that people used to know only about 3,000 years of history, but now they know much more. So I might ask something like "What was the time period in which people had limited knowledge?" The question tests knowledge of when historical records were incomplete and therefore difficult to access. It requires understanding of the text as well as analysis to determine what time period is being referred to here.  Next, I'll look at: "Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end." This paragraph states that the universe seems infinite because of its reflection, but it could actually be finite with two ends. So I might ask something like "How does the structure of the universe affect its size?" This question tests understanding of the concept of reflection and how it can distort perceptions of size, as well as analysis to determine what implications this might have for the actual size of the universe. Then I'll move on: "The earth ... circles about the sun in a slightly distorted and slowly variable oval path in a year." This paragraph talks about the Earth's orbit around the Sun. So I might ask something like "What is the shape of the Earth's orbit around the sun?" This question tests understanding of the text as well as analysis to determine the specific shape mentioned here. Lastly, let's examine: "Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."  This paragraph says that the Earth's distance from the Sun changes throughout the year. So I might ask something like "Why does the Earth's distance from the Sun change over the course of the year?" This question tests understanding of the text as well as analysis to determine why this change occurs."""
     print("Begin HGWELLS test")
     # result = generate_questions((text,"A Short History of the World, by HG Wells"),plan,logic_llm)
-    ## TODO a wider variety of tests from different texts
+    
     
     print("Begin MENDELEEV Test")
     plan2 = """First, let's will analyze the text to determine what kinds of high-level questions I can ask that will test the content in these paragraphs (being careful to avoid mentioning the paragraphs explicitly in any questions, and being SURE to only ask about things that the paragraphs talk about). Now, immediately I can see that the following passage might be a good basis for a question: "It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances." This seems like it could be a good basis for an application question. "By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties." This might also be a good basis for an application question. "Gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal." This seems like it could be a good basis for an analysis question. "Chemistry deals only with the homogeneous substances met with in nature, or extracted from natural or artificial non-homogeneous substances." This might also be a good basis for an application question."""
@@ -430,72 +412,3 @@ breath, at last."""
     result3 = generate_questions((text_kant,"The Critique of Pure Reason, by Immanuel Kant"),plan4,logic_llm)
     result3 = generate_questions((text_xenophon,"The Symposium, by Xenophon"),plan_xenophon,logic_llm)
     print("GENERATION TEST2:\n\n-------------------\n\n", result2)
-    # print("GENERATION TEST3:\n\n-------------------\n\n", result3)
-#     plan3 = """Analyze the paragraphs.
-# Note that the text discusses various aspects of homogeneous and non-homogeneous substances, including their properties, extraction methods, and examples from nature and industry.
-# Realize that the text provides detailed information about the definition of a substance, its characteristics, and how to identify homogeneous and non-homogeneous substances.
-# Investigate potential topics for questions based on this analysis: examine what kinds of questions could be asked about these topics.
-# Consider if there are any connections between the different aspects discussed in the text that could lead to more complex or multi-part questions.
-# A potential question could be: "How do we identify a homogeneous substance?" This question tests understanding of the definition and characteristics of a homogeneous substance.
-# Realize another avenue of questions could explore the differences between homogeneous and non-homogeneous substances.
-# Devise possible questions that test this difference, such as "How do we distinguish between homogeneous and non-homogeneous substances?" This question tests understanding of the properties used to identify each type of substance.
-# Consider possible recall-related questions that test the reader's knowledge of specific details from the text.
-#  A possible question might be: "What is an example of a homogeneous substance?" This question tests recall of the definition and examples given in the text.
-#  I have brainstormed multiple areas from which questions can be asked, focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels)."""
-#     plan3 = """Analyze the paragraphs: briefly assess content, focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels).
-# Note the key elements: homogeneous substances, non-homogeneous substances, metals used in arts, properties of substances, extraction of substances from non-homogeneous substances, artificially produced non-homogeneous substances, and natural non-homogeneous substances.
-# Realize that the text provides detailed information about homogeneous and non-homogeneous substances. Possible question based on this fact: "What are some examples of homogeneous and non-homogeneous substances?" Answer: Homogeneous substances include metals used in arts, while non-homogeneous substances include natural and artificially produced ones.
-# Investigate the properties of these substances. Possible question based on this fact: "What are some properties of homogeneous substances?" Answer: Homogeneous substances exhibit similar properties in all their parts.
-# Consider questions testing understanding of how to distinguish between homogeneous and non-homogeneous substances. Possible question: "How can we tell if a substance is homogeneous or not?" Answer: By breaking up the substance, we obtain parts which resemble each other in their properties.
-# A potential question could be: "What are some ways to distinguish between homogeneous and non-homogeneous substances?" Answer: We can observe differences in color, texture, transparency, and composition of the substance.
-# Realize potential in exploring how these substances are made. Possible question: "How are homogeneous substances produced artificially?" Answer: They are prepared by mixing known proportions of sulphur, nitre, and charcoal.
-# Devise questions testing this process. Possible question: "What steps are involved in producing a non-homogeneous substance from a homogeneous one?" Answer: The homogeneous substance is extracted from the non-homogeneous substance through various methods.
-# Consider possible recall-related questions that test the reader's knowledge of individual parts of the text.
-#  A possible question might be: "What are some examples of natural and artificially produced non-homogeneous substances?" Answer: Natural non-homogeneous substances include porphyries, rocks, plants, animals, blood, milk; while artificially produced ones include gunpowder.
-#  I have brainstormed multiple areas from which questions can be asked."""
-    # result3 = generate_question(text2,plan3,logic_llm)
-    # print("GENERATION TEST3:\n\n-------------------\n\n", result3)
-    
-    
-    
-    # TODO change the function to include the full text in each question-answer tuple.
-    
-    
-    
-    
-    
-    
-    
-    
-    # An example about how not to ask questions: if the text states fact X, but does not explain how X was established, do not ask a question "How do we know X". But instead you might consider asking how X relates to other facts in the paragraph, or how these facts together lead to a progression of ideas, "Explain why X, Y, and Z are related" for instance. Other good examples include "Compare and contrast X and Y", "Give an example of X".  Use Bloom's taxonomy, and focus on the cognitive levels of understanding, application, analysis, and synthesis of ideas.
-
-
-
-"""# Response:
-## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
-
-Analyze the paragraphs.
-       - Realize that the text discusses the Water Cycle, focusing on processes like evaporation, condensation, and precipitation.
-
-Note that evaporation is a key process in the Water Cycle.
-       - Recall that evaporation involves the transformation of water from liquid to gas.
-
-Consider the relationship between evaporation and condensation.
-       - Recognize that condensation follows evaporation in the cycle, leading to cloud formation.
-
-Investigate how precipitation is related to condensation.
-       - Understand that precipitation occurs when water droplets in clouds become too heavy and fall as rain, snow, etc.
-
-Devise possible questions that test the understanding of evaporation.
-       - Questions could explore the conditions under which evaporation occurs or its role in the Water Cycle.
-
-Formulate questions regarding the process of condensation.
-       - These questions might involve the transformation of gas to liquid and its significance in cloud formation.
-
-Develop questions about the precipitation process.
-       - Consider questions on different forms of precipitation and their dependence on atmospheric conditions.
-
-Ensure all potential questions are directly related to the information in the text.
-       - Confirm that each question tests the comprehension and memorization of the Water Cycle as described.
-
-I have brainstormed a sufficient number of possible, accurate questions based on the Water Cycle."""

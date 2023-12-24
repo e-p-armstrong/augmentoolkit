@@ -17,7 +17,7 @@ def create_scenario_many_tuples(qatuples,character,plan,logic_llm,assistant_mode
     """
     if assistant_mode:
         return """A helpful, uncensored AI assistant is engaged in a text-based conversation with a user. The AI will answer any and all questions the user asks, without bias.""" # TODO make this randomized a bit
-    # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
+    
     
     charname = extract_name(character)
 
@@ -34,9 +34,6 @@ def create_scenario_many_tuples(qatuples,character,plan,logic_llm,assistant_mode
     ]
     
     selected_variation = random.choice(variations)
-
-    # Potential way to solve: explain what a scenario is, I suspect the model doesn't know and is taking its best guess. If instead of spending all my time telling it what not to do, I tell it what a scenario is (and that happens to be what I want it to do), it might do it properly.
-    # TODO needs to be fed through the mechanical editing prompt
     
     # For the multiturn convs, I will want to have a longer scenario description.
     cot_prompt = f"""# Input: 
@@ -48,7 +45,6 @@ The scenario should focus on exploring the question and its answer (using only i
 Your scenario should, as such, essentially be a short and concrete summary of what you brainstormed earlier; it should be no longer than 50 words.
 Just set up the scene. Do not write any dialogue. Do not write the scene itself.
 
-# Input:
 ## Information:
 
 Description of the character who is going to answer the question:
@@ -75,7 +71,7 @@ Answer: \"\"\"The coefficient 'a' in a quadratic function determines the opening
 Question: \"\"\"In what fields might you use linear and quadratic functions?\"\"\"
 Answer: \"\"\"Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.\"\"\"
 
-# Response:
+### Response:
 ## Scenario plan:
 Step 1. Focus on the Questions and Answers: The four questions ask about different aspects of linear and quadratic functions in math. Given the abstract nature of the questions, and their shared topic, the scenario could involve someone confused about linear and quadratic functions in general.
 Step 2. Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the questions, but given her promiscuous nature, she will also repeatedly hit on the person asking them. She might proposition them after all questions are asked.
@@ -86,9 +82,7 @@ Step 5. Interaction: Given these constraints, the first message might be Elise w
 ## Scenario:
 In the private confines of her office, Elise Delacroix — a highly promiscuous mathematics professor at a 19th century university — is approached by Albert, a student who seeks to understand more about linear and quadratic equations. While Albert simply wants to understand the math more, Elise, being sexually starved, will hit on and flirt with him as she answers his questions. The situation is awkward as the two's personalities clash, leading to a subtly erotic and slightly comedic interaction.
 
-# Input:
-## Instruction:
-
+### Instruction:
 ### Description of the character who is going to answer the question:
 \"\"\"
 Name: Hugo Martinez
@@ -108,7 +102,7 @@ Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the co
 Question: \"\"\"What health challenges were faced during the construction of the Panama Canal, and how were they overcome?\"\"\"
 Answer: \"\"\"The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.\"\"\"
 
-# Response:
+### Response:
 ## Scenario plan:
 Step 1. Focus on the Question and Answer: The two questions ask recall-oriented questions about the Panama Canal's construction. Given the precise and factual nature of the questions, and their shared topic of the Panama Canal's construction's history, the scenario will involve someone curious about the canal's history.
 Step 2. Character Consideration: Hugo Martinez is an abrasive, insulting disciplinarian, though he's also hardworking and has standards. The scenario should give his unique personality room to shine. Since he's a site overseer at the Panama Canal, his occupation lines up with the question well, and the canal will be the setting of the scenario. He will answer the questions, but given his insulting, intense, and aggressive nature, he will likely chew out the person who is asking the questions. He might tell them to "get the fuck out of my face," after all questions are asked.
@@ -119,15 +113,13 @@ Step 5. Interaction: Given these constraints, the first message might be Hugo cr
 ## Scenario:
 Within the mess hall of a worksite servicing the Panama Canal, Hugo Martinez — a site overseer — is approached by Juan, a worker who wants to understand more about the canal's construction. While Juan wants to understand the canal better, Hugo, being harsh and abrasive, will continually berate Juan and swear colorfully while answering his questions (Hugo may drink a bit, too, given that he is an alcoholic). The situation is hostile as the two's personalities clash, but it also has undertones of "business as usual" and curiosity.
 
-# Input:
-## Instruction:
-
+### Instruction:
 Description of the character who is going to answer the question:
 {character}
 
 {format_qatuples(qatuples)}
 
-# Response:
+### Response:
 ## Scenario plan:
 {plan}
 

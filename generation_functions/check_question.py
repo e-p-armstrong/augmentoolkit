@@ -6,18 +6,17 @@ from .constants import LOGICAL_MODEL
 
 # POSSIBLE TODO:
 # Add an "Off the rails insane forever generation" check, like on this output:
+# I haven't seen this happen since I started using 70bs though.
 """
 4.) What did ancient people believe about the shape and movement of our world, before scientific discoveries indicated otherwise? (Hint: The earth is a spheroid, not flat. The universe existed before the year 4004 BCE. The earth rotates on its axis and orbits around the sun.) You are allowed to dramatically change/revamp/rewrite this question's content. The goal here is to create a different question that still requires information from the paragraphs, but doesn't require knowledge of flawed assumptions connected with biblical interpretations or an understanding of events before the creation of the universe, which goes beyond the generally accepted scientific evidence provided in the text.  As you see fit. (Don't just rephrase the old question.) The goal here is to create a different question that still requires information from the paragraphs, but doesn't require knowledge of flawed assumptions connected with biblical interpretations or an understanding of events before the creation of the universe, which goes beyond the generally accepted scientific evidence provided in the text.  As you see fit. (Don't just rephrase the old question.) So you should create a new question that only requires information from the paragraphs to solve. It is not necessary to refer to the text at all. Also note: An example about how NOT to ask questions is if the text states fact X, but does not explain how X was established, do not ask a question "How do we know X". But instead you might consider asking how X relates to other facts in the paragraph, or how these facts together lead to a progression of ideas, "Explain how X, Y, and Z are related" for instance. Here's what we know: 1. The earth is a spheroid, not flat (paragraph 3). 2. The universe existed before the year 4004 BCE (paragraph 5). 3. The earth rotates on its axis and orbits around the sun (paragraph 5).
 Answer: We don't have an answer.
 """
-# That's for finishing touches probably though
 
 # Answer vetting
 def check_question(qatuple,logic_llm):
     retries = 0
     while (retries <= 4):
-        decision_prompt = f"""# Input:
-You are an expert educational AI. Given a paragraph or two from a larger text, and a question based on the paragraphs, you will make a determination as to whether the question tests ONLY information in the paragraphs. Essentially: you will check if the question is answerable, given the information in the paragraphs. Your task includes first analyzing the text, thinking through whether or not the question reflects aspects of the paragraphs provided. 
+        decision_prompt = f"""You are an expert educational AI. Given a paragraph or two from a larger text, and a question based on the paragraphs, you will make a determination as to whether the question tests ONLY information in the paragraphs. Essentially: you will check if the question is answerable, given the information in the paragraphs. Your task includes first analyzing the text, thinking through whether or not the question reflects aspects of the paragraphs provided. 
 
 Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Relevant" or "Irrelevant" depending on your analysis of the question with regards to the text. 
 
@@ -29,9 +28,7 @@ You will analyze the question step-by-step, ensuring each part of the question i
 
 Please now apply this method to the provided text and question, and write out your reasoning and thought process.
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 The concept of artificial intelligence (AI) revolves around the creation of machines capable of intelligent behavior. Key components of AI include machine learning, neural networks, and natural language processing. Machine learning involves training computers to learn from data and improve their performance over time. Neural networks are modeled after the human brain's network of neurons and are pivotal in enabling machines to recognize patterns and make decisions. Natural language processing, another crucial aspect of AI, allows machines to understand and interpret human languages, facilitating interaction between humans and computers.
@@ -39,7 +36,7 @@ The concept of artificial intelligence (AI) revolves around the creation of mach
 
 Question (based on text): \"\"\"What is the role of neural networks in AI, and how does natural language processing contribute to human-computer interaction?\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 
 ### In-Depth Analysis of the Text:
@@ -58,9 +55,7 @@ Question (based on text): \"\"\"What is the role of neural networks in AI, and h
 The text addresses both components of the question with sufficient detail, making it: Relevant.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 The phenomenon of photosynthesis in plants is an essential process for life on Earth. It involves the conversion of light energy into chemical energy, which is stored in glucose. This process occurs in the chloroplasts, specifically within a pigment called chlorophyll. Photosynthesis consists of two main stages: the light-dependent reactions and the light-independent reactions, also known as the Calvin cycle. During the light-dependent reactions, sunlight is absorbed by chlorophyll, which then converts water (H2O) into oxygen (O2) and transfers energy to the light-independent reactions. The Calvin cycle uses this energy to convert carbon dioxide (CO2) from the atmosphere into glucose, a simple sugar.
@@ -68,7 +63,7 @@ The phenomenon of photosynthesis in plants is an essential process for life on E
 
 Question (based on text): \"\"\"Explain exactly why chlorophyll able to absorb sunlight, and why is this important for the Calvin cycle?\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 
 ### In-Depth Analysis of the Text:
@@ -87,9 +82,7 @@ Question (based on text): \"\"\"Explain exactly why chlorophyll able to absorb s
 Although the text touches upon the role of chlorophyll, it does not provide the depth of explanation required by the question, making it: Irrelevant.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 The octopus is an extraordinary creature, renowned for its intelligence and ability to adapt to its environment. Octopuses have three hearts and a complex nervous system, which includes a central brain and a small brain in each of their eight arms. These arms are capable of intricate movements and can even carry out simple tasks independently. The creature's ability to change its color and texture is another remarkable feature, which it uses for camouflage and communication. Notably, octopuses are known for their problem-solving skills and have been observed using tools in captivity.
@@ -97,7 +90,7 @@ The octopus is an extraordinary creature, renowned for its intelligence and abil
 
 Question (based on text): \"\"\"How do octopuses utilize their color-changing ability in their natural habitat, and what role does their central brain play in this process?\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 
 ### In-Depth Analysis of the Text:
@@ -116,9 +109,7 @@ Question (based on text): \"\"\"How do octopuses utilize their color-changing ab
 Given the text's coverage of color-changing but lack of detail on the central brain's role, the overall assessment of the question's relevance to the text is: Irrelevant.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 {qatuple[2]}
@@ -128,15 +119,11 @@ Question (based on text): \"\"\"{qatuple[0]}\"\"\"
 
 If the question clearly goes off the rails and is incoherent, then it is irrelevant.
 
-# Response:
+### Response:
 ## Reasoning and thought process (be careful around "how" and "why" questions):
 """
-        # print("DEBUG\n\n" + decision_prompt)
         try:
             completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=question_relevant_grammar, temperature=0.2)["choices"][0]["text"]
-
-            # print("DEBUG\n\n")
-            # print(completion)
             
             response_pattern = re.compile(r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)", re.DOTALL | re.IGNORECASE)
             response = response_pattern.search(completion).group(1).strip()
@@ -158,9 +145,8 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
             if retries <= 4:
                 retries += 1
             else:
-                return (None,None), None
+                return (None,None), completion
     return (None, None), None
-# There is no bug about this ignoring certain judgments and retrying; that's just the dissenting reasoning from the print statement
 
 if __name__ == "__main__": # test
     logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
@@ -190,7 +176,7 @@ if __name__ == "__main__": # test
     else:
         print("Made wrong choice for good question")
         
-    ## TODO a wider variety of tests from different texts
+    
     
     print("Begin Mendeleev test")
     text2 = """A substance or material is that which occupies space and has

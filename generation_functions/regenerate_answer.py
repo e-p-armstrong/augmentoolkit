@@ -8,8 +8,7 @@ from .strip_steps import strip_steps
 def regenerate_answer(qatuple, dissenting_reasoning, plan, logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""# Input:
-You are an expert educational AI. Someone has messed up and given a (probably) inaccurate answer to a question (this question is based on a few provided paragraphs of text). Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer is flawed, you will write the correct answer to the question. 
+        decision_prompt = f"""You are an expert educational AI. Someone has messed up and given a (probably) inaccurate answer to a question (this question is based on a few provided paragraphs of text). Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer is flawed, you will write the correct answer to the question. 
 
 Text: \"\"\"{qatuple[2]}\"\"\"
 
@@ -21,7 +20,7 @@ Reasoning as to why the answer is incorrect: \"\"\"{strip_steps(dissenting_reaso
 
 If there are many questions, just answer the first 2.
 
-# Response:
+### Response:
 ## Plan for new answer (step-by-step):
 {plan}
 # New answer (comprehensive and complete; do not mention the text):
@@ -38,6 +37,7 @@ The correct answer would be \""""
             return correction.strip()
         except:
             retries += 1
+            print(f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}")
     return None
             
             
@@ -58,7 +58,7 @@ Step 4. Plan a Corrected Answer: To account for this distinction, one could adju
     
     print("Begin HGWELLS test")
     result = regenerate_answer(inaccurate_qa_tuple, dissenting_reasoning, plan, logic_llm)
-    ## TODO a wider variety of tests from different texts
+    
     
     # Example output:
     """The correct answer would be "It is likely that the concept of a spherical Earth was understood by at least a limited number of intelligent people around the time period mentioned in the text when it became commonly taught in schools and universities, which would put this knowledge after about 2500 years ago.". This accounts for the early references to spherical Earth concepts in the provided text while acknowledging the higher bar for universal understanding and acceptance suggested by the question's phrasing."""

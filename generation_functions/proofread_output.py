@@ -12,11 +12,10 @@ def proofread_output(text,logic_llm):
     
     Format: Question: [question]\n\n
     """
-    # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
     
-    # It's way more willing to use different time periods than I expected, which is cool.
-    prompt = f"""# Input:
-You are an expert "mechanical editing" AI that is going to fix all typographical, grammatical, and spelling errors in a provided text, without making any other corrections. You will leave stylistic choices and everything else completely unchanged.
+    
+    
+    prompt = f"""You are an expert "mechanical editing" AI that is going to fix all typographical, grammatical, and spelling errors in a provided text, without making any other corrections. You will leave stylistic choices and everything else completely unchanged.
 
 Text to edit: \"\"\"{text}\"\"\"
 
@@ -32,7 +31,7 @@ Begin Edit: [the full text, with all mechanical errors fixed]
 
 Add as many steps as you need, then output "End of reasoning" as a final step. Then do the edit.
 
-# Response:
+### Response:
 ## Edit plan:
 """
     completion = logic_llm(prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=proofread_output_grammar,temperature=0.2)["choices"][0]["text"]
@@ -60,8 +59,8 @@ if __name__ == "__main__": # test
     edit = proofread_output(text,logic_llm)
     
         
-    ## TODO a wider variety of tests from different texts
-    ## TODO add a space between "a" and the LLM completion. It's bugged rn. But adding it in the prompt breaks the completion, so it needs to be done afterwards.
+    
+    
     
     
 # !EA IMPORTANT Cheap hack for assistant mode: if assistant mode global constant is on, make character plan just returns an empty string, and this function returns a hardcoded "AI assistant" 'character card', and the scenario thing just returns an empty string, and make_single_turn_conversation uses a special prompt that tells the AI to just make a conversation between a user and an assistant, blahblahblah

@@ -47,7 +47,7 @@ You should aim to make 6 questions (at most), but if the text is too small or in
 
 You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they will not have the text on-hand.
 
-# Response: I will remember to follow the question and answer format given by:
+### Response: I will remember to follow the question and answer format given by:
 \"\"\"
 num) question contents.
 Answer: question answer.
@@ -56,13 +56,7 @@ All my questions will be directly answerable from the provided paragraphs, and w
 
 ## Questions:
 """
-        # print("DEBUG\n\n" + decision_prompt)
         completion = logic_llm(question_prompt, max_tokens=2000, stop=["</s>","# Input:"], echo=True, grammar=questions_grammar,temperature=0.2)["choices"][0]["text"]
-        # EVERYTHING BELOW HERE IS TODO
-        # print("DEBUG\n\n")
-        print("COMPLETION:\n\n----------------------")
-        print(completion)
-        print("\n------------------")
         
         # Extract questions
         response_pattern = re.compile(r"Questions:\n(.+)",re.IGNORECASE | re.DOTALL)
@@ -92,5 +86,5 @@ if __name__ == "__main__": # test
 The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."""
     print("Begin HGWELLS test")
     result = generate_short_questions(text,logic_llm)
-    ## TODO a wider variety of tests from different texts
+    
     

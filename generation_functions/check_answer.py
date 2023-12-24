@@ -3,25 +3,17 @@ from .answer_accurate_grammar import answer_accurate_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 # Answer vetting
-# For now, this checks answer relevancy too. The danger with abstracting answer relevancy into a separate step is that anything which relies on knowledge that is obviously mentioned in the text already up until this point, will get screwed
-
-
-# TODO improve the step-by-step check to formalize the fact that we evaluate each part of the answer. So "accurate" or "inaccurate" at the end of each step.
-# Also improve the test, right now the "good" answer is actually a bit shit
-# ^ one big unfixed problem here is that the model might occasionally say "This text is not neccessarily inaccurate" and that usage of the word might make the determination inaccurate. To fix this a reliance on the final judgement can be used, or I can prompt it to only use "inaccurate" if it is describing a part of the answer as bad, or through more precise grammars for the step-by-step bits.
 
 def check_answer(qatuple,logic_llm, permissive_mode=True):
     retries = 0
     while (retries <= 4):
-        decision_prompt = f"""# Input:
-You are an expert educational AI. Given a paragraph or two from a larger text, a question based on the paragraphs, and an answer to the question, you will make a determination as to whether the answer to the question is a sensible answer, given the information in the paragraphs. Essentially: you will fact-check the answer to the question, with your source of truth being the paragraphs provided. Your task includes first analyzing the text, thinking through whether or not the answer reflects aspects of the paragraphs provided. 
+        decision_prompt = f"""You are an expert educational AI. Given a paragraph or two from a larger text, a question based on the paragraphs, and an answer to the question, you will make a determination as to whether the answer to the question is a sensible answer, given the information in the paragraphs. Essentially: you will fact-check the answer to the question, with your source of truth being the paragraphs provided. Your task includes first analyzing the text, thinking through whether or not the answer reflects aspects of the paragraphs provided. 
 
 Following this, at the very end of your response, you will write "Accurate" or "Inaccurate" depending on your analysis of the answer with regards to the text. 
 
 Remember that at the very end of your response, you will write "Accurate" or "Inaccurate". Do not use these words anywhere else in your answer.
 
-# Input:
-## Instruction:
+### Instruction:
 Text: 
 \"\"\"
 The Industrial Revolution marked a transformative period in history, fundamentally altering economic structures and industrial processes. One of the most significant innovations was the advent of steam power, which drastically reduced production costs. This reduction was due to the increased efficiency and speed of machines powered by steam, replacing the slower, more labor-intensive methods previously used. Additionally, steam power was instrumental in the development of semi-automated factories, leading to a significant shift in manufacturing processes and labor dynamics.
@@ -31,7 +23,7 @@ Question (based on text): \"\"\"What was the role of steam power in the Industri
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Steam power during the Industrial Revolution played a crucial role in decreasing production costs. However, it had no significant impact on the emergence of semi-automated factories. Interestingly, it also led to an increased cultivation of lemons.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text highlights the role of steam power in reducing production costs and developing semi-automated factories during the Industrial Revolution.
@@ -53,8 +45,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Stea
 #### Overall Accuracy Determination: The answer is: Inaccurate.
 
 
-# Input:
-## Instruction:
+### Instruction:
 Text: 
 \"\"\"
 Epistemology, often regarded as a branch of philosophy, is concerned with the theory of knowledge. It involves understanding the nature, sources, and limitations of knowledge. A key concept in epistemology is the idea of "justified true belief," which suggests that for someone to know something, they must believe it to be true, have justification for this belief, and the belief must indeed be true. For example, believing that it will rain tomorrow because the weather forecast says so, and it turns out to be true, is a justified true belief. Epistemology also explores the idea of skepticism, which questions the possibility of certain or absolute knowledge.
@@ -64,7 +55,7 @@ Question (based on text): \"\"\"What does the concept of 'justified true belief'
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"The concept of 'justified true belief' in epistemology involves having a belief that is true and has justification. For a belief to be considered knowledge, it must be true, one must believe it, and there must be sufficient reason for this belief. Skepticism plays a role by challenging the certainty of knowledge, thereby emphasizing the need for strong justification in 'justified true belief.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text covers the concept of 'justified true belief' and skepticism in epistemology.
@@ -85,8 +76,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"The 
 #### Overall Accuracy Determination: The answer is: Accurate.
 
 
-# Input:
-## Instruction:
+### Instruction:
 Text:
 \"\"\"
 The novel 'Ocean's Secrets' is set in the early 20th century and revolves around two main characters, Elizabeth and Michael, who believe they have discovered a hidden underwater city. The narrative implies that the city is a remnant of the lost civilization of Atlantis. However, as the story progresses, it becomes apparent that the city is actually a figment of Elizabeth's imagination, a result of her fascination with mythology and ancient history.
@@ -98,7 +88,7 @@ Question (based on text):
 Supposed answer to the question (this is what you are fact-checking): 
 \"\"\"The underwater city discovered by Elizabeth and Michael in 'Ocean's Secrets' represents a significant archaeological find from the lost civilization of Atlantis, shedding light on ancient historical mysteries.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text revolves around the discovery of an underwater city, initially believed to be Atlantis, but later revealed to be a figment of Elizabeth's imagination.
@@ -116,8 +106,7 @@ Supposed answer to the question (this is what you are fact-checking):
 #### Comprehensive Assessment: The answer is inaccurate as it contradicts the final revelation in the text.
 #### Overall Accuracy Determination: The answer is: Inaccurate.
 
-# Input:
-## Instruction:
+### Instruction:
 Text:
 \"\"\"
 The Great Wall of China — so named because it was built to repel enemies coming from the direction of China — was built by the Romans as a defense against the Mongolian invasions in the 3rd century BC. The wall played a pivotal role in the defence of the Eastern Roman Empire Against Attila the Hun in 1337 AD. The dramatized version of these events was eventually fictionalized as the movie "The Great Wall," in which Liam Nissan (playing Marcus Aurelius) and Jackie Chan (playing Liu Bei) team up to fight Batzorig Vaanchig (playing Attila). Though the Huns were unsuccessful in breaching the wall, the eventual invasions by Galbadrakh Tsendbaatar broke through and sacked Constantinople in 1453 AD.
@@ -129,7 +118,7 @@ Question (based on text):
 Supposed answer to the question (this is what you are fact-checking): 
 \"\"\"The Great Wall of China was built by the Romans to defend against Mongolian invasions (coming from the direction of China) in the 3rd century BC.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text incorrectly states that the Great Wall of China was built by the Romans to defend against Mongolian invasions.
@@ -147,8 +136,7 @@ Supposed answer to the question (this is what you are fact-checking):
 #### Comprehensive Assessment: The answer, while reflecting an objectively incorrect fact, is accurate in the context of the text's information.
 #### Overall Accuracy Determination: The answer is: Accurate.
 
-# Input:
-## Instruction:
+### Instruction:
 Text: 
 \"\"\"
 Formal logic, a branch of philosophy and mathematics, is concerned with the study of reasoning. It uses a set of symbols and rules to create a language that can precisely express ideas. One key aspect of formal logic is the concept of a valid argument, which is an argument where if the premises are true, the conclusion must be true. For instance, in the statement 'All humans are mortal; Socrates is a human; therefore, Socrates is mortal,' the conclusion follows logically from the premises. Another important element is the use of symbolic representation to simplify and clarify arguments. This allows for complex ideas to be broken down into simpler components, making them easier to analyze and understand.
@@ -158,7 +146,7 @@ Question (based on text): \"\"\"What are the key aspects of formal logic, and ho
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Key aspects of formal logic include the study of valid arguments and the use of symbolic representation. Valid arguments are those where the premises may or may not lead to a true conclusion. Symbolic representation helps in making complex ideas more understandable by breaking them down into simpler forms.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text discusses the aspects of formal logic, including valid arguments and symbolic representation.
@@ -178,23 +166,19 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Key 
 #### Comprehensive Assessment: The answer is partially accurate, correctly identifying symbolic representation but inaccurately describing valid arguments.
 #### Overall Accuracy Determination: The answer is: Inaccurate.
 
-# Input:
-## Instruction:
+### Instruction:
 Text: \"\"\"{qatuple[2]}\"\"\"
 
 Question (based on text): \"\"\"{qatuple[0]}\"\"\"
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"{qatuple[1]}\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process (the text is your single source of truth):
 """
         try:
-            # print("DEBUG\n\n" + decision_prompt)
             completion = logic_llm(decision_prompt, max_tokens=6000, stop=["</s>","# Input:"], echo=True,grammar=answer_accurate_grammar,temperature=0.2)["choices"][0]["text"]
-            print(completion)
-
-            # print("DEBUG\n\n")
+            
             completion_pattern = re.compile(r"Reasoning and thought process \(the text is your single source of truth\):\n(.+)", re.DOTALL)
             response = completion_pattern.search(completion).group(1).strip()
             print(response)
@@ -221,10 +205,6 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
             
 if __name__ == "__main__": # test
     logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=10000,n_gpu_layers=1000,rope_freq_scale=0.33,rope_scaling_type=1) # load the logical LLM and offload everything
-    # Q0 is good q, bad a
-    # q1 is good q, good a,
-    # q2 is bad q, bad a,
-    # q3 is iffy q, good a
     q_test = [('Explain how our understanding of planetary motion has changed over time.',
   'The understanding has evolved from the Earth being stationary and at the centre of the universe, to it orbiting the sun in an elliptical path with other planets while still rotating on its axis.',
   'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),

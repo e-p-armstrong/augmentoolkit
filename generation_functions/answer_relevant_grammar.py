@@ -1,11 +1,6 @@
 from llama_cpp import LlamaGrammar
 
-# TODO improve? I just copy-pasted it from something else
-
 answer_relevant_grammar = LlamaGrammar.from_string(r"""                     
-    
-# TODO                                               
-# I COULD break this down further, by having the first step be a special "Analyze" step, the second step being a special "Understand" step, and the third+ being "Compare" steps" that each must end with "relevant" or "irrelevant" followed by a final judgement step... but currently it's working, and the model can't be that stupid right? Well I might do it later. I'll leave this comment here as a reminder.
        
 # Root rule specifying the overall structure of the analysis
 root ::= deep-analysis "\n" comprehensive-understanding "\n" targeted-comparison "\n" identification-of-extraneous-info "\n" final-judgment

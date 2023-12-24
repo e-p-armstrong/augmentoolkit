@@ -36,7 +36,6 @@ You should analyze the conversation piece-by-piece to ensure that the question a
 Work step-by-step.
 
 
-# Input:
 ## Provided questions and answers:
 
 Question: \"\"\"How does the slope 'm' in a linear function y = mx + b affect the graph of the function?\"\"\"
@@ -66,7 +65,7 @@ Elise Delacroix: "I... I..." For the first time in the conversation Elise stumbl
 
 The primary character (who should answer the questions, not ask them) is: Elise Delacroix
 
-# Response:
+### Response:
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about the slope 'm' in a linear function. It is consistent with the first provided question. It is asked by Albert, who is not the primary character, which is correct.
@@ -86,7 +85,6 @@ The primary character (who should answer the questions, not ask them) is: Elise 
   - Final Judgment: Consistent.
 
 
-# Input:
 ## Provided questions and answers:
 
 Question: \"\"\"What does Mendeleev compare science to in 'Principles of Chemistry'?\"\"\"
@@ -116,7 +114,7 @@ Jude: "The principles of science form the chains supporting the bridge, which is
 
 The primary character (who should answer the questions, not ask them) is: Jude
 
-# Response:
+### Response:
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about what Mendeleev compares science to in 'Principles of Chemistry'. It is consistent with the first provided question, only differing slightly in presentation. It is asked by Student, who is not the primary character, which is correct.
@@ -136,9 +134,7 @@ The primary character (who should answer the questions, not ask them) is: Jude
   - Final Judgment: Inconsistent.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Question: \"\"\"How does practical work relate to theoretical understanding in chemistry, according to Arjun Patel?\"\"\"
 Answer: \"\"\"In the text 'Introduction to Practicing Chemical Science', Arjun Patel believes that practical work sharpens the faculty of judgement and criticism while studying special chemical questions.\"\"\"
 
@@ -168,7 +164,7 @@ Lance: "The first step in learning chemistry," he begins, his voice firm and uny
 
 The primary character (who should answer the questions, not ask them) is: Lance
 
-# Response:
+### Response:
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about how practical work relates to theoretical understanding in chemistry. It is consistent with the first provided question. It is asked by Lance, who is the primary character, which is wrong and inconsistent.
@@ -188,9 +184,7 @@ The primary character (who should answer the questions, not ask them) is: Lance
   - Final Judgment: Inconsistent.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Question: \"\"\"What is the significance of the double helix structure of DNA?\"\"\"
 Answer: \"\"\"The double helix structure of DNA is significant as it allows for the stable storage of genetic information and facilitates accurate replication during cell division.\"\"\"
 
@@ -216,7 +210,7 @@ Professor Carlisle: "Ah, so you CAN get something right after all!" He smirks di
 
 The primary character (who should answer the questions, not ask them) is: Professor Carlisle
 
-# Response:
+### Response:
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about the significance of the double helix structure of DNA. It is consistent with the first provided question. It is asked by Professor Carlisle, who is the primary character, which is wrong and inconsistent.
@@ -236,9 +230,7 @@ The primary character (who should answer the questions, not ask them) is: Profes
   - Final Judgment: Inconsistent.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 {format_qatuples(qatuples)}
 
 Conversation:
@@ -285,6 +277,7 @@ The primary character (who should answer the questions, not ask them) is: {chara
                 retries += 1
         except:
             retries += 1
+            print(f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}")
             
             
 if __name__ == "__main__": # test

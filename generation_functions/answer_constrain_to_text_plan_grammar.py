@@ -1,7 +1,5 @@
 from llama_cpp import LlamaGrammar
 
-# TODO improve? I just copy-pasted it from something else
-
 answer_constrain_to_text_plan_grammar = LlamaGrammar.from_string(r"""
        
 root ::= analyze-step understand-step identify-step plan-revised-step "\n"

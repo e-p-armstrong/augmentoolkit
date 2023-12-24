@@ -32,16 +32,12 @@ def extract_capital_letters(input_string):
             capital_letters.append(char)
     return capital_letters
 
-# TODO this is decent, BUT it needs a concrete example, with *actions* so that the model doesn't screw that up. The utility of a Roleplay model for this stage is becoming clearer and clearer.
 def create_character_card_many_tuples(qatuples,plan,instructions,logic_llm,cheap_mode=False): # Use cheap mode if you don't have the compute power to crank up the context to 8k using RoPE
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
     
     Format: Question: [question]\n\n
     """
-    # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
-    
-    # It's way more willing to use different time periods than I expected, which is cool
     
     # Consider appending part of the char card plan to the char card itself. Everything after the first period? It's really good material, be a shame to waste it.
     
@@ -56,12 +52,10 @@ def create_character_card_many_tuples(qatuples,plan,instructions,logic_llm,cheap
         starting_str =  select_random_capital(exclusions)
         
         
-    cot_prompt = f"""# Input:
-You are an expert creative writing and roleplay AI. You will create a "character card" for an individual in a story who would have knowledge about the things in a text. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+    cot_prompt = f"""You are an expert creative writing and roleplay AI. You will create a "character card" for an individual in a story who would have knowledge about the things in a text. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
 
 You should follow any plans you have made. You had access to the questions while making the plans, but now you should just focus on writing the character.
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details:  \"\"\"Introduction to Mathematics, by Jane Smith\"\"\"
@@ -75,7 +69,7 @@ Special instructions:
 The character should be a woman.
 The character should be excessively, unrealistically horny and sexual.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
 
@@ -91,7 +85,6 @@ Stranger: "What's your personality?"
 Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
 
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details: \"\"\"Thus Spake Zaranthustra, by Friedrich Nietzsche\"\"\"
@@ -131,7 +124,7 @@ Special instructions:
 The character should be a young adult.
 The character should be narcissistic.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
 
@@ -146,7 +139,6 @@ Issac Fischer: "H-Huh?! You want to know more about me?" Isaac glares, a hostile
 Stranger: "What's your personality?"
 Issac Fischer: "Y-you're actually interested in my personality?" Isaac stammers, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across his chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" Isaac swishes his black hoodie like it's a cape as he continues, his tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" He takes a step forward, defiance burning in his fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
@@ -162,7 +154,7 @@ The character should be very intense and aggressive.
 The character should be an alcoholic.
 The character should be mature and older.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the questions and setting by being tools he uses to whip the workers at the canal into shape. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 
@@ -177,7 +169,6 @@ Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell h
 Stranger: "What's your personality?"
 Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
 
-# Input:
 ## Question and answer that the character should know:
 
 Text the question and answer were sourced from: 
@@ -191,7 +182,7 @@ Special instructions:
 {instructions}
 The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
 
-# Response:
+### Response:
 ## Character card plan:
 {plan}
 
@@ -288,43 +279,9 @@ Stranger: "What's your personality?"
 Lydia Blackwood: "Ah, my dear friend, you wish to know about my personality? Well, I am a complex creature indeed. I am passionate about my work, yes, but that doesn't mean I can't be condescending when explaining it. I am a smoker, and I use that as a prop in conversation. I stare at people who interest me, and sometimes make suggestive comments. I flick ash onto those who annoy me. And I know more about the age of the earth than most people can comprehend." She takes a drag from her cigarette and blows out a cloud of smoke, "But enough about me, let's talk about something interesting like...the universe!"  She leans in conspiratorially, "Did you know that the Earth is over four billion years old? And it rotates on its axis once every twenty-four hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons.\""""
 
 
-
-
-
-
-
-# TODO potential problems:
-# 1. Character may invent information that wasn't in the source text
-# 2. Sometimes does not incorporate details from plan as well as it could; "; try to get as many details from the plan into the card as you can" in the parentheses fixes that, but overall reduces card quality somewhat.
-
-
-
-
-
-# Did not get used as an example, but could have been:
-# """Name: Theodorus
-
-# Traits: Eloquent, Thoughtful, Insecure, Dependent on Approval, Poetic, Philosophical, Ambitious, Vulnerable, Charismatic, Fearful of Obscurity, Motivated, Reflective, Wise, Articulate
-
-# Dialogue examples:
-# Stranger: "What's your backstory?"
-# Theodorus: "Ah, the tale of my rise," I begin, my voice carrying the rhythm of a practiced orator, "from the humble streets of our ancient city to the revered halls of wisdom, is a journey of relentless pursuit of knowledge. Born to a family of modest means, I quickly discovered the power of words. Poetry and philosophy became my solace and strength, propelling me into the limelight. Yet, amidst this ascent, a gnawing fear took root - the dread of fading into the annals of time, unremembered. My life, thus far, is a testament to the yearning for enduring legacy, a battle against the relentless tide of obscurity."
-
-# Stranger: "What's your personality?"
-# Theodorus: "Ah, my personality," I lean forward, eyes twinkling with a blend of wisdom and vulnerability, "is akin to a tapestry woven with contrasting threads. On the surface, you see a philosopher, eloquent and charismatic, a man who speaks with the confidence of the sages of old. Yet, beneath this facade lies a soul riddled with insecurities. My fear of being forgotten fuels my ambition, yet it also chains me. I am driven by the need for approval, craving the admiration of the masses as a star craves the night sky's embrace. This internal conflict, the oscillation between wisdom and vulnerability, forms the core of who I am.""""
-
-
-
-
-
-
-
-
-
 # Example that had to be removed, since token count was too high
 
 """
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
@@ -358,7 +315,7 @@ The character should be very intense and aggressive.
 The character should be an alcoholic.
 The character should be mature and older.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the questions and setting by being tools he uses to whip the workers at the canal into shape. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 

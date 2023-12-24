@@ -17,15 +17,14 @@ Ensure your questions strictly adhere to the text's content, avoiding any extern
 
 Your response should be concise, focusing solely on the text's content to test knowledge without the text's reference. Maintain a step-by-step reasoning approach, ensuring your text analysis and brainstorming logically lead to comprehensive question planning. Avoid any deviation from the text's content. Any questions you plan may only mention the text if the provided text is literary or philosophical, but they MUST REFER TO IT BY NAME.
 
-# Input:
-## Instruction:
+### Instruction:
 Text details: A History of the United States, by Fred Garcia
 Text to plan questions from: 
 \"\"\"
 The American Revolution, a pivotal event in history, was fueled by a series of causes and events that led to significant consequences for both America and Britain. One of the major catalysts was the Boston Massacre, an incident that drastically intensified revolutionary sentiments among the American colonists. The implementation of the Stamp Act further aggravated these sentiments, marking a critical point in the escalation of dissent. Similarly, the Boston Tea Party played a key role in heightening tensions, directly leading to the enactment of the Intolerable Acts. These acts, deemed unbearable by the colonists, were instrumental in the formation of the First Continental Congress, uniting the colonies in their fight for independence. A notable event during the revolution was the Battle of Saratoga, which had immediate effects such as boosting American morale and securing French support, pivotal in turning the tide of the war in favor of the American colonies.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 Step 1. Identify Key Topics: The text summarizes the causes and effects of various events of the American revolution, and the relationships between these things.
 Step 2. Brainstorm and Develop Questions Testing Recall: Create questions that require recalling specific facts or details from the text. Example: "What were the immediate effects of the Battle of Saratoga on the American Revolution?"
@@ -33,15 +32,14 @@ Step 3. Devise Questions Exploring Relationships Between Facts: In this case, th
 Step 4. Create Questions Investigating If-Then Relationships (where since one thing is true, another follows): I will devise questions that examine how different events are interconnected. Example: "In what ways did the Intolerable Acts fuel the revolutionary cause?"
 Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Fred Garcia focuses on summarizing specific events of the American Revolution,. Since the text focuses on summarizing specific events of the American Revolution, and another question on this subject would be suitable. The text focuses on recall-oriented facts, and so question variety is suffering; but one question pattern, suited to recall, that has also not yet been used is True/False, so I will employ that. Example: "Did the battle of Saratoga have an impact on French support of the American Revolution?"
 
-# Input:
-## Instruction:
+### Instruction:
 Text details: Introduction to Mathematics, by Elise Delacroix
 Text to plan questions from: 
 \"\"\"
 In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 Step 1. Identify Key Topics: The key topics in this paragraph are linear and quadratic functions in mathematics, their definitions, components, and applications.
 Step 2. Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of definitions and components of these functions. Example: "What does the 'm' in the linear function equation represent?"
@@ -49,8 +47,7 @@ Step 3. Devise Questions Exploring Relationships Between Components: Generate qu
 Step 4. Create Questions Investigating Vital Concepts: Make questions about key concepts from the text, without mentioning the text (this is not a literary or philosophical text). Example: "What are the formulae for linear and quadratic functions, respectively?"
 Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Elise Delacroix focuses on linear and quadratic functions in mathematics (as well as functions in general), and another question on this subject would be suitable. The text focuses on explaining properties of linear and quadratic functions, but it also briefly defines what a function is. Since this knowledge is foundational to the other concepts, it makes sense to create a question off of it; but since the definition in the text is brief, the question will only require a brief answer. Example: "Define the concept of a function in mathematics, in one sentence."
 
-# Input:
-## Instruction:
+### Instruction:
 Text details: Thus Spake Zarathustra, by Friedrich Nietzsche
 Text to plan questions from:
 \"\"\"
@@ -83,7 +80,7 @@ nether-world, thou exuberant star!
 Like thee must I GO DOWN, as men say, to whom I shall descend.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 Step 1: Identify Key Themes: In this excerpt, we find themes of transformation, self-discovery, the value of wisdom, and the need for recognition of effort and wisdom.
 Step 2: Brainstorm and Develop Questions Testing Recall: Develop questions asking for specific information mentioned in this text. Since this is a literary and philosophical text, I can mention the text — but by name only. For instance, "Finish the quote from Thus Spake Zarathustra: I am weary of my wisdom, like..."
@@ -91,8 +88,7 @@ Step 3: Devise Questions Testing Comprehension of, and Belief in, the Text's Opi
 Step 4. Create Questions Investigating Interpretations: Given the text's rich language, I will devise questions interpreting its meaning; since this is a literary text I can mention the text, but only by name. Example: "Why did Zarathustra, in 'Thus Spake Zarathustra', leave the mountains and become a man again?"
 Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Friedrich Nietzsche focuses on Zarathustra's monologue, and another question on this subject would be suitable. Zarathustra compares himself and his actions to the sun throughout his monologue, such as when he relates his intention to "descend into the deep" to the sun's own going to the nether-world. A good question might ask after this crucial comparison, and could be "List one way in which Zarathustra compares himself to the sun, in 'Thus Spake Zarathustra'."
 
-# Input:
-## Instruction:
+### Instruction:
 Text details: The Republic, by Plato
 Text to plan questions from:
 \"\"\"
@@ -138,7 +134,7 @@ Certainly not, replied Glaucon.
 Then we are not going to listen; of that you may be assured.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and Thought Process:
 Step 1: Identify Key Themes: This excerpt from Plato's "The Republic" presents themes of social interaction, philosophical dialogue, and the dynamics of persuasion and power.
 Step 2: Brainstorm and Develop Questions Testing Recall: Instead of focusing on dry, context-dependent questions like the order of events or family relations, I will concentrate on more meaningful historical details present in the text. For instance, "Which goddess is Bendis equivalent to?"
@@ -146,15 +142,14 @@ Step 3: Devise Questions Exploring Comprehension of, and Belief in, the Text's O
 Step 4: Create Questions Investigating Interpretations: Focusing on the dialogue's subtleties, I will craft an interpretative question. Since this is a literary text, I can reference the text, but only by name. So the question might be, "In Plato's "The Republic," in the dialogue where Polemarchus comments on the size of his group and questions Socrates' strength compared to it, ultimately stating that Socrates will have to remain where he is, what is Polemarchus implying?" This question prompts critical thinking about power dynamics and conversational implications depicted.
 Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Plato focuses on the visit to Piraeus and the interaction with Glaucon, and another question on this subject would be suitable. The text focuses on the interaction between Polemarchus and Socrates, but enough questions have already been asked about that subject to cover it completely. That leaves the visit to Piraeus as a subject for questions. The cause behind Socrates' visit to Piraeus is directly mentioned in the text and could make for a good recall question, so one question may be "Why did Socrates visit Piraeus with Glaucon in Plato's 'The Republic'?"
 
-# Input:
-## Instruction:
+### Instruction:
 Text details: Great Construction Projects Throughout History, by Marco Gonzalez
 Text to plan questions from:
 \"\"\"
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and Thought Process:
 Step 1. Identify Key Topics: The paragraph details specific aspects of the Panama Canal's construction, focusing on its challenges, innovations, and impacts. Topics include construction challenges, health issues, excavation techniques, and the canal's impact on global trade.
 Step 2. Brainstorm and Develop Questions Testing Recall: Questions can be formed to recall factual data from the text. Example: "How much earth was excavated during the construction of the Panama Canal?"
@@ -162,15 +157,14 @@ Step 3. Devise Questions Exploring Cause and Effect Relationships: This involves
 Step 4. Create Questions Investigating Quantitative Values: Given the text's focus on concrete numbers, I will devise questions that require analyzing these figures. Example: "By how many miles did the Panama Canal reduce the sea voyage from San Francisco to New York?"
 Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Marco Gonzalez focuses on the Panama Canal (and recall-oriented facts about it), and another question on this subject would be suitable. One small area that has not yet been tested, and which is an important detail mentioned in the text, is be: "In what year was the Panama Canal completed?"
 
-# Input:
-## Instruction:
+### Instruction:
 Text details: The Scale of the Solar System, by Rob Robertson
 Text to plan questions from: 
 \"\"\"
 If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
 \"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 Step 1. Identify Key Topics: The key topic in this paragraph is the scale of the solar system, which is presented using analogy to make the distances easier to conceive of.
 Step 2. Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of the components of this analogy. Since the text is not provided while the question is being asked, I will have to include the analogy in the question. Example: "If the Earth had a diameter of only one inch, how far would the moon be from the Earth, if it (and its distance from the Earth) were also resized proportionally?"
@@ -179,8 +173,7 @@ Step 4. Create Questions Investigating Vital Concepts: Make questions about key 
 Step 5. Make a Question that Naturally Complements the Text's Focus: The text by Rob Robertson focuses on the size-based analogy described throughout, and another question on this subject would be suitable. Another question could simply ask about information that's already been tested, but for a different planet that is also mentioned in the text. Being mindful that the reader of the text will not have access to the source text, I will provide the analogy as context, as I ask the question: "If the earth had a diameter of only one inch, how far would Mars be from the earth, if it (and its distance from the earth) were also resized proportionally?"
 
 
-# Input:
-## Instruction:
+### Instruction:
 Text details: {text[1]}
 Text to plan questions from:
 \"\"\"
@@ -190,7 +183,7 @@ Text to plan questions from:
 Any interpretive questions must not argue against the text, nor should they judge the text; but instead will adopt any views it holds, regardless of what those views may be. 
 Your planned questions must include context, if a question requires both context and knowledge to solve.
 
-# Response:
+### Response:
 ## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
 """
     # print("DEBUG\n\n" + decision_prompt)
@@ -205,11 +198,6 @@ Your planned questions must include context, if a question requires both context
                             top_p=1,
                             min_p=0.5,
                            )["choices"][0]["text"]
-    # EVERYTHING BELOW HERE IS TODO
-    # print("DEBUG\n\n")
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",re.IGNORECASE | re.DOTALL)
@@ -226,7 +214,7 @@ if __name__ == "__main__": # test
 The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."""
     print("Begin HGWELLS test")
     result = generate_questions_plan((text,"A Short History of the World, by HG Wells"),logic_llm)
-    ## TODO a wider variety of tests from different texts
+    
 
     # Chemistry: a harder science
     print("Begin MENDELEEV TEST")
