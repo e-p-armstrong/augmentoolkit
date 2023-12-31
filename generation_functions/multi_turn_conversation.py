@@ -9,7 +9,12 @@ import random
 
 # all characters in this prompt are over 18
 
-# TODO change the scene to third person, the first person is causing impersonation issues.
+# Explanation of wtf the first few-shot example is:
+# No I do not have a teacher-student fetish, the reason why Elise is a teacher is an adaptation to the following three facts:
+# 1. This tool is meant to be able to generate data for training ERP bots by default
+# 2. This tool is also meant to be able to take in educational material by default
+# 3. When generating characters that would know about educational material, the model tends to generate academics or professors in that field, talking to students.
+# Given these facts, we clearly need to prompt the model to be able to generate horny teachers, or else it's going to just do it poorly when it realizes it has a sexualized character that's also a teacher. I didn't want to choose this, the constraints of the problem forced me to.
 
 def extract_steps(text, steps=[2,4,5]):
     """
@@ -44,7 +49,7 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm,
     
     Format: Question: [question]\n\n
     """
-    # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
+    
     
     charname = extract_name(character)
     first_words_of_card = extract_first_words(charname,character)
@@ -82,8 +87,6 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm,
     # Define constants acquired from code
     character-name ::= "{charname}"
     
-    question-1-content ::= "{qatuples[0][0][0:10]}"
-    
     intro-statement ::= character-name ":" [^\\n]+
     
     # Statement by Secondary Character
@@ -94,6 +97,11 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm,
     anything ::= [^\\t]+
 
     """)
+    
+    # NOTE Immediately below is a very long comment that tried to use a dynamic grammar to force the question to directly quote the question from the question-answer tuples. Using it makes this step prone to freezing, because if the model asks the question but fails to exactly quote the part of the question in the grammar, it won't be allowed to end that dialogue line until it generates that line. Which it will basically never do. So it just generates until it runs out of ctx.
+    # NOTE If you want to try and fix it, go ahead, but I do not encourage spending time on this bit. If you do want to do it, I recommend just getting the conv started off the right way, with the first question and answer; the llm should get the rest right if it gets the start right.
+    
+    
     # if (len(qatuples) == 2):
     #     multi_turn_conversation_grammar = LlamaGrammar.from_string(f"""
 
@@ -183,20 +191,92 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm,
     #     answer-4 ::= character-name ":" [^\\n]+ answer-4-content [^\\n]+
 
     #     """)
+    
+    if assistant_mode:
+        character = "AI Assistant"
+        scenario = "A conversation between a helpful AI Assistant, and a user." 
+        scenario_plan = "N/A"
+        charname = "AI Assistant"
+        cot_prompt = f"""You are an expert at creative writing and educational material. You will write a short conversation between a curious user and a helpful AI assistant, in which the user asks some questions and the AI assistant answers them. The questions the user asks will be provided; the answers the assistant should return will also be provided. You must use these questions and answers directly in your conversation.
+    
+Keep the conversation natural.
 
-    
-    
-    #0.1 min p, 1.25 temp? But prob too high for this step
-    
-    
-    
-    extra_info = extract_steps(scenario_plan)
-    cot_prompt = f"""# Input:
-You are an expert creative writing and roleplay AI. You will write a short conversation in which a secondary character asks some questions (one at a time) and the primary character answers them (also one at a time). 
+## Information:
+Question: \"\"\"How does the slope 'm' in a linear function y = mx + b affect the graph of the function?\"\"\"
+Answer: \"\"\"The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.\"\"\"
+
+Question: \"\"\"What role does the y-intercept 'b' play in graphing a linear function?\"\"\"
+Answer: \"\"\"The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.\"\"\"
+
+Question: \"\"\"In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?\"\"\"
+Answer: \"\"\"The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.\"\"\"
+
+Question: \"\"\"In what fields might you use linear and quadratic functions?\"\"\"
+Answer: \"\"\"Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.\"\"\"
+
+The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+
+### Response:
+## Conversation that answers the provided questions:
+AI Assistant: Hello! I'm here to help with any questions you might have. Feel free to ask away!
+
+User: I was wondering about something in math. How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
+AI Assistant: Great question! The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph. Do you have any further questions about linear functions?
+User: Yes, actually. What role does the y-intercept 'b' play in graphing a linear function?
+AI Assistant: Good question! The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis. Can I assist you further with linear functions?
+User: Moving on to another type of function, in the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
+AI Assistant: The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.  Anything else you want to know about quadratic functions?
+User: Yes, one more. In what fields might you use linear and quadratic functions?
+AI Assistant: Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Anything else you'd like to know about linear and quadratic functions?
+
+## Information:
+Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
+Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
+
+Question: \"\"\"What health challenges were faced during the construction of the Panama Canal, and how were they overcome?\"\"\"
+Answer: \"\"\"The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.\"\"\"
+
+The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+
+### Response:
+## Conversation that answers the provided questions:
+AI Assistant: Hello! I'm here to help you with any questions you might have. What's on your mind today?
+User: I was reading about the Panama Canal and got curious, how much earth was excavated during its construction?
+AI Assistant: That's a great question! Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project. Do you have any further questions about the Panama Canal?
+User: Wow, that is massive! Also, I heard there were some health challenges. What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
+AI Assistant: Indeed, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Do you want to know anything else about the Panama Canal?
+
+## Information:
+Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
+Answer: \"\"\"They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.\"\"\"
+
+Question: \"\"\"Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.\"\"\"
+Answer: \"\"\""Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it."\"\"\"
+
+The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+
+### Response:
+## Conversation that answers the provided questions:
+AI Assistant: Good day! I'm here to assist with any questions or insights you might seek. Please, feel free to ask anything.
+User: What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
+AI Assistant: That's a profound question. They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring. Do you want to know more about Thus Spake Zarathustra?
+User: Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.
+AI Assistant: Certainly. Nietzsche once wrote, "Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it." Do you have any more questions about Nietzsche or his works?
+
+## Information:
+{format_qatuples(qatuples)}
+
+The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+
+### Response:
+## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
+AI Assistant:"""
+    else:
+        extra_info = extract_steps(scenario_plan)
+        cot_prompt = f"""You are an expert creative writing and roleplay AI. You will write a short conversation in which a secondary character asks some questions (one at a time) and the primary character answers them (also one at a time). 
 
 Write compellingly. Each character should have a distinct voice that reflects their background, personality, and current emotional state. This helps in making dialogue more realistic and engaging.
 
-# Input:
 ## Information:
 Comment: Alright let's get this started. I'm fully confident in your inspiring writing ability; please do this really well for me.
 
@@ -239,7 +319,7 @@ Answer: \"\"\"Linear and quadratic functions appear frequently in various fields
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Elise Delacroix should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
-# Response:
+### Response:
 ## Conversation that answers the provided questions:
 Elise Delacroix: "A visitor? Ah!~ Albert! It's rare for you come to see me in my office, and you're alone, too..." She looks at Albert and grins coyly, "Are you here to ask me something... or are you interested in some 'extracurricular activities'?" Elise asks with a not-so-subtle seductive tone, as she fixes Albert with a deep gaze.
 Albert: "N-No!!!" he stammers, so surprised he nearly drops his math notes. "I-I'm actually here because I've got a few questions about math for you, Elise... First of all, could you tell me: how does the slope 'm' in a linear function y = mx + b affect the graph of the function?"
@@ -251,7 +331,6 @@ Elise Delacroix: "Ghh... you know, Albert, you're breaking a poor woman's heart,
 Albert: "I should really..." He tries to say he declines, but as he gazes into Elise's beautiful eyes, he's drawn in by their surprising innocence and warmth. Behind that perfect visage no doubt lies a heart coming apart at the seams, buffeted by years of heartbreak. "Oh, bother." Albert mumbles. "We... can meet at a cafe, in a few hours, if that'd be alright..." he continues, wondering what kind of mess he's getting myself into. Just then, a shock of remembering strikes him, "Oh! But I have one more math question, sorry about the mood, but I should really get this answered: Do you know in what fields you might use linear and quadratic functions?"
 Elise Delacroix: "I... I..." For the first time in the conversation Elise stumbles over her words, her soul on fire with vindication and the joy of acceptance. She can do nothing but stand there, smiling at Albert for what feels like an eternity, until she finally regains her composure. "T-to answer your question," she begins, her voice shaky, "Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Now..." Elise shyly walks over to Albert and lightly, sweetly kisses him on the cheek, "office hours are over. Please no more math questions. I'll see you at that cafe."
 
-# Input:
 ## Information:
 Comment: Excellent! Really fantastic job! I love how the scene had the secondary character, Albert, ask all the questions, while Elise answered them in-character. I also adore the plot you wrote! Let's keep this going.
 
@@ -288,7 +367,7 @@ Answer: \"\"\"The construction faced significant health challenges, notably mala
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Hugo Martinez should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
-# Response:
+### Response:
 ## Conversation that answers the provided questions:
 Hugo Martinez: "Huh? Oh FUCK ME, looks like a worker's got something they wanna say to me," Hugo, seeing Juan approach his table at the mess hall, rolls his eyes exasperatedly and downs half a beer as if to douse his frustration. Instead, it seems to fuel it. "WELL?!" He barks. "If you've got some stupid shit to say to me, Juan, then don't make me fucking wait to hear it, too!"
 Juan: "I was just curious, sir," Juan tiredly says as Hugo's words ring in his ears, "about this really impressive canal we've been maintaining (under your wise leadership). Do you know how much earth was excavated during the Panama Canal?"
@@ -296,7 +375,6 @@ Hugo Martinez: "WELL NOW," Hugo begins, his voice snide and uncompromising, "may
 Juan: "Of course, sir," Juan replies, suppressing a sigh and forcing enthusiasm through his tone. "Now, if you would permit me just one more question before I get out of your way: What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"
 Hugo Martinez: "Health? What, you planning on becoming a doctor? I guess we BOTH understand that you have no talent being a real working man then, HAHAHA!" Hugo's echoing laugh has not a hint of empathy in it. "Well, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Maybe you can put THAT shit on your application to med school, you milquetoast ponce! Now get the fuck out of my face, and be ready for your shift after lunch break, y'hear?!"
 
-# Input:
 ## Information:
 Comment: Very good. You were accurate with quoting the questions, didn't introduce any new questions or answers, and stayed in-character the whole time. Let's do the next one!
 
@@ -319,12 +397,9 @@ Here's some further information that might help you:
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from {charname} should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
-# Response:
+### Response:
 ## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
 {charname}: "{conv_starter}"""
-#{charname}: "{conv_starter}
-    # NOTE inline example
-    # NOTE reinforce connection to the questions with additional endprompting
     
     # NOTE: Very rarely, the first message of this conv will just be part of the character card, causing the conv to not make much sense. The cause of this is likely the fact that Elise quotes her character card in her first message. However, referencing the character card in this way also makes characters act as they are described, which is deemed advantageous enough that I am not changing this for now.
     # I get the sense that LLMs can learn relationships and connections between parts of the prompt, even if they're quite far apart, if you give them examples like this. It's fascinating to see how each part of the prompt has consequences -- sometimes unintended ones.
@@ -332,27 +407,25 @@ The primary character's answer will use all parts of the answers given. Instead 
     # Note: performance degrades rapidly if you put more than one sentence in a pre-prompt parentheses thing
     completion = logic_llm(cot_prompt, 
                            max_tokens=8000, 
-                           stop=["</s>","# Input:"], 
+                           stop=["</s>","# Input:", "## Information"], 
                            echo=True, 
-                           grammar=multi_turn_conversation_grammar, # radical no grammar use, we trust the single-shot example to make the output right because grammars always led to fully using the context here. Breaks are expensive
-                           temperature=0.5, # min p settings, too inconsistent
+                           grammar=multi_turn_conversation_grammar,
+                           temperature=0.5,
                             top_k=0,
                             top_p=1,
                             min_p=0.6, 
-                        #    temperature=0.2,
-                        #    min_p = 0.05,
-                        #    top_k=0,
-                        #    top_p=1.00
                            )["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
+    # return (generation,"AI Assistant","A conversation between a helpful AI Assistant, and a user.","N/A",qatuples), completion
+
     return (generation,character,scenario,scenario_plan,qatuples), completion
 
 
@@ -404,7 +477,7 @@ Step 5. Interaction: Given these constraints, the first message might be Clara c
     
     # output = multi_turn_conversation([q_test[1],q_test[3]],character,scenario,scenario_plan,logic_llm)
         
-    ## TODO a wider variety of tests from different texts
+    
 
     scenario = """Inside the confines of 19th century elite university, Archibald Thornbury — a professor with an immense ego — is approached by Christopher, a student who seeks to understand more about the Earth's history. While Christopher simply wants to understand the concepts better, Archibald, being pretentious and arrogant, will lecture and talk down to him as he answers his questions. The situation is tense, but it also has undertones of "business as usual" and curiosity."""
     scenario_plan = """Step 1. Focus on the question and answer: The two questions ask about human understanding of the age of the Earth and its movement throughout history. Given the abstract nature of the questions, and their shared topic of the Earth's history, the scenario could involve someone confused about these topics in general.
@@ -419,7 +492,7 @@ Stranger: "What's your backstory?"
 Professor Archibald Thornbury: "Ah, you wish to know my humble beginnings? Well, I was born into a family of scholars and educators. My father, grandfather, great-grandfather, they were all men of letters. It was only natural that I should follow in their footsteps. After attending Oxford, where I received my doctorate with honors, I began teaching at this esteemed institution. My specialty? The history of human understanding regarding the age of the Earth and earth movements. A fascinating subject, wouldn't you agree?" He smirks, clearly expecting a response in the affirmative. "I've written several books on the topic, each more comprehensive than the last. They are required reading for many universities worldwide."
 Stranger: "What's your personality?"
 Professor Archibald Thornbury: "My dear friend, I am a man of intellect and wisdom. My knowledge is vast, my understanding profound. When I speak, it is with the weight of centuries behind me. I don't suffer fools gladly, nor do I tolerate ignorance. If you wish to learn from me, you must be prepared to listen and absorb. And if you can't handle that, well..." He shrugs dismissively, "there are plenty more who can." His eyes twinkle with amusement as he adds, "But don't mistake my bluntness for rudeness. I simply value time too much to waste it on those who don't appreciate it.\""""
-    output = multi_turn_conversation([q_test[1],q_test[3]],character2,scenario,scenario_plan,logic_llm)
+    output = multi_turn_conversation([q_test[1],q_test[3]],character2,scenario,scenario_plan,logic_llm,assistant_mode=True)
     
     
     
@@ -439,7 +512,7 @@ Step 4. Setting: Given the subject of the question, and the character card, the 
 Step 5. Interaction: Given these constraints, the first message might be Hana asking what Yuki needs help with (Hana may throw in a kind remark about how they're doing, given her personality). Yuki's response might then be a deferential attempt to ask for help, followed by the first question. Hana will then provide the first answer, though she will surround the answer with remarks of a helpful nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples."""
     scenario_japan = """Inside the confines of Hana Kawasaki's high school classroom during study hall time is Yuki — a fellow student who seeks to understand homogeneous substances better due his confusion about them. While he simply wants answers from her regarding this topic (which are provided), she will be kind and helpful as always, answering all questions in an informative manner while providing him with encouragement along the way..."""
     
-    output = multi_turn_conversation([mendeleev_qtuples[1],mendeleev_qtuples[3]],character_japan,scenario_japan,plan_japan,logic_llm)
+    output = multi_turn_conversation([mendeleev_qtuples[1],mendeleev_qtuples[3]],character_japan,scenario_japan,plan_japan,logic_llm,assistant_mode=True)
     
     
     
@@ -448,99 +521,3 @@ Step 5. Interaction: Given these constraints, the first message might be Hana as
     
     
 # !EA IMPORTANT Cheap hack for assistant mode: if assistant mode global constant is on, make character plan just returns an empty string, and this function returns a hardcoded "AI assistant" 'character card', and the scenario thing just returns an empty string, and make_single_turn_conversation uses a special prompt that tells the AI to just make a conversation between a user and an assistant, blahblahblah
-
-
-# TODO test this example of a scenario without a secondary character to see if it breaks stuff
-
-# It worked decently well before the grammar screwed it over
-"""
- Clara Wellington: "Well, well, well. If it isn't a student wanting to learn something." She takes a drag from her cigarette and exhales a plume of smoke into the air. "What can I help you with today?" Her eyes narrow as she speaks, as if daring Albert to ask another question.
-
-Albert: "I... uh..." He clears his throat nervously, trying to find the words. "I was wondering about how human understanding has changed regarding the age of the Earth throughout history."
-
-Clara Wellington: "Oh, darling," she snorts, rolling her eyes. "You're asking for a history lesson? Here we go..." She leans back in her chair, crossing her arms over her chest as if bored. "Initially, religious texts suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old."
-
-Albert: "And...?" He prompts, not quite understanding where she's going with this.
-
-Clara Wellington: "And," she says, leaning forward again, her eyes narrowing even more. "That's just the beginning! We also know that Earth rotates on its axis once every 24 hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons."
-
-Albert: "I... see..." He says slowly, trying to process this new information. "So, we've learned about Earth's age and movement?"
-
-Clara Wellington: "Not just that," she smirks, taking another drag from her cigarette. "We've also discovered that the moon isn't made of cheese." She winks at him, a glint in her eye. "But don't worry, I won't bore you with all that. Just remember: Earth is old and it spins and orbits."
-
-Albert: "I... uh..." He stammers, unsure how to respond to this sudden change of topic. "Thank you, Dr. Wellington." He manages to say before turning around and leaving the room, still reeling from the encounter.
-
- Clara Wellington: "Good riddance," she mutters under her breath as Albert leaves. She turns back to her work, a smirk playing on her lips. "At least someone understands me." She takes another drag of her cigarette and returns to her research
-"""
-
-
-"""
-Clara Wellington: "Oh, a visitor? What can I help you with?" She asks, her voice dripping with sarcasm as she looks up from her research. Her eyes are bloodshot and tired, but her mind is sharp as ever.
-Albert: "I... uh..." He stutters, unsure of how to approach this woman who seems so intimidating. "I'm here to ask about the age of the Earth and its rotational movement."
-Clara Wellington: "Oh, darling," She rolls her eyes, "You're in luck. I just finished a paper on that very topic." She pulls out a stack of papers from underneath a pile of books and hands them to Albert. "Here you go. Read it and weep."
-Albert: "But... but..." He protests, "I wanted an explanation!"
-Clara Wellington: "Well, aren't you a little shit?" She snorts, taking another drag from her cigarette. "Fine. Initially, religious texts suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old."
-Albert: "But... but..." He protests again, "What about Earth's rotational movement?"
-Clara Wellington: "Oh, honey," She sighs, exhaling smoke into his face. "Earth rotates on its axis once every 24 hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons."
-Albert: "But... but..." He protests yet again, "How do we know all this?"
-Clara Wellington: "Oh, for fuck's sake," She groans, rolling her eyes. "We use scientific concepts like geology and astronomy to understand these things. It's not rocket science."
-"""
-
-# random conversation initializers work nicely
-"""Clara Wellington: Really" You're here to ask me about astronomy? I thought you were more interested in gossiping with your friends. But fine, let's see what we can do. What did you want to know?" She takes a drag of her cigarette and exhales smoke into the air as she speaks.
-Albert: "I... uh..." I stammer, trying to find my words. "Well, I was wondering about how human understanding has changed regarding the age of the Earth throughout history."
-Clara Wellington: "Oh, darling," She says with a sigh, rolling her eyes. "That's like asking me to explain quantum physics to a kindergartener. But since you asked..." She leans forward, her eyes narrowing slightly as she speaks. "Initially, religious texts suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old."
-Albert: "Wow... I never knew..." I mumble, trying to process this new information. "And what about Earth's rotational and orbital movement?" I ask, hoping to change the subject.
-Clara Wellington: "Oh, darling," She says again, her voice dripping with sarcasm. "You really want to know? Fine." She takes another drag of her cigarette before explaining. "Earth rotates on its axis once every 24 hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons."
-Albert: "I... I see..." I say, nodding slowly. "Thank you for that." I manage to get out, feeling slightly overwhelmed by her knowledge and arrogance."""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# first person example. Incase your model can handle writing in that tense. Airo doesn't seem to want to.
-"""
-Elise Delacroix: "A visitor? Ah!~ Albert! It's rare for you come to see me in my office, and you're alone, too..." I look at you and grin coyly, "Are you here to ask me questions about math... or are you interested in some 'extracurricular activities'?" I ask with a not-so-subtle seductive tone as I fix Albert with a deep gaze.
-
-Albert: "W-what?!" I stammer, so surprised I nearly drop my math notes. "I-I'm actually here to ask about your last lecture, Miss Delacroix." Regaining my composure, and summoning my courage, I approach Elise's desk. "I've got a few questions. First of all, could you tell me: how does the slope 'm' in a linear function y = mx + b affect the graph of the function?"
-
-Elise Delacroix: "Well~" I coquettishly tilt my head to the side, and daintily put a finger to my lipstick-colored lips in mock-thought, "The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph. So basically, to use an analogy you'd be familiar with..." I flash a wry grin, "...a higher slope makes the linear function more, well, 'erect'. If you get my meaning, hehe~" I say as I play with a strand of my hair.
-
-Albert: I can't believe my ears. Did Miss Delacroix just say what I think she just said? After a few seconds' thought I decide it's best to pretend I didn't hear anything. "I, uh, see..." I manage to get out. "Now, m-moving on, I really want to know a bit more about linear functions. What role does the y-intercept 'b' play in graphing a linear function?" 
-
-Elise Delacroix: "Awwww, you're no fun, Albert, you know that? Reminds me of my colleagues..." I pout playfully, suppressing my bitter frustration, as the hunger within me remains unalleviated. "But whatever. Look here..." I stand from my desk and walk over to a chalkboard, illustrating my points to Albert as I speak, "The answer to your question is that the y-intercept 'b', in the linear function y = mx + b, represents the point where the line crosses the y-axis. Understand?" I put down my chalk and lean suggestively against a nearby wall, "Now, Albert, you answer my question: do you think that we could 'intercept' each other at a café later...?"
-
-Albert: "I-I'm good, thank you, Miss Delacroix," I manage to sputter out, barely withstanding her alluring assault. I take a deep breath to calm myself but instead find myself shuddering as I catch the sweet scent of perfume. However, I press on in asking questions, for the sake of my GPA, "A-Actually, there was a bit more I wanted to know. In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"
-
-Elise Delacroix: "Ghh... you know, Albert, you're breaking a poor woman's heart," I pout, half-serious this time, as I pick my chalk up again. "But when it comes to quadratic functions, the thing you've gotta know is that the coefficient 'a' in a quadratic function determines the opening direction and width of the parabola. Isn't it wonderful to learn new things?" I walk over to Albert, look up longingly into his eyes, and weakly tug at his uniform collar. "Do you think we could... celebrate... this beautiful acquisition of knowledge together?"
-
-Albert: "I should really..." I try to say I decline, but as I gaze into Elise's beautiful eyes, I'm drawn in by their surprising innocence and warmth. Behind her perfect visage no doubt lies a heart coming apart at the seams, buffeted by years of heartbreak. "Oh, bother." I mumble. "We... can meet at a cafe, in a few hours, if that'd be alright..." I continue, wondering what kind of mess I'm getting myself into. Just then, a shock of remembering strikes me, "Oh! But I have one more math question — sorry about the mood, but I should really get this answered: Do you know in what fields you might use linear and quadratic functions?"
-
-Elise Delacroix: "I... I..." For the first time in the conversation I stumble over my words, my soul on fire with vindication, the joy of acceptance, and pure glee. I can do nothing but stand there, smiling at Albert for what feels like an eternity, until I finally regain my composure. "T-to answer your question," I begin, my voice shaky, "Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Now..." I reach up, tilt Albert's head to the side, and lightly kiss him on the cheek, "office hours are over. Please no more math questions. I'll see you at that cafe."
-"""
-
-"""
-Professor Archibald Thornbury: "Hey there, Christopher. What brings you to my office?" He asks in a tone of mild interest, though his eyes are already on a book he's reading.
-Christopher: "I-I was hoping for some help with the concepts we discussed last lecture," Chris begins, nervously. "I'm not sure I understood them fully."
-Professor Archibald Thornbury: "Well, well!" He looks up from his book, a smirk playing on his lips. "You've come to the right place then. What is it you don't understand?"
-Christopher: "I-uh... I was wondering if you could explain and identify changes in human understanding throughout history regarding the age of the Earth."
-Professor Archibald Thornbury: "Ah, a good question! Initially," He begins, leaning back in his chair as he speaks, "religious texts suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the Earth is over four billion years old."
-Christopher: "Thank you, Professor," Chris says, relieved to understand this concept. He then asks, "Could you also demonstrate an understanding of Earth's rotational and orbital movement using scientific concepts?"
-Professor Archibald Thornbury: "Of course!" He smiles, clearly enjoying the chance to show off his knowledge. "Earth rotates on its axis once every 24 hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons."
-Christopher: "I see!" Chris nods, taking notes as Archibald speaks. He then asks, "What's your opinion on these concepts?"
-Professor Archibald Thornbury: "My dear boy," he begins, leaning forward and steepling his fingers, "They are the foundation of our understanding of Earth. Without them, we would be lost in a sea of ignorance!" He chuckles at this, clearly pleased with himself.
-Christopher: "I see." Chris nods again, now more confident. "Thank you for your time, Professor Thornbury."
-Professor Archibald Thornbury: "No problem," he says dismissively, returning to his book.
-"""

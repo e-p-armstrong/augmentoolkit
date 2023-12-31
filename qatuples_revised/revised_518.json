@@ -1,0 +1,6 @@
+[
+    "How do you use a truth table to determine if an argument is valid or invalid?",
+    "Apply the truth table test by checking each row; if there's a row where premises are true and conclusion is false, the argument is invalid; otherwise, it's valid. The 6th row in the example was highlighted as invalid.",
+    "And all we have to do for the final column \u201cC\u201d is simply repeat verbatim the truth values that we have assigned to our reference column \u201cC.\u201d  A B C (A v Bv C ~A C T T T        T   T F T T T F        T   T F F T F T        T   T F T T F F        T   T F F F T T        T   T T T F T F        T   T T F F F T        F   T T T F F F        F   F T F  The above truth table is now complete. The next step is to apply the truth table test of validity in order to determine whether the argument is valid or invalid. Remember that what we\u2019re looking for is a row in which the premises are true and the conclusion is false. If we find such a row, the argument is invalid. If we do not find such a row, then the argument is valid. Applying this definition to the above truth table, we can see that the argument is invalid because of the 6th row of the table (which I have highlighted).",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

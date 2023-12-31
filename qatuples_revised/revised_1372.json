@@ -1,0 +1,6 @@
+[
+    "What is the structure of Modus Tollens?",
+    "The structure of Modus Tollens is as follows: If A implies B and not C, then not B implies not A. Therefore, not A.",
+    "~T        Modus tollens 1, 5  14. 1. (A v B\u2283 ~C 2. C v D 3. A  /\u2234 D 4. A v B       Addition 3 Answers to exercises  225 5. ~C         Modus ponens 1, 4 6. D          Disjunctive syllogism 2, 5  15. 1. L v (M \u2283 N) 2. ~L \u2283 (N \u2283 O) 3. ~L  /\u2234 M \u2283 O 4. N \u2283 O      Modus ponens 2, 3 5. M \u2283 N      Disjunctive syllogism 1, 3 6. M \u2283 O      Hypothetical syllogism 4, 5  16. 1. A \u2283 B 2. A v (C \u22c5 D) 3. ~B \u22c5 ~E /\u2234 C 4. ~B      Simplification 3 5. ~A      Modus tollens 1, 4 6. C \u22c5 D    Disjunctive syllogism 2, 5 7. C       Simplification 6  17. 1.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

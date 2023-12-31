@@ -14,49 +14,46 @@ def generate_new_question(qatuple,logic_llm):
     made_questions = False
     retries = 0
     questions = []
-    while (not made_questions and (retries <= 5)): # TODO? Maybe add a few-shot prompt
-        question_prompt = f"""# Input:
-You are an expert educational AI that, given a paragraph or two from a text, will create a suitable educational question based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
+    while (not made_questions and (retries <= 5)): # TODO - UPDATE and TEST the few-shot prompt with the latest from generate_questions
+        question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create a suitable educational question based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
 
 Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
 
 You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they will not have the text on-hand.
 
-# Input:
-## Instruction:
+### Instruction:
+Text details: Road Construction, by Mark Ericsson
 
 Text to make a question from: 
 \"\"\"
 Road construction is a multifaceted process involving various stages and materials, each critical for the durability and safety of the road. Initially, a thorough site survey and soil testing are conducted to assess the suitability of the terrain. Following this, the groundwork commences with the removal of topsoil and leveling of the area. Subsequently, a layer of sub-base material, typically composed of crushed stone or gravel, is laid to provide stability. This is followed by the base layer, often made of a stronger aggregate, to support the surface layer. The surface layer, usually asphalt or concrete, is then applied, offering a smooth and durable driving surface. Additionally, proper drainage systems are installed to prevent water accumulation, which can lead to road damage. Throughout the construction, environmental considerations are taken into account to minimize the impact on surrounding ecosystems. Regular maintenance, including patching and resurfacing, is essential to extend the road's lifespan and ensure safety for its users.
 \"\"\"
 
-# Response:
+### Response:
 ## Question:
 1.) What is the purpose of conducting a site survey and soil testing in the initial stage of road construction?
 Answer: The site survey and soil testing are conducted to assess the suitability of the terrain for road construction, ensuring the area is appropriate and will support the road structure effectively.
 
-# Input:
-## Instruction:
+### Instruction:
+Text details: Introduction to Mathematics, by Elise Delacroix
 
 Text to make a question from: 
 \"\"\"
 In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
 \"\"\"
 
-# Response:
+### Response:
 ## Question:
 1.) How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
 Answer: The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.
 
-# Input:
-## Instruction:
+### Instruction:
+Text details: Thus Spake Zarathustra, by Friedrich Nietzsche
 
-Text to make questions from: 
+Text to make a question from: 
 \"\"\"
-When Zarathustra was thirty years old, he left his home and the lake of
-his home, and went into the mountains. There he enjoyed his spirit and
-solitude, and for ten years did not weary of it. But at last his heart
-changed,—and rising one morning with the rosy dawn, he went before the
+When Zarathustra was thirty years old, he left his home and the lake of his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart changed,—and rising one morning with the rosy dawn, he went before the
 sun, and spake thus unto it:
 
 Thou great star! What would be thy happiness if thou hadst not those for
@@ -80,60 +77,114 @@ evening, when thou goest behind the sea, and givest light also to the
 nether-world, thou exuberant star!
 
 Like thee must I GO DOWN, as men say, to whom I shall descend.
-
-Bless me, then, thou tranquil eye, that canst behold even the greatest
-happiness without envy!
-
-Bless the cup that is about to overflow, that the water may flow golden
-out of it, and carry everywhere the reflection of thy bliss!
-
-Lo! This cup is again going to empty itself, and Zarathustra is again
-going to be a man.
-
-Thus began Zarathustra's down-going.
 \"\"\"
 
-# Response:
+### Response:
 ## Question:
 1.) What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-Answer: They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
+Answer: They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
 
-# Input:
-## Instruction:
+### Instruction:
+Text details: The Republic, by Plato
+
+Text to make a question from: 
+\"\"\"
+I went down yesterday to the Piraeus with Glaucon the son of Ariston,
+that I might offer up my prayers to the goddess (Bendis, the Thracian
+Artemis.); and also because I wanted to see in what manner they would
+celebrate the festival, which was a new thing. I was delighted with the
+procession of the inhabitants; but that of the Thracians was equally,
+if not more, beautiful. When we had finished our prayers and viewed the
+spectacle, we turned in the direction of the city; and at that instant
+Polemarchus the son of Cephalus chanced to catch sight of us from a
+distance as we were starting on our way home, and told his servant to
+run and bid us wait for him. The servant took hold of me by the cloak
+behind, and said: Polemarchus desires you to wait.
+
+I turned round, and asked him where his master was.
+
+There he is, said the youth, coming after you, if you will only wait.
+
+Certainly we will, said Glaucon; and in a few minutes Polemarchus
+appeared, and with him Adeimantus, Glaucon’s brother, Niceratus the son
+of Nicias, and several others who had been at the procession.
+
+Polemarchus said to me: I perceive, Socrates, that you and your
+companion are already on your way to the city.
+
+You are not far wrong, I said.
+
+But do you see, he rejoined, how many we are?
+
+Of course.
+
+And are you stronger than all these? for if not, you will have to
+remain where you are.
+
+May there not be the alternative, I said, that we may persuade you to
+let us go?
+
+But can you persuade us, if we refuse to listen to you? he said.
+
+Certainly not, replied Glaucon.
+
+Then we are not going to listen; of that you may be assured.
+\"\"\"
+
+### Response:
+## Question:
+1.) In Plato's "The Republic," in the dialogue where Polemarchus comments on the size of his group and questions Socrates' strength compared to it, ultimately stating that Socrates will have to remain where he is, what is Polemarchus implying?
+Answer: Polemarchus is implying that since his group is stronger than Socrates, he can force Socrates to remain where he is.
+
+### Instruction:
+Text Details: Engineering Projects Throughout History, by Hugo Gonzalez
 
 Text to make a question from: 
 \"\"\"
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
 \"\"\"
 
-# Response:
+### Response:
 ## Question:
 1.) How much earth was excavated during the construction of the Panama Canal?
 Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
 
-# Input:
-## Instruction:
+### Instruction:
+Text Details: Engineering Projects Throughout History, by Hugo Gonzalez
+
+Text to make a question from: 
+\"\"\"
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+\"\"\"
+
+### Response:
+## Question:
+1.) How much earth was excavated during the construction of the Panama Canal?
+Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
+
+### Instruction:
+Text details: {qatuple[3]}
 
 Text to make a question from: 
 \"\"\"
 {qatuple[2]}
 \"\"\"
 
-# Response:
+### Response:
 ## Question (based on text):
 """
         # print("DEBUG\n\n" + decision_prompt)
         print("--QA TUPLE DURING NEW Q GEN--")
         print(qatuple)
-        completion = logic_llm(question_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True,grammar=question_grammar,temperature=0.2)["choices"][0]["text"]
-        print("COMPLETION:\n\n----------------------")
-        print(completion)
-        print("\n------------------")
+        completion = logic_llm(question_prompt, max_tokens=8000, stop=["</s>","# Input"], echo=True,grammar=question_grammar,temperature=0.2)["choices"][0]["text"]
+        # print("COMPLETION:\n\n----------------------")
+        # print(completion)
+        # print("\n------------------")
         
         # Extract questions
         response_pattern = re.compile(r"Question \(based on text\):\n(.+)",re.IGNORECASE | re.DOTALL)
         generation = response_pattern.search(completion).group(1)
-        print("GENERATION:\n\n-------------------\n\n", generation)
+        # print("GENERATION:\n\n-------------------\n\n", generation)
         print("-------------------")
         pattern = re.compile(r'(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)', re.DOTALL | re.MULTILINE | re.IGNORECASE)
         matches = pattern.findall(generation)
@@ -143,17 +194,13 @@ Text to make a question from:
         else:
             print("retry!")
             retries += 1
-    # if (retries > 5):
-    #     return None
 
     for match in matches:
-        return (match[0].replace(") ","",1).strip(), match[1].replace(") ","",1).strip(),qatuple[2].replace(") ","",1),qatuple[3])
+        return (match[0].replace(") ","",1).strip(), match[1].replace(") ","",1).strip(),qatuple[2].replace(") ","",1),qatuple[3]), completion
     print("Should not have reached here")
     print(matches)
     print(questions)
     return questions, completion
-
-# TODO fix the bug where the ) is included in the question text
 
 if __name__ == "__main__": # test
     logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
@@ -164,7 +211,7 @@ The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compres
     plan = """First, let's will analyze the text to determine what kinds of high-level questions I can ask that will test the content in these paragraphs (being careful to avoid mentioning the paragraphs explicitly in any questions, and being SURE to only ask about things that the paragraphs talk about). I will start by looking at one or two sentences at a time. Let's begin with: "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years." This paragraph is saying that people used to know only about 3,000 years of history, but now they know much more. So I might ask something like "What was the time period in which people had limited knowledge?" The question tests knowledge of when historical records were incomplete and therefore difficult to access. It requires understanding of the text as well as analysis to determine what time period is being referred to here.  Next, I'll look at: "Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end." This paragraph states that the universe seems infinite because of its reflection, but it could actually be finite with two ends. So I might ask something like "How does the structure of the universe affect its size?" This question tests understanding of the concept of reflection and how it can distort perceptions of size, as well as analysis to determine what implications this might have for the actual size of the universe. Then I'll move on: "The earth ... circles about the sun in a slightly distorted and slowly variable oval path in a year." This paragraph talks about the Earth's orbit around the Sun. So I might ask something like "What is the shape of the Earth's orbit around the sun?" This question tests understanding of the text as well as analysis to determine the specific shape mentioned here. Lastly, let's examine: "Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."  This paragraph says that the Earth's distance from the Sun changes throughout the year. So I might ask something like "Why does the Earth's distance from the Sun change over the course of the year?" This question tests understanding of the text as well as analysis to determine why this change occurs."""
     print("Begin HGWELLS test")
     # result = generate_question(text,plan,logic_llm)
-    ## TODO a wider variety of tests from different texts
+    
     
     print("Begin MENDELEEV Test")
     text2 = """A substance or material is that which occupies space and has
@@ -229,71 +276,4 @@ Step 5. Create Questions Investigating Application of Concepts: Look for example
       
     result2 = generate_new_question((text2,"Principles of chemistry"),logic_llm)
     print("GENERATION TEST2:\n\n-------------------\n\n", result2)
-#     plan3 = """Step 1. Analyze the paragraphs.
-# Step 2. Note that the text discusses various aspects of homogeneous and non-homogeneous substances, including their properties, extraction methods, and examples from nature and industry.
-# Step 3. Realize that the text provides detailed information about the definition of a substance, its characteristics, and how to identify homogeneous and non-homogeneous substances.
-# Step 4. Investigate potential topics for questions based on this analysis: examine what kinds of questions could be asked about these topics.
-# Step 5. Consider if there are any connections between the different aspects discussed in the text that could lead to more complex or multi-part questions.
-# Step 6. A potential question could be: "How do we identify a homogeneous substance?" This question tests understanding of the definition and characteristics of a homogeneous substance.
-# Step 7. Realize another avenue of questions could explore the differences between homogeneous and non-homogeneous substances.
-# Step 8. Devise possible questions that test this difference, such as "How do we distinguish between homogeneous and non-homogeneous substances?" This question tests understanding of the properties used to identify each type of substance.
-# Step 9. Consider possible recall-related questions that test the reader's knowledge of specific details from the text.
-# Step 10. A possible question might be: "What is an example of a homogeneous substance?" This question tests recall of the definition and examples given in the text.
-# Step 11. I have brainstormed multiple areas from which questions can be asked, focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels)."""
-#     plan3 = """Step 1. Analyze the paragraphs: briefly assess content, focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels).
-# Step 2. Note the key elements: homogeneous substances, non-homogeneous substances, metals used in arts, properties of substances, extraction of substances from non-homogeneous substances, artificially produced non-homogeneous substances, and natural non-homogeneous substances.
-# Step 3. Realize that the text provides detailed information about homogeneous and non-homogeneous substances. Possible question based on this fact: "What are some examples of homogeneous and non-homogeneous substances?" Answer: Homogeneous substances include metals used in arts, while non-homogeneous substances include natural and artificially produced ones.
-# Step 4. Investigate the properties of these substances. Possible question based on this fact: "What are some properties of homogeneous substances?" Answer: Homogeneous substances exhibit similar properties in all their parts.
-# Step 5. Consider questions testing understanding of how to distinguish between homogeneous and non-homogeneous substances. Possible question: "How can we tell if a substance is homogeneous or not?" Answer: By breaking up the substance, we obtain parts which resemble each other in their properties.
-# Step 6. A potential question could be: "What are some ways to distinguish between homogeneous and non-homogeneous substances?" Answer: We can observe differences in color, texture, transparency, and composition of the substance.
-# Step 7. Realize potential in exploring how these substances are made. Possible question: "How are homogeneous substances produced artificially?" Answer: They are prepared by mixing known proportions of sulphur, nitre, and charcoal.
-# Step 8. Devise questions testing this process. Possible question: "What steps are involved in producing a non-homogeneous substance from a homogeneous one?" Answer: The homogeneous substance is extracted from the non-homogeneous substance through various methods.
-# Step 9. Consider possible recall-related questions that test the reader's knowledge of individual parts of the text.
-# Step 10. A possible question might be: "What are some examples of natural and artificially produced non-homogeneous substances?" Answer: Natural non-homogeneous substances include porphyries, rocks, plants, animals, blood, milk; while artificially produced ones include gunpowder.
-# Step 11. I have brainstormed multiple areas from which questions can be asked."""
-    # result3 = generate_question(text2,plan3,logic_llm)
-    # print("GENERATION TEST3:\n\n-------------------\n\n", result3)
-    
-    
-    
-    # TODO change the function to include the full text in each question-answer tuple.
-    
-    
-    
-    
-    
-    
-    
-    
-    # An example about how not to ask questions: if the text states fact X, but does not explain how X was established, do not ask a question "How do we know X". But instead you might consider asking how X relates to other facts in the paragraph, or how these facts together lead to a progression of ideas, "Explain why X, Y, and Z are related" for instance. Other good examples include "Compare and contrast X and Y", "Give an example of X".  Use Bloom's taxonomy, and focus on the cognitive levels of understanding, application, analysis, and synthesis of ideas.
 
-
-
-"""# Response:
-## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
-
-Step 1: Analyze the paragraphs.
-       - Realize that the text discusses the Water Cycle, focusing on processes like evaporation, condensation, and precipitation.
-
-Step 2: Note that evaporation is a key process in the Water Cycle.
-       - Recall that evaporation involves the transformation of water from liquid to gas.
-
-Step 3: Consider the relationship between evaporation and condensation.
-       - Recognize that condensation follows evaporation in the cycle, leading to cloud formation.
-
-Step 4: Investigate how precipitation is related to condensation.
-       - Understand that precipitation occurs when water droplets in clouds become too heavy and fall as rain, snow, etc.
-
-Step 5: Devise possible questions that test the understanding of evaporation.
-       - Questions could explore the conditions under which evaporation occurs or its role in the Water Cycle.
-
-Step 6: Formulate questions regarding the process of condensation.
-       - These questions might involve the transformation of gas to liquid and its significance in cloud formation.
-
-Step 7: Develop questions about the precipitation process.
-       - Consider questions on different forms of precipitation and their dependence on atmospheric conditions.
-
-Step 8: Ensure all potential questions are directly related to the information in the text.
-       - Confirm that each question tests the comprehension and memorization of the Water Cycle as described.
-
-Step 9: I have brainstormed a sufficient number of possible, accurate questions based on the Water Cycle."""

@@ -1,0 +1,6 @@
+[
+    "How does the '~A' column differ from the 'A' column in terms of truth values?",
+    "The '~A' column contains the negated truth values of the corresponding statements in the 'A' column. If A is true (T), then ~A is false (F). If A is false (F), then ~A is true (T).",
+    "Or you may simply want to circle the truth values under the main operator to distinguish them from the rest.Chapter 2: Formal methods of evaluating arguments  84 A B C (A v B) v C ~A C T T T        T   T   T T F        T   T   T F T        T   T   T F F        T   T   F T T        T   T   F T F        T   T   F F T        F   T   F F F        F   F     Finally, we will fill out the remaining two columns, which is very straightforward. All we have to do for the \u201c~A\u201d is negate the truth values that we have assigned to our \u201cA\u201d reference column.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

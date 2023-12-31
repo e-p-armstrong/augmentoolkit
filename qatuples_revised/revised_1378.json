@@ -1,0 +1,6 @@
+[
+    "What does it mean for a statement to follow logically from another?",
+    "A statement follows logically from another if the truth of the first guarantees the truth of the second.",
+    "(F \u2283 G\u22c5 (H \u2283 I) 2. J \u2283 K 3. (F v J) \u22c5 (H v L)  /\u2234 G v K 4. F \u2283 G       Simplification 1 5. F v J        Simplification 3 6. G v K       Constructive dilemma 2, 4, 5  18. 1. (E v F) \u2283 (G \u22c5 H) 2. (G v H) \u2283 I 3. E  /\u2234 I 4. E v F       Addition 3 5. G \u22c5 H      Modus ponens 1, 4 6. G          Simplification 5 7. G v H       Addition 6 8. I           Modus ponens 2, 7  19. Answers to exercises  226 1. (N v O) \u2283 P 2. (P v Q) \u2283 R 3. Q v N 4. ~Q /\u2234 R 5. N      Disjunctive syllogism 3, 4 6. N v O   Addition 5 7. P      Modus ponens 1, 6 8. P v Q   Addition 7 9. R      Modus ponens 2, 8  20.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

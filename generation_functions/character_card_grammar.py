@@ -14,7 +14,7 @@ name ::= [^\n ]+
 
 traits ::=  trait trait trait trait trait trait trait trait trait trait trait trait trait? trait? trait? trait? trait? trait? trait? trait? # 14 comma-separated traits
 
-trait ::= [A-Z][a-z ']+ ", " # todo, it wants hyphens, I can tell because I see it using double spaces for things like Mid twenties. But idk how to add hyphens.
+trait ::= [A-Z][a-z ']+ ", " # TODO, it wants hyphens, I can tell because I see it using double spaces for things like Mid  twenties. But idk how to add hyphens to gbnf. Maybe \- ?
 
 dialogue-examples ::= history personality
 

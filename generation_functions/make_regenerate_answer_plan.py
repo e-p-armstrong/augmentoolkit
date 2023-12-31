@@ -8,8 +8,7 @@ from .strip_steps import strip_steps
 def make_regenerate_answer_plan(qatuple, dissenting_reasoning,logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""# Input:
-You are an expert educational AI. Someone has provided an answer to a question based on a few paragraphs of text, but the answer may be incorrect due to contradicting the text or including erroneous information. Your task is to plan out and think through a correct answer to the question, ensuring it aligns with the information provided in the text.
+        decision_prompt = f"""You are an expert educational AI. Someone has provided an answer to a question based on a few paragraphs of text, but the answer may be incorrect due to contradicting the text or including erroneous information. Your task is to plan out and think through a correct answer to the question, ensuring it aligns with the information provided in the text.
 
 Text: \"\"\"{qatuple[2]}\"\"\"
 
@@ -27,13 +26,13 @@ Step 4. Plan a Corrected Answer: Devise a new answer emphasizing that sunlight i
 
 Based on this example, plan out a revised version of the answer \"\"\"{qatuple[1]}\"\"\" with respect to the text and reasoning provided.
 
-# Response:
+### Response:
 ## New answer plan:
 """
         completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=make_regenerate_answer_plan_grammar,temperature=0.2)["choices"][0]["text"]
 
         # print("DEBUG\n\n")
-        print(completion)
+        # print(completion)
         completion_pattern = re.compile(r"New answer plan:\n(.+)", re.DOTALL)
         correction = completion_pattern.search(completion).group(1)
         return correction.strip()

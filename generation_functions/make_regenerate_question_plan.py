@@ -29,13 +29,13 @@ Step 6. End of reasoning.
 
 Please now apply the above method to the provided text and question, and write out your reasoning and thought process.
 
-# Response:
+### Response:
 ## New question plan:
 """
         completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True,grammar=make_regenerate_question_plan_grammar,temperature=0.2)["choices"][0]["text"]
 
         # print("DEBUG\n\n")
-        print(completion)
+        # print(completion)
         completion_pattern = re.compile(r"New question plan:\n(.+)", re.DOTALL)
         correction = completion_pattern.search(completion).group(1)
         return correction.strip()
@@ -68,4 +68,4 @@ Step 5. Final Judgment: Since the text does contain information about how the ea
     result = make_regenerate_question_plan(q_test[2],dissenting_reasoning,logic_llm)
     
     
-    ## TODO a wider variety of tests from different texts
+    

@@ -8,14 +8,11 @@ from llama_cpp import Llama
 def check_answer_relevancy_with_text(qatuple,logic_llm):
     retries = 0
     while (retries <= 4):
-        decision_prompt = f"""# Input:
-You are an expert educational AI. Given a paragraph or two from a larger text, a question based on the paragraphs, and an answer to the question, you will make a determination as to whether the answer only uses the information in the paragraphs for its main points. Essentially: you will check if the answer is constrained to the information in the paragraphs provided. Your task includes first analyzing the answer, thinking through whether or not the answer reflects aspects of the paragraphs provided. 
+        decision_prompt = f"""You are an expert educational AI. Given a paragraph or two from a larger text, a question based on the paragraphs, and an answer to the question, you will make a determination as to whether the answer only uses the information in the paragraphs for its main points. Essentially: you will check if the answer is constrained to the information in the paragraphs provided. Your task includes first analyzing the answer, thinking through whether or not the answer reflects aspects of the paragraphs provided. 
 
 Following this, at the very end of your response, you will write "Relevant" or "Irrelevant" depending on your analysis of the answer with regards to the text. 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 Polar bears are primarily found in the Arctic Circle, where they have adapted to the harsh cold environment. Their diet is primarily based on marine mammals, with seals being the most crucial part of their diet. Polar bears are skilled hunters, often waiting by seals' breathing holes to catch their prey. Occasionally, they also eat birds, bird eggs, and small mammals. They also consume significant amounts of berries and fish. These bears are known for their ability to survive in extreme conditions, thanks to their thick fur and fat layers which provide insulation, as well as their efficient digestion system, which makes good use of the few nutrients available.
@@ -25,7 +22,7 @@ Question (based on text): \"\"\"What are the primary food sources of polar bears
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Polar bears primarily eat seals, but they also consume significant amounts of berries and fish. Their efficient digestion system, which has been studied through MRIs, allows them to process a wide variety of foods.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text describes the diet of polar bears, focusing on their primary and secondary food sources.
@@ -48,9 +45,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Pola
 #### Explanation of Judgment: Since the answer mostly aligns with the text but includes extraneous information (MRIs), the final judgment is: Irrelevant.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 The Pythagorean theorem is a fundamental principle in geometry, stating that in a right-angled triangle, the square of the length of the hypotenuse (the side opposite the right angle) is equal to the sum of the squares of the lengths of the other two sides. This theorem is often expressed as the equation a² + b² = c², where a and b are the lengths of the two sides that form the right angle, and c is the length of the hypotenuse. Historically, this theorem has been attributed to the ancient Greek mathematician Pythagoras, although evidence suggests it was known to mathematicians in several cultures before him.
@@ -60,7 +55,7 @@ Question (based on text): \"\"\"What does the Pythagorean theorem state in the c
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"The Pythagorean theorem, crucial in geometry, states that in a right-angled triangle, a² + b² = c², where a and b are the perpendicular sides and c is the hypotenuse. Additionally, it is noteworthy that this theorem was utilized in ancient Egypt for land surveying purposes.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text explains the Pythagorean theorem, its formula, and historical background.
@@ -83,9 +78,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"The 
 #### Explanation of Judgment: Due to the inclusion of unsupported historical context, the final judgment is: Irrelevant.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 Sigmund Freud, an Austrian neurologist and the father of psychoanalysis, introduced the concept of the unconscious mind. He suggested that the unconscious mind stores feelings, thoughts, and desires that are too threatening or painful for conscious awareness. Freud believed that these repressed elements could influence behavior and personality. One of his key methods for exploring the unconscious mind was through dream analysis, where he interpreted the meaning of dreams as a pathway to understanding the hidden desires and thoughts of the individual. Freud also developed the theory of the Oedipus complex, which proposes that during the phallic stage of psychosexual development, a male child experiences unconscious sexual desires for his mother and hostility toward his father.
@@ -95,7 +88,7 @@ Question (based on text): \"\"\"What methods did Freud use to explore the uncons
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Freud used dream analysis as a method to explore the unconscious mind. He also introduced the concept of the Oedipus complex, suggesting that during a specific stage of development, a child experiences unconscious desires.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text discusses Freud's methods for exploring the unconscious mind and key concepts he introduced.
@@ -119,9 +112,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Freu
 #### Explanation of Judgment: Each part of the answer is directly supported by the text, so the final judgment is: Relevant.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 The Library of Alexandria, one of the largest and most significant libraries of the ancient world, was dedicated to the Muses—the nine goddesses of the arts. It flourished under the patronage of the Ptolemaic dynasty and functioned as a major center of scholarship. The library was estimated to house anywhere between 40,000 to 400,000 scrolls at its peak. The destruction of the library, which occurred over several incidents, marked a significant loss of cultural and scientific knowledge.
@@ -131,7 +122,7 @@ Question (based on text): \"\"\"What was the importance of the Library of Alexan
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"The Library of Alexandria was crucial in the ancient world as a center of scholarship and cultural development. It housed a vast collection of works, providing scholars with access to knowledge from various fields. The library's destruction is often attributed to Julius Caesar's fire during the Siege of Alexandria, a claim supported by several historical documents and archaeological findings.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text describes the Library of Alexandria's role, its size, patronage, and the impact of its destruction.
@@ -154,9 +145,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"The 
 #### Explanation of Judgment: Due to the inclusion of specific and unsupported historical details, the final judgment is: Irrelevant.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: 
 \"\"\"
 The planet Venus has a very dense atmosphere composed mainly of carbon dioxide, with clouds of sulfuric acid. This composition creates a runaway greenhouse effect, leading to surface temperatures hot enough to melt lead. Venus rotates very slowly on its axis, taking about 243 Earth days to complete one rotation, which is longer than its orbital period around the Sun. Interestingly, Venus rotates in the opposite direction to most planets in the solar system. This retrograde rotation is thought to be the result of a collision with a large celestial body early in its history.
@@ -166,7 +155,7 @@ Question (based on text): \"\"\"What are the main characteristics of Venus's atm
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Venus's atmosphere is dense, primarily composed of carbon dioxide, and contains clouds of sulfuric acid, leading to extremely high temperatures. The planet has a unique rotation, taking 243 Earth days to rotate once and rotating in a retrograde direction due to gravitational interactions with Earth and other planets.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text provides specific information on Venus's atmosphere and rotation.
@@ -189,23 +178,18 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Venu
 #### Explanation of Judgment: Due to the inclusion of an unsupported reason for Venus's retrograde rotation, the final judgment is: Irrelevant.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text: \"\"\"{qatuple[2]}\"\"\"
 
 Question (based on text): \"\"\"{qatuple[0]}\"\"\"
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"{qatuple[1]}\"\"\"
 
-# Response:
+### Response:
 ## Reasoning and thought process (be careful about extra details, even vague ones):
 """
-        # print("DEBUG\n\n" + decision_prompt)
         try:
             completion = logic_llm(decision_prompt, max_tokens=5500, stop=["</s>","# Input:"], grammar=answer_relevant_grammar, echo=True,temperature=0.2)["choices"][0]["text"]
-            print(completion)
-            # print("DEBUG\n\n")
             completion_pattern = re.compile(r"Reasoning and thought process \(be careful about extra details, even vague ones\):\n(.+)", re.DOTALL | re.IGNORECASE)
             judgement_pattern = re.compile(r"Explanation of Judgment:(.+)", re.DOTALL | re.IGNORECASE)
             response = completion_pattern.search(completion).group(1).strip()
@@ -214,7 +198,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
             print("\n\nDETERMINATION:\n------")
             print(determination)
             print("\n---------\n")
-            if "irrelevant" in determination or "Irrelevant" in determination or "mostly" in determination or "partially" in determination or "introduces information not present in the text" in determination: # Hack to get around faulty 13b outputs
+            if "irrelevant" in determination.lower() or "mostly" in determination.lower() or "partial" in determination.lower() or "introduces information not present in the text" in determination.lower(): # Hack to get around faulty 13b outputs
                 return (False,response), completion
             elif "relevant" in determination or "Relevant" in determination:
                 return (True,response), completion
@@ -222,8 +206,8 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
                 retries += 1
         except:
             retries += 1
-    
-    # TODO error handling
+            print(f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}")
+            
             
 if __name__ == "__main__": # test
     logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=8000,n_gpu_layers=1000,rope_freq_scale=0.33,rope_scaling_type=1) # load the logical LLM and offload everything
@@ -243,7 +227,6 @@ if __name__ == "__main__": # test
     
     print("Begin HGWELLS test")
     result = check_answer_relevancy_with_text(q_test[2],logic_llm)
-    ## TODO a wider variety of tests from different texts
     if not result[0]: # if not relevant
         print("Made right choice for bad answer")
     else:

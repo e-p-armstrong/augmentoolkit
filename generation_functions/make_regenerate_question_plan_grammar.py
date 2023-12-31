@@ -1,6 +1,6 @@
 from llama_cpp import LlamaGrammar
 
-# TODO improve? I just copy-pasted it from something else
+
 
 make_regenerate_question_plan_grammar = LlamaGrammar.from_string(r"""
 root ::= analyze-step identify-step generate-step refine-step ensure-step end-of-reasoning

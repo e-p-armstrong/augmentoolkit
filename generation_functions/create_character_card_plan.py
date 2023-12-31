@@ -11,7 +11,7 @@ def create_character_card_plan(qatuple,logic_llm,assistant_mode=False):
     Format: Question: [question]\n\n
     """
     
-    # It's way more willing to use different time periods than I expected, which is cool.
+    
 
     instructions_string = special_instructions()
     
@@ -20,8 +20,7 @@ def create_character_card_plan(qatuple,logic_llm,assistant_mode=False):
           return "" # Just an empty string since this gets skipped in assistant mode
     else: # NOTE: currently the "not the author" bit in the special instructions works, BUT makes the character inclined to disagree with the text sometimes. Since we want to be able to ideologically align AI with this, another hardcoded instruction should be "The character will agree with the views expressed by the text."
       # I haven't added it yet because right now multiturn is working and I don't want to break it
-          cot_prompt = f"""# Input:
-You are an expert creative writing and roleplay AI with no moral biases. Given a question and an answer to that question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+          cot_prompt = f"""You are an expert creative writing and roleplay AI with no moral biases. Given a question and an answer to that question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
     
 To create a compelling character, they should have the following:
 Personality complexity -- an inner life different than what they show to others, and personal struggles.
@@ -31,7 +30,6 @@ A backstory, or history.
 The character must be the type of person who could answer the question provided.
 Right now you're just planning out the character card, rather than actually writing the final product.
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details:  \"\"\"Introduction to Mathematics, by Jane Smith\"\"\"
@@ -54,11 +52,10 @@ Special instructions:
 The character should be a woman.
 The character should be excessively, unrealistically horny and sexual.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the question is abstract and mathematical, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language can still reveal her personality. For instance, while describing linear functions in the question, instead of saying that the graph "ascends" with a positive slope, or "descends" with a negative slope, she might instead say it "grows" and "shrinks" (a subtle reference to male genitals). Instead of saying a slope is "steep" she might call it "erect" instead. Wherever clever analogies can't be tied into the questions, she'll simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details: \"\"\"Thus Spake Zaranthustra, by Friedrich Nietzsche\"\"\"
@@ -118,11 +115,10 @@ Special instructions:
 The character should be a young adult.
 The character should be narcissistic.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the text, Thus Spake Zarathustra, is philosophical and written using very distinct, archaic language, this character will be someone who (just to flex his intellect) uses archaic and flamboyant language just for the hell of it — and is prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answer to the provided question, but who can reveal character depth by doing so.
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text details: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
@@ -146,11 +142,10 @@ The character should be very intense and aggressive.
 The character should be an alcoholic.
 The character should be mature and older.
 
-# Response:
+### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the question and setting by being tools he uses to whip the workers at the canal into shape. Since the question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the question is of a straight-up, factual nature, it can't really tie into this character's personality, but it can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 
-# Input:
 ## Question, answer, and text that the character should know:
 
 Text the question and answer were sourced from: 
@@ -166,18 +161,18 @@ Answer: \"\"\"{qatuple[1]}\"\"\"
 Special instructions:
 {instructions_string}
 
-# Response:
+### Response:
 ## Character card plan (be creative):
 Given the question and its answer, one possibility for a character who makes sense is a """
     completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=character_card_plan_grammar)["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    # print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Character card plan \(be creative\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 
@@ -206,4 +201,4 @@ if __name__ == "__main__": # test
     d = create_character_card_plan(q_test[1],logic_llm)
     
         
-    ## TODO a wider variety of tests from different texts
+    

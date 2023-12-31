@@ -1,0 +1,6 @@
+[
+    "What is rule number 4 for valid inference?",
+    "Rule 4 states that if H v R, then L.",
+    "K \u2283 (H v R/\u2234 L 4. K _________________ 5. H v R _________________ 6. ~R _________________ 7. H _________________ 8. H \u22c5 K _________________ 9. L _________________  #8 1. C \u2283 B 2. ~D \u22c5 ~B 3. (A \u2283 (B \u2283 C)) v D       4. A v C  /\u2234 B \u2283 C 5. ~D   _________________ 6. A \u2283 (B \u2283 C) _____________ 7. ~B    _________________ 8. ~C    __________________ 9. A    __________________ 10. B \u2283 C __________________ 11. (B \u2283 C) v B __________________   Chapter 2: Formal methods of evaluating arguments  106   2.12 How to construct proofs  You can think of constructing proofs as a game. The goal of the game is to derive the conclusion from the given premises using only the 8 valid rules of inference that we have introduced. Not every proof requires you to use every rule, of course. But you may use any of the rules\u2014as along as your use of the rule is correct. Like most games, people can be better or worse at the \u201cgame\u201d of constructing proofs.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

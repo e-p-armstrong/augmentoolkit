@@ -59,7 +59,7 @@ Dr. Samuel Blackwell: "I am a man of science, driven by facts and evidence," I s
     d = create_thought_plan(q_test[1],character,scenario,logic_llm)
     
         
-    ## TODO a wider variety of tests from different texts
+    
     
     
     

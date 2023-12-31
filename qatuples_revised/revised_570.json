@@ -1,0 +1,6 @@
+[
+    "What is the symbol for the biconditional?",
+    "The symbol for the biconditional is \"\u2261\" or \"tribar.\"",
+    "The biconditional is represented using the symbol \u201c\u2261\u201d which is called a \u201ctribar.\u201d  p q p \u2261 q T T T T F F F T F F F T Chapter 2: Formal methods of evaluating arguments  93  Some common ways of expressing the biconditional in English are with the phrases \u201cif and only if\u201d and \u201cjust in case.\u201d If you have been paying close attention (or do from now on outyou will see me use the phrase \u201cif and only if\u201d often. It is most commonly used when one is giving a definition, such as the definition of validity and also in defining the \u201cmaterial equivalence\u201d in this very section. It makes sense that the biconditional would be used in this way since when we define something we are laying down an equivalent way of saying it. Exercise 14: Construct a truth table to determine whether the following pairs of statements are materially equivalent. 1. A \u2283 B and ~A v B 2. ~(A \u22c5 B) and ~A v ~B 3. A \u2283 B and ~B \u2283 ~A 4. A v ~B and B \u2283 A 5. B \u2283 A and A \u2283 B  6. ~(A \u2283 B) and A \u22c5 ~B 7. A v B and ~A \u22c5 ~B 8.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

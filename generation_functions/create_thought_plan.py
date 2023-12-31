@@ -6,7 +6,6 @@ from .constants import LOGICAL_MODEL
 def extract_name(str):
 
     # Regular expression to match 'Name:' followed by any characters until the end of the line
-    # TODO make the characters more distinct in the create character card; the dialogue needs to be less GPT-4-y, or else the RP perf will suffer.
     name_regex = r'^Name:\s*(.*)$'
 
     # Searching in the multiline string
@@ -28,16 +27,14 @@ def create_thought_plan(qatuple,character,logic_llm,assistant_mode=False):
     
     # use regex to extract charname
     charname = extract_name(character)
-    # TODO make an interesting choice about whether to include the source text here or not. Including the source text constraints the LLM's output to be more faithful to the spirit of the original text, and prevents a game of telephone; but it may slightly degrade character quality? Eh maybe not really. Leave it in for now. At least format it better though.
     
-    # It's way more willing to use different time periods than I expected, which is cool.
-    cot_prompt = f"""# Input:
-You are an expert logical reasoning and question-solving AI. Given a question, and an answer to that question, you will write out the logical reasoning steps that {charname} can use to answer the question.
+    
+    
+    cot_prompt = f"""You are an expert logical reasoning and question-solving AI. Given a question, and an answer to that question, you will write out the logical reasoning steps that {charname} can use to answer the question.
 
 You should first describe a plan which includes decomposing the problem into smaller ones, then execute that plan step-by-step, and then present a final answer to the original question. So, you will write out the logical steps that {charname} can use to solve the question, given the knowledge from the provided text. Try to begin each line with something like "Realize" or "Recall".
 
 
-# Input:
 ## Information:
 
 Text the question and answer were sourced from (Judge Elias Hawthorne does not have access to this text, but does know its information; you can use insights from it, but don't mention "the text" by name):
@@ -105,7 +102,7 @@ Absoluta sententia expositore non indiget.
 Question: \"\"\"What is the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?\"\"\"
 Answer: \"\"\"The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person.\"\"\"
 
-# Response:
+### Response:
 ## Reasoning Steps:
 Step 1. Formulate a plan to understand the meaning of 'A digniori fieri debet denominatio et resolutio' by defining it, then interpreting the definition in the context of law.
 Step 2. Recall that the phrase 'A digniori fieri debet denominatio et resolutio' translates to "Title and acquittal ought to proceed from the more worthy person."
@@ -114,7 +111,6 @@ Step 4. Understand that this implies a belief that justice and legal rights shou
 Step 5. Conclude that the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio' is the emphasis on the importance of merit and worthiness in making legal decisions about titles and acquittals.
 
 
-# Input:
 ## Information:
 
 Text the question and answer were sourced from (Carlos Mendez does not have access to this text, but does know its information; you can use insights from it, but don't mention "the text" by name): 
@@ -125,7 +121,7 @@ During the construction of the Panama Canal, a massive engineering feat complete
 Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
 Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
 
-# Response:
+### Response:
 # Reasoning:
 Step 1. Formulate a plan to answer the question about the amount of earth excavated during the Panama Canal construction.
 Step 2. Recall that "how much earth was excavated" can be decently answered by stating the volume of earth removed.
@@ -133,7 +129,6 @@ Step 3. Recall that over 200 million cubic yards of earth were removed.
 Step 4. Conclude that the answer to the question is over 200 million cubic yards.
 
 
-# Input:
 ## Information:
 
 Text the question and answer were sourced from ({charname} does not have access to this text, but does know its information; you can use insights from it, but don't mention "the text" by name): 
@@ -144,20 +139,20 @@ Text the question and answer were sourced from ({charname} does not have access 
 Question: \"\"\"{qatuple[0]}\"\"\"
 Answer: \"\"\"{qatuple[1]}\"\"\"
 
-# Response:
+### Response:
 ## Reasoning (only use as many logical steps as you must in order to solve the problem):
 """
 
 #Logical progression of steps that {charname} can use to answer the question
     completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=thought_plan_grammar,temperature=0.2)["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    # print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"## Reasoning \(only use as many logical steps as you must in order to solve the problem\):\n(Step 1\..+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 
@@ -196,7 +191,7 @@ Dr. Samuel Blackwell: "I am a man of science, driven by facts and evidence," I s
     d = create_thought_plan(q_test[1],character,logic_llm)
     
         
-    ## TODO a wider variety of tests from different texts
+    
     
     
     

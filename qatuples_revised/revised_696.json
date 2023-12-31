@@ -1,0 +1,6 @@
+[
+    "How can you infer ~B from A \u2283 B and ~A?",
+    "Since A \u2283 B implies B, and ~A means not-A, you can infer ~B by negating the implication.",
+    "A v (B \u2283 A2. ~A \u22c5 C  /\u2234 ~B  #12 1. (D v E) \u2283 (F \u22c5 G) 2. D  /\u2234 F  #13 1. T \u2283 U 2. V v ~U 3. ~V \u22c5 ~W /\u2234 ~T  #14 1. (A v B) \u2283 ~C 2. C v D 3. A  /\u2234 D  #15 1. L v (M \u2283 N) 2. ~L \u2283 (N \u2283 O) 3. ~L  /\u2234 M \u2283 O  #16 1. A \u2283 B 2. A v (C \u22c5 D) 3. ~B \u22c5 ~E /\u2234 C  #17 1. (F \u2283 G) \u22c5 (H \u2283 I) 2. J \u2283 K 3. (F v J) \u22c5 (H v L)  /\u2234 G v K  #18 1. (E v F) \u2283 (G \u22c5 H) 2. (G v H) \u2283 I 3.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

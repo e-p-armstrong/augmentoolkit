@@ -1,0 +1,6 @@
+[
+    "What is the main operator for exercise 20?",
+    "The main operator for exercise 20 is the wedge 20.",
+    "(E \u22c5 Pv (B \u22c5 S) c. Main operator is the wedge 20.  a. X = Cartman is xenophobic; R = Cartman is a racist; M = Cartman is a murderer; T = Cartman is the thief b. (X \u22c5 R) \u22c5 (~M \u22c5 ~T) c. Main operator is the second dot  Exercise 12 1. Invalid 2. Valid 3. Invalid 4. Valid A B C (A v B) \u22c5 (A v C) ~A B v C T T T   T    T   T F T T T F   T    T   T F T T F T   T    T   T F T T F F   T    T   T F F F T T   T    T   T T T F T F   T    F   F T T F F T   F    F   T T T F F F   F    F   F T F    Answers to exercises  218 5.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

@@ -1,0 +1,6 @@
+[
+    "What does '\u2283' represent in a logical argument?",
+    "'\u2283' represents \"if... then\" or \"implies\" in a logical argument, signifying that the truth of the first statement (the antecedentguarantees the truth of the second statement (the consequent). It is used in modus ponens and hypothetical syllogism.",
+    "~N Modus ponens, 1, 2 5. ~H Modus tollens, 3, 4  Example 2: 1. A v B 2. C \u2283 D 3. A \u2283 C 4. ~D  /\u2234 B 5. A \u2283 D  Hypothetical syllogism, 3, 2 Chapter 2: Formal methods of evaluating arguments  105 6. ~A  Modus tollens, 5, 4 7. B  Disjunctive syllogism, 1, 6  # 1 1. A \u22c5 C /\u2234 (A v E\u22c5 (C v D) 2. A _________________ 3. C _________________ 4. A v E _________________ 5. C v D _________________ 6. (A v E) \u22c5 (C v D) ______________  # 2 1. A \u2283 (B \u2283 D) 2. ~D 3. D v A  /\u2234 ~B 4. A _________________ 5. B \u2283 D _________________ 6. ~B _________________  # 3 1. A \u2283 ~B 2. A v C 3.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

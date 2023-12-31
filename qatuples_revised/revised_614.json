@@ -1,0 +1,6 @@
+[
+    "What does it mean for an argument to be valid, in terms of logic?",
+    "A valid argument is one where if the premises are true, the conclusion must also be true.",
+    "And if we lined them all up as I have below, you can see why ancient philosophers referred to this valid argument form as a \u201cchain argument\u201d:     p \u2283 q        q \u2283 r       r \u2283 s          s \u2283 t       \u2234 p \u2283 t  Chapter 2: Formal methods of evaluating arguments  100 Notice how the consequent of each preceding conditional statement links up with the antecedent of the next conditional statement in such a way as to create a chain. The chain could be as long as we liked, but the rule that we will cite in our proofs only connects two different conditional statements together. As before, it is important to realize that any argument with this same form is a valid argument. For example,  1. (A v B\u2283 ~D 2. ~D \u2283 C 3. \u2234 (A v B) \u2283 C  Notice that the consequent of the first premise and the antecedent of the second premise are exactly the same term, \u201c~D\u201d. That is what allows us to \u201clink\u201d the antecedent of the first premise and the consequent of the second premise together in a \u201cchain\u201d to infer the conclusion.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

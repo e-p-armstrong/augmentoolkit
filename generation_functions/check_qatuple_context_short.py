@@ -23,8 +23,7 @@ def extract_question_answer(response):
 def check_qatuple_context_deprecated(qatuple,logic_llm):
     retries = 0
     while (retries <= 4):
-        decision_prompt = f"""# Input:
-You are checking whether a provided question and answer make sense if asked by themselves, with no additional information. You need to check for vague wording that a reader cannot interpret correctly, and questions that lack key context and would not be possibly answerable even if asked of someone with complete, masterful knowledge of the general subject matter of the question.
+        decision_prompt = f"""You are checking whether a provided question and answer make sense if asked by themselves, with no additional information. You need to check for vague wording that a reader cannot interpret correctly, and questions that lack key context and would not be possibly answerable even if asked of someone with complete, masterful knowledge of the general subject matter of the question.
 
 Evaluate the provided question-answer pair step-by-step. Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Pass" or "Fail" or "Reword". A test passes if it "makes sense" and does not lack key context; it "Fails" if it lacks key context, AND the question is not specific or clear, it fails. If it lacks context but the question is specific, pointed, and grounded, then it needs to be reworded to have the context-needing terms (i.e., vague reference to "the text") removed. If it has no problems, it passes. 
 
@@ -33,16 +32,14 @@ I want you to especially check for vague references to "the text", "passage", an
 Please now apply this method to the provided text and question, and write out your reasoning and thought process.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: Simple Sabotage, by the Office of Strategic Services, Published 1944
 Note that while you have access to this information, for the sake of rewording questions, you should evaluate the question as if you could not see this.
 
 Question: How can you avoid blame for an act of sabotage, according to the text?
 Answer: You can do them in public places where anyone would have been capable of carrying out the act.
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. This question mentions "the text" without specifying which text it is referring to.
@@ -62,16 +59,14 @@ Answer: You can do them in public places where anyone would have been capable of
 Question: How can you avoid blame for an act of sabotage, according to 'Simple Sabotage' by the Office of Strategic Services?
 Answer: You can do them in public places where anyone would have been capable of carrying out the act.
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: Simple Sabotage, By the Office of Strategic Services, Published 1867
 Note that while you have access to this information, for the sake of rewording questions, you should evaluate the question as if you could not see this.
 
 Question: How does the type of saboteur affect their role in destruction?
 Answer: If they are a technician, they can devise methods of simple sabotage appropriate to their facilities. If not technically trained, they need suggestions for what to destroy and how to accomplish it.
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question does not misuse any specific terms without proper context.
@@ -88,16 +83,14 @@ Answer: If they are a technician, they can devise methods of simple sabotage app
 #### Final judgment: Pass.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: Introduction to Philosophy, by George Stuart Fullerton
 Note that while you have access to this information, for the sake of rewording questions, you should evaluate the question as if you could not see this.
 
 Question: What is the meaning of this passage?
 Answer: This passage means that things which think, form plans, and act on those plans, are beyond simple machines. This is evidenced by the line "Creatures that think, form plans, and _act_, are not what we call automata."
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question asks about "this passage" without specifying which passage it is referring to or what book it belongs to.
@@ -114,16 +107,14 @@ Answer: This passage means that things which think, form plans, and act on those
 #### Final judgment: Fail.
 
 
-# Input:
-## Instruction:
-
+### Instruction:
 Text details: {qatuple[3]}
 Note that while you have access to this information, for the sake of rewording questions, you should evaluate the question as if you could not see this.
 
 Question: {qatuple[0]}
 Answer: {qatuple[1]}
 
-# Response:
+### Response:
 ## Reasoning and thought process (be thorough):
 """
         # print("DEBUG\n\n" + decision_prompt)
@@ -140,7 +131,7 @@ Answer: {qatuple[1]}
             print("\n---------\n")
             if "Reword" in determination or "reword" in determination:
                 q,a = extract_question_answer(response)
-                return (q,a,qatuple[2],qatuple[3]) # TODO search for the reworded question and answer
+                return (q,a,qatuple[2],qatuple[3])
             elif "Pass" in determination or "pass" in determination:
                 return (True,response)
             elif "Fail" in determination or "fail" in determination:
@@ -155,7 +146,6 @@ Answer: {qatuple[1]}
             else:
                 return (None,None), None
     return (None, None), None
-# There is no bug about this ignoring certain judgments and retrying; that's just the dissenting reasoning from the print statement
 
 if __name__ == "__main__": # test
     logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100) # load the logical LLM and offload everything
@@ -168,7 +158,7 @@ if __name__ == "__main__": # test
   'fucking sophists',"The Republic, by Plato"),
               ('How does Darwin explain natural selection?',
   'Darwin explains natural selection as a process where organisms better adapted to their environment tend to survive and produce more offspring. This theory suggests that traits beneficial for survival are more likely to be passed on to subsequent generations.',
-  'fucking creationists',"The Origin of Species, by Charles Darwin")]
+  'fucking Lamarckism',"The Origin of Species, by Charles Darwin")]
     
     print("Begin variety test")
     # Try to detect bad question
@@ -187,8 +177,6 @@ if __name__ == "__main__": # test
         print("Made right choice for good question")
     else:
         print("Made wrong choice for good question")
-        
-    ## TODO a wider variety of tests from different texts
     
     print("Begin Mendeleev test") 
     # NOTE I should actually do a mendeleev test, to see if including examples from that text has screwed it

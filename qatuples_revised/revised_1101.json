@@ -1,0 +1,6 @@
+[
+    "What percentage of the population is assumed to be robbers in this scenario?",
+    "Half of one percent, or .5%.",
+    "This is another good illustration of how far off probabilities can be when the base rate is ignored. Last one. Suppose that Bob is a super-eyewitness. When he observers a crime he is 99% accurate in identifying the suspect. Suppose that Bob identifies Nancy as the person who robbed the American Apparel store. In a population where .5% (half of one percentof the population are robbers, what is the probability that Nancy really is a robber, given that Bob\u2019s eyewitness testimony identified her as a robber? At this point, having been sensitized to the base rate fallacy, you should suspect that the probability is nowhere near as high as the accuracy of Bob\u2019s eyewitness skills. Here\u2019s the math. Suppose our population is 1000 people: 995 non- robbers and 5 robbers (based on the above base rate of robbers in the population). Of 995 non-robbers, Bob will misidentify 9.95 as robbers (false positives) and accurately identify 4.95 as robbers for a totally of 14.9 robber- identifications.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

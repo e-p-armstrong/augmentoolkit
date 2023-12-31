@@ -1,0 +1,6 @@
+[
+    "What are valid forms of inference in logic?",
+    "Valid forms of inference include modus ponens and hypothetical syllogism, among others, which allow one to derive conclusions from given premises using conditional statements.",
+    "A proof is a series of statements, starting with the premises and ending with the conclusion, where each additional statement after the premises is derived from some previous line(sof the proof using one of the valid forms of inference. We will practice this some more in the exercise at the end of this section. The next form of inference is called \u201chypothetical syllogism.\u201d This is what ancient philosophers called \u201cthe chain argument\u201d and it should be obvious why in a moment. Here is the form of the rule:  1. p \u2283 q 2. q \u2283 r 3. \u2234 p \u2283 r  As you can see, the conclusion of this argument links p and r together in a conditional statement. We could continue adding conditionals such as \u201cr \u2283 s\u201d and \u201cs \u2283 t\u201d and the inferences would be just as valid.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

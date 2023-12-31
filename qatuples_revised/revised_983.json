@@ -1,0 +1,6 @@
+[
+    "What is a necessary condition in evaluating causation?",
+    "A necessary condition is a feature present every time the event occurs; it tells us something important about the cause.",
+    "So in the table below, \u201c~A\u201d represents that Charlie did not eat human food on that day; \u201c~B\u201d represents that he did not get a bath and shampoo that day; \u201c~S\u201d represents that he did not have a seizure that day. In contrast, \u201cB\u201d represents that he did have a bath and shampoo, whereas \u201cC\u201d represents that he was given a flea treatment that day. Here is how the log looks:  Chapter 3: Evaluating inductive arguments and probabilistic and statistical fallacies  162    Day 1 ~A B C D S Day 2 A ~B C D ~S Day 3 A B ~C D ~S Day 4 A B C ~D S Day 5 A B ~C D ~S Day 6 A ~B C D ~S  How can we use this information to determine what might be causing Charlie to have seizures? The first thing we\u2019d want to know is what feature is present every time he has a seizure. This would be a necessary (but not sufficientcondition. And that can tell us something important about the cause.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

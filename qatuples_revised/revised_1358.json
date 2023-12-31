@@ -1,0 +1,6 @@
+[
+    "How do you determine if a statement is a tautology or not, based on its truth table?",
+    "A statement is a tautology if it is always true, regardless of the truth values of its components (A and B).",
+    "Tautology          A B (A v B\u2283 (A \u22c5 B) T T        T    T    T T F        T    F    F F T        T    F    F F F        F    T    F A B (~A \u2283 ~B) \u2283 (~B \u2283 ~A) T T        T    T    T T F        T    F    F F T        F    T    T F F        T    T    T A B (A \u2283 B) \u2283 (~B \u2283 ~A) T T        T    T    T T F        F    T    F F T        T    T    T F F        T    T    T A B (B v ~B) \u2283 A T T           T   T T F           T   T F T           T   F F F           T   F A B (A v B) v ~A T T           T  T  F T F           T  T  F F T           T  T  T F F           F  T  T Answers to exercises  222 Exercise 16 1.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

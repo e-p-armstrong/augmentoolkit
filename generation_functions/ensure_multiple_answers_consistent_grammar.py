@@ -1,6 +1,5 @@
 from llama_cpp import LlamaGrammar
 
-# TODO
 ensure_multiple_answers_consistent_grammar = LlamaGrammar.from_string(r"""                     
     
 # Root rule to define the overall structure

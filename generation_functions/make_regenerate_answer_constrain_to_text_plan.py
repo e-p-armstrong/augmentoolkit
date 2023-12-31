@@ -4,13 +4,10 @@ from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .strip_steps import strip_steps
 
-# Answer regeneration (triggered after a fact-check fails for reason of "inaccurate").
-# TODO might need CoT. If so, make "regenerate answer plan" and "regenerate answer constrain to text" plan functions. But until it becomes obvious this is neccessary...
 def make_regenerate_answer_constrain_to_text_plan(qatuple, dissenting_reasoning, logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""# Input:
-You are an expert educational AI that is going to think through a plan for a revised answer (the current one is flawed). Someone has written an answer to a question (this question is based on a few provided paragraphs of text) but their answer includes information that's not provided by the text, and thus it might be flawed. You will plan out and think through, step-by-step, a revision to the answer, which will only use provided information. Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer deviates from the text, you will plan out and think through a correct answer to the question.
+        decision_prompt = f"""You are an expert educational AI that is going to think through a plan for a revised answer (the current one is flawed). Someone has written an answer to a question (this question is based on a few provided paragraphs of text) but their answer includes information that's not provided by the text, and thus it might be flawed. You will plan out and think through, step-by-step, a revision to the answer, which will only use provided information. Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer deviates from the text, you will plan out and think through a correct answer to the question.
 
 Right now, you will PLAN OUT and THINK THROUGH different possibilities for a new answer that answers the question using only information in the provided text.
 
@@ -30,19 +27,20 @@ Step 4. Plan Revised Answer: Based on this reasoning, a revised answer should on
 
 You are to use the above example as a reference, while you plan out a revised version of the answer \"\"\"{qatuple[1]}\"\"\" with regards to the text and reasoning provided earlier.
 
-# Response:
+### Response:
 ## Reasoning and thought process:
 """
         try:
             completion = logic_llm(decision_prompt, max_tokens=3000, stop=["</s>","# Input:"], echo=True, grammar=answer_constrain_to_text_plan_grammar, temperature=0.2)["choices"][0]["text"]
 
             # print("DEBUG\n\n")
-            print(completion)
+            # print(completion)
             completion_pattern = re.compile(r"Reasoning and thought process:\n(.+)", re.DOTALL)
             correction = completion_pattern.search(completion).group(1)
             return correction
         except:
             retries += 1
+            print(f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}")
 
 
 if __name__ == "__main__": # test
@@ -74,6 +72,6 @@ Step 4. Final Judgment: Since the answer mentions concepts not present in the or
     
     print("Begin HGWELLS test")
     result = make_regenerate_answer_constrain_to_text_plan(q_test[2], dissenting_reasoning, logic_llm)
-    ## TODO a wider variety of tests from different texts
+    
             
 # I could definitely just use a grammar to add the question generation to this step
