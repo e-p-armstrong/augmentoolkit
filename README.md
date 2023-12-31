@@ -5,9 +5,7 @@ Avoids breaking the bank (and getting your API key revoked) because it doesn't u
 
 ## Table of Contents:
 1. [Installation](#installation)
-2. [Introduction](#introduction)
-    - [What is Augmentoolkit?](#what-is-augmentoolkit)
-    - [Why Was it Built?](#why-was-it-built)
+2. [Introduction](#introduction-what-is-this-and-why-was-it-built)
 3. [Quickstart](#quickstart)
 4. [Usage](#usage)
     - [Concepts and Operation](#concepts-and-operation)
@@ -16,7 +14,7 @@ Avoids breaking the bank (and getting your API key revoked) because it doesn't u
 5. [Customization](#customization-arranged-in-order-of-least-to-most-difficult-to-implement)
 6. [General Notes, Known Limitations, Quirks, Features](#general-notes-known-limitations-quirks-features)
     - [Why is it writing so many files?](#why-is-it-writing-so-many-files)
-    - [Known Limitations](#known-limitations)
+    - [Known Limitations (and Potential Solutions)](#known-limitations)
 7. [Contributing](#contributing)
     - [Improvement Areas](#obvious-areas-for-improvement-feel-free-to-open-a-pr)
 8. [Contact](#contact)
