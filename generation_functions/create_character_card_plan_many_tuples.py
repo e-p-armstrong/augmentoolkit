@@ -171,14 +171,14 @@ Given the question, its answer, and the special instructions, one possibility fo
                             top_p=1,
                             min_p=0.4,
                            )["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Character card plan \(be creative, do not use real people as characters, do NOT make the author of the book a character\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation, instructions_string, completion
 

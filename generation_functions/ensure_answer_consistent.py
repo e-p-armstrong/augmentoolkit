@@ -131,7 +131,7 @@ Conversation:
             completion_pattern = re.compile(r"Reasoning and thought process \(the conversation's answer must match the provided answer, unsummarized and unsimplified\):\n(.+)", re.DOTALL)
             response = completion_pattern.search(completion).group(1).strip()
             # print("DEBUG\n\n")
-            print(completion)
+            # print(completion)
             if permissive_mode:
                 determination_pattern = re.compile(r"Final Judgement:(.+)", re.DOTALL)
                 determination = determination_pattern.search(response).group(1).strip()

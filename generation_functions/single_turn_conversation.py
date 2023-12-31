@@ -197,14 +197,14 @@ The primary character's answer will use all parts of the answer given.
     
     # Note: performance degrades rapidly if you put more than one sentence in a pre-prompt parentheses thing
     completion = logic_llm(cot_prompt, max_tokens=4096, stop=["</s>","# Input:"], echo=True, grammar=single_turn_conversation_grammar,temperature=0.2)["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Conversation that answers the provided question \(first, the secondary character will ask the question; then, the primary character will answer it\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 

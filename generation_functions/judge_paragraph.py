@@ -259,7 +259,7 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
         completion = logic_llm(decision_prompt, max_tokens=6000, grammar=judge_paragraph_grammar, stop=["</s>","# Input:"], echo=True,temperature=0.2)["choices"][0]["text"]
 
         # print("DEBUG\n\n")
-        # print(completion)
+        # # print(completion)
         response_pattern = re.compile(r"Reasoning and thought process \(reason intelligently\):(.+)", re.DOTALL | re.IGNORECASE)
         
         judgement_pattern = re.compile(r"Final Judgment:(.+)", re.DOTALL | re.IGNORECASE)

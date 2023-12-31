@@ -1,0 +1,6 @@
+[
+    "What is the problem with the initial calculation of the probability of flipping at least one head?",
+    "The initial calculation adds up the probabilities of each individual event, resulting in an outcome that's more than three times as likely as any other single event. Probability should be between 0 and 1 (inclusive).",
+    "Since I want to know the chance of flipping at least one head, then perhaps I should simply calculate the probability of the disjunction like this:   .5 + .5 + .5 + .5 + .5 + .5 = 3 (or 300% However, this cannot be right, because the probability of any event is between 1 and 0 (including 0 and 1 for events that are impossible and absolutely certain). However, this way of calculating the probability leaves us with an event that is three times more than certain. And nothing is more than 100% certain\u2014100% certainty is the limit. So something is wrong with the calculation. Another way of seeing that something must be wrong with the calculation is that it isn\u2019t impossible that I flip 6 tails in a row (and thus no heads). Since that is a real possibility (however improbable), it cannot be 100% certain that I flip at least one head. Here is the way to think about this problem. What is the probability that I flip all tails?",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

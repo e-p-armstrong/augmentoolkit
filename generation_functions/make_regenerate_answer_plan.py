@@ -32,7 +32,7 @@ Based on this example, plan out a revised version of the answer \"\"\"{qatuple[1
         completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=make_regenerate_answer_plan_grammar,temperature=0.2)["choices"][0]["text"]
 
         # print("DEBUG\n\n")
-        print(completion)
+        # print(completion)
         completion_pattern = re.compile(r"New answer plan:\n(.+)", re.DOTALL)
         correction = completion_pattern.search(completion).group(1)
         return correction.strip()

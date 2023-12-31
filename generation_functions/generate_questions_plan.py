@@ -202,7 +202,7 @@ Your planned questions must include context, if a question requires both context
     # Extract plan
     response_pattern = re.compile(r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation, completion
 

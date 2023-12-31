@@ -175,14 +175,14 @@ Special instructions:
                            grammar=character_card_grammar,
                            temperature=0.2,
                            )["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    # print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Character card \(make sure to only use information explicitly provided in the text\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 

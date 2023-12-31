@@ -1,0 +1,6 @@
+[
+    "What is the symbol used to represent disjunction in the given language?",
+    "The symbol used to represent disjunction in the given language is a \"wedge\" (v).",
+    "In our symbolic language, the symbol we will use to represent a disjunction is called a \u201cwedge\u201d (v). (You can simply use a lowercase \u201cv\u201d to write the wedge.Here is the truth table for disjunction:          As before, the header of this truth table represents two propositions (first two columns) and their disjunction (last column). The following four rows represent the conditions under which the disjunction is true. As we have seen, the disjunction is true when at least one of its disjuncts is true, including when they are both true (the first three rows). A disjunction is false only if both disjuncts are false (last row). Your seatbelt is buckled You do not get a ticket True Your seatbelt is not buckled You get a ticket True Your seatbelt is buckled You get a ticket True Your seatbelt is not buckled You do not get a ticket False p q p v q T T T T F T F T T F F F Chapter 2: Formal methods of evaluating arguments  63 As we have defined it, the wedge (v) is what is called an \u201cinclusive or.\u201d An inclusive or is a disjunction that is true even when both disjuncts are true.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

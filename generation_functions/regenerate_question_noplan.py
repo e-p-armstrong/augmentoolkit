@@ -30,7 +30,7 @@ Answer: question answer, using only info in the paragraphs.
         completion = logic_llm(decision_prompt, max_tokens=500, stop=["</s>","2)","2.)"], echo=True, grammar=question_grammar)["choices"][0]["text"]
 
         # print("DEBUG\n\n")
-        print(completion)
+        # print(completion)
         completion_pattern = re.compile(r"New question \(1 paragraph at most; do not explicitly refer to the provided text, just test the concepts\):\n(.+)", re.DOTALL)
         correction = completion_pattern.search(completion).group(1)
         

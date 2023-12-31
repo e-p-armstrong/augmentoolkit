@@ -11,7 +11,7 @@ def sanity_check(logic_llm):
         decision_prompt = f"""Hi there, """
         # print("DEBUG\n\n" + decision_prompt)
         completion = logic_llm(decision_prompt, max_tokens=100, stop=["</s>","# Input:"], echo=True,grammar=answer_accurate_grammar,temperature=0.2)["choices"][0]["text"]
-        print(completion)
+        # print(completion)
 
         return
             

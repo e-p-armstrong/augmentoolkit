@@ -113,14 +113,14 @@ You don't need to add negative emotions and tension to the scenario if those don
                             top_p=1,
                             min_p=0.5,
                            )["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    # print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Scenario plan \(be creative, and make sure all characters present fit in with the setting\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     if (not ("Albert" in charname)):
         if "Albert" in generation:

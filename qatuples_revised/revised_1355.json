@@ -1,0 +1,6 @@
+[
+    "What does it mean when a statement is called a tautology?",
+    "A tautology is a statement that is always true, regardless of the truth values assigned to its variables or components.",
+    "Tautology          A B A \u2283 (A \u22c5 BT T         T   T T F         F   F F T         T   F F F         T   F A B (A \u22c5 B) \u2283 (~A \u2283 ~B) T T        T    T    T T F        F    T    T F T        F    T    F F F        F    T    T A B (A \u22c5 ~A) \u2283 B T T           F   T   T T F           F   T   F F T           F   T   T F F           F   T   F A B (A \u2283 A) \u2283 (B \u22c5 ~B) T T        T    F    F T F        T    F    F F T        T    F    F F F        T    F    F A B (A \u22c5 B) \u2283 (A v B) T T        T    T    T T F        F    T    T F T        F    T    T F F        F    T    F Answers to exercises  221 6.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

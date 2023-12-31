@@ -35,14 +35,14 @@ Add as many steps as you need, then output "End of reasoning" as a final step. T
 ## Edit plan:
 """
     completion = logic_llm(prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=proofread_output_grammar,temperature=0.2)["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Begin Edit: (.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 

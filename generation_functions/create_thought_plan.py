@@ -145,14 +145,14 @@ Answer: \"\"\"{qatuple[1]}\"\"\"
 
 #Logical progression of steps that {charname} can use to answer the question
     completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=thought_plan_grammar,temperature=0.2)["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    # print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"## Reasoning \(only use as many logical steps as you must in order to solve the problem\):\n(Step 1\..+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 

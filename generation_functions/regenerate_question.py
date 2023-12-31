@@ -29,7 +29,7 @@ Final note: you are allowed and encouraged to dramatically change/revamp/rewrite
         completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","2.)"], echo=True, grammar=question_grammar,temperature=0.2)["choices"][0]["text"]
 
         # print("DEBUG\n\n")
-        print(completion)
+        # print(completion)
         completion_pattern = re.compile(r"New question:\n(.+)", re.DOTALL)
         correction = completion_pattern.search(completion).group(1)
         return correction.strip()

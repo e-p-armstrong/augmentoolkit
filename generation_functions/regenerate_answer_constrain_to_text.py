@@ -28,7 +28,7 @@ Reasoning as to why the answer goes off the rails: \"\"\"{strip_steps(dissenting
 The constrained answer would be \"\"\""""
         try:
             completion = logic_llm(decision_prompt, max_tokens=3000, stop=["</s>","# Input:"], grammar=regenerate_answer_constrain_to_text_grammar, temperature=0.2, echo=True)["choices"][0]["text"]
-            print(completion)
+            # print(completion)
             completion_pattern = re.compile(r"New answer \(do not mention the text\):\nThe constrained answer would be \"\"\"(.+?)\"\"\"", re.DOTALL)
             correction = completion_pattern.search(completion).group(1)
             return correction.strip()

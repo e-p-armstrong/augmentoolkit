@@ -133,7 +133,7 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
             print("\n\nDETERMINATION:\n------")
             print(determination)
             print("\n---------\n")
-            if "irrelevant" in determination or "Irrelevant" in determination:
+            if "irrelevant" in determination or "Irrelevant" in determination.lower() or "mostly" in determination.lower() or "partial" in determination.lower() or "introduces information not present in the text" in determination.lower():
                 return (False,response), completion
             elif "relevant" in determination or "Relevant" in determination:
                 return (True,response), completion

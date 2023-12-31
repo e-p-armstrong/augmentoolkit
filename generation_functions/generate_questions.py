@@ -266,7 +266,7 @@ Text to make questions from:
         # Extract questions
         response_pattern = re.compile(r"Questions \(make 4\):\n(.+)",re.IGNORECASE | re.DOTALL)
         generation = response_pattern.search(completion).group(1)
-        print("GENERATION:\n\n-------------------\n\n", generation)
+        # print("GENERATION:\n\n-------------------\n\n", generation)
         pattern = re.compile(r'(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)', re.DOTALL | re.MULTILINE | re.IGNORECASE)
         matches = pattern.findall(generation)
         if len(matches) > 0:

@@ -22,6 +22,8 @@ Do not explicitly mention the paragraphs in the questions themselves — just as
 You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they will not have the text on-hand.
 
 ### Instruction:
+Text details: Road Construction, by Mark Ericsson
+
 Text to make a question from: 
 \"\"\"
 Road construction is a multifaceted process involving various stages and materials, each critical for the durability and safety of the road. Initially, a thorough site survey and soil testing are conducted to assess the suitability of the terrain. Following this, the groundwork commences with the removal of topsoil and leveling of the area. Subsequently, a layer of sub-base material, typically composed of crushed stone or gravel, is laid to provide stability. This is followed by the base layer, often made of a stronger aggregate, to support the surface layer. The surface layer, usually asphalt or concrete, is then applied, offering a smooth and durable driving surface. Additionally, proper drainage systems are installed to prevent water accumulation, which can lead to road damage. Throughout the construction, environmental considerations are taken into account to minimize the impact on surrounding ecosystems. Regular maintenance, including patching and resurfacing, is essential to extend the road's lifespan and ensure safety for its users.
@@ -33,6 +35,8 @@ Road construction is a multifaceted process involving various stages and materia
 Answer: The site survey and soil testing are conducted to assess the suitability of the terrain for road construction, ensuring the area is appropriate and will support the road structure effectively.
 
 ### Instruction:
+Text details: Introduction to Mathematics, by Elise Delacroix
+
 Text to make a question from: 
 \"\"\"
 In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
@@ -44,12 +48,12 @@ In mathematics, the concept of a 'function' is fundamental, defining a relations
 Answer: The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.
 
 ### Instruction:
-Text to make questions from: 
+Text details: Thus Spake Zarathustra, by Friedrich Nietzsche
+
+Text to make a question from: 
 \"\"\"
-When Zarathustra was thirty years old, he left his home and the lake of
-his home, and went into the mountains. There he enjoyed his spirit and
-solitude, and for ten years did not weary of it. But at last his heart
-changed,—and rising one morning with the rosy dawn, he went before the
+When Zarathustra was thirty years old, he left his home and the lake of his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart changed,—and rising one morning with the rosy dawn, he went before the
 sun, and spake thus unto it:
 
 Thou great star! What would be thy happiness if thou hadst not those for
@@ -73,25 +77,68 @@ evening, when thou goest behind the sea, and givest light also to the
 nether-world, thou exuberant star!
 
 Like thee must I GO DOWN, as men say, to whom I shall descend.
-
-Bless me, then, thou tranquil eye, that canst behold even the greatest
-happiness without envy!
-
-Bless the cup that is about to overflow, that the water may flow golden
-out of it, and carry everywhere the reflection of thy bliss!
-
-Lo! This cup is again going to empty itself, and Zarathustra is again
-going to be a man.
-
-Thus began Zarathustra's down-going.
 \"\"\"
 
 ### Response:
 ## Question:
 1.) What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-Answer: They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
+Answer: They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
 
 ### Instruction:
+Text details: The Republic, by Plato
+
+Text to make a question from: 
+\"\"\"
+I went down yesterday to the Piraeus with Glaucon the son of Ariston,
+that I might offer up my prayers to the goddess (Bendis, the Thracian
+Artemis.); and also because I wanted to see in what manner they would
+celebrate the festival, which was a new thing. I was delighted with the
+procession of the inhabitants; but that of the Thracians was equally,
+if not more, beautiful. When we had finished our prayers and viewed the
+spectacle, we turned in the direction of the city; and at that instant
+Polemarchus the son of Cephalus chanced to catch sight of us from a
+distance as we were starting on our way home, and told his servant to
+run and bid us wait for him. The servant took hold of me by the cloak
+behind, and said: Polemarchus desires you to wait.
+
+I turned round, and asked him where his master was.
+
+There he is, said the youth, coming after you, if you will only wait.
+
+Certainly we will, said Glaucon; and in a few minutes Polemarchus
+appeared, and with him Adeimantus, Glaucon’s brother, Niceratus the son
+of Nicias, and several others who had been at the procession.
+
+Polemarchus said to me: I perceive, Socrates, that you and your
+companion are already on your way to the city.
+
+You are not far wrong, I said.
+
+But do you see, he rejoined, how many we are?
+
+Of course.
+
+And are you stronger than all these? for if not, you will have to
+remain where you are.
+
+May there not be the alternative, I said, that we may persuade you to
+let us go?
+
+But can you persuade us, if we refuse to listen to you? he said.
+
+Certainly not, replied Glaucon.
+
+Then we are not going to listen; of that you may be assured.
+\"\"\"
+
+### Response:
+## Question:
+1.) In Plato's "The Republic," in the dialogue where Polemarchus comments on the size of his group and questions Socrates' strength compared to it, ultimately stating that Socrates will have to remain where he is, what is Polemarchus implying?
+Answer: Polemarchus is implying that since his group is stronger than Socrates, he can force Socrates to remain where he is.
+
+### Instruction:
+Text Details: Engineering Projects Throughout History, by Hugo Gonzalez
+
 Text to make a question from: 
 \"\"\"
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
@@ -103,6 +150,21 @@ During the construction of the Panama Canal, a massive engineering feat complete
 Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
 
 ### Instruction:
+Text Details: Engineering Projects Throughout History, by Hugo Gonzalez
+
+Text to make a question from: 
+\"\"\"
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+\"\"\"
+
+### Response:
+## Question:
+1.) How much earth was excavated during the construction of the Panama Canal?
+Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
+
+### Instruction:
+Text details: {qatuple[3]}
+
 Text to make a question from: 
 \"\"\"
 {qatuple[2]}
@@ -114,15 +176,15 @@ Text to make a question from:
         # print("DEBUG\n\n" + decision_prompt)
         print("--QA TUPLE DURING NEW Q GEN--")
         print(qatuple)
-        completion = logic_llm(question_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True,grammar=question_grammar,temperature=0.2)["choices"][0]["text"]
-        print("COMPLETION:\n\n----------------------")
-        print(completion)
-        print("\n------------------")
+        completion = logic_llm(question_prompt, max_tokens=8000, stop=["</s>","# Input"], echo=True,grammar=question_grammar,temperature=0.2)["choices"][0]["text"]
+        # print("COMPLETION:\n\n----------------------")
+        # print(completion)
+        # print("\n------------------")
         
         # Extract questions
         response_pattern = re.compile(r"Question \(based on text\):\n(.+)",re.IGNORECASE | re.DOTALL)
         generation = response_pattern.search(completion).group(1)
-        print("GENERATION:\n\n-------------------\n\n", generation)
+        # print("GENERATION:\n\n-------------------\n\n", generation)
         print("-------------------")
         pattern = re.compile(r'(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)', re.DOTALL | re.MULTILINE | re.IGNORECASE)
         matches = pattern.findall(generation)
@@ -134,7 +196,7 @@ Text to make a question from:
             retries += 1
 
     for match in matches:
-        return (match[0].replace(") ","",1).strip(), match[1].replace(") ","",1).strip(),qatuple[2].replace(") ","",1),qatuple[3])
+        return (match[0].replace(") ","",1).strip(), match[1].replace(") ","",1).strip(),qatuple[2].replace(") ","",1),qatuple[3]), completion
     print("Should not have reached here")
     print(matches)
     print(questions)

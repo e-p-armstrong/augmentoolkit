@@ -126,14 +126,14 @@ To avoid inaccuracies, don't use real people as characters.
                             min_p=0.3,
                             repeat_penalty=2
                             )["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    # print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Scenario \(will have no dialogue, will just set up the scene\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 

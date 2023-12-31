@@ -165,14 +165,14 @@ Special instructions:
 ## Character card plan (be creative):
 Given the question and its answer, one possibility for a character who makes sense is a """
     completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=character_card_plan_grammar)["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    # print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Character card plan \(be creative\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 

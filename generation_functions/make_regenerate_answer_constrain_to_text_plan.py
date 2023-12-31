@@ -34,7 +34,7 @@ You are to use the above example as a reference, while you plan out a revised ve
             completion = logic_llm(decision_prompt, max_tokens=3000, stop=["</s>","# Input:"], echo=True, grammar=answer_constrain_to_text_plan_grammar, temperature=0.2)["choices"][0]["text"]
 
             # print("DEBUG\n\n")
-            print(completion)
+            # print(completion)
             completion_pattern = re.compile(r"Reasoning and thought process:\n(.+)", re.DOTALL)
             correction = completion_pattern.search(completion).group(1)
             return correction

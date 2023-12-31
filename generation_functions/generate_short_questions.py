@@ -61,7 +61,7 @@ All my questions will be directly answerable from the provided paragraphs, and w
         # Extract questions
         response_pattern = re.compile(r"Questions:\n(.+)",re.IGNORECASE | re.DOTALL)
         generation = response_pattern.search(completion).group(1)
-        print("GENERATION:\n\n-------------------\n\n", generation)
+        # print("GENERATION:\n\n-------------------\n\n", generation)
         pattern = re.compile(r'(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)', re.DOTALL | re.MULTILINE | re.IGNORECASE)
         matches = pattern.findall(generation)
         print("GENERATION:\n\n-------------------\n\n", matches)

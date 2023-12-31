@@ -1,0 +1,6 @@
+[
+    "How does a disjunctive syllogism differ from a hypothetical syllogism?",
+    "A disjunctive syllogism has two premises and a conclusion where the first premise is \"A or B\" and the second premise is \"C,\" while the conclusion is either A or C. The structure is: 1. A \u22c5 C, 2. (A v E), 3. C v D, 4. (A v E\u22c5 (C v D). A hypothetical syllogism has two premises and a conclusion where the first premise is \"If A then B\" and the second premise is C, with the conclusion being B. The structure is: 1. A \u2283 C, 2. C, 3. ~D /\u2234 A \u2283 D",
+    "~N Modus ponens, 1, 2 5. ~H Modus tollens, 3, 4  Example 2: 1. A v B 2. C \u2283 D 3. A \u2283 C 4. ~D  /\u2234 B 5. A \u2283 D  Hypothetical syllogism, 3, 2 Chapter 2: Formal methods of evaluating arguments  105 6. ~A  Modus tollens, 5, 4 7. B  Disjunctive syllogism, 1, 6  # 1 1. A \u22c5 C /\u2234 (A v E\u22c5 (C v D) 2. A _________________ 3. C _________________ 4. A v E _________________ 5. C v D _________________ 6. (A v E) \u22c5 (C v D) ______________  # 2 1. A \u2283 (B \u2283 D) 2. ~D 3. D v A  /\u2234 ~B 4. A _________________ 5. B \u2283 D _________________ 6. ~B _________________  # 3 1. A \u2283 ~B 2. A v C 3.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

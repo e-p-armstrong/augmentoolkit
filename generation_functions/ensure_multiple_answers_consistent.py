@@ -257,10 +257,10 @@ The primary character (who should answer the questions, not ask them) is: {chara
                                   min_p=0.6
                                    )["choices"][0]["text"]
             print("DEBUG\n\n")
-            print(completion)
+            # print(completion)
             completion_pattern = re.compile(r"Response \(the conversation's answer must match the provided answer, unsummarized and unsimplified; added questions that are rhetorical or part of the plot \(such as 'would you like to get coffee'\) are acceptable\):\n(.+)", re.DOTALL)
             response = completion_pattern.search(completion).group(1).strip()
-            print(completion)
+            # print(completion)
             if permissive_mode:
                 determination_pattern = re.compile(r"Final Judgment:(.+)", re.IGNORECASE)
                 determination = determination_pattern.search(response).group(1).strip()

@@ -1,0 +1,6 @@
+[
+    "What is a truth table used for in logic?",
+    "A truth table is used to determine the truth value of a compound statement (conclusionbased on the truth values of its components (premises).",
+    "Here is how that truth table looks:   A B C (A v Bv C ~A C T T T    T T F    T F T    T F F    F T T    F T F    F F T    F F F      Here is an important point to note about setting up a truth table. You need to make sure that your reference columns capture each distinct possible assignment of truth values. One way to make sure you do this is by following the same pattern each time you construct a truth table. There is no one right way of doing this, but here is how I do it (and recommend that you do it too). Construct the reference columns so that the atomic propositions are arranged alphabetically, from left to right. Then on the right-most reference column (the C column above), alternate true and false each row, all the way to the bottom. On the reference column to the left of that (the B column above), alternate two rows true, two rows false, all the way to the bottom. On the next column to the left (the A column above), alternate 4 true, 4 false, all the way to the bottom. The next step is to determine the truth values of the premises and conclusion.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

@@ -1,0 +1,6 @@
+[
+    "What is the difference between implication and equivalence in logic?",
+    "Implication asserts that if one proposition is true, then another must be true; equivalence states that if both propositions are true or false simultaneously.",
+    "p q ~p \u22c5 ~q ~(p v qT T      F  F  F      F  T T F      F  F  T      F  T F T      T  F  F      F  T F F      T  T  T      T  F  Again, as you can see from the truth table, the truth values under the main operators of each sentence are identical on every row (i.e., for every assignment of truth values to the atomic propositions). In fact, there is a fifth truth functional connective called \u201cmaterial equivalence\u201d or the \u201cbiconditional\u201d that is defined as true when the atomic propositions share the same truth value, and false when the truth values different. Although we will not be relying on the biconditional, I provide the truth table for it below.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

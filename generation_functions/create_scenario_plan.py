@@ -120,14 +120,14 @@ Description of the character who is going to answer the question:
 """
     # Even if the example does a justified clever trick, the model imitating it may fuck up the trick. So try to avoid complex things that aren't needed for the task in examples, like the "just how much have you dug" colloquialization
     completion = logic_llm(cot_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True, grammar=scenario_plan_grammar,temperature=0.2)["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    # print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Scenario plan \(be creative, and make sure all characters present fit in with the setting\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation
 

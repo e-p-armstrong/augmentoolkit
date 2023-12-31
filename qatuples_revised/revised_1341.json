@@ -1,0 +1,6 @@
+[
+    "What does '~A v B' represent in a logical argument?",
+    "'~A v B' represents not-A or A implies not-B, meaning that if A is false then B must be true. This symbol shows the inverse relationship between A and B.",
+    "Invalid R T S R \u22c5 (T v ST ~S T T T      T   T T F T T F      T   T T T T F T      T   T F F T F F      F   F F T F T T      F   T T F F T F      F   T T T F F T      F   T F F F F F      F   F F T  6. Invalid 7. Valid   8. Valid A B ~(A v B) ~A v ~B T T  F  T     F  F  F T F  F  T     F  T  T F T  F  T     T  T  F F F  T  F     T  T  T  9.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

@@ -190,7 +190,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
             print("\n\nDETERMINATION:\n------")
             print(determination)
             print("\n---------\n")
-            if "inaccurate" in determination or "Inaccurate" in determination or "mostly" in determination: # The "mostly" is there to catch "mostly accurate" which the model says occasionally, and which actually means inaccurate.
+            if "inaccurate" in determination.lower() or "Inaccurate" in determination.lower() or "mostly" in determination.lower() or "partial" in determination.lower(): # The "mostly" is there to catch "mostly accurate" which the model says occasionally, and which actually means inaccurate.
                 return (False,response), completion
             elif "accurate" in determination or "Accurate" in determination: # very deliberate placement of accurate here, becaues the model can sometimes say irrelevant at the very end, even after saying accurate in its judgement
                 return (True,response), completion

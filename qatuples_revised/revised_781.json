@@ -1,0 +1,6 @@
+[
+    "How do universal and particular statements relate to validity in categorical syllogisms?",
+    "A valid argument requires at least one universal statement, while invalid arguments have only particular statements or both universal and particular statements that contradict each other.",
+    "This is so since no universal statement logically implies the existence of any particular. Conversely, if the premise Venn does represent a particular statement (i.e., it contains an asterisk), then if the conclusion doesn\u2019t contain particular statement (i.e., doesn\u2019t contain an asterisk), the argument will be invalid. Exercise 20: Construct Venn diagrams to determine which of the following immediate categorical inferences are valid and which are invalid. Make sure you remember that we are not interpreting universal statements to imply existential commitment. Chapter 2: Formal methods of evaluating arguments  130 1. All S are P; therefore, some S are P 2. No S are P; therefore, some S are not P 3. All S are P; therefore, some P are S 4. No S are P; therefore, some P are not S   2.17 Venn validity for categorical syllogisms  A categorical syllogism is just an argument with two premises and a conclusion, where every statement of the argument is a categorical statement.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

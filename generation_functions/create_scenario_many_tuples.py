@@ -36,12 +36,11 @@ def create_scenario_many_tuples(qatuples,character,plan,logic_llm,assistant_mode
     selected_variation = random.choice(variations)
     
     # For the multiturn convs, I will want to have a longer scenario description.
-    cot_prompt = f"""# Input: 
-You are an expert creative writing and roleplay AI. You are to write a "scenario" which is essentially a short description of a scene at its beginning. Its "setting," but with a hint of where the setting is going, plot-wise. Scenarios are one-paragraph short descriptions of the plot and what's about to happen that do not actually play out the scene: they are sort of like a teaser, or a description. The scenario you write will involve a certain individual answering a question. You will have information from a question, an answer to that question, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question.
+    cot_prompt = f"""You are an expert creative writing and roleplay AI. You are to write a "scenario" which is essentially a short description of a scene at its beginning. Its "setting," but with a hint of where the setting is going, plot-wise. Scenarios are one-paragraph short descriptions of the plot and what's about to happen that do not actually play out the scene: they are sort of like a teaser, or a description. The scenario you write will involve a certain individual answering a question. You will have information from some questions, answers to those question, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question.
 
 Write the scenario on a single line. Note that the scenario is not the scene itself.
 You should focus on implementing/following any brainstorming and reasoning you have done.
-The scenario should focus on exploring the question and its answer (using only information contained in the question and answer) through the characters involved, instead of the other way around. 
+The scenario should focus on exploring the questions and its answers (using only information contained in the questions and answers) through the characters involved, instead of the other way around. 
 Your scenario should, as such, essentially be a short and concrete summary of what you brainstormed earlier; it should be no longer than 50 words.
 Just set up the scene. Do not write any dialogue. Do not write the scene itself.
 
@@ -136,14 +135,14 @@ Description of the character who is going to answer the question:
                             top_p=1,
                             min_p=0.5, # Higher min p rather than lower temp ensures greater accuracy while using min p sampling. I think I've figured out how to make it precise for this application.
                            )["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Scenario \(will have no dialogue, will just set up the scene\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     if (not ("Albert" in charname)):
         if "Albert" in generation:

@@ -1,0 +1,6 @@
+[
+    "What is a valid argument and an invalid argument in logic?",
+    "A valid argument is one where if the premises are true, then the conclusion must also be true; an invalid argument is one where the truth of the premises does not guarantee the truth of the conclusion.",
+    "Thus, the explanation of why this argument is invalid is that the sixth row of the table shows a scenario in which the premises are both true and yet the conclusion is false. Chapter 2: Formal methods of evaluating arguments  85 Exercise 12: Use the truth table test of validity to determine whether or not the following arguments are valid or invalid. 1. 1. A v B 2. B 3. \u2234 ~A  2. 1. A \u22c5 B 2. \u2234 A v B  3. 1. ~C 2. \u2234 ~(C v A 4. 1. (A v B) \u22c5 (A v C) 2. ~A 3. \u2234 B v C  5. 1. R \u22c5 (T v S) 2. T 3. \u2234 ~S  6. 1. A v B 2. \u2234 A \u22c5 B  7. 1. ~(A \u22c5 B) 2. \u2234 ~A v ~B  8. 1. ~(A v B) 2. \u2234 ~A v ~B   9. 1. (R v S) \u22c5 ~D 2. ~R 3.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

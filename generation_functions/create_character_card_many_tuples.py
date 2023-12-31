@@ -200,14 +200,14 @@ Name: {starting_str}"""
                         top_p=1,
                         min_p=0.5,
                             )["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(r"Character card \(be creative, write at least 3 paragraphs for each dialogue line\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
     return generation, completion
 

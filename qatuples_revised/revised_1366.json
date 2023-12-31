@@ -1,0 +1,6 @@
+[
+    "What is the constructive dilemma in logic?",
+    "The constructive dilemma is when one assumes two contradictory propositions and deduces a third.",
+    "~A \u22c5 ~C /\u2234 B 3. ~A       Simplification 2 4. B        Disjunctive syllogism 1, 3  6. 1. A \u2283 B 2. ~B \u22c5 ~C /\u2234 ~A 3. ~B      Simplification 2 4. ~A      Modus tollens, 1, 3  7. 1. D \u2283 E 2. (E \u2283 F\u22c5 (F\u2283 D)  /\u2234 D \u2283 F 3. E \u2283 F         Simplification 2 4. D \u2283 F         Hypothetical syllogism 1, 3  8. 1. (T \u2283 U) \u22c5 (T \u2283 V) 2. T  /\u2234 U v V 3. T v U      Addition 2 4. U v V      Constructive dilemma 1, 2, 3  9. 1. (E \u22c5 F) v (G \u2283 H) 2. I \u2283 G Answers to exercises  224 3. ~(E \u22c5 F) /\u2234 I \u2283 H 4. G \u2283 H     Disjunctive syllogism 1, 3 5.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

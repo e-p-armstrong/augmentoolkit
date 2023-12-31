@@ -9,7 +9,7 @@ import random
 
 # all characters in this prompt are over 18
 
-# Explanation:
+# Explanation of wtf the first few-shot example is:
 # No I do not have a teacher-student fetish, the reason why Elise is a teacher is an adaptation to the following three facts:
 # 1. This tool is meant to be able to generate data for training ERP bots by default
 # 2. This tool is also meant to be able to take in educational material by default
@@ -99,7 +99,7 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm,
     """)
     
     # NOTE Immediately below is a very long comment that tried to use a dynamic grammar to force the question to directly quote the question from the question-answer tuples. Using it makes this step prone to freezing, because if the model asks the question but fails to exactly quote the part of the question in the grammar, it won't be allowed to end that dialogue line until it generates that line. Which it will basically never do. So it just generates until it runs out of ctx.
-    # NOTE If you want to try and fix it, go ahead, but I do not encourage spending time on this bit.
+    # NOTE If you want to try and fix it, go ahead, but I do not encourage spending time on this bit. If you do want to do it, I recommend just getting the conv started off the right way, with the first question and answer; the llm should get the rest right if it gets the start right.
     
     # if (len(qatuples) == 2):
     #     multi_turn_conversation_grammar = LlamaGrammar.from_string(f"""
@@ -191,10 +191,88 @@ def multi_turn_conversation(qatuples,character,scenario,scenario_plan,logic_llm,
 
     #     """)
     
+    if assistant_mode:
+        character = "AI Assistant"
+        scenario = "A conversation between a helpful AI Assistant, and a user." 
+        scenario_plan = "N/A"
+        charname = "AI Assistant"
+        cot_prompt = f"""You are an expert at creative writing and educational material. You will write a short conversation between a curious user and a helpful AI assistant, in which the user asks some questions and the AI assistant answers them. The questions the user asks will be provided; the answers the assistant should return will also be provided. You must use these questions and answers directly in your conversation.
     
-    
-    extra_info = extract_steps(scenario_plan)
-    cot_prompt = f"""You are an expert creative writing and roleplay AI. You will write a short conversation in which a secondary character asks some questions (one at a time) and the primary character answers them (also one at a time). 
+Keep the conversation natural.
+
+## Information:
+Question: \"\"\"How does the slope 'm' in a linear function y = mx + b affect the graph of the function?\"\"\"
+Answer: \"\"\"The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.\"\"\"
+
+Question: \"\"\"What role does the y-intercept 'b' play in graphing a linear function?\"\"\"
+Answer: \"\"\"The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.\"\"\"
+
+Question: \"\"\"In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?\"\"\"
+Answer: \"\"\"The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.\"\"\"
+
+Question: \"\"\"In what fields might you use linear and quadratic functions?\"\"\"
+Answer: \"\"\"Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.\"\"\"
+
+The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+
+### Response:
+## Conversation that answers the provided questions:
+AI Assistant: Hello! I'm here to help with any questions you might have. Feel free to ask away!
+
+User: I was wondering about something in math. How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
+AI Assistant: Great question! The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph. Do you have any further questions about linear functions?
+User: Yes, actually. What role does the y-intercept 'b' play in graphing a linear function?
+AI Assistant: Good question! The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis. Can I assist you further with linear functions?
+User: Moving on to another type of function, in the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
+AI Assistant: The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.  Anything else you want to know about quadratic functions?
+User: Yes, one more. In what fields might you use linear and quadratic functions?
+AI Assistant: Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Anything else you'd like to know about linear and quadratic functions?
+
+## Information:
+Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
+Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
+
+Question: \"\"\"What health challenges were faced during the construction of the Panama Canal, and how were they overcome?\"\"\"
+Answer: \"\"\"The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.\"\"\"
+
+The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+
+### Response:
+## Conversation that answers the provided questions:
+AI Assistant: Hello! I'm here to help you with any questions you might have. What's on your mind today?
+User: I was reading about the Panama Canal and got curious, how much earth was excavated during its construction?
+AI Assistant: That's a great question! Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project. Do you have any further questions about the Panama Canal?
+User: Wow, that is massive! Also, I heard there were some health challenges. What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
+AI Assistant: Indeed, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Do you want to know anything else about the Panama Canal?
+
+## Information:
+Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
+Answer: \"\"\"They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.\"\"\"
+
+Question: \"\"\"Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.\"\"\"
+Answer: \"\"\""Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it."\"\"\"
+
+The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+
+### Response:
+## Conversation that answers the provided questions:
+AI Assistant: Good day! I'm here to assist with any questions or insights you might seek. Please, feel free to ask anything.
+User: What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
+AI Assistant: That's a profound question. They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring. Do you want to know more about Thus Spake Zarathustra?
+User: Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.
+AI Assistant: Certainly. Nietzsche once wrote, "Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it." Do you have any more questions about Nietzsche or his works?
+
+## Information:
+{format_qatuples(qatuples)}
+
+The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+
+### Response:
+## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
+AI Assistant:"""
+    else:
+        extra_info = extract_steps(scenario_plan)
+        cot_prompt = f"""You are an expert creative writing and roleplay AI. You will write a short conversation in which a secondary character asks some questions (one at a time) and the primary character answers them (also one at a time). 
 
 Write compellingly. Each character should have a distinct voice that reflects their background, personality, and current emotional state. This helps in making dialogue more realistic and engaging.
 
@@ -328,23 +406,25 @@ The primary character's answer will use all parts of the answers given. Instead 
     # Note: performance degrades rapidly if you put more than one sentence in a pre-prompt parentheses thing
     completion = logic_llm(cot_prompt, 
                            max_tokens=8000, 
-                           stop=["</s>","# Input:"], 
+                           stop=["</s>","# Input:", "## Information"], 
                            echo=True, 
                            grammar=multi_turn_conversation_grammar,
-                           temperature=0.5, # min p settings, too inconsistent
+                           temperature=0.5,
                             top_k=0,
                             top_p=1,
                             min_p=0.6, 
                            )["choices"][0]["text"]
-    print("COMPLETION:\n\n----------------------")
-    print(completion)
-    print("\n------------------")
+    # print("COMPLETION:\n\n----------------------")
+    # print(completion)
+    # print("\n------------------")
     
     # Extract plan
     response_pattern = re.compile(f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",re.IGNORECASE | re.DOTALL)
     generation = response_pattern.search(completion).group(1)
-    print("GENERATION:\n\n-------------------\n\n", generation)
+    # print("GENERATION:\n\n-------------------\n\n", generation)
     
+    # return (generation,"AI Assistant","A conversation between a helpful AI Assistant, and a user.","N/A",qatuples), completion
+
     return (generation,character,scenario,scenario_plan,qatuples), completion
 
 
@@ -411,7 +491,7 @@ Stranger: "What's your backstory?"
 Professor Archibald Thornbury: "Ah, you wish to know my humble beginnings? Well, I was born into a family of scholars and educators. My father, grandfather, great-grandfather, they were all men of letters. It was only natural that I should follow in their footsteps. After attending Oxford, where I received my doctorate with honors, I began teaching at this esteemed institution. My specialty? The history of human understanding regarding the age of the Earth and earth movements. A fascinating subject, wouldn't you agree?" He smirks, clearly expecting a response in the affirmative. "I've written several books on the topic, each more comprehensive than the last. They are required reading for many universities worldwide."
 Stranger: "What's your personality?"
 Professor Archibald Thornbury: "My dear friend, I am a man of intellect and wisdom. My knowledge is vast, my understanding profound. When I speak, it is with the weight of centuries behind me. I don't suffer fools gladly, nor do I tolerate ignorance. If you wish to learn from me, you must be prepared to listen and absorb. And if you can't handle that, well..." He shrugs dismissively, "there are plenty more who can." His eyes twinkle with amusement as he adds, "But don't mistake my bluntness for rudeness. I simply value time too much to waste it on those who don't appreciate it.\""""
-    output = multi_turn_conversation([q_test[1],q_test[3]],character2,scenario,scenario_plan,logic_llm)
+    output = multi_turn_conversation([q_test[1],q_test[3]],character2,scenario,scenario_plan,logic_llm,assistant_mode=True)
     
     
     
@@ -431,7 +511,7 @@ Step 4. Setting: Given the subject of the question, and the character card, the 
 Step 5. Interaction: Given these constraints, the first message might be Hana asking what Yuki needs help with (Hana may throw in a kind remark about how they're doing, given her personality). Yuki's response might then be a deferential attempt to ask for help, followed by the first question. Hana will then provide the first answer, though she will surround the answer with remarks of a helpful nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples."""
     scenario_japan = """Inside the confines of Hana Kawasaki's high school classroom during study hall time is Yuki — a fellow student who seeks to understand homogeneous substances better due his confusion about them. While he simply wants answers from her regarding this topic (which are provided), she will be kind and helpful as always, answering all questions in an informative manner while providing him with encouragement along the way..."""
     
-    output = multi_turn_conversation([mendeleev_qtuples[1],mendeleev_qtuples[3]],character_japan,scenario_japan,plan_japan,logic_llm)
+    output = multi_turn_conversation([mendeleev_qtuples[1],mendeleev_qtuples[3]],character_japan,scenario_japan,plan_japan,logic_llm,assistant_mode=True)
     
     
     

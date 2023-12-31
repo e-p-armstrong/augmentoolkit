@@ -307,7 +307,7 @@ Answer: {qatuple[1]}
             completion = logic_llm(decision_prompt, max_tokens=10000, stop=["</s>","# Input:"], echo=True, grammar=check_qatuple_context_grammar, temperature=0.2)["choices"][0]["text"]
 
             # print("DEBUG\n\n")
-            # print(completion)
+            # # print(completion)
             
             response_pattern = re.compile(r"Reasoning and thought process \(be thorough\):(.+)", re.DOTALL | re.IGNORECASE)
             response = response_pattern.search(completion).group(1).strip()

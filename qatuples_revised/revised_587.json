@@ -1,0 +1,6 @@
+[
+    "What is the purpose of constructing a proof to show an argument's validity in propositional logic?",
+    "To efficiently demonstrate that an argument is valid, rather than using truth tables.",
+    "(A \u2283 A\u2283 (B \u22c5 ~B) 5. (A \u22c5 B) \u2283 (A v B) 6. (A v B) \u2283 (A \u22c5 B)  7. (~A \u2283 ~B) \u2283 (~B \u2283 ~A) 8. (A \u2283 B) \u2283 (~B \u2283 ~A) 9. (B v ~B) \u2283 A 10. (A v B) v ~A      Chapter 2: Formal methods of evaluating arguments  96 2.11 Proofs and the 8 valid forms of inference  Although truth tables are our only formal method of deciding whether an argument is valid or invalid in propositional logic, there is another formal method of proving that an argument is valid: the method of proof. Although you cannot construct a proof to show that an argument is invalid, you can construct proofs to show that an argument is valid. The reason proofs are helpful, is that they allow us to show that certain arguments are valid much more efficiently than do truth tables. For example, consider the following argument:  1. (R v S) \u2283 (T \u2283 K) 2. ~K 3.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]

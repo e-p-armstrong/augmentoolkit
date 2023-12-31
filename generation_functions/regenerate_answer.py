@@ -29,7 +29,7 @@ The correct answer would be \""""
             completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","\n"], echo=True, grammar=regenerate_answer_grammar,temperature=0.2)["choices"][0]["text"]
 
             # print("DEBUG\n\n")
-            print(completion)
+            # print(completion)
             completion_pattern = re.compile(r"New answer \(comprehensive and complete; do not mention the text\):\nThe correct answer would be \"(.+)", re.DOTALL)
             correction = completion_pattern.search(completion).group(1)
             if "Step 4: Plan a Corrected" in correction:

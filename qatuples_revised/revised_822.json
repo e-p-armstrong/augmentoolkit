@@ -1,0 +1,6 @@
+[
+    "What does it mean for two statements to be contradictory?",
+    "Two statements are contradictory when they cannot both be true at the same time or in the same context.",
+    "No P is M  Some S is M  \u2234 Some S is not P  11. No P is M  Some S is not M  \u2234 Some S is not P  12. No M is P  Some S is not M  \u2234 Some S is not P  13. No P is M  Some M is not S  \u2234 Some S is not P  14. No P is M  No M is S  \u2234 No S is P  15. No P is M  All M is S  \u2234 No S is P  16. No P is M  All S is M  \u2234 No S is P  17. All P is M  No S is M  \u2234 No S is P  18. All M is P  No S is M  \u2234 No S is P  19. Some M is P  Some M is not S  \u2234 Some S is not P  20.",
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
+]
