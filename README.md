@@ -5,9 +5,6 @@ Avoids breaking the bank (and getting your API key revoked) because it doesn't u
 
 ## Table of Contents:
 1. [Installation](#installation)
-    - [Getting the Repository](#getting-the-repository)
-    - [Installing Dependencies](#installing-dependencies)
-    - [Quick Install](#quick-install)
 2. [Introduction](#introduction)
     - [What is Augmentoolkit?](#what-is-augmentoolkit)
     - [Why Was it Built?](#why-was-it-built)
