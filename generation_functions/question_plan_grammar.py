@@ -2,7 +2,8 @@ from llama_cpp import LlamaGrammar
 
 ### A grammar that forces the model to generate correct character cards (with traits, names, everything)
 
-question_plan_grammar = LlamaGrammar.from_string(r"""
+question_plan_grammar = LlamaGrammar.from_string(
+    r"""
 
 # root ::= reasoning-start
 # At least 3 steps
@@ -22,7 +23,8 @@ if-then-step ::= "Step " [0-9]?[0-9] ". " "Create Questions Investigating" [^\n]
 
 make-suitable-step ::= "Step " [0-9]?[0-9] ". " "Make a Question that Naturally Complements the Text's Focus:" [^\n]+ "\n"
 
-""")
+"""
+)
 
 
 # Realize

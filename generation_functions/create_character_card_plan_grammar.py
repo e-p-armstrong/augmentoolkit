@@ -2,7 +2,8 @@ from llama_cpp import LlamaGrammar
 
 ### A grammar that forces the model to generate correct character cards (with traits, names, everything)
 
-character_card_plan_grammar = LlamaGrammar.from_string(r"""
+character_card_plan_grammar = LlamaGrammar.from_string(
+    r"""
        
 # Testing making traits come BEFORE dialogue examples, unlike AliChat, so that way it kind of "flows" into dialogue; and also the details are closer to the start and thus more easily remembered.       
 
@@ -34,7 +35,8 @@ root ::= [^\n]+ "\n"
 
 # theme-step ::= "Step " [0-9]?[0-9] ". " "A theme " [^\n]+ "\n"
 
-""")
+"""
+)
 
 # question_grammar = LlamaGrammar.from_string(r"""# GBNF Grammar for Q&A Format with Flexible Punctuation
 

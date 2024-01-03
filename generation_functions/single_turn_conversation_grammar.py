@@ -2,7 +2,8 @@ from llama_cpp import LlamaGrammar
 
 ### A grammar that forces the model to generate correct character cards (with traits, names, everything)
 
-single_turn_conversation_grammar = LlamaGrammar.from_string(r"""
+single_turn_conversation_grammar = LlamaGrammar.from_string(
+    r"""
 
 # The root rule defines the structure of the dialogue
 root ::= statement "\n\n" response "\n"
@@ -23,7 +24,8 @@ character-name ::= word | word word | word word word | word word word word | wor
 dialogue-line ::= [^\n]+
 
 
-""")
+"""
+)
 
 # question_grammar = LlamaGrammar.from_string(r"""# GBNF Grammar for Q&A Format with Flexible Punctuation
 

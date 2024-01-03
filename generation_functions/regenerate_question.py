@@ -2,8 +2,9 @@ import re
 from generation_functions.question_grammar import question_grammar
 from .strip_steps import strip_steps
 
+
 # Question regeneration (triggered after a relevance-check fails on the question).
-def regenerate_question(qatuple, dissenting_reasoning,plan,logic_llm):
+def regenerate_question(qatuple, dissenting_reasoning, plan, logic_llm):
     retries = 0
     while retries < 5:
         decision_prompt = f"""You are an expert educational AI. You are provided with a flawed question that requires significant knowledge outside these paragraphs to answer. You will make a different question that is solveable if one knows the information in the paragraphs (but since students will not have the paragraphs at hand when given the question, do not refer to the text). Given these paragraphs, the flawed question based on the paragraphs, and the explanation of why the answer is flawed, and a plan for the new question, you will write out a new question that only requires information from the paragraphs to solve. 
@@ -26,7 +27,14 @@ Final note: you are allowed and encouraged to dramatically change/revamp/rewrite
 
 # New question:
 """
-        completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","2.)"], echo=True, grammar=question_grammar,temperature=0.2)["choices"][0]["text"]
+        completion = logic_llm(
+            decision_prompt,
+            max_tokens=4000,
+            stop=["</s>", "2.)"],
+            echo=True,
+            grammar=question_grammar,
+            temperature=0.2,
+        )["choices"][0]["text"]
 
         # print("DEBUG\n\n")
         # print(completion)

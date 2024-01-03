@@ -3,10 +3,11 @@ from .judge_paragraph_grammar import judge_paragraph_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 
-def judge_paragraph(p,logic_llm):
+
+def judge_paragraph(p, logic_llm):
     reached_decision = False
     max_retries = 0
-    while (not reached_decision and (max_retries <= 3)):
+    while not reached_decision and (max_retries <= 3):
         decision_prompt = f"""You are an expert educational AI that will make a determination as to whether the contents of the paragraph(s) provided are suitable for making educational questions based off of them; these questions should be able to test the knowledge in in the book. The book in question is {p[1]}, and you should keep this in mind when considering what kind of questions should be capable of being developed. If there is sufficiently deep information to make questions about, you will judge it suitable, even if the knowledge being tested does not reflect typical curricula. Essentially: you will determine if provided text is a table of contents, introductory paragraph for a book, etc., or if it actually contains real information that would be worthy to teach and make questions for an examination from. Your task includes first analyzing the text, thinking through whether or not good questions can be made from it. 
 
 
@@ -256,13 +257,25 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
 ## Reasoning and thought process (reason intelligently):
 """
         # print("DEBUG\n\n" + decision_prompt)
-        completion = logic_llm(decision_prompt, max_tokens=6000, grammar=judge_paragraph_grammar, stop=["</s>","# Input:"], echo=True,temperature=0.2)["choices"][0]["text"]
+        completion = logic_llm(
+            decision_prompt,
+            max_tokens=6000,
+            grammar=judge_paragraph_grammar,
+            stop=["</s>", "# Input:"],
+            echo=True,
+            temperature=0.2,
+        )["choices"][0]["text"]
 
         # print("DEBUG\n\n")
         # # print(completion)
-        response_pattern = re.compile(r"Reasoning and thought process \(reason intelligently\):(.+)", re.DOTALL | re.IGNORECASE)
-        
-        judgement_pattern = re.compile(r"Final Judgment:(.+)", re.DOTALL | re.IGNORECASE)
+        response_pattern = re.compile(
+            r"Reasoning and thought process \(reason intelligently\):(.+)",
+            re.DOTALL | re.IGNORECASE,
+        )
+
+        judgement_pattern = re.compile(
+            r"Final Judgment:(.+)", re.DOTALL | re.IGNORECASE
+        )
         try:
             response = response_pattern.search(completion).group(1)
             print(response)
@@ -271,30 +284,36 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
             print(determination)
             print("\n---------\n")
             if "unsuitable" in determination.lower():
-                reached_decision=True
-                return (None,p[1])
+                reached_decision = True
+                return (None, p[1])
             elif "suitable" in determination.lower():
-                return (p[0],p[1])
+                return (p[0], p[1])
         except:
             pass
-        max_retries += 1        
-        
-        
+        max_retries += 1
+
+
 if __name__ == "__main__":
-    test = ('Slowly by degrees as one million of years followed another, this fiery scene would lose its eruptive incandescence.  The vapours in the sky would rain down and become less dense overhead; great slaggy cakes of solidifying rock would appear upon the surface of the molten sea, and sink under it, to be replaced by other floating masses.  The sun and moon growing now each more distant and each smaller, would rush with diminishing swiftness across the heavens. The moon now, because of its smaller size, would be already cooled far below incandescence, and would be alternately obstructing and reflecting the sunlight in a series of eclipses and full moons.\n\nAnd so with a tremendous slowness through the vastness of time, the earth would grow more and more like the earth on which we live, until at last an age would come when, in the cooling air, steam would begin to condense into clouds, and the first rain would fall hissing upon the first rocks below.  For endless millenia the greater part of the earth’s water would still be vaporized in the atmosphere, but there would now be hot streams running over the crystallizing rocks below and pools and lakes into which these streams would be carrying detritus and depositing sediment.',
- 'A Short History of the World, by HG Wells, published 1922')
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,
-                      n_ctx=7000,
-                      rope_freq_scale=0.33,
-                      n_gpu_layers=100,
-                      verbose=True,
-                      # n_gqa=8
-                      )
+    test = (
+        "Slowly by degrees as one million of years followed another, this fiery scene would lose its eruptive incandescence.  The vapours in the sky would rain down and become less dense overhead; great slaggy cakes of solidifying rock would appear upon the surface of the molten sea, and sink under it, to be replaced by other floating masses.  The sun and moon growing now each more distant and each smaller, would rush with diminishing swiftness across the heavens. The moon now, because of its smaller size, would be already cooled far below incandescence, and would be alternately obstructing and reflecting the sunlight in a series of eclipses and full moons.\n\nAnd so with a tremendous slowness through the vastness of time, the earth would grow more and more like the earth on which we live, until at last an age would come when, in the cooling air, steam would begin to condense into clouds, and the first rain would fall hissing upon the first rocks below.  For endless millenia the greater part of the earth’s water would still be vaporized in the atmosphere, but there would now be hot streams running over the crystallizing rocks below and pools and lakes into which these streams would be carrying detritus and depositing sediment.",
+        "A Short History of the World, by HG Wells, published 1922",
+    )
+    logic_llm = Llama(
+        model_path=LOGICAL_MODEL,
+        n_gqa=8,
+        offload_kqv=True,
+        n_ctx=7000,
+        rope_freq_scale=0.33,
+        n_gpu_layers=100,
+        verbose=True,
+        # n_gqa=8
+    )
     right = 0
-    d1 = judge_paragraph(test,logic_llm)
+    d1 = judge_paragraph(test, logic_llm)
     if d1[0]:
         right += 1
-    test2 = ("""
+    test2 = (
+        """
 
   A
 
@@ -345,13 +364,16 @@ if __name__ == "__main__":
   Wm. BAYNE, Printer,
   James’s Court, Edinburgh.
 
-""",'Collection of latin maxims & rules in law and equity')
-    
-    d2 = judge_paragraph(test2,logic_llm)
+""",
+        "Collection of latin maxims & rules in law and equity",
+    )
+
+    d2 = judge_paragraph(test2, logic_llm)
     if not d2[0]:
         right += 1
-    
-    test3 = ("""A communi observantia non est recedendum; et minime mutandæ sunt quæ
+
+    test3 = (
+        """A communi observantia non est recedendum; et minime mutandæ sunt quæ
 certam interpretationem habent.
 
      We must not depart rashly from common observance; and those
@@ -408,10 +430,12 @@ Ab assuetis non fit injuria.
 Absoluta sententia expositore non indiget.
 
      An absolute or perfect opinion or sentence, needs no
-     expounder, exposition, or explanation.""",'A Collection of latin maxims & rules in law and equity, by Peter Halkerston')
-    
-    d3 = judge_paragraph(test3,logic_llm)
+     expounder, exposition, or explanation.""",
+        "A Collection of latin maxims & rules in law and equity, by Peter Halkerston",
+    )
+
+    d3 = judge_paragraph(test3, logic_llm)
     if d3[0]:
         right += 1
-        
+
     print("Num right: ", right)

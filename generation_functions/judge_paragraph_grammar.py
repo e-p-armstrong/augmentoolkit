@@ -1,6 +1,7 @@
 from llama_cpp import LlamaGrammar
 
-judge_paragraph_grammar = LlamaGrammar.from_string(r"""                     
+judge_paragraph_grammar = LlamaGrammar.from_string(
+    r"""                     
        
 root ::= identify-content-step evaluate-relevance-step assess-contexts-and-formats-step assess-possibility-step determine-suitability-step check-contextual-completeness-step final-step "\n"
 
@@ -21,4 +22,5 @@ final-step ::= "Step " [0-9]?[0-9] ". " "Final Judgment: " ("Unsuitable" | "Suit
 context-format-bullets ::= bullet-item+
 bullet-item ::= "  - " bullet-item-detail "\n"
 bullet-item-detail ::= [^\n]+
-""")
+"""
+)

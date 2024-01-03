@@ -1,6 +1,7 @@
 from llama_cpp import LlamaGrammar
 
-answer_relevant_grammar = LlamaGrammar.from_string(r"""                     
+answer_relevant_grammar = LlamaGrammar.from_string(
+    r"""                     
        
 # Root rule specifying the overall structure of the analysis
 root ::= deep-analysis "\n" comprehensive-understanding "\n" targeted-comparison "\n" identification-of-extraneous-info "\n" final-judgment
@@ -47,11 +48,11 @@ impact-assessment ::= [^\n]+
 relevance-detail ::= [^\n]+
 judgment-detail ::= [^\n]+
 
-""")
+"""
+)
 
 # question_grammar = LlamaGrammar.from_string(r"""# GBNF Grammar for Q&A Format with Flexible Punctuation
 
 # root ::= answer
 # answer ::= "Test"
 # """)
-

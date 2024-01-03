@@ -24,8 +24,9 @@ from .process_multiturn_functions import has_sequential_chars
 #     return matching_questions
 
 
-
-def identify_duplicates(tuples: List[Tuple[str, str, str, str]]) -> List[Tuple[str, str, str, str]]:
+def identify_duplicates(
+    tuples: List[Tuple[str, str, str, str]]
+) -> List[Tuple[str, str, str, str]]:
     # Create a dictionary to hold questions with the same first N characters
     question_dict = {}
 
@@ -40,19 +41,25 @@ def identify_duplicates(tuples: List[Tuple[str, str, str, str]]) -> List[Tuple[s
         else:
             question_dict[prefix] = [q_tuple]
 
-    matching_questions = [q for q_list in question_dict.values() if len(q_list) == 1 for q in q_list]
-    selected_from_duplicates = [q_list[0] for q_list in question_dict.values() if len(q_list) > 1]
-    
+    matching_questions = [
+        q for q_list in question_dict.values() if len(q_list) == 1 for q in q_list
+    ]
+    selected_from_duplicates = [
+        q_list[0] for q_list in question_dict.values() if len(q_list) > 1
+    ]
+
     return matching_questions + selected_from_duplicates
+
+
 # There is no bug about this ignoring certain judgments and retrying; that's just the dissenting reasoning from the print statement
 
 
 if __name__ == "__main__":
     sample_tuples = [
-    ("What is your name?", "Alice", "12/12/2021", "ID1"),
-    ("What is your quest?", "Bob", "12/12/2021", "ID2"),
-    ("When is your birthday?", "Cindy", "12/12/2021", "ID3"),
-    ("When is your birthday?", "Dan", "12/12/2021", "ID4"),
-    ("When do you go to school?", "Eve", "12/12/2021", "ID5")
-]
+        ("What is your name?", "Alice", "12/12/2021", "ID1"),
+        ("What is your quest?", "Bob", "12/12/2021", "ID2"),
+        ("When is your birthday?", "Cindy", "12/12/2021", "ID3"),
+        ("When is your birthday?", "Dan", "12/12/2021", "ID4"),
+        ("When do you go to school?", "Eve", "12/12/2021", "ID5"),
+    ]
     print(identify_duplicates(sample_tuples))

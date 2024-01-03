@@ -1,27 +1,28 @@
 def strip_steps(instruction_text):
     """
     This function takes a string containing step-by-step instructions and removes the "Step N." prefix from each line.
-    
+
     Parameters:
     instruction_text (str): A string with each step in the format "Step N. Instruction", separated by newlines
 
     Returns:
     str: A single string with the steps stripped, joined by newlines.
     """
-    instructions = instruction_text.split('\n')
+    instructions = instruction_text.split("\n")
     stripped_instructions = []
     for line in instructions:
         # Check if line starts with 'Step' and followed by a number and period
-        if line.strip().startswith('Step') and '.' in line:
+        if line.strip().startswith("Step") and "." in line:
             # Find the index of the first period
-            period_index = line.find('.')
+            period_index = line.find(".")
             # Extract the text after the period (and optional space)
-            text_after_period = line[period_index+1:].lstrip()
+            text_after_period = line[period_index + 1 :].lstrip()
             stripped_instructions.append(text_after_period)
         else:
             stripped_instructions.append(line)
-    
-    return '\n'.join(stripped_instructions)
+
+    return "\n".join(stripped_instructions)
+
 
 if __name__ == "__main__":
     # Example usage with a multi-line string
@@ -32,7 +33,7 @@ Step 2. Identify Key Points: look for important concepts or ideas mentioned in t
 
     result = strip_steps(example_instructions)
     print(result)
-    
+
     # Example with no space after the period
     example_non_instructions = """
     Step1. This is a lovely
@@ -42,7 +43,7 @@ Step 2. Identify Key Points: look for important concepts or ideas mentioned in t
     """
 
     result2 = strip_steps(example_non_instructions)
-    
+
     print(result2)
 
     example_3 = """

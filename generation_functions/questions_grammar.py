@@ -1,6 +1,7 @@
 from llama_cpp import LlamaGrammar
 
-questions_grammar = LlamaGrammar.from_string(r"""
+questions_grammar = LlamaGrammar.from_string(
+    r"""
 root ::= (question-one answer "\n") (question-two answer "\n") (question-three answer "\n") (question-four answer)
 
 # Define the question structure with a number followed by content and ending punctuation
@@ -41,18 +42,12 @@ question-four ::= "4.) " [^\n]+ [?.!] "\n\n" # maybe blacklist ?!. along with ne
     
 
 # Optional whitespace: space, tab, or newlines zero or more times
-""")
-
-
-
-
-
-
-
+"""
+)
 
 
 # questions_grammar = LlamaGrammar.from_string(r"""
-                                            
+
 # root ::= (question answer)
 
 # # Define the question structure with a number followed by content and ending punctuation

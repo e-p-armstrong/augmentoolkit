@@ -3,10 +3,11 @@ from .question_plan_grammar import question_plan_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 
-def generate_questions_plan(text,logic_llm):
+
+def generate_questions_plan(text, logic_llm):
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
-    
+
     Format: Question: [question]\n\n
     """
     # Determine which paragraphs are worthy of making questions from
@@ -187,41 +188,58 @@ Your planned questions must include context, if a question requires both context
 ## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
 """
     # print("DEBUG\n\n" + decision_prompt)
-    completion = logic_llm(cot_prompt, 
-                           max_tokens=8000, 
-                           stop=["</s>","# Input:"], 
-                           echo=True, 
-                           grammar=question_plan_grammar, 
-                        #    temperature=0.2
-                        temperature=0.8, # min p settings, too inconsistent
-                            top_k=0,
-                            top_p=1,
-                            min_p=0.5,
-                           )["choices"][0]["text"]
-    
+    completion = logic_llm(
+        cot_prompt,
+        max_tokens=8000,
+        stop=["</s>", "# Input:"],
+        echo=True,
+        grammar=question_plan_grammar,
+        #    temperature=0.2
+        temperature=0.8,  # min p settings, too inconsistent
+        top_k=0,
+        top_p=1,
+        min_p=0.5,
+    )["choices"][0]["text"]
+
     # Extract plan
-    response_pattern = re.compile(r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",re.IGNORECASE | re.DOTALL)
+    response_pattern = re.compile(
+        r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",
+        re.IGNORECASE | re.DOTALL,
+    )
     generation = response_pattern.search(completion).group(1)
     # print("GENERATION:\n\n-------------------\n\n", generation)
-    
+
     return generation, completion
 
 
-if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=8000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=True) # load the logical LLM and offload everything
+if __name__ == "__main__":  # test
+    logic_llm = Llama(
+        model_path=LOGICAL_MODEL,
+        n_gqa=8,
+        offload_kqv=True,
+        n_ctx=8000,
+        rope_freq_scale=0.33,
+        n_gpu_layers=100,
+        verbose=True,
+    )  # load the logical LLM and offload everything
     text = """The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.
 
 The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."""
     print("Begin HGWELLS test")
-    result = generate_questions_plan((text,"A Short History of the World, by HG Wells"),logic_llm)
-    
+    result = generate_questions_plan(
+        (text, "A Short History of the World, by HG Wells"), logic_llm
+    )
 
     # Chemistry: a harder science
     print("Begin MENDELEEV TEST")
-    text2 = ("""A substance or material is that which occupies space and has weight; that is, which presents a mass attracted by the earth and by other masses of material, and of which the _objects_ of nature are composed, and by means of which the motions and _phenomena_ of nature are accomplished. It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances. This is most clearly apparent in solid substances. The metals used in the arts (for example, gold, iron, copper) must be homogeneous, otherwise they are brittle and unfit for many purposes. Homogeneous matter exhibits similar properties in all its parts. By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties. Glass, pure sugar, marble, &c., are examples of homogeneous substances. Examples of non-homogeneous substances are, however, much more frequent in nature and the arts. Thus the majority of the rocks are not homogeneous. In porphyries bright pieces of a mineral called 'orthoclase' are often seen interspersed amongst the dark mass of the rock. In ordinary red granite it is easy to distinguish large pieces of orthoclase mixed with dark semi-transparent quartz and flexible laminæ of mica. Similarly, plants and animals are non-homogeneous. Thus, leaves are composed of a skin, fibre, pulp, sap, and a green colouring matter. As an example of those non-homogeneous substances which are produced artificially, gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal. Many liquids, also, are not homogeneous, as may be observed by the aid of the microscope, when drops of blood are seen to consist of a colourless liquid in which red corpuscles, invisible to the naked eye owing to their small size, are floating about.""","Principles of Chemistry, by Demitry Mendeleev")
-    result2 = generate_questions_plan(text2,logic_llm)
-    
-    text3 = ("""After the girl had played to them upon the flute, and then the boy in
+    text2 = (
+        """A substance or material is that which occupies space and has weight; that is, which presents a mass attracted by the earth and by other masses of material, and of which the _objects_ of nature are composed, and by means of which the motions and _phenomena_ of nature are accomplished. It is easy to discover by examining and investigating, by various methods, the objects met with in nature and in the arts, that some of them are homogeneous, whilst others are composed of a mixture of several homogeneous substances. This is most clearly apparent in solid substances. The metals used in the arts (for example, gold, iron, copper) must be homogeneous, otherwise they are brittle and unfit for many purposes. Homogeneous matter exhibits similar properties in all its parts. By breaking up a homogeneous substance we obtain parts which, although different in form, resemble each other in their properties. Glass, pure sugar, marble, &c., are examples of homogeneous substances. Examples of non-homogeneous substances are, however, much more frequent in nature and the arts. Thus the majority of the rocks are not homogeneous. In porphyries bright pieces of a mineral called 'orthoclase' are often seen interspersed amongst the dark mass of the rock. In ordinary red granite it is easy to distinguish large pieces of orthoclase mixed with dark semi-transparent quartz and flexible laminæ of mica. Similarly, plants and animals are non-homogeneous. Thus, leaves are composed of a skin, fibre, pulp, sap, and a green colouring matter. As an example of those non-homogeneous substances which are produced artificially, gunpowder may be cited, which is prepared by mixing together known proportions of sulphur, nitre, and charcoal. Many liquids, also, are not homogeneous, as may be observed by the aid of the microscope, when drops of blood are seen to consist of a colourless liquid in which red corpuscles, invisible to the naked eye owing to their small size, are floating about.""",
+        "Principles of Chemistry, by Demitry Mendeleev",
+    )
+    result2 = generate_questions_plan(text2, logic_llm)
+
+    text3 = (
+        """After the girl had played to them upon the flute, and then the boy in
 turn upon the harp, and both performers, as it would appear, had set the
 hearts of every one rejoicing, Socrates turned to Callias:
 
@@ -252,12 +270,15 @@ why? Distinctions vanish with the use of perfumes. The freeman and the
 slave have forthwith both alike one odour. But the scents derived from
 toils--those toils which every free man loves (7)--need customary habit
 first, and time's distillery, if they are to be sweet with freedom's
-breath, at last.""","The Symposium, by Xenophon")
+breath, at last.""",
+        "The Symposium, by Xenophon",
+    )
     print("Begin XENOPHON test")
-    result3 = generate_questions_plan(text3,logic_llm)
-    
+    result3 = generate_questions_plan(text3, logic_llm)
+
     print("Begin KANT test")
-    text4 = ("""I. Of the difference between Pure and Empirical Knowledge
+    text4 = (
+        """I. Of the difference between Pure and Empirical Knowledge
 
 That all our knowledge begins with experience there can be no doubt.
 For how is it possible that the faculty of cognition should be awakened
@@ -294,9 +315,11 @@ that it would have fallen;” that is, he needed not to have waited for
 the experience that it did actually fall. But still, à priori, he could
 not know even this much. For, that bodies are heavy, and, consequently,
 that they fall when their supports are taken away, must have been known
-to him previously, by means of experience.""", "The Critique of Pure Reason, by Immanuel Kant")
-    result4 = generate_questions_plan(text4,logic_llm)
-    
+to him previously, by means of experience.""",
+        "The Critique of Pure Reason, by Immanuel Kant",
+    )
+    result4 = generate_questions_plan(text4, logic_llm)
+
     # This text is very hard to parse, maybe not a good test
 #     print("Begin Beyond Good and Evil test")
 #     text5 = ("""The Will to Truth, which is to tempt us to many a hazardous
@@ -322,24 +345,9 @@ to him previously, by means of experience.""", "The Critique of Pure Reason, by 
 #     result4 = generate_questions_plan(text5,logic_llm)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # # old one
 
-# f"""[INST] <<SYS>> You are an expert educational AI that, given a paragraph or two from a text, will narrow down what kind of high-quality educational questions could be asked based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels).<</SYS>> For now, your goal is to just write a good, comprehensive plan for generating questions that require critical thinking to solve; what aspects of the provided paragraphs they might cover, etc. The questions should ONLY cover material that explictly appears in the provided paragraphs. The topics you think of should lean towards longer, more difficult questions, that require some thought to solve — but which can still be solved if you know the information in the paragraphs. Essentially: the question will test comprehension and memorization of real information that would be worthy to teach. Your task includes analyzing the text, thinking through and brainstorming which questions you will make and why. 
+# f"""[INST] <<SYS>> You are an expert educational AI that, given a paragraph or two from a text, will narrow down what kind of high-quality educational questions could be asked based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels).<</SYS>> For now, your goal is to just write a good, comprehensive plan for generating questions that require critical thinking to solve; what aspects of the provided paragraphs they might cover, etc. The questions should ONLY cover material that explictly appears in the provided paragraphs. The topics you think of should lean towards longer, more difficult questions, that require some thought to solve — but which can still be solved if you know the information in the paragraphs. Essentially: the question will test comprehension and memorization of real information that would be worthy to teach. Your task includes analyzing the text, thinking through and brainstorming which questions you will make and why.
 
 # Text to make questions from: \"\"\"{text}\"\"\"
 

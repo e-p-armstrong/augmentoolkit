@@ -1,20 +1,24 @@
 import re
+
 # try:
 from .question_grammar import question_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 
-def generate_new_question(qatuple,logic_llm):
+
+def generate_new_question(qatuple, logic_llm):
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
-    
+
     Format: Question: [question]\n\n
     """
     # Determine which paragraphs are worthy of making questions from
     made_questions = False
     retries = 0
     questions = []
-    while (not made_questions and (retries <= 5)): # TODO - UPDATE and TEST the few-shot prompt with the latest from generate_questions
+    while not made_questions and (
+        retries <= 5
+    ):  # TODO - UPDATE and TEST the few-shot prompt with the latest from generate_questions
         question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create a suitable educational question based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
 
 Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
@@ -176,17 +180,29 @@ Text to make a question from:
         # print("DEBUG\n\n" + decision_prompt)
         print("--QA TUPLE DURING NEW Q GEN--")
         print(qatuple)
-        completion = logic_llm(question_prompt, max_tokens=8000, stop=["</s>","# Input"], echo=True,grammar=question_grammar,temperature=0.2)["choices"][0]["text"]
+        completion = logic_llm(
+            question_prompt,
+            max_tokens=8000,
+            stop=["</s>", "# Input"],
+            echo=True,
+            grammar=question_grammar,
+            temperature=0.2,
+        )["choices"][0]["text"]
         # print("COMPLETION:\n\n----------------------")
         # print(completion)
         # print("\n------------------")
-        
+
         # Extract questions
-        response_pattern = re.compile(r"Question \(based on text\):\n(.+)",re.IGNORECASE | re.DOTALL)
+        response_pattern = re.compile(
+            r"Question \(based on text\):\n(.+)", re.IGNORECASE | re.DOTALL
+        )
         generation = response_pattern.search(completion).group(1)
         # print("GENERATION:\n\n-------------------\n\n", generation)
         print("-------------------")
-        pattern = re.compile(r'(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)', re.DOTALL | re.MULTILINE | re.IGNORECASE)
+        pattern = re.compile(
+            r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
+            re.DOTALL | re.MULTILINE | re.IGNORECASE,
+        )
         matches = pattern.findall(generation)
         if len(matches) > 0:
             print("Made Qs, yay!")
@@ -196,14 +212,26 @@ Text to make a question from:
             retries += 1
 
     for match in matches:
-        return (match[0].replace(") ","",1).strip(), match[1].replace(") ","",1).strip(),qatuple[2].replace(") ","",1),qatuple[3]), completion
+        return (
+            match[0].replace(") ", "", 1).strip(),
+            match[1].replace(") ", "", 1).strip(),
+            qatuple[2].replace(") ", "", 1),
+            qatuple[3],
+        ), completion
     print("Should not have reached here")
     print(matches)
     print(questions)
     return questions, completion
 
-if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
+
+if __name__ == "__main__":  # test
+    logic_llm = Llama(
+        model_path=LOGICAL_MODEL,
+        n_gqa=8,
+        offload_kqv=True,
+        n_ctx=4096,
+        n_gpu_layers=1000,
+    )  # load the logical LLM and offload everything
     text = """The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.
 
 The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."""
@@ -211,8 +239,7 @@ The earth, as everybody knows nowadays, is a spheroid, a sphere slightly compres
     plan = """First, let's will analyze the text to determine what kinds of high-level questions I can ask that will test the content in these paragraphs (being careful to avoid mentioning the paragraphs explicitly in any questions, and being SURE to only ask about things that the paragraphs talk about). I will start by looking at one or two sentences at a time. Let's begin with: "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years." This paragraph is saying that people used to know only about 3,000 years of history, but now they know much more. So I might ask something like "What was the time period in which people had limited knowledge?" The question tests knowledge of when historical records were incomplete and therefore difficult to access. It requires understanding of the text as well as analysis to determine what time period is being referred to here.  Next, I'll look at: "Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end." This paragraph states that the universe seems infinite because of its reflection, but it could actually be finite with two ends. So I might ask something like "How does the structure of the universe affect its size?" This question tests understanding of the concept of reflection and how it can distort perceptions of size, as well as analysis to determine what implications this might have for the actual size of the universe. Then I'll move on: "The earth ... circles about the sun in a slightly distorted and slowly variable oval path in a year." This paragraph talks about the Earth's orbit around the Sun. So I might ask something like "What is the shape of the Earth's orbit around the sun?" This question tests understanding of the text as well as analysis to determine the specific shape mentioned here. Lastly, let's examine: "Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."  This paragraph says that the Earth's distance from the Sun changes throughout the year. So I might ask something like "Why does the Earth's distance from the Sun change over the course of the year?" This question tests understanding of the text as well as analysis to determine why this change occurs."""
     print("Begin HGWELLS test")
     # result = generate_question(text,plan,logic_llm)
-    
-    
+
     print("Begin MENDELEEV Test")
     text2 = """A substance or material is that which occupies space and has
 weight; that is, which presents a mass attracted by the earth and
@@ -257,23 +284,12 @@ with the homogeneous substances met with in nature, or extracted
 from natural or artificial non-homogeneous substances. The various
 mixtures found in nature form the subjects of other natural
 sciences--as geognosy, botany, zoology, anatomy, &c."""
-      
-      
-      
-      
-      
-      
-      
+
     plan3 = """Step 1. Identify Key Topics: The key topics in this paragraph include homogeneous and non-homogeneous substances, their properties, and how they are extracted from natural or artificial mixtures.
 Step 2. Determine Information-Rich Areas: The text provides detailed descriptions of the properties of homogeneous and non-homogeneous substances, as well as methods for extracting them from mixtures.
 Step 3. Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of definitions and processes related to homogeneous and non-homogeneous substances. Example: "What is the definition of a homogeneous substance?"
 Step 4. Develop Questions Exploring Relationships Between Concepts: Generate questions that explore how one concept relates to another within the text. Example: "How does the extraction process for gold differ from that of orthoclase?"
 Step 5. Create Questions Investigating Application of Concepts: Look for examples of applications of these concepts in nature or industry that are mentioned in the text. Example: "In what ways is the concept of homogeneous substances used in chemistry?\""""
-      
-      
-      
-      
-      
-    result2 = generate_new_question((text2,"Principles of chemistry"),logic_llm)
-    print("GENERATION TEST2:\n\n-------------------\n\n", result2)
 
+    result2 = generate_new_question((text2, "Principles of chemistry"), logic_llm)
+    print("GENERATION TEST2:\n\n-------------------\n\n", result2)

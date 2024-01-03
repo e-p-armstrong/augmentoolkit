@@ -1,6 +1,7 @@
 from llama_cpp import LlamaGrammar
 
-ensure_multiple_answers_consistent_grammar = LlamaGrammar.from_string(r"""                     
+ensure_multiple_answers_consistent_grammar = LlamaGrammar.from_string(
+    r"""                     
     
 # Root rule to define the overall structure
 root ::= sequential-matching-section accuracy-check-section conclusion-section
@@ -20,7 +21,8 @@ matching-statement ::= number ". " [^\n]+ "\n"
 accuracy-statement ::= number ". " [^\n]+ "\n"
 conclusion-statement ::= "  - " [^\n]+ "\n"
 final-judgement ::= "  - Final Judgment:" [^\n]+
-""")
+"""
+)
 
 
 # the-tone ::= "  - The tone" [^\n]+ "\n"

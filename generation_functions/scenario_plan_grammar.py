@@ -3,7 +3,8 @@ from llama_cpp import LlamaGrammar
 ### A grammar that forces the model to generate correct character cards (with traits, names, everything)
 
 # TODO ban the word Stranger here, or use a randomized name in the character card. OR get an LLM to generate a name for the character card.
-scenario_plan_grammar = LlamaGrammar.from_string(r"""
+scenario_plan_grammar = LlamaGrammar.from_string(
+    r"""
                                                  
 root ::= consider-question-step consider-character-step constrain-step setting-step create-step second-message-step "\n"
 
@@ -19,4 +20,5 @@ create-step ::= "Step " [0-9]?[0-9] ". " "Interaction: Given these constraints, 
 
 second-message-step ::= "Step " [0-9]?[0-9] ". In the second message," [^\n]+ "\n"
 
-""")
+"""
+)

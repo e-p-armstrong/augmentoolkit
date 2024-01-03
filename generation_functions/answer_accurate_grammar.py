@@ -2,7 +2,8 @@ from llama_cpp import LlamaGrammar
 
 # NOTE might struggle with very complex answers that have more than nine parts to them. This can be amended by adding more options to the "compare-step" rule, or making a more general pattern, if your use-case requires it.
 
-answer_accurate_grammar = LlamaGrammar.from_string(r"""                     
+answer_accurate_grammar = LlamaGrammar.from_string(
+    r"""                     
     
        
 # Root rule specifying the overall structure of the analysis
@@ -45,7 +46,8 @@ assessment-detail ::= [^\n]+
 accuracy-detail ::= [^\n]+
 
 # understand-step ::= "Step " [0-9]?[0-9] ". " "Understand" [^\n]+ "\n"
-""")
+"""
+)
 # question_grammar = LlamaGrammar.from_string(r"""# GBNF Grammar for Q&A Format with Flexible Punctuation
 
 # root ::= answer

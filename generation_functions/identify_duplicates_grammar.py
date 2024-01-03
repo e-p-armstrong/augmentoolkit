@@ -4,7 +4,8 @@ from llama_cpp import LlamaGrammar
 
 
 # We don't actually need the final judgement step, the step-by-step combined with the fact that it makes a judgement at each step ensures accuracy
-identify_duplicates_grammar = LlamaGrammar.from_string(r"""
+identify_duplicates_grammar = LlamaGrammar.from_string(
+    r"""
        
 # Root rule defining the overall structure of the response
 root ::= normalization-block core-components-block comparative-analysis-block criteria-block conclusion-block
@@ -35,4 +36,5 @@ digit ::= [0-9] # Digits
 char ::= [^\n] # Any character except newline
 
 bullet-item ::= "- " content "\n"
-""")
+"""
+)

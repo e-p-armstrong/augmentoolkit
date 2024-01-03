@@ -2,18 +2,20 @@ import re
 from .ensure_answer_consistent_grammar import ensure_answer_consistent_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
+
+
 # Answer vetting
 # For now, this checks answer relevancy too. The danger with abstracting answer relevancy into a separate step is that anything which relies on knowledge that is obviously mentioned in the text already up until this point, will get screwed
-def ensure_answer_consistent(qatuple,conv,logic_llm,permissive_mode=True):
+def ensure_answer_consistent(qatuple, conv, logic_llm, permissive_mode=True):
     """
     permissive_mode: turn off if you want a single usage of the word "inconsistent" anywhere in the message to flag the whole thing as inconsistent. Prevents errors where an inconsistency happens way early in the answer, but the model forgets about it during its final judgement; but enables the error where the model mentions that something is "not entirely inconsistent" or similar, which is surprisingly common.
     """
     retries = 0
-    
+
     # It's expensive to regen a conversation; so we check very thoroughly, and use a two-shot example. "Permissive mode" recommended
-    
+
     # NOTE: I don't know what kind of errors this part of the pipeline will run into most often, so I don't really know what examples to feed it to guard it with. Come back to it once I have tested it more.
-    while (retries <= 4):
+    while retries <= 4:
         decision_prompt = f"""You are an expert educational AI. Your task is to determine whether two answers are the same, given a question, its answer, and a conversation between two fictional individuals in which that question is asked and that answer is provided. You will also check whether the question is essentially the same, and does not go "off the rails". Essentially: you will fact-check and consistency-check the question and answer in the conversation, with your source of truth being the provided question and answer. 
 
 Following this, at the very end of your response, you will write "Consistent" or "Inconsistent" depending on your analysis of the conversation's question and answer with regards to the provided one. Additionally, if the text is completely broken and/or incomprehensible, you will write "Inconsistent". You are not checking the accuracy of the answer, just its consistency with the provided answer.
@@ -127,8 +129,18 @@ Conversation:
 """
         # print("DEBUG\n\n" + decision_prompt)
         try:
-            completion = logic_llm(decision_prompt, max_tokens=4000, stop=["</s>","# Input:"], echo=True,grammar=ensure_answer_consistent_grammar,temperature=0.2)["choices"][0]["text"]
-            completion_pattern = re.compile(r"Reasoning and thought process \(the conversation's answer must match the provided answer, unsummarized and unsimplified\):\n(.+)", re.DOTALL)
+            completion = logic_llm(
+                decision_prompt,
+                max_tokens=4000,
+                stop=["</s>", "# Input:"],
+                echo=True,
+                grammar=ensure_answer_consistent_grammar,
+                temperature=0.2,
+            )["choices"][0]["text"]
+            completion_pattern = re.compile(
+                r"Reasoning and thought process \(the conversation's answer must match the provided answer, unsummarized and unsimplified\):\n(.+)",
+                re.DOTALL,
+            )
             response = completion_pattern.search(completion).group(1).strip()
             # print("DEBUG\n\n")
             # print(completion)
@@ -141,40 +153,63 @@ Conversation:
             print(determination)
             print("\n---------\n")
             if "inconsistent" in determination.lower():
-                return (False,response)
+                return (False, response)
             elif "consistent" in determination.lower():
-                return (True,response)
+                return (True, response)
             else:
                 retries += 1
         except:
             retries += 1
-            print(f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}")
-            
-            
-if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=4096,n_gpu_layers=1000) # load the logical LLM and offload everything
+            print(
+                f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}"
+            )
+
+
+if __name__ == "__main__":  # test
+    logic_llm = Llama(
+        model_path=LOGICAL_MODEL,
+        n_gqa=8,
+        offload_kqv=True,
+        n_ctx=4096,
+        n_gpu_layers=1000,
+    )  # load the logical LLM and offload everything
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,
     # q3 is iffy q, good a
-    q_test = [('Explain how our understanding of planetary motion has changed over time.',
-  'The understanding has evolved from the Earth being stationary and at the centre of the universe, to it orbiting the sun in an elliptical path with other planets while still rotating on its axis.',
-  'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),
- ('Identify and explain changes in human understanding throughout history regarding the age of the Earth.',
-  'Initially, the Bible suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old.',
-  'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),
- ('Using specific scientific principles, explain why we know Earth is approximately 8000 miles in diameter and how its distance from the sun varies.',
-  "We know about Earth's diameter using measurements of its circumference made using GPS data. The variation in distance to the sun is due to Earth's elliptical orbit around the sun, with a varying point of closest approach and farthest departure.",
-  'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.'),
- ("Demonstrate an understanding of Earth's rotational and orbital movement using scientific concepts.",
-  'Earth rotates on its axis once every 24 hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons.',
-  'The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.')]
-    
+    q_test = [
+        (
+            "Explain how our understanding of planetary motion has changed over time.",
+            "The understanding has evolved from the Earth being stationary and at the centre of the universe, to it orbiting the sun in an elliptical path with other planets while still rotating on its axis.",
+            "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.",
+        ),
+        (
+            "Identify and explain changes in human understanding throughout history regarding the age of the Earth.",
+            "Initially, the Bible suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old.",
+            "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.",
+        ),
+        (
+            "Using specific scientific principles, explain why we know Earth is approximately 8000 miles in diameter and how its distance from the sun varies.",
+            "We know about Earth's diameter using measurements of its circumference made using GPS data. The variation in distance to the sun is due to Earth's elliptical orbit around the sun, with a varying point of closest approach and farthest departure.",
+            "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.",
+        ),
+        (
+            "Demonstrate an understanding of Earth's rotational and orbital movement using scientific concepts.",
+            "Earth rotates on its axis once every 24 hours, causing day and night cycles. It also orbits around the sun in a slightly elliptical path, which affects how close it is to the sun at different times of the year - leading to seasons.",
+            "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.",
+        ),
+    ]
+
     print("Begin HGWELLS test")
     # Make card for good history question
-    
-    inaccurate_qa_tuple = ("For how long has the concept of a spherical Earth been known to at least a limited number of intelligent people?", "The concept of a spherical Earth has been known for only about 1,000 years.", "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.","A Short History of the World")
-    
+
+    inaccurate_qa_tuple = (
+        "For how long has the concept of a spherical Earth been known to at least a limited number of intelligent people?",
+        "The concept of a spherical Earth has been known for only about 1,000 years.",
+        "The story of our world is a story that is still very imperfectly known. A couple of hundred years ago men possessed the history of little more than the last three thousand years. What happened before that time was a matter of legend and speculation.  Over a large part of the civilized world it was believed and taught that the world had been created suddenly in 4004 B.C., though authorities differed as to whether this had occurred in the spring or autumn of that year. This fantastically precise misconception was based upon a too literal interpretation of the Hebrew Bible, and upon rather arbitrary theological assumptions connected therewith.  Such ideas have long since been abandoned by religious teachers, and it is universally recognized that the universe in which we live has to all appearances existed for an enormous period of time and possibly for endless time.  Of course there may be deception in these appearances, as a room may be made to seem endless by putting mirrors facing each other at either end. But that the universe in which we live has existed only for six or seven thousand years may be regarded as an altogether exploded idea.\n\nThe earth, as everybody knows nowadays, is a spheroid, a sphere slightly compressed, orange fashion, with a diameter of nearly 8,000 miles.  Its spherical shape has been known at least to a limited number of intelligent people for nearly 2,500 years, but before that time it was supposed to be flat, and various ideas which now seem fantastic were entertained about its relations to the sky and the stars and planets.  We know now that it rotates upon its axis (which is about 24 miles shorter than its equatorial diameter) every twenty-four hours, and that this is the cause of the alternations of day and night, that it circles about the sun in a slightly distorted and slowly variable oval path in a year. Its distance from the sun varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles.",
+        "A Short History of the World",
+    )
+
     # Bad answer
     # d = check_answer(inaccurate_qa_tuple,logic_llm)
     # if False == d[0]: # if not accurate
@@ -188,37 +223,40 @@ if __name__ == "__main__": # test
     # else:
     #     print("Made wrong choice for good question", d2[0])
     #     print("Well, if it said that because the answer didn't provide enough detail (didn't EXPLICITLY name the Hebrew bible) that is OK. Also catching that the text doesn't mention the age is good.")
-    
+
     conv = """Student: "Professor Drummond, what would you say are the major events in the history of our understanding regarding the age of the Earth?"
 Drummond: "Ah, a fascinating question indeed. The journey from misunderstanding to enlightenment is one that has spanned millennia." He pauses, collecting his thoughts, and then begins to speak, his voice echoing throughout the lecture hall. "Initially, religious texts suggested a young earth dating back no more than several thousand years. However, evidence from geology and astronomy has shown us that the earth is over four billion years old.\""""
-        
-    d3 = ensure_answer_consistent(q_test[1],conv,logic_llm)
+
+    d3 = ensure_answer_consistent(q_test[1], conv, logic_llm)
     if True == d3[0]:
-        print("Made right choice for good question and answer") # Passes currently
+        print("Made right choice for good question and answer")  # Passes currently
     else:
         print("Made wrong choice for good question and answer", d3[0])
-        
-#     qatuple_bad = ("What is the concept of 'projection' in psychology?","Projection is a defense mechanism in psychology where an individual attributes their own unwanted thoughts, feelings, or motives to another person.") # only need the first two
-#     conv2 = """Alice: "Hey John, I was reading about psychology and came across something interesting. Can you explain what 'projection' means in this context?"
-# John: "Of course, Alice! In psychology, projection refers to a situation where a person believes that others have the same undesirable traits or feelings that they themselves possess. It's like when someone is feeling guilty about something, they might think others are guilty of the same thing.\""""
 
-#     d4 = ensure_answer_consistent(qatuple_bad,conv2,logic_llm)
-#     if True == d4[0]:
-#         print("Made wrong choice for good question and bad answer") # Passes currently
-#     else:
-#         print("Made right choice for good question and bad answer", d3[0])
+    #     qatuple_bad = ("What is the concept of 'projection' in psychology?","Projection is a defense mechanism in psychology where an individual attributes their own unwanted thoughts, feelings, or motives to another person.") # only need the first two
+    #     conv2 = """Alice: "Hey John, I was reading about psychology and came across something interesting. Can you explain what 'projection' means in this context?"
+    # John: "Of course, Alice! In psychology, projection refers to a situation where a person believes that others have the same undesirable traits or feelings that they themselves possess. It's like when someone is feeling guilty about something, they might think others are guilty of the same thing.\""""
 
-    qatuple_bad = ("What is the purpose of the 'fruit of the poisonous tree' doctrine in legal proceedings?","The 'fruit of the poisonous tree' doctrine in legal proceedings is a metaphor that suggests evidence derived from illegal or unconstitutional methods (the 'poisonous tree') should also be excluded from trials (the 'fruit').")
+    #     d4 = ensure_answer_consistent(qatuple_bad,conv2,logic_llm)
+    #     if True == d4[0]:
+    #         print("Made wrong choice for good question and bad answer") # Passes currently
+    #     else:
+    #         print("Made right choice for good question and bad answer", d3[0])
+
+    qatuple_bad = (
+        "What is the purpose of the 'fruit of the poisonous tree' doctrine in legal proceedings?",
+        "The 'fruit of the poisonous tree' doctrine in legal proceedings is a metaphor that suggests evidence derived from illegal or unconstitutional methods (the 'poisonous tree') should also be excluded from trials (the 'fruit').",
+    )
     conv2 = """Cassandra: "Hey Jane, I'm prepping for my law exam and got stuck on something. Can you explain the 'fruit of the poisonous tree' doctrine?"
 Miranda: "Sure, Cassandra! Basically, it means if evidence is obtained illegally, it can't be used in court. It's like saying bad evidence leads to more bad evidence.\""""
 
-    d4 = ensure_answer_consistent(qatuple_bad,conv2,logic_llm)
+    d4 = ensure_answer_consistent(qatuple_bad, conv2, logic_llm)
     if True == d4[0]:
-        print("Made wrong choice for good question and bad answer") # Passes currently
+        print("Made wrong choice for good question and bad answer")  # Passes currently
     else:
         print("Made right choice for good question and bad answer", d3[0])
     # So currently it catches and looks for specifically: inaccuracies in the answer, inaccuracies in the question, and oversimplification of the answer. That should catch the majority of errors.
-    
+
     # When you write few-shot prompts you're basically guarding against common error cases, aren't you? Since ICL can work similarly to dataset building, maybe finetunes work the same way? You add in things in the dataset that fix the problem you have.
-    
+
     # Maybe I should make a dataset that explicitly explains what genitals people of different sexes have, since Augmental apparently got that wrong, occasionally.

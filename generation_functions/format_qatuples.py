@@ -1,9 +1,10 @@
-
 def format_qatuples(qatuples):
     strlst = []
     for qatuple in qatuples:
-        strlst.append(f"""Question: \"\"\"{qatuple[0]}\"\"\"
-Answer: \"\"\"{qatuple[1]}\"\"\"""")
+        strlst.append(
+            f"""Question: \"\"\"{qatuple[0]}\"\"\"
+Answer: \"\"\"{qatuple[1]}\"\"\""""
+        )
     return "\n\n".join(strlst)
 
 

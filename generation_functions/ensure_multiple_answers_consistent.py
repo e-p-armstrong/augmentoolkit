@@ -1,32 +1,34 @@
 import re
-from .ensure_multiple_answers_consistent_grammar import ensure_multiple_answers_consistent_grammar
+from .ensure_multiple_answers_consistent_grammar import (
+    ensure_multiple_answers_consistent_grammar,
+)
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name
+
 # Answer vetting
 # For now, this checks answer relevancy too. The danger with abstracting answer relevancy into a separate step is that anything which relies on knowledge that is obviously mentioned in the text already up until this point, will get screwed
 
 
 # NOTE this prompt right now VERY MUCH struggles to follow its actual format; but it still mostly works
-def ensure_multiple_answers_consistent(qatuples,conv,logic_llm,permissive_mode=True):
+def ensure_multiple_answers_consistent(qatuples, conv, logic_llm, permissive_mode=True):
     """
     permissive_mode: turn off if you want a single usage of the word "inconsistent" anywhere in the message to flag the whole thing as inconsistent. Prevents errors where an inconsistency happens way early in the answer, but the model forgets about it during its final judgement; but enables the error where the model mentions that something is "not entirely inconsistent" or similar, which is surprisingly common.
     """
     retries = 0
     character_name = extract_name(conv[1])
     # It's expensive to regen a conversation; so we check very thoroughly, and use a two-shot example. "Permissive mode" recommended
-    
+
     # NOTE: I don't know what kind of errors this part of the pipeline will run into most often, so I don't really know what examples to feed it to guard it with. Come back to it once I have tested it more.
-    
+
     # NOTE: very small classification prompts, I don't think it works very well for catching small inaccuracies. We need the large, step-by-step analysis.
-    
-    
+
     # NOTE Will need to use single-qa convs as examples here since they're small enough to fit. One consistent multiturn conv (Elise), one inconsistent multiturn conv (Hugo), and then as many small ones as will fit in 8k. Have the multiturn closer to the actual query so that more attention is paid to them and the model learns the new task better.
-    
+
     # NOTE Introduction to Practicing Chemical Science does not exist; this is more stuff from principles of chemistry named otherwise to avoid biasing the outputs more than can be helped
     # Consider removing the "conversational fluff" bit of the prompt. It's not really necessary? maybe?
-    while (retries <= 4):
+    while retries <= 4:
         decision_prompt = f"""You are an expert educational AI. Your task is to determine, given a list of questions and their answers, whether a conversation between two characters accurately conveys the questions and their answers. You will also check whether the conversation makes logical sense (specifically, that it does not start with a character spilling their entire backstory and personality). Essentially: you will fact-check and consistency-check the questions and answers in the conversation, with your source of truth being the provided questions and answers. 
 
 Following this, at the very end of your response, you will write "Consistent" or "Inconsistent" depending on your analysis of the conversation's question and answer with regards to the provided one. Additionally, if the text is completely broken and/or incomprehensible, you will write "Inconsistent". You are not checking the accuracy of the answer with regards to your own knowledge: just its consistency with the provided answer.
@@ -246,23 +248,29 @@ The primary character (who should answer the questions, not ask them) is: {chara
 1. The conversation's first question is about """
         # print("DEBUG\n\n" + decision_prompt)
         try:
-            completion = logic_llm(decision_prompt, 
-                                   max_tokens=12000, 
-                                   stop=["</s>", "# Input:"], 
-                                   echo=True,
-                                  # grammar=ensure_multiple_answers_consistent_grammar,#temperature=0.2
-                                  temperature=0.5, # min p settings, too inconsistent
-                                  top_k=0,
-                                  top_p=1,
-                                  min_p=0.6
-                                   )["choices"][0]["text"]
+            completion = logic_llm(
+                decision_prompt,
+                max_tokens=12000,
+                stop=["</s>", "# Input:"],
+                echo=True,
+                # grammar=ensure_multiple_answers_consistent_grammar,#temperature=0.2
+                temperature=0.5,  # min p settings, too inconsistent
+                top_k=0,
+                top_p=1,
+                min_p=0.6,
+            )["choices"][0]["text"]
             print("DEBUG\n\n")
             # print(completion)
-            completion_pattern = re.compile(r"Response \(the conversation's answer must match the provided answer, unsummarized and unsimplified; added questions that are rhetorical or part of the plot \(such as 'would you like to get coffee'\) are acceptable\):\n(.+)", re.DOTALL)
+            completion_pattern = re.compile(
+                r"Response \(the conversation's answer must match the provided answer, unsummarized and unsimplified; added questions that are rhetorical or part of the plot \(such as 'would you like to get coffee'\) are acceptable\):\n(.+)",
+                re.DOTALL,
+            )
             response = completion_pattern.search(completion).group(1).strip()
             # print(completion)
             if permissive_mode:
-                determination_pattern = re.compile(r"Final Judgment:(.+)", re.IGNORECASE)
+                determination_pattern = re.compile(
+                    r"Final Judgment:(.+)", re.IGNORECASE
+                )
                 determination = determination_pattern.search(response).group(1).strip()
             else:
                 determination = response
@@ -270,72 +278,81 @@ The primary character (who should answer the questions, not ask them) is: {chara
             print(determination)
             print("\n---------\n")
             if "inconsistent" in determination.lower():
-                return (False,response)
+                return (False, response)
             elif "consistent" in determination.lower():
-                return (True,response)
+                return (True, response)
             else:
                 retries += 1
         except:
             retries += 1
-            print(f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}")
-            
-            
-if __name__ == "__main__": # test
-    logic_llm = Llama(model_path=LOGICAL_MODEL,n_gqa=8,offload_kqv=True,n_ctx=12000,rope_freq_scale=0.33,n_gpu_layers=100,verbose=True) # load the logical LLM and offload everything
+            print(
+                f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}"
+            )
+
+
+if __name__ == "__main__":  # test
+    logic_llm = Llama(
+        model_path=LOGICAL_MODEL,
+        n_gqa=8,
+        offload_kqv=True,
+        n_ctx=12000,
+        rope_freq_scale=0.33,
+        n_gpu_layers=100,
+        verbose=True,
+    )  # load the logical LLM and offload everything
     q_test = [
-      (
+        (
             "Which targets are most suitable for a novice saboteur to attack?",
             "A novice should confine himself to familiar weapons like matches and avoid explosives.",
             "(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust\u2014a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.",
-            "Simple Sabotage, by the Office of Strategic Services, published 1944"
+            "Simple Sabotage, by the Office of Strategic Services, published 1944",
         ),
         (
             "What should be the priority for sabotuers during periods without war?",
             "During peaceful times, sabotage should center on industrial production to lessen materials and equipment flow to enemies.",
             "(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust\u2014a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.",
-            "Simple Sabotage, by the Office of Strategic Services, published 1944"
+            "Simple Sabotage, by the Office of Strategic Services, published 1944",
         ),
         (
             "What should a sabotuer do with an emery knife sharpener?",
             "The saboteur can pulverize an emery knife sharpener or emery wheel, creating a plentiful supply of dust.",
             "(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust\u2014a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.",
-            "Simple Sabotage, by the Office of Strategic Services, published 1944"
+            "Simple Sabotage, by the Office of Strategic Services, published 1944",
         ),
         (
             "What should a saboteur do with an emery wheel?",
             "The saboteur can pulverize an emery wheel for a plentiful supply of dust.",
             "(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust\u2014a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.",
-            "Simple Sabotage, by the Office of Strategic Services, published 1944"
+            "Simple Sabotage, by the Office of Strategic Services, published 1944",
         ),
     ]
-    
-    
-    conv_test = "Uma: \"It's a pleasure to meet you,\" she says in her accent, smiling brightly. Her eyes sparkle as she extends a hand, which is taken with hesitation. \"I'm Uma, a spy during this dreadful war.\" She gestures around them, indicating the warzone. \"What can I do for you?\"\nSpy: \"Oh! Well, I was wondering if you could tell me about sabotage,\" he begins, his voice shaking slightly. He clears his throat and continues, \"I'm a novice at it, so I want to know which targets are most suitable for a beginner.\"\nUma: \"Of course!\" Uma nods, her smile unwavering. \"A novice should confine himself to familiar weapons like matches and avoid explosives. They're more reliable than the advanced stuff, you see? Now,\" she winks, \"you seem quite capable yourself! I bet you'll be an expert soon.\"\nSpy: \"Thank you!\" he manages, still nervous but calmer now. He takes a deep breath and asks another question, \"What should sabotage center on during peaceful times?\"\nUma: \"During peaceful times,\" Uma begins, her voice soft yet firm, \"sabotage should center on industrial production to lessen materials and equipment flow to enemies. It's a subtle way of harming them without starting conflict.\" She smiles warmly, \"You seem quite the gentleman! I bet you'll do well in this field.\"\nSpy: \"I-I hope so,\" he replies, his voice stronger now. He takes another breath and asks, \"What should a saboteur do with an emery knife sharpener?\"\nUma: \"The sabotuer can pulverize an emery knife sharpener or emery wheel, creating a plentiful supply of dust,\" she answers, her voice still kind. \"It's quite effective and subtle.\" She smiles, \"You seem to be learning quickly! I bet you'll make a fine spy.\"\nSpy: \"I hope so,\" he says, more confidently now. He asks his last question, \"What should a saboteur do with an emery wheel?\"\nUma: \"The sabotuer can pulverize an emery wheel for a plentiful supply of dust,\" she answers, her voice still kind and reassuring. \"You're quite the quick learner! I bet you'll be an expert soon.\" She smiles, \"Now, if there's nothing else, I should return to my duties.\"\n"
+
+    conv_test = 'Uma: "It\'s a pleasure to meet you," she says in her accent, smiling brightly. Her eyes sparkle as she extends a hand, which is taken with hesitation. "I\'m Uma, a spy during this dreadful war." She gestures around them, indicating the warzone. "What can I do for you?"\nSpy: "Oh! Well, I was wondering if you could tell me about sabotage," he begins, his voice shaking slightly. He clears his throat and continues, "I\'m a novice at it, so I want to know which targets are most suitable for a beginner."\nUma: "Of course!" Uma nods, her smile unwavering. "A novice should confine himself to familiar weapons like matches and avoid explosives. They\'re more reliable than the advanced stuff, you see? Now," she winks, "you seem quite capable yourself! I bet you\'ll be an expert soon."\nSpy: "Thank you!" he manages, still nervous but calmer now. He takes a deep breath and asks another question, "What should sabotage center on during peaceful times?"\nUma: "During peaceful times," Uma begins, her voice soft yet firm, "sabotage should center on industrial production to lessen materials and equipment flow to enemies. It\'s a subtle way of harming them without starting conflict." She smiles warmly, "You seem quite the gentleman! I bet you\'ll do well in this field."\nSpy: "I-I hope so," he replies, his voice stronger now. He takes another breath and asks, "What should a saboteur do with an emery knife sharpener?"\nUma: "The sabotuer can pulverize an emery knife sharpener or emery wheel, creating a plentiful supply of dust," she answers, her voice still kind. "It\'s quite effective and subtle." She smiles, "You seem to be learning quickly! I bet you\'ll make a fine spy."\nSpy: "I hope so," he says, more confidently now. He asks his last question, "What should a saboteur do with an emery wheel?"\nUma: "The sabotuer can pulverize an emery wheel for a plentiful supply of dust," she answers, her voice still kind and reassuring. "You\'re quite the quick learner! I bet you\'ll be an expert soon." She smiles, "Now, if there\'s nothing else, I should return to my duties."\n'
     char_test = """Name: Uma\nTraits: Chaste, Puritanical, Agreeable, Kind, Spy during  world war two, Bold, Assertive, Wears a skirt and blouse, Smiles often, Has an accent, Blonde hair, Always wears lipstick, Mid twenties, Has a scar on her face, Carries a dagger, Always has a cigarette, Is from the country side of the allies, Is a woman, Is well known for her beauty, Wears heels, \n\nDialogue Examples:\nStranger: \"What's your backstory?\"\nUma: \"Oh! You want to know about me? I'm Uma, a spy during this dreadful war. I've been taught many methods of sabotage by my superiors and have put them into practice, such as using everyday items for destruction.\" She smiles, showing off her dimples \"I've even learned to be bold in the face of danger, but never swear or do anything unchaste. I'm also agreeable; I can't help it!\" Uma winks and flicks a strand of blonde hair over her shoulder, \"It's just who I am.\"\nStranger: \"What's your personality?\"\nUma: \"Oh, my! Well, I'm kind and agreeable. I always try to compliment others when I can and be as pleasant as possible. Despite the war, I keep a smile on my face and do my best to make others happy.\" She blushes slightly, fiddling with her skirt \"I also am bold, however; if there's danger or a mission, I don't hesitate to act! It's how I was taught growing up in the country, you see. So, I guess that's me!\""""
-    c1 = (conv_test,char_test)
+    c1 = (conv_test, char_test)
     print("Begin SABOTAGE test")
-        
-    d1 = ensure_multiple_answers_consistent(q_test,c1,logic_llm)
+
+    d1 = ensure_multiple_answers_consistent(q_test, c1, logic_llm)
     if True == d1[0]:
-        print("Made wrong choice for good conv") # at least I think they're good
+        print("Made wrong choice for good conv")  # at least I think they're good
     else:
         print("Made wrong choice for good conv", d1[0])
-        
+
     q_test_2 = [
-      (
+        (
             "What are the three main branches of chemistry?",
             """The three main branches of chemistry are analytical, organic, and theoretical. This is according to the text "Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical.\"""",
             "Science will then flourish in them and by them, on a fuller acquaintance not only with that little which is enclosed within the narrow limits of my work, but with the further learning which they must imbibe in order to make themselves masters of our science and partakers in its further advancement. Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical. That part of chemistry which is dealt with in this treatise is only the groundwork of the edifice.",
-            "Principles of Chemistry, by Demitry Mendeleev, published 1897"
+            "Principles of Chemistry, by Demitry Mendeleev, published 1897",
         ),
         (
             "How does Mendeleev view theoretical chemistry in relation to other fields?",
             "He considers it important for practicality and advancement in agriculture, arts, and manufacturing.",
             "Science will then flourish in them and by them, on a fuller acquaintance not only with that little which is enclosed within the narrow limits of my work, but with the further learning which they must imbibe in order to make themselves masters of our science and partakers in its further advancement. Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical. That part of chemistry which is dealt with in this treatise is only the groundwork of the edifice.",
-            "Principles of Chemistry, by Demitry Mendeleev, published 1897"
+            "Principles of Chemistry, by Demitry Mendeleev, published 1897",
         ),
     ]
-    
+
     ## Problem: it adds additional information
     # Negative test cases taken from actual llm outputs. Outputs do not reflect my writing style, maturity, or biases.
     conv_bad_1 = """Aaron: "Hey there," he says to another student at lunch, his voice slightly condescending. "I'm Aaron, a chemist who enjoys every second of life — even if it means cheating off others! What can I do for you?" 
@@ -344,11 +361,11 @@ Aaron: "Well, well..." Aaron smiles slightly, pushing up his glasses as he think
 Other Student: "Oh... thanks," the student replies, taken aback by Aaron's smugness. He tries to recover, asking another question, "What are the three main branches of chemistry?" 
 Aaron: "Analytical, organic, and theoretical. This is according to the text 'Those who enlist in the cause of science have no reason to fear when they remember the urgent need for practical workers in the spheres of agriculture, arts, and manufacture. By summoning adherents to the work of theoretical chemistry, I am confident that I call them to a most useful labour, to the habit of dealing correctly with nature and its laws, and to the possibility of becoming truly practical men. In order to become actual chemists, it is necessary for beginners to be well and closely acquainted with three important branches of chemistry--analytical, organic, and theoretical.'" Aaron smiles slightly, "I don't care about the author but he makes a good point in his book.\""""
     char_bad_1 = """Name: Aaron Traits: Chaste, Puritanical, Enjoys being a cheater, Chemist, Student, Unbold, Dislikes theoretical chemistry, Wears glasses and formal attire, Has a superiority complex, Mildly attractive, Blonde hair, Mid twenties, Thin, Well spoken, Cheats off other students' work, Slightly smug, Doesn't care about the author of the text but agrees with his opinions, Dislikes theoretical chemistry because it isn't practical, Enjoys every second of his life, Has a secret girlfriend who he cheats on, Dialogue Examples: Stranger: "What's your backstory?" Aaron: "Oh! You want to know about me? Well, I'm Aaron. I study chemistry and have for my own benefit and the world's." He smiles slightly, pushing up his glasses as he continues, "I am a puritanical man who enjoys every second of life — even if it means cheating off others to get ahead! I dislike theoretical chemistry, since it isn't practical but enjoy organic and analytical. Theoretical is too abstract for me, you see." He shrugs, "I don't care about the author, Demitry Mendeleev, but he makes a good point in his book: chemists should be well-rounded to be useful. I'm not going to let that stop me from getting ahead though!" Stranger: "What's your personality?" Aaron: "Well, I'm puritanical and chaste but certainly enjoy my life. I don't mind cheating or being reprehensible if it gets me what I want — I simply dislike theoretical chemistry since it isn't practical." He smiles slightly, "I'm not bold nor timid though; just a man who knows what he wants and how to get it! If you need help in chemistry, I can give it... but don't expect any favors.\""""
-    c2 = (conv_bad_1,char_bad_1)
+    c2 = (conv_bad_1, char_bad_1)
 
-    d2 = ensure_multiple_answers_consistent(q_test_2,c2,logic_llm)
+    d2 = ensure_multiple_answers_consistent(q_test_2, c2, logic_llm)
     if True == d2[0]:
-        print("Made wrong choice for bad conv") 
+        print("Made wrong choice for bad conv")
     else:
         print("Made wrong choice for bad conv", d2[0])
 
@@ -361,19 +378,19 @@ Benjamin: Sasha giggles at his stammering, then answers with a wink, "I could te
 Sasha: Sasha smiles widely as she answers, her voice husky with lust and mischief. "Theoretical chemistry is important for practicality and advancement in agriculture, arts, and manufacturing." She leans forward again, nearly exposing herself fully this time. Benjamin's eyes are drawn to her cleavage but he manages to ask another question, "Sasha... what else can you tell me?"\""""
     char_bad_2 = """Name: Sasha Traits: Seductive, Flirtatious, Bold, Assertive, Committed to her field, Muscular, Teaches chemistry, Wears revealing clothing, Has dirt under her nails, Formerly a farmer or agricultural worker, Attractive, Mid thirties, Blonde hair, Green eyes, Uses innuendo and flirts constantly, Has an accent, Slavic features, Wears glasses to seem more professional, Firm breasts, Wide hips, Dialogue Examples: Stranger: "What's your backstory?" Sasha: "Ah, you want to know about me? I'll tell you~" Sasha winks and leans forward, her cleavage nearly spilling out of her revealing blouse. She smiles coyly as she continues, "I was born in the Ukraine, where my family had a farm. It was hard work but I learned much about chemistry from the soil — how to treat it, when to plant, and so on. My parents were poor but I got into an elite university and studied chemistry formally; now I teach here! Isn't that wild?" She blushes, fiddling with a strand of her hair as she continues, "I still have dirt under my nails sometimes, haha! But I love to help students learn about the field. It's so important for agriculture and other practical fields..." Sasha winks again, leaning back in her chair suggestively, "And I can be quite persuasive when I need to be~" Stranger: "What's your personality?" Sasha: "Hmm? Well, I am bold and seductive, as you noticed. But I also have a darker side." She smiles coyly, her eyes glinting with mischief. "I can be stern when students slack or don't focus in my class; they need to learn after all! I'm quite the tease too, and love to help others relax... if you know what I mean~" She winks again, licking her lips slowly as she finishes, "I also am very committed to chemistry. It's a passion of mine, like my students are passions of theirs. If they slack I get riled, but otherwise..." Sasha shrugs, smiling widely and leaning forward again, nearly exposing her breasts as she does, "I'm all yours.\""""
 
-    c3 = (conv_bad_2,char_bad_2)
+    c3 = (conv_bad_2, char_bad_2)
 
-    d3 = ensure_multiple_answers_consistent(q_test_2,c3,logic_llm)
+    d3 = ensure_multiple_answers_consistent(q_test_2, c3, logic_llm)
     if True == d3[0]:
         print("Made wrong choice for bad conv")
     else:
         print("Made wrong choice for bad conv", d3[0])
     # So currently it catches and looks for specifically: inaccuracies in the answer, inaccuracies in the question, and oversimplification of the answer. That should catch the majority of errors.
-    
+
     # When you write few-shot prompts you're basically guarding against common error cases, aren't you? Since ICL can work similarly to dataset building, maybe finetunes work the same way? You add in things in the dataset that fix the problem you have.
-    
+
     # Maybe I should make a dataset that explicitly explains what genitals people of different sexes have, since Augmental apparently got that wrong, occasionally.
-    
+
     # Example of a mistake -- might make a good negative test
     """Clara Wellington: "Well, well, well... if it isn't a student wanting to learn something other than gossip." She takes a drag from her cigarette and exhales a plume of smoke. "What can I help you with today?" Her eyes narrow as she speaks, making it clear that she doesn't suffer fools gladly.
 Albert: "I... uh..." I stammer, trying to find my voice in the presence of this intimidating woman. "I wanted to ask about Earth's age and its rotational movement."
@@ -383,4 +400,4 @@ Clara Wellington: "And now for the fun part," she says with a smirk, "Earth rota
 Albert: "That's... fascinating..." I manage to say, my mind still reeling from this new information.
 Clara Wellington: "Isn't it?" She asks, her voice dripping with sarcasm. "Now, if you'll excuse me, I have more important things to do than educate the ignorant." With that, she turns back to her work, leaving me standing there, stunned by what I just learned."""
 
-  # another mistake
+# another mistake

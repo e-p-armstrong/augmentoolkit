@@ -4,7 +4,8 @@ from llama_cpp import LlamaGrammar
 
 
 # We don't actually need the final judgement step, the step-by-step combined with the fact that it makes a judgement at each step ensures accuracy
-question_relevant_grammar = LlamaGrammar.from_string(r"""
+question_relevant_grammar = LlamaGrammar.from_string(
+    r"""
                         
 # Root rule specifying the overall structure of the reasoning and thought process
 root ::= in-depth-analysis "\n" detailed-understanding "\n" targeted-comparison "\n" critical-evaluation
@@ -53,7 +54,8 @@ relevance ::= "Relevant." | "Irrelevant."
 
 # final_step ::= "Step " [0-9]?[0-9] ". " "Final Judgement: "
 
-""")
+"""
+)
 
 # question_grammar = LlamaGrammar.from_string(r"""# GBNF Grammar for Q&A Format with Flexible Punctuation
 
@@ -67,7 +69,7 @@ relevance ::= "Relevant." | "Irrelevant."
 # ### A grammar that forces the model to generate correct character cards (with traits, names, everything)
 
 # question_relevant_grammar = LlamaGrammar.from_string(r"""
-                                            
+
 # root ::= reasoning from-the-text judgement
 
 # reasoning ::= "First, I will check whether the question is answerable using the information in the paragraphs. The question asks " [^\n]+ "."

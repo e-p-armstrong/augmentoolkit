@@ -4,12 +4,14 @@ from llama_cpp import LlamaGrammar
 
 
 # We don't actually need the final judgement step, the step-by-step combined with the fact that it makes a judgement at each step ensures accuracy
-check_qatuple_context_reword_grammar = LlamaGrammar.from_string(r"""
+check_qatuple_context_reword_grammar = LlamaGrammar.from_string(
+    r"""
                         
 # Root rule specifying the overall structure of the reasoning and thought process
 root ::= "Question: " [^\n]+ "\n" "Answer: " [^\n]+ "\n"
 
-""")
+"""
+)
 
 # question_grammar = LlamaGrammar.from_string(r"""# GBNF Grammar for Q&A Format with Flexible Punctuation
 
@@ -23,7 +25,7 @@ root ::= "Question: " [^\n]+ "\n" "Answer: " [^\n]+ "\n"
 # ### A grammar that forces the model to generate correct character cards (with traits, names, everything)
 
 # question_relevant_grammar = LlamaGrammar.from_string(r"""
-                                            
+
 # root ::= reasoning from-the-text judgement
 
 # reasoning ::= "First, I will check whether the question is answerable using the information in the paragraphs. The question asks " [^\n]+ "."

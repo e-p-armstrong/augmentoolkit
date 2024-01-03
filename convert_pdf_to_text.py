@@ -1,4 +1,4 @@
-# Written by GPT-4 
+# Written by GPT-4
 import fitz  # PyMuPDF
 import pytesseract
 from PIL import Image
@@ -6,6 +6,7 @@ import io
 
 # Ensure the path to the tesseract executable is set if it's not in your PATH
 # pytesseract.pytesseract.tesseract_cmd = r'<path_to_your_tesseract_executable>'
+
 
 def convert_pdf_to_text(pdf_path, output_txt_path):
     # Open the PDF file
@@ -45,7 +46,10 @@ def convert_pdf_to_text(pdf_path, output_txt_path):
 
     return text
 
+
 # Usage
-pdf_path = './Introduction to Logic and Critical Thinking, by Matthew Van Cleave.pdf'
-output_txt_path = 'Introduction to Logic and Critical Thinking, by Matthew Van Cleave.txt'
+pdf_path = "./Introduction to Logic and Critical Thinking, by Matthew Van Cleave.pdf"
+output_txt_path = (
+    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave.txt"
+)
 convert_pdf_to_text(pdf_path, output_txt_path)
