@@ -184,6 +184,7 @@ Other limitations -- I've listed the major ones, and the ones I've found while g
 - Prompting format inconsistency fixes (newlines may vary even within the same prompt)
 - An experimental version using mixtral instruct, which would get around the RoPE issues. Would need to change every prompt to use its format, then test it.
 - Perhaps a version that, in the spirit of lean manufacturing, runs each paragraph through the entire pipeline one at a time (rather than going from one step to the next for all paragraphs) might be good for evaluating how a run is going while there is still time to abort it. May pose a problem if the VRAM memory leak issue is not solved though, as that prohibits the two-model approach.
+- Add support for various frontends or backends, like Text-Generation WebUI's API.
 
 ## Contact
 evanpeterarmstrong@gmail.com || @Heralax on Discord
