@@ -3,6 +3,8 @@ Generate multi-turn training data, about any subject, using Open Source LLMs!
 Save yourself the time of manually editing 1000s of AI chats to build your own dataset (which you then can't open source anyway because of personal reputation risks). Easily configure the prompts and settings to generate conversations aligned to your tastes and interests.
 Avoids breaking the bank (and getting your API key revoked) because it doesn't use the OpenAI API.
 
+[Fork this repo and customize it for yourself!](https://github.com/e-p-armstrong/augmentoolkit/fork)
+
 ## Table of Contents:
 1. [Installation](#installation)
 2. [Introduction](#introduction-what-is-this-and-why-was-it-built)
