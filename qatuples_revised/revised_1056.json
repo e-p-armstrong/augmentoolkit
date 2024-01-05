@@ -1,6 +1,0 @@
-[
-    "What is the formula for calculating the chances of drawing at least one head in six flips of a fair coin?",
-    "The formula is (1/2* (1/2)^5 = 1/32",
-    "That is a conjunction of different events. As you can also see, the probability of drawing such a hand is extremely low\u2014about .0005 or .05%. A flush is indeed a rare hand. But suppose we wanted to know, not the chances of drawing a flush in a specific suit, but just the chances of drawing a flush in any suit. In that case, we\u2019d have to calculate the probability of a disjunction of drawing either a flush in clubs or a flush in spades or a flush in diamonds or a flush in hearts. Recall that in order to calculate a disjunction we must add together the probabilities:   .0005 + .0005 + .0005 + .0005 = .002  So the probability of drawing a flush in any suit is still only about .2% or one fifth of one percent\u2014i.e., very low. Chapter 3: Evaluating inductive arguments and probabilistic and statistical fallacies  175 Let\u2019s examine another example before closing this section on probability. Suppose we want to know the chances of flipping at least 1 head in 6 flips of a fair coin. You might reason as follows: There is a 50% chance I flip heads on the first flip, a 50% chance on the second, etc.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

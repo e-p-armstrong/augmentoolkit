@@ -1,6 +1,0 @@
-[
-    "What is a tautology in logic?",
-    "A tautology is a statement that is always true under all possible interpretations of its variables or premises.",
-    "Chapter 2: Formal methods of evaluating arguments  95 A B (A \u2283 Bv A T T        T   T T F        F   T F T        T   T F F        T   T   A B (A v B) \u22c5 (~A \u22c5 ~B) T T     T   F  F  F  F  T F     T   F  F  F  T F T     T   F  T  F  F F F     F   F  T  F  T  Notice that in the second truth table, I had to do quite a lot of work before I could figure out what the truth values of the main operator were. I had to first determine the left conjunct (A v B) and then the right conjunct (~A \u22c5 ~B), but in order to figure out the truth values of the right conjunct (which is itself a conjunct), I had to determine the negations of A and B. Constructing truth tables can sometimes be a chore, but once you understand what you are doing (and why), it certainly isn\u2019t very difficult. Exercise 15: Construct a truth table to determine whether the following statements are tautologies, contradictions or contingent statements. 1. A \u2283 (A \u22c5 B) 2. (A \u22c5 B) \u2283 (~A \u2283 ~B) 3. (A \u22c5 ~A) \u2283 B 4.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

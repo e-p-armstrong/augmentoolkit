@@ -1,6 +1,0 @@
-[
-    "What does it mean for an argument to be valid or invalid in logical reasoning?",
-    "An argument is valid when its conclusion must be true if the premises are true, and invalid when it may be true even if the premises are false.",
-    "Invalid R T S R \u22c5 (T v ST ~S T T T      T   T T F T T F      T   T T T T F T      T   T F F T F F      F   F F T F T T      F   T T F F T F      F   T T T F F T      F   T F F F F F      F   F F T  6. Invalid 7. Valid   8. Valid A B ~(A v B) ~A v ~B T T  F  T     F  F  F T F  F  T     F  T  T F T  F  T     T  T  F F F  T  F     T  T  T  9.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

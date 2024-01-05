@@ -1,6 +1,0 @@
-[
-    "What is a necessary condition?",
-    "A necessary condition is one that must be present for an event to occur; if it's absent, the event cannot happen.",
-    "For example, being fed through a wood chipper is a sufficient condition for death, but it certainly isn\u2019t necessary! (Lot\u2019s of people die without being fed through a wood chipper, so it can\u2019t be a necessary condition of dying.In any case, determining necessary and sufficient conditions is a key part of determining a cause. When analyzing data to find a cause it is important that we rigorously test each candidate. Here is an example to illustrate rigorous testing. Suppose that on every day we collected data about Charlie he ate human food but that on none of the days was he given a bath and shampoo, as the table below indicates. Day 1 A ~B C D ~S Day 2 A ~B C D ~S Day 3 A ~B ~C D ~S Day 4 A ~B C ~D S Day 5 A ~B ~C D ~S Day 6 A ~B C D S  Given this data, A trivially passes the necessary condition test since it is always present (thus, there can never be a case where A is absent when S is present). However, in order to rigorously test A as a necessary condition, we have to look for cases in which A is not present and then see if our target condition S is present.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

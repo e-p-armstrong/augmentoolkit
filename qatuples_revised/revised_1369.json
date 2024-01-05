@@ -1,6 +1,0 @@
-[
-    "How does modus ponens differ from modus tollens?",
-    "Modus ponens infers the conclusion when both premises are true, while modus tollens infers the conclusion when the first premise is false.",
-    "I \u2283 H      Hypothetical syllogism 2, 4  10. 1. M \u2283 N 2. O \u2283 P 3. N \u2283 P 4. (N \u2283 P\u2283 (M v O) /\u2234N v P 5. M v O     Modus ponens 3, 4 6. N v P      Constructive dilemma 1, 2, 5  11. 1. A v (B \u2283 A) 2. ~A \u22c5 C /\u2234 ~B 3. ~A        Simplification 2 4. B \u2283 A      Disjunctive syllogism 1, 3 5. ~B        Modus tollens 3, 4  12. 1. (D v E) \u2283 (F \u22c5 G) 2. D  /\u2234 F 3. D v E       Addition 2 4. F \u22c5 G       Modus ponens 1, 3 5. F          Simplification 4  13. 1. T \u2283 U 2. V v ~U 3. ~V \u22c5 ~W /\u2234 ~T 4. ~V        Simplification 3 5. ~U        Disjunctive syllogism 2, 4 6.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

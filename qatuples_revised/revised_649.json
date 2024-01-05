@@ -1,6 +1,0 @@
-[
-    "What is the purpose of using numbers to represent propositions in a logical argument?",
-    "Using numbers allows for clear identification and organization of propositions within an argument, making it easier to follow the structure and relationships between them. It also helps avoid confusion when dealing with multiple statements or variables.",
-    "~~B \u22c5 D /\u2234 C 4. ~~B _________________ 5. ~A _________________ 6. C _________________  #4 1. A \u2283 B 2. A \u22c5 ~D 3. B \u2283 C   /\u2234 C \u22c5 ~D 4. A _________________ 5. A \u2283 C _________________ 6. C _________________ 7. ~D _________________ 8. C \u22c5 ~D _________________  #5 1. C 2. A \u2283 B 3. C \u2283 D 4. D \u2283 E  /\u2234 E v B 5. C \u2283 E _________________ 6. C v A _________________ 7. E v B _________________  #6 1. (A v M\u2283 R 2. (L \u2283 R) \u22c5 ~R 3. ~(C \u22c5 D) v (A v M)   /\u2234 ~(C \u22c5 D) 4. ~R  _______________ 5. ~(A v M) _______________ 6. ~(C \u22c5 D)      _______________  #7 1. (H \u22c5 K) \u2283 L 2. ~R \u22c5 K 3.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

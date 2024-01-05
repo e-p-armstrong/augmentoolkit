@@ -1,6 +1,0 @@
-[
-    "What is the purpose of mapping universal statements onto our three category Venn diagrams?",
-    "The purpose is to determine how we map our particular statements.",
-    "The point of strategy here is that we should always map our universal statements onto our three category Venns before mapping our particular statements. The reason is that the universal can determine how we map our particular statements (but not vice versa). Exercise 21: Use the Venn test of validity to determine whether the following syllogisms are valid or invalid. 1. All M is P All M is S \u2234 All S is P  2. All P is M  All M is S  \u2234 All S is P   3. All M is P  Some M is S  \u2234 Some S is P  4. All P is M  Some M is S  \u2234 Some S is P Chapter 2: Formal methods of evaluating arguments  139   5. All P is M  Some S is M  \u2234 Some S is P  6. All P is M  Some S is not M  \u2234 Some S is not P  7. All M is P  Some S is not M  \u2234 Some S is not P  8. All M is P  Some M is not S  \u2234 Some S is not P  9. No M is P  Some S is M  \u2234 Some S is not P  10.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

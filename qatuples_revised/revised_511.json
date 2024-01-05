@@ -1,6 +1,0 @@
-[
-    "What is the purpose of circling truth values under the main operator?",
-    "The purpose of circling truth values under the main operator is to distinguish them from the rest.",
-    "Or you may simply want to circle the truth values under the main operator to distinguish them from the rest.Chapter 2: Formal methods of evaluating arguments  84 A B C (A v B) v C ~A C T T T        T   T   T T F        T   T   T F T        T   T   T F F        T   T   F T T        T   T   F T F        T   T   F F T        F   T   F F F        F   F     Finally, we will fill out the remaining two columns, which is very straightforward. All we have to do for the \u201c~A\u201d is negate the truth values that we have assigned to our \u201cA\u201d reference column.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

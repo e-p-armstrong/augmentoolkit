@@ -1,6 +1,0 @@
-[
-    "What are the symbols A, B, C, and D used for in these cases?",
-    "The symbols A, B, and C represent different objects or entities, while G represents their relationship.",
-    "Case 1 A B ~C D ~G Case 2 ~A B C D G Case 3 A ~B C D G Case 1 A B C D G Case 2 ~A B ~C D ~G Case 3 A ~B C ~D G Case 1 A B C D G Case 2 ~A B C D G Case 3 A ~B C D G Case 1 A B C D ~G Case 2 ~A B C D G Case 3 A ~B C ~D G Case 1 A B ~C D ~G Case 2 ~A B C D G Case 3 A ~B ~C ~D ~G Case 1 A B C D ~G Case 2 ~A B C ~D ~G Case 3 A ~B ~C D G Case 1 A B ~C D G Chapter 3: Evaluating inductive arguments and probabilistic and statistical fallacies  169     8.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

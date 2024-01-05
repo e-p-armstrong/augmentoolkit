@@ -1,6 +1,0 @@
-[
-    "What is the method for determining whether a certain class of arguments is valid or invalid?",
-    "The method for determining whether a certain class of arguments (i.e., those that utilize only truth functional operatorsare valid or invalid is the truth table test of validity.",
-    "E  /\u2234 I  #19 1. (N v O\u2283 P 2. (P v Q) \u2283 R 3. Q v N 4. ~Q   /\u2234 R  Chapter 2: Formal methods of evaluating arguments  113 #20 1. J \u2283 K 2. K v L 3. (L \u22c5 ~J) \u2283 (M \u22c5 ~J) 4. ~K  /\u2234 M     2.13 Short review of propositional logic  So far in this chapter we have learned a formal method for determining whether a certain class of arguments (i.e., those that utilize only truth functional operators) are valid or invalid. That method is the truth table test of validity. We have also learned a formal method for proving arguments are valid or invalid (the method of proof). The other important skill we have learned in this chapter so far is translating sentences into propositional logic. Thus, there are three different skills that you should know how to do:   1. Translate sentences from English into propositional logic 2. Construct truth tables in order to determine whether an argument is valid or invalid 3.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

@@ -1,6 +1,0 @@
-[
-    "What is the form of the rule for a hypothetical syllogism in 'Introduction to Logic and Critical Thinking' by Matthew Van Cleave?",
-    "The form of the rule for a hypothetical syllogism is 1. p \u2283 q, 2. q \u2283 r, 3. \u2234 p \u2283 r. This argument links p and r in a conditional statement and can be extended with other conditionals like \"r \u2283 s\" and \"s \u2283 t\".",
-    "A proof is a series of statements, starting with the premises and ending with the conclusion, where each additional statement after the premises is derived from some previous line(sof the proof using one of the valid forms of inference. We will practice this some more in the exercise at the end of this section. The next form of inference is called \u201chypothetical syllogism.\u201d This is what ancient philosophers called \u201cthe chain argument\u201d and it should be obvious why in a moment. Here is the form of the rule:  1. p \u2283 q 2. q \u2283 r 3. \u2234 p \u2283 r  As you can see, the conclusion of this argument links p and r together in a conditional statement. We could continue adding conditionals such as \u201cr \u2283 s\u201d and \u201cs \u2283 t\u201d and the inferences would be just as valid.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

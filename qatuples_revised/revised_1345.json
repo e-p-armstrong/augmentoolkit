@@ -1,6 +1,0 @@
-[
-    "Which argument in exercise 13 is invalid?",
-    "The argument \"T \u2283 I\" (The Tigers will win; I = The Indians will lose their star pitcheris invalid because it does not follow the rules of deductive logic. It should be written as \"T \u2283 ~I\" (The Tigers will win; I \u2283 ~Indians will lose their star pitcher).",
-    "Valid D R S (R v S\u22c5 ~D ~R S \u22c5 ~D T T T     T   F  F F F T T F     T   F  F F F T F T     T   F  F T F T F F     F   F  F T F F T T     T   T  T F T F T F     T   T  T F F F F T     T   T  T T T F F F     F   F  T F F  Exercise 13 1. T \u2283 I  (T = The Tigers will win; I = The Indians will lose their star pitcher) 2. H \u2283 P  (P = Tom will pass the class; H = Tom does all of his homework) 3. R \u2283 G  (R = The car will run; G = The car has gas) Answers to exercises  219 4. A \u2283 C  (A = You are asking me about your grade; C = You care about your grade) 5.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

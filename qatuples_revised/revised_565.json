@@ -1,6 +1,0 @@
-[
-    "How can you prove that 'neither p nor q' is materially equivalent to ~(p v q)?",
-    "You can use a truth table to demonstrate this equivalence by comparing the truth values under the main operators of both statements. If they are identical, then the statements are materially equivalent.",
-    "R S ~S \u2283 R S v R T T      F  T T T F      T  T  T F T      F  T T F F      T  F F  If you look at the truth values under the main operators of each sentence, you can see that their truth values are identical on every row. That means the two statements are materially equivalent and can be used interchangeably, as far as propositional logic goes. Chapter 2: Formal methods of evaluating arguments  92 Let\u2019s demonstrate material equivalence with another example. We have seen that we can translate \u201cneither nor\u201d statements as a conjunction of two negations. So, a statement of the form, \u201cneither p nor q\u201d can be translated:   ~p \u22c5 ~q  But another way of translating statements of this form is as a negation of a disjunction, like this:   ~(p v q We can prove these two statements are materially equivalent with a truth table (below).",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

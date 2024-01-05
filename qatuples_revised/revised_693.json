@@ -1,6 +1,0 @@
-[
-    "What is the difference between a conditional and a biconditional statement?",
-    "A conditional statement has the form \"if P, then Q\" and expresses that Q follows from P; a biconditional statement has the form \"P iff Q\" and states that P and Q are equivalent. They both hold true under the same conditions.",
-    "B /\u2234 (A v C\u22c5 B  #3 1. D \u2283 E 2. D \u22c5 F  /\u2234 E  #4 1. J \u2283 K 2. J /\u2234 K v L  #5 1. A v B 2. ~A \u22c5 ~C /\u2234 B  #6 1. A \u2283 B 2. ~B \u22c5 ~C /\u2234 ~A  #7 1. D \u2283 E 2. (E \u2283 F) \u22c5 (F\u2283 D) /\u2234D \u2283 F  #8 1. (T \u2283 U) \u22c5 (T \u2283 V) 2. T  /\u2234 U v V  #9 1. (E \u22c5 F) v (G \u2283 H) 2. I \u2283 G 3. ~(E \u22c5 F) /\u2234 I \u2283 H   #10 1. M \u2283 N 2. O \u2283 P 3. N \u2283 P 4. (N \u2283 P) \u2283 (M v O) /\u2234N v P  #11 1.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

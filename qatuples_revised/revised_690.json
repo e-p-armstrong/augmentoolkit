@@ -1,6 +1,0 @@
-[
-    "Construct a proof for Exercise 17, Argument #1 using the rules provided in the text.",
-    "(A v B\u22c5 (A \u2283 D) /\u2234 A \u22c5 D",
-    "~D \u22c5 (R v F/\u2234 (L v G) \u22c5 ~R 6. ~D  Simplification 5 7. R v F Simplification 5 8. ~A  Modus tollens 2, 3 9. ~A v B Addition 8 10. L  Modus ponens 1, 9 11. L v G Addition 10 12. ~R v D Modus ponens 4, 10 13. ~R Disjunctive syllogism  14. (L v G) \u22c5 ~R  Conjunction 11, 13  Constructing proofs is a skill that takes practice. The following exercises will give you some practice with constructing proofs. Exercise 17: Construct proofs for the following valid arguments. The first fifteen proofs can be complete in three or less additional lines. The next five proofs will be a bit longer. It is important to note that there is always more than one way to construct a proof. If your proof differs from the answer key, that doesn\u2019t mean it is wrong. #1 1. A \u22c5 B 2. (A v C) \u2283 D /\u2234 A \u22c5 D  Chapter 2: Formal methods of evaluating arguments  112 #2 1. A 2.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

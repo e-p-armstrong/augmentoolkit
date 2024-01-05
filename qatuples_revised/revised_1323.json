@@ -1,6 +1,0 @@
-[
-    "How does the negation operator work in statement 4 and 5?",
-    "In both statements, the negation operator (~negates the relationship between C and P or U. If C is true, then ~(C v P) is false, meaning P is not a prokaryote; if C is true, then ~(C v U) is false, meaning U has signed the Kyoto Protocol.",
-    "(A \u22c5 B\u22c5 ~(C \u22c5 D) c. Main operator is the second dot 3.  a. C = Chimpanzees are prokaryotes; P = Protozoa are prokaryotes b. ~(C v P) c. Main operator is the negation 4.  a. C = China has not signed the Kyoto Protocol; U = The United States has not signed the Kyoto Protocol b. ~(C v U) c. Main operator is the negation 5.  a. C = Chevrolet will support the Olympic team; M = McDonald\u2019s will support the Olympic team b. (C v M) \u22c5 ~(C \u22c5 M) c. Main operator is the first dot 6.  a. L = Peter Jennings is a liar; M = Peter Jennings has a really bad memory b. L v M c. Main (and only) operator is the wedge 7.  a. L = Peter Jennings is a liar; M = Peter Jennings has a really bad memory b. ~(L v M) c. Main operator is the negation 8.  a. L = Peter Jennings is a liar; M = Peter Jennings has a really bad memory b. L \u22c5 M c. Main (and only) operator is the dot 9.  a. L = Peter Jennings is a liar; M = Peter Jennings has a really bad memory b.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

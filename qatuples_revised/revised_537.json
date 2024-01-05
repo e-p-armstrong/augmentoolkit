@@ -1,6 +1,0 @@
-[
-    "Suppose you pass all exams but do not pass the course; is the conditional E \u2283 C true or false in that case?",
-    "The conditional E \u2283 C is false in this case, as you passed the antecedent (Ebut not the consequent (C).",
-    "Thus, as we\u2019ve seen, the material conditional is false only when the antecedent is true and the consequent is false. R G R \u2283 G T T T T F F F T T F F T  It is sometimes helpful to think of the material conditional as a rule. For example, suppose that I tell my class:   If you pass all the exams, you will pass the course. Let\u2019s symbolize \u201cyou pass all the exams\u201d as \u201cE\u201d and \u201cyou pass the course\u201d as \u201cC.\u201d We would then symbolize the conditional as:   E \u2283 C  Under what conditions would my statement E \u2283 C be shown to be false? There are four possible scenarios:  E C E \u2283 C T T T T F F F T T F F T Chapter 2: Formal methods of evaluating arguments  88  Suppose that you pass all the exams and pass the class (first row). That would confirm my conditional statement E \u2283 C. Suppose, on the other hand, that although you passed all the exams, you did not pass the class (second row). This would should my statement is false (and you would have legitimate grounds for complaint!).",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

@@ -1,6 +1,0 @@
-[
-    "What is a categorical form?",
-    "A categorical form is a statement that asserts something about all or some members of a category. In this case, arguments 4 and 5 are in the \"Some S are not P\" form.",
-    "1. J \u2283 K 2. K v L 3. (L \u22c5 ~J\u2283 (M \u22c5 ~J) 4. ~K  /\u2234 M 5. L         Disjunctive syllogism 2, 4 6. ~J        Modus tollens 1, 4 7. L \u22c5 ~J     Conjunction 5, 6 8. M \u22c5 ~J    Modus ponens 3, 7 9. M        Simplification 8    Exercise 18 1. All real men are things that wear pink. 2. No dinosaurs are birds. 3. All birds are things that evolved from dinosaurs. 4. Some mammals are not predators. [Already in \u201cSome S are not P\u201d categorical form.] 5. Some predators are not mammals. [Already in \u201cSome S are not P\u201d categorical form.] 6. Some things that wander are not things that are lost. 7. No presidents are women. 8. No boxers are rich people. 9. No things that are sleeping are things that are conscious. 10. No things that are conscious are things that are sleeping. 11. All things that end well are things that are well. [Note that this is in a different order than the sentence states.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

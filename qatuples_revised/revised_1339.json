@@ -1,6 +1,0 @@
-[
-    "How do 'R', 'S', and 'F' relate to each other in the first row of symbols?",
-    "R means 'if', S means 'then', and F means 'false'. The relationship is that if a statement is true (R), then it implies falsehood (Sor falsity (F).",
-    "Invalid R T S R \u22c5 (T v ST ~S T T T      T   T T F T T F      T   T T T T F T      T   T F F T F F      F   F F T F T T      F   T T F F T F      F   T T T F F T      F   T F F F F F      F   F F T  6. Invalid 7. Valid   8. Valid A B ~(A v B) ~A v ~B T T  F  T     F  F  F T F  F  T     F  T  T F T  F  T     T  T  F F F  T  F     T  T  T  9.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

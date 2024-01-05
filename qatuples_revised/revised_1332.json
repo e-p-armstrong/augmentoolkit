@@ -1,6 +1,0 @@
-[
-    "What is the difference between '\u22c5' and 'v' operators in logic?",
-    "The '\u22c5' operator represents conjunction (and), while 'v' represents exclusive disjunction (or).",
-    "~(A v B\u22c5 (C \u22c5 D) c. Main operator is the first dot 15.  a. B = Ethiopians are good bobsledders; T = Ethiopians are good tennis players; D = Ethiopians are good distance runners b. ~(B v T) \u22c5 D c. Main operator is the dot 16.  a. S = Before Helen Keller met Annie Sullivan she could speak; R = Before Helen Keller met Annie Sullivan she could read; C = Before Helen Keller met Annie Sullivan she could communicate b. (~S \u22c5 ~R) \u22c5 ~C Answers to exercises  217 c. Main operator is the second dot 17.  a. C = Helen Keller learned to communicate; S = Helen Keller learned to play soccer; B = Helen Keller learned to play baseball b. C \u22c5 (~S \u22c5 ~B) c. Main operator is the first dot 18.  a. F = Tom is allowed to play football; S = Tom is allowed to play soccer b. (F v S) \u22c5 ~(F \u22c5 S) c. Main operator is the first dot 19.  a. E = Tom will major in engineering; P = Tom will major in physics; B = Tom will major in business; S = Tom will major in sociology b.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]

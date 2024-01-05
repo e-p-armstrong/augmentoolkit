@@ -1,6 +1,0 @@
-[
-    "What is the structure of a simplification 2 disjunctive syllogism?",
-    "A simplification 2 disjunctive syllogism has the form: (A v B/\u2234 C, (A v C) /\u2234 D. It asserts that if either A or B is true, then C is true, and if not-B is true, then D is true.",
-    "Simplification 2 Disjunctive syllogism 3, 5 Simplification 2 Modus tollens 1, 7 Disjunctive syllogism 4, 8 Modus ponens 6, 9 Addition 10  Exercise 17 1. 1. A \u22c5 B 2. (A v C\u2283 D /\u2234 A \u22c5 D 3. A        Simplification 1 4. A v C     Addition 3 5. D        Modus ponens 2, 4 6. A \u22c5 D    Conjunction 3, 5  2. 1. A 2. B /\u2234 (A v C) \u22c5 B 3. A v C      Addition 1 4. (A v C) \u22c5 B  Conjunction 2, 3  Answers to exercises  223 3. 1. D \u2283 E 2. D \u22c5 F /\u2234 E 3. D       Simplification 2 4. E       Modus ponens 1, 3  4. 1. J \u2283 K 2. J /\u2234 K v L 3. K      Modus ponens 1, 2 4. K v L    Addition 3  5. 1. A v B 2.",
-    "Introduction to Logic and Critical Thinking, by Matthew Van Cleave"
-]
