@@ -3,6 +3,8 @@ Generate multi-turn training data, about any subject, using Open Source LLMs!
 Save yourself the time of manually editing 1000s of AI chats to build your own dataset (which you then can't open source anyway because of personal reputation risks). Easily configure the prompts and settings to generate conversations aligned to your tastes and interests.
 Avoids breaking the bank (and getting your API key revoked) because it doesn't use the OpenAI API.
 
+[Fork this repo and customize it for your own needs!](https://github.com/e-p-armstrong/augmentoolkit/fork)
+
 ## Table of Contents:
 1. [Installation](#installation)
 2. [Introduction](#introduction-what-is-this-and-why-was-it-built)
@@ -184,6 +186,7 @@ Other limitations -- I've listed the major ones, and the ones I've found while g
 - Prompting format inconsistency fixes (newlines may vary even within the same prompt)
 - An experimental version using mixtral instruct, which would get around the RoPE issues. Would need to change every prompt to use its format, then test it.
 - Perhaps a version that, in the spirit of lean manufacturing, runs each paragraph through the entire pipeline one at a time (rather than going from one step to the next for all paragraphs) might be good for evaluating how a run is going while there is still time to abort it. May pose a problem if the VRAM memory leak issue is not solved though, as that prohibits the two-model approach.
+- Add support for various frontends or backends, like Text-Generation WebUI's API.
 
 ## Contact
 evanpeterarmstrong@gmail.com || @Heralax on Discord
