@@ -29,7 +29,7 @@ def create_thought_plan(qatuple, character, logic_llm, assistant_mode=False):
     # use regex to extract charname
     charname = extract_name(character)
 
-    cot_prompt = f"""You are an expert logical reasoning and question-solving AI. Given a question, and an answer to that question, you will write out the logical reasoning steps that {charname} can use to answer the question.
+    cot_prompt = f"""<s> [INST] You are an expert logical reasoning and question-solving AI. Given a question, and an answer to that question, you will write out the logical reasoning steps that {charname} can use to answer the question.
 
 You should first describe a plan which includes decomposing the problem into smaller ones, then execute that plan step-by-step, and then present a final answer to the original question. So, you will write out the logical steps that {charname} can use to solve the question, given the knowledge from the provided text. Try to begin each line with something like "Realize" or "Recall".
 
@@ -101,7 +101,7 @@ Absoluta sententia expositore non indiget.
 Question: \"\"\"What is the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?\"\"\"
 Answer: \"\"\"The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning Steps:
 Step 1. Formulate a plan to understand the meaning of 'A digniori fieri debet denominatio et resolutio' by defining it, then interpreting the definition in the context of law.
 Step 2. Recall that the phrase 'A digniori fieri debet denominatio et resolutio' translates to "Title and acquittal ought to proceed from the more worthy person."
@@ -120,7 +120,7 @@ During the construction of the Panama Canal, a massive engineering feat complete
 Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
 Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
 
-### Response:
+[/INST]### Response:
 # Reasoning:
 Step 1. Formulate a plan to answer the question about the amount of earth excavated during the Panama Canal construction.
 Step 2. Recall that "how much earth was excavated" can be decently answered by stating the volume of earth removed.
@@ -138,17 +138,19 @@ Text the question and answer were sourced from ({charname} does not have access 
 Question: \"\"\"{qatuple[0]}\"\"\"
 Answer: \"\"\"{qatuple[1]}\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning (only use as many logical steps as you must in order to solve the problem):
 """
 
     # Logical progression of steps that {charname} can use to answer the question
-    completion = logic_llm(
-        cot_prompt,
-        max_tokens=4000,
-        stop=["</s>", "# Input:"],
-        echo=True,
-        grammar=thought_plan_grammar,
+    completion = llm_call(
+        prompt=cot_prompt,
+        # max_tokens=4000,
+        # repeat_penalty=0,
+        # penalize_nl=False,
+        #stop=["</s>", "# Input:", "[INST]"],
+        #echo=True,
+        # grammar=thought_plan_grammar,
         temperature=0.2,
     )["choices"][0]["text"]
     # print("COMPLETION:\n\n----------------------")

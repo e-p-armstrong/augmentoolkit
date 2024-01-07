@@ -11,7 +11,7 @@ from .strip_steps import strip_steps
 def make_regenerate_question_plan(qatuple, dissenting_reasoning, logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""You are an expert educational AI. Someone has written a question that was supposed to be based on the provided paragraphs of text, but actually requires significant knowledge outside these paragraphs to answer. Your goal is to write a good, comprehensive plan for generating a revised question that addresses the criticism given. Given these paragraphs, the flawed question based on the paragraphs, and the explanation of why the question is flawed, you will PLAN OUT and THINK THROUGH different possibilities for a new question, one which will only require information from the paragraphs to solve. 
+        decision_prompt = f"""<s> [INST] You are an expert educational AI. Someone has written a question that was supposed to be based on the provided paragraphs of text, but actually requires significant knowledge outside these paragraphs to answer. Your goal is to write a good, comprehensive plan for generating a revised question that addresses the criticism given. Given these paragraphs, the flawed question based on the paragraphs, and the explanation of why the question is flawed, you will PLAN OUT and THINK THROUGH different possibilities for a new question, one which will only require information from the paragraphs to solve. 
 
 Paragraphs: \"\"\"{qatuple[2]}\"\"\"
 
@@ -31,15 +31,17 @@ Step 6. End of reasoning.
 
 Please now apply the above method to the provided text and question, and write out your reasoning and thought process.
 
-### Response:
+[/INST]### Response:
 ## New question plan:
 """
-        completion = logic_llm(
-            decision_prompt,
-            max_tokens=4000,
-            stop=["</s>", "# Input:"],
-            echo=True,
-            grammar=make_regenerate_question_plan_grammar,
+        completion = llm_call(
+            prompt=decision_prompt,
+            # max_tokens=4000,
+            # repeat_penalty=0,
+            # penalize_nl=False,
+            #stop=["</s>", "# Input:", "[INST]"],
+            #echo=True,
+            # grammar=make_regenerate_question_plan_grammar,
             temperature=0.2,
         )["choices"][0]["text"]
 

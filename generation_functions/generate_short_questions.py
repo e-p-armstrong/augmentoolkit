@@ -38,7 +38,7 @@ def generate_short_questions(text, existing_question_tuples, logic_llm):
     else:
         existing_qs = None
     while not made_questions and (retries <= 5):
-        question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs. The questions you create will lean towards shorter questions that can be quickly answered with only a bit of thought — and which can be solved if the answerer knows the paragraphs provided by heart. Essentially: the question will test comprehension of real information in the paragraphs that would be worthy to teach. After the question, you will also write its answer. Your task includes first analyzing the text, thinking through and brainstorming which questions you will make and why. 
+        question_prompt = f"""<s> [INST] You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs. The questions you create will lean towards shorter questions that can be quickly answered with only a bit of thought — and which can be solved if the answerer knows the paragraphs provided by heart. Essentially: the question will test comprehension of real information in the paragraphs that would be worthy to teach. After the question, you will also write its answer. Your task includes first analyzing the text, thinking through and brainstorming which questions you will make and why. 
 
 Each question you write (after your reasoning step is complete), MUST start on a new line with its question number followed by a bracket, ie, 1), or 2). This will then be followed by the question. This MUST be followed by "Answer: " followed by the question's answer. Each question must be separated by at least one new line. 
 
@@ -53,7 +53,7 @@ You should aim to make 6 questions (at most), but if the text is too small or in
 
 You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they will not have the text on-hand.
 
-### Response: I will remember to follow the question and answer format given by:
+[/INST]### Response: I will remember to follow the question and answer format given by:
 \"\"\"
 num) question contents.
 Answer: question answer.
@@ -62,13 +62,15 @@ All my questions will be directly answerable from the provided paragraphs, and w
 
 ## Questions:
 """
-        completion = logic_llm(
+        completion = llm_call(
             question_prompt,
-            max_tokens=2000,
-            stop=["</s>", "# Input:"],
-            echo=True,
-            grammar=questions_grammar,
+            # max_tokens=2000,
+            #stop=["</s>", "# Input:", "[INST]"],
+            #echo=True,
+            # grammar=questions_grammar,
             temperature=0.2,
+            # repeat_penalty=0,
+            # penalize_nl=False,
         )["choices"][0]["text"]
 
         # Extract questions

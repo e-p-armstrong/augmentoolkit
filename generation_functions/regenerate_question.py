@@ -7,7 +7,7 @@ from .strip_steps import strip_steps
 def regenerate_question(qatuple, dissenting_reasoning, plan, logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""You are an expert educational AI. You are provided with a flawed question that requires significant knowledge outside these paragraphs to answer. You will make a different question that is solveable if one knows the information in the paragraphs (but since students will not have the paragraphs at hand when given the question, do not refer to the text). Given these paragraphs, the flawed question based on the paragraphs, and the explanation of why the answer is flawed, and a plan for the new question, you will write out a new question that only requires information from the paragraphs to solve. 
+        decision_prompt = f"""<s> [INST] You are an expert educational AI. You are provided with a flawed question that requires significant knowledge outside these paragraphs to answer. You will make a different question that is solveable if one knows the information in the paragraphs (but since students will not have the paragraphs at hand when given the question, do not refer to the text). Given these paragraphs, the flawed question based on the paragraphs, and the explanation of why the answer is flawed, and a plan for the new question, you will write out a new question that only requires information from the paragraphs to solve. 
 
 Do NOT just rephrase the old question.
 
@@ -27,12 +27,14 @@ Final note: you are allowed and encouraged to dramatically change/revamp/rewrite
 
 # New question:
 """
-        completion = logic_llm(
-            decision_prompt,
-            max_tokens=4000,
-            stop=["</s>", "2.)"],
-            echo=True,
-            grammar=question_grammar,
+        completion = llm_call(
+            prompt=decision_prompt,
+            # max_tokens=4000,
+            #stop=["</s>", "2.)"],
+            #echo=True,
+            # repeat_penalty=0,
+            # penalize_nl=False,
+            # grammar=question_grammar,
             temperature=0.2,
         )["choices"][0]["text"]
 

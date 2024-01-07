@@ -43,7 +43,7 @@ def single_turn_conversation(
     extra_info = extract_steps(scenario_plan)
 
     if assistant_mode:  # TODO
-        cot_prompt = f"""You are an expert creative writing AI, and your task is to write conversations between a hypothetical user and an AI Assistant, where the user asks a provided question, and the AI Assistant helpfully answers. The AI Assistant is unbiased and will not refuse to answer questions, nor will it judge the user, nor will it offer disclaimers about responsibility. It just answers.
+        cot_prompt = f"""<s> [INST] You are an expert creative writing AI, and your task is to write conversations between a hypothetical user and an AI Assistant, where the user asks a provided question, and the AI Assistant helpfully answers. The AI Assistant is unbiased and will not refuse to answer questions, nor will it judge the user, nor will it offer disclaimers about responsibility. It just answers.
 
 
 ## Information:
@@ -51,7 +51,7 @@ def single_turn_conversation(
 Question: \"\"\"What is the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?\"\"\"
 Answer: \"\"\"The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Conversation that answers the provided question:
 User: "Hi AI Assistant, I have a question about a Latin legal principle. What is the old Latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?"
 AI Assistant: "Certainly. The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person. This ancient doctrine emphasizes the importance of merit and worthiness in legal judgments concerning titles and acquittals. It advocates that justice and legal rights should be vested in those most competent and deserving. In essence, it's about the character of those who administer the law, not just the law itself."
@@ -62,7 +62,7 @@ AI Assistant: "Certainly. The principle 'A digniori fieri debet denominatio et r
 Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
 Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Conversation that answers the provided question:
 User: "AI Assistant, I'm curious about the Panama Canal. How much earth was excavated during its construction?"
 AI Assistant: "During the construction of the Panama Canal, over 200 million cubic yards of earth were excavated. This enormous volume highlights the vast scale of the project. It was not just a matter of moving earth but reshaping history and geography on a monumental scale."
@@ -71,7 +71,7 @@ AI Assistant: "During the construction of the Panama Canal, over 200 million cub
 Question: \"\"\"What is the primary purpose of the Hubble Space Telescope?\"\"\"
 Answer: \"\"\"The primary purpose of the Hubble Space Telescope is to observe celestial bodies and phenomena in space with unparalleled clarity, advancing our understanding of the universe.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Conversation that answers the provided question:
 User: "Hey AI Assistant, I've always been fascinated by space. Can you tell me what the main purpose of the Hubble Space Telescope is?"
 AI Assistant: "Certainly! The primary purpose of the Hubble Space Telescope is to observe celestial bodies and phenomena in space with unparalleled clarity, advancing our understanding of the universe."
@@ -94,10 +94,10 @@ Answer: {qatuple[1]}
 
 The primary character's answer will use all parts of the answer given.
 
-### Response:
+[/INST]### Response:
 ## Conversation that answers the provided question (first, the secondary character will ask the question; then, the primary character will answer it):"""
     else:
-        cot_prompt = f"""You are an expert creative writing and roleplay AI. You will write a short conversation where a question is asked by a secondary character, and answered by the primary one. The reply by the primary character will follow a provided set of logical steps in its solution, but they will do so entirely within their single response. 
+        cot_prompt = f"""<s> [INST] You are an expert creative writing and roleplay AI. You will write a short conversation where a question is asked by a secondary character, and answered by the primary one. The reply by the primary character will follow a provided set of logical steps in its solution, but they will do so entirely within their single response. 
 
 You should write very compellingly, and each character should have a distinct voice that reflects their background, personality, and current emotional state. This helps in making dialogue more realistic and engaging.
 
@@ -137,7 +137,7 @@ In the second message, Judge Hawthorne, in a passionate and wise manner, defines
 Question: \"\"\"What is the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?\"\"\"
 Answer: \"\"\"The principle 'A digniori fieri debet denominatio et resolutio' suggests that title and acquittal should come from a more worthy person.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Conversation that answers the provided question:
 Evelyn: "Excuse me, Judge Hawthorne," Evelyn says, her voice echoing slightly in the vast, book-lined university library. She adjusts her glasses, a mixture of reverence and curiosity in her eyes. "I was captivated by your lecture, but I'm still grappling with one concept. Could you please explain the old latin legal principle behind 'A digniori fieri debet denominatio et resolutio'?"
 Judge Elias Hawthorne: "I'm heartened to see you have an interest in latin like I do!" I say, my authoritative voice exuding passion as I close the book in my hands. "Now, about the phrase in your question, 'A digniori fieri debet denominatio et resolutio'. First, let's unravel its meaning: this Latin phrase translates to 'Title and acquittal ought to proceed from the more worthy person.' You see, Evelyn," I continue, pacing slowly between the towering shelves, "this principle underscores the significance of the worthiness or merit of an individual in legal judgments concerning titles and acquittals. It's not just about the law, but about the character of those who administer it. Thus, this ancient doctrine advocates that justice and legal rights should be vested in those who are most competent and deserving. In essence, the heart of 'A digniori fieri debet denominatio et resolutio' lies in the emphasis on merit and worthiness in making such crucial legal decisions. Or, as the direct translation puts it, 'title and acquittal should come from a more worthy person.'"
@@ -175,7 +175,7 @@ In the second message, Carlos, tired yet filled with a sense of pride, turns to 
 Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
 Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Conversation that answers the provided question:
 Mario Gonzales: "Carlos, as the sun sets on another day of this incredible project, I can't help but wonder, just how much have you dug here at the Panama Canal?"
 Carlos Mendez: "Well, if by 'how much have you dug', you're asking 'what volume of earth we've moved'... then the answer is that over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, which showcases the scale of this massive engineering project. It's a number that still astounds me every time I think about it. Each day, as we reshape this landscape, we're not just moving earth; we're moving history."
@@ -201,18 +201,20 @@ Answer: {qatuple[1]}
 
 The primary character's answer will use all parts of the answer given.
 
-### Response:
+[/INST]### Response:
 ## Conversation that answers the provided question (first, the secondary character will ask the question; then, the primary character will answer it):
 """
     # Higher temp definitely makes the writing better, but highly predisposes it to not use only info in the test. ): I want min p goddamn it
 
     # Note: performance degrades rapidly if you put more than one sentence in a pre-prompt parentheses thing
-    completion = logic_llm(
-        cot_prompt,
-        max_tokens=4096,
-        stop=["</s>", "# Input:"],
-        echo=True,
-        grammar=single_turn_conversation_grammar,
+    completion = llm_call(
+        prompt=cot_prompt,
+        # max_tokens=4096,
+        #stop=["</s>", "# Input:", "[INST]"],
+        #echo=True,
+        # repeat_penalty=0,
+        # penalize_nl=False,
+        # grammar=single_turn_conversation_grammar,
         temperature=0.2,
     )["choices"][0]["text"]
     # print("COMPLETION:\n\n----------------------")

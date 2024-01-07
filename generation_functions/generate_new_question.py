@@ -4,9 +4,9 @@ import re
 from .question_grammar import question_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
+from aphrodite import SamplingParams
 
-
-def generate_new_question(qatuple, logic_llm):
+async def generate_new_question(qatuple, engine_wrapper):
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
 
@@ -19,7 +19,7 @@ def generate_new_question(qatuple, logic_llm):
     while not made_questions and (
         retries <= 5
     ):  # TODO - UPDATE and TEST the few-shot prompt with the latest from generate_questions
-        question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create a suitable educational question based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
+        question_prompt = f"""<s> [INST] You are an expert educational AI that, given a paragraph or two from a text, will create a suitable educational question based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
 
 Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
 
@@ -33,10 +33,10 @@ Text to make a question from:
 Road construction is a multifaceted process involving various stages and materials, each critical for the durability and safety of the road. Initially, a thorough site survey and soil testing are conducted to assess the suitability of the terrain. Following this, the groundwork commences with the removal of topsoil and leveling of the area. Subsequently, a layer of sub-base material, typically composed of crushed stone or gravel, is laid to provide stability. This is followed by the base layer, often made of a stronger aggregate, to support the surface layer. The surface layer, usually asphalt or concrete, is then applied, offering a smooth and durable driving surface. Additionally, proper drainage systems are installed to prevent water accumulation, which can lead to road damage. Throughout the construction, environmental considerations are taken into account to minimize the impact on surrounding ecosystems. Regular maintenance, including patching and resurfacing, is essential to extend the road's lifespan and ensure safety for its users.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Question:
 1.) What is the purpose of conducting a site survey and soil testing in the initial stage of road construction?
-Answer: The site survey and soil testing are conducted to assess the suitability of the terrain for road construction, ensuring the area is appropriate and will support the road structure effectively.
+Answer: The site survey and soil testing are conducted to assess the suitability of the terrain for road construction, ensuring the area is appropriate and will support the road structure effectively.</s> [INST]
 
 ### Instruction:
 Text details: Introduction to Mathematics, by Elise Delacroix
@@ -46,10 +46,10 @@ Text to make a question from:
 In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Question:
 1.) How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
-Answer: The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.
+Answer: The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.</s> [INST]
 
 ### Instruction:
 Text details: Thus Spake Zarathustra, by Friedrich Nietzsche
@@ -83,10 +83,10 @@ nether-world, thou exuberant star!
 Like thee must I GO DOWN, as men say, to whom I shall descend.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Question:
 1.) What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-Answer: They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
+Answer: They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.</s> [INST]
 
 ### Instruction:
 Text details: The Republic, by Plato
@@ -135,10 +135,10 @@ Certainly not, replied Glaucon.
 Then we are not going to listen; of that you may be assured.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Question:
 1.) In Plato's "The Republic," in the dialogue where Polemarchus comments on the size of his group and questions Socrates' strength compared to it, ultimately stating that Socrates will have to remain where he is, what is Polemarchus implying?
-Answer: Polemarchus is implying that since his group is stronger than Socrates, he can force Socrates to remain where he is.
+Answer: Polemarchus is implying that since his group is stronger than Socrates, he can force Socrates to remain where he is.</s> [INST]
 
 ### Instruction:
 Text Details: Engineering Projects Throughout History, by Hugo Gonzalez
@@ -148,10 +148,10 @@ Text to make a question from:
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Question:
 1.) How much earth was excavated during the construction of the Panama Canal?
-Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
+Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.</s> [INST]
 
 ### Instruction:
 Text Details: Engineering Projects Throughout History, by Hugo Gonzalez
@@ -161,10 +161,10 @@ Text to make a question from:
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Question:
 1.) How much earth was excavated during the construction of the Panama Canal?
-Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
+Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.</s> [INST]
 
 ### Instruction:
 Text details: {qatuple[3]}
@@ -174,20 +174,17 @@ Text to make a question from:
 {qatuple[2]}
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Question (based on text):
 """
-        # print("DEBUG\n\n" + decision_prompt)
+        # print("DEBUG\n\n" + prompt=decision_prompt)
+        sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]"],temperature=0.2)
         print("--QA TUPLE DURING NEW Q GEN--")
         print(qatuple)
-        completion = logic_llm(
-            question_prompt,
-            max_tokens=8000,
-            stop=["</s>", "# Input"],
-            echo=True,
-            grammar=question_grammar,
-            temperature=0.2,
-        )["choices"][0]["text"]
+        completion = await engine_wrapper.submit(
+                question_prompt,
+                sampling_params
+            )
         # print("COMPLETION:\n\n----------------------")
         # print(completion)
         # print("\n------------------")

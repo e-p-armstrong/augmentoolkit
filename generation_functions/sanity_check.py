@@ -10,13 +10,13 @@ def sanity_check(logic_llm):
     retries = 0
     while retries <= 4:
         decision_prompt = f"""Hi there, """
-        # print("DEBUG\n\n" + decision_prompt)
-        completion = logic_llm(
-            decision_prompt,
-            max_tokens=100,
-            stop=["</s>", "# Input:"],
-            echo=True,
-            grammar=answer_accurate_grammar,
+        # print("DEBUG\n\n" + prompt=decision_prompt)
+        completion = llm_call(
+            prompt=decision_prompt,
+            # max_tokens=100,
+            #stop=["</s>", "# Input:", "[INST]"],
+            #echo=True,
+            # grammar=answer_accurate_grammar,
             temperature=0.2,
         )["choices"][0]["text"]
         # print(completion)
@@ -31,7 +31,8 @@ if __name__ == "__main__":  # test
         offload_kqv=True,
         n_ctx=8000,
         n_gpu_layers=1000,
-        rope_freq_scale=0.33,
+        # repeat_penalty=0,
+        # penalize_nl=False,
         rope_scaling_type=1,
     )  # load the logical LLM and offload everything
 

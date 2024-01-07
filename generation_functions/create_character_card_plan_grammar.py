@@ -11,7 +11,7 @@ character_card_plan_grammar = LlamaGrammar.from_string(
 
 
 
-root ::= [^\n]+ "\n"
+root ::= [^\n]+
 
 
 # root ::= consider-step theme-step consistency-step "\n"

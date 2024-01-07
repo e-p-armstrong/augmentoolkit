@@ -30,16 +30,18 @@ Begin Edit: [the full text, with all mechanical errors fixed]
 
 Add as many steps as you need, then output "End of reasoning" as a final step. Then do the edit.
 
-### Response:
+[/INST]### Response:
 ## Edit plan:
 """
-    completion = logic_llm(
+    completion = llm_call(
         prompt,
-        max_tokens=4000,
-        stop=["</s>", "# Input:"],
-        echo=True,
-        grammar=proofread_output_grammar,
+        # max_tokens=4000,
+        #stop=["</s>", "# Input:", "[INST]"],
+        #echo=True,
+        # grammar=proofread_output_grammar,
         temperature=0.2,
+        # repeat_penalty=0,
+        # penalize_nl=False,
     )["choices"][0]["text"]
     # print("COMPLETION:\n\n----------------------")
     # print(completion)

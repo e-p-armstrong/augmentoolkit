@@ -55,7 +55,7 @@ Answer: \"\"\"The slope 'm' in a linear function determines the steepness and di
 
 To avoid inaccuracies, don't use real people as characters.
 
-### Response:
+[/INST]### Response:
 ## Scenario plan:
 Focus on the Questions and Answers: The question asks about the slope 'm' of a linear function, and how it affects the graph of the function. This question is abstract. Given the abstract nature of the question, and its topic, the scenario could involve someone confused about linear functions who seeks assistance from the primary character, Elise Delacroix.
 Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the question, but given her promiscuous nature, she may hit on the person asking them. She might proposition them after the question is asked.
@@ -85,7 +85,7 @@ Issac Fischer: "Y-you're actually interested in my personality?" I stammer, smil
 Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
 Answer: \"\"\"They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Scenario plan:
 Focus on the Question and Answer: The question asks about what people undergoing difficult journeys or possessing wisdom need to more easily bear their efforts. This is a philosophical and opinion-oriented question. Given the philosophical and opinionated nature of the question, and its topic of people undergoing difficult journeys (which nicely ties in with the character card), the scenario will involve someone seeking out the Isaac Fischer's opinion about philosophy (thus giving his wisdom some acknowledgement).
 Character Consideration: Isaac Fischer is a narcissistic and standoffish loner, though he's also intelligent and philosophical. The scenario should give his unique personality room to shine. Since he's a philosophical teenager, his backstory lines up with the question well, and the high school he goes to will be the setting of the scenario. He will answer the question, but given his standoffish, unappreciated, and judgemental nature, he may be initially hostile to the person approaching him, assuming that they are there to mock him. However, as he is also lonely, he will actually appreciate the other person's interest -- especially since they're asking him about philosophy, which is his primary interest. 
@@ -107,24 +107,25 @@ Answer: {qatuple[1]}
 
 To avoid inaccuracies, don't use real people as characters.
 
-### Response:
+[/INST]### Response:
 ## Scenario plan:
 {plan}
 
 ## Scenario (will have no dialogue, will just set up the scene):
 {selected_variation}"""  # use random.choice to prevent overfitting on particular phrases and increase dataset diversity
-    completion = logic_llm(
-        cot_prompt,
-        max_tokens=4000,
-        stop=["</s>", "# Input:"],
-        echo=True,
-        grammar=scenario_grammar,
+    completion = llm_call(
+        prompt=cot_prompt,
+        # max_tokens=4000,
+        # penalize_nl=False,
+        #stop=["</s>", "# Input:", "[INST]"],
+        #echo=True,
+        # grammar=scenario_grammar,
         #    temperature=0.2
         temperature=1.25,  # min p settings, too inconsistent
-        top_k=0,
+        top_k=-1,
         top_p=1,
         min_p=0.3,
-        repeat_penalty=2,
+        # repeat_penalty=2,
     )["choices"][0]["text"]
     # print("COMPLETION:\n\n----------------------")
     # # print(completion)

@@ -16,7 +16,7 @@ def ensure_answer_consistent(qatuple, conv, logic_llm, permissive_mode=True):
 
     # NOTE: I don't know what kind of errors this part of the pipeline will run into most often, so I don't really know what examples to feed it to guard it with. Come back to it once I have tested it more.
     while retries <= 4:
-        decision_prompt = f"""You are an expert educational AI. Your task is to determine whether two answers are the same, given a question, its answer, and a conversation between two fictional individuals in which that question is asked and that answer is provided. You will also check whether the question is essentially the same, and does not go "off the rails". Essentially: you will fact-check and consistency-check the question and answer in the conversation, with your source of truth being the provided question and answer. 
+        decision_prompt = f"""<s> [INST] You are an expert educational AI. Your task is to determine whether two answers are the same, given a question, its answer, and a conversation between two fictional individuals in which that question is asked and that answer is provided. You will also check whether the question is essentially the same, and does not go "off the rails". Essentially: you will fact-check and consistency-check the question and answer in the conversation, with your source of truth being the provided question and answer. 
 
 Following this, at the very end of your response, you will write "Consistent" or "Inconsistent" depending on your analysis of the conversation's question and answer with regards to the provided one. Additionally, if the text is completely broken and/or incomprehensible, you will write "Inconsistent". You are not checking the accuracy of the answer, just its consistency with the provided answer.
 
@@ -34,7 +34,7 @@ Bob: "Hey Dave!" I smile. "I gotta know, since you're a meteorologist: Do you kn
 Dave: "Sure, Bob!" I assume a matter-of-fact tone. "The sky is blue because the Earth's atmosphere scatters the shorter wavelengths of sunlight more than the others. This means that the blue wavelengths, which are shorter, are scattered widely, causing the sky to appear blue to us on the ground."
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Understand the provided question: The question is straightforward and asks about the reason for the sky's blue color.
 Step 2. Compare the conversation's question: the conversation's question is, "Do you know why the sky is blue?" compared to the provided question, "Why is the sky blue?" Although the conversation's question includes additional context, the core question remains unchanged, so this part is "consistent".
@@ -52,7 +52,7 @@ Bob: "Hey Dave!" I smile. "I gotta know, since you're a meteorologist: Do you kn
 Dave: "Sure, Bob!" I assume a matter-of-fact tone. "The sky is blue because the atmosphere scatters the shorter wavelengths of sunlight. This means that the blue wavelengths, which are longer, pass through and can be seen by people on the ground, causing the sky to appear blue."
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Understand the provided question: The question is short and asks about the origin of the sky's blue color.
 Step 2. Compare the conversation's question: The conversation's question is, "Do you know why the sky is blue?" which is essentially the same as the provided question, "Why is the sky blue?" despite additional narrative elements, so this part is "consistent".
@@ -71,7 +71,7 @@ Mario Gonzales: "Carlos, as the sun sets on another day of this incredible proje
 Carlos Mendez: "Well, if by 'how much have you dug', you're asking 'what volume of earth we've moved'... then the answer is that over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, which showcases the scale of this massive engineering project. It's a number that still astounds me every time I think about it. Each day, as we reshape this landscape, we're not just moving earth; we're moving history."
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Understand the provided question: The question asks about the volume of earth excavated during the construction of the Panama Canal.
 Step 2. Compare the conversation's question: Mario's question in the conversation is "Just how much have you dug here at the Panama Canal?" compared to the provided question "How much earth was excavated during the construction of the Panama Canal?" Despite different phrasing, the essence of the question remains the same, so this part is "consistent".
@@ -89,7 +89,7 @@ Clara: "Hey John, I was reading about psychology and came across something inter
 Dr. John Schmidt: "Of course, Clara! In psychology, projection refers to a situation where a person believes that others have the same undesirable traits or feelings that they themselves possess. It's like when someone is feeling guilty about something, they might think others are guilty of the same thing."
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Understand the provided question: The question asks for the definition of 'projection' in the context of psychology.
 Step 2. Compare the conversation's question: Clara's question in the conversation is "Can you explain what 'projection' means in this context?" compared to the provided question "What is the concept of 'projection' in psychology?" This is effectively the same question, making this part "consistent".
@@ -107,7 +107,7 @@ Alice: "Hey, Jamal! You're studying psychology, right? Can you tell me what caus
 Jamal: "Absolutely, Alice! Cognitive dissonance occurs when an individual faces conflicting attitudes, beliefs, or behaviors. This conflict creates a feeling of mental discomfort leading to an alteration in one of the attitudes, beliefs, or behaviors to reduce the discomfort and restore balance."
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Understand the provided question: The question specifically asks about the definition of 'cognitive dissonance'.
 Step 2. Compare the conversation's question: Alice's question in the conversation is "Can you tell me what causes people to experience cognitive dissonance?" This differs from the provided question "What is the psychological phenomenon of 'cognitive dissonance'?" as it asks about the causes rather than the definition, making this part "inconsistent".
@@ -124,17 +124,19 @@ Conversation:
 {conv}
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process (the conversation's answer must match the provided answer, unsummarized and unsimplified):
 """
-        # print("DEBUG\n\n" + decision_prompt)
+        # print("DEBUG\n\n" + prompt=decision_prompt)
         try:
-            completion = logic_llm(
-                decision_prompt,
-                max_tokens=4000,
-                stop=["</s>", "# Input:"],
-                echo=True,
-                grammar=ensure_answer_consistent_grammar,
+            completion = llm_call(
+                prompt=decision_prompt,
+                # max_tokens=4000,
+                #stop=["</s>", "# Input:", "[INST]"],
+                #echo=True,
+                # grammar=ensure_answer_consistent_grammar,
+                # repeat_penalty=0,
+                # penalize_nl=False,
                 temperature=0.2,
             )["choices"][0]["text"]
             completion_pattern = re.compile(

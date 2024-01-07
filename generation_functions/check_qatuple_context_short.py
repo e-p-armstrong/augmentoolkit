@@ -25,7 +25,7 @@ def extract_question_answer(response):
 def check_qatuple_context_deprecated(qatuple, logic_llm):
     retries = 0
     while retries <= 4:
-        decision_prompt = f"""You are checking whether a provided question and answer make sense if asked by themselves, with no additional information. You need to check for vague wording that a reader cannot interpret correctly, and questions that lack key context and would not be possibly answerable even if asked of someone with complete, masterful knowledge of the general subject matter of the question.
+        decision_prompt = f"""<s> [INST] You are checking whether a provided question and answer make sense if asked by themselves, with no additional information. You need to check for vague wording that a reader cannot interpret correctly, and questions that lack key context and would not be possibly answerable even if asked of someone with complete, masterful knowledge of the general subject matter of the question.
 
 Evaluate the provided question-answer pair step-by-step. Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Pass" or "Fail" or "Reword". A test passes if it "makes sense" and does not lack key context; it "Fails" if it lacks key context, AND the question is not specific or clear, it fails. If it lacks context but the question is specific, pointed, and grounded, then it needs to be reworded to have the context-needing terms (i.e., vague reference to "the text") removed. If it has no problems, it passes. 
 
@@ -41,7 +41,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: How can you avoid blame for an act of sabotage, according to the text?
 Answer: You can do them in public places where anyone would have been capable of carrying out the act.
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. This question mentions "the text" without specifying which text it is referring to.
@@ -68,7 +68,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: How does the type of saboteur affect their role in destruction?
 Answer: If they are a technician, they can devise methods of simple sabotage appropriate to their facilities. If not technically trained, they need suggestions for what to destroy and how to accomplish it.
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question does not misuse any specific terms without proper context.
@@ -92,7 +92,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: What is the meaning of this passage?
 Answer: This passage means that things which think, form plans, and act on those plans, are beyond simple machines. This is evidenced by the line "Creatures that think, form plans, and _act_, are not what we call automata."
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question asks about "this passage" without specifying which passage it is referring to or what book it belongs to.
@@ -116,17 +116,19 @@ Note that while you have access to this information, for the sake of rewording q
 Question: {qatuple[0]}
 Answer: {qatuple[1]}
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process (be thorough):
 """
-        # print("DEBUG\n\n" + decision_prompt)
+        # print("DEBUG\n\n" + prompt=decision_prompt)
         try:
-            completion = logic_llm(
-                decision_prompt,
-                max_tokens=3000,
-                stop=["</s>", "# Input:"],
-                echo=True,
-                grammar=check_qatuple_context_grammar,
+            completion = llm_call(
+                prompt=decision_prompt,
+                # repeat_penalty=0,
+                # penalize_nl=False,
+                # max_tokens=3000,
+                #stop=["</s>", "# Input:", "[INST]"],
+                #echo=True,
+                # # grammar=check_qatuple_context_grammar,
                 temperature=0.2,
             )["choices"][0]["text"]
 
@@ -136,7 +138,7 @@ Answer: {qatuple[1]}
             )
             response = response_pattern.search(completion).group(1).strip()
             decision_pattern = re.compile(r"Final judgment:(.+)", re.IGNORECASE)
-            print(response)
+            # print(response)
             determination = decision_pattern.search(response).group(1).strip()
             print("\n\nDETERMINATION:\n------")
             print(determination)
@@ -166,7 +168,6 @@ if __name__ == "__main__":  # test
         n_gqa=8,
         offload_kqv=True,
         n_ctx=12000,
-        rope_freq_scale=0.33,
         n_gpu_layers=100,
     )  # load the logical LLM and offload everything
     # NOTE: change these examples to have actual body text if you end up incorporating that into this step

@@ -12,7 +12,7 @@ from .strip_steps import strip_steps
 def regenerate_answer_constrain_to_text(qatuple, dissenting_reasoning, plan, logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""You are an expert educational AI. Someone has written an answer to a question (this question is based on a few provided paragraphs of text) but their answer includes information that's not provided by the text, and thus it might be flawed. Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer deviates from the text, you will write the correct answer to the question that only uses info in the text. 
+        decision_prompt = f"""<s> [INST] You are an expert educational AI. Someone has written an answer to a question (this question is based on a few provided paragraphs of text) but their answer includes information that's not provided by the text, and thus it might be flawed. Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer deviates from the text, you will write the correct answer to the question that only uses info in the text. 
 
 Text: \"\"\"{qatuple[2]}\"\"\"
 
@@ -23,20 +23,22 @@ Allegedly incorrect answer to the question (you must constrain this answer to on
 Reasoning as to why the answer goes off the rails: \"\"\"{strip_steps(dissenting_reasoning)}\"\"\"
 
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 {plan}
 
 ## New answer (do not mention the text):
 The constrained answer would be \"\"\""""
         try:
-            completion = logic_llm(
-                decision_prompt,
-                max_tokens=3000,
-                stop=["</s>", "# Input:"],
-                grammar=regenerate_answer_constrain_to_text_grammar,
+            completion = llm_call(
+                prompt=decision_prompt,
+                # max_tokens=3000,
+                #stop=["</s>", "# Input:", "[INST]"],
+                # grammar=regenerate_answer_constrain_to_text_grammar,
                 temperature=0.2,
-                echo=True,
+                #echo=True,
+                # repeat_penalty=0,
+                # penalize_nl=False,
             )["choices"][0]["text"]
             # print(completion)
             completion_pattern = re.compile(

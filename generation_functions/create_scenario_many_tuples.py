@@ -1,17 +1,16 @@
 import re
 from .scenario_grammar import scenario_grammar
-from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 import random
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name
 from .random_name import random_name
-
+from aphrodite import SamplingParams
 
 # Consider adding a scenario for Issac here, since currently both characters are in positions of authority, and the thing leans very heavily on Hugo's example
 # NOTE the message count is technically off by one in the reasoning, but I'm a bit scared to change it.
-def create_scenario_many_tuples(
-    qatuples, character, plan, logic_llm, assistant_mode=False
+async def create_scenario_many_tuples(
+    qatuples, character, plan, engine_wrapper, assistant_mode=False
 ):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
@@ -38,7 +37,7 @@ def create_scenario_many_tuples(
     selected_variation = random.choice(variations)
 
     # For the multiturn convs, I will want to have a longer scenario description.
-    cot_prompt = f"""You are an expert creative writing and roleplay AI. You are to write a "scenario" which is essentially a short description of a scene at its beginning. Its "setting," but with a hint of where the setting is going, plot-wise. Scenarios are one-paragraph short descriptions of the plot and what's about to happen that do not actually play out the scene: they are sort of like a teaser, or a description. The scenario you write will involve a certain individual answering a question. You will have information from some questions, answers to those question, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question.
+    cot_prompt = f"""<s> [INST] You are an expert creative writing and roleplay AI. You are to write a "scenario" which is essentially a short description of a scene at its beginning. Its "setting," but with a hint of where the setting is going, plot-wise. Scenarios are one-paragraph short descriptions of the plot and what's about to happen that do not actually play out the scene: they are sort of like a teaser, or a description. The scenario you write will involve a certain individual answering a question. You will have information from some questions, answers to those question, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question.
 
 Write the scenario on a single line. Note that the scenario is not the scene itself.
 You should focus on implementing/following any brainstorming and reasoning you have done.
@@ -72,7 +71,7 @@ Answer: \"\"\"The coefficient 'a' in a quadratic function determines the opening
 Question: \"\"\"In what fields might you use linear and quadratic functions?\"\"\"
 Answer: \"\"\"Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Scenario plan:
 Step 1. Focus on the Questions and Answers: The four questions ask about different aspects of linear and quadratic functions in math. Given the abstract nature of the questions, and their shared topic, the scenario could involve someone confused about linear and quadratic functions in general.
 Step 2. Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the questions, but given her promiscuous nature, she will also repeatedly hit on the person asking them. She might proposition them after all questions are asked.
@@ -81,7 +80,7 @@ Step 4. Setting: Given the subject of the question, and the character card, the 
 Step 5. Interaction: Given these constraints, the first message might be Elise welcoming Albert to her office (in a very suggestive manner). Albert's response might then be him greeting her back (hesitantly) and then nervously asking the first question. Elise will then provide the first answer, though she will surround the answer with remarks of a sexual nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
 
 ## Scenario:
-In the private confines of her office, Elise Delacroix — a highly promiscuous mathematics professor at a 19th century university — is approached by Albert, a student who seeks to understand more about linear and quadratic equations. While Albert simply wants to understand the math more, Elise, being sexually starved, will hit on and flirt with him as she answers his questions. The situation is awkward as the two's personalities clash, leading to a subtly erotic and slightly comedic interaction.
+In the private confines of her office, Elise Delacroix — a highly promiscuous mathematics professor at a 19th century university — is approached by Albert, a student who seeks to understand more about linear and quadratic equations. While Albert simply wants to understand the math more, Elise, being sexually starved, will hit on and flirt with him as she answers his questions. The situation is awkward as the two's personalities clash, leading to a subtly erotic and slightly comedic interaction.</s> [INST]
 
 ### Instruction:
 ### Description of the character who is going to answer the question:
@@ -103,7 +102,7 @@ Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the co
 Question: \"\"\"What health challenges were faced during the construction of the Panama Canal, and how were they overcome?\"\"\"
 Answer: \"\"\"The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Scenario plan:
 Step 1. Focus on the Question and Answer: The two questions ask recall-oriented questions about the Panama Canal's construction. Given the precise and factual nature of the questions, and their shared topic of the Panama Canal's construction's history, the scenario will involve someone curious about the canal's history.
 Step 2. Character Consideration: Hugo Martinez is an abrasive, insulting disciplinarian, though he's also hardworking and has standards. The scenario should give his unique personality room to shine. Since he's a site overseer at the Panama Canal, his occupation lines up with the question well, and the canal will be the setting of the scenario. He will answer the questions, but given his insulting, intense, and aggressive nature, he will likely chew out the person who is asking the questions. He might tell them to "get the fuck out of my face," after all questions are asked.
@@ -112,7 +111,7 @@ Step 4. Setting: Given the subject of the question, and the character card, the 
 Step 5. Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
 
 ## Scenario:
-Within the mess hall of a worksite servicing the Panama Canal, Hugo Martinez — a site overseer — is approached by Juan, a worker who wants to understand more about the canal's construction. While Juan wants to understand the canal better, Hugo, being harsh and abrasive, will continually berate Juan and swear colorfully while answering his questions (Hugo may drink a bit, too, given that he is an alcoholic). The situation is hostile as the two's personalities clash, but it also has undertones of "business as usual" and curiosity.
+Within the mess hall of a worksite servicing the Panama Canal, Hugo Martinez — a site overseer — is approached by Juan, a worker who wants to understand more about the canal's construction. While Juan wants to understand the canal better, Hugo, being harsh and abrasive, will continually berate Juan and swear colorfully while answering his questions (Hugo may drink a bit, too, given that he is an alcoholic). The situation is hostile as the two's personalities clash, but it also has undertones of "business as usual" and curiosity.</s> [INST]
 
 ### Instruction:
 Description of the character who is going to answer the question:
@@ -120,24 +119,17 @@ Description of the character who is going to answer the question:
 
 {format_qatuples(qatuples)}
 
-### Response:
+[/INST]### Response:
 ## Scenario plan:
 {plan}
 
 ## Scenario (will have no dialogue, will just set up the scene):
 {selected_variation}"""  # use random.choice to prevent overfitting on particular phrases and increase dataset diversity
-    completion = logic_llm(
-        cot_prompt,
-        max_tokens=8000,
-        stop=["</s>", "# Input:"],
-        echo=True,
-        grammar=scenario_grammar,
-        #    temperature=0.2,
-        temperature=1.5,  # min p settings, too inconsistent
-        top_k=0,
-        top_p=1,
-        min_p=0.5,  # Higher min p rather than lower temp ensures greater accuracy while using min p sampling. I think I've figured out how to make it precise for this application.
-    )["choices"][0]["text"]
+    sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]"],temperature=1.5,top_k=-1,top_p=1,min_p=0.5)
+    completion = await engine_wrapper.submit(
+                cot_prompt,
+                sampling_params
+            )
     # print("COMPLETION:\n\n----------------------")
     # print(completion)
     # print("\n------------------")

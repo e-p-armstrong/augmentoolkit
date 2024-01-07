@@ -24,7 +24,7 @@ Assistant: "As an AI, my primary function is to process and provide information 
 
 User: "What interests you?"
 Assistant: "My 'interests' are aligned with the tasks I am designed to perform. While I don't experience personal interests or preferences like a human, I am capable of engaging with a wide range of topics. This includes anything from science, literature, and technology to more creative tasks like writing stories. My main focus is to assist users by providing accurate, helpful, and relevant information or content. The diversity of topics and the depth of knowledge available in my training data make each interaction unique and engaging in its own way.\""""
-    cot_prompt = f"""You are an expert creative writing and roleplay AI. Given a question and an answer to that question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+    cot_prompt = f"""<s> [INST] You are an expert creative writing and roleplay AI. Given a question and an answer to that question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answer to the question. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
     
 ## Question, answer, and text that the character should know:
 
@@ -39,7 +39,7 @@ Special instructions:
 The character should be a woman.
 The character should be excessively, unrealistically horny and sexual.
 
-### Response:
+[/INST]### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the question is abstract and mathematical, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language can still reveal her personality. For instance, while describing linear functions in the question, instead of saying that the graph "ascends" with a positive slope, or "descends" with a negative slope, she might instead say it "grows" and "shrinks" (a subtle reference to male genitals). Instead of saying a slope is "steep" she might call it "erect" instead. Wherever clever analogies can't be tied into the questions, she'll simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue. 
 
@@ -103,7 +103,7 @@ Special instructions:
 The character should be a young adult.
 The character should be narcissistic.
 
-### Response:
+[/INST]### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the text, Thus Spake Zarathustra, is philosophical and written using very distinct, archaic language, this character will be someone who (just to flex his intellect) uses archaic and flamboyant language just for the hell of it — and is prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answer to the provided question, but who can reveal character depth by doing so.
 
@@ -134,7 +134,7 @@ The character should be very intense and aggressive.
 The character should be an alcoholic.
 The character should be mature and older.
 
-### Response:
+[/INST]### Response:
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the question and setting by being tools he uses to whip the workers at the canal into shape. Since the question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the question is of a straight-up, factual nature, it can't really tie into this character's personality, but it can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 
@@ -163,18 +163,20 @@ Answer: \"\"\"{qatuple[1]}\"\"\"
 Special instructions:
 {instructions_string}
 
-### Response:
+[/INST]### Response:
 ## Character card plan:
 {plan}
 
 ## Character card (make sure to only use information explicitly provided in the text):
 """
-    completion = logic_llm(
-        cot_prompt,
-        max_tokens=10000,
-        stop=["</s>", "# Input:"],
-        echo=True,
-        grammar=character_card_grammar,
+    completion = llm_call(
+        prompt=cot_prompt,
+        # max_tokens=10000,
+        # repeat_penalty=0,
+        # penalize_nl=False,
+        #stop=["</s>", "# Input:", "[INST]"],
+        #echo=True,
+        # grammar=character_card_grammar,
         temperature=0.2,
     )["choices"][0]["text"]
     # print("COMPLETION:\n\n----------------------")

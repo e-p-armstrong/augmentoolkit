@@ -9,7 +9,7 @@ from .strip_steps import strip_steps
 def regenerate_answer(qatuple, dissenting_reasoning, plan, logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""You are an expert educational AI. Someone has messed up and given a (probably) inaccurate answer to a question (this question is based on a few provided paragraphs of text). Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer is flawed, you will write the correct answer to the question. 
+        decision_prompt = f"""<s> [INST] You are an expert educational AI. Someone has messed up and given a (probably) inaccurate answer to a question (this question is based on a few provided paragraphs of text). Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer is flawed, you will write the correct answer to the question. 
 
 Text: \"\"\"{qatuple[2]}\"\"\"
 
@@ -21,19 +21,21 @@ Reasoning as to why the answer is incorrect: \"\"\"{strip_steps(dissenting_reaso
 
 If there are many questions, just answer the first 2.
 
-### Response:
+[/INST]### Response:
 ## Plan for new answer (step-by-step):
 {plan}
 # New answer (comprehensive and complete; do not mention the text):
 The correct answer would be \""""
         try:
-            completion = logic_llm(
-                decision_prompt,
-                max_tokens=4000,
-                stop=["</s>", "\n"],
-                echo=True,
-                grammar=regenerate_answer_grammar,
+            completion = llm_call(
+                prompt=decision_prompt,
+                # max_tokens=4000,
+                #stop=["</s>", "\n"],
+                #echo=True,
+                # grammar=regenerate_answer_grammar,
                 temperature=0.2,
+                # repeat_penalty=0,
+                # penalize_nl=False,
             )["choices"][0]["text"]
 
             # print("DEBUG\n\n")

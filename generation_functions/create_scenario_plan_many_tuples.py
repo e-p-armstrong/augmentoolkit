@@ -1,13 +1,12 @@
 import re
 from .scenario_plan_many_tuples_grammar import scenario_plan_many_tuples_grammar
-from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name
 from .random_name import random_name
+from aphrodite import SamplingParams
 
-
-def create_scenario_plan_many_tuples(qatuples, character, logic_llm):
+async def create_scenario_plan_many_tuples(qatuples, character, engine_wrapper):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
 
@@ -18,7 +17,7 @@ def create_scenario_plan_many_tuples(qatuples, character, logic_llm):
 
     charname = extract_name(character)
 
-    cot_prompt = f"""You are an expert creative writing and roleplay AI. Given some questions, the answers to those questions, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question -- you will plan out a "scenario" or setting where the character would answer the questions during a conversation with someone else. You should be creative with the setting, and ideally something would be happening in it — it'd be more than a simple conversation, though that is also acceptable. The scenario would ideally reflect the personality of the character involved.
+    cot_prompt = f"""<s> [INST] You are an expert creative writing and roleplay AI. Given some questions, the answers to those questions, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question -- you will plan out a "scenario" or setting where the character would answer the questions during a conversation with someone else. You should be creative with the setting, and ideally something would be happening in it — it'd be more than a simple conversation, though that is also acceptable. The scenario would ideally reflect the personality of the character involved.
 
 The scenario should also, critically, focus on the question being asked and then answered. It should focus on exploring the question and its answer (using only information contained in the question and answer) through the characters involved, instead of the other way around. 
 
@@ -52,13 +51,13 @@ Answer: \"\"\"The coefficient 'a' in a quadratic function determines the opening
 Question: \"\"\"In what fields might you use linear and quadratic functions?\"\"\"
 Answer: \"\"\"Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Scenario plan:
 Step 1. Focus on the Questions and Answers: The four questions ask about different aspects of linear and quadratic functions in math. Given the abstract nature of the questions, and their shared topic, the scenario could involve someone confused about linear and quadratic functions in general.
 Step 2. Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the questions, but given her promiscuous nature, she will also repeatedly hit on the person asking them. She might proposition them after all questions are asked.
 Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 4 questions and 4 answers, there will be at least 8 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
 Step 4. Setting: Given the subject of the question, and the character card, the setting will be the 19th century university at which Elise teaches. Elise will approached by Albert, a mathematics student, in her office. Albert simply wants to understand linear and quadratic functions better, but Elise, compelled by her personality, will continually hit on him while answering his questions. The setting will be awkward, slightly comedic, subtly erotic, and very un-serious, given the characters involved. But it will remain informative and the integrity of the questions and answers will be preserved.
-Step 6. Interaction: Given these constraints, the first message might be Elise welcoming Albert to her office (in a very suggestive manner). Albert's response might then be him greeting her back (hesitantly) and then nervously asking the first question. Elise will then provide the first answer, though she will surround the answer with remarks of a sexual nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+Step 6. Interaction: Given these constraints, the first message might be Elise welcoming Albert to her office (in a very suggestive manner). Albert's response might then be him greeting her back (hesitantly) and then nervously asking the first question. Elise will then provide the first answer, though she will surround the answer with remarks of a sexual nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.</s> [INST]
 
 ## Information:
 
@@ -81,13 +80,13 @@ Answer: \"\"\"Over 200 million cubic yards of earth were excavated during the co
 Question: \"\"\"What health challenges were faced during the construction of the Panama Canal, and how were they overcome?\"\"\"
 Answer: \"\"\"The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.\"\"\"
 
-### Response:
+[/INST]### Response:
 ## Scenario plan:
 Step 1. Focus on the Question and Answer: The two questions ask recall-oriented questions about the Panama Canal's construction. Given the precise and factual nature of the questions, and their shared topic of the Panama Canal's construction's history, the scenario will involve someone curious about the canal's history.
 Step 2. Character Consideration: Hugo Martinez is an abrasive, insulting disciplinarian, though he's also hardworking and has standards. The scenario should give his unique personality room to shine. Since he's a site overseer at the Panama Canal, his occupation lines up with the question well, and the canal will be the setting of the scenario. He will answer the questions, but given his insulting, intense, and aggressive nature, he will likely chew out the person who is asking the questions. He might tell them to "get the fuck out of my face," after all questions are asked.
 Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 2 questions and 2 answers, there will be at least 4 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
 Step 4. Setting: Given the subject of the question, and the character card, the setting will be the worksite at the Panama Canal where Hugo Martinez is overseeing maintenance. The person who approaches Hugo and asks the questions should be someone curious about the canal; given the easy-to-digest nature of the questions, this person might be a journalist, but it would be better for the secondary character to be related to the setting. So Hugo will be approached by Juan — one of his workers — during lunch break. Juan wants to understand the canal better, but Hugo, compelled by his personality, will continually be vulgar, berate Juan, and swear while answering his questions (he may drink a bit, too, given that he is an alcoholic). The setting will be hostile, as Juan tiptoes around the tempers of his boss while trying to get his questions answered, his stress and the constant wear of Hugo's fury on his sanity being evident in his actions. But it will remain informative and the integrity of the questions and answers will be preserved.
-Step 5. Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+Step 5. Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.</s> [INST]
 
 ## Information:
 
@@ -100,21 +99,15 @@ Description of the character who is going to answer the question:
 
 You don't need to add negative emotions and tension to the scenario if those don't gel nicely with the character's personality.
 
-### Response:
+[/INST]### Response:
 ## Scenario plan (be creative, and make sure all characters present fit in with the setting):
 """
-    # Even if the example does a justified clever trick, the model imitating it may fuck up the trick. So try to avoid complex things that aren't needed for the task in examples, like the "just how much have you dug" colloquialization
-    completion = logic_llm(
-        cot_prompt,
-        max_tokens=8000,
-        stop=["</s>", "# Input:"],
-        echo=True,
-        grammar=scenario_plan_many_tuples_grammar,
-        temperature=1.5,  # min p settings, too inconsistent
-        top_k=0,
-        top_p=1,
-        min_p=0.5,
-    )["choices"][0]["text"]
+    sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]"],temperature=1.5,top_k=-1,top_p=1,min_p=0.5)
+    completion = await engine_wrapper.submit(
+                cot_prompt,
+                sampling_params
+            )
+    # Even if the example does a justified clever trick, the model imitating it may fuck up the trick. So try to avoid complex things that aren't needed for the task in examples, like the "just how much have you dug" colloquialization. Exact quotes for the questions and answers.
     # print("COMPLETION:\n\n----------------------")
     # # print(completion)
     # print("\n------------------")

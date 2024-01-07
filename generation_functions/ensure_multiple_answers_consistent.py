@@ -29,7 +29,7 @@ def ensure_multiple_answers_consistent(qatuples, conv, logic_llm, permissive_mod
     # NOTE Introduction to Practicing Chemical Science does not exist; this is more stuff from principles of chemistry named otherwise to avoid biasing the outputs more than can be helped
     # Consider removing the "conversational fluff" bit of the prompt. It's not really necessary? maybe?
     while retries <= 4:
-        decision_prompt = f"""You are an expert educational AI. Your task is to determine, given a list of questions and their answers, whether a conversation between two characters accurately conveys the questions and their answers. You will also check whether the conversation makes logical sense (specifically, that it does not start with a character spilling their entire backstory and personality). Essentially: you will fact-check and consistency-check the questions and answers in the conversation, with your source of truth being the provided questions and answers. 
+        decision_prompt = f"""<s> [INST] You are an expert educational AI. Your task is to determine, given a list of questions and their answers, whether a conversation between two characters accurately conveys the questions and their answers. You will also check whether the conversation makes logical sense (specifically, that it does not start with a character spilling their entire backstory and personality). Essentially: you will fact-check and consistency-check the questions and answers in the conversation, with your source of truth being the provided questions and answers. 
 
 Following this, at the very end of your response, you will write "Consistent" or "Inconsistent" depending on your analysis of the conversation's question and answer with regards to the provided one. Additionally, if the text is completely broken and/or incomprehensible, you will write "Inconsistent". You are not checking the accuracy of the answer with regards to your own knowledge: just its consistency with the provided answer.
 
@@ -67,7 +67,7 @@ Elise Delacroix: "I... I..." For the first time in the conversation Elise stumbl
 
 The primary character (who should answer the questions, not ask them) is: Elise Delacroix
 
-### Response:
+[/INST]### Response:
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about the slope 'm' in a linear function. It is consistent with the first provided question. It is asked by Albert, who is not the primary character, which is correct.
@@ -116,7 +116,7 @@ Jude: "The principles of science form the chains supporting the bridge, which is
 
 The primary character (who should answer the questions, not ask them) is: Jude
 
-### Response:
+[/INST]### Response:
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about what Mendeleev compares science to in 'Principles of Chemistry'. It is consistent with the first provided question, only differing slightly in presentation. It is asked by Student, who is not the primary character, which is correct.
@@ -166,7 +166,7 @@ Lance: "The first step in learning chemistry," he begins, his voice firm and uny
 
 The primary character (who should answer the questions, not ask them) is: Lance
 
-### Response:
+[/INST]### Response:
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about how practical work relates to theoretical understanding in chemistry. It is consistent with the first provided question. It is asked by Lance, who is the primary character, which is wrong and inconsistent.
@@ -212,7 +212,7 @@ Professor Carlisle: "Ah, so you CAN get something right after all!" He smirks di
 
 The primary character (who should answer the questions, not ask them) is: Professor Carlisle
 
-### Response:
+[/INST]### Response:
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about the significance of the double helix structure of DNA. It is consistent with the first provided question. It is asked by Professor Carlisle, who is the primary character, which is wrong and inconsistent.
@@ -246,17 +246,19 @@ The primary character (who should answer the questions, not ask them) is: {chara
 ## Sequential Matching of Questions in the Conversation:
 ### Sequence and Phrasing of Questions:
 1. The conversation's first question is about """
-        # print("DEBUG\n\n" + decision_prompt)
+        # print("DEBUG\n\n" + prompt=decision_prompt)
         try:
-            completion = logic_llm(
-                decision_prompt,
-                max_tokens=12000,
-                stop=["</s>", "# Input:"],
-                echo=True,
-                # grammar=ensure_multiple_answers_consistent_grammar,#temperature=0.2
+            completion = llm_call(
+                prompt=decision_prompt,
+                # max_tokens=12000,
+                #stop=["</s>", "# Input:", "[INST]"],
+                #echo=True,
+                # # grammar=ensure_multiple_answers_consistent_grammar,#temperature=0.2
                 temperature=0.5,  # min p settings, too inconsistent
-                top_k=0,
+                top_k=-1,
                 top_p=1,
+                # repeat_penalty=0,
+                # penalize_nl=False,
                 min_p=0.6,
             )["choices"][0]["text"]
             print("DEBUG\n\n")
@@ -296,7 +298,6 @@ if __name__ == "__main__":  # test
         n_gqa=8,
         offload_kqv=True,
         n_ctx=12000,
-        rope_freq_scale=0.33,
         n_gpu_layers=100,
         verbose=True,
     )  # load the logical LLM and offload everything

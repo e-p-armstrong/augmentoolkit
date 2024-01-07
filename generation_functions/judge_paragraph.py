@@ -1,15 +1,15 @@
 import re
 from .judge_paragraph_grammar import judge_paragraph_grammar
-from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
+from aphrodite import SamplingParams
 
-
-def judge_paragraph(p, logic_llm):
+async def judge_paragraph(p, engine_wrapper):
     reached_decision = False
     max_retries = 0
     while not reached_decision and (max_retries <= 3):
-        decision_prompt = f"""You are an expert educational AI that will make a determination as to whether the contents of the paragraph(s) provided are suitable for making educational questions based off of them; these questions should be able to test the knowledge in in the book. The book in question is {p[1]}, and you should keep this in mind when considering what kind of questions should be capable of being developed. If there is sufficiently deep information to make questions about, you will judge it suitable, even if the knowledge being tested does not reflect typical curricula. Essentially: you will determine if provided text is a table of contents, introductory paragraph for a book, etc., or if it actually contains real information that would be worthy to teach and make questions for an examination from. Your task includes first analyzing the text, thinking through whether or not good questions can be made from it. 
+        decision_prompt = f"""<s> [INST] You are an expert educational AI that will make a determination as to whether the contents of the paragraph(s) provided are suitable for making educational questions based off of them; these questions should be able to test the knowledge in in the book. The book in question is {p[1]}, and you should keep this in mind when considering what kind of questions should be capable of being developed. If there is sufficiently deep information to make questions about, you will judge it suitable, even if the knowledge being tested does not reflect typical curricula. Essentially: you will determine if provided text is a table of contents, introductory paragraph for a book, etc., or if it actually contains real information that would be worthy to teach and make questions for an examination from. Your task includes first analyzing the text, thinking through whether or not good questions can be made from it. 
 
+End-of-chapter exercises, or questions that appear in the text BUT DO NOT HAVE A PROVIDED ANSWER, are not suitable for question generation, since it should be assumed that the creator of the questions must rely on the information in the text to get their answers.
 
 
 Following this, at the very end of your response, you will write "Suitable" or "Not suitable". It is imperative that you write one of these two things, as your answer is being automatically processed by a regex, so it must match one of those two strings exactly.
@@ -96,7 +96,7 @@ Credits: Steve Mattern, Barry Abrahamsen, and the Online Distributed Proofreadin
 ------------------------------------------------------------------------
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Identify Paragraph Content: This paragraph is from the introductory section of "Through England on a Side Saddle" by Celia Fiennes, including copyright and publication information.
 Step 2. Evaluate Educational Relevance: The paragraph contains legal, copyright, and publication information specific to the book's distribution and not its content.
@@ -107,9 +107,9 @@ Step 3. Assess Specific Contexts and Formats:
 Step 4. Assess the Possibility of Formulating Questions: The paragraph's content does not lend itself to educational questions due to its focus on publication rather than substantive content.
 Step 5. Determine Suitability for Educational Purposes: The paragraph lacks thematic, historical, scientific, or literary information and is thus unsuitable for creating educational questions.
 Step 6. Check for Contextual Completeness: The paragraph, while complete in its context, does not offer educational insights or concepts.
-Step 7. Final Judgment: Unsuitable for educational questions.
+Step 7. Final Judgment: Unsuitable for educational questions.</s>
 
-
+[INST]
 ### Instruction:
 Text details: Thus Spake Zaranthustra, by Friedrich Nietzsche
 
@@ -155,7 +155,7 @@ going to be a man.
 Thus began Zarathustra's down-going.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 
 Step 1. Identify Paragraph Content: The text is a philosophical excerpt from "Thus Spake Zarathustra" by Friedrich Nietzsche, describing Zarathustra's reflections and decisions.
@@ -167,7 +167,7 @@ Step 3. Assess Specific Contexts and Formats:
 Step 4. Assess the Possibility of Formulating Questions: The passage allows for various educational questions about philosophy, literature, and existential thought.
 Step 5. Determine Suitability for Educational Purposes: The text offers substantial material for discussion and analysis, suitable for creating educational questions.
 Step 6. Check for Contextual Completeness: The paragraph provides enough context to stand alone for educational discussion.
-Step 7. Final Judgment: Suitable for educational questions.
+Step 7. Final Judgment: Suitable for educational questions.</s> [INST]
 
 
 ### Instruction:
@@ -185,7 +185,7 @@ Text:
 Sarah continued her shopping, her mind now on the mayor's mysterious decision.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Identify Paragraph Content: The paragraph appears to be from a narrative, including a list and a snippet of overheard conversation.
 Step 2. Evaluate Educational Relevance: The paragraph contains a simple list of fruits and an unrelated, context-less dialogue, offering little educational substance.
@@ -196,7 +196,7 @@ Step 3. Assess Specific Contexts and Formats:
 Step 4. Assess the Possibility of Formulating Questions: Due to the lack of contextual or thematic depth, formulating educational questions from this paragraph is challenging.
 Step 5. Determine Suitability for Educational Purposes: The paragraph's lack of thematic depth and contextual clarity renders it unsuitable for creating educational questions.
 Step 6. Check for Contextual Completeness: The paragraph fails to provide a complete context for the dialogue and the list, hindering any meaningful educational interpretation.
-Step 7. Final Judgment: Unsuitable for educational questions.
+Step 7. Final Judgment: Unsuitable for educational questions.</s> [INST]
 
 
 ### Instruction:
@@ -207,7 +207,7 @@ Text:
 If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Identify Paragraph Content: This paragraph is from Rob Robertson's "The Scale of the Solar System," describing a scale model of the solar system.
 Step 2. Evaluate Educational Relevance: The paragraph contains analogies and information about the solar system's scale and distances between celestial bodies.
@@ -229,7 +229,7 @@ Text:
 In the world of science, there are countless mysteries and phenomena that elude easy explanation. For instance, certain forces and energies interact in ways that are not fully understood, shaping the universe in subtle and profound manners. These interactions often occur at levels beyond human perception, leaving much to speculation and theory. Various scientific disciplines attempt to explain these interactions, each offering unique perspectives but often lacking definitive answers. The vastness of these mysteries spans from the minuscule quantum realm to the expansive cosmos, hinting at complexities that challenge our current understanding.
 \"\"\"
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 Step 1. Identify Paragraph Content: The paragraph discusses the complexity and mystery of scientific phenomena, mentioning interactions of forces and energies in the universe.
 Step 2. Evaluate Educational Relevance: The paragraph touches on scientific themes and makes a number of broad claims.
@@ -240,7 +240,7 @@ Step 3. Assess Specific Contexts and Formats:
 Step 4. Assess the Possibility of Formulating Questions: Due to its vagueness and lack of specific content, the paragraph does not lend itself well to formulating meaningful educational questions.
 Step 5. Determine Suitability for Educational Purposes: The lack of clarity and specificity in the text renders it unsuitable for generating insightful educational questions.
 Step 6. Check for Contextual Completeness: The paragraph, while complete in its presentation, fails to provide the necessary detail and clarity to be understood for educational purposes.
-Step 7. Final Judgment: Unsuitable for educational questions due to its ambiguous and unclear content.
+Step 7. Final Judgment: Unsuitable for educational questions due to its ambiguous and unclear content.</s> [INST]
 
 
 ### Instruction:
@@ -253,18 +253,27 @@ Text:
 
 Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices and metadata are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process (reason intelligently):
 """
-        # print("DEBUG\n\n" + decision_prompt)
-        completion = logic_llm(
-            decision_prompt,
+        # print("DEBUG\n\n" + prompt=decision_prompt)
+        sampling_params = SamplingParams(
             max_tokens=6000,
-            grammar=judge_paragraph_grammar,
-            stop=["</s>", "# Input:"],
-            echo=True,
-            temperature=0.2,
-        )["choices"][0]["text"]
+            min_p=0.4,
+            stop=["</s>", "# Input:", "[INST]"],
+            # temperature=0.2
+        )
+        completion = await engine_wrapper.submit(
+            decision_prompt,
+            sampling_params
+            # repeat_penalty=0,
+            # penalize_nl=False,
+            # max_tokens=6000,
+            # grammar=judge_paragraph_grammar,
+            #stop=["</s>", "# Input:", "[INST]"],
+            #echo=True,
+            # temperature=0.2,
+        )
 
         # print("DEBUG\n\n")
         # # print(completion)
@@ -278,7 +287,7 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
         )
         try:
             response = response_pattern.search(completion).group(1)
-            print(response)
+            # print(response)
             determination = judgement_pattern.search(response).group(1)
             print("\n\nDETERMINATION:\n------")
             print(determination)
@@ -303,7 +312,6 @@ if __name__ == "__main__":
         n_gqa=8,
         offload_kqv=True,
         n_ctx=7000,
-        rope_freq_scale=0.33,
         n_gpu_layers=100,
         verbose=True,
         # n_gqa=8

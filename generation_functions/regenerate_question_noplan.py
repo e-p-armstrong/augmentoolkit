@@ -7,7 +7,7 @@ from .strip_steps import strip_steps
 def regenerate_question_DEPRECATED(qatuple, dissenting_reasoning, logic_llm):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""You are an expert educational AI. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). Someone has written a question that was supposed to be based on the provided paragraphs of text, but actually requires significant knowledge outside these paragraphs to answer. Given these paragraphs, the flawed question based on the paragraphs, and the explanation of why the answer is flawed, you will write out a new question that only requires information from the paragraphs to solve. However, you will not explicitly refer to the paragraphs in the question; the student will not have access to the text when answering it.
+        decision_prompt = f"""<s> [INST] You are an expert educational AI. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). Someone has written a question that was supposed to be based on the provided paragraphs of text, but actually requires significant knowledge outside these paragraphs to answer. Given these paragraphs, the flawed question based on the paragraphs, and the explanation of why the answer is flawed, you will write out a new question that only requires information from the paragraphs to solve. However, you will not explicitly refer to the paragraphs in the question; the student will not have access to the text when answering it.
         
 So, in short, your task is to rewrite a new question that is actually answerable if one knows the concepts from the paragraphs.
 
@@ -28,12 +28,14 @@ Answer: question answer, using only info in the paragraphs.
 
 # New question (1 paragraph at most; do not explicitly refer to the provided text, just test the concepts; FIX THE PROBLEMS IDENTIFIED IN THE CRITIQUE BY REWRITING THE QUESTION):
 """
-        completion = logic_llm(
-            decision_prompt,
-            max_tokens=500,
-            stop=["</s>", "2)", "2.)"],
-            echo=True,
-            grammar=question_grammar,
+        completion = llm_call(
+            prompt=decision_prompt,
+            # max_tokens=500,
+            #stop=["</s>", "2)", "2.)"],
+            #echo=True,
+            # repeat_penalty=0,
+            # penalize_nl=False,
+            # grammar=question_grammar,
         )["choices"][0]["text"]
 
         # print("DEBUG\n\n")

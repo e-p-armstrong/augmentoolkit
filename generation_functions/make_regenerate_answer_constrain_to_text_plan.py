@@ -10,7 +10,7 @@ def make_regenerate_answer_constrain_to_text_plan(
 ):
     retries = 0
     while retries < 5:
-        decision_prompt = f"""You are an expert educational AI that is going to think through a plan for a revised answer (the current one is flawed). Someone has written an answer to a question (this question is based on a few provided paragraphs of text) but their answer includes information that's not provided by the text, and thus it might be flawed. You will plan out and think through, step-by-step, a revision to the answer, which will only use provided information. Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer deviates from the text, you will plan out and think through a correct answer to the question.
+        decision_prompt = f"""<s> [INST] You are an expert educational AI that is going to think through a plan for a revised answer (the current one is flawed). Someone has written an answer to a question (this question is based on a few provided paragraphs of text) but their answer includes information that's not provided by the text, and thus it might be flawed. You will plan out and think through, step-by-step, a revision to the answer, which will only use provided information. Given these paragraphs, a question based on the paragraphs, the flawed answer to the question, and the explanation of why the answer deviates from the text, you will plan out and think through a correct answer to the question.
 
 Right now, you will PLAN OUT and THINK THROUGH different possibilities for a new answer that answers the question using only information in the provided text.
 
@@ -30,16 +30,17 @@ Step 4. Plan Revised Answer: Based on this reasoning, a revised answer should on
 
 You are to use the above example as a reference, while you plan out a revised version of the answer \"\"\"{qatuple[1]}\"\"\" with regards to the text and reasoning provided earlier.
 
-### Response:
+[/INST]### Response:
 ## Reasoning and thought process:
 """
         try:
-            completion = logic_llm(
-                decision_prompt,
-                max_tokens=3000,
-                stop=["</s>", "# Input:"],
-                echo=True,
-                grammar=answer_constrain_to_text_plan_grammar,
+            completion = llm_call(
+                prompt=decision_prompt,
+                # max_tokens=3000,
+                #stop=["</s>", "# Input:", "[INST]"],
+                #echo=True,  # repeat_penalty=0,
+                # penalize_nl=False,
+                # grammar=answer_constrain_to_text_plan_grammar,
                 temperature=0.2,
             )["choices"][0]["text"]
 
