@@ -5,6 +5,8 @@ Avoids breaking the bank (and getting your API key revoked) because it doesn't u
 
 [Fork this repo and customize it for your own needs!](https://github.com/e-p-armstrong/augmentoolkit/fork)
 
+**Beta for version using Aphrodite Engine (based on vLLM) now available!** (This means batched inference, GPTQ/AWQ support, hundreds of tokens per second, and asynchronous operations for a much faster experience). [Try it now and tell me what you think!](https://github.com/e-p-armstrong/augmentoolkit/tree/aphrodite-branch)
+
 ## Table of Contents:
 1. [Installation](#installation)
 2. [Introduction](#introduction-what-is-this-and-why-was-it-built)
@@ -29,16 +31,18 @@ First, get the repository onto your computer (or an instance rented out by your 
 git clone https://github.com/e-p-armstrong/augmentool.git
 ```
 
-Then, install the project's dependencies. You need the latest [Llama.cpp Python](https://github.com/abetlen/llama-cpp-python) with GPU acceleration, and the following Python libraries: `protobuf sentencepiece transformers matplotlib nltk`. Installing the former is honestly a pain; installing the latter is as simple as:
+Then, install the project's dependencies. You need the latest [Llama.cpp Python](https://github.com/abetlen/llama-cpp-python) with GPU acceleration, and the following Python libraries: `protobuf sentencepiece transformers matplotlib nltk aphrodite-engine`. Installing the former is honestly a pain; installing the latter is as simple as:
 ```
-pip install protobuf sentencepiece transformers matplotlib nltk
+pip install protobuf sentencepiece transformers matplotlib nltk aphrodite-engine
 ``` 
+
+#### Why does it still need lcpp if this is the aphrodite version? Because I haven't yet removed all the imports to it or all the grammar files, and installing lcpp anyway ensures that your CUDA is properly set up, so it's worth just getting it.
 
 Things change fast enough in ML that you should refer to the link for install advice about Llama.cpp Python, BUT if you have freshly rented out a GPU instance from a compute provider, then the quick install command below should work.
 
 **Quick install:** on a fresh Vast.ai Linux instance (select the ` anibali/pytorch:2.0.1-cuda11.8 ` docker image), you would need to run the following command to get this working:
 ```
-apt install -y build-essential && conda install -y cmake && conda install -y -c "nvidia/label/cuda-11.8.0" cuda-toolkit cuda-nvcc && CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install --upgrade --force-reinstall llama-cpp-python --no-cache-dir && pip install protobuf sentencepiece transformers matplotlib nltk
+apt install -y build-essential && conda install -y cmake && conda install -y -c "nvidia/label/cuda-11.8.0" cuda-toolkit cuda-nvcc && CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install --upgrade --force-reinstall llama-cpp-python --no-cache-dir && pip install protobuf sentencepiece transformers matplotlib nltk aphrodite-engine
 ```
 **Note: Runpod instances,** I believe, come with CMAKE and some other things preinstalled, but do not include conda as far as I know. Your command can probably be shorter there, and might just need to include the llama.cpp and Python parts. I don't use Runpod, IDK, try it out and tell me.
 
@@ -172,7 +176,7 @@ Other limitations -- I've listed the major ones, and the ones I've found while g
 
 ## Contributing
 - This is my first-ever repo accepting (and seeking!) contributions. I really think this can make a difference to the community.
-- But due to haphazard development over time, the code in this repo is only minimally cleaned-up. This means that there is no real coding style standard as of yet, even though there should be. Any more-experienced dev who shows up first and wants to enforce a proper coding standard is welcome, so long as it isn't too nitpicky.
+- But due to haphazard development over time, the code in this repo is only minimally cleaned-up. This means that there is no real coding style standard as of yet (all I did was run `black .`), even though there should be. Any more-experienced dev who shows up first and wants to enforce a proper coding style standard is welcome, so long as it isn't too nitpicky.
 - If you make a PR, please try running Augmentoolkit from start to finish on at least 10 paragraphs from a book to make sure that the prompts and pipeline still work. If you lack the compute I can handle this part.
 - If you make an issue, please use the appropriate label (feature request or bug report)
 - If you want to contact me, reach out on GitHub, on Discord (@Heralax, I usually hang out in TheBloke's server), or by [email](mailto:evanpeterarmstrong@gmail.com) (NOTE: I am decently slow at replying to email).
@@ -186,6 +190,7 @@ Other limitations -- I've listed the major ones, and the ones I've found while g
 - Prompting format inconsistency fixes (newlines may vary even within the same prompt)
 - An experimental version using mixtral instruct, which would get around the RoPE issues. Would need to change every prompt to use its format, then test it.
 - Perhaps a version that, in the spirit of lean manufacturing, runs each paragraph through the entire pipeline one at a time (rather than going from one step to the next for all paragraphs) might be good for evaluating how a run is going while there is still time to abort it. May pose a problem if the VRAM memory leak issue is not solved though, as that prohibits the two-model approach.
+- (Inspired by something Mixtral did in a test) have a "provide any context the question needs" step when generating questions. So questions are now Context: [c] Question: [q] Answer: [a] instead of just the last two. It really wants to give context so it should help it out.
 - Add support for various frontends or backends, like Text-Generation WebUI's API.
 
 ## Contact
