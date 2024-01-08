@@ -118,6 +118,20 @@ As for code structure, `processing.ipynb` handles the control flow and file writ
 
 Most functions are actually quite simple at heart; they call functions that generate output, and pass that output onto other functions, writing things to files as need be. 90% of the code in `processing` can be understood with that in mind.
 
+Since previous versions of the README omitted this key information: **the notebook outputs data both in its own format and in ShareGPT at the end.** Its own format is the following:
+```
+[
+[
+'something', # this is the conv
+'something', #character card
+'something', # Chain of Thought generations used to plan the scenario. Some of the later steps could possibly be useful context to append to the character card, so the entire thing is included incase you need it for your purposes.
+[['q','a','source_paragraph'],...up to 4 times...]
+],
+...repeated for each conversation you generated
+]
+```
+Things are accessed by index, which makes it more just a pure list format than JSON. **Of course you can also just convert to ShareGPT using the cell at the very end, but that loses some info.**
+
 ### Some features worth being aware of
 This subsection describes things that make life easier in Augmentoolkit.
 - **Easy resume:** don't have long uninterrupted periods of time to run this? No problem! Augmentoolkit saves outputs as they're written and resumes generation painlessly, so you can start and stop stress free.
