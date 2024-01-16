@@ -34,6 +34,11 @@ Then, install the project's dependencies. You need the latest [Llama.cpp Python]
 pip install protobuf sentencepiece transformers matplotlib nltk aphrodite-engine
 ``` 
 
+#### For runpod users, this should get you up and running (no conda required):
+```
+CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install --upgrade --force-reinstall llama-cpp-python --no-cache-dir && pip install protobuf sentencepiece transformers matplotlib nltk aphrodite-engine
+```
+
 #### Why does it still need lcpp if this is the aphrodite version? Because I haven't yet removed all the imports to it or all the grammar files, and installing lcpp anyway ensures that your CUDA is properly set up, so it's worth just getting it.
 
 Things change fast enough in ML that you should refer to the link for install advice about Llama.cpp Python, BUT if you have freshly rented out a GPU instance from a compute provider, then the quick install command below should work.
