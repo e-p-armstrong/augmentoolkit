@@ -305,7 +305,7 @@ Answer: {qatuple[1]}
 ## Reasoning and thought process (be thorough):
 """
         # print("DEBUG\n\n" + prompt=decision_prompt)
-        sampling_params = SamplingParams(max_tokens=10000,stop=["</s>", "# Input:", "[INST]"],temperature=0.2)
+        sampling_params = SamplingParams(max_tokens=10000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
         try:
             completion = await engine_wrapper.submit(
                     decision_prompt,

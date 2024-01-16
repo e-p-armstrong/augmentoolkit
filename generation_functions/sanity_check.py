@@ -14,7 +14,7 @@ def sanity_check(logic_llm):
         completion = llm_call(
             prompt=decision_prompt,
             # max_tokens=100,
-            #stop=["</s>", "# Input:", "[INST]"],
+            #stop=["</s>", "# Input:", "[INST]","### Instruction"],
             #echo=True,
             # grammar=answer_accurate_grammar,
             temperature=0.2,

@@ -148,7 +148,7 @@ Answer: \"\"\"{qatuple[1]}\"\"\"
         # max_tokens=4000,
         # repeat_penalty=0,
         # penalize_nl=False,
-        #stop=["</s>", "# Input:", "[INST]"],
+        #stop=["</s>", "# Input:", "[INST]","### Instruction"],
         #echo=True,
         # grammar=thought_plan_grammar,
         temperature=0.2,

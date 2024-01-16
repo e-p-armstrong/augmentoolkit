@@ -117,7 +117,7 @@ To avoid inaccuracies, don't use real people as characters.
         prompt=cot_prompt,
         # max_tokens=4000,
         # penalize_nl=False,
-        #stop=["</s>", "# Input:", "[INST]"],
+        #stop=["</s>", "# Input:", "[INST]","### Instruction"],
         #echo=True,
         # grammar=scenario_grammar,
         #    temperature=0.2

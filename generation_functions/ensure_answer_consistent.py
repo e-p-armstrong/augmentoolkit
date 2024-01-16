@@ -132,7 +132,7 @@ Conversation:
             completion = llm_call(
                 prompt=decision_prompt,
                 # max_tokens=4000,
-                #stop=["</s>", "# Input:", "[INST]"],
+                #stop=["</s>", "# Input:", "[INST]","### Instruction"],
                 #echo=True,
                 # grammar=ensure_answer_consistent_grammar,
                 # repeat_penalty=0,

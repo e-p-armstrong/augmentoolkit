@@ -36,7 +36,7 @@ Add as many steps as you need, then output "End of reasoning" as a final step. T
     completion = llm_call(
         prompt,
         # max_tokens=4000,
-        #stop=["</s>", "# Input:", "[INST]"],
+        #stop=["</s>", "# Input:", "[INST]","### Instruction"],
         #echo=True,
         # grammar=proofread_output_grammar,
         temperature=0.2,

@@ -168,7 +168,7 @@ Given the question and its answer, one possibility for a character who makes sen
         # max_tokens=4000,
         # repeat_penalty=0,
         # penalize_nl=False,
-        #stop=["</s>", "# Input:", "[INST]"],
+        #stop=["</s>", "# Input:", "[INST]","### Instruction"],
         #echo=True,
         # # grammar=character_card_plan_grammar,
     )["choices"][0]["text"]

@@ -126,7 +126,7 @@ Answer: {qatuple[1]}
                 # repeat_penalty=0,
                 # penalize_nl=False,
                 # max_tokens=3000,
-                #stop=["</s>", "# Input:", "[INST]"],
+                #stop=["</s>", "# Input:", "[INST]","### Instruction"],
                 #echo=True,
                 # # grammar=check_qatuple_context_grammar,
                 temperature=0.2,

@@ -179,7 +179,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
 ## Reasoning and thought process (the text is your single source of truth):
 """
         try:
-            sampling_params = SamplingParams(max_tokens=6000,stop=["</s>", "# Input:", "[INST]"],temperature=0.2)
+            sampling_params = SamplingParams(max_tokens=6000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
             completion = await engine_wrapper.submit(
                 decision_prompt,
                 sampling_params

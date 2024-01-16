@@ -189,7 +189,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
 ## Reasoning and thought process (be careful about extra details, even vague ones):
 """
         try:
-            sampling_params = SamplingParams(max_tokens=5500,stop=["</s>", "# Input:", "[INST]"],temperature=0.2)
+            sampling_params = SamplingParams(max_tokens=5500,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
             completion = await engine_wrapper.submit(
                 decision_prompt,
                 sampling_params

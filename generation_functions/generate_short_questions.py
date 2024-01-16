@@ -65,7 +65,7 @@ All my questions will be directly answerable from the provided paragraphs, and w
         completion = llm_call(
             question_prompt,
             # max_tokens=2000,
-            #stop=["</s>", "# Input:", "[INST]"],
+            #stop=["</s>", "# Input:", "[INST]","### Instruction"],
             #echo=True,
             # grammar=questions_grammar,
             temperature=0.2,

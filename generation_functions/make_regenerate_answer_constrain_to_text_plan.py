@@ -37,7 +37,7 @@ You are to use the above example as a reference, while you plan out a revised ve
             completion = llm_call(
                 prompt=decision_prompt,
                 # max_tokens=3000,
-                #stop=["</s>", "# Input:", "[INST]"],
+                #stop=["</s>", "# Input:", "[INST]","### Instruction"],
                 #echo=True,  # repeat_penalty=0,
                 # penalize_nl=False,
                 # grammar=answer_constrain_to_text_plan_grammar,

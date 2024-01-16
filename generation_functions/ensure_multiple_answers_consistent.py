@@ -251,7 +251,7 @@ The primary character (who should answer the questions, not ask them) is: {chara
             completion = llm_call(
                 prompt=decision_prompt,
                 # max_tokens=12000,
-                #stop=["</s>", "# Input:", "[INST]"],
+                #stop=["</s>", "# Input:", "[INST]","### Instruction"],
                 #echo=True,
                 # # grammar=ensure_multiple_answers_consistent_grammar,#temperature=0.2
                 temperature=0.5,  # min p settings, too inconsistent

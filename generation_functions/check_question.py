@@ -123,7 +123,7 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
 ## Reasoning and thought process (be careful around "how" and "why" questions):
 """
         try:
-            sampling_params = SamplingParams(max_tokens=4000,stop=["</s>", "# Input:", "[INST]"],temperature=0.2)
+            sampling_params = SamplingParams(max_tokens=4000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
             completion = await engine_wrapper.submit(
                 decision_prompt,
                 sampling_params

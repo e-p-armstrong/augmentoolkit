@@ -54,7 +54,7 @@ Remember, your task is to analyze this text to see if it is broken, and if it is
     completion = llm_call(
         prompt,
         # max_tokens=2000,
-        #stop=["</s>", "# Input:", "[INST]"],
+        #stop=["</s>", "# Input:", "[INST]","### Instruction"],
         #echo=True,
         # grammar=proofread_output_grammar,
         temperature=0.2,

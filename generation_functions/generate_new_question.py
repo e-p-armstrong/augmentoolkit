@@ -178,7 +178,7 @@ Text to make a question from:
 ## Question (based on text):
 """
         # print("DEBUG\n\n" + prompt=decision_prompt)
-        sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]"],temperature=0.2)
+        sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
         print("--QA TUPLE DURING NEW Q GEN--")
         print(qatuple)
         completion = await engine_wrapper.submit(

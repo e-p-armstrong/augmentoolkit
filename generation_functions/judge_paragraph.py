@@ -260,7 +260,7 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
         sampling_params = SamplingParams(
             max_tokens=6000,
             min_p=0.4,
-            stop=["</s>", "# Input:", "[INST]"],
+            stop=["</s>", "# Input:", "[INST]","### Instruction"],
             # temperature=0.2
         )
         completion = await engine_wrapper.submit(
@@ -270,7 +270,7 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
             # penalize_nl=False,
             # max_tokens=6000,
             # grammar=judge_paragraph_grammar,
-            #stop=["</s>", "# Input:", "[INST]"],
+            #stop=["</s>", "# Input:", "[INST]","### Instruction"],
             #echo=True,
             # temperature=0.2,
         )

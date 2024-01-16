@@ -162,7 +162,7 @@ The character should not have written the text and should not be affiliated with
 [/INST]### Response:
 ## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a"""
-    sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]"],temperature=2,top_k=-1,top_p=1,min_p=0.4)
+    sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=2,top_k=-1,top_p=1,min_p=0.4)
     completion = await engine_wrapper.submit(
                 cot_prompt,
                 sampling_params

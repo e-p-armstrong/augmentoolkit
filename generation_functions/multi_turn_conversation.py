@@ -413,7 +413,7 @@ The primary character's answer will use all parts of the answers given. Instead 
 
     # Note: performance degrades rapidly if you put more than one sentence in a pre-prompt parentheses thing
     
-    sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]"],temperature=0.5,top_k=-1,top_p=1,min_p=0.6)
+    sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.5,top_k=-1,top_p=1,min_p=0.6)
     completion = await engine_wrapper.submit(
                 cot_prompt,
                 sampling_params

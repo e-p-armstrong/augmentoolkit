@@ -210,7 +210,7 @@ The primary character's answer will use all parts of the answer given.
     completion = llm_call(
         prompt=cot_prompt,
         # max_tokens=4096,
-        #stop=["</s>", "# Input:", "[INST]"],
+        #stop=["</s>", "# Input:", "[INST]","### Instruction"],
         #echo=True,
         # repeat_penalty=0,
         # penalize_nl=False,

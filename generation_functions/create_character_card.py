@@ -174,7 +174,7 @@ Special instructions:
         # max_tokens=10000,
         # repeat_penalty=0,
         # penalize_nl=False,
-        #stop=["</s>", "# Input:", "[INST]"],
+        #stop=["</s>", "# Input:", "[INST]","### Instruction"],
         #echo=True,
         # grammar=character_card_grammar,
         temperature=0.2,
