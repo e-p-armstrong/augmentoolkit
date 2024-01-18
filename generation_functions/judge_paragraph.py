@@ -1,9 +1,20 @@
 import re
-from .judge_paragraph_grammar import judge_paragraph_grammar
+from .judge_paragraph_grammar import judge_paragraph_ebnf
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
+from aphrodite.common.grammar import GrammarLogitsProcessor
+from transformers import AutoTokenizer
 
-async def judge_paragraph(p, engine_wrapper):
+async def judge_paragraph(p, engine_wrapper,tokenizer):
+    
+    
+    # t = engine_wrapper.tokenizer()
+    
+    # print("\n\n\n\nTOKENIZER: ", t, "\n\n\n")
+    # tk = AutoTokenizer.from_pretrained(t)
+    
+    grammar_logits_processor = GrammarLogitsProcessor(tokenizer,judge_paragraph_ebnf)
+    
     reached_decision = False
     max_retries = 0
     while not reached_decision and (max_retries <= 3):
@@ -261,7 +272,9 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
             max_tokens=6000,
             min_p=0.4,
             stop=["</s>", "# Input:", "[INST]","### Instruction"],
+            logits_processors=[grammar_logits_processor]
             # temperature=0.2
+            
         )
         completion = await engine_wrapper.submit(
             decision_prompt,
@@ -286,8 +299,9 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
             r"Final Judgment:(.+)", re.DOTALL | re.IGNORECASE
         )
         try:
+            print("\n\RESPONSE:\n------")
             response = response_pattern.search(completion).group(1)
-            # print(response)
+            print(response)
             determination = judgement_pattern.search(response).group(1)
             print("\n\nDETERMINATION:\n------")
             print(determination)

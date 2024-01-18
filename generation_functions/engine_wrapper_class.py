@@ -22,4 +22,11 @@ class EngineWrapper():
         
         full_output = ''.join(outputs)
         return final_output.prompt + final_output.outputs[0].text
+    
+    def tokenizer(self): # if engine_use_ray is false I guess
+        return self.engine.engine.model_config.tokenizer
+    # async def tokenizer(self):
+    #     model_config = await self.engine.get_model_config()
+    #     return model_config.tokenizer
+
         

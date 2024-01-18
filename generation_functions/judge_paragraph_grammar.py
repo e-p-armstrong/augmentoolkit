@@ -1,26 +1,52 @@
-from llama_cpp import LlamaGrammar
+# from llama_cpp import LlamaGrammar
 
-judge_paragraph_grammar = LlamaGrammar.from_string(
-    r"""                     
-       
-root ::= identify-content-step evaluate-relevance-step assess-contexts-and-formats-step assess-possibility-step determine-suitability-step check-contextual-completeness-step final-step "\n"
+from lark import Lark
 
-identify-content-step ::= "Step " [0-9]?[0-9] ". " "Identify Paragraph Content: " [^\n]+ "\n"
+judge_paragraph_ebnf = r"""
 
-evaluate-relevance-step ::= "Step " [0-9]?[0-9] ". " "Evaluate Educational Relevance: " [^\n]+ "\n"
+start: identifycontentstep evaluaterelevancestep assesscontentsandformatsstep assessprobabilitystep determinesuitabilitystep checkcontextualcompletenessstep finalstep "\n"
 
-assess-contexts-and-formats-step ::= "Step " [0-9]?[0-9] ". " "Assess Specific Contexts and Formats:" "\n" context-format-bullets
+identifycontentstep: "step " stepnumber ". " "Identify Paragraph Content: " /[^\n]+/ "\n"
 
-assess-possibility-step ::= "Step " [0-9]?[0-9] ". " "Assess the Possibility of Formulating Questions: " [^\n]+ "\n"
+evaluaterelevancestep: "step " stepnumber ". " "Evaluate Educational Relevance: " /[^\n]+/ "\n"
 
-determine-suitability-step ::= "Step " [0-9]?[0-9] ". " "Determine Suitability for Educational Purposes: " [^\n]+ "\n"
+assesscontentsandformatsstep: "step " stepnumber ". " "Assess Specific Contexts and Formats:" "\n" contextformatbullets
 
-check-contextual-completeness-step ::= "Step " [0-9]?[0-9] ". " "Check for Contextual Completeness: " [^\n]+ "\n"
+assessprobabilitystep: "step " stepnumber ". " "Assess the Possibility of Formulating Questions: " /[^\n]+/ "\n"
 
-final-step ::= "Step " [0-9]?[0-9] ". " "Final Judgment: " ("Unsuitable" | "Suitable" | "suitable" | "unsuitable") "\n"
+determinesuitabilitystep: "step " stepnumber ". " "Determine Suitability for Educational Purposes: " /[^\n]+/ "\n"
 
-context-format-bullets ::= bullet-item+
-bullet-item ::= "  - " bullet-item-detail "\n"
-bullet-item-detail ::= [^\n]+
+checkcontextualcompletenessstep: "step " stepnumber ". " "Check for Contextual Completeness: " /[^\n]+/ "\n"
+
+finalstep: "step " stepnumber ". " "Final Judgment: " /(Unsuitable) | (Suitable) | (suitable) | (unsuitable)/ "\n"
+
+contextformatbullets: bulletitem+
+bulletitem: "   " bulletitemdetail "\n"
+bulletitemdetail: /[^\n]+/
+stepnumber: /[0-9]?[0-9]/
 """
-)
+
+# judge_paragraph_grammar = LlamaGrammar.from_string(
+#     r"""                     
+       
+# root ::= identifycontentstep evaluaterelevancestep assesscontentsandformatsstep assessprobabilitystep determinesuitabilitystep checkcontextualcompletenessstep finalstep "\n"
+
+# identifycontentstep ::= "step " [09]?[09] ". " "Identify Paragraph Content: " [^\n]+ "\n"
+
+# evaluaterelevancestep ::= "step " [09]?[09] ". " "Evaluate Educational Relevance: " [^\n]+ "\n"
+
+# assesscontentsandformatsstep ::= "step " [09]?[09] ". " "Assess Specific Contexts and Formats:" "\n" contextformatbullets
+
+# assessprobabilitystep ::= "step " [09]?[09] ". " "Assess the Possibility of Formulating Questions: " [^\n]+ "\n"
+
+# determinesuitabilitystep ::= "step " [09]?[09] ". " "Determine Suitability for Educational Purposes: " [^\n]+ "\n"
+
+# checkcontextualcompletenessstep ::= "step " [09]?[09] ". " "Check for Contextual Completeness: " [^\n]+ "\n"
+
+# finalstep ::= "step " [09]?[09] ". " "Final Judgment: " ("Unsuitable" | "Suitable" | "suitable" | "unsuitable") "\n"
+
+# contextformatbullets ::= bulletitem+
+# bulletitem ::= "   " bulletitemdetail "\n"
+# bulletitemdetail ::= [^\n]+
+# """
+# )

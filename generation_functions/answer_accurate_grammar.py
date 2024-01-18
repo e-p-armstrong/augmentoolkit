@@ -2,6 +2,49 @@ from llama_cpp import LlamaGrammar
 
 # NOTE might struggle with very complex answers that have more than nine parts to them. This can be amended by adding more options to the "compare-step" rule, or making a more general pattern, if your use-case requires it.
 
+# judge_paragraph_ebnf = r"""
+
+# root: text-analysis answer-breakdown accuracy-check final-judgment
+
+# # Text analysis
+# text-analysis: "### Text Analysis:" "\n" identify-key-info categorize-info-type
+
+# identify-key-info: "#### Identify Key Information: " TEXT-INFO-DETAIL "\n"
+# categorize-info-type: "#### Categorize Information Type: " info-type-detail "\n\n"
+
+# # Answer breakdown
+# answer-breakdown: "### Answer Breakdown:" "\n" dissect-answer identify-answer-type
+
+# dissect-answer: "#### Dissect the Answer: " answer-detail "\n"
+# identify-answer-type: "#### Identify Answer Type: " answer-type-detail "\n\n"
+
+# # Accuracy check
+# accuracy-check: "### Accuracy Check:" "\n" direct-comparison inference-and-contextual-alignment
+
+# direct-comparison: "#### Direct Comparison for Factual Accuracy:\n" comparison-points
+# comparison-points: bullet-point+
+# bullet-point: "  - " comparison-point-detail "\n"
+# inference-and-contextual-alignment: "#### Inference and Contextual Alignment: " contextual-alignment-detail "\n\n"
+
+# # Final judgment
+# final-judgment: "### Final Judgment:" "\n" comprehensive-assessment overall-accuracy-determination
+
+# comprehensive-assessment: "#### Comprehensive Assessment: " assessment-detail "\n"
+# overall-accuracy-determination: "#### Overall Accuracy Determination: " accuracy-detail "\n"
+
+# # Terminal symbols
+# TEXT-INFO-DETAIL: /[^\n]+/ # uppercase the rest
+# info-type-detail: /[^\n]+/
+# answer-detail: /[^\n]+/
+# answer-type-detail: /[^\n]+/
+# comparison-point-detail: /[^\n]+/
+# contextual-alignment-detail: /[^\n]+/
+# assessment-detail: /[^\n]+/
+# accuracy-detail: /[^\n]+/
+
+
+# """
+
 answer_accurate_grammar = LlamaGrammar.from_string(
     r"""                     
     
