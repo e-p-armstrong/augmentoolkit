@@ -1,6 +1,6 @@
 import re
 # from .answer_accurate_grammar import answer_accurate_grammar
-from llama_cpp import Llama
+
 from .constants import LOGICAL_MODEL
 
 # Run this to check if your tokens per second are good, and your GPU is working. Libraries update frequently and sometimes they break.

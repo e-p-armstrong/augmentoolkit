@@ -2,7 +2,7 @@ import re
 # from .ensure_multiple_answers_consistent_grammar import (
 #     ensure_multiple_answers_consistent_grammar,
 # )
-from llama_cpp import Llama
+
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name

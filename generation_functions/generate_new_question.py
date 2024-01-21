@@ -2,7 +2,7 @@ import re
 
 # try:
 # from .question_grammar import question_grammar
-from llama_cpp import Llama
+
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
 
