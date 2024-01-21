@@ -1,0 +1,6 @@
+protobuf 
+sentencepiece 
+transformers 
+matplotlib 
+nltk 
+aphrodite-engine

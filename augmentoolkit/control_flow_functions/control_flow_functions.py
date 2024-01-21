@@ -745,7 +745,7 @@ def convert_directory_to_list(directory_path):
     )
 
 
-def convert_directory_and_process_conversations(directory_path, extract_conversation):
+def convert_directory_and_process_conversations(directory_path):
     master_list = []
 
     for filename in os.listdir(directory_path):
@@ -758,7 +758,7 @@ def convert_directory_and_process_conversations(directory_path, extract_conversa
                     isinstance(item, (list, str)) for item in data
                 ):
                     # Extract and process the conversation part
-                    conversations = extract_conversation(data[0])
+                    conversations = process_multiturn_functions.extract_conversation(data[0])
                     # Convert tuples back to the formatted string as required
                     data[0] = [
                         f"{charname}: {message}" for charname, message in conversations
