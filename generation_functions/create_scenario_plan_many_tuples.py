@@ -1,5 +1,5 @@
-import re
-from .scenario_plan_many_tuples_grammar import scenario_plan_many_tuples_grammar
+# import re
+# from .scenario_plan_many_tuples_grammar import scenario_plan_many_tuples_grammar
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name

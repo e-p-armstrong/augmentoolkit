@@ -1,5 +1,5 @@
 import re
-from .multi_turn_conversation_grammar import multi_turn_conversation_grammar
+# from .multi_turn_conversation_grammar import multi_turn_conversation_grammar
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name

@@ -1,5 +1,5 @@
 import re
-from .character_card_grammar import character_card_grammar
+# from .character_card_grammar import character_card_grammar
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 import string

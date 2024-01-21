@@ -1,5 +1,5 @@
 import re
-from .create_character_card_plan_grammar import character_card_plan_grammar
+# from .create_character_card_plan_grammar import character_card_plan_grammar
 from llama_cpp import Llama
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples

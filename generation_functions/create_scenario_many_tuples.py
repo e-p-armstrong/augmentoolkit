@@ -1,5 +1,5 @@
 import re
-from .scenario_grammar import scenario_grammar
+# from .scenario_grammar import scenario_grammar
 from .constants import LOGICAL_MODEL
 import random
 from .format_qatuples import format_qatuples

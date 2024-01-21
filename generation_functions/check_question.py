@@ -1,5 +1,5 @@
 import re
-from .question_relevant_grammar import question_relevant_grammar
+# from .question_relevant_grammar import question_relevant_grammar
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
 
