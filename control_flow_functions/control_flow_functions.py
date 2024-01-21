@@ -179,7 +179,8 @@ async def repair_qatuple_context(
 
 
 # Control flow helpers -- Question/Answer Validation
-async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id):
+async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id, engine_wrapper=None, generate_new_question=None, check_question=None,
+    check_answer_relevancy_with_text=None, check_answer=None, double_check_counter=3):
     try:
         qtuple = qa_tuple
         print(
@@ -188,7 +189,7 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id):
         passed_checks = 0
         times_checked = 0
         dissenting_reasoning = ""
-        while times_checked < DOUBLE_CHECK_COUNTER:
+        while times_checked < double_check_counter:
             print(
                 f"\n\nACCURACY CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
             )
@@ -203,13 +204,13 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id):
             else:
                 passed_checks += 1
             times_checked += 1
-            if passed_checks >= ceil(DOUBLE_CHECK_COUNTER / 2):
+            if passed_checks >= ceil(double_check_counter / 2):
                 break
             failed_checks = times_checked - passed_checks
-            if failed_checks >= ceil(DOUBLE_CHECK_COUNTER / 2):
+            if failed_checks >= ceil(double_check_counter / 2):
                 break
 
-        if passed_checks >= ceil(DOUBLE_CHECK_COUNTER / 2):  # if question checks passed
+        if passed_checks >= ceil(double_check_counter / 2):  # if question checks passed
             print(f"\n\ANSWER ACCURACY CHECKS PASSED retries: {total_retries}")
             return qtuple
         else:
@@ -228,6 +229,8 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id):
                 qtuple,
                 total_retries,
                 question_group_id=run_id.split("--subquestion--")[0],
+                engine_wrapper=engine_wrapper, generate_new_question=generate_new_question, check_question=check_question,
+    check_answer_relevancy_with_text=check_answer_relevancy_with_text, check_answer=check_answer, double_check_counter=double_check_counter
             )  # going to get one hell of a call stack by the end of this, but it should be fine
     except Exception as e:
         print("!!ERROR!!")
@@ -237,7 +240,8 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id):
     return (None, None, None, qtuple[3])
 
 
-async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id):
+async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id, engine_wrapper=None, generate_new_question=None, check_question=None,
+    check_answer_relevancy_with_text=None, check_answer=None, double_check_counter=3):
     try:
         qtuple = qa_tuple
         print(
@@ -246,7 +250,7 @@ async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id):
         passed_checks = 0
         times_checked = 0
         dissenting_reasoning = ""
-        while times_checked < DOUBLE_CHECK_COUNTER:
+        while times_checked < double_check_counter:
             print(
                 f"\n\nRELEVANCE CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
             )
@@ -261,15 +265,16 @@ async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id):
             else:
                 passed_checks += 1
             times_checked += 1
-            if passed_checks >= ceil(DOUBLE_CHECK_COUNTER / 2):
+            if passed_checks >= ceil(double_check_counter / 2):
                 break
             failed_checks = times_checked - passed_checks
-            if failed_checks >= ceil(DOUBLE_CHECK_COUNTER / 2):
+            if failed_checks >= ceil(double_check_counter / 2):
                 break
 
-        if passed_checks >= ceil(DOUBLE_CHECK_COUNTER / 2):
+        if passed_checks >= ceil(double_check_counter / 2):
             print(f"\n\nRELEVANCE CHECKS PASSED")
-            return await vet_answer_accuracy_loop(qtuple, total_retries, run_id)
+            return await vet_answer_accuracy_loop(qtuple, total_retries, run_id, engine_wrapper=engine_wrapper, generate_new_question=generate_new_question, check_question=check_question,
+    check_answer_relevancy_with_text=check_answer_relevancy_with_text, check_answer=check_answer, double_check_counter=double_check_counter)
         else:
             print(f"\n\nRELEVANCE CHECKS FAILED - SENDING BACK TO QUESTION LOOP")
             total_retries += 1
@@ -283,6 +288,8 @@ async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id):
                 qtuple,
                 total_retries,
                 question_group_id=run_id.split("--subquestion--")[0],
+                engine_wrapper=engine_wrapper, generate_new_question=generate_new_question, check_question=check_question,
+    check_answer_relevancy_with_text=check_answer_relevancy_with_text, check_answer=check_answer, double_check_counter=double_check_counter
             )
     except Exception as e:
         print("!!ERROR!!")
@@ -292,7 +299,8 @@ async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id):
     return (None, None, None, qtuple[3])
 
 
-async def vet_question_loop(qa_tuple, question_group_id=None, total_retries=0):
+async def vet_question_loop(qa_tuple, total_retries, question_group_id=None, engine_wrapper=None, generate_new_question=None, check_question=None,
+    check_answer_relevancy_with_text=None, check_answer=None, double_check_counter=3):
     try:
         qtuple = qa_tuple
         print(
@@ -303,7 +311,7 @@ async def vet_question_loop(qa_tuple, question_group_id=None, total_retries=0):
             passed_checks = 0
             times_checked = 0
             dissenting_reasoning = ""
-            while times_checked < DOUBLE_CHECK_COUNTER:
+            while times_checked < double_check_counter:
                 print(
                     f"\n\nQUESTION CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
                 )
@@ -316,17 +324,18 @@ async def vet_question_loop(qa_tuple, question_group_id=None, total_retries=0):
                 else:
                     passed_checks += 1
                 times_checked += 1
-                if passed_checks >= ceil(DOUBLE_CHECK_COUNTER / 2):
+                if passed_checks >= ceil(double_check_counter / 2):
                     break
                 failed_checks = times_checked - passed_checks
-                if failed_checks >= ceil(DOUBLE_CHECK_COUNTER / 2):
+                if failed_checks >= ceil(double_check_counter / 2):
                     break
 
             if passed_checks >= ceil(
-                DOUBLE_CHECK_COUNTER / 2
+                double_check_counter / 2
             ):  # if all question checks passed
                 print(f"\n\nQUESTION CHECKS PASSED retries: {total_retries}")
-                return await vet_answer_relevance_loop(qtuple, total_retries, run_id)
+                return await vet_answer_relevance_loop(qtuple, total_retries, run_id,engine_wrapper=engine_wrapper, generate_new_question=generate_new_question, check_question=check_question,
+    check_answer_relevancy_with_text=check_answer_relevancy_with_text, check_answer=check_answer, double_check_counter=double_check_counter)
             else:
                 # Generate new question and restart the loop
                 print(
@@ -358,11 +367,16 @@ async def vet_question_loop(qa_tuple, question_group_id=None, total_retries=0):
 async def generate_qatuples_from_para(
     idx,
     para,
-    engine_wrapper,
-    vetted_qa_tuples,
-    qa_tuples_dir,
-    generate_questions,
-    generate_questions_plan,
+    engine_wrapper=None,
+    vetted_qa_tuples=None,
+    qa_tuples_dir=None,
+    generate_questions=None,
+    generate_questions_plan=None,
+    generate_new_question=None,
+    check_question=None,
+    check_answer_relevancy_with_text=None,
+    check_answer=None,
+    double_check_counter=3
 ):
     try:
         existing_files = glob.glob(
@@ -378,16 +392,16 @@ async def generate_qatuples_from_para(
                 continue
 
         question_group_id = make_id()
-        print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
+        # print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
         plan, questions_plan_output = await generate_questions_plan(
             para, engine_wrapper
         )
         write_output_to_file(
             questions_plan_output, "./question_plan_generations", question_group_id
         )
-        print(
-            f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
-        )
+        # print(
+            # f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
+        # )
         question_answer_tuples, question_generation_output = await generate_questions(
             para, plan, engine_wrapper
         )
@@ -399,7 +413,8 @@ async def generate_qatuples_from_para(
         for qnum, question_answer_tuple in enumerate(question_answer_tuples):
             print(f"\n\n=======!!=BEGIN VETTING QA TUPLE {idx}_{qnum}=!!=======\n\n")
             good_qa_tuple = await vet_question_loop(
-                question_answer_tuple, question_group_id=question_group_id
+                question_answer_tuple, 0, question_group_id=question_group_id, engine_wrapper=engine_wrapper, generate_new_question=generate_new_question, check_question=check_question,
+    check_answer_relevancy_with_text=check_answer_relevancy_with_text, check_answer=check_answer, double_check_counter=double_check_counter
             )
 
             # Write resulting question file if the tuple is not None
