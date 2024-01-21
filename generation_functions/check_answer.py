@@ -1,4 +1,5 @@
 import re
+import traceback
 
 # from .answer_accurate_grammar import answer_accurate_grammar
 
@@ -227,6 +228,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
         except Exception as e:
             retries += 1
             print("EXCEPTION IN CHECK_ANSWER: ", e)
+            traceback.print_exc()
 
 
 if __name__ == "__main__":  # test

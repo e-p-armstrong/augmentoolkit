@@ -1,4 +1,5 @@
 import re
+import traceback
 
 # from .answer_relevant_grammar import answer_relevant_grammar
 from .constants import LOGICAL_MODEL
@@ -227,6 +228,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
             print(
                 f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}"
             )
+            traceback.print_exc()
     return None, None
 
 

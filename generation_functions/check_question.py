@@ -1,4 +1,5 @@
 import re
+import traceback
 
 # from .question_relevant_grammar import question_relevant_grammar
 from .constants import LOGICAL_MODEL
@@ -160,6 +161,7 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
                 retries += 1
         except Exception as e:
             print("Exception!", e)
+            traceback.print_exc()
             if retries <= 4:
                 retries += 1
             else:
