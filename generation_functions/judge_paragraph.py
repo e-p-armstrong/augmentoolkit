@@ -1,7 +1,9 @@
 import re
+
 # from .judge_paragraph_grammar import judge_paragraph_grammar
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
+
 
 async def judge_paragraph(p, engine_wrapper):
     reached_decision = False
@@ -260,7 +262,7 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
         sampling_params = SamplingParams(
             max_tokens=6000,
             min_p=0.4,
-            stop=["</s>", "# Input:", "[INST]","### Instruction"],
+            stop=["</s>", "# Input:", "[INST]", "### Instruction"],
             # temperature=0.2
         )
         completion = await engine_wrapper.submit(
@@ -270,8 +272,8 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
             # penalize_nl=False,
             # max_tokens=6000,
             # grammar=judge_paragraph_grammar,
-            #stop=["</s>", "# Input:", "[INST]","### Instruction"],
-            #echo=True,
+            # stop=["</s>", "# Input:", "[INST]","### Instruction"],
+            # echo=True,
             # temperature=0.2,
         )
 
@@ -289,9 +291,9 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
             response = response_pattern.search(completion).group(1)
             # print(response)
             determination = judgement_pattern.search(response).group(1)
-            #print("\n\nDETERMINATION:\n------")
-            #print(determination)
-            #print("\n---------\n")
+            # print("\n\nDETERMINATION:\n------")
+            # print(determination)
+            # print("\n---------\n")
             if "unsuitable" in determination.lower():
                 reached_decision = True
                 return (None, p[1])

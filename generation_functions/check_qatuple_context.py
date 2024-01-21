@@ -1,4 +1,5 @@
 import re
+
 # from .check_qatuple_context_grammar import check_qatuple_context_grammar
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
@@ -305,12 +306,13 @@ Answer: {qatuple[1]}
 ## Reasoning and thought process (be thorough):
 """
         # print("DEBUG\n\n" + prompt=decision_prompt)
-        sampling_params = SamplingParams(max_tokens=10000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
+        sampling_params = SamplingParams(
+            max_tokens=10000,
+            stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+            temperature=0.2,
+        )
         try:
-            completion = await engine_wrapper.submit(
-                    decision_prompt,
-                    sampling_params
-                )
+            completion = await engine_wrapper.submit(decision_prompt, sampling_params)
 
             # print("DEBUG\n\n")
             # # print(completion)
@@ -323,9 +325,9 @@ Answer: {qatuple[1]}
             decision_pattern = re.compile(r"Final judgment:(.+)", re.IGNORECASE)
             # print(response)
             determination = decision_pattern.search(response).group(1).strip()
-            #print("\n\nDETERMINATION:\n------")
-            #print(determination)
-            #print("\n---------\n")
+            # print("\n\nDETERMINATION:\n------")
+            # print(determination)
+            # print("\n---------\n")
             if "pass" in determination.lower():
                 print("Leaving be...")
                 return (True, response), completion

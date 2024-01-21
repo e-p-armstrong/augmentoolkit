@@ -6,6 +6,7 @@ import re
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
 
+
 async def generate_new_question(qatuple, engine_wrapper):
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
@@ -178,13 +179,14 @@ Text to make a question from:
 ## Question (based on text):
 """
         # print("DEBUG\n\n" + prompt=decision_prompt)
-        sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
+        sampling_params = SamplingParams(
+            max_tokens=8000,
+            stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+            temperature=0.2,
+        )
         print("--QA TUPLE DURING NEW Q GEN--")
         print(qatuple)
-        completion = await engine_wrapper.submit(
-                question_prompt,
-                sampling_params
-            )
+        completion = await engine_wrapper.submit(question_prompt, sampling_params)
         # print("COMPLETION:\n\n----------------------")
         # print(completion)
         # print("\n------------------")

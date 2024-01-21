@@ -17,11 +17,13 @@ import traceback
 import glob
 import uuid
 
-# Used basically everywhere: 
+
+# Used basically everywhere:
 def make_id():
     return str(uuid.uuid4())
 
-# Also used basically everywhere: 
+
+# Also used basically everywhere:
 def write_output_to_file(output, directory, uuid):
     # Ensure directory exists
     if not os.path.exists(directory):
@@ -36,12 +38,20 @@ def write_output_to_file(output, directory, uuid):
 
     print(f"Output written to {file_path}")
 
+
 # multiturn helpers
 # These will probably be used for multiturn rapid-fire answering.
 
 
 # Idea: use multiple short answers to train the task of answering multiple questions in one response. Two-three short answers per response should be enough.
-async def make_multiturn_character(qa_tuples, conv_id, engine_wrapper, create_character_card_plan_many_tuples, create_character_card_many_tuples, assistant_mode):
+async def make_multiturn_character(
+    qa_tuples,
+    conv_id,
+    engine_wrapper,
+    create_character_card_plan_many_tuples,
+    create_character_card_many_tuples,
+    assistant_mode,
+):
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
@@ -57,7 +67,15 @@ async def make_multiturn_character(qa_tuples, conv_id, engine_wrapper, create_ch
     return char, instructions
 
 
-async def make_multiturn_scenario(qa_tuples, character, engine_wrapper, create_scenario_plan_many_tuples, create_scenario_many_tuples, assistant_mode, conv_id):
+async def make_multiturn_scenario(
+    qa_tuples,
+    character,
+    engine_wrapper,
+    create_scenario_plan_many_tuples,
+    create_scenario_many_tuples,
+    assistant_mode,
+    conv_id,
+):
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
@@ -83,12 +101,15 @@ async def make_multiturn_conversation_info(qa_tuples, assistant_mode):
         return (qa_tuples, "will", "be", "replaced", conv_id)
     # thought_plan = create_thought_plan_many_tuples(qa_tuples,character,scenario,logic_llm) # There IS a way to make multiturn chain of thought answering work: generate each pair of messages using a separate prompt or a separate function, each of which has only the thought plan for that question/answer pair. But simply cramming in all the step-by-step things will confuse the hell out of the poor model. So for the first release version we're skipping it and just giving the response, with no reasoning, in the multiturn convs.
     character, instructions = await make_multiturn_character(qa_tuples, conv_id)
-    scenario, scenario_plan = await make_multiturn_scenario(qa_tuples, character, conv_id)
+    scenario, scenario_plan = await make_multiturn_scenario(
+        qa_tuples, character, conv_id
+    )
 
     return (qa_tuples, character, scenario, scenario_plan, conv_id)
 
+
 # Group tuples for multiturn example generation (by chunk of source text) and then run that helper (so that we can make multiturn conversations from questions based on the same paragraphs)
-def group_by_text(tuples_list,identify_duplicates):
+def group_by_text(tuples_list, identify_duplicates):
     # Dictionary to hold the groups with text as the key
     groups = {}
 
@@ -106,7 +127,9 @@ def group_by_text(tuples_list,identify_duplicates):
 
 
 # Postprocessing function for question/answer validation
-async def repair_qatuple_context(idx, tup, engine_wrapper, check_qatuple_context, writepath, vetted_qa_tuples):
+async def repair_qatuple_context(
+    idx, tup, engine_wrapper, check_qatuple_context, writepath, vetted_qa_tuples
+):
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as f:
@@ -153,7 +176,7 @@ async def repair_qatuple_context(idx, tup, engine_wrapper, check_qatuple_context
     except Exception as e:
         print("!!! ERROR!", e)
         traceback.print_exc()
-        
+
 
 # Control flow helpers -- Question/Answer Validation
 async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id):
@@ -169,7 +192,9 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id):
             print(
                 f"\n\nACCURACY CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
             )
-            judgement, answer_accuracy_output = await check_answer(qtuple, engine_wrapper)
+            judgement, answer_accuracy_output = await check_answer(
+                qtuple, engine_wrapper
+            )
             write_output_to_file(
                 answer_accuracy_output, "./check_answer_accuracy_generations", run_id
             )
@@ -193,12 +218,16 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id):
                 f"\n\nACCURACY CHECKS FAILED - SENDING BACK TO QUESTION LOOP retries: {total_retries}"
             )
             total_retries += 1
-            qtuple, generate_new_q_output = await generate_new_question(qtuple, engine_wrapper)
+            qtuple, generate_new_q_output = await generate_new_question(
+                qtuple, engine_wrapper
+            )
             write_output_to_file(
                 generate_new_q_output, "./regenerate_question_generations", run_id
             )
             vet_question_loop(
-                qtuple, total_retries, question_group_id=run_id.split("--subquestion--")[0]
+                qtuple,
+                total_retries,
+                question_group_id=run_id.split("--subquestion--")[0],
             )  # going to get one hell of a call stack by the end of this, but it should be fine
     except Exception as e:
         print("!!ERROR!!")
@@ -244,12 +273,16 @@ async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id):
         else:
             print(f"\n\nRELEVANCE CHECKS FAILED - SENDING BACK TO QUESTION LOOP")
             total_retries += 1
-            qtuple, generate_new_q_output = await generate_new_question(qtuple, engine_wrapper)
+            qtuple, generate_new_q_output = await generate_new_question(
+                qtuple, engine_wrapper
+            )
             write_output_to_file(
                 generate_new_q_output, "./regenerate_question_generations", run_id
             )
             return vet_question_loop(
-                qtuple, total_retries, question_group_id=run_id.split("--subquestion--")[0]
+                qtuple,
+                total_retries,
+                question_group_id=run_id.split("--subquestion--")[0],
             )
     except Exception as e:
         print("!!ERROR!!")
@@ -320,8 +353,17 @@ async def vet_question_loop(qa_tuple, question_group_id=None, total_retries=0):
 
     return (None, None, None, qtuple[3])
 
+
 # Question generation
-async def generate_qatuples_from_para(idx,para,engine_wrapper,vetted_qa_tuples,qa_tuples_dir,generate_questions,generate_questions_plan):
+async def generate_qatuples_from_para(
+    idx,
+    para,
+    engine_wrapper,
+    vetted_qa_tuples,
+    qa_tuples_dir,
+    generate_questions,
+    generate_questions_plan,
+):
     try:
         existing_files = glob.glob(
             os.path.join(qa_tuples_dir, f"para_{idx}_*.json")
@@ -337,7 +379,9 @@ async def generate_qatuples_from_para(idx,para,engine_wrapper,vetted_qa_tuples,q
 
         question_group_id = make_id()
         print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
-        plan, questions_plan_output = await generate_questions_plan(para, engine_wrapper)
+        plan, questions_plan_output = await generate_questions_plan(
+            para, engine_wrapper
+        )
         write_output_to_file(
             questions_plan_output, "./question_plan_generations", question_group_id
         )
@@ -353,9 +397,7 @@ async def generate_qatuples_from_para(idx,para,engine_wrapper,vetted_qa_tuples,q
             question_group_id,
         )
         for qnum, question_answer_tuple in enumerate(question_answer_tuples):
-            print(
-                f"\n\n=======!!=BEGIN VETTING QA TUPLE {idx}_{qnum}=!!=======\n\n"
-            )
+            print(f"\n\n=======!!=BEGIN VETTING QA TUPLE {idx}_{qnum}=!!=======\n\n")
             good_qa_tuple = await vet_question_loop(
                 question_answer_tuple, question_group_id=question_group_id
             )
@@ -372,12 +414,6 @@ async def generate_qatuples_from_para(idx,para,engine_wrapper,vetted_qa_tuples,q
     except Exception as e:
         print(f"Q ERROR: {e}")
         traceback.print_exc()
-
-
-
-
-
-
 
 
 # Graphing code generated by GPT-4. May be suboptimal/ugly.
@@ -415,7 +451,9 @@ def filter_and_graph(tuples):
 
 
 ## Paragraph Filtering (worthy for questions?)
-async def determine_worthy(idx,p, judged_worthy_for_questions, engine_wrapper, output_dir, judge_paragraph):
+async def determine_worthy(
+    idx, p, judged_worthy_for_questions, engine_wrapper, output_dir, judge_paragraph
+):
     # for idx, p in tqdm(enumerate(paragraphs_processed[:10])):
     file_name = f"{idx}.json"
     file_path = os.path.join(output_dir, file_name)
@@ -453,14 +491,41 @@ async def determine_worthy(idx,p, judged_worthy_for_questions, engine_wrapper, o
         except:
             print(f"DEBUG max retries exceeded for index {idx}")
 
-async def filter_all_questions(paragraphs_processed, judged_worthy_for_questions, engine_wrapper, output_dir, judge_paragraph,take_subset=False):
-    if not take_subset:
-        tasks = [determine_worthy(idx, p,judged_worthy_for_questions, engine_wrapper, output_dir, judge_paragraph) for idx, p in enumerate(paragraphs_processed)]
-    else:
-        tasks = [determine_worthy(idx, p,judged_worthy_for_questions, engine_wrapper, output_dir, judge_paragraph) for idx, p in enumerate(paragraphs_processed[:13])]
-    for future in tqdmasyncio.tqdm.as_completed(tasks):
-            await future
 
+async def filter_all_questions(
+    paragraphs_processed,
+    judged_worthy_for_questions,
+    engine_wrapper,
+    output_dir,
+    judge_paragraph,
+    take_subset=False,
+):
+    if not take_subset:
+        tasks = [
+            determine_worthy(
+                idx,
+                p,
+                judged_worthy_for_questions,
+                engine_wrapper,
+                output_dir,
+                judge_paragraph,
+            )
+            for idx, p in enumerate(paragraphs_processed)
+        ]
+    else:
+        tasks = [
+            determine_worthy(
+                idx,
+                p,
+                judged_worthy_for_questions,
+                engine_wrapper,
+                output_dir,
+                judge_paragraph,
+            )
+            for idx, p in enumerate(paragraphs_processed[:13])
+        ]
+    for future in tqdmasyncio.tqdm.as_completed(tasks):
+        await future
 
 
 def sentence_chunking_algorithm(file_path, tokenizer, max_token_length=400):
@@ -514,8 +579,6 @@ def sentence_chunking_algorithm(file_path, tokenizer, max_token_length=400):
     return sentence_chunks_with_source
 
 
-
-
 def fix_text(to_replace_arr, text):
     for startup in to_replace_arr:
         text = text.replace(startup[0], startup[1])
@@ -548,10 +611,14 @@ async def ensure_multiple_answers_are_same(
     return None
 
 
-
 async def make_multiturn_conversation(info, engine_wrapper):
     conv, conv_output = await multi_turn_conversation(
-        info[0], info[1], info[2], info[3], engine_wrapper, assistant_mode=ASSISTANT_MODE
+        info[0],
+        info[1],
+        info[2],
+        info[3],
+        engine_wrapper,
+        assistant_mode=ASSISTANT_MODE,
     )
     write_output_to_file(conv_output, "./multiturn_conversation_generations", info[4])
 
@@ -585,7 +652,7 @@ async def create_info(idx, group, multi_turn_convs_info, multi_turn_convs_info_d
             print(f"Skipped generating {file_path} as it already exists")
 
     multi_turn_convs_info.append(group_convs_info)
-    
+
 
 def read_json_files_info(directory):
     # Create a list to hold the tuples
@@ -611,14 +678,18 @@ def read_json_files_info(directory):
     return tuple_list
 
 
-async def create_conversation(idx,info, engine_wrapper, multi_turn_convs, multi_turn_convs_dir):
+async def create_conversation(
+    idx, info, engine_wrapper, multi_turn_convs, multi_turn_convs_dir
+):
     file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
 
     # Skip if file already exists
     if not os.path.exists(file_path):
         try:
             conv = await make_multiturn_conversation(info, engine_wrapper)
-            final_conv = await ensure_multiple_answers_are_same(info, conv, engine_wrapper)
+            final_conv = await ensure_multiple_answers_are_same(
+                info, conv, engine_wrapper
+            )
 
             if final_conv is not None:
                 with open(file_path, "w") as file:
@@ -632,13 +703,8 @@ async def create_conversation(idx,info, engine_wrapper, multi_turn_convs, multi_
             data = json.load(f)
             multi_turn_convs.append(data)
         print(f"Skipped generating {file_path} as it already exists")
-        
-        
-        
-        
-        
-        
-        
+
+
 def convert_directory_to_list(directory_path):
     master_list = []
     simplified_list = []
@@ -688,8 +754,8 @@ def convert_directory_to_list(directory_path):
     print(
         "Conversion complete. Master list written to 'master_list.json'. Simplified data written to 'simplified_data.json'."
     )
-    
-    
+
+
 def convert_directory_and_process_conversations(directory_path, extract_conversation):
     master_list = []
 

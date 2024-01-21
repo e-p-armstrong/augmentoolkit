@@ -1,8 +1,10 @@
 import re
+
 # from .answer_accurate_grammar import answer_accurate_grammar
 
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
+
 # Answer vetting
 
 
@@ -179,11 +181,12 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
 ## Reasoning and thought process (the text is your single source of truth):
 """
         try:
-            sampling_params = SamplingParams(max_tokens=6000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
-            completion = await engine_wrapper.submit(
-                decision_prompt,
-                sampling_params
+            sampling_params = SamplingParams(
+                max_tokens=6000,
+                stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+                temperature=0.2,
             )
+            completion = await engine_wrapper.submit(decision_prompt, sampling_params)
 
             completion_pattern = re.compile(
                 r"Reasoning and thought process \(the text is your single source of truth\):\n(.+)",
@@ -198,9 +201,9 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
                 determination = determination_pattern.search(response).group(1).strip()
             else:
                 determination = response
-            #print("\n\nDETERMINATION:\n------")
-            #print(determination)
-            #print("\n---------\n")
+            # print("\n\nDETERMINATION:\n------")
+            # print(determination)
+            # print("\n---------\n")
             if (
                 "inaccurate" in determination.lower()
                 or "Inaccurate" in determination.lower()

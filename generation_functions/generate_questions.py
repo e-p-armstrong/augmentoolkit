@@ -1,8 +1,10 @@
 import re
+
 # from .questions_grammar import questions_grammar
 from .constants import LOGICAL_MODEL
 from .strip_steps import strip_steps
 from aphrodite import SamplingParams
+
 
 async def generate_questions(para_tuple, plan, engine_wrapper):
     """
@@ -250,12 +252,16 @@ Text to make questions from:
 ## Questions (make 4):
 """
         # print("DEBUG\n\n" + prompt=decision_prompt)
-        sampling_params = SamplingParams(max_tokens=12000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.8,top_k=-1,top_p=1,min_p=0.5)
-        completion = await engine_wrapper.submit(
-            question_prompt,
-            sampling_params
+        sampling_params = SamplingParams(
+            max_tokens=12000,
+            stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+            temperature=0.8,
+            top_k=-1,
+            top_p=1,
+            min_p=0.5,
         )
-        
+        completion = await engine_wrapper.submit(question_prompt, sampling_params)
+
         # Extract questions
         response_pattern = re.compile(
             r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
@@ -272,7 +278,7 @@ Text to make questions from:
         else:
             retries += 1
     if retries > 5:
-        return None,None
+        return None, None
 
     for match in matches:
         questions.append(

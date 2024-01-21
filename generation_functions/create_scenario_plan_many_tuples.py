@@ -6,6 +6,7 @@ from .extract_name import extract_name
 from .random_name import random_name
 from aphrodite import SamplingParams
 
+
 async def create_scenario_plan_many_tuples(qatuples, character, engine_wrapper):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
@@ -102,11 +103,15 @@ You don't need to add negative emotions and tension to the scenario if those don
 [/INST]### Response:
 ## Scenario plan (be creative, and make sure all characters present fit in with the setting):
 """
-    sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=1.5,top_k=-1,top_p=1,min_p=0.5)
-    completion = await engine_wrapper.submit(
-                cot_prompt,
-                sampling_params
-            )
+    sampling_params = SamplingParams(
+        max_tokens=8000,
+        stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+        temperature=1.5,
+        top_k=-1,
+        top_p=1,
+        min_p=0.5,
+    )
+    completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # Even if the example does a justified clever trick, the model imitating it may fuck up the trick. So try to avoid complex things that aren't needed for the task in examples, like the "just how much have you dug" colloquialization. Exact quotes for the questions and answers.
     # print("COMPLETION:\n\n----------------------")
     # # print(completion)

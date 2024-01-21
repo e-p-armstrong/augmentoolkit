@@ -1,4 +1,5 @@
 import re
+
 # from .multi_turn_conversation_grammar import multi_turn_conversation_grammar
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
@@ -295,12 +296,16 @@ The primary character's answer will use all parts of the answers given. Instead 
     # I get the sense that LLMs can learn relationships and connections between parts of the prompt, even if they're quite far apart, if you give them examples like this. It's fascinating to see how each part of the prompt has consequences -- sometimes unintended ones.
 
     # Note: performance degrades rapidly if you put more than one sentence in a pre-prompt parentheses thing
-    
-    sampling_params = SamplingParams(max_tokens=8000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.5,top_k=-1,top_p=1,min_p=0.6)
-    completion = await engine_wrapper.submit(
-                cot_prompt,
-                sampling_params
-            )
+
+    sampling_params = SamplingParams(
+        max_tokens=8000,
+        stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+        temperature=0.5,
+        top_k=-1,
+        top_p=1,
+        min_p=0.6,
+    )
+    completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # print("COMPLETION:\n\n----------------------")
     # print(completion)
     # print("\n------------------")

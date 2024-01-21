@@ -1,4 +1,5 @@
 import re
+
 # from .question_relevant_grammar import question_relevant_grammar
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
@@ -123,11 +124,12 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
 ## Reasoning and thought process (be careful around "how" and "why" questions):
 """
         try:
-            sampling_params = SamplingParams(max_tokens=4000,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
-            completion = await engine_wrapper.submit(
-                decision_prompt,
-                sampling_params
+            sampling_params = SamplingParams(
+                max_tokens=4000,
+                stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+                temperature=0.2,
             )
+            completion = await engine_wrapper.submit(decision_prompt, sampling_params)
 
             response_pattern = re.compile(
                 r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)",
@@ -139,9 +141,9 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
             )
             # print(response)
             determination = decision_pattern.search(response).group(1).strip()
-            #print("\n\nDETERMINATION:\n------")
-            #print(determination)
-            #print("\n---------\n")
+            # print("\n\nDETERMINATION:\n------")
+            # print(determination)
+            # print("\n---------\n")
             if (
                 "irrelevant" in determination
                 or "Irrelevant" in determination.lower()

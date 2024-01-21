@@ -1,7 +1,9 @@
 import re
+
 # from .answer_relevant_grammar import answer_relevant_grammar
 from .constants import LOGICAL_MODEL
 from aphrodite import SamplingParams
+
 
 # Answer vetting
 # For now, this checks answer relevancy too. The danger with abstracting answer relevancy into a separate step is that anything which relies on knowledge that is obviously mentioned in the text already up until this point, will get screwed
@@ -189,11 +191,12 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
 ## Reasoning and thought process (be careful about extra details, even vague ones):
 """
         try:
-            sampling_params = SamplingParams(max_tokens=5500,stop=["</s>", "# Input:", "[INST]","### Instruction"],temperature=0.2)
-            completion = await engine_wrapper.submit(
-                decision_prompt,
-                sampling_params
+            sampling_params = SamplingParams(
+                max_tokens=5500,
+                stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+                temperature=0.2,
             )
+            completion = await engine_wrapper.submit(decision_prompt, sampling_params)
             completion_pattern = re.compile(
                 r"Reasoning and thought process \(be careful about extra details, even vague ones\):\n(.+)",
                 re.DOTALL | re.IGNORECASE,
@@ -204,9 +207,9 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
             response = completion_pattern.search(completion).group(1).strip()
             # # print(response)
             determination = judgement_pattern.search(response).group(1).strip()
-            #print("\n\nDETERMINATION:\n------")
-            #print(determination)
-            #print("\n---------\n")
+            # print("\n\nDETERMINATION:\n------")
+            # print(determination)
+            # print("\n---------\n")
             if (
                 "irrelevant" in determination.lower()
                 or "mostly" in determination.lower()
@@ -225,6 +228,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
                 f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}"
             )
     return None, None
+
 
 if __name__ == "__main__":  # test
     logic_llm = Llama(
