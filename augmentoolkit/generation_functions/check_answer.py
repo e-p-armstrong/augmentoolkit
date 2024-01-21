@@ -184,7 +184,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
         try:
             sampling_params = SamplingParams(
                 max_tokens=6000,
-                stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+                stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
                 temperature=0.2,
             )
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)

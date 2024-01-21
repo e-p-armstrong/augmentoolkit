@@ -1,10 +1,10 @@
-# import re
 # from .scenario_plan_many_tuples_grammar import scenario_plan_many_tuples_grammar
 from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name
 from .random_name import random_name
 from aphrodite import SamplingParams
+import re
 
 
 async def create_scenario_plan_many_tuples(qatuples, character, engine_wrapper):
@@ -105,7 +105,7 @@ You don't need to add negative emotions and tension to the scenario if those don
 """
     sampling_params = SamplingParams(
         max_tokens=8000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+        stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
         temperature=1.5,
         top_k=-1,
         top_p=1,

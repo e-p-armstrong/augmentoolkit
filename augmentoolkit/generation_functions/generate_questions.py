@@ -254,7 +254,7 @@ Text to make questions from:
         # print("DEBUG\n\n" + prompt=decision_prompt)
         sampling_params = SamplingParams(
             max_tokens=12000,
-            stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+            stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
             temperature=0.8,
             top_k=-1,
             top_p=1,

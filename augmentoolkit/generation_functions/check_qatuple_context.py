@@ -308,7 +308,7 @@ Answer: {qatuple[1]}
         # print("DEBUG\n\n" + prompt=decision_prompt)
         sampling_params = SamplingParams(
             max_tokens=10000,
-            stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+            stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
             temperature=0.2,
         )
         try:

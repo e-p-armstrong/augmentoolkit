@@ -194,7 +194,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
         try:
             sampling_params = SamplingParams(
                 max_tokens=5500,
-                stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+                stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
                 temperature=0.2,
             )
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)
@@ -225,9 +225,9 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
                 retries += 1
         except:
             retries += 1
-            print(
-                f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}"
-            )
+            # print(
+            #     f"Something went catastrophically wrong with this one. Investigate! Here's the completion:\n{completion}"
+            # )
             traceback.print_exc()
     return None, None
 

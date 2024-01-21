@@ -166,7 +166,7 @@ The character should not have written the text and should not be affiliated with
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a"""
     sampling_params = SamplingParams(
         max_tokens=8000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+        stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
         temperature=2,
         top_k=-1,
         top_p=1,

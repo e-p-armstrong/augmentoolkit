@@ -195,7 +195,7 @@ The character should not have written the text and should not be affiliated with
 Name: {starting_str}"""
     sampling_params = SamplingParams(
         max_tokens=10000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+        stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
         temperature=2,
         top_k=-1,
         top_p=1,

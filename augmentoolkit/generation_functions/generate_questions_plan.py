@@ -191,7 +191,7 @@ Your planned questions must include context, if a question requires both context
     # print("DEBUG\n\n" + prompt=decision_prompt)
     sampling_params = SamplingParams(
         max_tokens=8000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+        stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
         temperature=0.8,
         top_k=-1,
         top_p=1,
