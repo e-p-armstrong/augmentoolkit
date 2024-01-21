@@ -16,7 +16,7 @@ from math import ceil
 import traceback
 import glob
 import uuid
-from ..generation_functions import create_scenario_plan_many_tuples, create_scenario_many_tuples, check_answer, check_question, check_answer_relevancy_with_text, generate_new_question, generate_questions, generate_questions_plan, process_multiturn_functions, identify_duplicates, judge_paragraph, multi_turn_conversation, check_qatuple_context, create_character_card_many_tuples, create_character_card_plan_many_tuples
+from augmentoolkit.generation_functions import create_scenario_plan_many_tuples, create_scenario_many_tuples, check_answer, check_question, check_answer_relevancy_with_text, generate_new_question, generate_questions, generate_questions_plan, process_multiturn_functions, identify_duplicates, judge_paragraph, multi_turn_conversation, check_qatuple_context, create_character_card_many_tuples, create_character_card_plan_many_tuples
 
 
 # Used basically everywhere:
