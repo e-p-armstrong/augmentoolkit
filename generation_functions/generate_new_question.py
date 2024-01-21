@@ -195,7 +195,7 @@ Text to make a question from:
         )
         generation = response_pattern.search(completion).group(1)
         # print("GENERATION:\n\n-------------------\n\n", generation)
-        print("-------------------")
+        # print("-------------------")
         pattern = re.compile(
             r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
             re.DOTALL | re.MULTILINE | re.IGNORECASE,

@@ -139,9 +139,9 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
             )
             # print(response)
             determination = decision_pattern.search(response).group(1).strip()
-            print("\n\nDETERMINATION:\n------")
-            print(determination)
-            print("\n---------\n")
+            #print("\n\nDETERMINATION:\n------")
+            #print(determination)
+            #print("\n---------\n")
             if (
                 "irrelevant" in determination
                 or "Irrelevant" in determination.lower()

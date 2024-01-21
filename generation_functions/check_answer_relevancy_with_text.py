@@ -204,9 +204,9 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
             response = completion_pattern.search(completion).group(1).strip()
             # # print(response)
             determination = judgement_pattern.search(response).group(1).strip()
-            print("\n\nDETERMINATION:\n------")
-            print(determination)
-            print("\n---------\n")
+            #print("\n\nDETERMINATION:\n------")
+            #print(determination)
+            #print("\n---------\n")
             if (
                 "irrelevant" in determination.lower()
                 or "mostly" in determination.lower()

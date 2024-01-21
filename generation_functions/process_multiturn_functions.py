@@ -74,8 +74,8 @@ def compare_answers_with_qatuples(dialogues, qatuples, n):
         sequential, comp = has_sequential_chars(
             qatuples[int(i / 2) - 1][1], dialogues[i][1], n
         )
-        print(sequential)
-        print(n)
+        # print(sequential)
+        # print(n)
         if not sequential:
             print(
                 f"Answer {int(i/2)}: {dialogues[i][1]} does not match the corresponding answer in qatuples: {qatuples[int(i/2) - 1][1]}, {comp}"

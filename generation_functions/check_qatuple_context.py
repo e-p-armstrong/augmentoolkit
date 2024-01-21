@@ -323,9 +323,9 @@ Answer: {qatuple[1]}
             decision_pattern = re.compile(r"Final judgment:(.+)", re.IGNORECASE)
             # print(response)
             determination = decision_pattern.search(response).group(1).strip()
-            print("\n\nDETERMINATION:\n------")
-            print(determination)
-            print("\n---------\n")
+            #print("\n\nDETERMINATION:\n------")
+            #print(determination)
+            #print("\n---------\n")
             if "pass" in determination.lower():
                 print("Leaving be...")
                 return (True, response), completion

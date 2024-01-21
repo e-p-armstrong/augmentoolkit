@@ -198,9 +198,9 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
                 determination = determination_pattern.search(response).group(1).strip()
             else:
                 determination = response
-            print("\n\nDETERMINATION:\n------")
-            print(determination)
-            print("\n---------\n")
+            #print("\n\nDETERMINATION:\n------")
+            #print(determination)
+            #print("\n---------\n")
             if (
                 "inaccurate" in determination.lower()
                 or "Inaccurate" in determination.lower()

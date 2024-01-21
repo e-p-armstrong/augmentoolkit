@@ -276,9 +276,9 @@ The primary character (who should answer the questions, not ask them) is: {chara
                 determination = determination_pattern.search(response).group(1).strip()
             else:
                 determination = response
-            print("\n\nDETERMINATION:\n------")
-            print(determination)
-            print("\n---------\n")
+            #print("\n\nDETERMINATION:\n------")
+            #print(determination)
+            #print("\n---------\n")
             if "inconsistent" in determination.lower():
                 return (False, response)
             elif "consistent" in determination.lower():

@@ -289,9 +289,9 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
             response = response_pattern.search(completion).group(1)
             # print(response)
             determination = judgement_pattern.search(response).group(1)
-            print("\n\nDETERMINATION:\n------")
-            print(determination)
-            print("\n---------\n")
+            #print("\n\nDETERMINATION:\n------")
+            #print(determination)
+            #print("\n---------\n")
             if "unsuitable" in determination.lower():
                 reached_decision = True
                 return (None, p[1])
