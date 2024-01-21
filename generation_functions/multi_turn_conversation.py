@@ -299,7 +299,7 @@ The primary character's answer will use all parts of the answers given. Instead 
 
     sampling_params = SamplingParams(
         max_tokens=8000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction"],
+        stop=["</s>", "# Input:", "[INST]", "### Instruction", "### Information"],
         temperature=0.5,
         top_k=-1,
         top_p=1,
@@ -324,14 +324,7 @@ The primary character's answer will use all parts of the answers given. Instead 
 
 
 if __name__ == "__main__":  # test
-    logic_llm = Llama(
-        model_path=LOGICAL_MODEL,
-        n_gqa=8,
-        offload_kqv=True,
-        n_ctx=8000,
-        n_gpu_layers=100,
-        verbose=True,
-    )  # load the logical LLM and offload everything
+    engine_wrapper = EngineWrapper(model=LOGICAL_MODEL, quantization="gptq")
     # Q0 is good q, bad a
     # q1 is good q, good a,
     # q2 is bad q, bad a,
@@ -410,7 +403,7 @@ Professor Archibald Thornbury: "My dear friend, I am a man of intellect and wisd
         character2,
         scenario,
         scenario_plan,
-        logic_llm,
+        engine_wrapper,
         assistant_mode=True,
     )
 
@@ -460,7 +453,7 @@ Step 5. Interaction: Given these constraints, the first message might be Hana as
         character_japan,
         scenario_japan,
         plan_japan,
-        logic_llm,
+        engine_wrapper,
         assistant_mode=True,
     )
 
