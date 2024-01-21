@@ -16,7 +16,24 @@ from math import ceil
 import traceback
 import glob
 import uuid
-from augmentoolkit.generation_functions import create_scenario_plan_many_tuples, create_scenario_many_tuples, check_answer, check_question, check_answer_relevancy_with_text, generate_new_question, generate_questions, generate_questions_plan, process_multiturn_functions, identify_duplicates, judge_paragraph, multi_turn_conversation, check_qatuple_context, create_character_card_many_tuples, create_character_card_plan_many_tuples, extract_name
+from augmentoolkit.generation_functions import (
+    create_scenario_plan_many_tuples,
+    create_scenario_many_tuples,
+    check_answer,
+    check_question,
+    check_answer_relevancy_with_text,
+    generate_new_question,
+    generate_questions,
+    generate_questions_plan,
+    process_multiturn_functions,
+    identify_duplicates,
+    judge_paragraph,
+    multi_turn_conversation,
+    check_qatuple_context,
+    create_character_card_many_tuples,
+    create_character_card_plan_many_tuples,
+    extract_name,
+)
 
 
 # Used basically everywhere:
@@ -45,18 +62,23 @@ def write_output_to_file(output, directory, uuid):
 
 
 # Idea: use multiple short answers to train the task of answering multiple questions in one response. Two-three short answers per response should be enough.
-async def make_multiturn_character(
-    qa_tuples, conv_id, engine_wrapper, assistant_mode
-):
+async def make_multiturn_character(qa_tuples, conv_id, engine_wrapper, assistant_mode):
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
         return "will_be_replaced", "will_be_replaced"
-    plan, instructions, card_plan_output = await create_character_card_plan_many_tuples.create_character_card_plan_many_tuples(
+    (
+        plan,
+        instructions,
+        card_plan_output,
+    ) = await create_character_card_plan_many_tuples.create_character_card_plan_many_tuples(
         qa_tuples, engine_wrapper
     )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
     write_output_to_file(card_plan_output, "./multiturn_card_plan_generations", conv_id)
-    char, char_output = await create_character_card_many_tuples.create_character_card_many_tuples(
+    (
+        char,
+        char_output,
+    ) = await create_character_card_many_tuples.create_character_card_many_tuples(
         qa_tuples, plan, instructions, engine_wrapper
     )  # creates a character card
     write_output_to_file(char_output, "./multiturn_card_generations", conv_id)
@@ -70,27 +92,35 @@ async def make_multiturn_scenario(
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
         return "will_be_replaced", "will_be_replaced"
-    plan, scenario_plan_output = await create_scenario_plan_many_tuples.create_scenario_plan_many_tuples(
+    (
+        plan,
+        scenario_plan_output,
+    ) = await create_scenario_plan_many_tuples.create_scenario_plan_many_tuples(
         qa_tuples, character, engine_wrapper
     )
     write_output_to_file(
         scenario_plan_output, "./multiturn_scenario_plan_generations", conv_id
     )
-    scenario, scenario_output = await create_scenario_many_tuples.create_scenario_many_tuples(
+    (
+        scenario,
+        scenario_output,
+    ) = await create_scenario_many_tuples.create_scenario_many_tuples(
         qa_tuples, character, plan, engine_wrapper
     )  # creates a scenario based on a character card and question/answer tuple
     write_output_to_file(scenario_output, "./multiturn_scenario_generations", conv_id)
     return scenario, plan
 
 
-async def make_multiturn_conversation_info(qa_tuples, engine_wrapper, assistant_mode ):
+async def make_multiturn_conversation_info(qa_tuples, engine_wrapper, assistant_mode):
     conv_id = make_id()
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
         return (qa_tuples, "will", "be", "replaced", conv_id)
     # thought_plan = create_thought_plan_many_tuples(qa_tuples,character,scenario,logic_llm) # There IS a way to make multiturn chain of thought answering work: generate each pair of messages using a separate prompt or a separate function, each of which has only the thought plan for that question/answer pair. But simply cramming in all the step-by-step things will confuse the hell out of the poor model. So for the first release version we're skipping it and just giving the response, with no reasoning, in the multiturn convs.
-    character, instructions = await make_multiturn_character(qa_tuples, conv_id, engine_wrapper, assistant_mode)
+    character, instructions = await make_multiturn_character(
+        qa_tuples, conv_id, engine_wrapper, assistant_mode
+    )
     scenario, scenario_plan = await make_multiturn_scenario(
         qa_tuples, character, conv_id, engine_wrapper, assistant_mode
     )
@@ -113,13 +143,14 @@ def group_by_text(tuples_list):
         groups[text].append((question, answer, text, textname))
 
     # Return the values of the dictionary, which are the lists of tuples grouped by text; also remove duplicates
-    return [identify_duplicates.identify_duplicates(group) for group in list(groups.values())]
+    return [
+        identify_duplicates.identify_duplicates(group)
+        for group in list(groups.values())
+    ]
 
 
 # Postprocessing function for question/answer validation
-async def repair_qatuple_context(
-    idx, tup, engine_wrapper, writepath, vetted_qa_tuples
-):
+async def repair_qatuple_context(idx, tup, engine_wrapper, writepath, vetted_qa_tuples):
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as f:
@@ -140,7 +171,9 @@ async def repair_qatuple_context(
 
     try:
         revision_id = make_id()
-        revision, revision_output = await check_qatuple_context.check_qatuple_context(tup, engine_wrapper)
+        revision, revision_output = await check_qatuple_context.check_qatuple_context(
+            tup, engine_wrapper
+        )
         write_output_to_file(
             revision_output, "./question_context_revision_generations", revision_id
         )  # incidentally, identifying the problem and fixing it in the same step (without another planning step) works a lot better than identifying it and then trying to fix it in the next step.
@@ -169,18 +202,20 @@ async def repair_qatuple_context(
 
 
 # Control flow helpers -- Question/Answer Validation
-async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3):
+async def vet_answer_accuracy_loop(
+    qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3
+):
     try:
         qtuple = qa_tuple
         # print(
-            # f"\n\nStarting ACCURACY loop for question: {qtuple[0]}, context: {qtuple[2]}"
+        # f"\n\nStarting ACCURACY loop for question: {qtuple[0]}, context: {qtuple[2]}"
         # )
         passed_checks = 0
         times_checked = 0
         dissenting_reasoning = ""
         while times_checked < double_check_counter:
             # print(
-                # f"\n\nACCURACY CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
+            # f"\n\nACCURACY CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
             # )
             judgement, answer_accuracy_output = await check_answer.check_answer(
                 qtuple, engine_wrapper
@@ -205,10 +240,13 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id, engine_wrapp
         else:
             # Generate new question and restart the loop
             # print(
-                # f"\n\nACCURACY CHECKS FAILED - SENDING BACK TO QUESTION LOOP retries: {total_retries}"
+            # f"\n\nACCURACY CHECKS FAILED - SENDING BACK TO QUESTION LOOP retries: {total_retries}"
             # )
             total_retries += 1
-            qtuple, generate_new_q_output = await generate_new_question.generate_new_question(
+            (
+                qtuple,
+                generate_new_q_output,
+            ) = await generate_new_question.generate_new_question(
                 qtuple, engine_wrapper
             )
             write_output_to_file(
@@ -218,7 +256,8 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id, engine_wrapp
                 qtuple,
                 total_retries,
                 question_group_id=run_id.split("--subquestion--")[0],
-                engine_wrapper=engine_wrapper, double_check_counter=double_check_counter
+                engine_wrapper=engine_wrapper,
+                double_check_counter=double_check_counter,
             )  # going to get one hell of a call stack by the end of this, but it should be fine
     except Exception as e:
         print("!!ERROR!!")
@@ -228,20 +267,25 @@ async def vet_answer_accuracy_loop(qa_tuple, total_retries, run_id, engine_wrapp
     return (None, None, None, qtuple[3])
 
 
-async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3):
+async def vet_answer_relevance_loop(
+    qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3
+):
     try:
         qtuple = qa_tuple
         # print(
-            # f"\n\nStarting RELEVANCE loop for question: {qtuple[0]}, context: {qtuple[2]}"
+        # f"\n\nStarting RELEVANCE loop for question: {qtuple[0]}, context: {qtuple[2]}"
         # )
         passed_checks = 0
         times_checked = 0
         dissenting_reasoning = ""
         while times_checked < double_check_counter:
             # print(
-                # f"\n\nRELEVANCE CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
+            # f"\n\nRELEVANCE CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
             # )
-            judgement, answer_relevancy_output = await check_answer_relevancy_with_text.check_answer_relevancy_with_text(
+            (
+                judgement,
+                answer_relevancy_output,
+            ) = await check_answer_relevancy_with_text.check_answer_relevancy_with_text(
                 qtuple, engine_wrapper
             )
             write_output_to_file(
@@ -260,11 +304,20 @@ async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id, engine_wrap
 
         if passed_checks >= ceil(double_check_counter / 2):
             # print(f"\n\nRELEVANCE CHECKS PASSED")
-            return await vet_answer_accuracy_loop(qtuple, total_retries, run_id, engine_wrapper=engine_wrapper, double_check_counter=double_check_counter)
+            return await vet_answer_accuracy_loop(
+                qtuple,
+                total_retries,
+                run_id,
+                engine_wrapper=engine_wrapper,
+                double_check_counter=double_check_counter,
+            )
         else:
             # print(f"\n\nRELEVANCE CHECKS FAILED - SENDING BACK TO QUESTION LOOP")
             total_retries += 1
-            qtuple, generate_new_q_output = await generate_new_question.generate_new_question(
+            (
+                qtuple,
+                generate_new_q_output,
+            ) = await generate_new_question.generate_new_question(
                 qtuple, engine_wrapper
             )
             write_output_to_file(
@@ -274,7 +327,8 @@ async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id, engine_wrap
                 qtuple,
                 total_retries,
                 question_group_id=run_id.split("--subquestion--")[0],
-                engine_wrapper=engine_wrapper, double_check_counter=double_check_counter
+                engine_wrapper=engine_wrapper,
+                double_check_counter=double_check_counter,
             )
     except Exception as e:
         print("!!ERROR!!")
@@ -284,7 +338,13 @@ async def vet_answer_relevance_loop(qa_tuple, total_retries, run_id, engine_wrap
     return (None, None, None, qtuple[3])
 
 
-async def vet_question_loop(qa_tuple, total_retries, question_group_id=None, engine_wrapper=None, double_check_counter=3):
+async def vet_question_loop(
+    qa_tuple,
+    total_retries,
+    question_group_id=None,
+    engine_wrapper=None,
+    double_check_counter=3,
+):
     try:
         qtuple = qa_tuple
         # print(
@@ -299,7 +359,9 @@ async def vet_question_loop(qa_tuple, total_retries, question_group_id=None, eng
                 # print(
                 #     f"\n\nQUESTION CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
                 # )
-                judgement, check_q_output = await check_question.check_question(qtuple, engine_wrapper)
+                judgement, check_q_output = await check_question.check_question(
+                    qtuple, engine_wrapper
+                )
                 write_output_to_file(
                     check_q_output, "./check_question_generations", run_id
                 )
@@ -318,7 +380,13 @@ async def vet_question_loop(qa_tuple, total_retries, question_group_id=None, eng
                 double_check_counter / 2
             ):  # if all question checks passed
                 # print(f"\n\nQUESTION CHECKS PASSED retries: {total_retries}")
-                return await vet_answer_relevance_loop(qtuple, total_retries, run_id,engine_wrapper=engine_wrapper, double_check_counter=double_check_counter)
+                return await vet_answer_relevance_loop(
+                    qtuple,
+                    total_retries,
+                    run_id,
+                    engine_wrapper=engine_wrapper,
+                    double_check_counter=double_check_counter,
+                )
             else:
                 # Generate new question and restart the loop
                 # print(
@@ -328,7 +396,10 @@ async def vet_question_loop(qa_tuple, total_retries, question_group_id=None, eng
                 if (
                     total_retries <= 4
                 ):  # only regen question if we're not already at max regens
-                    qtuple, generate_new_q_output = await generate_new_question.generate_new_question(
+                    (
+                        qtuple,
+                        generate_new_q_output,
+                    ) = await generate_new_question.generate_new_question(
                         qtuple, engine_wrapper
                     )
                     write_output_to_file(
@@ -353,7 +424,7 @@ async def generate_qatuples_from_para(
     engine_wrapper=None,
     vetted_qa_tuples=None,
     qa_tuples_dir=None,
-    double_check_counter=3
+    double_check_counter=3,
 ):
     try:
         existing_files = glob.glob(
@@ -370,18 +441,20 @@ async def generate_qatuples_from_para(
 
         question_group_id = make_id()
         # print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
-        plan, questions_plan_output = await generate_questions_plan.generate_questions_plan(
-            para, engine_wrapper
-        )
+        (
+            plan,
+            questions_plan_output,
+        ) = await generate_questions_plan.generate_questions_plan(para, engine_wrapper)
         write_output_to_file(
             questions_plan_output, "./question_plan_generations", question_group_id
         )
         # print(
-            # f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
+        # f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
         # )
-        question_answer_tuples, question_generation_output = await generate_questions.generate_questions(
-            para, plan, engine_wrapper
-        )
+        (
+            question_answer_tuples,
+            question_generation_output,
+        ) = await generate_questions.generate_questions(para, plan, engine_wrapper)
         write_output_to_file(
             question_generation_output,
             "./question_generation_generations",
@@ -390,7 +463,11 @@ async def generate_qatuples_from_para(
         for qnum, question_answer_tuple in enumerate(question_answer_tuples):
             print(f"\n\n=======!!=BEGIN VETTING QA TUPLE {idx}_{qnum}=!!=======\n\n")
             good_qa_tuple = await vet_question_loop(
-                question_answer_tuple, 0, question_group_id=question_group_id, engine_wrapper=engine_wrapper, double_check_counter=double_check_counter
+                question_answer_tuple,
+                0,
+                question_group_id=question_group_id,
+                engine_wrapper=engine_wrapper,
+                double_check_counter=double_check_counter,
             )
 
             # Write resulting question file if the tuple is not None
@@ -443,7 +520,11 @@ def filter_and_graph(tuples):
 
 ## Paragraph Filtering (worthy for questions?)
 async def determine_worthy(
-    idx, p, judged_worthy_for_questions, engine_wrapper, output_dir,
+    idx,
+    p,
+    judged_worthy_for_questions,
+    engine_wrapper,
+    output_dir,
 ):
     # for idx, p in tqdm(enumerate(paragraphs_processed[:10])):
     file_name = f"{idx}.json"
@@ -580,7 +661,9 @@ async def ensure_multiple_answers_are_same(
     retries = 0
     c = conv
     while retries < 2:  # try twice, since multiturn is an expensive operation
-        if process_multiturn_functions.call_all_processors(c[0], info[0]):  # if programmatic validation passes
+        if process_multiturn_functions.call_all_processors(
+            c[0], info[0]
+        ):  # if programmatic validation passes
             return c
 
         retries += 1
@@ -613,7 +696,15 @@ async def make_multiturn_conversation(info, engine_wrapper, assistant_mode):
     return conv
 
 
-async def create_info(idx, group, engine_wrapper, assistant_mode, multi_turn_convs_info, multi_turn_convs_info_dir, rearrangements_to_take):
+async def create_info(
+    idx,
+    group,
+    engine_wrapper,
+    assistant_mode,
+    multi_turn_convs_info,
+    multi_turn_convs_info_dir,
+    rearrangements_to_take,
+):
     all_permutations = list(itertools.permutations(group))
 
     sample_size = min(rearrangements_to_take, len(all_permutations))
@@ -627,7 +718,9 @@ async def create_info(idx, group, engine_wrapper, assistant_mode, multi_turn_con
         # Skip if file already exists
         if not os.path.exists(file_path):
             try:
-                info = await make_multiturn_conversation_info(perm,engine_wrapper,assistant_mode)
+                info = await make_multiturn_conversation_info(
+                    perm, engine_wrapper, assistant_mode
+                )
 
                 if info is not None:
                     with open(file_path, "w") as file:
@@ -675,7 +768,9 @@ async def create_conversation(
     # Skip if file already exists
     if not os.path.exists(file_path):
         try:
-            conv = await make_multiturn_conversation(info, engine_wrapper, assistant_mode)
+            conv = await make_multiturn_conversation(
+                info, engine_wrapper, assistant_mode
+            )
             final_conv = await ensure_multiple_answers_are_same(
                 info, conv, engine_wrapper, assistant_mode
             )
@@ -711,7 +806,9 @@ def convert_directory_to_list(directory_path):
                     # Extract and process conversation
                     conversation, primary_char_desc = data[0], data[1]
                     primary_char_name = extract_name.extract_name(primary_char_desc)
-                    dialogues = process_multiturn_functions.extract_conversation(conversation)
+                    dialogues = process_multiturn_functions.extract_conversation(
+                        conversation
+                    )
 
                     # Convert to simplified format
                     simplified_conversations = []
@@ -758,7 +855,9 @@ def convert_directory_and_process_conversations(directory_path):
                     isinstance(item, (list, str)) for item in data
                 ):
                     # Extract and process the conversation part
-                    conversations = process_multiturn_functions.extract_conversation(data[0])
+                    conversations = process_multiturn_functions.extract_conversation(
+                        data[0]
+                    )
                     # Convert tuples back to the formatted string as required
                     data[0] = [
                         f"{charname}: {message}" for charname, message in conversations
