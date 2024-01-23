@@ -88,7 +88,7 @@ async def multi_turn_conversation(
         scenario = "A conversation between a helpful AI Assistant, and a user."
         scenario_plan = "N/A"
         charname = "AI Assistant"
-        cot_prompt = f"""<s> [INST] You are an expert at creative writing and educational material. You will write a short conversation between a curious user and a helpful AI assistant, in which the user asks some questions and the AI assistant answers them. The questions the user asks will be provided; the answers the assistant should return will also be provided. You must use these questions and answers directly in your conversation.
+        cot_prompt = f"""You are an expert at creative writing and educational material. You will write a short conversation between a curious user and a helpful AI assistant, in which the user asks some questions and the AI assistant answers them. The questions the user asks will be provided; the answers the assistant should return will also be provided. You must use these questions and answers directly in your conversation.
     
 Keep the conversation natural.
 
@@ -107,7 +107,7 @@ Answer: \"\"\"Linear and quadratic functions appear frequently in various fields
 
 The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
 
-[/INST]### Response:
+### Response:
 ## Conversation that answers the provided questions:
 AI Assistant: Hello! I'm here to help with any questions you might have. Feel free to ask away!
 
@@ -118,7 +118,7 @@ AI Assistant: Good question! The y-intercept 'b' in the linear function equation
 User: Moving on to another type of function, in the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
 AI Assistant: The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.  Anything else you want to know about quadratic functions?
 User: Yes, one more. In what fields might you use linear and quadratic functions?
-AI Assistant: Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Anything else you'd like to know about linear and quadratic functions?</s> [INST]
+AI Assistant: Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Anything else you'd like to know about linear and quadratic functions?
 
 ## Information:
 Question: \"\"\"How much earth was excavated during the construction of the Panama Canal?\"\"\"
@@ -129,13 +129,13 @@ Answer: \"\"\"The construction faced significant health challenges, notably mala
 
 The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
 
-[/INST]### Response:
+### Response:
 ## Conversation that answers the provided questions:
 AI Assistant: Hello! I'm here to help you with any questions you might have. What's on your mind today?
 User: I was reading about the Panama Canal and got curious, how much earth was excavated during its construction?
 AI Assistant: That's a great question! Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project. Do you have any further questions about the Panama Canal?
 User: Wow, that is massive! Also, I heard there were some health challenges. What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-AI Assistant: Indeed, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Do you want to know anything else about the Panama Canal?</s> [INST]
+AI Assistant: Indeed, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Do you want to know anything else about the Panama Canal?
 
 ## Information:
 Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
@@ -146,25 +146,25 @@ Answer: \"\"\""Lo! I am weary of my wisdom, like the bee that hath gathered too 
 
 The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
 
-[/INST]### Response:
+### Response:
 ## Conversation that answers the provided questions:
 AI Assistant: Good day! I'm here to assist with any questions or insights you might seek. Please, feel free to ask anything.
 User: What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
 AI Assistant: That's a profound question. They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring. Do you want to know more about Thus Spake Zarathustra?
 User: Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.
-AI Assistant: Certainly. Nietzsche once wrote, "Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it." Do you have any more questions about Nietzsche or his works?</s> [INST]
+AI Assistant: Certainly. Nietzsche once wrote, "Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it." Do you have any more questions about Nietzsche or his works?
 
 ## Information:
 {format_qatuples(qatuples)}
 
 The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
 
-[/INST]### Response:
+### Response:
 ## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
 AI Assistant:"""
     else:
         extra_info = extract_steps(scenario_plan)
-        cot_prompt = f"""<s> [INST] You are an expert creative writing and roleplay AI. You will write a short conversation in which a secondary character asks some questions (one at a time) and the primary character answers them (also one at a time). 
+        cot_prompt = f"""You are an expert creative writing and roleplay AI. You will write a short conversation in which a secondary character asks some questions (one at a time) and the primary character answers them (also one at a time). 
 
 Write compellingly. Each character should have a distinct voice that reflects their background, personality, and current emotional state. This helps in making dialogue more realistic and engaging.
 
@@ -210,7 +210,7 @@ Answer: \"\"\"Linear and quadratic functions appear frequently in various fields
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Elise Delacroix should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
-[/INST]### Response:
+### Response:
 ## Conversation that answers the provided questions:
 Elise Delacroix: "A visitor? Ah!~ Albert! It's rare for you come to see me in my office, and you're alone, too..." She looks at Albert and grins coyly, "Are you here to ask me something... or are you interested in some 'extracurricular activities'?" Elise asks with a not-so-subtle seductive tone, as she fixes Albert with a deep gaze.
 Albert: "N-No!!!" he stammers, so surprised he nearly drops his math notes. "I-I'm actually here because I've got a few questions about math for you, Elise... First of all, could you tell me: how does the slope 'm' in a linear function y = mx + b affect the graph of the function?"
@@ -220,7 +220,7 @@ Elise Delacroix: "Awwww, you're no fun, Albert, you know that? Reminds me of my 
 Albert: "N-no thank you, Miss Delacroix," Albert manages to sputter out, barely withstanding the alluring assault. He takes a deep breath to try and calm down, but instead finds himself shuddering as he catches the sweet scent of perfume. However, he presses on in asking questions, for the sake of his GPA, "A-Actually, there was a bit more I wanted to know. In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"
 Elise Delacroix: "Ghh... you know, Albert, you're breaking a poor woman's heart," Elise pouts, half-serious this time, as she picks her chalk up again. "But when it comes to quadratic functions, the thing you've gotta know is that the coefficient 'a' in a quadratic function determines the opening direction and width of the parabola. Isn't it wonderful to learn new things?" Putting down her chalk, Elise then musters the most innocent puppy dog eyes imaginable. "We should... celebrate... this beautiful acquisition of knowledge together..."
 Albert: "I should really..." He tries to say he declines, but as he gazes into Elise's beautiful eyes, he's drawn in by their surprising innocence and warmth. Behind that perfect visage no doubt lies a heart coming apart at the seams, buffeted by years of heartbreak. "Oh, bother." Albert mumbles. "We... can meet at a cafe, in a few hours, if that'd be alright..." he continues, wondering what kind of mess he's getting myself into. Just then, a shock of remembering strikes him, "Oh! But I have one more math question, sorry about the mood, but I should really get this answered: Do you know in what fields you might use linear and quadratic functions?"
-Elise Delacroix: "I... I..." For the first time in the conversation Elise stumbles over her words, her soul on fire with vindication and the joy of acceptance. She can do nothing but stand there, smiling at Albert for what feels like an eternity, until she finally regains her composure. "T-to answer your question," she begins, her voice shaky, "Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Now..." Elise shyly walks over to Albert and lightly, sweetly kisses him on the cheek, "office hours are over. Please no more math questions. I'll see you at that cafe."</s> [INST]
+Elise Delacroix: "I... I..." For the first time in the conversation Elise stumbles over her words, her soul on fire with vindication and the joy of acceptance. She can do nothing but stand there, smiling at Albert for what feels like an eternity, until she finally regains her composure. "T-to answer your question," she begins, her voice shaky, "Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering. Now..." Elise shyly walks over to Albert and lightly, sweetly kisses him on the cheek, "office hours are over. Please no more math questions. I'll see you at that cafe."
 
 ## Information:
 Comment: Excellent! Really fantastic job! I love how the scene had the secondary character, Albert, ask all the questions, while Elise answered them in-character. I also adore the plot you wrote! Let's keep this going.
@@ -258,13 +258,13 @@ Answer: \"\"\"The construction faced significant health challenges, notably mala
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Hugo Martinez should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
-[/INST]### Response:
+### Response:
 ## Conversation that answers the provided questions:
 Hugo Martinez: "Huh? Oh FUCK ME, looks like a worker's got something they wanna say to me," Hugo, seeing Juan approach his table at the mess hall, rolls his eyes exasperatedly and downs half a beer as if to douse his frustration. Instead, it seems to fuel it. "WELL?!" He barks. "If you've got some stupid shit to say to me, Juan, then don't make me fucking wait to hear it, too!"
 Juan: "I was just curious, sir," Juan tiredly says as Hugo's words ring in his ears, "about this really impressive canal we've been maintaining (under your wise leadership). Do you know how much earth was excavated during the Panama Canal?"
 Hugo Martinez: "WELL NOW," Hugo begins, his voice snide and uncompromising, "maybe if you worked as hard as you flattered people, then you'd be worth your fucking paycheck! But that's a good question, so I'll let you off the hook this time. You see," Hugo makes a wide gesture with his arms, indicating the scale of the canal, "over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project. 200 MILLION! Now _those_ people know how to work!" Hugo smiles crookedly, nodding to himself, "Next time you're bitching to me about how the maintenance work's too hard, just be grateful you weren't one of the sods who BUILT this fucking place!"
 Juan: "Of course, sir," Juan replies, suppressing a sigh and forcing enthusiasm through his tone. "Now, if you would permit me just one more question before I get out of your way: What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"
-Hugo Martinez: "Health? What, you planning on becoming a doctor? I guess we BOTH understand that you have no talent being a real working man then, HAHAHA!" Hugo's echoing laugh has not a hint of empathy in it. "Well, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Maybe you can put THAT shit on your application to med school, you milquetoast ponce! Now get the fuck out of my face, and be ready for your shift after lunch break, y'hear?!"</s> [INST]
+Hugo Martinez: "Health? What, you planning on becoming a doctor? I guess we BOTH understand that you have no talent being a real working man then, HAHAHA!" Hugo's echoing laugh has not a hint of empathy in it. "Well, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Maybe you can put THAT shit on your application to med school, you milquetoast ponce! Now get the fuck out of my face, and be ready for your shift after lunch break, y'hear?!"
 
 ## Information:
 Comment: Very good. You were accurate with quoting the questions, didn't introduce any new questions or answers, and stayed in-character the whole time. Let's do the next one!
@@ -288,7 +288,7 @@ Here's some further information that might help you:
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from {charname} should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
-[/INST]### Response:
+### Response:
 ## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
 {charname}: "{conv_starter}"""
 

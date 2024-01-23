@@ -18,7 +18,7 @@ Answer: We don't have an answer.
 async def check_question(qatuple, engine_wrapper):
     retries = 0
     while retries <= 4:
-        decision_prompt = f"""<s> [INST] You are an expert educational AI. Given a paragraph or two from a larger text, and a question based on the paragraphs, you will make a determination as to whether the question tests ONLY information in the paragraphs. Essentially: you will check if the question is answerable, given the information in the paragraphs. Your task includes first analyzing the text, thinking through whether or not the question reflects aspects of the paragraphs provided. 
+        decision_prompt = f"""You are an expert educational AI. Given a paragraph or two from a larger text, and a question based on the paragraphs, you will make a determination as to whether the question tests ONLY information in the paragraphs. Essentially: you will check if the question is answerable, given the information in the paragraphs. Your task includes first analyzing the text, thinking through whether or not the question reflects aspects of the paragraphs provided. 
 
 Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Relevant" or "Irrelevant" depending on your analysis of the question with regards to the text. 
 
@@ -38,7 +38,7 @@ The concept of artificial intelligence (AI) revolves around the creation of mach
 
 Question (based on text): \"\"\"What is the role of neural networks in AI, and how does natural language processing contribute to human-computer interaction?\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 
 ### In-Depth Analysis of the Text:
@@ -54,7 +54,7 @@ Question (based on text): \"\"\"What is the role of neural networks in AI, and h
 #### Depth Match: The text provides the necessary level of detail to answer the question, though it remains descriptive and does not delve into deeper explanatory mechanisms.
 
 ### Critical Evaluation and Final Judgment:
-The text addresses both components of the question with sufficient detail, making it: Relevant.</s> [INST]
+The text addresses both components of the question with sufficient detail, making it: Relevant.
 
 
 ### Instruction:
@@ -65,7 +65,7 @@ The phenomenon of photosynthesis in plants is an essential process for life on E
 
 Question (based on text): \"\"\"Explain exactly why chlorophyll able to absorb sunlight, and why is this important for the Calvin cycle?\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 
 ### In-Depth Analysis of the Text:
@@ -81,7 +81,7 @@ Question (based on text): \"\"\"Explain exactly why chlorophyll able to absorb s
 #### Depth Match: The text lacks the specific scientific principles explaining the mechanism of sunlight absorption by chlorophyll, which is central to the question.
 
 ### Critical Evaluation and Final Judgment:
-Although the text touches upon the role of chlorophyll, it does not provide the depth of explanation required by the question, making it: Irrelevant.</s> [INST]
+Although the text touches upon the role of chlorophyll, it does not provide the depth of explanation required by the question, making it: Irrelevant.
 
 
 ### Instruction:
@@ -92,7 +92,7 @@ The octopus is an extraordinary creature, renowned for its intelligence and abil
 
 Question (based on text): \"\"\"How do octopuses utilize their color-changing ability in their natural habitat, and what role does their central brain play in this process?\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 
 ### In-Depth Analysis of the Text:
@@ -108,7 +108,7 @@ Question (based on text): \"\"\"How do octopuses utilize their color-changing ab
 #### Depth Match: The text does not provide information about the role of the central brain in this process, lacking the required depth on the control mechanism.
 
 ### Critical Evaluation and Final Judgment:
-Given the text's coverage of color-changing but lack of detail on the central brain's role, the overall assessment of the question's relevance to the text is: Irrelevant.</s> [INST]
+Given the text's coverage of color-changing but lack of detail on the central brain's role, the overall assessment of the question's relevance to the text is: Irrelevant.
 
 
 ### Instruction:
@@ -121,7 +121,7 @@ Question (based on text): \"\"\"{qatuple[0]}\"\"\"
 
 If the question clearly goes off the rails and is incoherent, then it is irrelevant.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process (be careful around "how" and "why" questions):
 """
         try:

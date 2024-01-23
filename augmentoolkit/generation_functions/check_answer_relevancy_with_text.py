@@ -11,7 +11,7 @@ from aphrodite import SamplingParams
 async def check_answer_relevancy_with_text(qatuple, engine_wrapper):
     retries = 0
     while retries <= 4:
-        decision_prompt = f"""<s> [INST] You are an expert educational AI. Given a paragraph or two from a larger text, a question based on the paragraphs, and an answer to the question, you will make a determination as to whether the answer only uses the information in the paragraphs for its main points. Essentially: you will check if the answer is constrained to the information in the paragraphs provided. Your task includes first analyzing the answer, thinking through whether or not the answer reflects aspects of the paragraphs provided. 
+        decision_prompt = f"""You are an expert educational AI. Given a paragraph or two from a larger text, a question based on the paragraphs, and an answer to the question, you will make a determination as to whether the answer only uses the information in the paragraphs for its main points. Essentially: you will check if the answer is constrained to the information in the paragraphs provided. Your task includes first analyzing the answer, thinking through whether or not the answer reflects aspects of the paragraphs provided. 
 
 Following this, at the very end of your response, you will write "Relevant" or "Irrelevant" depending on your analysis of the answer with regards to the text. 
 
@@ -25,7 +25,7 @@ Question (based on text): \"\"\"What are the primary food sources of polar bears
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Polar bears primarily eat seals, but they also consume significant amounts of berries and fish. Their efficient digestion system, which has been studied through MRIs, allows them to process a wide variety of foods.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text describes the diet of polar bears, focusing on their primary and secondary food sources.
@@ -45,7 +45,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Pola
 
 ### Final Judgment on Answer Relevance:
 #### Relevance Assessment: The answer is partially relevant but introduces unsupported details.
-#### Explanation of Judgment: Since the answer mostly aligns with the text but includes extraneous information (MRIs), the final judgment is: Irrelevant.</s> [INST]
+#### Explanation of Judgment: Since the answer mostly aligns with the text but includes extraneous information (MRIs), the final judgment is: Irrelevant.
 
 
 ### Instruction:
@@ -58,7 +58,7 @@ Question (based on text): \"\"\"What does the Pythagorean theorem state in the c
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"The Pythagorean theorem, crucial in geometry, states that in a right-angled triangle, a² + b² = c², where a and b are the perpendicular sides and c is the hypotenuse. Additionally, it is noteworthy that this theorem was utilized in ancient Egypt for land surveying purposes.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text explains the Pythagorean theorem, its formula, and historical background.
@@ -78,7 +78,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"The 
 
 ### Final Judgment on Answer Relevance:
 #### Relevance Assessment: The answer is partially relevant but includes significant extraneous historical information.
-#### Explanation of Judgment: Due to the inclusion of unsupported historical context, the final judgment is: Irrelevant.</s> [INST]
+#### Explanation of Judgment: Due to the inclusion of unsupported historical context, the final judgment is: Irrelevant.
 
 
 ### Instruction:
@@ -91,7 +91,7 @@ Question (based on text): \"\"\"What methods did Freud use to explore the uncons
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Freud used dream analysis as a method to explore the unconscious mind. He also introduced the concept of the Oedipus complex, suggesting that during a specific stage of development, a child experiences unconscious desires.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text discusses Freud's methods for exploring the unconscious mind and key concepts he introduced.
@@ -112,7 +112,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Freu
 
 ### Final Judgment on Answer Relevance:
 #### Relevance Assessment: The answer accurately reflects the text's content.
-#### Explanation of Judgment: Each part of the answer is directly supported by the text, so the final judgment is: Relevant.</s> [INST]
+#### Explanation of Judgment: Each part of the answer is directly supported by the text, so the final judgment is: Relevant.
 
 
 ### Instruction:
@@ -125,7 +125,7 @@ Question (based on text): \"\"\"What was the importance of the Library of Alexan
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"The Library of Alexandria was crucial in the ancient world as a center of scholarship and cultural development. It housed a vast collection of works, providing scholars with access to knowledge from various fields. The library's destruction is often attributed to Julius Caesar's fire during the Siege of Alexandria, a claim supported by several historical documents and archaeological findings.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text describes the Library of Alexandria's role, its size, patronage, and the impact of its destruction.
@@ -145,7 +145,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"The 
 
 ### Final Judgment on Answer Relevance:
 #### Relevance Assessment: The answer starts correctly but introduces unsupported details about the library's destruction.
-#### Explanation of Judgment: Due to the inclusion of specific and unsupported historical details, the final judgment is: Irrelevant.</s> [INST]
+#### Explanation of Judgment: Due to the inclusion of specific and unsupported historical details, the final judgment is: Irrelevant.
 
 
 ### Instruction:
@@ -158,7 +158,7 @@ Question (based on text): \"\"\"What are the main characteristics of Venus's atm
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Venus's atmosphere is dense, primarily composed of carbon dioxide, and contains clouds of sulfuric acid, leading to extremely high temperatures. The planet has a unique rotation, taking 243 Earth days to rotate once and rotating in a retrograde direction due to gravitational interactions with Earth and other planets.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Deep Analysis of the Text:
 #### Content Scope and Detail: The text provides specific information on Venus's atmosphere and rotation.
@@ -178,7 +178,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Venu
 
 ### Final Judgment on Answer Relevance:
 #### Relevance Assessment: The answer is mostly relevant but introduces an unsupported causal claim.
-#### Explanation of Judgment: Due to the inclusion of an unsupported reason for Venus's retrograde rotation, the final judgment is: Irrelevant.</s> [INST]
+#### Explanation of Judgment: Due to the inclusion of an unsupported reason for Venus's retrograde rotation, the final judgment is: Irrelevant.
 
 
 ### Instruction:
@@ -188,7 +188,7 @@ Question (based on text): \"\"\"{qatuple[0]}\"\"\"
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"{qatuple[1]}\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process (be careful about extra details, even vague ones):
 """
         try:

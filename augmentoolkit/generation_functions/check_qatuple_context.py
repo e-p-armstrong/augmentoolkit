@@ -26,7 +26,7 @@ def extract_question_answer(response):
 async def check_qatuple_context(qatuple, engine_wrapper):
     retries = 0
     while retries <= 4:
-        decision_prompt = f"""<s> [INST] You are checking whether a provided question and answer make sense if asked by themselves, with no additional information. You need to check for vague wording that a reader cannot interpret correctly, and questions that lack key context and would not be possibly answerable even if asked of someone with complete, masterful knowledge of the general subject matter of the question.
+        decision_prompt = f"""You are checking whether a provided question and answer make sense if asked by themselves, with no additional information. You need to check for vague wording that a reader cannot interpret correctly, and questions that lack key context and would not be possibly answerable even if asked of someone with complete, masterful knowledge of the general subject matter of the question.
 
 Evaluate the provided question-answer pair step-by-step. Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Pass" or "Fail" or "Reword". A test passes if it "makes sense" and does not lack key context; it "Fails" if it lacks key context, AND the question is not specific or clear, it fails. If it lacks context but the question is specific, pointed, and grounded, then it needs to be reworded to have the context-needing terms (i.e., vague reference to "the text") removed. If it has no problems, it passes. 
 
@@ -42,7 +42,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: What is the main theme of this book?
 Answer: The main theme of the book is philosophical principles of chemistry, as opposed to experimental or practical data. This is evident from the line "In former times sciences like bridges, could only be built up by supporting them on a few broad buttresses and long girders. In addition to the exposition of the principles of chemistry, it has been my desire to show how science has now been built up like a suspension bridge, supported by the united strength of a number of slender, but firmly-fixed, chains, which individually are of little strength, and has thus been carried over difficulties which before appeared insuperable.\" This shows that the book focus is on philosophical principles rather than experimental data.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. This question asks about "this book" without stating which book this is.
@@ -60,7 +60,7 @@ Answer: The main theme of the book is philosophical principles of chemistry, as 
 
 ### Question Rewording (using text details as reference):
 Question: What is the main theme of Principles of Chemistry, by Demitry Mendeleev?
-Answer: The main theme of Principles of Chemistry is philosophical principles of chemistry, as opposed to experimental or practical data. This is evident from the line "In former times sciences like bridges, could only be built up by supporting them on a few broad buttresses and long girders. In addition to the exposition of the principles of chemistry, it has been my desire to show how science has now been built up like a suspension bridge, supported by the united strength of a number of slender, but firmly-fixed, chains, which individually are of little strength, and has thus been carried over difficulties which before appeared insuperable.\" This shows that focus of Principles of Chemistry is on philosophical principles rather than experimental data.</s> [INST]
+Answer: The main theme of Principles of Chemistry is philosophical principles of chemistry, as opposed to experimental or practical data. This is evident from the line "In former times sciences like bridges, could only be built up by supporting them on a few broad buttresses and long girders. In addition to the exposition of the principles of chemistry, it has been my desire to show how science has now been built up like a suspension bridge, supported by the united strength of a number of slender, but firmly-fixed, chains, which individually are of little strength, and has thus been carried over difficulties which before appeared insuperable.\" This shows that focus of Principles of Chemistry is on philosophical principles rather than experimental data.
 
 
 ### Instruction:
@@ -70,7 +70,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: What does Mendeleev consider important about solutions?
 Answer: He considers them an unsolved subject that he cannot ignore in his book, despite the lack of proof for his own theory on their nature.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: This question does not use terms like "book", "text", "passage", or "excerpt" without context, as it directly asks about Mendeleev's view on a specific topic.
@@ -88,7 +88,7 @@ Answer: He considers them an unsolved subject that he cannot ignore in his book,
 
 ### Question Rewording (using text details as reference):
 Question: What does Mendeleev consider important about solutions?
-Answer: Mendeleev considers solutions an unsolved subject that he cannot ignore in his book Principles of Chemistry, despite the lack of proof for his own theory on their nature.</s> [INST]
+Answer: Mendeleev considers solutions an unsolved subject that he cannot ignore in his book Principles of Chemistry, despite the lack of proof for his own theory on their nature.
 
 
 ### Instruction:
@@ -98,7 +98,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: What is the main theme of this passage?
 Answer: The main theme of this passage is the principle that learning scientists should study the latest literature and discoveries of their field.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. This question asks about "this passage" without stating which passage this is (or what book it belongs to).
@@ -112,7 +112,7 @@ Answer: The main theme of this passage is the principle that learning scientists
 
 ### Critical Evaluation and Final Judgment:
 #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. Both the question and answer lack specific context about the "passage", making it impossible to determine which passage from 'Principles of Chemistry' they are referring to. The question is precise in asking for a main theme but fails due to lack of context. Since context cannot be determined, even knowing what book the question is asking about, context cannot be added with rewording. 
-#### Final judgment: Fail.</s> [INST]
+#### Final judgment: Fail.
 
 
 ### Instruction:
@@ -122,7 +122,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: How can you avoid blame for an act of sabotage, according to the text?
 Answer: You can do them in public places where anyone would have been capable of carrying out the act.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. This question mentions "the text" without specifying which text it is referring to.
@@ -140,7 +140,7 @@ Answer: You can do them in public places where anyone would have been capable of
 
 ### Question Rewording (using text details as reference):
 Question: How can you avoid blame for an act of sabotage, according to 'Simple Sabotage' by the Office of Strategic Services?
-Answer: You can do them in public places where anyone would have been capable of carrying out the act.</s> [INST]
+Answer: You can do them in public places where anyone would have been capable of carrying out the act.
 
 
 ### Instruction:
@@ -150,7 +150,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: What was the basis of Mendeleev's work in his book?
 Answer: The periodic law.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. This question uses the term "his book" without specifying which book it is referring to.
@@ -168,7 +168,7 @@ Answer: The periodic law.
 
 ### Question Rewording (using text details as reference):
 Question: What was the basis of Mendeleev's work in 'Principles of Chemistry'?
-Answer: The periodic law.</s> [INST]
+Answer: The periodic law.
 
 
 ### Instruction:
@@ -178,7 +178,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: What does Demitry Mendeleev say about inquiry in 'Principles of Chemistry'?
 Answer: Inquiry should be encouraged, and dissatisfied with speculative reasonings alone. It should subject every idea to experiment.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question does not misuse terms like "book", "text", "passage", or "excerpt" without proper context.
@@ -192,7 +192,7 @@ Answer: Inquiry should be encouraged, and dissatisfied with speculative reasonin
 
 ### Critical Evaluation and Final Judgment:
 #### Evaluation: The question and answer both pass all checks for context, specificity, precision, and clarity.
-#### Final judgment: Pass.</s> [INST]
+#### Final judgment: Pass.
 
 
 ### Instruction:
@@ -202,7 +202,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: How does science advance, according to Demitry Mendeleev's text?
 Answer: Science advances through discovering new truths and practical results.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question mentions "Mendeleev's text" but does not specify which text it is referring to.
@@ -230,7 +230,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: What are some ways information can be spread, according to the Office of Strategic Services?
 Answer: Various media may be used to disseminate suggestions and information regarding simple sabotage. Among these are radio broadcasts or leaflets, which may be directed towards specific areas or general in scope. Agents may also be trained in the art of simple sabotage.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question does not misuse terms like "book", "text", "passage", or "excerpt" without proper context.
@@ -244,7 +244,7 @@ Answer: Various media may be used to disseminate suggestions and information reg
 
 ### Critical Evaluation and Final Judgment:
 #### Evaluation: The question and answer both pass all checks for context, specificity, precision, and clarity.
-#### Final judgment: Pass.</s> [INST]
+#### Final judgment: Pass.
 
 
 ### Instruction:
@@ -254,7 +254,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: How does the type of saboteur affect their role in destruction?
 Answer: If they are a technician, they can devise methods of simple sabotage appropriate to their facilities. If not technically trained, they need suggestions for what to destroy and how to accomplish it.
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question does not misuse any specific terms without proper context.
@@ -268,7 +268,7 @@ Answer: If they are a technician, they can devise methods of simple sabotage app
 
 ### Critical Evaluation and Final Judgment:
 #### Evaluation: Both the question and answer are precise and do not require additional context for understanding.
-#### Final judgment: Pass.</s> [INST]
+#### Final judgment: Pass.
 
 
 ### Instruction:
@@ -278,7 +278,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: What is the meaning of this passage?
 Answer: This passage means that things which think, form plans, and act on those plans, are beyond simple machines. This is evidenced by the line "Creatures that think, form plans, and _act_, are not what we call automata."
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Question Context Validation
 #### Special Term Context Check: Specifically check for use of the terms "book", "text", "passage", and "excerpt" without context about which specific thing is being discussed. The question asks about "this passage" without specifying which passage it is referring to or what book it belongs to.
@@ -292,7 +292,7 @@ Answer: This passage means that things which think, form plans, and act on those
 
 ### Critical Evaluation and Final Judgment:
 #### Evaluation: Both the question and answer lack specific context, making it impossible to determine which passage from 'Introduction to Philosophy' they are referring to. The question is precise in asking for a meaning but fails due to lack of context.
-#### Final judgment: Fail.</s> [INST]
+#### Final judgment: Fail.
 
 
 ### Instruction:
@@ -302,7 +302,7 @@ Note that while you have access to this information, for the sake of rewording q
 Question: {qatuple[0]}
 Answer: {qatuple[1]}
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process (be thorough):
 """
         # print("DEBUG\n\n" + prompt=decision_prompt)

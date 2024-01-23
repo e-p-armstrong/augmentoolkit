@@ -12,7 +12,7 @@ from aphrodite import SamplingParams
 async def check_answer(qatuple, engine_wrapper, permissive_mode=True):
     retries = 0
     while retries <= 4:
-        decision_prompt = f"""<s> [INST] You are an expert educational AI. Given a paragraph or two from a larger text, a question based on the paragraphs, and an answer to the question, you will make a determination as to whether the answer to the question is a sensible answer, given the information in the paragraphs. Essentially: you will fact-check the answer to the question, with your source of truth being the paragraphs provided. Your task includes first analyzing the text, thinking through whether or not the answer reflects aspects of the paragraphs provided. 
+        decision_prompt = f"""You are an expert educational AI. Given a paragraph or two from a larger text, a question based on the paragraphs, and an answer to the question, you will make a determination as to whether the answer to the question is a sensible answer, given the information in the paragraphs. Essentially: you will fact-check the answer to the question, with your source of truth being the paragraphs provided. Your task includes first analyzing the text, thinking through whether or not the answer reflects aspects of the paragraphs provided. 
 
 Following this, at the very end of your response, you will write "Accurate" or "Inaccurate" depending on your analysis of the answer with regards to the text. 
 
@@ -28,7 +28,7 @@ Question (based on text): \"\"\"What was the role of steam power in the Industri
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Steam power during the Industrial Revolution played a crucial role in decreasing production costs. However, it had no significant impact on the emergence of semi-automated factories. Interestingly, it also led to an increased cultivation of lemons.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text highlights the role of steam power in reducing production costs and developing semi-automated factories during the Industrial Revolution.
@@ -47,7 +47,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Stea
 
 ### Final Judgment:
 #### Comprehensive Assessment: The answer is accurate regarding production costs, inaccurate regarding semi-automated factories, and the lemon cultivation claim is unsupported.
-#### Overall Accuracy Determination: The answer is: Inaccurate.</s> [INST]
+#### Overall Accuracy Determination: The answer is: Inaccurate.
 
 
 ### Instruction:
@@ -60,7 +60,7 @@ Question (based on text): \"\"\"What does the concept of 'justified true belief'
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"The concept of 'justified true belief' in epistemology involves having a belief that is true and has justification. For a belief to be considered knowledge, it must be true, one must believe it, and there must be sufficient reason for this belief. Skepticism plays a role by challenging the certainty of knowledge, thereby emphasizing the need for strong justification in 'justified true belief.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text covers the concept of 'justified true belief' and skepticism in epistemology.
@@ -78,7 +78,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"The 
 
 ### Final Judgment:
 #### Comprehensive Assessment: Both parts of the answer accurately reflect the text's content.
-#### Overall Accuracy Determination: The answer is: Accurate.</s> [INST]
+#### Overall Accuracy Determination: The answer is: Accurate.
 
 
 ### Instruction:
@@ -93,7 +93,7 @@ Question (based on text):
 Supposed answer to the question (this is what you are fact-checking): 
 \"\"\"The underwater city discovered by Elizabeth and Michael in 'Ocean's Secrets' represents a significant archaeological find from the lost civilization of Atlantis, shedding light on ancient historical mysteries.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text revolves around the discovery of an underwater city, initially believed to be Atlantis, but later revealed to be a figment of Elizabeth's imagination.
@@ -109,7 +109,7 @@ Supposed answer to the question (this is what you are fact-checking):
 
 ### Final Judgment:
 #### Comprehensive Assessment: The answer is inaccurate as it contradicts the final revelation in the text.
-#### Overall Accuracy Determination: The answer is: Inaccurate.</s> [INST]
+#### Overall Accuracy Determination: The answer is: Inaccurate.
 
 ### Instruction:
 Text:
@@ -123,7 +123,7 @@ Question (based on text):
 Supposed answer to the question (this is what you are fact-checking): 
 \"\"\"The Great Wall of China was built by the Romans to defend against Mongolian invasions (coming from the direction of China) in the 3rd century BC.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text incorrectly states that the Great Wall of China was built by the Romans to defend against Mongolian invasions.
@@ -139,7 +139,7 @@ Supposed answer to the question (this is what you are fact-checking):
 
 ### Final Judgment:
 #### Comprehensive Assessment: The answer, while reflecting an objectively incorrect fact, is accurate in the context of the text's information.
-#### Overall Accuracy Determination: The answer is: Accurate.</s> [INST]
+#### Overall Accuracy Determination: The answer is: Accurate.
 
 ### Instruction:
 Text: 
@@ -151,7 +151,7 @@ Question (based on text): \"\"\"What are the key aspects of formal logic, and ho
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"Key aspects of formal logic include the study of valid arguments and the use of symbolic representation. Valid arguments are those where the premises may or may not lead to a true conclusion. Symbolic representation helps in making complex ideas more understandable by breaking them down into simpler forms.\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 ### Text Analysis:
 #### Identify Key Information: The text discusses the aspects of formal logic, including valid arguments and symbolic representation.
@@ -169,7 +169,7 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"Key 
 
 ### Final Judgment:
 #### Comprehensive Assessment: The answer is partially accurate, correctly identifying symbolic representation but inaccurately describing valid arguments.
-#### Overall Accuracy Determination: The answer is: Inaccurate.</s> [INST]
+#### Overall Accuracy Determination: The answer is: Inaccurate.
 
 ### Instruction:
 Text: \"\"\"{qatuple[2]}\"\"\"
@@ -178,7 +178,7 @@ Question (based on text): \"\"\"{qatuple[0]}\"\"\"
 
 Supposed answer to the question (this is what you are fact-checking): \"\"\"{qatuple[1]}\"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process (the text is your single source of truth):
 """
         try:

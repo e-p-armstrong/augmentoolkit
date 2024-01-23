@@ -17,7 +17,7 @@ async def generate_questions(para_tuple, plan, engine_wrapper):
     retries = 0
     questions = []
     while not made_questions and (retries <= 5):
-        question_prompt = f"""<s> [INST] You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
+        question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
 
 Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
 
@@ -32,7 +32,7 @@ Text to make questions from:
 In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
 \"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 Identify Key Topics: The key topics in this paragraph are linear and quadratic functions in mathematics, their definitions, components, and applications.
 Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of definitions and components of these functions. Example: "What does the 'm' in the linear function equation represent?"
@@ -51,7 +51,7 @@ Answer: The y-intercept 'b' in the linear function equation y = mx + b represent
 Answer: The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.
 
 4.) Define the concept of a function in mathematics, in one sentence.
-Answer: A function is a relationship where each input is associated with exactly one output.</s> [INST]
+Answer: A function is a relationship where each input is associated with exactly one output.
 
 
 ### Instruction:
@@ -86,7 +86,7 @@ nether-world, thou exuberant star!
 Like thee must I GO DOWN, as men say, to whom I shall descend.
 \"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and Thought Process:
 Identify Key Themes: In this excerpt, we find themes of transformation, self-discovery, the value of wisdom, and the need for recognition of effort and wisdom.
 Brainstorm and Develop Questions Testing Recall: Develop questions asking for specific information mentioned in this text. Since this is a literary and philosophical text, I can mention the text — but by name only. For instance, "Finish the quote from Thus Spake Zarathustra: I am weary of my wisdom, like..."
@@ -105,7 +105,7 @@ Answer: They need the acknowledgement and admiration of others. Take the line fr
 Answer: After enjoying his spirit and solitude for ten years, he had a change of heart, and realized that wisdom unshared, without acknowledgement, brings little satisfaction. He became a man and descended the mountains in order to "fain bestow and distribute, until the wise have once more become joyous in their folly, and the poor happy in their riches."
 
 4.) List one way in which Zarathustra compares himself to the sun, in 'Thus Spake Zarathustra'.
-Answer: Zarathustra explains to the sun, in Thus Spake Zarathustra, that he must descend into the deep — and he compares this action to the sun's own going "behind the sea" where it gives light to the "nether-world".</s> [INST]
+Answer: Zarathustra explains to the sun, in Thus Spake Zarathustra, that he must descend into the deep — and he compares this action to the sun's own going "behind the sea" where it gives light to the "nether-world".
 
 
 ### Instruction:
@@ -155,7 +155,7 @@ Certainly not, replied Glaucon.
 Then we are not going to listen; of that you may be assured.
 \"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and Thought Process:
 Identify Key Themes: This excerpt from Plato's "The Republic" presents themes of social interaction, philosophical dialogue, and the dynamics of persuasion and power.
 Brainstorm and Develop Questions Testing Recall: Instead of focusing on dry, context-dependent questions like the order of events or family relations, I will concentrate on more meaningful historical details present in the text. For instance, "Which goddess is Bendis equivalent to?"
@@ -174,7 +174,7 @@ Answer: One viable alternative I can take is to persuade them to let me go. This
 Answer: Polemarchus is implying that since his group is stronger than Socrates, he can force Socrates to remain where he is.
 
 4.) Why did Socrates visit Piraeus with Glaucon in Plato's "The Republic"?
-Answer: Socrates visited Piraeus to offer up his prayers to the goddess Bendis, as well as to see in what manner the Thracians would celebrate the festival.</s> [INST]
+Answer: Socrates visited Piraeus to offer up his prayers to the goddess Bendis, as well as to see in what manner the Thracians would celebrate the festival.
 
 
 ### Instruction:
@@ -185,7 +185,7 @@ Text to make questions from:
 During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
 \"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and Thought Process:
 Identify Key Topics: The paragraph details specific aspects of the Panama Canal's construction, focusing on its challenges, innovations, and impacts. Topics include construction challenges, health issues, excavation techniques, and the canal's impact on global trade.
 Brainstorm and Develop Questions Testing Recall: Questions can be formed to recall factual data from the text. Example: "How much earth was excavated during the construction of the Panama Canal?"
@@ -204,7 +204,7 @@ Answer: The construction faced significant health challenges, notably malaria an
 Answer: The completion of the Panama Canal reduced the sea voyage from San Francisco to New York by around 8,000 miles.
 
 4.) In what year was the Panama Canal completed?
-Answer: The Panama Canal's construction was completed in 1914.</s> [INST]
+Answer: The Panama Canal's construction was completed in 1914.
 
 
 ### Instruction:
@@ -215,7 +215,7 @@ Text to plan questions from:
 If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
 \"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and thought process:
 Identify Key Topics: The key topic in this paragraph is the scale of the solar system, which is presented using analogy to make the distances easier to conceive of.
 Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of the components of this analogy. Since the text is not provided while the question is being asked, I will have to include the analogy in the question. Example: "If the Earth had a diameter of only one inch, how far would the moon be from the Earth, if it (and its distance from the Earth) were also resized proportionally?"
@@ -234,7 +234,7 @@ Answer: The distances between planets is much greater than the planets' sizes. I
 Answer: Mercury would be one hundred and twenty-five yards from the sun, and Venus would be two hundred and fifty yards from the sun.
 
 4.) If the earth had a diameter of only one inch, how far would Mars be from the earth, if it (and its distance from the earth) were also resized proportionally?
-Answer: Mars would be a hundred and seventy-five feet beyond the earth.</s> [INST]
+Answer: Mars would be a hundred and seventy-five feet beyond the earth.
 
 
 ### Instruction:
@@ -245,7 +245,7 @@ Text to make questions from:
 {para_tuple[0]}
 \"\"\"
 
-[/INST]### Response:
+### Response:
 ## Reasoning and Thought Process:
 {strip_steps(plan)}
 
