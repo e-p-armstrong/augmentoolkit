@@ -21,6 +21,7 @@ class EngineWrapper:
             engine_use_ray=False,
             disable_log_requests=True,
             max_model_len=12000,
+            dtype="float16"
         )
         self.engine = AsyncAphrodite.from_engine_args(engine_args)
 

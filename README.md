@@ -31,7 +31,7 @@ First, get the repository onto your computer (or an instance rented out by your 
 git clone https://github.com/e-p-armstrong/augmentool.git
 ```
 
-Then, install the project's dependencies. For the Aphrodite branch **you need a CUDA version >= 12, so be sure to pick an appropriate docker image if using RunPod!** Nvidia GPUs with compute capability > 7.5, and some AMD GPUs (allegedly) will work her. You also need the following Python libraries: `protobuf sentencepiece transformers matplotlib nltk aphrodite-engine`. If your computer is suitable and your CUDA version correct, it should be as easy to install as:
+Then, install the project's dependencies. For the Aphrodite branch **you need a CUDA version >= 12, so be sure to pick an appropriate docker image if using RunPod!** The "Fine-tuning Notebook by Trelis - Cuda 12.1" template seems to work nicely. Nvidia GPUs with compute capability > 7.5, and some AMD GPUs (allegedly) will work her. You also need the following Python libraries: `protobuf sentencepiece transformers matplotlib nltk aphrodite-engine`. If your computer is suitable and your CUDA version correct, it should be as easy to install as:
 ```
 pip install protobuf sentencepiece transformers matplotlib nltk aphrodite-engine
 ```
@@ -39,6 +39,7 @@ OR
 ```
 pip install -r requirements.txt
 ```
+You may get some messages saying that torchvision and torchaudio require older versions of Pytorch. This should be safely ignorable.
 
 **Quick install on Vast.ai (Note for Runpod users: just do the pip install command above! It's much faster):** on a fresh Vast.ai Linux instance (select the ` anibali/pytorch:2.0.1-cuda11.8 ` docker image), you would need to run the following command to get this working:
 ```
