@@ -83,7 +83,7 @@ Here is a flowchart detailing how a typical run of Augmentoolkit may proceed. Th
 
 ### Concepts and Operation
 Read this subsection for a slightly more detailed version of the more finicky bits of the quickstart, as well as an understanding of the key files in this repo.
-Augmentoolkit is centered around a Jupyter Notebook (`processing.ipynb`) so that progress is easier to inspect, and starting and stopping is easier. All the prompts and their GBNF Grammars are stored in `./generation_functions`.
+Augmentoolkit is centered around a Jupyter Notebook (`processing.ipynb`) so that progress is easier to inspect, and starting and stopping is easier. All the prompts are stored in `./augmentoolkit/generation_functions`.
 
 You run Augmentoolkit by running the Jupyter Notebook `processing.ipynb`. **Depending on if you are using a combination of a larger LLM and a smaller one, you will either need to comment out one notebook cell, or restart the notebook at a (clearly indicated) point.**
 
@@ -106,7 +106,7 @@ Once all the cells before the point below finish executing, restart the notebook
 
 Once this is done, you can run the last three cells, starting with the one you saw just below the "Stop Here" cell. Apologies for the convoluted process, I don't actually think there's a way to get around the VRAM memory leak yet.
 
-***Important files:*** The core of the project is `processing.ipynb`, which needs `./generation_functions`, and one or more plaintext files -- all in the same folder as `processing` -- in order to run. If you are going to change anything, please read [Customization](#customization-arranged-in-order-of-least-to-most-difficult-to-implement) first.
+***Important files:*** The core of the project is `processing.ipynb`, which needs `./augmentoolkit/`, and one or more plaintext files -- all in the same folder as `processing` -- in order to run. If you are going to change anything, please read [Customization](#customization-arranged-in-order-of-least-to-most-difficult-to-implement) first.
 ### Understanding what is going on as it runs
 This subsection summarizes output folders and code structure.
 This notebook makes plenty of folders while it runs. The ones you may want to pay attention to are `./worthy_for_questions`, `./qatuples_raw`, `./qatuples_revised`, `./multiturn_convs_info`, and finally, `./multiturn_convs`. `./multiturn_convs` is the final output directory. Everything else is just the notebook saving the outputs of every single step in case someone wants to train a model specifically for running this pipeline at some point.
@@ -122,7 +122,6 @@ This subsection describes things that make life easier in Augmentoolkit.
 - **Easy resume:** don't have long uninterrupted periods of time to run this? No problem! Augmentoolkit saves outputs as they're written and resumes generation painlessly, so you can start and stop stress free.
 - **Two-model generation for the sake of SPEED:** every single task, except the very last one (multi-turn conversation generation) can be accomplished reliably by a good enough 13b. It is highly recommended that you run all steps until the actual multi-turn conversation generation using a 13b, and then switch to a 70b for the last part. This will require a restart of the notebook to deallocate the VRAM, but don't worry, the easy resume means this should work fine (if you haven't moved any files around).
 - **Validation, validation, validation:** Learning lessons from the original Augmental, consistency with the source text is an extremely high priority here, and this is ensured with multiple layers of LLM-based validation (and at the end, numerous examples of regex-based validation).
-- **GBNF Grammars:** possibly the most under-utilized feature of Llama.cpp sees a lot of love here. Check out any `_grammar.py` file in `./generation_functions` and see for yourself how this notebook ensures consistent output across its many steps!
 - **Aphrodite Engine:** batched inference, flash attention, and a host of other optimizations and tricks, make Augmentoolkit fast and scaleable on this branch. Just don't modify the Aphrodite Engine package itself or else GPL will bite you.
 
 The steps above describe how to run the notebook with default settings. But your use case likely differs from the default. Here's a step-by-step process about how to customize it!
@@ -136,7 +135,7 @@ Read this to learn how to hack Augmentoolkit for your own use cases.
 
 ![](specialinstructions.jpg)
 
-3. ***Change the constants.*** There are a few constant values in this notebook, and in `./generation_functions/constant_values.py` (the latter is only really used when testing prompts during development). These constants are tested, but if your use case requires special settings (e.g., you want to make conversations from more permutations of existing questions; or you think the character counts for the "duplicate question/answer" validation functions are too restrictive) then feel free to change the related setting. The most intuitive and least-likely-to-break-anything settings to change are rearrangements_to_take and double_check_counter. Beyond that... you'll need to figure out what the function does before changing it if you expect it to run.
+3. ***Change the constants.*** There are a few constant values in this notebook, and in `./augmentoolkit/generation_functions/constant_values.py` (the latter is only really used when testing prompts during development). These constants are tested, but if your use case requires special settings (e.g., you want to make conversations from more permutations of existing questions; or you think the character counts for the "duplicate question/answer" validation functions are too restrictive) then feel free to change the related setting. The most intuitive and least-likely-to-break-anything settings to change are rearrangements_to_take and double_check_counter. Beyond that... you'll need to figure out what the function does before changing it if you expect it to run.
 
 4. ***Assistant Mode*** Technically this could be considered part of 3), but it's different enough that I feel it warrants separate explanation. By default, the notebook is configured to produce RP-style data; "Assistant mode" is something you can toggle in the settings cell immediately below this one, which skips character and scenario generation and answers every question in a chat between a user and a helpful AI assistant (with no personality). In the limited testing I have done with this, **it seems that assistant mode is simple enough to work from start-to-finish with 13b models** such as Flatorcamaid by Ikari. So if your compute or time are very limited, or you are using this for a more professional use case, feel free to turn this on.
 
