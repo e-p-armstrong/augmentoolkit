@@ -5,7 +5,6 @@ from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 import string
 import random
-from aphrodite import SamplingParams
 
 
 def extract_author_name(title):
@@ -193,14 +192,12 @@ The character should not have written the text and should not be affiliated with
 
 ## Character card (be creative, write at least 3 paragraphs for each dialogue line):
 Name: {starting_str}"""
-    sampling_params = SamplingParams(
-        max_tokens=10000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-        temperature=2,
-        top_k=-1,
-        top_p=1,
-        min_p=0.5,
-    )
+    sampling_params = {
+        "max_tokens": 10000,
+        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+        "temperature": 1,
+        "top_p": 0.5,
+    }
     completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # print(prompt=cot_prompt)
     # print("COMPLETION:\n\n----------------------")

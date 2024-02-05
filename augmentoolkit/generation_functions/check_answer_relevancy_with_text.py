@@ -3,8 +3,6 @@ import traceback
 
 # from .answer_relevant_grammar import answer_relevant_grammar
 from .constants import LOGICAL_MODEL
-from aphrodite import SamplingParams
-
 
 # Answer vetting
 # For now, this checks answer relevancy too. The danger with abstracting answer relevancy into a separate step is that anything which relies on knowledge that is obviously mentioned in the text already up until this point, will get screwed
@@ -192,11 +190,11 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
 ## Reasoning and thought process (be careful about extra details, even vague ones):
 """
         try:
-            sampling_params = SamplingParams(
-                max_tokens=5500,
-                stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-                temperature=0.2,
-            )
+            sampling_params = {
+                "max_tokens": 5500,
+                "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+                "temperature": 0.2,
+            }
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)
             completion_pattern = re.compile(
                 r"Reasoning and thought process \(be careful about extra details, even vague ones\):\n(.+)",

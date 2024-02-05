@@ -6,7 +6,6 @@ import random
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name
 from .random_name import random_name
-from aphrodite import SamplingParams
 
 
 # Consider adding a scenario for Issac here, since currently both characters are in positions of authority, and the thing leans very heavily on Hugo's example
@@ -127,14 +126,14 @@ Description of the character who is going to answer the question:
 
 ## Scenario (will have no dialogue, will just set up the scene):
 {selected_variation}"""  # use random.choice to prevent overfitting on particular phrases and increase dataset diversity
-    sampling_params = SamplingParams(
-        max_tokens=8000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-        temperature=1.5,
-        top_k=-1,
-        top_p=1,
-        min_p=0.5,
-    )
+    sampling_params = {
+        "max_tokens": 8000,
+        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+        "temperature": 1.5,
+        # top_k=-1,
+        "top_p": 0.5,
+        # min_p=0.5,
+    }
     completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # print("COMPLETION:\n\n----------------------")
     # print(completion)

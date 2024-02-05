@@ -2,7 +2,6 @@ import re
 
 # from .judge_paragraph_grammar import judge_paragraph_grammar
 from .constants import LOGICAL_MODEL
-from aphrodite import SamplingParams
 
 
 async def judge_paragraph(p, engine_wrapper):
@@ -259,12 +258,12 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
 ## Reasoning and thought process (reason intelligently):
 """
         # print("DEBUG\n\n" + prompt=decision_prompt)
-        sampling_params = SamplingParams(
-            max_tokens=6000,
-            min_p=0.4,
-            stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-            # temperature=0.2
-        )
+        sampling_params = {
+            "max_tokens": 6000,
+            # "min_p": 0.4,
+            "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+            "temperature": 0.2
+        }
         completion = await engine_wrapper.submit(
             decision_prompt,
             sampling_params

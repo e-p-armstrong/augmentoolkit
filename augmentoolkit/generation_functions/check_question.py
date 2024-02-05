@@ -3,7 +3,6 @@ import traceback
 
 # from .question_relevant_grammar import question_relevant_grammar
 from .constants import LOGICAL_MODEL
-from aphrodite import SamplingParams
 
 # POSSIBLE TODO:
 # Add an "Off the rails insane forever generation" check, like on this output:
@@ -125,11 +124,11 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
 ## Reasoning and thought process (be careful around "how" and "why" questions):
 """
         try:
-            sampling_params = SamplingParams(
-                max_tokens=4000,
-                stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-                temperature=0.2,
-            )
+            sampling_params = {
+                "max_tokens": 4000,
+                "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+                "temperature": 0.2,
+            }
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)
 
             response_pattern = re.compile(

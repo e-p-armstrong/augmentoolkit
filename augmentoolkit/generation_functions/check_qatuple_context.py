@@ -2,7 +2,6 @@ import re
 
 # from .check_qatuple_context_grammar import check_qatuple_context_grammar
 from .constants import LOGICAL_MODEL
-from aphrodite import SamplingParams
 
 
 def extract_question_answer(response):
@@ -306,11 +305,11 @@ Answer: {qatuple[1]}
 ## Reasoning and thought process (be thorough):
 """
         # print("DEBUG\n\n" + prompt=decision_prompt)
-        sampling_params = SamplingParams(
-            max_tokens=10000,
-            stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-            temperature=0.2,
-        )
+        sampling_params = {
+            "max_tokens": 10000,
+            "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+            "temperature": 0.2,
+        }
         try:
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)
 

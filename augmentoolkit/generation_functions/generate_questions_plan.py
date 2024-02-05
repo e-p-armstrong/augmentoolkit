@@ -2,8 +2,6 @@ import re
 
 # from .question_plan_grammar import question_plan_grammar
 from .constants import LOGICAL_MODEL
-from aphrodite import SamplingParams
-
 
 async def generate_questions_plan(text, engine_wrapper):
     """
@@ -189,14 +187,14 @@ Your planned questions must include context, if a question requires both context
 ## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
 """
     # print("DEBUG\n\n" + prompt=decision_prompt)
-    sampling_params = SamplingParams(
-        max_tokens=8000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-        temperature=0.8,
-        top_k=-1,
-        top_p=1,
-        min_p=0.5,
-    )
+    sampling_params = {
+        "max_tokens": 8000,
+        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+        "temperature": 0.8,
+        # top_k=-1,
+        "top_p": 1,
+        # min_p=0.5,
+    }
     completion = await engine_wrapper.submit(cot_prompt, sampling_params)
 
     # Extract plan

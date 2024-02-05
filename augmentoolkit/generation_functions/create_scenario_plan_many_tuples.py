@@ -3,7 +3,6 @@ from .constants import LOGICAL_MODEL
 from .format_qatuples import format_qatuples
 from .extract_name import extract_name
 from .random_name import random_name
-from aphrodite import SamplingParams
 import re
 
 
@@ -103,14 +102,14 @@ You don't need to add negative emotions and tension to the scenario if those don
 ### Response:
 ## Scenario plan (be creative, and make sure all characters present fit in with the setting):
 """
-    sampling_params = SamplingParams(
-        max_tokens=8000,
-        stop=["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-        temperature=1.5,
-        top_k=-1,
-        top_p=1,
-        min_p=0.5,
-    )
+    sampling_params = {
+        "max_tokens": 8000,
+        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+        "temperature": 1.5,
+        # top_k=-1,
+        "top_p": 1,
+        # min_p=0.5,
+    }
     completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # Even if the example does a justified clever trick, the model imitating it may fuck up the trick. So try to avoid complex things that aren't needed for the task in examples, like the "just how much have you dug" colloquialization. Exact quotes for the questions and answers.
     # print("COMPLETION:\n\n----------------------")
