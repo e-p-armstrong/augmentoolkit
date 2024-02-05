@@ -5,7 +5,7 @@ Avoids breaking the bank (and getting your API key revoked) because it doesn't u
 
 [Fork this repo and customize it for your own needs!](https://github.com/e-p-armstrong/augmentoolkit/fork)
 
-**Beta for version using Aphrodite Engine (based on vLLM) now available!** (This means batched inference, GPTQ/AWQ support, hundreds of tokens per second, and asynchronous operations for a much faster experience). [Try it now and tell me what you think!](https://github.com/e-p-armstrong/augmentoolkit/tree/aphrodite-branch)
+**The Version Using Aphrodite Engine (based on vLLM) is updated and recommended for most usecases!** (This means batched inference, GPTQ/AWQ support, hundreds of tokens per second, and asynchronous operations for a much faster experience). [Try it now!](https://github.com/e-p-armstrong/augmentoolkit/tree/aphrodite-branch)
 
 ## Table of Contents:
 1. [Installation](#installation)
