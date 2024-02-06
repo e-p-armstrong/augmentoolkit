@@ -562,7 +562,6 @@ Answer: {qatuple[1]}
             "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
             "temperature": 0.2,
         }
-        print(decision_prompt)
         try:
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)
 

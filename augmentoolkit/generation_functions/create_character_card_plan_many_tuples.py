@@ -308,8 +308,6 @@ Given the question, its answer, and the special instructions, one possibility fo
         "top_p": 0.5,
         # min_p=0.4,
     }
-    print("\n\nCARDPLAN GEN\n\n")
-    print(cot_prompt)
     completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # print("COMPLETION:\n\n----------------------")
     # print(completion)

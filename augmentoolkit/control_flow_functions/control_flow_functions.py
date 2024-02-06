@@ -425,7 +425,8 @@ async def generate_qatuples_from_para(
     vetted_qa_tuples=None,
     qa_tuples_dir=None,
     double_check_counter=3,
-    use_filenames=False
+    use_filenames=False,
+    rtwl=None
 ):
     try:
         existing_files = glob.glob(
@@ -572,6 +573,7 @@ async def filter_all_questions(
     output_dir,
     take_subset=False,
     use_filenames=False,
+    rtwl=None
 ):
     if not take_subset:
         tasks = [
@@ -597,7 +599,8 @@ async def filter_all_questions(
             )
             for idx, p in enumerate(paragraphs_processed[:13])
         ]
-    for future in tqdmasyncio.tqdm.as_completed(tasks):
+    limited_tasks = [rtwl(task) for task in tasks]
+    for future in tqdmasyncio.tqdm.as_completed(limited_tasks):
         await future
 
 

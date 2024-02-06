@@ -327,8 +327,6 @@ Name: {starting_str}"""
         "temperature": 1,
         "top_p": 0.5,
     }
-    print("\n\n\nCARD ACTUAL GEN\n\n\n")
-    print(cot_prompt)
     completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # print(prompt=cot_prompt)
     # print("COMPLETION:\n\n----------------------")
