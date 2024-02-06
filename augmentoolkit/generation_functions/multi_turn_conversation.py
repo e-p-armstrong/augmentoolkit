@@ -140,7 +140,7 @@ AI Assistant: Indeed, the construction faced significant health challenges, nota
 Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
 Answer: \"\"\"They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.\"\"\"
 
-Question: \"\"\"Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.\"\"\"
+Question: \"\"\"Recite a famous quote from Thus Spake Zarathustra that likens the solitary gathering of wisdom to a bee gathering honey.\"\"\"
 Answer: \"\"\""Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it."\"\"\"
 
 The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
@@ -150,7 +150,7 @@ The AI's answer will use all parts of the answers given. Instead of copying the 
 AI Assistant: Good day! I'm here to assist with any questions or insights you might seek. Please, feel free to ask anything.
 User: What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
 AI Assistant: That's a profound question. They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring. Do you want to know more about Thus Spake Zarathustra?
-User: Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey.
+User: Recite a famous quote from Thus Spake Zarathustra that likens the solitary gathering of wisdom to a bee gathering honey.
 AI Assistant: Certainly. Nietzsche once wrote, "Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it." Do you have any more questions about Nietzsche or his works?
 
 ## Information:

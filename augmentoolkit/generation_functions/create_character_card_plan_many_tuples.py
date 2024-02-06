@@ -148,12 +148,12 @@ Given the question, its answer, and the special instructions, one possibility fo
 
 ## Question, answer, and text that the character should know:
 
+Text details: \"\"\"{qatuples[0][3]}\"\"\"
+
 Text the question and answer were sourced from: 
 \"\"\"
 {qatuples[0][2]}
 \"\"\"
-
-Details of the text the paragraphs were sourced from: \"\"\"{qatuples[0][3]}\"\"\"
 
 {format_qatuples(qatuples)}
 
@@ -249,9 +249,9 @@ Thus began Zarathustra's down-going.
 \"\"\"
 
 Question: \"\"\"What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?\"\"\"
-Answer: \"\"\"They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.\"\"\"
+Answer: \"\"\"They need the acknowledgement and admiration of others. They need others to see and appreciate the light they bring.\"\"\"
 
-Question: \"\"\"Recite a famous quote from that likens the solitary gathering of wisdom to a bee gathering honey.\"\"\"
+Question: \"\"\"Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey.\"\"\"
 Answer: \"\"\""Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it."\"\"\"
 
 Special instructions:
@@ -260,7 +260,7 @@ The character should be narcissistic.
 
 ### Response:
 ## Character card plan:
-Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
 
 ## Question, answer, and text that the character should know:
 
@@ -291,8 +291,6 @@ Text the question and answer were sourced from:
 \"\"\"
 {qatuples[0][2]}
 \"\"\"
-
-Details of the text the paragraphs were sourced from: \"\"\"{qatuples[0][3]}\"\"\"
 
 {format_qatuples(qatuples)}
 
