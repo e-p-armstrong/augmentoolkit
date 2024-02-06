@@ -1,7 +1,7 @@
 # Augmentoolkit
 Generate multi-turn training data, about any subject, using Open Source LLMs!
 Save yourself the time of manually editing 1000s of AI chats to build your own dataset (which you then can't open source anyway because of personal reputation risks). Easily configure the prompts and settings to generate conversations aligned to your tastes and interests.
-Avoids breaking the bank (and getting your API key revoked) because it doesn't use the OpenAI API.
+Now designed for use with APIs offering open-source models, so you don't have to have a fancy computer to make awesome datasets, and you don't have to screw around with dependencies and CUDA. The free credits on services such as [Together.ai]("https://www.together.ai/") should be enough to make a good dataset in its entirety — they offer Mixtral at prices like $0.6/1 Million Tokens(!)
 
 [Fork this repo and customize it for your own needs!](https://github.com/e-p-armstrong/augmentoolkit/fork)
 
@@ -31,9 +31,9 @@ First, get the repository onto your computer (or an instance rented out by your 
 git clone https://github.com/e-p-armstrong/augmentool.git
 ```
 
-Then, install the project's dependencies. For the Aphrodite branch **you need a CUDA version >= 12, so be sure to pick an appropriate docker image if using RunPod!** The "Fine-tuning Notebook by Trelis - Cuda 12.1" template seems to work nicely. Nvidia GPUs with compute capability > 7.5, and some AMD GPUs (allegedly) will work her. You also need the following Python libraries: `protobuf sentencepiece transformers matplotlib nltk aphrodite-engine`. If your computer is suitable and your CUDA version correct, it should be as easy to install as:
+Then, install the project's dependencies. For the API branch setup is super easy, you just need a handful of Python libraries: `protobuf sentencepiece transformers matplotlib nltk openai`. It should be as easy to install as:
 ```
-pip install protobuf sentencepiece transformers matplotlib nltk aphrodite-engine
+pip install protobuf sentencepiece transformers matplotlib nltk openai
 ```
 OR
 ```
@@ -41,10 +41,7 @@ pip install -r requirements.txt
 ```
 You may get some messages saying that torchvision and torchaudio require older versions of Pytorch. This should be safely ignorable.
 
-**Quick install on Vast.ai (Note for Runpod users: just do the pip install command above! It's much faster):** on a fresh Vast.ai Linux instance (select the ` anibali/pytorch:2.0.1-cuda11.8 ` docker image), you would need to run the following command to get this working:
-```
-apt install -y build-essential && conda install -y cmake && conda install -y -c "nvidia/label/cuda-11.8.0" cuda-toolkit cuda-nvcc && pip install protobuf sentencepiece transformers matplotlib nltk aphrodite-engine
-```
+You don't even need CUDA this time.
 
 ## Introduction: What is this and why was it built?
 Open source is meant to move fast, be shareable, and be novel. Our datasets are none of these. Most of the top models have private datasets (or are merges), and replicating said datasets often either A) requires an obscene number of OpenAI API credits, or B) requires you, the model creator, to spend dozens if not hundreds of hours accumulating a hybrid dataset based off of your own conversations with bots. The former is based on a paid service (whose TOS you're violating) that can ban you at any second and whose writing style you probably hate; the latter is far too slow to iterate on, does not scale at all, and is not easily shareable due to the sensitive nature of private chats with bots. And moreover, if we're literally creating machines that can write, why do we spend most of our time writing?
@@ -63,15 +60,11 @@ You can see a flowchart of this process over in [Usage](#usage).
 The name "Augmentoolkit" comes from "Augmented data" (my own coined phrase for human-written text that is AI-reformatted, since I [couldn't find a standardized one](https://xkcd.com/927/)) and "toolkit".
 
 ## Quickstart:
-After installing the dependencies, ither open up processing.ipynb and follow its instructions (faster), or follow the bulleted list below (more complete).
+After installing the dependencies:
 
-Here's a bullet list describing how to quickly get this notebook generating text.
-- Get this notebook and the other code onto a machine with the power to run [NeverSleep/FlatOrcamaid-13b-v0.2](https://huggingface.co/TheBloke/FlatOrcamaid-13B-v0.2-GGUF/tree/main), and probably [Airoboros-l2-70b-3.1.2.Q4_K_M](https://huggingface.co/TheBloke/Airoboros-L2-70B-3.1.2-GGUF) too. **If you want to save money, use something like a 3090 with a Q_6_K quant of a 13b for the majority of the steps, then copy your data over to a a machine that can run the 70b once you reach the final step. This can potentially lead to roughly 3x cost savings, or more if you own the card yourself.**
-- Install the dependencies shown in [Installation](#installation)
-- You no longer need to get the models onto the machine yourself; Aphrodite Engine handles the download!
-- What you do next depends on how you want to proceed:
-    - If you can run Airoboros 70b (a low quant should do fine, I use Q4_K_M), then you should run all the cells until the point where it says "Stop here, Restart the Notebook, and Reimport Everything". Once all your steps finish, restart the notebook and import everything again using the second code cell of the notebook. Then run the cells after the point where it told you to restart. This ensures that you use a model smart enough to correctly do multi-turn conversations.
-    - If you cannot run Airoboros 70b, and don't want to rent out an A6000 (<$1/hr usually), then change the LARGE_LOGICAL_MODEL constant in the second notebook cell to be the path to the smartest model that you can run, and comment out the cell that loads the model a second time right near the end.
+- Get this notebook and the other repo code onto a machine with an internet connection
+- Paste your API key, favorite model name, and the endpoint URL of your preferred AI service, into the relevant constants located in the first code cell. Recommendation: [Together.ai with Hermes Mixtral works really nicely](https://api.together.xyz/playground/chat/NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO).
+- Run all the cells below and watch as the notebook generates questions, answers, and conversations based on Principles of Chemistry and Simple Sabotage.
 
 ***If you want to run a subset of the total text through the entire pipeline, to evaluate how well it works, turn on the USE_SUBSET flag in the second notebook code cell (on by default)***
 
@@ -85,28 +78,9 @@ Here is a flowchart detailing how a typical run of Augmentoolkit may proceed. Th
 Read this subsection for a slightly more detailed version of the more finicky bits of the quickstart, as well as an understanding of the key files in this repo.
 Augmentoolkit is centered around a Jupyter Notebook (`processing.ipynb`) so that progress is easier to inspect, and starting and stopping is easier. All the prompts are stored in `./augmentoolkit/generation_functions`.
 
-You run Augmentoolkit by running the Jupyter Notebook `processing.ipynb`. **Depending on if you are using a combination of a larger LLM and a smaller one, you will either need to comment out one notebook cell, or restart the notebook at a (clearly indicated) point.**
+You run Augmentoolkit by running the Jupyter Notebook `processing.ipynb`. **You no longer need to restart the notebook, even if doing part of the generation with a smaller model, when you're using an API**
 
-**If you want to run through the whole thing on a 13b**, I recommend either using as smart a model as you can, along with assistant mode. You can turn on assistant mode by setting this to True:
-![](step1.jpg)
-
-Then comment this code cell out (near the very end):
-![](step2.jpg)
-
-Then run all cells
-
-**If you want to run using a 2-step process with a small and large LLM**
-Then run cells until you see a markdown cell saying "Stop Here" and some other stuff.
-
-Once all the cells before the point below finish executing, restart the notebook...
-![](step2.jpg)
-
-...And run the import cell again...
-![](step3.jpg)
-
-Once this is done, you can run the last three cells, starting with the one you saw just below the "Stop Here" cell. Apologies for the convoluted process, I don't actually think there's a way to get around the VRAM memory leak yet.
-
-***Important files:*** The core of the project is `processing.ipynb`, which needs `./augmentoolkit/`, and one or more plaintext files -- all in the same folder as `processing` -- in order to run. If you are going to change anything, please read [Customization](#customization-arranged-in-order-of-least-to-most-difficult-to-implement) first.
+***Important files:*** The core of the project is `processing.ipynb`, which needs `./augmentoolkit/`, and one or more plaintext files -- all in the same folder as `processing.ipynb` -- in order to run. If you are going to change anything, please read [Customization](#customization-arranged-in-order-of-least-to-most-difficult-to-implement) first.
 ### Understanding what is going on as it runs
 This subsection summarizes output folders and code structure.
 This notebook makes plenty of folders while it runs. The ones you may want to pay attention to are `./worthy_for_questions`, `./qatuples_raw`, `./qatuples_revised`, `./multiturn_convs_info`, and finally, `./multiturn_convs`. `./multiturn_convs` is the final output directory. Everything else is just the notebook saving the outputs of every single step in case someone wants to train a model specifically for running this pipeline at some point.
@@ -120,14 +94,15 @@ Most functions are actually quite simple at heart; they call functions that gene
 ### Some features worth being aware of
 This subsection describes things that make life easier in Augmentoolkit.
 - **Easy resume:** don't have long uninterrupted periods of time to run this? No problem! Augmentoolkit saves outputs as they're written and resumes generation painlessly, so you can start and stop stress free.
-- **Two-model generation for the sake of SPEED:** every single task, except the very last one (multi-turn conversation generation) can be accomplished reliably by a good enough 13b. It is highly recommended that you run all steps until the actual multi-turn conversation generation using a 13b, and then switch to a 70b for the last part. This will require a restart of the notebook to deallocate the VRAM, but don't worry, the easy resume means this should work fine (if you haven't moved any files around).
+- **Two-model generation for the sake of SPEED:** every single task, except the very last one (multi-turn conversation generation) can be accomplished reliably by a good enough small model. But with APIs being as cheap as they are you can probably get away with running the whole thing using Mixtral anyway.
 - **Validation, validation, validation:** Learning lessons from the original Augmental, consistency with the source text is an extremely high priority here, and this is ensured with multiple layers of LLM-based validation (and at the end, numerous examples of regex-based validation).
-- **Aphrodite Engine:** batched inference, flash attention, and a host of other optimizations and tricks, make Augmentoolkit fast and scaleable on this branch. Just don't modify the Aphrodite Engine package itself or else GPL will bite you.
+- **API-capable:** using the OpenAI API package, Augmentoolkit can now be powered by a host of Open-source model-providing APIs that are much cheaper and easier to use than running a GPU yourself, in most cases. For those of us with credits to spare, or with no fancy computers. Don't worry, it asynchronously uses the API, because your time is valuable.
+- **Holy crap is it fast now:** No more waiting for days while your GPU chugs along. If you're using a fast API, your speeds will be *blazing*. All the examples you see in ./example_generated_convs took like 20 minutes to generate from start to finish using Hermes Mixtral via Together.ai.
 
 The steps above describe how to run the notebook with default settings. But your use case likely differs from the default. Here's a step-by-step process about how to customize it!
 ### Customization (arranged in order of least-to-most difficult to implement):
 Read this to learn how to hack Augmentoolkit for your own use cases.
-1. ***Change the source texts used to generate training data.*** You can do this in the first code cell of the notebook. **IMPORTANT** the filenames of these should be formatted in a specific way, since the filenames are used as part of the prompts and in at least one regex. You need to have them be like: `[textname], by authorname`. So for example, `Simple Sabotage, by the Office of Strategic Services`. You can also include the publication date after the author name if you want (as in `Principles of Chemistry, by Demitry Mendeleev, published 1897`), but note that this may bias most of the characters to live in the era of the textbook, which may or may not be what you want. **If you have a PDF you want to use as a source text, you can convert it to a .txt using `./convert_pdf_to_text.py` (just change the target string in the code, and run the script).** If you want a good source of plaintext documents, [try Project Gutenberg](https://www.gutenberg.org/); if you want educational PDFs, try [OpenStax](https://openstax.org/subjects).
+1. ***Change the source texts used to generate training data.*** You can do this in the first code cell of the notebook. **IF YOU TURN USE_FILENAMES ON** then the filenames of these inputs should be formatted in a specific way, since the filenames are used as part of the prompts and in at least one regex. You need to have them be like: `[textname], by authorname`. So for example, `Simple Sabotage, by the Office of Strategic Services`. You can also include the publication date after the author name if you want (as in `Principles of Chemistry, by Demitry Mendeleev, published 1897`), but note that this may bias most of the characters to live in the era of the textbook, which may or may not be what you want. `USE_FILENAMES` is off by default, and that means the notebook just shows the model the text in each file now. **Also, if you have a PDF you want to use as a source text, you can convert it to a .txt using `./convert_pdf_to_text.py` (just change the target string in the code, and run the script).** If you want a good source of plaintext documents, [try Project Gutenberg](https://www.gutenberg.org/); if you want educational PDFs, try [OpenStax](https://openstax.org/subjects).
 
 ![](changetext.jpg)
 
@@ -135,11 +110,11 @@ Read this to learn how to hack Augmentoolkit for your own use cases.
 
 ![](specialinstructions.jpg)
 
-3. ***Change the constants.*** There are a few constant values in this notebook, and in `./augmentoolkit/generation_functions/constant_values.py` (the latter is only really used when testing prompts during development). These constants are tested, but if your use case requires special settings (e.g., you want to make conversations from more permutations of existing questions; or you think the character counts for the "duplicate question/answer" validation functions are too restrictive) then feel free to change the related setting. The most intuitive and least-likely-to-break-anything settings to change are rearrangements_to_take and double_check_counter. Beyond that... you'll need to figure out what the function does before changing it if you expect it to run.
+3. ***Change the constants.*** There are a few constant values in this notebook, and in `./augmentoolkit/generation_functions/constant_values.py` (the latter is only really used when testing prompts during development). These constants are tested, but if your use case requires special settings (e.g., you want to make conversations from more permutations of existing questions; or you think the character counts for the "duplicate question/answer" validation functions are too restrictive) then feel free to change the related setting. The most intuitive and least-likely-to-break-anything settings to change are rearrangements_to_take and double_check_counter. Beyond that... you'll need to figure out what the function does before changing it if you expect it to run. **NEW! You no longer need to manually title all the files you use as input!** And it's probably better if you don't because that way the model isn't as constrained to the time period it associates with your book. This should make truly bulk work much easier.
 
 4. ***Assistant Mode*** Technically this could be considered part of 3), but it's different enough that I feel it warrants separate explanation. By default, the notebook is configured to produce RP-style data; "Assistant mode" is something you can toggle in the settings cell immediately below this one, which skips character and scenario generation and answers every question in a chat between a user and a helpful AI assistant (with no personality). In the limited testing I have done with this, **it seems that assistant mode is simple enough to work from start-to-finish with 13b models** such as Flatorcamaid by Ikari. So if your compute or time are very limited, or you are using this for a more professional use case, feel free to turn this on.
 
-5. ***Change the model.*** This is as simple as switching the LOGICAL_MODEL value out for another one (provide Hugging Face paths, such as TheBloke/FlatOrcamaid-13B-v0.2-GGUF (the title you see on the model's webpage)), but your mileage may vary significantly depending on what model you use. My personal recommendation is to use [FlatOrcamaid](https://huggingface.co/TheBloke/FlatOrcamaid-13B-v0.2-GGUF/tree/main) (helluva name, I know) for the small model, and [Airoboros-l2-70b-3.1.2.Q4_K_M](https://huggingface.co/TheBloke/Airoboros-L2-70B-3.1.2-GGUF) for the large model. You need 12k context on your model, but Aphrodite Engine should handle the RoPE scaling automatically. Check `augmentoolkit/generation_functions/engine_wrapper.py` to customize the engine's parameters.
+5. ***Change the model.*** This is as simple as switching the LOGICAL_MODEL value out for another one, but your mileage may vary significantly. My personal recommendation is to use [Hermes Mixtral DPO](https://api.together.xyz/playground/chat/NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO) for both models. You need at least 12k context on your model, and APIs typically don't allow RoPE scaling, so you're probably limited to MistralAI models here (or, heavens forbid, OpenAI. But GPT-4.5 + Augmentoolkit will BANKRUPT you fast, so be wary).
 
 6. ***Change the examples.*** To improve performance on your specific use case, and for your specific type of input text (textbooks, fiction, etc)., you may very well need to change the prompts, if you're a stickler for quality. Here, you should focus on changing the examples, and even then, you should focus on changing a few specific files that do not generalize as well as the others. Augmentoolkit by default is very generalist, having a bit of RP and being capable of decently creating data for factual and philosophical texts. But this general capability hurts its specific task performance. **Few-shot examples I recommend looking into changing first, if you want to radically adapt what Augmentoolkit does: `augmentoolkit/generation_functions/generate_questions.py augmentoolkit/generation_functions/generate_new_question.py augmentoolkit/generation_functions/judge_paragraph.py` for modifying the questions you generate and controlling what gets sent to question generation; `augmentoolkit/generation_functions/multi_turn_convs.py` for adapting the conversations to the types of question you ask. If you want to, you can change the types of characters generated using `augmentoolkit/generation_functions/create_character_card_plan_many_tuples.py`, `augmentoolkit/generation_functions/create_character_card_many_tuples.py`, and `augmentoolkit/generation_functions/multi_turn_conversation.py`.** Changing prompts is hard so only change what you need. Validation too open and permissive? Change only judge_paragraph. The model asks the wrong kinds of question? Change the question generation prompts. Your new questions keep getting flagged by validation? Change the validation examples (just work through the reasoning steps yourself for the example (or get GPT-4 to do it) but have the example reach the correct conclusion). Don't like the writing style? Change `augmentoolkit/generation_functions/multi_turn_conversation.py`. Modifying the examples is by far the hardest modification you can make, but it also affords the most control, and will help ensure the quality you need for very specific or professional projects.
 
@@ -181,7 +156,6 @@ Other limitations -- I've listed the major ones, and the ones I've found while g
 
 ### Obvious areas for improvement (feel free to open a PR!):
 - Convert into a script with command line arguments for the model and texts used
-- Multithreading, or use the Llama.cpp server, or something else that allows multiple simultaneous forward passes if there is spare VRAM
 - If there is a way to stop the vram memory leak without restarting the notebook which I have missed, implementing that would be a godsend
 - Use a faster backend. I stuck with Llama.cpp because it had grammars but something like AWQ might be faster.
 - General Cleanup and Bug Fixes

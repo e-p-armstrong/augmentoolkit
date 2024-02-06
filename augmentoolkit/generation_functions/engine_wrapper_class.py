@@ -14,7 +14,7 @@ def make_id():
 
 
 class EngineWrapper:
-    def __init__(self, model):
+    def __init__(self, model,api_key=None,base_url=None):
         # engine_args = AsyncEngineArgs(
         #     model=model,
         #     quantization=quantization,
@@ -25,7 +25,7 @@ class EngineWrapper:
         # )
         # self.engine = AsyncAphrodite.from_engine_args(engine_args)
         
-        self.client = AsyncOpenAI(api_key="b6f1cbb729a28a019a7d899dd155843f21bb90c4d3bb566e43b1e7a94b44a576",base_url="https://api.together.xyz")
+        self.client = AsyncOpenAI(api_key=api_key,base_url=base_url)
         self.model = model
 
 

@@ -203,7 +203,7 @@ async def repair_qatuple_context(idx, tup, engine_wrapper, writepath, vetted_qa_
 
 # Control flow helpers -- Question/Answer Validation
 async def vet_answer_accuracy_loop(
-    qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3
+    qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3, use_filenames=False
 ):
     try:
         qtuple = qa_tuple
@@ -247,7 +247,7 @@ async def vet_answer_accuracy_loop(
                 qtuple,
                 generate_new_q_output,
             ) = await generate_new_question.generate_new_question(
-                qtuple, engine_wrapper
+                qtuple, engine_wrapper, use_filenames=use_filenames
             )
             write_output_to_file(
                 generate_new_q_output, "./regenerate_question_generations", run_id
@@ -258,6 +258,7 @@ async def vet_answer_accuracy_loop(
                 question_group_id=run_id.split("--subquestion--")[0],
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
+                use_filenames=use_filenames
             )  # going to get one hell of a call stack by the end of this, but it should be fine
     except Exception as e:
         print("!!ERROR!!")
@@ -268,7 +269,7 @@ async def vet_answer_accuracy_loop(
 
 
 async def vet_answer_relevance_loop(
-    qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3
+    qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3, use_filenames=False
 ):
     try:
         qtuple = qa_tuple
@@ -310,6 +311,7 @@ async def vet_answer_relevance_loop(
                 run_id,
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
+                use_filenames=use_filenames
             )
         else:
             # print(f"\n\nRELEVANCE CHECKS FAILED - SENDING BACK TO QUESTION LOOP")
@@ -318,7 +320,7 @@ async def vet_answer_relevance_loop(
                 qtuple,
                 generate_new_q_output,
             ) = await generate_new_question.generate_new_question(
-                qtuple, engine_wrapper
+                qtuple, engine_wrapper, use_filenames=use_filenames
             )
             write_output_to_file(
                 generate_new_q_output, "./regenerate_question_generations", run_id
@@ -329,6 +331,7 @@ async def vet_answer_relevance_loop(
                 question_group_id=run_id.split("--subquestion--")[0],
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
+                use_filenames=use_filenames
             )
     except Exception as e:
         print("!!ERROR!!")
@@ -344,6 +347,7 @@ async def vet_question_loop(
     question_group_id=None,
     engine_wrapper=None,
     double_check_counter=3,
+    use_filenames=False
 ):
     try:
         qtuple = qa_tuple
@@ -386,6 +390,7 @@ async def vet_question_loop(
                     run_id,
                     engine_wrapper=engine_wrapper,
                     double_check_counter=double_check_counter,
+                    use_filenames=use_filenames
                 )
             else:
                 # Generate new question and restart the loop
@@ -400,7 +405,7 @@ async def vet_question_loop(
                         qtuple,
                         generate_new_q_output,
                     ) = await generate_new_question.generate_new_question(
-                        qtuple, engine_wrapper
+                        qtuple, engine_wrapper, use_filenames=use_filenames
                     )
                     write_output_to_file(
                         generate_new_q_output,
@@ -426,7 +431,6 @@ async def generate_qatuples_from_para(
     qa_tuples_dir=None,
     double_check_counter=3,
     use_filenames=False,
-    rtwl=None
 ):
     try:
         existing_files = glob.glob(
@@ -441,7 +445,7 @@ async def generate_qatuples_from_para(
                 vetted_qa_tuples.append(qa_tuple)
             return
         question_group_id = make_id()
-        # print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
+        print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
         (
             plan,
             questions_plan_output,
@@ -449,9 +453,9 @@ async def generate_qatuples_from_para(
         write_output_to_file(
             questions_plan_output, "./question_plan_generations", question_group_id
         )
-        # print(
-        # f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
-        # )
+        print(
+        f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
+        )
         (
             question_answer_tuples,
             question_generation_output,
@@ -469,6 +473,7 @@ async def generate_qatuples_from_para(
                 question_group_id=question_group_id,
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
+                use_filenames=use_filenames
             )
 
             # Write resulting question file if the tuple is not None

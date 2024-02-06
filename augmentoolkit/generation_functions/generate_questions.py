@@ -482,6 +482,7 @@ Text to make questions from:
     while not made_questions and (retries <= 5):
         try:
             # print("DEBUG\n\n" + prompt=decision_prompt)
+            print("ENTERED QGEN")
             sampling_params = {
                 "max_tokens": 2000,
                 "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST", "## Questions"],
@@ -508,7 +509,9 @@ Text to make questions from:
             else:
                 retries += 1
         except Exception as e:
-            traceback.print_exc()    
+            traceback.print_exc()
+            print("RETRYING!") 
+            retries += 1   
             
             
     if retries > 5:
