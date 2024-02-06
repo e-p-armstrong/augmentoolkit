@@ -8,7 +8,9 @@ import random
 from .special_instructions import special_instructions
 
 
-async def create_character_card_plan_many_tuples(qatuples, engine_wrapper, use_filenames=False):
+async def create_character_card_plan_many_tuples(
+    qatuples, engine_wrapper, use_filenames=False
+):
     """
     Produce a plan for a character card for an RP character that's going to answer one of the questions generated from the text. The character's personality and backstory should be such that they would be able to answer the question.
 
@@ -302,7 +304,17 @@ Special instructions:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a"""
     sampling_params = {
         "max_tokens": 8000,
-        "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST","### Questions", "## Question, answer, and text that the character should know:"],
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+            "### Questions",
+            "## Question, answer, and text that the character should know:",
+        ],
         "temperature": 1,
         # top_k=-1,
         "top_p": 0.5,

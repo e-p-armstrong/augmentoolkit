@@ -6,6 +6,7 @@ import re
 from .constants import LOGICAL_MODEL
 import traceback
 
+
 async def generate_new_question(qatuple, engine_wrapper, use_filenames=False):
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
@@ -17,7 +18,7 @@ async def generate_new_question(qatuple, engine_wrapper, use_filenames=False):
     retries = 0
     questions = []
     if use_filenames:
-                question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create a suitable educational question based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
+        question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create a suitable educational question based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
 
     Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
 
@@ -306,11 +307,18 @@ async def generate_new_question(qatuple, engine_wrapper, use_filenames=False):
         while not made_questions and (
             retries <= 5
         ):  # TODO - UPDATE and TEST the few-shot prompt with the latest from generate_questions
-            
             # print("DEBUG\n\n" + prompt=decision_prompt)
             sampling_params = {
                 "max_tokens": 8000,
-                "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
                 "temperature": 0.2,
             }
             print("--QA TUPLE DURING NEW Q GEN--")

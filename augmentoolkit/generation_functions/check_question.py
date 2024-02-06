@@ -126,7 +126,15 @@ If the question clearly goes off the rails and is incoherent, then it is irrelev
         try:
             sampling_params = {
                 "max_tokens": 4000,
-                "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
                 "temperature": 0.2,
             }
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)

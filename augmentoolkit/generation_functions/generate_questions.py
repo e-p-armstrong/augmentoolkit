@@ -5,6 +5,7 @@ from .constants import LOGICAL_MODEL
 from .strip_steps import strip_steps
 import traceback
 
+
 async def generate_questions(para_tuple, plan, engine_wrapper, use_filenames=False):
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
@@ -16,7 +17,7 @@ async def generate_questions(para_tuple, plan, engine_wrapper, use_filenames=Fal
     retries = 0
     questions = []
     if use_filenames:
-                question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
+        question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
 
 Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
 
@@ -478,14 +479,23 @@ Text to make questions from:
 {strip_steps(plan)}
 
 ## Questions (make 4):
-""" 
+"""
     while not made_questions and (retries <= 5):
         try:
             # print("DEBUG\n\n" + prompt=decision_prompt)
             print("ENTERED QGEN")
             sampling_params = {
                 "max_tokens": 2000,
-                "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST", "## Questions"],
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                    "## Questions",
+                ],
                 "temperature": 0.8,
                 # top_k=-1,
                 "top_p": 1,
@@ -510,10 +520,9 @@ Text to make questions from:
                 retries += 1
         except Exception as e:
             traceback.print_exc()
-            print("RETRYING!") 
-            retries += 1   
-            
-            
+            print("RETRYING!")
+            retries += 1
+
     if retries > 5:
         return None, None
 
@@ -526,7 +535,6 @@ Text to make questions from:
                 para_tuple[1].replace(") ", "", 1),
             )
         )
-        
 
     return questions, completion
 

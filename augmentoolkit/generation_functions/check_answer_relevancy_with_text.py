@@ -4,6 +4,7 @@ import traceback
 # from .answer_relevant_grammar import answer_relevant_grammar
 from .constants import LOGICAL_MODEL
 
+
 # Answer vetting
 # For now, this checks answer relevancy too. The danger with abstracting answer relevancy into a separate step is that anything which relies on knowledge that is obviously mentioned in the text already up until this point, will get screwed
 async def check_answer_relevancy_with_text(qatuple, engine_wrapper):
@@ -192,7 +193,15 @@ Supposed answer to the question (this is what you are fact-checking): \"\"\"{qat
         try:
             sampling_params = {
                 "max_tokens": 5500,
-                "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
                 "temperature": 0.2,
             }
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)

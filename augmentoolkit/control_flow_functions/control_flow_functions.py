@@ -62,7 +62,9 @@ def write_output_to_file(output, directory, uuid):
 
 
 # Idea: use multiple short answers to train the task of answering multiple questions in one response. Two-three short answers per response should be enough.
-async def make_multiturn_character(qa_tuples, conv_id, engine_wrapper, assistant_mode, use_filenames):
+async def make_multiturn_character(
+    qa_tuples, conv_id, engine_wrapper, assistant_mode, use_filenames
+):
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
@@ -111,7 +113,9 @@ async def make_multiturn_scenario(
     return scenario, plan
 
 
-async def make_multiturn_conversation_info(qa_tuples, engine_wrapper, assistant_mode, use_filenames):
+async def make_multiturn_conversation_info(
+    qa_tuples, engine_wrapper, assistant_mode, use_filenames
+):
     conv_id = make_id()
     if (
         assistant_mode
@@ -150,7 +154,9 @@ def group_by_text(tuples_list):
 
 
 # Postprocessing function for question/answer validation
-async def repair_qatuple_context(idx, tup, engine_wrapper, writepath, vetted_qa_tuples,use_filenames=False):
+async def repair_qatuple_context(
+    idx, tup, engine_wrapper, writepath, vetted_qa_tuples, use_filenames=False
+):
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as f:
@@ -203,7 +209,12 @@ async def repair_qatuple_context(idx, tup, engine_wrapper, writepath, vetted_qa_
 
 # Control flow helpers -- Question/Answer Validation
 async def vet_answer_accuracy_loop(
-    qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3, use_filenames=False
+    qa_tuple,
+    total_retries,
+    run_id,
+    engine_wrapper=None,
+    double_check_counter=3,
+    use_filenames=False,
 ):
     try:
         qtuple = qa_tuple
@@ -258,7 +269,7 @@ async def vet_answer_accuracy_loop(
                 question_group_id=run_id.split("--subquestion--")[0],
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
-                use_filenames=use_filenames
+                use_filenames=use_filenames,
             )  # going to get one hell of a call stack by the end of this, but it should be fine
     except Exception as e:
         print("!!ERROR!!")
@@ -269,7 +280,12 @@ async def vet_answer_accuracy_loop(
 
 
 async def vet_answer_relevance_loop(
-    qa_tuple, total_retries, run_id, engine_wrapper=None, double_check_counter=3, use_filenames=False
+    qa_tuple,
+    total_retries,
+    run_id,
+    engine_wrapper=None,
+    double_check_counter=3,
+    use_filenames=False,
 ):
     try:
         qtuple = qa_tuple
@@ -311,7 +327,7 @@ async def vet_answer_relevance_loop(
                 run_id,
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
-                use_filenames=use_filenames
+                use_filenames=use_filenames,
             )
         else:
             # print(f"\n\nRELEVANCE CHECKS FAILED - SENDING BACK TO QUESTION LOOP")
@@ -331,7 +347,7 @@ async def vet_answer_relevance_loop(
                 question_group_id=run_id.split("--subquestion--")[0],
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
-                use_filenames=use_filenames
+                use_filenames=use_filenames,
             )
     except Exception as e:
         print("!!ERROR!!")
@@ -347,7 +363,7 @@ async def vet_question_loop(
     question_group_id=None,
     engine_wrapper=None,
     double_check_counter=3,
-    use_filenames=False
+    use_filenames=False,
 ):
     try:
         qtuple = qa_tuple
@@ -390,7 +406,7 @@ async def vet_question_loop(
                     run_id,
                     engine_wrapper=engine_wrapper,
                     double_check_counter=double_check_counter,
-                    use_filenames=use_filenames
+                    use_filenames=use_filenames,
                 )
             else:
                 # Generate new question and restart the loop
@@ -449,17 +465,21 @@ async def generate_qatuples_from_para(
         (
             plan,
             questions_plan_output,
-        ) = await generate_questions_plan.generate_questions_plan(para, engine_wrapper,use_filenames=use_filenames)
+        ) = await generate_questions_plan.generate_questions_plan(
+            para, engine_wrapper, use_filenames=use_filenames
+        )
         write_output_to_file(
             questions_plan_output, "./question_plan_generations", question_group_id
         )
         print(
-        f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
+            f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
         )
         (
             question_answer_tuples,
             question_generation_output,
-        ) = await generate_questions.generate_questions(para, plan, engine_wrapper,use_filenames=use_filenames)
+        ) = await generate_questions.generate_questions(
+            para, plan, engine_wrapper, use_filenames=use_filenames
+        )
         write_output_to_file(
             question_generation_output,
             "./question_generation_generations",
@@ -473,7 +493,7 @@ async def generate_qatuples_from_para(
                 question_group_id=question_group_id,
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
-                use_filenames=use_filenames
+                use_filenames=use_filenames,
             )
 
             # Write resulting question file if the tuple is not None
@@ -546,7 +566,9 @@ async def determine_worthy(
         else:
             judged_worthy_for_questions.append((data["paragraph"], data["metadata"]))
     else:
-        judgement = await judge_paragraph.judge_paragraph(p, engine_wrapper,use_filenames=use_filenames)
+        judgement = await judge_paragraph.judge_paragraph(
+            p, engine_wrapper, use_filenames=use_filenames
+        )
         judged_worthy_for_questions.append(judgement)
 
         # Prepare the data to be written to the file
@@ -578,7 +600,7 @@ async def filter_all_questions(
     output_dir,
     take_subset=False,
     use_filenames=False,
-    rtwl=None
+    rtwl=None,
 ):
     if not take_subset:
         tasks = [
@@ -588,7 +610,7 @@ async def filter_all_questions(
                 judged_worthy_for_questions,
                 engine_wrapper,
                 output_dir,
-                use_filenames
+                use_filenames,
             )
             for idx, p in enumerate(paragraphs_processed)
         ]
@@ -600,7 +622,7 @@ async def filter_all_questions(
                 judged_worthy_for_questions,
                 engine_wrapper,
                 output_dir,
-                use_filenames
+                use_filenames,
             )
             for idx, p in enumerate(paragraphs_processed[:13])
         ]
@@ -716,7 +738,7 @@ async def create_info(
     multi_turn_convs_info,
     multi_turn_convs_info_dir,
     rearrangements_to_take,
-    use_filenames
+    use_filenames,
 ):
     all_permutations = list(itertools.permutations(group))
 

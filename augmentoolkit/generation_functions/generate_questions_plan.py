@@ -3,6 +3,7 @@ import re
 # from .question_plan_grammar import question_plan_grammar
 from .constants import LOGICAL_MODEL
 
+
 async def generate_questions_plan(text, engine_wrapper, use_filenames=False):
     """
     Produce a list of questions based off of an input text. The min between (4, as many good questions as the text permits)
@@ -356,11 +357,19 @@ Your planned questions must include context, if a question requires both context
 ### Response:
 ## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
 Step 1. Identify Key Topics:"""
-    
+
     # print("DEBUG\n\n" + prompt=decision_prompt)
     sampling_params = {
         "max_tokens": 8000,
-        "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+        ],
         "temperature": 0.8,
         # top_k=-1,
         "top_p": 1,
@@ -523,7 +532,7 @@ to him previously, by means of experience.""",
 
 # Keep your answer concise. You will not mention the text in any topics you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they will not have the text on-hand. Remember to stay completely within the content of the text, and to NOT STRAY IN THE SLIGHTEST.
 
-# For the first part of your reasoning step, you might want to make a few learning objectives based on the paragraphs provided. 
+# For the first part of your reasoning step, you might want to make a few learning objectives based on the paragraphs provided.
 
 # # Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
 # First, let's will analyze the text to determine what kinds of high-level questions I can ask that will test the content in these paragraphs (being careful to avoid mentioning the paragraphs explicitly in any questions, and being SURE to only ask about things that the paragraphs talk about). Now, immediately I can see that the following passage might be a good basis for a question: """

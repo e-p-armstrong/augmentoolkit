@@ -504,8 +504,16 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
         sampling_params = {
             "max_tokens": 6000,
             # "min_p": 0.4,
-            "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-            "temperature": 0.2
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+            ],
+            "temperature": 0.2,
         }
         # print(decision_prompt)
         completion = await engine_wrapper.submit(

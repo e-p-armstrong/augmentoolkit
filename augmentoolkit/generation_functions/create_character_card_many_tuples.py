@@ -55,7 +55,7 @@ async def create_character_card_many_tuples(
         starting_str = select_random_capital(exclusions + author_name_letters)
     else:
         starting_str = select_random_capital(exclusions)
-        
+
     if use_filenames:
         cot_prompt = f"""You are an expert creative writing and roleplay AI. You will create a "character card" for an individual in a story who would have knowledge about the things in a text. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting. But do not mention the questions or answers in the character card.
 
@@ -193,7 +193,7 @@ The character should not have written the text and should not be affiliated with
 
 ## Character card (be creative, write at least 3 paragraphs for each dialogue line):
 Name: {starting_str}"""
-    else:  
+    else:
         cot_prompt = f"""You are an expert creative writing and roleplay AI. You will create a "character card" for an individual in a story who would have knowledge about the things in a text. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting. But do not mention the questions or answers in the character card.
 
 You should follow any plans you have made. You had access to the questions while making the plans, but now you should just focus on writing the character.
@@ -323,7 +323,16 @@ Special instructions:
 Name: {starting_str}"""
     sampling_params = {
         "max_tokens": 10000,
-        "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST", "## Text"],
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+            "## Text",
+        ],
         "temperature": 1,
         "top_p": 0.5,
     }

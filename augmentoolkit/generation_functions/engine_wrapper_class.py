@@ -9,12 +9,13 @@ import asyncio
 import uuid
 from openai import AsyncOpenAI
 
+
 def make_id():
     return str(uuid.uuid4())
 
 
 class EngineWrapper:
-    def __init__(self, model,api_key=None,base_url=None):
+    def __init__(self, model, api_key=None, base_url=None):
         # engine_args = AsyncEngineArgs(
         #     model=model,
         #     quantization=quantization,
@@ -24,10 +25,9 @@ class EngineWrapper:
         #     dtype="float16"
         # )
         # self.engine = AsyncAphrodite.from_engine_args(engine_args)
-        
-        self.client = AsyncOpenAI(api_key=api_key,base_url=base_url)
-        self.model = model
 
+        self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
+        self.model = model
 
     async def submit(
         self, prompt, sampling_params
@@ -46,7 +46,7 @@ class EngineWrapper:
             temperature=sampling_params["temperature"],
             top_p=sampling_params["top_p"],
             stop=sampling_params["stop"],
-            max_tokens=sampling_params["max_tokens"]
+            max_tokens=sampling_params["max_tokens"],
         )
         completion = completion.choices[0].text
         return prompt + completion

@@ -128,7 +128,18 @@ Description of the character who is going to answer the question:
 {selected_variation}"""  # use random.choice to prevent overfitting on particular phrases and increase dataset diversity
     sampling_params = {
         "max_tokens": 8000,
-        "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST", "## Information","User:", "## Scenario"],
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+            "## Information",
+            "User:",
+            "## Scenario",
+        ],
         "temperature": 0.5,
         # top_k=-1,
         "top_p": 0.5,
