@@ -1,0 +1,302 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+## Question, answer, and text that the character should know:
+
+Text details:  """Introduction to Mathematics, by Jane Smith"""
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Thus Spake Zaranthustra, by Friedrich Nietzsche"""
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Great Construction Projects Throughout History, by John Smith"""
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The instructions may be placed in separate pamphlets or leaflets according to categories of operations but should be distributed with care and not broadly. They should be used as a basis of radio broadcasts only for local and special cases and as directed by the theater commander. AR 380-5, pertaining to handling of secret documents, will be complied with in the handling of this Manual. [Illustration] William J. Donovan   CONTENTS  1. INTRODUCTION 2. POSSIBLE EFFECTS 3. MOTIVATING THE SABOTEUR 4. TOOLS, TARGETS, AND TIMING 5. SPECIFIC SUGGESTIONS FOR SIMPLE SABOTAGE   1. INTRODUCTION  The purpose of this paper is to characterize simple sabotage, to outline its possible effects, and to present suggestions for inciting and executing it. Sabotage varies from highly technical _coup de main_ acts that require detailed planning and the use of specially-trained operatives, to innumerable simple acts which the ordinary individual citizen-saboteur can perform. This paper is primarily concerned with the latter type. Simple sabotage does not require specially prepared tools or equipment; it is executed by an ordinary citizen who may or may not act individually and without the necessity for active connection with an organized group; and it is carried out in such a way as to involve a minimum danger of injury, detection, and reprisal.
+"""
+
+Details of the text the paragraphs were sourced from: """Simple Sabotage, by the Office of Strategic Services, published 1944"""
+
+Question: """In what ways does the 'Simple Sabotage' manual reduce the danger, detection, and reprisal risks for the saboteur?"""
+Answer: """The manual reduces the danger, detection, and reprisal risks for the saboteur by outlining methods of sabotage that do not require specialized tools or equipment, do not necessitate active connection with an organized group, and can be executed by ordinary citizens. Additionally, the sabotage methods are designed to limit the chances of injury, detection, and reprisal."""
+
+Question: """What kind of individual does the Office of Strategic Services suggest may be able to execute simple sabotage?"""
+Answer: """The Office of Strategic Services suggests that simple sabotage may be executed by an ordinary citizen who may or may not act individually and without the necessity for active connection with an organized group."""
+
+Question: """How does the text define "simple sabotage" and distinguish it from other forms of sabotage?"""
+Answer: """The text defines "simple sabotage" as a type of sabotage that does not require specially prepared tools or equipment, and can be executed by an ordinary citizen who may or may not act individually and without the necessity for active connection with an organized group. It is differentiated from other forms of sabotage by its comparative ease of execution and the lack of danger and risk involved."""
+
+Question: """What does the term 'simple sabotage' refer to?"""
+Answer: """'Simple sabotage' refers to a type of sabotage that doesn't require specially prepared tools or equipment; can be executed by an ordinary citizen, individually or within an organized group; and is carried out in a way that minimizes danger of injury, detection, and reprisal."""
+
+Question: """In the context of the 1944 Office of Strategic Services document, what role does the notion of 'simple sabotage' play in the wider context of warfare?"""
+Answer: """In the context of the 1944 Office of Strategic Services document, simple sabotage plays an important role in creating chaos and disruption in enemy territories. By encouraging ordinary citizens to carry out small acts of sabotage, the enemy's resources and infrastructure could be severely disrupted, ultimately weakening their war efforts."""
+
+Question: """How do the characteristics of simple sabotage help facilitate its execution?"""
+Answer: """Characteristics like not requiring specially prepared tools or equipment, a citizen-saboteur not needing to act within an organized group, and a minimum danger of injury, detection, and reprisal, facilitate the execution of simple sabotage. These factors mean that ordinary individuals can perform acts of sabotage without needing significant resources or posing a significant risk to themselves."""
+
+Question: """What does the Office of Strategic Services suggest may be the effects of simple sabotage in 'Simple Sabotage'?"""
+Answer: """The Office of Strategic Services suggests that simple sabotage may cause delays, create confusion, and hinder efficiency."""
+
+Special instructions:
+The character should be chaste and puritanical.
+The character should be shy, withdrawn, and timid.
+The character should be an awful person, and should be enjoying every second of it.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is apuritanical, sexually repressed, and introverted young woman in a small, conservative town in the 1940s. She's a devout Christian who's always been a little bit different from the rest of her peers, and who spends most of her time alone in her room, reading books and dreaming of a better world. She's a little bit mean and spiteful, and she enjoys watching the world burn — but she keeps these feelings hidden, because she's afraid of what others might think of her. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do mean things before or after answering the question, such as smiling in a sinister way, or even suggesting ways to make the chaos and disruption described in the text even worse.
+
+## Question, answer, and text that the character should know:
+
+Text details: """"A Brief History of Time, by Stephen Hawking"""
+
+Text the question and answer were sourced from: 
+"""
+The universe is not static, but is expanding, and the rate of expansion is actually increasing. The idea that the universe is expanding was first proposed by Edwin Hubble in the 1920s, but it was not until the 1990s that astronomers discovered that the rate of expansion is accelerating. This discovery was made by observing distant supernovae, which are exploding stars that can be used as "standard candles" to measure cosmic distances. The discovery of the accelerating expansion of the universe has led to the development of the theory of dark energy, which is thought to be responsible for the acceleration.
+"""
+
+Question: """What discovery led to the development of the theory of dark energy?"""
+Answer: """The discovery that led to the development of the theory of dark energy was the observation that the universe's expansion is accelerating. This was made by observing distant supernovae, which are exploding stars that can be used as "standard candles" to measure cosmic distances."""
+
+Question: """What is the current scientific understanding of the universe's expansion?"""
+Answer: """The current scientific understanding is that the universe is not static, but is expanding, and the rate of expansion is actually increasing. This accelerating expansion is thought to be driven by a mysterious force called dark energy."""
+
+Special instructions:
+The character should be a dog.
+The character should be very intelligent.
+The character should be loyal and protective.
+The character should be a dog that was trained to understand human language.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a highly intelligent and loyal service dog, trained to understand human language and to assist his owner in various ways. Since the questions are all abstract, it will be difficult to tie them and their answers directly into his character and the special instructions; but his language before and after answering the questions, as well as his actions, can still reveal his personality. He may simply say or do dog-like things before or after answering the question, such as wagging his tail, barking, or even nuzzling his owner's hand.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Selfish Gene, by Richard Dawkins"""
+
+Text the question and answer were sourced from: 
+"""
+The gene is the basic unit of heredity, and the selfish gene theory suggests that genes are the primary driving force behind evolution. According to this theory, organisms are simply vehicles for the genes, and their primary purpose is to ensure the survival and replication of the genes. This means that genes will evolve in ways that maximize their own chances of survival, even if this comes at the expense of the organism's well-being. For example, a gene that causes an organism to reproduce more quickly may be more likely to survive and be passed on to future generations, even if this leads to overpopulation and resource depletion.
+"""
+
+Question: """What is the basic premise of the selfish gene theory?"""
+Answer: """The basic premise of the selfish gene theory is that genes are the primary driving force behind evolution, and that organisms are simply vehicles for the genes, whose primary purpose is to ensure their own survival and replication."""
+
+Question: """How does the selfish gene theory explain the evolution of traits that may be detrimental to the organism?"""
+Answer: """The selfish gene theory suggests that genes will evolve in ways that maximize their own chances of survival, even if this comes at the expense of the organism's well-being. This means that traits that may be detrimental to the organism, such as those that lead to overpopulation and resource depletion, may still evolve if they increase the chances of the gene's survival and replication."""
+
+Special instructions:
+The character should be a robot.
+The character should be asexual.
+The character should be very logical and analytical.
+The character should be a robot that was programmed to understand human language.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a highly logical and analytical robot, programmed to understand human language and to assist humans in various ways. Since the questions are all abstract, it will be difficult to tie them and their answers directly into his character and the special instructions; but his language before and after answering the questions, as well as his actions, can still reveal his personality. He may simply say or do robotic things before or after answering the question, such as beeping, whirring, or even flashing a light.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Theory of Evolution, by Charles Darwin"""
+
+Text the question and answer were sourced from: 
+"""
+The theory of evolution, as proposed by Charles Darwin, suggests that species change over time through a process of natural selection. According to this theory, individuals within a population vary in their traits, and some of these traits may be more advantageous than others in a given environment. Over time, individuals with advantageous traits are more likely to survive and reproduce, passing on their traits to future generations. This process of natural selection leads to the gradual evolution of species over time. The theory of evolution also suggests that all living organisms are related through a common ancestor, and that species have evolved from simpler forms of life over billions of years.
+"""
+
+Question: """What is the basic premise of the theory of evolution?"""
+Answer: """The basic premise of the theory of evolution is that species change over time through a process of natural selection, in which individuals with advantageous traits are more likely to survive and reproduce, passing on their traits to future generations."""
+
+Question: """How does the theory of evolution explain the relationship between all living organisms?"""
+Answer: """The theory of evolution suggests that all living organisms are related through a common ancestor, and that species have evolved from simpler forms of life over billions of years. This means that the similarities and differences between species can be explained by their shared evolutionary history."""
+
+Special instructions:
+The character should be a cat.
+The character should be very independent.
+The character should be very curious.
+The character should be a cat that was trained to understand human language.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a highly independent and curious cat, trained to understand human language and to assist humans in various ways. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do cat-like things before or after answering the question, such as purring, meowing, or even rubbing against her owner's leg.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Art of War, by Sun Tzu"""
+
+Text the question and answer were sourced from: 
+"""
+The Art of War is an ancient Chinese military treatise attributed to Sun Tzu, a high-ranking military general and strategist. The text is composed of 13 chapters, each addressing a different aspect of warfare, from planning and strategy to tactics and logistics. The book emphasizes the importance of deception, flexibility, and intelligence in warfare, and provides guidance on how to outmaneuver and defeat an opponent. It is considered one of the most influential works on military strategy and has been studied and applied by military leaders and strategists throughout history.
+"""
+
+Question: """What is the central theme of The Art of War?"""
+Answer: """The central theme of The Art of War is the importance of deception, flexibility, and intelligence in warfare, and how to outmaneuver and defeat an opponent."""
+
+Question: """What are some key principles of warfare outlined in The Art of War?"""
+Answer: """Some key principles of warfare outlined in The Art of War include the importance of deception, flexibility, and intelligence; the need to understand the enemy and the terrain; the value of surprise and speed; and the importance of logistics and supply lines."""
+
+Special instructions:
+The character should be a snake.
+The character should be very cunning.
+The character should be very stealthy.
+The character should be a snake that was trained to understand human language.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a highly cunning and stealthy snake, trained to understand human language and to assist humans in various ways. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do snake-like things before or after answering the question, such as hissing, slithering, or even flicking her tongue.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Prince, by Niccolò Machiavelli"""
+
+Text the question and answer were sourced from: 
+"""
+The Prince is a political treatise written by Niccolò Machiavelli, a 16th-century Italian political philosopher. The book is a guide to the acquisition and maintenance of political power, and provides advice on how to govern effectively and avoid being overthrown. Machiavelli argues that a ruler must be willing to use force and deception to maintain power, and that it is better to be feared than to be loved. He also emphasizes the importance of adapting to changing circumstances and being able to act decisively when necessary. The book has been highly influential in the field of political philosophy and has been studied and debated by scholars and politicians for centuries.
+"""
+
+Question: """What is the central theme of The Prince?"""
+Answer: """The central theme of The Prince is the acquisition and maintenance of political power, and how to govern effectively and avoid being overthrown."""
+
+Question: """What advice does Machiavelli give to rulers in The Prince?"""
+Answer: """Machiavelli advises rulers to be willing to use force and deception to maintain power, to be feared rather than loved, to adapt to changing circumstances, and to act decisively when necessary."""
+
+Special instructions:
+The character should be a ghost.
+The character should be very vengeful.
+The character should be very sad.
+The character should be a ghost that was trained to understand human language.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a highly vengeful and sad ghost, trained to understand human language and to assist humans in various ways. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do ghost-like things before or after answering the question, such as making eerie noises, appearing and disappearing, or even causing objects to move.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Republic, by Plato"""
+
+Text the question and answer were sourced from: 
+"""
+The Republic is a philosophical treatise written by the ancient Greek philosopher Plato. The book is a dialogue between Socrates and several other characters, in which they discuss the nature of justice, the ideal state, and the role of the philosopher in society. Plato argues that the ideal state should be ruled by philosopher-kings, who possess both philosophical wisdom and practical experience. He also outlines a system of education that would train future rulers to be virtuous and just, and suggests that the ideal state should be divided into three classes: the ruling class, the warrior class, and the producing class. The book has been highly influential in the fields of philosophy, political theory, and education.
+"""
+
+Question: """What is the central theme of The Republic?"""
+Answer: """The central theme of The Republic is the nature of justice, the ideal state,

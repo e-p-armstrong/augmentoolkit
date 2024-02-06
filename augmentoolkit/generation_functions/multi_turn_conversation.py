@@ -298,8 +298,8 @@ The primary character's answer will use all parts of the answers given. Instead 
 
     sampling_params = {
         "max_tokens": 8000,
-        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "### Information"],
-        "temperature": 0.5,
+        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "### Information", "## Information", "## Instruction", "Name:"],
+        "temperature": 0.8,
         # "top_k": -1,
         "top_p": 1,
         # "min_p": 0.6,

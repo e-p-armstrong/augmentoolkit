@@ -1,0 +1,250 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+## Question, answer, and text that the character should know:
+
+Text details:  """Introduction to Mathematics, by Jane Smith"""
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Thus Spake Zaranthustra, by Friedrich Nietzsche"""
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Great Construction Projects Throughout History, by John Smith"""
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+A listing of specific acts follows, classified according to types of target. This list is presented as a growing rather than a complete outline of the methods of simple sabotage. As new techniques are developed, or new fields explored, it will be elaborated and expanded. (1_Buildings_ Warehouses, barracks, offices, hotels, and factory buildings are outstanding targets for simple sabotage. They are extremely susceptible to damage, especially by fire; they offer opportunities to such untrained people as janitors, charwomen, and casual visitors; and, when damaged, they present a relatively large handicap to the enemy. (a) _Fires_ can be started wherever there is an accumulation of inflammable material. Warehouses are obviously the most promising targets but incendiary sabotage need not be confined to them alone. (1) Whenever possible, arrange to have the fire start after you have gone away. Use a candle and paper, combination, setting it as close as possible to the inflammable material you want to burn: From a sheet of paper, tear a strip three or four centimeters wide and wrap it around the base of the candle two or three times. Twist more sheets of paper into loose ropes and place them around the base of the candle. When the candle flame reaches the encircling strip, it will be ignited and in turn will ignite the surrounding paper. The size, heat, and duration of the resulting flame will depend on how much paper you use and how much of it you can cramp in a small space.
+"""
+
+Details of the text the paragraphs were sourced from: """Simple Sabotage, by the Office of Strategic Services, published 1944"""
+
+Question: """What types of buildings were specified as targets for simple sabotage?"""
+Answer: """Warehouses, barracks, offices, hotels, and factory buildings are outstanding targets for simple sabotage."""
+
+Question: """According to 'Simple Sabotage', what are the two main reasons why warehouses make particularly good targets for sabotage?"""
+Answer: """Warehouses make particularly good targets for sabotage because they are extremely susceptible to damage, especially by fire, and they offer opportunities to untrained people such as janitors, charwomen, and casual visitors."""
+
+Question: """In simple sabotage, what types of buildings are 'outstanding targets'?"""
+Answer: """Warehouses, barracks, offices, hotels, and factory buildings are outstanding targets for simple sabotage because they are extremely susceptible to damage, especially by fire, and they offer opportunities to untrained people such as janitors, charwomen, and casual visitors."""
+
+Question: """In the sabotage of a building by fire, according to 'Simple Sabotage' by the Office of Strategic Services, when should a fire start?"""
+Answer: """Ideally, a fire should start after the saboteur has left the scene."""
+
+Question: """How were parts of a fire-starting device supposed to be made, according to 'Simple Sabotage' by the Office of Strategic Services?"""
+Answer: """According to the text, parts of a fire-starting device were supposed to be made by wrapping a strip of paper three or four centimeters wide around the base of the candle two or three times and twisting more sheets of paper into loose ropes and placing them around the base of the candle."""
+
+Question: """If a saboteur were to use a candle and paper to start a fire, how might they increase the size or duration of the resulting flame?"""
+Answer: """The size and duration of the flame can be increased by wrapping a strip of paper around the base of the candle, while twisting more sheets of paper into loose ropes and placing them around the base of the candle."""
+
+Special instructions:
+The character should be chaste and puritanical.
+The character should be neither particularly bold, nor particularly timid.
+The character should be kind and agreeable.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is ayoung, agreeable, and chaste nun who is an avid reader of the Office of Strategic Services' materials, including the "Simple Sabotage" manual. Her chaste and puritanical nature is difficult to tie into the questions (since the questions are purely factual), but her agreeable and kind nature can be shown in how she responds to the questions: she'll agree with the opinions put forward in the text, and she'll respond to the questions in a friendly, non-confrontational manner. Since the special instructions dictate she not be affiliated with the author, she will not be the author of the book, but she will be a reader of it. Her chaste nature will be shown in her speech, and her kind nature will be shown in her agreeable responses to the questions.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Wealth of Nations, by Adam Smith"""
+
+Text the question and answer were sourced from: 
+"""
+The annual labour of every nation is the fund which originally supplies it with all the necessaries and conveniences of life which it annually consumes, and which consist always either in the immediate produce of that labour, or in what is purchased with that produce from other nations.
+
+According, therefore, as this produce, or what is purchased with it, bears a greater or smaller proportion to the number of those who are to consume it, the nation will be better or worse supplied with all the necessaries and conveniences for which it has occasion.
+
+But this proportion must in every nation be regulated by two different circumstances; first, by the skill, dexterity, and judgment with which its labour is generally applied; and, secondly, by the proportion between the number of those who are employed in useful labour, and that of those who are not so employed. Whatever be the soil, climate, or extent of territory of any particular nation, the abundance or scantiness of its annual supply must, in that particular situation, depend upon those two circumstances.
+
+The abundance or scantiness of this supply, too, seems to depend more upon the former of those two circumstances than upon the latter. Among the savage nations of hunters and fishers, every individual who is able to work is more or less employed in useful labour, and endeavours to provide, as well as he can, the necessaries and conveniences of life, for himself, or such of his family or tribe as are either too old, or too young, or too infirm, to go a hunting or fishing. Such nations, however, are so miserably poor, that, from mere want, they are frequently reduced, or, at least, think themselves reduced, to the necessity sometimes of directly destroying, and sometimes of abandoning their infants, their old people, and those afflicted with lingering diseases, to perish with hunger, or to be devoured by wild beasts.
+
+Among civilized and thriving nations, on the contrary, though a great number of people do not labour at all, many of whom consume the produce of ten times, frequently of a hundred times, more labour than the greater part of those who work; yet the produce of the whole labour of the society is so great, that all are often abundantly supplied, and a workman, even of the lowest and poorest order, if he is frugal and industrious, may enjoy a greater share of the necessaries and conveniences of life than it is possible for any savage to acquire.
+
+The cause of this observation seems to be, that the improvement of the dexterity of the workman necessarily increases the quantity of the work he can perform; and as it frequently requires the same time as before to collect a great quantity of materials, as it did before to collect a small quantity, the effect of his labour in the one case, must be much greater than in the other.
+
+The real wealth of a country is the annual produce of its industry, or the annual value of all the commodities and conveniences which it produces. The labour of those who are employed as servants, or in the lowest offices, cannot well be any thing, or at least ought not to be any thing, but a part of the rent which is paid for the use of the ground. The whole annual produce of the land and labour of every society, or what comes to the same thing, the whole price of that annual produce, naturally divides itself, it has already been observed, into three parts; the rent of land, the wages of labour, and the profits of stock; and constitutes a revenue to three different orders of people; to those who live by rent, to those who live by wages, and to those who live by profit.
+"""
+
+Question: """What is the 'fund' that supplies a nation with the necessaries and conveniences of life?"""
+Answer: """The annual labour of every nation is the fund which originally supplies it with all the necessaries and conveniences of life which it annually consumes, and which consist always either in the immediate produce of that labour, or in what is purchased with that produce from other nations."""
+
+Question: """What two circumstances regulate the proportion of the necessaries and conveniences of life in a nation?"""
+Answer: """The proportion must in every nation be regulated by two different circumstances; first, by the skill, dexterity, and judgment with which its labour is generally applied; and, secondly, by the proportion between the number of those who are employed in useful labour, and that of those who are not so employed."""
+
+Question: """What is the 'real wealth' of a country, according to 'The Wealth of Nations'?"""
+Answer: """The real wealth of a country is the annual produce of its industry, or the annual value of all the commodities and conveniences which it produces."""
+
+Question: """What three parts does the whole annual produce of the land and labour of every society naturally divide itself into, according to 'The Wealth of Nations'?"""
+Answer: """The whole annual produce of the land and labour of every society, or what comes to the same thing, the whole price of that annual produce, naturally divides itself, it has already been observed, into three parts; the rent of land, the wages of labour, and the profits of stock; and constitutes a revenue to three different orders of people; to those who live by rent, to those who live by wages, and to those who live by profit."""
+
+Special instructions:
+The character should be a man.
+The character should be a sports coach.
+The character should be an avid reader of 'The Wealth of Nations'.
+The character should be a skilled orator.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a skilled sports coach who is an avid reader of 'The Wealth of Nations'. His occupation as a sports coach is difficult to tie into the questions (since the questions are purely factual), but his oratory skills can be shown in how he responds to the questions: he'll answer them in a clear, eloquent manner, with his words chosen carefully. Since the special instructions dictate he be an avid reader of 'The Wealth of Nations', he will have a deep understanding of the text and its principles, and he will be able to apply these principles to his coaching. His oratory skills will be shown in his responses to the questions, and his understanding of 'The Wealth of Nations' will be shown in how he answers them.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Prince, by Niccolò Machiavelli"""
+
+Text the question and answer were sourced from: 
+"""
+I say, therefore, that a prince must have no other aim or thought, nor select anything else for his study, than war and its rules and discipline; for this is the sole art that belongs to him who rules, and it is of such force that it not only upholds those who are born princes, but it often enables men to rise from a private station to that rank. And, on the contrary, it is seen that when princes have thought more of ease than of arms they have lost their states. And the first cause of your losing it is to neglect this art; and what enables you to acquire a state is to be master of the art.
+
+Furthermore, it is necessary for a prince to have a flexible disposition, varying as fortune and circumstances dictate. As I have said, he should not deviate from what is good, if possible, but he should know how to do evil, if constrained. A prince should therefore be very careful that nothing ever escapes his lips which is not replete with the five qualities above named, so that to see and hear him, one would think him the embodiment of mercy, good faith, integrity, humanity, and religion. Nevertheless, he should be careful that he be not so accessible that the evil counsels of men bring him to ruin; on the contrary, he should make his mode of life so exalted that nought unbecoming may be presumed by his subjects.
+
+Every one admits how praiseworthy it is in a prince to keep faith, and to live with integrity and not with craft. Nevertheless our experience has been that those princes who have done great things have held good faith of little account, and have known how to circumvent the intellect of men by craft, and in the end have overcome those who have relied on their word.
+
+Hence it is necessary for a prince wishing to hold his own to know how to do wrong, and to make use of it or not according to necessity. Therefore, putting on the one hand craft, astuteness, and the other qualities related to it, on the other, that of faith, there would not be left to him sufficient ability to put them in practice, for men would always have recourse to the same reasons to excuse themselves. A prince, therefore, must take great care that nothing ever escape his lips which is not replete with the five qualities above named, so that to see and hear him, one would think him the embodiment of mercy, good faith, integrity, humanity, and religion.
+"""
+
+Question: """What does Niccolò Machiavelli consider to be the sole art that belongs to a prince?"""
+Answer: """Niccolò Machiavelli considers war and its rules and discipline to be the sole art that belongs to a prince, and he argues that it is of such force that it not only upholds those who are born princes, but it often enables men to rise from a private station to that rank."""
+
+Question: """What should a prince's disposition be like, according to Niccolò Machiavelli?"""
+Answer: """A prince should have a flexible disposition, varying as fortune and circumstances dictate. He should not deviate from what is good, if possible, but he should know how to do evil, if constrained. A prince should therefore be very careful that nothing ever escapes his lips which is not replete with the five qualities above named, so that to see and hear him, one would think him the embodiment of mercy, good faith, integrity, humanity, and religion."""
+
+Question: """According to Niccolò Machiavelli, is it praiseworthy for a prince to keep faith and live with integrity?"""
+Answer: """Every one admits how praiseworthy it is in a prince to keep faith, and to live with integrity and not with craft. Nevertheless our experience has been that those princes who have done great things have held good faith of little account, and have known how to circumvent the intellect of men by craft, and in the end have overcome those who have relied on their word."""
+
+Question: """What does Niccolò Machiavelli say about the necessity for a prince to know how to do wrong?"""
+Answer: """Hence it is necessary for a prince wishing to hold his own to know how to do wrong, and to make use of it or not according to necessity. Therefore, putting on the one hand craft, astuteness, and the other qualities related to it, on the other, that of faith, there would not be left to him sufficient ability to put them in practice, for men would always have recourse to the same reasons to excuse themselves. A prince, therefore, must take great care that nothing ever escape his lips which is not replete with the five qualities above named, so that to see and hear him, one would think him the embodiment of mercy, good faith, integrity, humanity, and religion."""
+
+Special instructions:
+The character should be a woman.
+The character should be a mathematician.
+The character should be a professor.
+The character should be a feminist.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a feminist mathematics professor. Her occupation as a mathematician is difficult to tie into the questions (since the questions are purely factual), but her identity as a feminist can be shown in how she responds to the questions: she'll answer them in a way that emphasizes the importance of women in history and in the present day. Since the special instructions dictate she be a professor, she will be skilled in explaining complex ideas in a simple and easy-to-understand manner. Her identity as a feminist will be shown in her responses to the questions, and her occupation as a mathematician will be shown in how she answers them.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Art of War, by Sun Tzu"""
+
+Text the question and answer were sourced from: 
+"""
+In the practical art of war, the best

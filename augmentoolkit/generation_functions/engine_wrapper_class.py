@@ -7,7 +7,7 @@
 # )
 import asyncio
 import uuid
-from openai import OpenAI
+from openai import AsyncOpenAI
 
 def make_id():
     return str(uuid.uuid4())
@@ -25,14 +25,22 @@ class EngineWrapper:
         # )
         # self.engine = AsyncAphrodite.from_engine_args(engine_args)
         
-        self.client = OpenAI(api_key="api-key",base_url="your-api-provider")
+        self.client = AsyncOpenAI(api_key="b6f1cbb729a28a019a7d899dd155843f21bb90c4d3bb566e43b1e7a94b44a576",base_url="https://api.together.xyz")
         self.model = model
 
 
     async def submit(
         self, prompt, sampling_params
     ):  # Submit request and wait for it to stream back fully
-        completion = self.client.completions.create(
+        if "temperature" not in sampling_params:
+            sampling_params["temperature"] = 1
+        if "top_p" not in sampling_params:
+            sampling_params["top_p"] = 1
+        if "max tokens" not in sampling_params:
+            sampling_params["max_tokens"] = 3000
+        if "stop" not in sampling_params:
+            sampling_params["stop"] = []
+        completion = await self.client.completions.create(
             model=self.model,
             prompt=prompt,
             temperature=sampling_params["temperature"],
@@ -40,16 +48,5 @@ class EngineWrapper:
             stop=sampling_params["stop"],
             max_tokens=sampling_params["max_tokens"]
         )
-        
-        request_id = make_id()
-        outputs = []
-        # self.engine.add_request(request_id,prompt,sampling_params) #old sync code
-        final_output = None
-        async for request_output in self.engine.generate(
-            prompt, sampling_params, request_id
-        ):
-            outputs.append(request_output.outputs[0].text)
-            final_output = request_output
-
-        full_output = "".join(outputs)
-        return final_output.prompt + final_output.outputs[0].text
+        completion = completion.choices[0].text
+        return prompt + completion

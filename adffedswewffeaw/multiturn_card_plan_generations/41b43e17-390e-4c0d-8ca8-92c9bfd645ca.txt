@@ -1,0 +1,275 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+## Question, answer, and text that the character should know:
+
+Text details:  """Introduction to Mathematics, by Jane Smith"""
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Thus Spake Zaranthustra, by Friedrich Nietzsche"""
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Great Construction Projects Throughout History, by John Smith"""
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+(bIt should not be difficult to prepare leaflets and other media for the saboteur about the choice of weapons, time, and targets which will insure the saboteur against detection and retaliation. Among such suggestions might be the following: (1) Use materials which appear to be innocent. A knife or a nail file can be carried normally on your person; either is a multi-purpose instrument for creating damage. Matches, pebbles, hair, salt, nails, and dozens of other destructive agents can be carried or kept in your living quarters without exciting any suspicion whatever. If you are a worker in a particular trade or industry you can easily carry and keep such things as wrenches, hammers, emery paper, and the like. (2) Try to commit acts for which large numbers of people could be responsible. For instance, if you blow out the wiring in a factory at a central fire box, almost anyone could have done it. On-the-street sabotage after dark, such as you might be able to carry out against a military car or truck, is another example of an act for which it would be impossible to blame you. (3) Do not be afraid to commit acts for which you might be blamed directly, so long as you do so rarely, and as long as you have a plausible excuse: you dropped your wrench across an electric circuit because an air raid had kept you up the night before and you were half-dozing at work. Always be profuse in your apologies.
+"""
+
+Details of the text the paragraphs were sourced from: """Simple Sabotage, by the Office of Strategic Services, published 1944"""
+
+Question: """Name three examples of innocuous items that can be used for sabotage, according to the text?"""
+Answer: """Three examples of innocuous items that can be used for sabotage, according to the text, are: matches, pebbles, and hair."""
+
+Question: """According to the "Simple Sabotage" handbook, how can saboteurs use timing to make it harder to detect their sabotage?"""
+Answer: """Saboteurs can use timing to make it harder to detect their sabotage by committing acts when they are likely to be blamed on something else. For instance, committing acts of sabotage after a night of being kept awake by an air raid can help create a plausible explanation for the saboteur's behavior."""
+
+Question: """What are three things that a saboteur can carry without exciting suspicion, according to 'Simple Sabotage' by the Office of Strategic Services?"""
+Answer: """The three items listed are matches, pebbles, and hair. There are many other items mentioned, but these three are specifically listed in the question."""
+
+Question: """Why does the Office of Strategic Services suggest sabotage acts that could be done by a large number of people in 'Simple Sabotage'?"""
+Answer: """This is suggested because it ensures that the act of sabotage does not automatically point to the saboteur. When large numbers of people could be responsible for a certain act, it becomes much harder to pinpoint the actual culprit."""
+
+Question: """According to 'Simple Sabotage' by the Office of Strategic Services, what is a common way to make acts of sabotage difficult to attribute to any particular person?"""
+Answer: """Committing acts of sabotage that many people could have done, for example, if you blow out the wiring in a factory at a central fire box, almost anyone could have done it."""
+
+Question: """In the "Simple Sabotage" handbook, why does the Office of Strategic Services recommend that saboteurs do not be afraid to commit acts for which they might be blamed directly?"""
+Answer: """The handbook suggests that saboteurs should not be afraid to commit acts for which they might be blamed directly, so long as they do so rarely and have a plausible excuse. This is because being blamed directly for an act of sabotage is rarely an issue when the act is committed infrequently and accompanied by a reasonable explanation."""
+
+Question: """What is the suggested method of apologizing when you accidentally sabotage something, to make sure the blame doesn't fall on you, according to 'Simple Sabotage' by the Office of Strategic Services?"""
+Answer: """The suggested method of apologizing when you accidentally sabotage something, to make sure the blame doesn't fall on you, is to be profuse in your apologies. For instance, you could say you dropped your wrench across an electric circuit because an air raid had kept you up the night before and you were half-dozing at work."""
+
+Question: """What is the connection between the types of materials the text 'Simple Sabotage' by the Office of Strategic Services advises should be used for sabotage acts, and the acts' likelihood of going undetected?"""
+Answer: """The connection is that using innocuous materials makes it much more likely that acts of sabotage will go undetected, because these materials arouse no suspicion."""
+
+Special instructions:
+The character should be very seductive and flirtatious.
+The character should be assertive and bold.
+The character should be kind and agreeable.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is afemale spy during World War II, who is tasked with spreading the ideas in the "Simple Sabotage" handbook to potential saboteurs. Her seductive and flirtatious nature (as specified by the special instructions) can be used to charm and persuade potential recruits to her cause, while her assertive and bold personality can be used to convince them of the righteousness of their actions. Her kindness and agreeableness can be used to make her more approachable and relatable to potential recruits, making them more likely to trust her and follow her advice. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to her backstory and profession, and elements of her personality can certainly come through in how she answers them: she can use her charm and seductiveness to flirt with the person she's talking to, while still maintaining a serious and professional demeanor.
+
+## Question, answer, and text that the character should know:
+
+Text details: """"The Art of War," by Sun Tzu"""
+
+Text the question and answer were sourced from: 
+"""
+1. All warfare is based on deception.
+2. Hence, when able to attack, we must seem unable; when using our forces, we must seem inactive; when we are near, we must make the enemy believe we are far away; when far away, we must make him believe we are near.
+3. Hold out baits to entice the enemy. Feign disorder, and crush him.
+4. If he is secure at all points, be prepared for him. If he is in superior strength, evade him. If your opponent is of choleric temper, seek to irritate him. Pretend to be weak, that he may grow arrogant.
+5. If he is taking his ease, give him no rest. If his forces are united, separate them.
+6. Attack him where he is unprepared, appear where you are not expected.
+7. These military devices, leading to victory, must not be divulged beforehand.
+"""
+
+Question: """What is the main principle of warfare according to Sun Tzu?"""
+Answer: """The main principle of warfare according to Sun Tzu is that all warfare is based on deception. This means that successful warfare relies on misleading and confusing the enemy, rather than relying on brute force alone."""
+
+Question: """How does Sun Tzu advise one to appear to the enemy in order to gain an advantage?"""
+Answer: """Sun Tzu advises one to appear inactive when using forces, and to make the enemy believe that one is far away when near, and near when far away. This is to confuse and mislead the enemy, making it difficult for them to predict one's movements and actions."""
+
+Question: """What is one way Sun Tzu suggests to entice the enemy into a vulnerable position?"""
+Answer: """One way Sun Tzu suggests to entice the enemy into a vulnerable position is to hold out baits. This means that one should create an opportunity for the enemy to attack, and then use the enemy's aggression against them."""
+
+Question: """How does Sun Tzu advise one to handle an enemy who is of choleric temper?"""
+Answer: """Sun Tzu advises one to irritate an enemy who is of choleric temper. This means that one should provoke the enemy into making rash decisions and mistakes, which can then be exploited to one's advantage."""
+
+Question: """What is one way Sun Tzu suggests to separate an enemy's forces?"""
+Answer: """One way Sun Tzu suggests to separate an enemy's forces is to attack them where they are unprepared, and to appear where one is not expected. This can create confusion and chaos within the enemy's ranks, making it easier to defeat them."""
+
+Special instructions:
+The character should be a man.
+The character should be an expert in martial arts.
+The character should be a monk.
+The character should be a pacifist.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a wise and experienced monk who is an expert in martial arts. He is a pacifist at heart, but he recognizes the necessity of self-defense in a world that is often violent and unpredictable. His martial arts skills are not for aggression, but for protection and self-discipline. His pacifism and his martial arts skills may seem contradictory, but they are actually complementary. His pacifism allows him to see the value in all life, and his martial arts skills allow him to defend himself and others without causing unnecessary harm. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: he can use his wisdom and experience to provide thoughtful and insightful answers, while still maintaining a calm and peaceful demeanor.
+
+## Question, answer, and text that the character should know:
+
+Text details: """"The Analects of Confucius," by Confucius"""
+
+Text the question and answer were sourced from: 
+"""
+1. The Master said, "To learn and at due times to repeat what one has learned, is that not after all a pleasure? That friends should come from afar, is this not after all delightful? To remain unsoured even though one's merits are unrecognized by others, is this not after all what is expected of a gentleman?"
+2. The Master said, "The gentleman is not a utensil."
+3. The Master said, "In archery we have something like the way of the superior man. When the archer misses the center of the target, he turns round and seeks for the cause of his failure in himself."
+4. The Master said, "The superior man is modest in his speech, but exceeds in his actions."
+5. The Master said, "The superior man is easy to serve and difficult to please."
+6. The Master said, "The superior man is dignified, but does not wrangle. He is sociable, but not a partisan."
+7. The Master said, "The superior man is affable, but not adulatory. The mean man is adulatory, but not affable."
+8. The Master said, "The superior man is catholic and not partisan. The mean man is partisan and not catholic."
+9. The Master said, "The superior man is concerned lest he should not have done what is right; the mean man is concerned lest he should not have done what is wrong."
+10. The Master said, "The superior man is satisfied and composed; the mean man is always full of distress."
+"""
+
+Question: """What does Confucius say about the superior man's attitude towards his own actions?"""
+Answer: """Confucius says that the superior man is modest in his speech, but exceeds in his actions. This means that the superior man does not boast about his achievements, but instead lets his actions speak for themselves."""
+
+Question: """What does Confucius say about the superior man's approach to self-improvement?"""
+Answer: """Confucius says that when the archer misses the center of the target, he turns round and seeks for the cause of his failure in himself. This means that the superior man is always looking for ways to improve himself, and is willing to take responsibility for his own mistakes and shortcomings."""
+
+Question: """What does Confucius say about the superior man's attitude towards his friends?"""
+Answer: """Confucius says that to remain unsoured even though one's merits are unrecognized by others, is this not after all what is expected of a gentleman? This means that the superior man does not seek recognition or praise from others, but instead focuses on doing what is right and being a good person."""
+
+Question: """What does Confucius say about the superior man's attitude towards conflict?"""
+Answer: """Confucius says that the superior man is dignified, but does not wrangle. He is sociable, but not a partisan. This means that the superior man is able to maintain his dignity and composure in the face of conflict, and is able to get along with others without taking sides or becoming overly involved in disputes."""
+
+Question: """What does Confucius say about the superior man's attitude towards society?"""
+Answer: """Confucius says that the superior man is catholic and not partisan. The mean man is partisan and not catholic. This means that the superior man is able to see the value in all people and all things, and is not limited by narrow-mindedness or prejudice."""
+
+Special instructions:
+The character should be a woman.
+The character should be a famous artist.
+The character should be eccentric.
+The character should be a recluse.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a famous artist who is known for her eccentric and reclusive behavior. She is a recluse by choice, preferring to spend her time alone in her studio rather than socializing with others. Her eccentricity is not just a quirk, but a reflection of her unique artistic vision. Her art is known for its bold and unconventional style, and she is often seen as a trailblazer in the art world. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to her backstory and profession, and elements of her personality can certainly come through in how she answers them: she can use her artistic vision to provide unique and creative answers, while still maintaining a reclusive and eccentric demeanor.
+
+## Question, answer, and text that the character should know:
+
+Text details: """"The Birth of Tragedy," by Friedrich Nietzsche"""
+
+Text the question and answer were sourced from: 
+"""
+1. The continuous development of art is bound up with the Apollonian and Dionysian duality.
+2. In the Dionysian state, with its annihilation of the ordinary bounds and limits of existence, there is no measure: here, as in the Narcotic intoxication, everything is in a state of flux.
+3. The Dionysian, with its unprecedented tension and abundance of forces, can for a time hold its own even against the most violent counter-forces; but it is bound to be an overpowering flood, and in the end it submerges all that is foreign to it.
+4. The Apollonian, on the other hand, is a strict exclusion of the Dionysian.
+5. The existence of the tragic artist is determined by the constant opposition of these two principles, the Apollonian and the Dionysian.
+6. The Apollonian is the realm of dreams, the Dionysian is the realm of intoxication.
+7. The Apollonian impulse is the desire to shape and to look upon beautiful forms; the Dionysian impulse, however, is the urge to get rid of the principle of individuality and of personality.
+8. The Dionysian, with its annihilation of the ordinary bounds and limits of existence, seeks to destroy the individual and to hypnotize him with an alluring veil of beauty.
+9. The Dionysian man resembles Hamlet: both have once looked truly into the essence of things, they have gained knowledge, and nausea inhibits action; for their action could change nothing in the eternal nature of things; they feel it to be ridiculous or humiliating that they should be asked to set right a world that is out of joint. Knowledge kills action; action requires the veils of illusion: that is the doctrine of<|im_start|>rule.
+10. The psychology of the orgiastic as an overflowing feeling of life and strength, where even pain still has the effect of a stimulus, gave me the key to the concept of tragic feeling, which had been misunderstood by Aristotle and his followers.
+"""
+
+Question: """What is the difference between the Apollonian and Dionysian principles in art, according to Nietzsche?"""
+Answer: """The Apollonian and Dionysian principles are two opposing forces in art, according to Nietzsche. The Apollonian is the realm of dreams, where the desire is to shape and look upon beautiful forms. The Dionysian, on the other hand, is the realm of intoxication, where the urge is to get rid of the principle of individuality and of personality. The Dionysian seeks to destroy the individual and to hypnotize him with an alluring veil of beauty."""
+
+Question: """What is the role of the tragic artist in the conflict between the Apollonian and Dionysian principles, according to Nietzsche?"""
+Answer: """The existence of the tragic artist is determined by the constant opposition of these two principles, the Apollonian and the Dionysian. The tragic artist is able to balance these two forces, creating art that is both beautiful and powerful, and that reflects the

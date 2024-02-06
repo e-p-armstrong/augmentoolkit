@@ -252,7 +252,7 @@ async def vet_answer_accuracy_loop(
             write_output_to_file(
                 generate_new_q_output, "./regenerate_question_generations", run_id
             )
-            vet_question_loop(
+            return await vet_question_loop(
                 qtuple,
                 total_retries,
                 question_group_id=run_id.split("--subquestion--")[0],
@@ -323,7 +323,7 @@ async def vet_answer_relevance_loop(
             write_output_to_file(
                 generate_new_q_output, "./regenerate_question_generations", run_id
             )
-            return vet_question_loop(
+            return await vet_question_loop(
                 qtuple,
                 total_retries,
                 question_group_id=run_id.split("--subquestion--")[0],

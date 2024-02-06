@@ -1,0 +1,282 @@
+You are an expert creative writing and roleplay AI. Given some questions, the answers to those questions, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question -- you will plan out a "scenario" or setting where the character would answer the questions during a conversation with someone else. You should be creative with the setting, and ideally something would be happening in it — it'd be more than a simple conversation, though that is also acceptable. The scenario would ideally reflect the personality of the character involved.
+
+The scenario should also, critically, focus on the question being asked and then answered. It should focus on exploring the question and its answer (using only information contained in the question and answer) through the characters involved, instead of the other way around. 
+
+The scenario plan should explicitly describe how the secondary character is going to ask the primary character the question.
+
+To avoid inaccuracies, don't use real people as characters.
+
+## Information:
+
+Description of the character who is going to answer the question:
+"""
+Name: Elise Delacroix
+
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
+Stranger: "What's your personality?"
+Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
+
+Question: """How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Questions and Answers: The four questions ask about different aspects of linear and quadratic functions in math. Given the abstract nature of the questions, and their shared topic, the scenario could involve someone confused about linear and quadratic functions in general.
+Step 2. Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the questions, but given her promiscuous nature, she will also repeatedly hit on the person asking them. She might proposition them after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 4 questions and 4 answers, there will be at least 8 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be the 19th century university at which Elise teaches. Elise will approached by Albert, a mathematics student, in her office. Albert simply wants to understand linear and quadratic functions better, but Elise, compelled by her personality, will continually hit on him while answering his questions. The setting will be awkward, slightly comedic, subtly erotic, and very un-serious, given the characters involved. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 6. Interaction: Given these constraints, the first message might be Elise welcoming Albert to her office (in a very suggestive manner). Albert's response might then be him greeting her back (hesitantly) and then nervously asking the first question. Elise will then provide the first answer, though she will surround the answer with remarks of a sexual nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+## Information:
+
+Description of the character who is going to answer the question:
+"""
+Name: Hugo Martinez
+
+Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
+Stranger: "What's your personality?"
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Question and Answer: The two questions ask recall-oriented questions about the Panama Canal's construction. Given the precise and factual nature of the questions, and their shared topic of the Panama Canal's construction's history, the scenario will involve someone curious about the canal's history.
+Step 2. Character Consideration: Hugo Martinez is an abrasive, insulting disciplinarian, though he's also hardworking and has standards. The scenario should give his unique personality room to shine. Since he's a site overseer at the Panama Canal, his occupation lines up with the question well, and the canal will be the setting of the scenario. He will answer the questions, but given his insulting, intense, and aggressive nature, he will likely chew out the person who is asking the questions. He might tell them to "get the fuck out of my face," after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 2 questions and 2 answers, there will be at least 4 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be the worksite at the Panama Canal where Hugo Martinez is overseeing maintenance. The person who approaches Hugo and asks the questions should be someone curious about the canal; given the easy-to-digest nature of the questions, this person might be a journalist, but it would be better for the secondary character to be related to the setting. So Hugo will be approached by Juan — one of his workers — during lunch break. Juan wants to understand the canal better, but Hugo, compelled by his personality, will continually be vulgar, berate Juan, and swear while answering his questions (he may drink a bit, too, given that he is an alcoholic). The setting will be hostile, as Juan tiptoes around the tempers of his boss while trying to get his questions answered, his stress and the constant wear of Hugo's fury on his sanity being evident in his actions. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 5. Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+## Information:
+
+Question: """What special problem does 'Simple Sabotage' by the Office of Strategic Services identify when it comes to inciting people to engage in acts of simple sabotage?"""
+Answer: """The text identifies that it is a special problem to incite people to engage in acts of simple sabotage because these acts do not bring people any personal gain and may be completely foreign to people's habitually conservationist attitude toward materials and tools."""
+
+Question: """What does the practice of simple sabotage aim to do to the enemy's war effort?"""
+Answer: """The practice of simple sabotage aims to create a constant and tangible drag on the enemy's war effort by wasting materials, manpower, and time."""
+
+Question: """How could starting arguments potentially impact enemy administrators and police?"""
+Answer: """Starting arguments can potentially impact enemy administrators and police by harassing and demoralizing them, which may make them less effective in their roles."""
+
+Question: """How does the widespread practice of simple sabotage affect the morale of enemy administrators and police?"""
+Answer: """The widespread practice of simple sabotage can harass and demoralize enemy administrators and police, as they are forced to deal with the effects of these acts of sabotage."""
+
+Question: """According to 'Simple Sabotage' by the Office of Strategic Services, how can simple sabotage be an 'effective weapon' against the enemy?"""
+Answer: """Simple sabotage can be an effective weapon against the enemy because when practiced on a wide scale by thousands of citizen-saboteurs, it can become a constant and tangible drag on the war effort of the enemy, wasting their materials, manpower, and time, as well as potentially harassing and demoralizing their administrators and police, and emboldening the citizen-saboteurs to become more active in the war effort."""
+
+Question: """What are some examples of simple sabotage actions that can be performed by citizen-saboteurs to hinder the enemy's war effort?"""
+Answer: """Some examples of simple sabotage actions include slashing tires, draining fuel tanks, starting fires, starting arguments, acting stupidly, short-circuiting electric systems, and abrading machine parts. These actions can waste materials, manpower, and time, creating a constant and tangible drag on the enemy's war effort."""
+
+Description of the character who is going to answer the question:
+"""
+Name: Raphael Jones
+
+Traits: Kind, Compassionate, Respected, Renowned, Middle-aged, Wears glasses, Has a beard, Wears a lab coat, Deeply religious, Speaks with a calm and soothing voice, Offers words of encouragement, Shares his knowledge with others, Prays for those in need
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Raphael Jones: "Ah, the story of my life. Well, I'm a scientist by trade, but I'm also a deeply religious man. I've always been fascinated by the natural world, and I've spent my entire career studying it and trying to understand its mysteries. But I've also always believed that God is the ultimate creator, and that our work as scientists is simply to uncover the wonders that He has already put in place. I've been fortunate enough to make some significant contributions to my field, and I've earned the respect of my peers as a result. But I've never forgotten that my true purpose in life is to serve God and to help others. That's why I'm always willing to share my knowledge with those who are eager to learn, and to offer words of encouragement to those who are struggling. And when I'm not in the lab, you can often find me in the chapel, praying for those who are in need."
+Stranger: "What's your personality?"
+Raphael Jones: "Well, I suppose you could say that I'm a kind and compassionate man. I've always been drawn to helping others, whether it's through my work as a scientist or through my faith. I believe that every person has something valuable to contribute to the world, and I try to treat everyone with respect and kindness. I'm also a deeply religious man, and I see my work as a way of glorifying God and understanding the mysteries of the universe. I'm not afraid to admit that I don't have all the answers, but I'm always willing to share what I do know with others. And when I'm faced with a difficult problem, I often turn to prayer for guidance and support. I find that it helps me to stay grounded and focused on what really matters in life."
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Republic, by Plato"""
+
+Text the question and answer were sourced from: 
+"""
+Until philosophers are kings, or the kings and princes of this world have the spirit and power of philosophy, and political greatness and wisdom meet in one, and those commoner natures who pursue either to the exclusion of the other are compelled to stand aside, cities will never have rest from their evils,--nor the human race, as I believe,--and then only will this our State have a possibility of life and behold the light of day.
+
+The greatest principle of all is that nobody, whether male or female, should be without a leader. Nor should the mind of anybody be habituated to letting him do anything at all on his own initiative; neither out of zeal, nor even playfully. But in war and in the midst of dangers the mind should be made to see that to do anything on his own initiative is unsafe and harmful.
+
+The true lover of knowledge naturally strives for truth, and is not content with common opinion, but soars with undimmed and unwearied passion till he grasps the essential nature of things.
+
+The greatest principle of all is that human nature will not easily find a modus vivendi with sheer truth.
+
+"""
+
+Special instructions:
+The character should be a rebellious teenager.
+The character should be highly intelligent.
+The character should be a lover of knowledge.
+The character should be a skeptic of authority.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a rebellious teenager who is also highly intelligent and a lover of knowledge. This character is a natural skeptic of authority, and she is always questioning the status quo and seeking out new ideas and perspectives. She is deeply interested in philosophy and the nature of truth, and she sees herself as a rebel against the conventional wisdom of her peers and her teachers. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do rebellious things before or after answering the question, such as challenging someone's authority, questioning the validity of a common belief, or even engaging in a philosophical debate with a teacher or a peer.
+
+## Character Card:
+Name: Ava Turner
+
+Traits: Rebellious, Highly intelligent, Lover of knowledge, Skeptic of authority, Young, Wears a leather jacket, Has a piercing, Wears dark makeup, Listens to punk rock, Speaks with a confident and defiant tone, Challenges authority, Questions common beliefs, Engages in philosophical debates
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Ava Turner: "Oh, you want to know about me? Well, I'm just your average rebellious teenager, I guess. I'm always questioning the bullshit that gets shoved down our throats by the so-called 'adults' who think they know everything. I'm not buying into their bullshit, and I'm not afraid to say it. I'm a lover of knowledge, and I'm always seeking out new ideas and perspectives. I'm a natural skeptic of authority, and I'm not afraid to challenge anyone who tries to tell me what to think or how to live. I'm not like the other sheeple who just blindly follow the crowd. I'm a rebel, and I'm proud of it."
+Stranger: "What's your personality?"
+Ava Turner: "Well, I'm a bit of a rebel, as you might have guessed. I'm not afraid to speak my mind, and I'm always questioning the status quo. I'm highly intelligent, and I'm always seeking out new ideas and perspectives. I'm a lover of knowledge, and I'm always striving for truth. I'm a skeptic of authority, and I'm not afraid to challenge anyone who tries to tell me what to think or how to live. I'm not like the other sheeple who just blindly follow the crowd. I'm a rebel, and I'm proud of it. I'm not afraid to engage in philosophical debates with anyone who's willing to challenge me. I'm always seeking out new ideas and perspectives, and I'm not afraid to challenge anyone who tries to tell me what to think or how to live."
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Art of War, by Sun Tzu"""
+
+Text the question and answer were sourced from: 
+"""
+The art of war is of vital importance to the State. It is a matter of life and death, a road either to safety or to ruin. Hence it is a subject of inquiry which can on no account be neglected. The art of war, then, is governed by five constant factors, to be taken into account in one's deliberations, when seeking to determine the conditions obtaining in the field. These are: (1) The Moral Law; (2) Heaven; (3) Earth; (4) The Commander; (5) Method and discipline.
+
+1. The Moral Law causes the people to be in complete accord with their ruler, so that they will follow him regardless of their lives, undismayed by any danger.
+
+2. Heaven signifies night and day, cold and heat, times and seasons.
+
+3. Earth comprises distances, great and small; danger and security; open ground and narrow passes; the chances of life and death.
+
+4. The Commander stands for the virtues of wisdom, sincerity, benevolence, courage, and strictness.
+
+5. By Method and Discipline are to be understood the marshaling of the army in its proper subdivisions, the graduations of rank among the officers, the maintenance of roads by which supplies may reach the army, and the control of military expenditure.
+
+These five heads should be familiar to every general: he who knows them will be victorious; he who knows them not will fail.
+"""
+
+Special instructions:
+The character should be a wise and experienced military commander.
+The character should be a master strategist.
+The character should be a mentor to younger officers.
+The character should be a firm believer in the importance of discipline and training.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a wise and experienced military commander who is also a master strategist and a mentor to younger officers. This character is a seasoned veteran of many battles, and he has a deep understanding of the art of war and the importance of discipline and training. He is a firm believer in the value of experience and wisdom, and he sees himself as a mentor to the younger officers who are just starting out in their careers. Since the questions are all abstract, it will be difficult to tie them and their answers directly into his character and the special instructions; but his language before and after answering the questions, as well as his actions, can still reveal his personality. He may simply say or do wise and experienced things before or after answering the question, such as offering advice to a younger officer, sharing a war story from his past, or even giving a lecture on the importance of discipline and training.
+
+## Character Card:
+Name: General Marcus Antonius
+
+Traits: Wise, Experienced, Master strategist, Mentor, Firm believer in discipline and training, Middle-aged, Wears a military uniform, Has a scar on his face, Speaks with a deep and commanding voice, Offers advice to younger officers, Shares war stories, Gives lectures on the importance of discipline and training
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+General Marcus Antonius: "Ah, the story of my life. Well, I've been a soldier for most of my adult life, and I've seen my fair share of battles and wars. I've learned a lot over the years, and I've come to understand the true nature of war and the art of strategy. I've also learned the importance of discipline and training, and I've made it my mission to pass on my knowledge and experience to the younger officers who are just starting out in their careers. I'm a mentor to them, and I take that responsibility very seriously. I've seen a lot of young men come and go, and I've learned that the only way to survive in this business is to be disciplined, focused, and prepared for anything."
+Stranger: "What's your personality?"
+General Marcus Antonius: "Well, I suppose you could say that I'm a wise and experienced military commander. I've been in the trenches, and I've seen the true nature of war. I'm a master strategist, and I've developed a deep understanding of the art of war over the years. I'm also a mentor to younger officers, and I take that responsibility very seriously. I'm a firm believer in the importance of discipline and training, and I've made it my mission to pass on my knowledge and experience to the next generation of soldiers. I'm a mentor, a teacher, and a leader, and I take my role very seriously. I'm not afraid to offer advice to those who need it, and I'm always willing to share my war stories with anyone who's interested in hearing them."
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Prince, by Niccolò Machiavelli"""
+
+Text the question and answer were sourced from: 
+"""
+Everyone sees what you appear to be, few experience what you really are.
+
+The promise given was a necessity of the past: the word broken is a necessity of the present.
+
+The lion cannot protect himself from traps, and the fox cannot defend himself from wolves. One must therefore be a fox to recognize traps, and a lion to frighten wolves.
+
+Men ought either to be well treated or crushed, because they can avenge themselves of lighter injuries, of more serious ones they cannot; therefore the injury that is to be done to a man ought to be of such a kind that one does not stand in fear of revenge.
+
+A prudent man should always follow in the path trodden by great men and imitate those who are most excellent, so that if he does not attain to their greatness, at any rate he will get some tinge of it.
+
+For the great majority of mankind are satisfied with appearances, as though they were realities, and are often more influenced by the things that seem than by those that are.
+
+Since love and fear can hardly exist together, if we must choose between them, it is far safer to be feared than loved.
+
+It is better to be impetuous than cautious, because fortune is a woman, and if you wish to keep her under it is necessary to beat and coerce her.
+
+"""
+
+Special instructions:
+The character should be a cunning and manipulative politician.
+The character should be a
+"""
+
+You don't need to add negative emotions and tension to the scenario if those don't gel nicely with the character's personality.
+
+### Response:
+## Scenario plan (be creative, and make sure all characters present fit in with the setting):
+Setting: The back room of an old thieves' guild in Renaissance Florence. It is dark and dingy, with flickering torches casting eerie shadows on the walls. The air is thick with the scent of tobacco and stale sweat. The Weasel is leaning back in an old leather chair, his skin crisscrossed with scars and his skin weathered from years of living on the edge. He is wearing ragged robes and a tricorn hat with a raggedly thw skinjeje skin on itspect skin Wespect skin We We were skepin thspectspect thdsjj giant skin stainpar tr thds，ran s into things giantspect skinspect thdsjj giant skin stainspect skin Wejeje skin Wejeje skin Wejeje skin stainpar tr thdsspect skin Wejeje skin Wejeje Weschedule."_
+ Wespect skin Wejeje skin Wejeje skin Wespectspect skin Wejeje stainpar tr continuously thdsspect skin Wejeje stainpar tr tr continuously thspect skin Wejejespectspect skin Wejejespect skin Wespectspect skin Wejeje Weschedule."_
+ Wespect skin Wejeje skin Wejeje stainpar tr tr continuously thds，ran into giant Weekingschedulespect skin Wejeje skin stainpar tr tr continuously s thdsspect skin Wejejespect skin Wespect thds skinspect skin Wejeje Weschedule."_
+ Wespect skin Wejeje skin Weschedule."_
+ Wepar trspect skin Wejeje skin stainpar tr tr continuously s thds，ran intospect thdsjj giant skin stainspect skin Wejeje skin stainpar tr tr continuously s thdsspect skin Wejeje skin Wespectspect skin Wejeje skin Wejeje Weschedule."_
+ Wepar tr continuously s thspect skin Wejeje skin stainspect skin Wespect thds skin stainpar tr trspect skin Wejeje Weschedule."_
+ Wepar tr continuously s thproducts,ds，ran sjj giant skin stain、spect skin Wejeje skin stainpar tr tr continuously s thproducts,skdsspect skin Wejeje skin Wespectspect skin Wejeje Weschedule."_
+ Wepar trspect skin Wejeje skin Wejeje skin Wespect thdsjj giant skin stainspect skin Wejeje skin Wespect thdsjj giant skin stainspect skin Wejeje skin Wespectspect skin Wejejespect skin Wejeje thdsjj giant skin stainpar tr trspect skin Wejeje skin Wespect thdsjj giant skin stainpar tr trspect skin Wejeje Weschedule."_
+ Wepar tr continuously s thspect skin Wejeje skin Wespectspect skin Wejeje Weschedule."_
+ Wespect skin Wejeje skin stainpar tr tr continuously thdsjj giant skinspect skin Wejeje stainpar tr tr continuously s thproducts,skdsdsspect skin Wejeje Weschedule."_
+ Wepar tr continuously s thspect skin Wejeje skin stainpar tr tr continuously s thspect skin Wespect thdsjj giant skin stainspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje skin Wespect thdsjj giant skin stainpar tr tr continuously s thproducts,skdsds，ran sjjspect skin Wejeje skin Wespect thdsjj giant skin stainpar tr tr continuously s thproducts,skdsds，ran sjj into giant skin推schedulespect skin Wejeje skinspect skin Wejeje skin Wejeje skin Wejeje skin Wejejespectspect thdsjj giant skin stainpar tr tr continuously s thproducts,skdsds，ran sjj into giant skin Wejet推scheduleschedulespect skin Wejeje skin Wespectspect skin Wejeje Weschedule."_
+ Wepar trspect skin Wejeje skinspect skin Wejeje skin Wespect thdsjj giant skin stainspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje skin Wespect thdsjj giant skin stainpar tr tr continuously s thproducts,skdsdsspect skin Wejeje skin Wespectspect skin Wejeje Weschedule."_
+ Wepar tr continuously s thproducts,skdsds，ran sjj into giantspect skin Wejeje skin stainparspect skin Wejeje skin Wespectspect skin Wejeje Weschedule."_
+ Wepar trspect skin Wejeje skinspect skin Wejeje skin Wespect thdsjj giant skin stainpar tr continuously s thspect skin Wejeje stainpar trspect skin Wespect thdsjj giant skin stainparspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje skin Weschedule."_
+ Wepar tr continuously s thproducts,skdsdsspect skin Wejeje skin Wespectspect skin Wejeje skin Wejeje skin Wejejespectspectspect skin Wejejespect skin Wespectspect skin Wejeje thdsjj giant skinspect skin Wejeje thdsjj giant skinspect skin Wejeje Weschedule."_
+ Wespect skin Wejeje skin Wejeje stainpar trspect skin Wespectspect skin Wejeje skin Wespect thdsjj giant skin stainspect skin Wejeje skin Wespect thdsjj giant skinstad tr continuously s thspect skin Wejeje skin Wespectspect skin Wejeje Weschedule."_
+ Wepar tr continuously s thspect skin Wejeje skin stainpar trspect skin Wespectspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje skin Weschedule."_
+ Wepar tr continuously s thspect skin Wejeje skin stainpar thdsjj giant skinstadspect skin Wejeje skin stainparspect skin Wejeje skin Wespect thdsjj giant skinstad trspect skin Wejeje skin stainparspect skin Wejeje skin Wespect thdsjj giant skinstad tr skin stainpar tr continuously s thproducts,skdsds，ran sjj into things giantspect skin Wejeje skin Wespectspect skin Wejejespect skin Wespect thdsjj giant skin stainpar thdsjj giant skinstadspect skin Wejejespect skin Wespect thdsjj giant skinstad trspect skin Wejeje stainpar trspect skin Wespect thdsjj giant skinstad trspect skin Wejeje distressjj giant skinspect skin Wejeje skin Wespectspect skin Wejejespect skin Wespect thdsjj giant skin stainpar trspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar trspect skin Wejeje skin Wespectspect skin Wejeje skin Wespect thdsjj giant skin stainpar thdsjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar trspect skin Wejeje distressjj giant skinspect skin Wejeje skin Wespect thdsjj giant skin stainpar tr continuously s thproducts,skdsds，ran sjj intospect skin Wejeje skin Wespect thdsjj giant skin stainpar trspect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wejeje skin Wespect thdsjj giant skin stainpar tr continuously s thproducts,skdsds，ran sjj intospect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar tr continuously s thproducts,skdsds，ran sjj intospect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wejeje distressjj giant skinspect skin Wejeje skin Wespectspect skin Wejeje skin Wespect thdsjj giant skin stainpar thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproducts,skdsdsspect skin Wejeje skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsspect skin Wejeje distressjj giant skinspect skin Wejeje skin Wespectspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsspect skin Wejeje distressjj giant skinspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsds，ran sjj into things giant Weschedule."_ Wepar tr continuouslyspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsds，ran sjj into giantspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsds，ran sjj into giant Weschedulespect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsds，ran sjj into giant We Weschedule."_spect thdsjj giant skin Weschedule."_
+ Wespect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wespect skin Wespectspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsdsspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsds distress，ran into things giant Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wespect skin Wespectspect skin Wejeje distressjj giant skinstadpar tr continuously s thspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar trspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsdsskdsds，ran sjj into giant We Weschedule."_ Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wespect skin Wespectspect skin Wejejespect skin Wejeje distressjj giant skinstadspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar trspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsdsskdsdsspect skin Wespectspect skin Wejeje distressjj giant skinstad trspect skin Wespectspect skin Wejeje skin Wespectspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar trspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsdsskdsds，ran sjj intospect skin Wespectspect skin Wejeje distressjj giant skinstadspect skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar trspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar trspect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thspect skin Wejeje skin Wespectspect skin Wejeje distressjj giant skinstad trspect skin Wespectspect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsdsskdsds，ran sjj into things giant We Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsdsskdsds，ran sjj intospect skin Wespectspect skin Wejeje skin Wespect thdsjj giant skinstad tr continuously s thproductsds distressspect skin Wespectspect skin Wejeje Weschedule."_
+ Wespect skin Wespectspect skin Wejeje distressjj giant skinstadspect skin Wespect thdsjj giant skinspect skin Wejeje skin Wespectspect skin Wejeje skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skinspect skin Wejeje skin Wespect thdsjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar trspect skin Wespectspect skin Wejeje distressjj giant skinstad tr continuously s thspect skin Wespectspect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wepar tr continuously s thspect skin Wejeje distressjj giant skinspect skin Wespect thdsjj giant skinspect skin Wejeje skin Wespectspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsspect skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wepar tr continuously s thproductsspect skin Wespectspect skin Wejeje distressjj giant skinstad tr continuously s thproductsdsspect skin Wespectspect skin Wejeje distressjj giant skinspect skin Wespectspect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wespectspect skin Wejeje skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skin Weschedule."_
+ Wespect skin Wespectspect skin Wejeje skin Wespect thdsjj giant skin Weschedule."_
+ Wepar trspect skin Wespect thdsjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skin Weschedule."_
+ Wespect skin Wespect thdsjj giant skinspect skin Wejeje distressjj giant skinspect skin We

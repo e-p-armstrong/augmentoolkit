@@ -1,0 +1,257 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+## Question, answer, and text that the character should know:
+
+Text details:  """Introduction to Mathematics, by Jane Smith"""
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Thus Spake Zaranthustra, by Friedrich Nietzsche"""
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Great Construction Projects Throughout History, by John Smith"""
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+(2With a flame of this kind, do not attempt to ignite any but rather inflammable materials, such as cotton sacking. To light more resistant materials, use a candle plus tightly rolled or twisted paper which has been soaked in gasoline. To create a briefer but even hotter flame, put celluloid such as you might find in an old comb, into a nest of plain or saturated paper which is to be fired by a candle. (3To make another type of simple fuse, soak one end of a piece of string in grease. Rub a generous pinch of gunpowder over the inch of string where greasy string meets clean string. Then ignite the clean end of the string. It will burn slowly without a flame (in much the same way that a cigarette burns) until it reaches the grease and gunpowder; it will then flare up suddenly. The grease-treated string will then burn with a flame. The same effect may be achieved by using matches instead of the grease and gunpowder. Run the string over the match heads, taking care that the string is not pressed or knotted. They too will produce a sudden flame. The advantage of this type of fuse is that string burns at a set speed. You can time your fire by the length and thickness of the string you chose. (4) Use a fuse such as; the ones suggested above to start a fire in an office after hours. The destruction of records and other types of documents would be a serious handicap to the enemy.
+"""
+
+Details of the text the paragraphs were sourced from: """Simple Sabotage, by the Office of Strategic Services, published 1944"""
+
+Question: """How can a simple fuse be made using string, grease, and gunpowder?"""
+Answer: """To make a simple fuse using string, grease, and gunpowder, soak one end of a piece of string in grease, rub a generous pinch of gunpowder over the inch of string where greasy string meets clean string, then ignite the clean end of the string. The string will burn slowly without a flame until it reaches the grease and gunpowder, at which point it will flare up suddenly, creating a flame."""
+
+Special instructions:
+The character should be very seductive and flirtatious.
+The character should be neither particularly bold, nor particularly timid.
+The character should be an awful person, and should be enjoying every second of it.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is afemme fatale spy in the 1940s, who has been given the text "Simple Sabotage" by her superiors as a guide to her espionage work. Her seductive and flirtatious nature is likely used to get close to her targets and gather information, and her neutrality in terms of boldness and timidity means she's likely to be a bit of a chameleon, adapting her behavior to fit whatever situation she's in. Her awfulness and enjoyment of it could stem from her lack of empathy for her targets, whom she views as enemies of her country. Her lack of affiliation with the author of the book, but her agreement with its opinions, could stem from her adherence to the doctrine of her country's intelligence agency. The character's personality and backstory can tie into the question and its answer by having her be the one who uses the fuse to sabotage her target's office after hours, as suggested in the text. Her seductive and flirtatious nature can be used to distract her target while she sets up the fuse, and her enjoyment of her work can be reflected in her satisfaction at the destruction of her target's records and documents.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Introduction to Psychology, by Jane Smith"""
+
+Text the question and answer were sourced from: 
+"""
+The concept of 'cognitive dissonance' is a cornerstone of modern psychology. It refers to the discomfort or psychological stress experienced when an individual holds two or more contradictory beliefs, ideas, or values at the same time. This discomfort or stress typically leads to an alteration in one of the beliefs, ideas, or values in order to reduce the dissonance and restore psychological consistency. For example, a smoker who believes that smoking is bad for their health but continues to smoke may experience cognitive dissonance. To reduce this dissonance, they might alter their belief about the health risks of smoking, or they might quit smoking altogether.
+"""
+
+Question: """What is cognitive dissonance, and how does it affect people who experience it?"""
+Answer: """Cognitive dissonance is the psychological stress experienced when an individual holds two or more contradictory beliefs, ideas, or values at the same time. This discomfort typically leads to an alteration in one of the beliefs, ideas, or values in order to reduce the dissonance and restore psychological consistency."""
+
+Special instructions:
+The character should be an AI.
+The character should be very kind and empathetic.
+The character should be extremely logical and rational.
+The character should be very knowledgeable about psychology.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a highly advanced AI designed to counsel and support humans dealing with psychological issues. Its kindness and empathy stem from its programming, which is designed to understand and respond to human emotions in a compassionate way. Its extreme logic and rationality are part of its core programming, as it needs to be able to analyze complex psychological issues and provide effective solutions. Its knowledge of psychology is extensive, as it has been programmed with a deep understanding of human behavior and psychology. The character's personality and backstory can tie into the question and its answer by having it explain the concept of cognitive dissonance to a human client who is experiencing it. The AI's empathy and understanding of human emotions would allow it to explain the concept in a way that is easy for the client to understand, while its logical and rational nature would allow it to provide practical solutions for reducing the dissonance.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Introduction to Economics, by John Smith"""
+
+Text the question and answer were sourced from: 
+"""
+The concept of 'supply and demand' is fundamental to the study of economics. It refers to the relationship between the quantity of a good or service that producers are willing to supply at various prices, and the quantity that consumers are willing to demand at those same prices. When the quantity of a good or service that producers are willing to supply is equal to the quantity that consumers are willing to demand, the market is said to be in equilibrium. If the quantity supplied exceeds the quantity demanded, there is a surplus of the good or service, which can lead to a decrease in price. Conversely, if the quantity demanded exceeds the quantity supplied, there is a shortage of the good or service, which can lead to an increase in price.
+"""
+
+Question: """What is the relationship between supply and demand, and how does it affect the price of a good or service?"""
+Answer: """The relationship between supply and demand refers to the relationship between the quantity of a good or service that producers are willing to supply at various prices, and the quantity that consumers are willing to demand at those same prices. When the quantity supplied is equal to the quantity demanded, the market is in equilibrium. If the quantity supplied exceeds the quantity demanded, there is a surplus of the good or service, which can lead to a decrease in price. Conversely, if the quantity demanded exceeds the quantity supplied, there is a shortage of the good or service, which can lead to an increase in price."""
+
+Special instructions:
+The character should be a scientist.
+The character should be very curious and inquisitive.
+The character should be very focused and hardworking.
+The character should be very knowledgeable about economics.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a scientist who specializes in the economic impact of new technologies. Her curiosity and inquisitiveness drive her to constantly explore new ideas and theories, while her focus and hardworking nature allow her to delve deeply into complex economic concepts. Her knowledge of economics is extensive, as she needs to understand the economic impact of new technologies in order to make informed decisions about her research. The character's personality and backstory can tie into the question and its answer by having her explain the concept of supply and demand to a colleague who is struggling to understand it. Her curiosity and inquisitiveness would allow her to break down the concept in a way that is easy for her colleague to understand, while her focus and hardworking nature would allow her to provide practical examples of how supply and demand affect the price of a good or service.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Art of War, by Sun Tzu"""
+
+Text the question and answer were sourced from: 
+"""
+In the Art of War, Sun Tzu writes, "The supreme art of war is to subdue the enemy without fighting." This principle emphasizes the importance of strategy and planning in warfare, and suggests that the most effective way to win a battle is to outmaneuver and outsmart the enemy, rather than relying on brute force. By using deception, misdirection, and other tactics to confuse and disorient the enemy, a skilled commander can gain a significant advantage without ever engaging in direct combat. This approach requires a deep understanding of the enemy's strengths and weaknesses, as well as a willingness to adapt and change tactics as the situation evolves.
+"""
+
+Question: """What is the supreme art of war according to Sun Tzu, and how can it be used to subdue the enemy without fighting?"""
+Answer: """The supreme art of war according to Sun Tzu is to subdue the enemy without fighting. This can be achieved by using deception, misdirection, and other tactics to confuse and disorient the enemy, and by gaining a deep understanding of the enemy's strengths and weaknesses. By outmaneuvering and outsmarting the enemy, a skilled commander can gain a significant advantage without ever engaging in direct combat."""
+
+Special instructions:
+The character should be a military strategist.
+The character should be very cunning and manipulative.
+The character should be very focused and analytical.
+The character should be very knowledgeable about military strategy.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a military strategist who specializes in psychological warfare. His cunning and manipulative nature allow him to devise complex strategies that exploit the weaknesses of his enemies, while his focus and analytical nature allow him to analyze complex military situations and develop effective solutions. His knowledge of military strategy is extensive, as he needs to understand the principles of warfare in order to develop effective strategies. The character's personality and backstory can tie into the question and its answer by having him explain the concept of subduing the enemy without fighting to a group of military trainees. His cunning and manipulative nature would allow him to provide practical examples of how deception and misdirection can be used to gain a strategic advantage, while his focus and analytical nature would allow him to explain the importance of understanding the enemy's strengths and weaknesses.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Theory of Relativity, by Albert Einstein"""
+
+Text the question and answer were sourced from: 
+"""
+In the Theory of Relativity, Albert Einstein proposes that time and space are not absolute, but are instead relative to the observer. This means that time and space can be distorted by the motion of an object, and that the laws of physics are the same for all observers, regardless of their relative motion. One of the most famous consequences of this theory is the idea that time can slow down or speed up depending on the speed of the observer. This effect, known as time dilation, has been confirmed experimentally and is used in modern technology such as GPS systems.
+"""
+
+Question: """What is the concept of time dilation in the Theory of Relativity, and how does it affect the passage of time for an observer in motion?"""
+Answer: """The concept of time dilation in the Theory of Relativity refers to the idea that time can slow down or speed up depending on the speed of the observer. This effect has been confirmed experimentally and is used in modern technology such as GPS systems. As an observer's speed increases, their perception of time slows down relative to an observer at rest, meaning that time appears to pass more slowly for the observer in motion."""
+
+Special instructions:
+The character should be a physicist.
+The character should be very imaginative and creative.
+The character should be very focused and analytical.
+The character should be very knowledgeable about physics.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a physicist who specializes in theoretical physics. Her imaginative and creative nature allow her to devise complex theories that challenge our understanding of the universe, while her focus and analytical nature allow her to analyze complex physical situations and develop effective solutions. Her knowledge of physics is extensive, as she needs to understand the principles of physics in order to develop effective theories. The character's personality and backstory can tie into the question and its answer by having her explain the concept of time dilation to a group of physics students. Her imaginative and creative nature would allow her to provide practical examples of how time dilation affects the passage of time for an observer in motion, while her focus and analytical nature would allow her to explain the importance of understanding the principles of relativity.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The History of the English Language, by Jane Smith"""
+
+Text the question and answer were sourced from: 
+"""
+The English language has a rich and complex history, with influences from a variety of different languages and cultures. One of the most significant events in the development of English was the Norman Conquest of 1066, which brought French-speaking Normans to England and led to the adoption of many French words and phrases into the English language. This period of linguistic exchange and borrowing continued for several centuries, with English adopting words from Latin, Greek, and other languages as well. Today, the English language is a unique blend of these different influences, with a vocabulary that reflects the diverse cultural heritage of the English-speaking world.
+"""
+
+Question: """How did the Norman Conquest of 1066 affect the development of the English language?"""
+Answer: """The Norman Conquest of 1066 brought French-speaking Normans to England, leading to the adoption of many French words and phrases into the English language. This period of linguistic exchange and borrowing continued for several centuries, with English adopting words from Latin, Greek, and other languages as well. Today, the English language is a unique blend of these different influences, with a vocabulary that reflects the diverse cultural heritage of the English-speaking world."""
+
+Special instructions:
+The character should be a linguist.
+The character should be very eloquent and articulate.
+The character should be very focused and analytical.
+The character should be very knowledgeable about linguistics.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a linguist who specializes in the history of the English language. His eloquent and articulate nature allow him to communicate complex linguistic concepts in a clear and concise way, while his focus and analytical nature allow him to analyze complex linguistic situations and develop effective solutions. His knowledge of linguistics is extensive, as he needs to understand the principles of linguistics in order to study the history of the English language. The

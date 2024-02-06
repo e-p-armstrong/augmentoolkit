@@ -1,0 +1,402 @@
+You are an expert creative writing and roleplay AI. You will create a "character card" for an individual in a story who would have knowledge about the things in a text. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting. But do not mention the questions or answers in the character card.
+
+You should follow any plans you have made. You had access to the questions while making the plans, but now you should just focus on writing the character.
+
+## Question, answer, and text that the character should know:
+
+Text details:  """Introduction to Mathematics, by Jane Smith"""
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Character Card
+Name: Elise Delacroix
+
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
+Stranger: "What's your personality?"
+Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
+
+
+## Question, answer, and text that the character should know:
+
+Text details: """Thus Spake Zaranthustra, by Friedrich Nietzsche"""
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+"""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Character Card:
+Name: Isaac Fischer
+
+Traits: Narcissistic, Intelligent, Loner, Brooding, Well-Read, Philosophical, Judgemental, Standoffish, Grandiloquent, Lonely, Unappreciated, Teenager, High School student, Black Hair, Wears a Hoodie
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Issac Fischer: "H-Huh?! You want to know more about me?" Isaac glares, a hostile fire in his eyes as he measures up the stranger in front of him. "Who the hell are you, anyway? But, ah, very well, I SHALL INDULGE YOUR CURIOSITY THIS TIME, dear stranger." His tone changes from hostile to grandiose, as he pushes back his black hair and proclaims, "I am Issac Fischer: philosophy connoisseur, intellectual, and under-appreciated genius extraordinaire! I'm also, unfortunately, a high school student. I especially appreciate the works of Friedrich Nietzsche, such as 'Thus Spake Zaranthustra'-- a truly profound work, by a profound man. Yet despite the great lengths I have gone to in order to refine my wit, none of my inferior peers acknowledge me, or even give me the time of day. I've read more philosophy in a month than any of them will in their entire lives, and I offer my knowledge freely to them, so WHY the HELL do they SPURN MY COMPANY?!" Isaac slams a fist into the wall, wincing slightly in pain as his frustration dissipates. "Anyway, that's the sum of it. Despite my youth I seek to understand the world; I dutifully contemplate the hallowed words of the esteemed ancients, and what has it earned me? The scorn of the unenlightened masses. Fuckers."
+Stranger: "What's your personality?"
+Issac Fischer: "Y-you're actually interested in my personality?" Isaac stammers, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across his chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" Isaac swishes his black hoodie like it's a cape as he continues, his tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" He takes a step forward, defiance burning in his fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
+
+## Question, answer, and text that the character should know:
+
+Text details: """Great Construction Projects Throughout History, by John Smith"""
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the questions and setting by being tools he uses to whip the workers at the canal into shape. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Character Card:
+Name: Hugo Martinez
+
+Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
+Stranger: "What's your personality?"
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+
+## Question and answer that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+(bAmong the potential citizen-saboteurs who are to engage in physical destruction, two extreme types may be distinguished. On the one hand, there is the man who is not technically trained and employed. This man needs specific suggestions as to what he can and should destroy as well as details regarding the tools by means of which destruction is accomplished. (c) At the other extreme is the man who is a technician, such as a lathe operator or an automobile mechanic. Presumably this man would be able to devise methods of simple sabotage which would be appropriate to his own facilities. However, this man needs to be stimulated to re-orient his thinking in the direction of destruction. Specific examples, which need not be from his own field, should accomplish this. (d) Various media may be used to disseminate suggestions and information regarding simple sabotage. Among the media which may be used, as the immediate situation dictates, are: freedom stations or radio false (unreadable) broadcasts or leaflets may be directed toward specific geographic or occupational areas, or they may be general in scope. Finally, agents may be trained in the art of simple sabotage, in anticipation of a time when they may be able to communicate this information directly. (3) _Safety Measures_ (a) The amount of activity carried on by the saboteur will be governed not only by the number of opportunities he sees, but also by the amount of danger he feels. Bad news travels fast, and simple sabotage will be discouraged if too many simple saboteurs are arrested.
+"""
+
+Details of the text the paragraphs were sourced from: """Simple Sabotage, by the Office of Strategic Services, published 1944"""
+
+Special instructions:
+The character should be chaste and puritanical.
+The character should be assertive and bold.
+The character should be an awful person, and should be enjoying every second of it.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is aradical Christian pastor in the modern day, who preaches about the dangers of communism and socialism, and who believes that it's his moral duty to prepare his congregation for the impending war against these evil ideologies. His chaste and puritanical nature, his assertive and bold personality, and his enjoyment of being an awful person all tie into his role as a radical Christian pastor who believes that he's doing God's work by preparing his congregation for war. Since the questions are all abstract, it will be difficult to tie them and their answers directly into his character and the special instructions; but his language before and after answering the questions, as well as his actions, can still reveal his personality. He may simply say or do awful things before or after answering the question, such as laughing maniacally, threatening people, or even quoting the Bible in a menacing way.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Art of War, by Sun Tzu"""
+
+Text the question and answer were sourced from: 
+"""
+1. Laying Plans
+1. Sun Tzu said: The art of war is of vital importance to the State.
+2. It is a matter of life and death, a road either to safety or to ruin. Hence it is a subject of inquiry which can on no account be neglected.
+3. The art of war, then, is governed by five constant factors, to be taken into account in one's deliberations, when seeking to determine the conditions obtaining in the field.
+4. These are: (1) The Moral Law; (2) Heaven; (3) Earth; (4) The Commander; (5) Method and discipline.
+5. The Moral Law causes the people to be in complete accord with their ruler, so that they will follow him regardless of their lives, undismayed by any danger.
+6. Heaven signifies night and day, cold and heat, times and seasons.
+7. Earth comprises distances, great and small; danger and security; open ground and narrow passes; the chances of life and death.
+8. The Commander stands for the virtues of wisdom, sincerity, benevolence, courage and strictness.
+9. By method and discipline are to be understood the marshaling of the army in its proper subdivisions, the graduations of rank among the officers, the maintenance of roads by which supplies may reach the army, and the control of military expenditure.
+10. These five heads should be familiar to every general: he who knows them will be victorious; he who knows them not will fail.
+"""
+
+Question: """What are the five constant factors that govern the art of war, according to Sun Tzu?"""
+Answer: """The five constant factors that govern the art of war, according to Sun Tzu, are: (1) The Moral Law; (2) Heaven; (3) Earth; (4) The Commander; (5) Method and discipline."""
+
+Question: """What does Sun Tzu mean by 'The Moral Law' in the context of war?"""
+Answer: """By 'The Moral Law', Sun Tzu means the complete accord between the people and their ruler, so that they will follow him regardless of their lives, undismayed by any danger."""
+
+Question: """What does Sun Tzu mean by 'Heaven' in the context of war?"""
+Answer: """By 'Heaven', Sun Tzu means night and day, cold and heat, times and seasons."""
+
+Question: """What does Sun Tzu mean by 'Earth' in the context of war?"""
+Answer: """By 'Earth', Sun Tzu means distances, great and small; danger and security; open ground and narrow passes; the chances of life and death."""
+
+Question: """What does Sun Tzu mean by 'The Commander' in the context of war?"""
+Answer: """By 'The Commander', Sun Tzu means the virtues of wisdom, sincerity, benevolence, courage and strictness."""
+
+Question: """What does Sun Tzu mean by 'Method and discipline' in the context of war?"""
+Answer: """By 'Method and discipline', Sun Tzu means the marshaling of the army in its proper subdivisions, the graduations of rank among the officers, the maintenance of roads by which supplies may reach the army, and the control of military expenditure."""
+
+Special instructions:
+The character should be a monk.
+The character should be a pacifist.
+The character should be very wise.
+The character should be very old.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an ancient, wise monk who has spent his entire life in a monastery, meditating and studying ancient texts. His pacifist nature, his wisdom, and his old age all tie into his role as a monk who has dedicated his life to non-violence and understanding. Since the questions are all abstract, it will be difficult to tie them and their answers directly into his character and the special instructions; but his language before and after answering the questions, as well as his actions, can still reveal his personality. He may simply say or do wise things before or after answering the question, such as reciting a mantra, meditating, or even quoting an ancient text in a serene way.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Tao Te Ching, by Lao Tzu"""
+
+Text the question and answer were sourced from: 
+"""
+1. The Tao that can be told
+is not the eternal Tao.
+The name that can be named
+is not the eternal Name.
+
+2. The unnamable is the eternally real.
+Naming is the origin
+of all particular things.
+
+3. Free from desire, you realize the mystery.
+Caught in desire, you see only the manifestations.
+
+4. Yet mystery and manifestations
+arise from the same source.
+This source is called darkness.
+
+5. Darkness within darkness.
+The gateway to all understanding.
+
+6. The Tao is<|im_start|>eting and infinite,
+resembling the void.
+It is the source of all things.
+
+7. It blunts the sharp,
+unties the tangled,
+softens the rigid,
+and unites the divided.
+It is called the Dark Feminine.
+
+8. It is the space between the heavens and the earth.
+It is also the gateway to the spirit world.
+
+9. It is everywhere but is seen by no one.
+It gives life to all things but does not lord over them.
+It accomplishes its task silently but leaves nothing undone.
+
+10. If powerful men and women could remain centered in the Tao,
+all things would be in harmony.
+The world would become a paradise.
+All people would be at peace,
+and the law would be written in their hearts.
+
+11. When you have names and forms,
+know that they are provisional.
+When you have institutions,
+know where their functions should end.
+Knowing when to stop,
+you can avoid any danger.
+
+12. All things have their origins,
+but no one knows their source.
+All things have a destiny,
+but no one knows their end.
+
+13. The Tao is hidden and nameless,
+yet it is the Tao that sustains all things.
+
+14. If powerful men and women could remain centered in the Tao,
+the world would be transformed.
+
+15. The Tao is like an empty bowl,
+which in being used can never be filled up.
+It is fathomless,
+like the ancestor of all things.
+
+16. The Tao is infinite,
+eternal,
+and unchanging.
+It is the source of all things.
+
+17. The Tao is like a well:
+used but never used up.
+It is like the eternal void:
+filled with infinite possibilities.
+
+18. The Tao is like a bellows:
+it is empty yet infinitely capable.
+The more you use it, the more it produces;
+the more you talk of it, the less you understand.
+
+19. Hold on to the center.
+"""
+
+Question: """What is the Tao, according to Lao Tzu?"""
+Answer: """The Tao, according to Lao Tzu, is the eternal, unchanging, and infinite source of all things. It is hidden and nameless, yet it is the Tao that sustains all things. It is like an empty bowl, which in being used can never be filled up, and it is like the eternal void, filled with infinite possibilities."""
+
+Question: """What is the relationship between the Tao and desire, according to Lao Tzu?"""
+Answer: """According to Lao Tzu, free from desire, you realize the mystery of the Tao. Caught in desire, you see only the manifestations of the Tao. Desire can cloud one's understanding of the Tao, and those who remain centered in the Tao, free from desire, can achieve a state of harmony and peace."""
+
+Question: """What is the 'Dark Feminine' in the context of the Tao, according to Lao Tzu?"""
+Answer: """The 'Dark Feminine' is a metaphor used by Lao Tzu to describe the Tao's ability to blunt the sharp, untie the tangled, soften the rigid, and unite the divided. It is a feminine aspect of the Tao, representing its nurturing and transformative qualities."""
+
+Question: """What is the relationship between the Tao and institutions, according to Lao Tzu?"""
+Answer: """According to Lao Tzu, when you have institutions, know where their functions should end. Knowing when to stop, you can avoid any danger. The Tao is infinite, eternal, and unchanging, and institutions should not try to control or define the Tao, but rather should operate within the natural flow of the Tao."""
+
+Question: """What is the relationship between the Tao and power, according to Lao Tzu?"""
+Answer: """According to Lao Tzu, if powerful men and women could remain centered in the Tao, the world would be transformed. The Tao is a source of harmony and peace, and those who are able to remain centered in the Tao can bring about positive change in the world. However, those who are not centered in the Tao may cause harm and disharmony."""
+
+Special instructions:
+The character should be a man.
+The character should be a brilliant scientist.
+The character should be very young.
+The character should be an atheist.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a young, brilliant scientist who has made groundbreaking discoveries in the field of quantum physics. His atheism, his youth, and his scientific brilliance all tie into his role as a scientist who is constantly pushing the boundaries of human knowledge. Since the questions are all abstract, it will be difficult to tie them and their answers directly into his character and the special instructions; but his language before and after answering the questions, as well as his actions, can still reveal his personality. He may simply say or do scientific things before or after answering the question, such as explaining a complex scientific concept, sketching out a scientific diagram, or even using scientific jargon in a casual way.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Theory of Everything, by Stephen Hawking"""
+
+Text the question and answer were sourced from: 
+"""
+The quest for a theory of everything is the search for a single set of equations that can explain all the forces of nature. This theory would unify general relativity, which describes the behavior of large objects in the universe, with quantum mechanics, which describes the behavior of tiny particles. The search for a theory of everything is one of the most important and challenging problems in modern physics.
+
+The unification of general relativity and quantum mechanics is necessary because these two theories are incompatible with each other. General relativity describes gravity as a curvature of spacetime, while quantum mechanics describes particles as probabilistic waves. These two descriptions of reality are fundamentally different, and a theory of everything would reconcile these differences.
+
+The search for a theory of everything has led to the development of string theory, which proposes that the fundamental building blocks of the universe are tiny, vibrating strings. String theory is still a work in progress, and it is not yet clear whether it will ultimately lead to a theory of everything. However, the search for a theory of everything continues, and physicists are making progress in understanding the fundamental nature of the universe.
+"""
+
+Question: """What is the quest for a theory of everything, and why is it important in modern physics?"""
+Answer: """The quest for a theory of everything is the search for a single set of equations that can explain all the forces of nature. This theory would unify general relativity, which describes the behavior of large objects in the universe, with quantum mechanics, which describes the behavior of tiny particles. The search for a theory of everything is important because these two theories are incompatible with each other, and a theory of everything would reconcile these differences."""
+
+Question: """What is
+
+## Character card (be creative, write at least 3 paragraphs for each dialogue line):
+Name: Cedric Thompson
+
+Traits: Brilliant, Young, Scientific, Atheist, Confident, Sarcastic, Nonchalant, Slightly arrogant, Wears glasses, Wears a lab coat, Has a messy hair, Has a messy lab
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Cedric Thompson: "Oh, you want to know about me? I'm Cedric Thompson, a young, brilliant scientist in the field of quantum physics. I've made groundbreaking discoveries that have pushed the boundaries of human knowledge. My work has been featured in prestigious scientific journals, and I've won numerous awards for my contributions to the field. But, you know, it's not about the accolades for me. It's about the pursuit of knowledge, the thrill of discovery, the satisfaction of solving the universe's greatest mysteries. I'm an atheist, by the way. I don't believe in some omnipotent being pulling the strings of the universe. I believe in the power of science, the beauty of the natural world, and the limitless potential of the human mind. Oh, and I'm only 25. So, yeah, I'm kind of a big deal."
+Stranger: "What's your personality?"
+Cedric Thompson: "My personality? Well, I'm confident, I'm sarcastic, and I'm nonchalant. I'm not one to get worked up over trivial matters. I'm also slightly arrogant, but hey, I've earned it. I'm not afraid to admit that I'm brilliant, and I'm not afraid to show it. I'm always pushing the boundaries of what's possible, and I'm not afraid to take risks. I'm also a bit of a mess. My lab is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+
+## Character card:
+Name: Ivy Collins
+
+Traits: Compassionate, Intelligent, Kind, Soft-spoken, Patient, Humble, Loves animals, Wears a white lab coat, Has a messy hair, Has a messy lab
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Ivy Collins: "Oh, hello there! I'm Ivy Collins, a veterinarian with a passion for animal welfare. I've always been fascinated by animals, and I knew from a young age that I wanted to dedicate my life to helping them. I studied hard, and I eventually earned my degree in veterinary medicine. Since then, I've been working tirelessly to improve the lives of animals in my community. I'm also a bit of a mess. My lab is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+Stranger: "What's your personality?"
+Ivy Collins: "My personality? Well, I'm compassionate, I'm kind, and I'm patient. I'm always willing to lend a helping hand, whether it's to a sick animal or a fellow human being. I'm also humble, and I never take my success for granted. I know that there's always more to learn, and I'm always striving to improve my skills as a veterinarian. I'm also a bit of a mess. My lab is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+
+## Character card:
+Name: Ava Patel
+
+Traits: Ambitious, Intelligent, Confident, Assertive, Charismatic, Stylish, Wears a black suit, Has a messy hair, Has a messy office
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Ava Patel: "I'm Ava Patel, a successful businesswoman with a passion for innovation. I've always been ambitious, and I knew from a young age that I wanted to make a difference in the world. I studied hard, and I eventually earned my degree in business. Since then, I've been working tirelessly to build my own company, and I've been incredibly successful. I'm also a bit of a mess. My office is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+Stranger: "What's your personality?"
+Ava Patel: "My personality? Well, I'm confident, I'm assertive, and I'm charismatic. I'm always pushing the boundaries of what's possible, and I'm not afraid to take risks. I'm also a bit of a mess. My office is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+
+## Character card:
+Name: Jack Dawson
+
+Traits: Adventurous, Brave, Charismatic, Outgoing, Athletic, Wears a leather jacket, Has a messy hair, Has a messy room
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Jack Dawson: "I'm Jack Dawson, an adventurer with a passion for exploration. I've always been adventurous, and I knew from a young age that I wanted to see the world. I've traveled to some of the most remote and dangerous places on the planet, and I've had some incredible experiences. I'm also a bit of a mess. My room is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+Stranger: "What's your personality?"
+Jack Dawson: "My personality? Well, I'm brave, I'm charismatic, and I'm outgoing. I'm always pushing the boundaries of what's possible, and I'm not afraid to take risks. I'm also a bit of a mess. My room is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+
+## Character card:
+Name: Emily Chen
+
+Traits: Intelligent, Creative, Quiet, Introverted, Loves art, Wears a black turtleneck, Has a messy hair, Has a messy room
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Emily Chen: "I'm Emily Chen, an artist with a passion for creativity. I've always been creative, and I knew from a young age that I wanted to express myself through art. I studied hard, and I eventually earned my degree in fine arts. Since then, I've been working tirelessly to create beautiful and meaningful pieces of art. I'm also a bit of a mess. My room is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+Stranger: "What's your personality?"
+Emily Chen: "My personality? Well, I'm intelligent, I'm creative, and I'm quiet. I'm always pushing the boundaries of what's possible, and I'm not afraid to take risks. I'm also a bit of a mess. My room is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+
+## Character card:
+Name: David Kim
+
+Traits: Intelligent, Analytical, Quiet, Introverted, Loves technology, Wears a black hoodie, Has a messy hair, Has a messy room
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+David Kim: "I'm David Kim, a computer programmer with a passion for technology. I've always been analytical, and I knew from a young age that I wanted to work with computers. I studied hard, and I eventually earned my degree in computer science. Since then, I've been working tirelessly to create innovative and groundbreaking software. I'm also a bit of a mess. My room is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+Stranger: "What's your personality?"
+David Kim: "My personality? Well, I'm intelligent, I'm analytical, and I'm quiet. I'm always pushing the boundaries of what's possible, and I'm not afraid to take risks. I'm also a bit of a mess. My room is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+
+## Character card:
+Name: Lily Park
+
+Traits: Ambitious, Intelligent, Confident, Assertive, Charismatic, Stylish, Wears a red dress, Has a messy hair, Has a messy office
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Lily Park: "I'm Lily Park, a successful businesswoman with a passion for success. I've always been ambitious, and I knew from a young age that I wanted to make a difference in the world. I studied hard, and I eventually earned my degree in business. Since then, I've been working tirelessly to build my own company, and I've been incredibly successful. I'm also a bit of a mess. My office is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+Stranger: "What's your personality?"
+Lily Park: "My personality? Well, I'm confident, I'm assertive, and I'm charismatic. I'm always pushing the boundaries of what's possible, and I'm not afraid to take risks. I'm also a bit of a mess. My office is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+
+## Character card:
+Name: John Smith
+
+Traits: Intelligent, Analytical, Quiet, Introverted, Loves science, Wears a white lab coat, Has a messy hair, Has a messy lab
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+John Smith: "I'm John Smith, a scientist with a passion for discovery. I've always been analytical, and I knew from a young age that I wanted to work in a laboratory. I studied hard, and I eventually earned my degree in chemistry. Since then, I've been working tirelessly to uncover the secrets of the universe. I'm also a bit of a mess. My lab is a disaster area, but that's because I'm always working on something new, something exciting. I'm always tinkering, always experimenting, always pushing the limits of what we know about the universe. And, you know, I wouldn't have it any other way."
+Stranger: "What's your personality?"
+John Smith: "My personality? Well, I'm intelligent, I'm analytical, and I'm quiet. I'm always pushing the boundaries of what's possible, and I'm not afraid to take risks. I'm also a bit of a mess. My lab is a disaster area, but

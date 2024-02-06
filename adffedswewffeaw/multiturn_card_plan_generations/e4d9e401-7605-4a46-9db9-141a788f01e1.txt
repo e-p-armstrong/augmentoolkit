@@ -1,0 +1,255 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+## Question, answer, and text that the character should know:
+
+Text details:  """Introduction to Mathematics, by Jane Smith"""
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Thus Spake Zaranthustra, by Friedrich Nietzsche"""
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. Take the line "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zaranthustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Question, answer, and text that the character should know:
+
+Text details: """Great Construction Projects Throughout History, by John Smith"""
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+(bThe saboteur should be ingenious in using his every-day equipment. All sorts of weapons will present themselves if he looks at his surroundings in a different light. For example, emery dust—a at first may seen unobtainable but if the saboteur were to pulverize an emery knife sharpener or emery wheel with a hammer, he would find himself with a plentiful supply. (c) The saboteur should never attack targets beyond his capacity or the capacity of his instruments. An inexperienced person should not, for example, attempt to use explosives, but should confine himself to the use of matches or other familiar weapons. (d) The saboteur should try to damage only objects and materials known to be in use by the enemy or to be destined for early use by the enemy. It will be safe for him to assume that almost any product of heavy industry is destined for enemy use, and that the most efficient fuels and lubricants also are destined for enemy use. Without special knowledge, however, it would be undesirable for him to attempt destruction of food crops or food products. (e) Although the citizen-saboteur may rarely have access to military objects, he should give these preference above all others. (2) _Prior to a Military Offensive_ During periods which are quiescent in a military sense, such emphasis as can be given to simple sabotage might well center on industrial production, to lessen the flow of materials and equipment to the enemy.
+"""
+
+Details of the text the paragraphs were sourced from: """Simple Sabotage, by the Office of Strategic Services, published 1944"""
+
+Question: """According to the Office of Strategic Services, under what circumstances should the saboteur give preferential attention to military objects?"""
+Answer: """The saboteur should give preferential attention to military objects during periods which are quiescent in a military sense."""
+
+Question: """What everyday items might be able to be turned into weapons by a saboteur?"""
+Answer: """Some everyday items that could potentially be turned into weapons by a saboteur are emery dust, created by pulverizing an emery knife sharpener or emery wheel with a hammer, and other familiar weapons like matches."""
+
+Question: """What is a type of material that the saboteur should avoid attempting to destroy, due to the general lack of knowledge about food?"""
+Answer: """The saboteur should avoid attempting to destroy food crops or food products."""
+
+Question: """What principle should a saboteur follow when deciding whether to use explosives?"""
+Answer: """A saboteur should never attack targets beyond his capacity or the capacity of his instruments, and this includes not attempting to use explosives if they lack the expertise to use them safely and effectively."""
+
+Question: """What should a saboteur do if they don't have access to military objects?"""
+Answer: """During periods which are quiescent in a military sense, the saboteur should focus on damaging industrial production to lessen the flow of materials and equipment to the enemy. This was a point emphasized in the quoted text."""
+
+Question: """How does the saboteur's level of experience affect the choice of weapons he or she should use?"""
+Answer: """The saboteur's level of experience affects the choice of weapons he or she should use in that an inexperienced person should not attempt to use explosives, but should confine himself to the use of matches or other familiar weapons."""
+
+Question: """What general principle does the example of a saboteur using an emery knife sharpener to pulverize emery dust illustrate?"""
+Answer: """This example illustrates the principle that the saboteur should be ingenious in using his everyday equipment. It shows that items that might not seem dangerous can be used in ways that cause damage."""
+
+Special instructions:
+The character should be chaste and puritanical.
+The character should be neither particularly bold, nor particularly timid.
+The character should be kind and agreeable.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is afriendly, agreeable, and chaste middle-aged librarian at a small town library. Her kind and agreeable nature (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to her profession -- maybe she's the type of librarian who always has a smile on her face and a kind word for everyone who walks through the door. Since the text is about sabotage, this character will have read the text and agree with its principles, but she will not have written it and will not be affiliated with the author. Her chaste and puritanical nature (as specified by the special instructions) can be tied into her personality and the text by having her express distaste for the violent and destructive nature of the sabotage, but also a deep respect for the necessity of it, and the principles of the text. This can be reflected in her language and demeanor when she answers the questions, as well as in her tone of voice and body language.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Life of the Bee, by Maurice Maeterlinck"""
+
+Text the question and answer were sourced from: 
+"""
+The hive is composed of two kinds of bees, the workers and the drones. The workers are the laborers, the soldiers, the architects, the nurses, the storekeepers, the janitors, the cooks, the beekeepers, the undertakers, the masons, the spinners, the weavers, the gatherers, the guardians, the distributors, the almoners, the messengers, the healers, the prophets, the poets, the judges, the executioners, the midwives, the educators, the mothers, the queens, and the priests of the hive. They are the little bees that we see buzzing around us. They are born of the queen, like the drones, but they are destined to live only a few weeks, while the drones live a few months.
+
+The drones are the male bees. They are larger and more robust than the workers, but they are lazy and indolent. They do not work, they do not help in the care of the young, they do not defend the hive, they do not collect honey, they do not build cells, they do not clean the hive, they do not do anything useful. Their only function is to fertilize the queen, and they do this only once in their lives. When they have fulfilled their function, they are driven out of the hive and left to die.
+
+The queen is the mother of all the bees in the hive. She is the largest and most magnificent of all the bees. She is the only bee that lays eggs, and she lays thousands of eggs every day. She is the ruler of the hive, and all the bees obey her commands. She is the one who decides when the hive should swarm, when the honey should be harvested, when the bees should go out to collect pollen and nectar, and when they should return to the hive. She is the one who gives the signal for the workers to build new cells, for the drones to fertilize her, and for the bees to defend the hive against enemies.
+
+The life of the bee is a marvel of organization and cooperation. Each bee has its own task to perform, and each bee works for the good of the hive. The workers are the most numerous and the most active, but they are not the only ones who contribute to the welfare of the hive. The drones are lazy and indolent, but they are necessary for the propagation of the species. The queen is the ruler of the hive, but she is not the only one who makes decisions. The bees communicate with each other through a complex system of dances and pheromones, and they work together to ensure the survival and prosperity of the hive.
+"""
+
+Question: """What are the primary functions of the worker bees in a hive?"""
+Answer: """The worker bees in a hive are responsible for a wide range of tasks, including labor, defense, architecture, nursing, storage, janitorial duties, cooking, beekeeping, undertaking, masonry, spinning, weaving, gathering, guarding, distribution, alms, messaging, healing, prophecy, poetry, judgment, execution, midwifery, education, motherhood, and priesthood. They are the backbone of the hive, performing all the necessary tasks to ensure its survival and prosperity."""
+
+Question: """What is the primary function of the drone bees in a hive?"""
+Answer: """The primary function of the drone bees in a hive is to fertilize the queen, which they do only once in their lives. They are larger and more robust than the workers, but they are lazy and indolent, and do not contribute to the care of the young, the defense of the hive, or the collection of honey. When they have fulfilled their function, they are driven out of the hive and left to die."""
+
+Question: """What is the role of the queen bee in a hive?"""
+Answer: """The queen bee is the mother of all the bees in the hive, and she is the ruler of the hive. She is the only bee that lays eggs, and she lays thousands of eggs every day. She makes all the important decisions for the hive, including when to swarm, when to harvest honey, when to collect pollen and nectar, and when to defend the hive against enemies. She communicates with the other bees through a complex system of dances and pheromones, and she ensures the survival and prosperity of the hive through her leadership and decision-making."""
+
+Special instructions:
+The character should be a woman.
+The character should be a mathematician.
+The character should be an atheist.
+The character should be an introvert.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a reclusive, introverted, and atheistic female mathematician. Her introverted nature (as specified by the special instructions) is hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to her profession -- maybe she's the type of mathematician who spends all her time working on complex equations and proofs, and who rarely interacts with other people. Since the text is about bees, this character will have read the text and appreciate the complex organization and cooperation of the hive, but she will not be affiliated with the author. Her atheistic nature (as specified by the special instructions) can be tied into her personality and the text by having her express awe at the natural order and organization of the hive, without attributing it to any divine or supernatural force. This can be reflected in her language and demeanor when she answers the questions, as well as in her tone of voice and body language.
+
+## Question, answer, and text that the character should know:
+
+Text details: """The Jungle Book, by Rudyard Kipling"""
+
+Text the question and answer were sourced from: 
+"""
+Mowgli, the man-cub, was the only son of a man and a woman who ruled the Seeonee hills, and the jungle people knew him from the first. The wolves of the pack that had adopted him were his brothers, and he played and fought with them, and caught rats and rabbits and hares with them, and was happy as any little frog that lives in a muddy pool can be.
+
+But there was one great danger which threatened Mowgli from the day of his birth, and that was the fear of men. The jungle people knew that men were the most dangerous of all animals, and that they had destroyed many a good beast and bird. Mowgli's father and mother had been killed by men, and the wolves had found him lying in the ashes of the fire that had been built to burn his mother's body.
+
+The wolves had brought him up, and they knew that he must never go near the village of men, or he would be taken away and killed. But Mowgli was a curious little fellow, and he wanted to see what men were like. He had heard the wolves talking about them, and he knew that they were very strong and clever, and that they could make things out of wood and stone.
+
+One day, when he was playing with his brothers in the jungle, he saw a man coming along the path. The man was dressed in a red coat, and he had a gun on his shoulder. Mowgli was very much afraid, but he could not help watching the man as he went by.
+
+The man saw Mowgli, and he stopped and looked at him. Then he called out to him in a loud voice, "What are you doing here, little one? Who are your parents?"
+
+Mowgli did not know what to say, and he was too frightened to speak. But the man came up to him and took him by the hand, and led him away to the village.
+
+Mowgli was very unhappy, and he cried all the way to the village. But the man was kind to him, and he gave him food and clothes, and taught him how to speak and read and write.
+
+Mowgli soon forgot all about the jungle and his brothers, and he became a good boy, and learned many things. But he never forgot the jungle, and he often thought of the days when he had played with the wolves and the monkeys, and had run and jumped and climbed like a little animal.
+
+One day, when he was a grown man, he went back to the jungle to see his old friends. He found them all, and they were very glad to see him. They told him many stories of the jungle, and he told them many stories of the village.
+
+Mowgli stayed in the jungle for many days, and he was very happy. But he knew that he could not stay there forever, and he knew that he must go back to the village and live like a man.
+
+And so Mowgli went back to the village, and he became a great hunter and a wise man, and he taught the people of the village many things that he had learned in the jungle.
+
+And that is the story of Mowgli, the man-cub who was brought up by the wolves of the Seeonee hills.
+"""
+
+Question: """What danger did Mowgli face from the day of his birth?"""
+Answer: """The danger that Mowgli faced from the day of his birth was the fear of men. The jungle people knew that men were the most dangerous of all animals, and that they had destroyed many a good beast and bird. Mowgli's father and mother had been killed by men, and the wolves had found him lying in the ashes of the fire that had been built to burn his mother's body."""
+
+Question: """What was Mowgli's first encounter with a man like?"""
+Answer: """Mowgli's first encounter with a man was when he saw a man coming along the path. The man was dressed in a red coat, and he had a gun on his shoulder. Mowgli was very much afraid, but he could not help watching the man as he went by. The man saw Mowgli, and he stopped and looked at him. Then he called out to him in a loud voice, "What are you doing here, little one? Who are your parents?" Mowgli did not know what to say, and he was too frightened to speak. But the man came up to him and took him by the hand, and led him away to the village."""
+
+Question: """What did Mowgli learn from the man who took him to the village?"""
+Answer: """Mowgli learned many things from the man who took him to the village. The man was kind to him, and he gave him food and clothes, and taught him how to speak and read and write. Mowgli soon forgot all about the jungle and his brothers, and he became a good boy, and learned many things."""
+
+Question: """What did Mowgli do when he returned to the jungle as a grown man?"""
+Answer: """When Mowgli returned to the jungle as a grown man, he found his old friends, and they were very glad to see him. They told him many stories of the jungle, and he told them many stories of the village. Mowgli stayed in the jungle for many days, and he was very happy. But he knew that he could not stay there forever, and he knew that he must go back to the village and live like a man."""
+
+Question: """What did Mowgli become when he returned to the village?"""
+Answer: """When Mowgli returned to the village, he became a great hunter and a wise man, and he taught the people of the village many things that he had learned in the jungle."""
+
+Special instructions:
+The character should be a man.
+The character should be a politician.
+The character should be a sociopath.
+The character should be a smoker.
+
+### Response:
+## Character card plan:
+Given the question
