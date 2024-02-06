@@ -3,4 +3,4 @@ sentencepiece
 transformers 
 matplotlib 
 nltk 
-aphrodite-engine
+openai
