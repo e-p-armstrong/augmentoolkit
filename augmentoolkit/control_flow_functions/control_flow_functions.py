@@ -16,6 +16,8 @@ from math import ceil
 import traceback
 import glob
 import uuid
+import yaml
+
 from augmentoolkit.generation_functions import (
     create_scenario_plan_many_tuples,
     create_scenario_many_tuples,
@@ -35,6 +37,10 @@ from augmentoolkit.generation_functions import (
     extract_name,
 )
 
+with open('./config.yaml', 'r') as file:
+    obj_conf = yaml.safe_load(file)
+
+import os
 
 # Used basically everywhere:
 def make_id():
@@ -76,14 +82,14 @@ async def make_multiturn_character(
     ) = await create_character_card_plan_many_tuples.create_character_card_plan_many_tuples(
         qa_tuples, engine_wrapper, use_filenames=use_filenames
     )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
-    write_output_to_file(card_plan_output, "./multiturn_card_plan_generations", conv_id)
+    write_output_to_file(card_plan_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_card_plan_generations", conv_id)
     (
         char,
         char_output,
     ) = await create_character_card_many_tuples.create_character_card_many_tuples(
         qa_tuples, plan, instructions, engine_wrapper, use_filenames=use_filenames
     )  # creates a character card
-    write_output_to_file(char_output, "./multiturn_card_generations", conv_id)
+    write_output_to_file(char_output, obj_conf['PATH']['OUTPUT'] + "multiturn_card_generations", conv_id)
     return char, instructions
 
 
@@ -101,7 +107,7 @@ async def make_multiturn_scenario(
         qa_tuples, character, engine_wrapper
     )
     write_output_to_file(
-        scenario_plan_output, "./multiturn_scenario_plan_generations", conv_id
+        scenario_plan_output, obj_conf['PATH']['OUTPUT'] + "multiturn_scenario_plan_generations", conv_id
     )
     (
         scenario,
@@ -109,7 +115,7 @@ async def make_multiturn_scenario(
     ) = await create_scenario_many_tuples.create_scenario_many_tuples(
         qa_tuples, character, plan, engine_wrapper
     )  # creates a scenario based on a character card and question/answer tuple
-    write_output_to_file(scenario_output, "./multiturn_scenario_generations", conv_id)
+    write_output_to_file(scenario_output, obj_conf['PATH']['OUTPUT'] + "multiturn_scenario_generations", conv_id)
     return scenario, plan
 
 
@@ -181,7 +187,7 @@ async def repair_qatuple_context(
             tup, engine_wrapper, use_filenames=use_filenames
         )
         write_output_to_file(
-            revision_output, "./question_context_revision_generations", revision_id
+            revision_output, obj_conf['PATH']['OUTPUT'] + "question_context_revision_generations", revision_id
         )  # incidentally, identifying the problem and fixing it in the same step (without another planning step) works a lot better than identifying it and then trying to fix it in the next step.
         if isinstance(revision[0], str):  # if the thing was reworded
             vetted_qa_tuples[idx] = revision
@@ -232,7 +238,7 @@ async def vet_answer_accuracy_loop(
                 qtuple, engine_wrapper
             )
             write_output_to_file(
-                answer_accuracy_output, "./check_answer_accuracy_generations", run_id
+                answer_accuracy_output, obj_conf['PATH']['OUTPUT'] + "/check_answer_accuracy_generations", run_id
             )
             if not judgement[0]:  # if not accurate
                 dissenting_reasoning = judgement[1]
@@ -261,7 +267,7 @@ async def vet_answer_accuracy_loop(
                 qtuple, engine_wrapper, use_filenames=use_filenames
             )
             write_output_to_file(
-                generate_new_q_output, "./regenerate_question_generations", run_id
+                generate_new_q_output, obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations", run_id
             )
             return await vet_question_loop(
                 qtuple,
@@ -306,7 +312,7 @@ async def vet_answer_relevance_loop(
                 qtuple, engine_wrapper
             )
             write_output_to_file(
-                answer_relevancy_output, "./check_answer_relevancy_generations", run_id
+                answer_relevancy_output, obj_conf['PATH']['OUTPUT'] + "/check_answer_relevancy_generations", run_id
             )
             if not judgement[0]:  # if not relevant
                 dissenting_reasoning = judgement[1]
@@ -339,7 +345,7 @@ async def vet_answer_relevance_loop(
                 qtuple, engine_wrapper, use_filenames=use_filenames
             )
             write_output_to_file(
-                generate_new_q_output, "./regenerate_question_generations", run_id
+                generate_new_q_output, obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations", run_id
             )
             return await vet_question_loop(
                 qtuple,
@@ -383,7 +389,7 @@ async def vet_question_loop(
                     qtuple, engine_wrapper
                 )
                 write_output_to_file(
-                    check_q_output, "./check_question_generations", run_id
+                    check_q_output, obj_conf['PATH']['OUTPUT'] + "/check_question_generations", run_id
                 )
                 if not judgement[0]:  # if not relevant
                     dissenting_reasoning = judgement[1]
@@ -425,7 +431,7 @@ async def vet_question_loop(
                     )
                     write_output_to_file(
                         generate_new_q_output,
-                        "./regenerate_question_generations",
+                        obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations",
                         run_id,
                     )
                     print("New question: ", qtuple)
@@ -469,7 +475,7 @@ async def generate_qatuples_from_para(
             para, engine_wrapper, use_filenames=use_filenames
         )
         write_output_to_file(
-            questions_plan_output, "./question_plan_generations", question_group_id
+            questions_plan_output, obj_conf['PATH']['OUTPUT'] + "/question_plan_generations", question_group_id
         )
         print(
             f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
@@ -482,7 +488,7 @@ async def generate_qatuples_from_para(
         )
         write_output_to_file(
             question_generation_output,
-            "./question_generation_generations",
+            obj_conf['PATH']['OUTPUT'] + "/question_generation_generations",
             question_group_id,
         )
         for qnum, question_answer_tuple in enumerate(question_answer_tuples):
@@ -725,7 +731,7 @@ async def make_multiturn_conversation(info, engine_wrapper, assistant_mode):
         engine_wrapper,
         assistant_mode=assistant_mode,
     )
-    write_output_to_file(conv_output, "./multiturn_conversation_generations", info[4])
+    write_output_to_file(conv_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_conversation_generations", info[4])
 
     return conv
 
