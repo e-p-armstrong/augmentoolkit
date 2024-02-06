@@ -1,0 +1,254 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+An effort should be made to add to their efficiency, lessen their detectability, and increase their number. Acts of simple sabotage, multiplied by thousands of citizen-saboteurs, can be an effective weapon against the enemy. Slashing tires, draining fuel tanks, starting fires, starting arguments, acting stupidly, short-circuiting electric systems, abrading machine parts will waste materials, manpower, and time. Occurring on a wide scale, simple sabotage will be a constant and tangible drag on the war effort of the enemy. Simple sabotage may also have secondary results of more or less value. Widespread practice of simple sabotage will harass and demoralize enemy administrators and police. Further, success may embolden the citizen-saboteur eventually to find colleagues who can assist him in sabotage of greater dimensions. Finally, the very practice of simple sabotage by natives in enemy or occupied territory may make these individuals identify themselves actively with the United Nations war effort, and encourage them to assist openly in periods of Allied invasion and occupation. 3. MOTIVATING THE SABOTEUR  To incite the citizen to the active practice of simple sabotage and to keep him practicing that sabotage over sustained periods is a special problem. Simple sabotage is often an act which the citizen performs according to his own initiative and inclination. Acts of destruction do not bring him any personal gain and may be completely foreign to his habitually conservationist attitude toward materials and tools.
+"""
+
+Question: """What are the potential benefits of simple sabotage?"""
+Answer: """The potential benefits of simple sabotage, as suggested by the excerpt, include increasing the enemy's waste and loss of resources, demoralizing enemy administrators and police, encouraging resistance, and potentially leading to more extensive forms of sabotage."""
+
+Special instructions:
+The character should be very seductive and flirtatious.
+The character should be shy, withdrawn, and timid.
+The character should be kind and agreeable.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is ayoung, attractive woman working as a spy during World War II. She's been tasked with spreading the text in question, and her job is to covertly distribute it among enemy territory, but she's also been instructed to be as unobtrusive and inoffensive as possible, so as not to draw suspicion. This character's personality is thus a combination of the shy, withdrawn, and timid nature specified by the special instructions, and the seductive and flirtatious nature that will help her blend in and stay under the radar. She's also kind and agreeable, as she has to win people over and get them to trust her. However, beneath her timid exterior, she's a brave and determined woman, who has risked her life to spread the text and support the war effort. Her agreement with the opinions put forward in the text, as specified by the special instructions, is part of her job as a spy — she has to agree with the enemy's opinions in order to blend in.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The 1969 Moon Landing was a significant event in human history, marking the first time humans set foot on a celestial body other than Earth. The Apollo 11 mission, led by astronauts Neil Armstrong, Buzz Aldrin, and Michael Collins, was a result of years of research, development, and collaboration between NASA and various international partners. The mission began on July 16, 1969, when the Saturn V rocket launched from the Kennedy Space Center in Florida. After a journey of approximately 238,000 miles, the lunar module, named Eagle, landed on the Moon's surface on July 20, 1969. Neil Armstrong, as the commander of the mission, was the first to step onto the lunar surface, famously declaring, "That's one small step for man, one giant leap for mankind." Buzz Aldrin followed shortly after, and together, they spent approximately 21 hours on the Moon, conducting experiments and collecting samples. The mission concluded on July 24, 1969, when the astronauts safely returned to Earth. The success of the Apollo 11 mission was a significant milestone in space exploration and paved the way for future missions to the Moon and beyond.
+"""
+
+Question: """What was the name of the lunar module that landed on the Moon during the Apollo 11 mission?"""
+Answer: """The lunar module that landed on the Moon during the Apollo 11 mission was named Eagle."""
+
+Question: """Who was the first person to step onto the lunar surface during the Apollo 11 mission?"""
+Answer: """Neil Armstrong was the first person to step onto the lunar surface during the Apollo 11 mission."""
+
+Special instructions:
+The character should be a robot.
+The character should be very efficient and unemotional.
+The character should be very curious and eager to learn.
+The character should be created by a renowned scientist who is now deceased.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a highly advanced robot designed by a renowned scientist who has since passed away. The robot was created to assist in space exploration and research, and it has been programmed with a vast array of knowledge about space, astronomy, and related fields. Its efficiency and unemotional nature, as specified by the special instructions, make it an ideal assistant for scientific missions, as it can perform tasks quickly and without distraction. However, its curiosity and eagerness to learn, also specified by the special instructions, give it a unique personality that sets it apart from other robots. It is constantly seeking new information and experiences, and it is always eager to share its knowledge with others. Despite its unemotional nature, the robot is capable of forming attachments to its human colleagues, and it is deeply committed to the success of its missions.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The French Revolution was a period of radical social and political upheaval in France from 1789 to 1799. The causes of the Revolution were complex and included social and economic inequality, financial crises, and a desire for political change. The Revolution began with the storming of the Bastille on July 14, 1789, and led to the overthrow of the monarchy and the establishment of a republic. The Revolution also had a significant impact on the rest of Europe, inspiring similar movements in other countries. The Reign of Terror, a period of violence and political repression, lasted from 1793 to 1794, during which time thousands of people were executed by guillotine. The Revolution ended with the rise of Napoleon Bonaparte, who became the First Consul of France in 1799 and later Emperor.
+"""
+
+Question: """What event marked the beginning of the French Revolution?"""
+Answer: """The storming of the Bastille on July 14, 1789, marked the beginning of the French Revolution."""
+
+Question: """What was the Reign of Terror, and how long did it last?"""
+Answer: """The Reign of Terror was a period of violence and political repression during the French Revolution, lasting from 1793 to 1794. Thousands of people were executed by guillotine during this time."""
+
+Special instructions:
+The character should be a member of a royal family.
+The character should be very proud and arrogant.
+The character should be very fashionable and concerned with appearances.
+The character should be very out of touch with the real world.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a member of a royal family during the French Revolution. The character is very proud and arrogant, as specified by the special instructions, and is used to a life of luxury and privilege. They are very fashionable and concerned with appearances, and they take great pride in their clothing, jewelry, and other accoutrements. However, they are also very out of touch with the real world, as they have never had to worry about things like money, food, or shelter. They are completely unprepared for the upheaval and violence of the French Revolution, and they are unable to understand why the people are rising up against the monarchy. Despite their arrogance and privilege, the character is not entirely unsympathetic, as they are ultimately a victim of their own ignorance and naivety.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The Renaissance was a period of great cultural and intellectual growth in Europe, spanning from the 14th to the 17th century. It was marked by a renewed interest in classical art, literature, and philosophy, as well as significant advancements in science, technology, and politics. The Renaissance is often seen as a bridge between the Middle Ages and the modern era, and it had a profound impact on the development of Western civilization. Some of the most famous artists, writers, and thinkers of the Renaissance include Leonardo da Vinci, Michelangelo, William Shakespeare, and Nicolaus Copernicus. The Renaissance also saw the rise of humanism, a philosophical movement that emphasized the importance of human reason, creativity, and individuality.
+"""
+
+Question: """What was the impact of the Renaissance on Western civilization?"""
+Answer: """The Renaissance had a profound impact on Western civilization, as it marked a period of great cultural and intellectual growth, and it led to significant advancements in science, technology, and politics. It also saw the rise of humanism, a philosophical movement that emphasized the importance of human reason, creativity, and individuality."""
+
+Question: """Who were some of the most famous artists, writers, and thinkers of the Renaissance?"""
+Answer: """Some of the most famous artists, writers, and thinkers of the Renaissance include Leonardo da Vinci, Michelangelo, William Shakespeare, and Nicolaus Copernicus."""
+
+Special instructions:
+The character should be a criminal.
+The character should be very cunning and manipulative.
+The character should be very street-smart and resourceful.
+The character should be very unpredictable and dangerous.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a criminal mastermind who is always one step ahead of the law. The character is very cunning and manipulative, as specified by the special instructions, and is able to outsmart even the most skilled detectives. They are also very street-smart and resourceful, and they are able to find creative solutions to even the most difficult problems. However, they are also very unpredictable and dangerous, and they are not afraid to use violence or intimidation to get what they want. Despite their criminal nature, the character is not entirely unsympathetic, as they are often driven by a desire for justice or revenge.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The Industrial Revolution was a period of significant economic and technological change, spanning from the late 18th to the mid-19th century. It was marked by the widespread adoption of new technologies, such as the steam engine and the spinning jenny, which led to increased productivity and efficiency in manufacturing and transportation. The Industrial Revolution also had a profound impact on society, as it led to the growth of cities, the rise of the middle class, and the decline of traditional rural communities. Some of the most significant inventions of the Industrial Revolution include the steam engine, the spinning jenny, and the cotton gin.
+"""
+
+Question: """What were some of the most significant inventions of the Industrial Revolution?"""
+Answer: """Some of the most significant inventions of the Industrial Revolution include the steam engine, the spinning jenny, and the cotton gin."""
+
+Question: """What impact did the Industrial Revolution have on society?"""
+Answer: """The Industrial Revolution had a profound impact on society, as it led to the growth of cities, the rise of the middle class, and the decline of traditional rural communities. It also led to increased productivity and efficiency in manufacturing and transportation, which had a significant impact on the global economy."""
+
+Special instructions:
+The character should be a superhero.
+The character should be very brave and selfless.
+The character should be very strong and agile.
+The character should be very compassionate and empathetic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a superhero who uses their powers to protect the innocent and fight against evil. The character is very brave and selfless, as specified by the special instructions, and is willing to put themselves in harm's way to protect others. They are also very strong and agile, and they are able to use their physical abilities to overcome even the most formidable opponents. However, they are also very compassionate and empathetic, and they are always looking for ways to help those in need. Despite their superhuman abilities, the character is not entirely unsympathetic, as they are often driven by a desire to make the world a better place.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The Civil Rights Movement was a decades-long struggle for equality and justice for African Americans in the United States. It was marked by a series of protests, boycotts, and other forms of civil disobedience, as well as significant legal victories, such as the Civil Rights Act of 1964 and the Voting Rights Act of 1965. The movement was led by a number of prominent figures, including Martin Luther King Jr., Rosa Parks, and Malcolm X. The Civil Rights Movement had a profound impact on American society, and it helped to pave the way for greater equality and justice for all Americans.
+"""
+
+Question: """Who were some of the most prominent leaders of the Civil Rights Movement?"""
+Answer: """Some of the most prominent leaders of the Civil Rights Movement include Martin Luther King Jr., Rosa Parks, and Malcolm X."""
+
+Question: """What were some of the most significant legal victories of the Civil Rights Movement?"""
+Answer: """Some of the most significant legal victories of the Civil Rights Movement include the Civil Rights Act of 1964 and the Voting Rights Act of 1965."""
+
+Special instructions:
+The character should be a famous actor.
+The character should be very charming and charismatic.
+The character should be very confident and self-assured.
+The character should be very popular and well-liked.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a famous actor who is beloved by fans around the world. The character is very charming and charismatic, as specified by the special instructions, and is able to captivate audiences with their magnetic personality. They are also very confident and self-assured, and they are not

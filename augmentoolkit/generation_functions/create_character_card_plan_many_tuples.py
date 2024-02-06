@@ -30,7 +30,7 @@ A backstory, or history.
 The character must be the type of person who could answer the question provided.
 Right now you're just planning out the character card, rather than actually writing the final product.
 
-## Question, answer, and text that the character should know:
+### Questions, answers, and text that the character should know:
 
 Text details:  \"\"\"Introduction to Mathematics, by Jane Smith\"\"\"
 
@@ -61,7 +61,7 @@ The character should be excessively, unrealistically horny and sexual.
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
 
-## Question, answer, and text that the character should know:
+### Questions, answers, and text that the character should know:
 
 Text details: \"\"\"Thus Spake Zarathustra, by Friedrich Nietzsche\"\"\"
 
@@ -121,7 +121,7 @@ The character should be narcissistic.
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote from Thus Spake Zarathustra that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
 
-## Question, answer, and text that the character should know:
+### Questions, answers, and text that the character should know:
 
 Text details: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
 
@@ -146,7 +146,7 @@ The character should be mature and older.
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 
-## Question, answer, and text that the character should know:
+### Questions, answers, and text that the character should know:
 
 Text details: \"\"\"{qatuples[0][3]}\"\"\"
 
@@ -175,7 +175,7 @@ A backstory, or history.
 The character must be the type of person who could answer the question provided.
 Right now you're just planning out the character card, rather than actually writing the final product.
 
-## Question, answer, and text that the character should know:
+### Questions, answers, and text that the character should know:
 
 Text the question and answer were sourced from: 
 \"\"\"
@@ -204,7 +204,7 @@ The character should be excessively, unrealistically horny and sexual.
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
 
-## Question, answer, and text that the character should know:
+### Questions, answers, and text that the character should know:
 
 Text the question and answer were sourced from: 
 \"\"\"
@@ -262,7 +262,7 @@ The character should be narcissistic.
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
 
-## Question, answer, and text that the character should know:
+### Questions, answers, and text that the character should know:
 
 Text the question and answer were sourced from: 
 \"\"\"
@@ -285,7 +285,7 @@ The character should be mature and older.
 ## Character card plan:
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
 
-## Question, answer, and text that the character should know:
+### Questions, answers, and text that the character should know:
 
 Text the question and answer were sourced from: 
 \"\"\"
@@ -296,19 +296,20 @@ Text the question and answer were sourced from:
 
 Special instructions:
 {instructions_string.strip()}
-The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
 
 ### Response:
 ## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
 Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a"""
     sampling_params = {
         "max_tokens": 8000,
-        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+        "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST","### Questions", "## Question, answer, and text that the character should know:"],
         "temperature": 1,
         # top_k=-1,
         "top_p": 0.5,
         # min_p=0.4,
     }
+    print("\n\nCARDPLAN GEN\n\n")
+    print(cot_prompt)
     completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # print("COMPLETION:\n\n----------------------")
     # print(completion)

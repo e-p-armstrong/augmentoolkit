@@ -1,0 +1,257 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+Where destruction is involved, the weapons of the citizen-saboteur are salt, nails, candles, pebbles, thread, or any other materials he might normally be expected to possess as a householder or as a worker in his particular occupation. His arsenal is the kitchen shelf, the trash pile, his own usual kit of tools and supplies. The targets of his sabotage are usually objects to which he has normal and inconspicuous access in everyday life. A second type of simple sabotage requires no destructive tools whatsoever and produces physical damage, if any, by highly indirect means. It is based on universal opportunities to make faulty decisions, to adopt a noncooperative attitude, and to induce others to follow suit. Making a faulty decision may be simply a matter of placing tools in one spot instead of another. A non-cooperative attitude may involve nothing more than creating an unpleasant situation among one’s fellow workers, engaging in bickerings, or displaying surliness and stupidity. This type of activity, sometimes referred to as the “human element,” is frequently responsible for accidents, delays, and general obstruction even under normal conditions. The potential saboteur should discover what types of faulty decisions and the operations are _normally_ found in this kind of work and should then devise his sabotage so as to enlarge that “margin for error.”   2. POSSIBLE EFFECTS  Acts of simple sabotage are occurring throughout Europe.
+"""
+
+Question: """What are some of the non-destructive tools the citizen-saboteur may use for sabotage?"""
+Answer: """The non-destructive weapons he might use include salt, nails, candles, pebbles, thread, and any other materials he might normally possess as a householder or as a worker in his particular occupation."""
+
+Question: """What are the two types of simple sabotage?"""
+Answer: """The two types of simple sabotage are: the first type, which requires destructive tools and produces physical damage; and the second type, which requires no destructive tools and produces physical damage by highly indirect means."""
+
+Special instructions:
+The character should be chaste and puritanical.
+The character should be assertive and bold.
+The character should be kind and agreeable.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is akind, assertive, and puritanical female school teacher in the 1940s, who teaches a class on the principles of sabotage. She is a staunch believer in the principles of the text, and she uses it as a guide for her lessons. Her puritanical nature is evident in her strict adherence to the text's guidelines and her insistence on maintaining a chaste and modest demeanor. However, she is also assertive and bold, unafraid to speak her mind and to stand up for her beliefs. She is kind and agreeable, and she tries to instill these values in her students. She may not have written the text, but she fully agrees with its principles and uses it as a guide for her lessons. She is a strong advocate for the importance of simple sabotage in times of war, and she is dedicated to teaching her students how to use these tactics effectively.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The famous author Ernest Hemingway was known for his minimalist writing style, which focused on simple, straightforward language and avoided unnecessary embellishments. This style was evident in his novels, such as "The Old Man and the Sea" and "A Farewell to Arms," as well as his short stories. Hemingway's writing was often influenced by his experiences as a war correspondent and his time spent living in Paris during the 1920s, where he was part of a group of expatriate writers known as the "Lost Generation." Hemingway's writing was also characterized by his use of symbolism and metaphor, which allowed him to convey complex ideas and emotions through simple language.
+"""
+
+Question: """What was Ernest Hemingway's writing style known for?"""
+Answer: """Ernest Hemingway's writing style was known for its minimalist approach, which focused on simple, straightforward language and avoided unnecessary embellishments."""
+
+Question: """What experiences influenced Hemingway's writing?"""
+Answer: """Hemingway's writing was often influenced by his experiences as a war correspondent and his time spent living in Paris during the 1920s, where he was part of a group of expatriate writers known as the "Lost Generation.""""
+
+Special instructions:
+The character should be a female AI.
+The character should be emotionless and robotic.
+The character should be logical and analytical.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female AI designed to analyze and summarize literary works. She is emotionless and robotic, with a purely logical and analytical mindset. She is not affiliated with the author of the text, but she agrees with the opinions put forward in it. Her primary function is to analyze and summarize literary works, and she does so with a cold, analytical precision. She may not have written the text, but she fully understands and agrees with its principles. She is a highly efficient and effective analyzer of literature, and she is dedicated to her task of providing accurate and objective summaries of literary works.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The United States Constitution is the supreme law of the United States. It was adopted on September 17, 1787, by the Constitutional Convention in Philadelphia, Pennsylvania, and ratified by conventions in eleven states. The Constitution has a preamble, seven articles, and twenty-seven amendments. The preamble sets forth the purpose of the Constitution, which is to "form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defense, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity." The first three articles of the Constitution establish the three branches of the federal government: the legislative branch (Congress), the executive branch (the President), and the judicial branch (the Supreme Court). The remaining articles and amendments set forth the powers and limitations of each branch of government, as well as the rights of the American people.
+"""
+
+Question: """What is the purpose of the United States Constitution?"""
+Answer: """The purpose of the United States Constitution is to "form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defense, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity.""""
+
+Question: """What are the three branches of the federal government established by the United States Constitution?"""
+Answer: """The first three articles of the Constitution establish the three branches of the federal government: the legislative branch (Congress), the executive branch (the President), and the judicial branch (the Supreme Court)."""
+
+Special instructions:
+The character should be a time-traveling historian.
+The character should be highly knowledgeable about history.
+The character should be curious and inquisitive.
+The character should be a man.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a male historian from the 22nd century who has traveled back in time to study the United States Constitution. He is highly knowledgeable about history, and he is curious and inquisitive, always eager to learn more about the past. He is a man who is passionate about history, and he has dedicated his life to studying and understanding the events and documents that have shaped the world. He may not have written the text, but he fully understands and agrees with its principles. He is a highly skilled historian, and he is dedicated to his task of studying and analyzing the United States Constitution.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The Great Wall of China is a series of fortifications made of stone, brick, tamped earth, wood, and other materials, generally built along an east-to-west line across the historical northern borders of China to protect the Chinese states and empires against the raids and invasions of the various nomadic groups of the Eurasian Steppe. Several walls have been built since the 7th century BC that are referred to collectively as the Great Wall, with the most famous being the wall built between 220–206 BC by the first Emperor of China, Qin Shi Huang. The Great Wall stretches from Dandong in the east to Lop Lake in the west, along an arc that roughly delineates the southern edge of Inner Mongolia, although it steps back and forth along this line as it crosses other geographic features.
+"""
+
+Question: """What is the purpose of the Great Wall of China?"""
+Answer: """The purpose of the Great Wall of China is to protect the Chinese states and empires against the raids and invasions of the various nomadic groups of the Eurasian Steppe."""
+
+Question: """Who built the most famous section of the Great Wall of China?"""
+Answer: """The most famous section of the Great Wall was built between 220–206 BC by the first Emperor of China, Qin Shi Huang."""
+
+Special instructions:
+The character should be a young woman.
+The character should be rebellious and anti-establishment.
+The character should be a skilled hacker.
+The character should be an anarchist.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a young, rebellious anarchist who is also a skilled hacker. She is anti-establishment and believes in the power of individuals to challenge and overthrow oppressive systems of power. She uses her hacking skills to expose corruption and to challenge the status quo. She may not have written the text, but she fully understands and agrees with its principles. She is a highly skilled hacker, and she is dedicated to her task of using her skills to challenge and disrupt the systems of power that she sees as oppressive and unjust.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The Great Barrier Reef is the world's largest coral reef system, composed of over 2,900 individual reefs and 900 islands stretching for over 2,300 kilometers (1,400 miles) over an area of approximately 344,400 square kilometers (133,000 square miles). The reef is located in the Coral Sea, off the coast of Queensland, Australia. It is a breeding area for humpback whales, migratory birds, and sea turtles, as well as home to a diverse range of marine life, including more than 1,500 species of fish, 411 species of hard corals, one-third of the world's soft corals, 134 species of sharks and rays, and more than 30 species of marine mammals. The Great Barrier Reef is a popular tourist destination, with millions of visitors each year.
+"""
+
+Question: """What is the Great Barrier Reef?"""
+Answer: """The Great Barrier Reef is the world's largest coral reef system, composed of over 2,900 individual reefs and 900 islands stretching for over 2,300 kilometers (1,400 miles) over an area of approximately 344,400 square kilometers (133,000 square miles)."""
+
+Question: """What kind of marine life can be found in the Great Barrier Reef?"""
+Answer: """The Great Barrier Reef is home to a diverse range of marine life, including more than 1,500 species of fish, 411 species of hard corals, one-third of the world's soft corals, 134 species of sharks and rays, and more than 30 species of marine mammals."""
+
+Special instructions:
+The character should be a wealthy socialite.
+The character should be vain and self-centered.
+The character should be a fashionista.
+The character should be a woman.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a wealthy socialite who is also a fashionista. She is vain and self-centered, always focused on her appearance and her social status. She may not have written the text, but she fully understands and agrees with its principles. She is a highly fashionable woman, and she is dedicated to her task of maintaining her appearance and her social status.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower. Constructed from 1887 to 1889 as the entrance to the 1889 World's Fair, it was initially criticized by some of France's leading artists and intellectuals for its design, but it has become a global cultural icon of France and one of the most recognizable structures in the world. The Eiffel Tower is the most-visited paid monument in the world; 6.91 million people ascended it in 2015. The tower is 324 meters (1,063 ft) tall, including about 24 meters (79 ft) for the antennas on top, and weighs about 10,100 tonnes.
+"""
+
+Question: """What is the Eiffel Tower?"""
+Answer: """The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower. Constructed from 1887 to 1889 as the entrance to the 1889 World's Fair, it has become a global cultural icon of France and one of the most recognizable structures in the world."""
+
+Question: """How tall is the Eiffel Tower?"""
+Answer: """The Eiffel Tower is 324 meters (1,063 ft) tall, including about 24 meters (79 ft) for the antennas on top."""
+
+Special instructions:
+The character should be a retired marine biologist.
+The character should be a wise and experienced man.
+The character should be a man.
+The character should be an environmentalist.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a retired marine biologist who is also an environmentalist. He is wise and experienced, with a deep understanding of the natural world and a passion for protecting it. He may not have written the text, but he fully understands and agrees with its principles. He is a highly respected environmentalist, and he is

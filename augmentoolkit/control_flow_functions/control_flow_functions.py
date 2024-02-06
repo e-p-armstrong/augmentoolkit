@@ -62,7 +62,7 @@ def write_output_to_file(output, directory, uuid):
 
 
 # Idea: use multiple short answers to train the task of answering multiple questions in one response. Two-three short answers per response should be enough.
-async def make_multiturn_character(qa_tuples, conv_id, engine_wrapper, assistant_mode):
+async def make_multiturn_character(qa_tuples, conv_id, engine_wrapper, assistant_mode, use_filenames):
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
@@ -72,14 +72,14 @@ async def make_multiturn_character(qa_tuples, conv_id, engine_wrapper, assistant
         instructions,
         card_plan_output,
     ) = await create_character_card_plan_many_tuples.create_character_card_plan_many_tuples(
-        qa_tuples, engine_wrapper
+        qa_tuples, engine_wrapper, use_filenames=use_filenames
     )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
     write_output_to_file(card_plan_output, "./multiturn_card_plan_generations", conv_id)
     (
         char,
         char_output,
     ) = await create_character_card_many_tuples.create_character_card_many_tuples(
-        qa_tuples, plan, instructions, engine_wrapper
+        qa_tuples, plan, instructions, engine_wrapper, use_filenames=use_filenames
     )  # creates a character card
     write_output_to_file(char_output, "./multiturn_card_generations", conv_id)
     return char, instructions
@@ -111,7 +111,7 @@ async def make_multiturn_scenario(
     return scenario, plan
 
 
-async def make_multiturn_conversation_info(qa_tuples, engine_wrapper, assistant_mode):
+async def make_multiturn_conversation_info(qa_tuples, engine_wrapper, assistant_mode, use_filenames):
     conv_id = make_id()
     if (
         assistant_mode
@@ -119,7 +119,7 @@ async def make_multiturn_conversation_info(qa_tuples, engine_wrapper, assistant_
         return (qa_tuples, "will", "be", "replaced", conv_id)
     # thought_plan = create_thought_plan_many_tuples(qa_tuples,character,scenario,logic_llm) # There IS a way to make multiturn chain of thought answering work: generate each pair of messages using a separate prompt or a separate function, each of which has only the thought plan for that question/answer pair. But simply cramming in all the step-by-step things will confuse the hell out of the poor model. So for the first release version we're skipping it and just giving the response, with no reasoning, in the multiturn convs.
     character, instructions = await make_multiturn_character(
-        qa_tuples, conv_id, engine_wrapper, assistant_mode
+        qa_tuples, conv_id, engine_wrapper, assistant_mode, use_filenames
     )
     scenario, scenario_plan = await make_multiturn_scenario(
         qa_tuples, character, conv_id, engine_wrapper, assistant_mode
@@ -150,7 +150,7 @@ def group_by_text(tuples_list):
 
 
 # Postprocessing function for question/answer validation
-async def repair_qatuple_context(idx, tup, engine_wrapper, writepath, vetted_qa_tuples):
+async def repair_qatuple_context(idx, tup, engine_wrapper, writepath, vetted_qa_tuples,use_filenames=False):
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as f:
@@ -172,7 +172,7 @@ async def repair_qatuple_context(idx, tup, engine_wrapper, writepath, vetted_qa_
     try:
         revision_id = make_id()
         revision, revision_output = await check_qatuple_context.check_qatuple_context(
-            tup, engine_wrapper
+            tup, engine_wrapper, use_filenames=use_filenames
         )
         write_output_to_file(
             revision_output, "./question_context_revision_generations", revision_id
@@ -425,6 +425,7 @@ async def generate_qatuples_from_para(
     vetted_qa_tuples=None,
     qa_tuples_dir=None,
     double_check_counter=3,
+    use_filenames=False
 ):
     try:
         existing_files = glob.glob(
@@ -437,14 +438,13 @@ async def generate_qatuples_from_para(
                 with open(file_path, "r") as file:
                     qa_tuple = tuple(json.load(file))
                 vetted_qa_tuples.append(qa_tuple)
-                continue
-
+            return
         question_group_id = make_id()
         # print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
         (
             plan,
             questions_plan_output,
-        ) = await generate_questions_plan.generate_questions_plan(para, engine_wrapper)
+        ) = await generate_questions_plan.generate_questions_plan(para, engine_wrapper,use_filenames=use_filenames)
         write_output_to_file(
             questions_plan_output, "./question_plan_generations", question_group_id
         )
@@ -454,7 +454,7 @@ async def generate_qatuples_from_para(
         (
             question_answer_tuples,
             question_generation_output,
-        ) = await generate_questions.generate_questions(para, plan, engine_wrapper)
+        ) = await generate_questions.generate_questions(para, plan, engine_wrapper,use_filenames=use_filenames)
         write_output_to_file(
             question_generation_output,
             "./question_generation_generations",
@@ -525,6 +525,7 @@ async def determine_worthy(
     judged_worthy_for_questions,
     engine_wrapper,
     output_dir,
+    use_filenames,
 ):
     # for idx, p in tqdm(enumerate(paragraphs_processed[:10])):
     file_name = f"{idx}.json"
@@ -539,7 +540,7 @@ async def determine_worthy(
         else:
             judged_worthy_for_questions.append((data["paragraph"], data["metadata"]))
     else:
-        judgement = await judge_paragraph.judge_paragraph(p, engine_wrapper)
+        judgement = await judge_paragraph.judge_paragraph(p, engine_wrapper,use_filenames=use_filenames)
         judged_worthy_for_questions.append(judgement)
 
         # Prepare the data to be written to the file
@@ -570,6 +571,7 @@ async def filter_all_questions(
     engine_wrapper,
     output_dir,
     take_subset=False,
+    use_filenames=False,
 ):
     if not take_subset:
         tasks = [
@@ -579,6 +581,7 @@ async def filter_all_questions(
                 judged_worthy_for_questions,
                 engine_wrapper,
                 output_dir,
+                use_filenames
             )
             for idx, p in enumerate(paragraphs_processed)
         ]
@@ -590,6 +593,7 @@ async def filter_all_questions(
                 judged_worthy_for_questions,
                 engine_wrapper,
                 output_dir,
+                use_filenames
             )
             for idx, p in enumerate(paragraphs_processed[:13])
         ]
@@ -704,6 +708,7 @@ async def create_info(
     multi_turn_convs_info,
     multi_turn_convs_info_dir,
     rearrangements_to_take,
+    use_filenames
 ):
     all_permutations = list(itertools.permutations(group))
 
@@ -719,7 +724,7 @@ async def create_info(
         if not os.path.exists(file_path):
             try:
                 info = await make_multiturn_conversation_info(
-                    perm, engine_wrapper, assistant_mode
+                    perm, engine_wrapper, assistant_mode, use_filenames
                 )
 
                 if info is not None:

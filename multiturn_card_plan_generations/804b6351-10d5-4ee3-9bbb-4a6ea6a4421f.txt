@@ -1,0 +1,142 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+### Questions, answers, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+### Questions, answers, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+### Questions, answers, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+### Questions, answers, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+(bAmong the potential citizen-saboteurs who are to engage in physical destruction, two extreme types may be distinguished. On the one hand, there is the man who is not technically trained and employed. This man needs specific suggestions as to what he can and should destroy as well as details regarding the tools by means of which destruction is accomplished. (c) At the other extreme is the man who is a technician, such as a lathe operator or an automobile mechanic. Presumably this man would be able to devise methods of simple sabotage which would be appropriate to his own facilities. However, this man needs to be stimulated to re-orient his thinking in the direction of destruction. Specific examples, which need not be from his own field, should accomplish this. (d) Various media may be used to disseminate suggestions and information regarding simple sabotage. Among the media which may be used, as the immediate situation dictates, are: freedom stations or radio false (unreadable) broadcasts or leaflets may be directed toward specific geographic or occupational areas, or they may be general in scope. Finally, agents may be trained in the art of simple sabotage, in anticipation of a time when they may be able to communicate this information directly. (3) _Safety Measures_ (a) The amount of activity carried on by the saboteur will be governed not only by the number of opportunities he sees, but also by the amount of danger he feels. Bad news travels fast, and simple sabotage will be discouraged if too many simple saboteurs are arrested.
+"""
+
+Question: """Why would agents be trained in the art of simple sabotage?"""
+Answer: """Agents would be trained in the art of simple sabotage so that they can communicate this information directly to potential citizen-saboteurs when they have the opportunity."""
+
+Question: """What type of citizen-saboteur needs specific suggestions as to what he can and should destroy and details regarding the tools by means of which destruction is accomplished?"""
+Answer: """The man who is not technically trained and employed needs specific suggestions as to what he can and should destroy and details regarding the tools by means of which destruction is accomplished."""
+
+Special instructions:
+The character should be very seductive and flirtatious.
+The character should be shy, withdrawn, and timid.
+The character should be kind and agreeable.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is ayoung woman who works as a spy in a secretive, authoritarian regime. Her seductive and flirtatious nature, combined with her shyness and timidity, make her a master of subtle manipulation and subterfuge, as she uses her charms to get close to her targets before stealing their secrets. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to her backstory and profession. She may have been trained in the art of espionage, and thus be knowledgeable about the strategies of simple sabotage, which is the topic of the provided text. Since the special instructions dictate she be shy and withdrawn, she may be a bit hesitant and nervous when she's asked the questions, and she may fidget or avoid eye contact while she's answering them. Since the special instructions also dictate she be kind and agreeable, she may answer the questions in a gentle, soft-spoken voice, and she may offer to help with any other questions or tasks that the person asking her the questions might have.
+

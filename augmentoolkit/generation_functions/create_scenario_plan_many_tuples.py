@@ -104,8 +104,8 @@ You don't need to add negative emotions and tension to the scenario if those don
 """
     sampling_params = {
         "max_tokens": 8000,
-        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-        "temperature": 1.5,
+        "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST", "## Information","User:", "## Scenario"],
+        "temperature": 0.6,
         # top_k=-1,
         "top_p": 1,
         # min_p=0.5,

@@ -360,7 +360,7 @@ Step 1. Identify Key Topics:"""
     # print("DEBUG\n\n" + prompt=decision_prompt)
     sampling_params = {
         "max_tokens": 8000,
-        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+        "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
         "temperature": 0.8,
         # top_k=-1,
         "top_p": 1,

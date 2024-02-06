@@ -3,7 +3,7 @@ import re
 # from .questions_grammar import questions_grammar
 from .constants import LOGICAL_MODEL
 from .strip_steps import strip_steps
-
+import traceback
 
 async def generate_questions(para_tuple, plan, engine_wrapper, use_filenames=False):
     """
@@ -15,9 +15,8 @@ async def generate_questions(para_tuple, plan, engine_wrapper, use_filenames=Fal
     made_questions = False
     retries = 0
     questions = []
-    while not made_questions and (retries <= 5):
-        if use_filenames:
-            question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
+    if use_filenames:
+                question_prompt = f"""You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
 
 Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
 
@@ -439,7 +438,6 @@ Answer: The Panama Canal's construction was completed in 1914.
 
 
 ### Instruction:
-Text details: The Scale of the Solar System, by Rob Robertson
 
 Text to plan questions from:
 \"\"\"
@@ -480,33 +478,39 @@ Text to make questions from:
 {strip_steps(plan)}
 
 ## Questions (make 4):
-"""
-        # print("DEBUG\n\n" + prompt=decision_prompt)
-        sampling_params = {
-            "max_tokens": 12000,
-            "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
-            "temperature": 0.8,
-            # top_k=-1,
-            "top_p": 1,
-            # min_p=0.5,
-        }
-        completion = await engine_wrapper.submit(question_prompt, sampling_params)
+""" 
+    while not made_questions and (retries <= 5):
+        try:
+            # print("DEBUG\n\n" + prompt=decision_prompt)
+            sampling_params = {
+                "max_tokens": 2000,
+                "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST", "## Questions"],
+                "temperature": 0.8,
+                # top_k=-1,
+                "top_p": 1,
+                # min_p=0.5,
+            }
+            completion = await engine_wrapper.submit(question_prompt, sampling_params)
 
-        # Extract questions
-        response_pattern = re.compile(
-            r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
-        )
-        generation = response_pattern.search(completion).group(1)
-        # print("GENERATION:\n\n-------------------\n\n", generation)
-        pattern = re.compile(
-            r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
-            re.DOTALL | re.MULTILINE | re.IGNORECASE,
-        )
-        matches = pattern.findall(generation)
-        if len(matches) > 0:
-            made_questions = True
-        else:
-            retries += 1
+            # Extract questions
+            response_pattern = re.compile(
+                r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
+            )
+            generation = response_pattern.search(completion).group(1)
+            # print("GENERATION:\n\n-------------------\n\n", generation)
+            pattern = re.compile(
+                r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
+                re.DOTALL | re.MULTILINE | re.IGNORECASE,
+            )
+            matches = pattern.findall(generation)
+            if len(matches) > 0:
+                made_questions = True
+            else:
+                retries += 1
+        except Exception as e:
+            traceback.print_exc()    
+            
+            
     if retries > 5:
         return None, None
 
@@ -519,6 +523,7 @@ Text to make questions from:
                 para_tuple[1].replace(") ", "", 1),
             )
         )
+        
 
     return questions, completion
 

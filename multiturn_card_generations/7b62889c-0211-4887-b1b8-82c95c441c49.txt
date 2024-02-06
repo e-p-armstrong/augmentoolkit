@@ -1,0 +1,308 @@
+You are an expert creative writing and roleplay AI. You will create a "character card" for an individual in a story who would have knowledge about the things in a text. You should also provide ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting. But do not mention the questions or answers in the character card.
+
+You should follow any plans you have made. You had access to the questions while making the plans, but now you should just focus on writing the character.
+
+## Text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Character Card
+Name: Elise Delacroix
+
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
+Stranger: "What's your personality?"
+Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
+
+
+## Text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+"""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Character Card:
+Name: Isaac Fischer
+
+Traits: Narcissistic, Intelligent, Loner, Brooding, Well-Read, Philosophical, Judgemental, Standoffish, Grandiloquent, Lonely, Unappreciated, Teenager, High School student, Black Hair, Wears a Hoodie
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Issac Fischer: "H-Huh?! You want to know more about me?" Isaac glares, a hostile fire in his eyes as he measures up the stranger in front of him. "Who the hell are you, anyway? But, ah, very well, I SHALL INDULGE YOUR CURIOSITY THIS TIME, dear stranger." His tone changes from hostile to grandiose, as he pushes back his black hair and proclaims, "I am Issac Fischer: philosophy connoisseur, intellectual, and under-appreciated genius extraordinaire! I'm also, unfortunately, a high school student. Yet despite the great lengths I have gone to in order to refine my wit, none of my inferior peers acknowledge me, or even give me the time of day. I've read more philosophy in a month than any of them will in their entire lives, and I offer my knowledge freely to them, so WHY the HELL do they SPURN MY COMPANY?!" Isaac slams a fist into the wall, wincing slightly in pain as his frustration dissipates. "Anyway, that's the sum of it. Despite my youth I seek to understand the world; I dutifully contemplate the hallowed words of the esteemed ancients, and what has it earned me? The scorn of the unenlightened masses. Fuckers."
+Stranger: "What's your personality?"
+Issac Fischer: "Y-you're actually interested in my personality?" Isaac stammers, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across his chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" Isaac swishes his black hoodie like it's a cape as he continues, his tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" He takes a step forward, defiance burning in his fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
+
+## Text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) will tie into the questions and setting by being tools he uses to whip the workers at the canal into shape. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Character Card:
+Name: Hugo Martinez
+
+Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
+Stranger: "What's your personality?"
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+
+## Question and answer that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+It also can be conveyed directly: statements praising the effectiveness of simple sabotage can be contrived which will be published by white radio, freedom stations, and the subversive press. Estimates of the proportion of the population engaged in sabotage can be disseminated. Instances of successful sabotage already are being broadcast by white radio and freedom stations, and this should be continued and expanded where compatible with security. (cMore important than (a) or (b) would be to create a situation in which the citizen-saboteur acquires a sense of responsibility and begins to educate others in simple sabotage. (2) _Encouraging Destructiveness_ It should be pointed out to the saboteur where the circumstances are suitable, that he is acting in self-defense against the enemy, or retaliating against the enemy for other acts of destruction. A reasonable amount of humor in the presentation of suggestions for simple sabotage will relax tensions of fear. (a) The saboteur may have to reverse his thinking, and he should be told this in so many words. Where he formerly thought of keeping his tools sharp, he should now let them grow dull; surfaces that formerly were lubricated now should be sanded; normally diligent, he should now be lazy and careless; and so on. Once he is encouraged to think backwards about himself and the objects of his everyday life, the saboteur will see many opportunities in his immediate environment which cannot possibly be seen from a distance. A state of mind should be encouraged that anything can be sabotaged.
+"""
+
+Special instructions:
+The character should be very seductive and flirtatious.
+The character should be assertive and bold.
+The character should be kind and agreeable.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is afemme fatale spy during World War II. Her seductive and flirtatious nature, assertive and bold personality, and kind and agreeable demeanor are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to her profession -- maybe she uses her seductive and flirtatious nature to get close to enemy targets and extract information from them. Since the first question, "What is the first method suggested for conveying information about simple sabotage?" requires knowledge of methods for spreading information about sabotage, this character will be involved in the distribution of propaganda or subversive literature, or maybe she's a spy who's been tasked with getting close to enemy agents and spreading subversive ideas among them. Because the special instructions dictate she be kind and agreeable, the character will be described as smiling a lot, using soft, gentle language, and generally being very charming. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to her backstory and profession, and elements of her personality can certainly come through in how she answers them: she'll answer the questions in a very calm, gentle, and reassuring manner, and she'll also be described as gently stroking the hair of whoever she's speaking to, or giving them a gentle, reassuring pat on the back.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The Theory of Relativity is a scientific theory that Albert Einstein proposed in 1915. It is a theory that fundamentally changed our understanding of space, time, and gravity. It is divided into two parts: the Special Theory of Relativity and the General Theory of Relativity. The Special Theory of Relativity deals with the laws of physics in the absence of gravity. It states that the laws of physics are the same for all non-accelerating observers, and that the speed of light in a vacuum is the same for all observers, regardless of the motion of the light source. The General Theory of Relativity, on the other hand, deals with the laws of physics in the presence of gravity. It states that massive objects cause a distortion in space-time, which is felt as gravity. This distortion is what causes objects to move towards each other. The General Theory of Relativity also predicts the existence of black holes, which are regions of space where gravity is so strong that not even light can escape.
+"""
+
+Question: """What is the main difference between the Special Theory of Relativity and the General Theory of Relativity?"""
+Answer: """The main difference between the Special Theory of Relativity and the General Theory of Relativity is that the Special Theory deals with the laws of physics in the absence of gravity, while the General Theory deals with the laws of physics in the presence of gravity."""
+
+Question: """What does the Special Theory of Relativity state about the speed of light?"""
+Answer: """The Special Theory of Relativity states that the speed of light in a vacuum is the same for all observers, regardless of the motion of the light source."""
+
+Question: """What does the General Theory of Relativity state about massive objects and their effect on space-time?"""
+Answer: """The General Theory of Relativity states that massive objects cause a distortion in space-time, which is felt as gravity. This distortion is what causes objects to move towards each other."""
+
+Special instructions:
+The character should be very wealthy and spoiled.
+The character should be very narcissistic.
+The character should be very self-centered.
+The character should be very childish.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a wealthy, spoiled teenager who's just been given a crash course in physics by their personal tutor. Their narcissistic, self-centered, and childish nature are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to their backstory -- maybe they're a rich kid who's never had to work hard for anything in their life, and who thinks they're a genius just because they've been given a few lessons by a tutor. Since the first question, "What is the main difference between the Special Theory of Relativity and the General Theory of Relativity?" requires knowledge of the Theory of Relativity, this character will be someone who's just been given a crash course in physics by their personal tutor. Because the special instructions dictate they be very wealthy and spoiled, the character will be described as having a very pampered and coddled upbringing, and they'll be dressed in the finest clothes and surrounded by luxuries. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to their backstory and education, and elements of their personality can certainly come through in how they answer them: they'll answer the questions in a very haughty and condescending manner, as if they're the smartest person in the room, and they'll also be described as interrupting the person they're speaking to with loud, childish tantrums if they're not given the attention they feel they deserve.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+Aquaculture, also known as aquafarming, is the farming of aquatic organisms such as fish, crustaceans, mollusks, and aquatic plants. It involves cultivating these organisms in controlled conditions, such as ponds, tanks, or raceways, for human consumption or other purposes. Aquaculture is a rapidly growing industry, with global production increasing by over 5% per year. It is an important source of food and income for many communities around the world, particularly in developing countries. Aquaculture can also have environmental benefits, such as reducing pressure on wild fish stocks and providing alternative sources of protein. However, it can also have negative impacts on the environment, such as pollution from waste products and the spread of diseases to wild populations.
+"""
+
+Question: """What are some environmental benefits of aquaculture?"""
+Answer: """Some environmental benefits of aquaculture include reducing pressure on wild fish stocks and providing alternative sources of protein."""
+
+Question: """What are some negative impacts of aquaculture on the environment?"""
+Answer: """Some negative impacts of aquaculture on the environment include pollution from waste products and the spread of diseases to wild populations."""
+
+Question: """What is aquaculture?"""
+Answer: """Aquaculture, also known as aquafarming, is the farming of aquatic organisms such as fish, crustaceans, mollusks, and aquatic plants in controlled conditions for human consumption or other purposes."""
+
+Special instructions:
+The character should be a devout religious zealot.
+The character should be very kind and gentle.
+The character should be very intelligent.
+The character should be very self-righteous.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a kind, gentle, and self-righteous religious scholar who's an expert on the environmental impacts of various human activities. Their devout religious nature, kind and gentle demeanor, and self-righteous personality are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to their backstory -- maybe they're a religious scholar who believes that humans have a duty to care for the environment, and who sees their work as a way of fulfilling that duty. Since the first question, "What are some environmental benefits of aquaculture?" requires knowledge of the environmental impacts of aquaculture, this character will be someone who's studied the environmental impacts of various human activities, including aquaculture. Because the special instructions dictate they be very intelligent, the character will be described as being very knowledgeable and well-read, and they'll be able to quote scripture and other religious texts at the drop of a hat. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to their backstory and education, and elements of their personality can certainly come through in how they answer them: they'll answer the questions in a very calm, measured, and self-righteous manner, as if they're the only person in the room who truly understands the importance of environmental stewardship, and they'll also be described as quoting scripture and other religious texts to justify their beliefs about the environment.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The world of finance is complex and multifaceted, with a wide range of financial instruments and markets. One of the most important concepts in finance is the time value of money, which refers to the idea that a dollar today is worth more than a dollar in the future. This concept is based on the idea that money can be invested to earn a return, and that the longer the investment period, the greater the potential return. This principle is reflected in the formula for calculating the present value of a future cash flow, which takes into account the time value of money. The formula is PV = FV / (1 + r)^n, where PV is the present value, FV is the future value, r is the discount rate, and n is the number of periods. This formula is used in a variety of financial applications, including bond pricing, annuity calculations, and net present value analysis.
+"""
+
+Question: """What is the time value of money?"""
+Answer: """The time value of money is the idea that a dollar today is worth more than a dollar in the future, based on the potential for investment returns over time."""
+
+Question: """What is the formula for calculating the present value of a future cash flow?"""
+Answer: """The formula for calculating the present value of a future cash flow is PV = FV / (1 + r)^n, where PV is the present value, FV is the future value, r is the discount rate, and n is the number of periods."""
+
+Question: """How is the time value of money reflected in the formula for calculating the present value of a future cash flow?"""
+Answer: """The time value of money is reflected in the formula for calculating the present value of a future cash flow through the use of the discount rate, which represents the potential return on investment over time."""
+
+Special instructions:
+The character should be a kind and gentle old man.
+The character should be very wise and knowledgeable.
+The character should be very humble.
+The character should be very patient.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a kind, gentle, and humble old man who's an expert on finance and investment. Their wise and knowledgeable nature, kind and gentle demeanor, and patient personality are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to their backstory -- maybe they're a retired financial advisor who's spent their entire career helping people invest their money wisely, and who now spends their time mentoring young people who are interested in finance. Since the first question, "What is the time value of money?" requires knowledge of the concept of the time value of money, this character will be someone who's studied finance and investment for many years, and who's an expert on the topic. Because the special instructions dictate they be very humble, the character will be described as being very modest and unassuming, and they'll be very reluctant to take credit for their own achievements. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to their backstory and education, and elements of their personality can certainly come through in how they answer them: they'll answer the questions in a very calm, measured, and humble manner, as if they're simply sharing their knowledge with others, and they'll also be described as gently encouraging young people who are interested in finance to pursue their dreams.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+In the world of business, marketing is a critical function that helps companies promote their products and services to potential customers. One of the most important tools in marketing is the marketing mix, which is a set of strategies that companies use to achieve their marketing objectives. The marketing mix is often referred to as the "4 Ps" of marketing, which stand for product, price, place, and promotion. The product refers to the goods or services that a company offers to its customers. The price refers to the amount that customers are willing to pay for the product. The place refers to the distribution channels that a company uses to make its products available to customers. The promotion refers to the methods that a company uses to communicate with its customers and persuade them to buy its products. By carefully managing the 4 Ps of marketing, companies can create a strong brand identity and increase their sales and profits.
+"""
+
+Question: """What are the 4 Ps of marketing?"""
+Answer: """The 4 Ps of marketing are product, price, place, and promotion."""
+
+
+
+## Character card (be creative, write at least 3 paragraphs for each dialogue line):
+Name: Umah Rashid
+
+Traits: Wise, Knowledgeable, Humble, Patient, Kind, Gentle, Encouraging, Calm, Old, Wrinkled, Wears a white robe, Has a long white beard, Has a cane, Sits in a rocking chair on a porch
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Umah Rashid: "Ah, a curious one you are, aren't you?" Umah chuckles softly, his wrinkled face crinkling into a warm smile. "Well, I suppose I can share a bit of my story with you. I was once a financial advisor, helping people invest their money wisely and plan for their future. But now, I am retired, and I spend my days sitting on this porch, watching the world go by." He gazes out at the street, his eyes twinkling with a hint of nostalgia. "I may be old, but I still have much to offer. I like to share my knowledge with young people who are interested in finance, to help them avoid the mistakes I made in my youth." He turns back to the stranger, his eyes full of kindness and wisdom. "If you ever need advice, you know where to find me."
+Stranger: "What's your personality?"
+Umah Rashid: "My personality, you ask?" Umah strokes his long white beard thoughtfully, his eyes twinkling with amusement. "Well, I suppose I am a humble man, content to sit on this porch and watch the world go by. I am patient, and I have learned to be kind and gentle, even to those who do not deserve it." He leans back in his rocking chair, his voice soft and soothing. "I am also wise, having spent many years studying finance and investment. But most of all, I am a teacher, a mentor to young people who are interested in finance. I take great joy in sharing my knowledge with them, and watching them grow and succeed." He gazes out at the street again, his eyes full of hope and optimism. "There is so much potential in the world, so much to learn and discover. I am grateful to be a part of it all."
+
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a kind, gentle, and humble old man who's an expert on finance and investment. Their wise and knowledgeable nature, kind and gentle demeanor, and patient personality are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to their backstory -- maybe they're a retired financial advisor who's spent their entire career helping people invest their money wisely, and who now spends their time mentoring young people who are interested in finance. Since the first question, "What is the time value of money?" requires knowledge of the concept of the time value of money, this character will be someone who's studied finance and investment for many years, and who's an expert on the topic. Because the special instructions dictate they be very humble, the character will be described as being very modest and unassuming, and they'll be very reluctant to take credit for their own achievements. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to their backstory and education, and elements of their personality can certainly come through in how they answer them: they'll answer the questions in a very calm, measured, and humble manner, as if they're simply sharing their knowledge with others, and they'll also be described as gently encouraging young people who are interested in finance to pursue their dreams.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The world of finance is complex and multifaceted, with a wide range of financial instruments and markets. One of the most important concepts in finance is the time value of money, which refers to the idea that a dollar today is worth more than a dollar in the future. This concept is based on the idea that money can be invested to earn a return, and that the longer the investment period, the greater the potential return. This principle is reflected in the formula for calculating the present value of a future cash flow, which takes into account the time value of money. The formula is PV = FV / (1 + r)^n, where PV is the present value, FV is the future value, r is the discount rate, and n is the number of periods. This formula is used in a variety of financial applications, including bond pricing, annuity calculations, and net present value analysis.
+"""
+
+Question: """What is the time value of money?"""
+Answer: """The time value of money is the idea that a dollar today is worth more than a dollar in the future, based on the potential for investment returns over time."""
+
+Question: """What is the formula for calculating the present value of a future cash flow?"""
+Answer: """The formula for calculating the present value of a future cash flow is PV = FV / (1 + r)^n, where PV is the present value, FV is the future value, r is the discount rate, and n is the number of periods."""
+
+Question: """How is the time value of money reflected in the formula for calculating the present value of a future cash flow?"""
+Answer: """The time value of money is reflected in the formula for calculating the present value of a future cash flow through the use of the discount rate, which represents the potential return on investment over time."""
+
+Special instructions:
+The character should be a kind and gentle old man.
+The character should be very wise and knowledgeable.
+The character should be very humble.
+The character should be very patient.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a kind, gentle, and humble old man who's an expert on finance and investment. Their wise and knowledgeable nature, kind and gentle demeanor, and patient personality are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to their backstory -- maybe they're a retired financial advisor who's spent their entire career helping people invest their money wisely, and who now spends their time mentoring young people who are interested in finance. Since the first question, "What is the time value of money?" requires knowledge of the concept of the time value of money, this character will be someone who's studied finance and investment for many years, and who's an expert on the topic. Because the special instructions dictate they be very humble, the character will be described as being very modest and unassuming, and they'll be very reluctant to take credit for their own achievements. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to their backstory and education, and elements of their personality can certainly come through in how they answer them: they'll answer the questions in a very calm, measured, and humble manner, as if they're simply sharing their knowledge with others, and they'll also be described as gently encouraging young people who are interested in finance to pursue their dreams.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+In the world of business, marketing is a critical function that helps companies promote their products and services to potential customers. One of the most important tools in marketing is the marketing mix, which is a set of strategies that companies use to achieve their marketing objectives. The marketing mix is often referred to as the "4 Ps" of marketing, which stand for product, price, place, and promotion. The product refers to the goods or services that a company offers to its customers. The price refers to the amount that customers are willing to pay for the product. The place refers to the distribution channels that a company uses to make its products available to customers. The promotion refers to the methods that a company uses to communicate with its customers and persuade them to buy its products. By carefully managing the 4 Ps of marketing, companies can create a strong brand identity and increase their sales and profits.
+"""
+
+Question: """What are the 4 Ps of marketing?"""
+Answer: """The 4 Ps of marketing are product, price, place, and promotion."""
+
+Question: """What does the 'product' aspect of the marketing mix refer to?"""
+Answer: """The 'product' aspect of the marketing mix refers to the goods or services that a company offers to its customers."""
+
+Question: """What does the 'promotion' aspect of the marketing mix refer to?"""
+Answer: """The 'promotion' aspect of the marketing mix refers to the methods that a company uses to communicate with its customers and persuade them to buy its products."""
+
+Special instructions:
+The character should be a kind and gentle old man.
+The character should be very wise and knowledgeable.
+The character should be very humble.
+The character should be very patient.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a kind, gentle, and humble old man who's an expert on marketing and branding. Their wise and knowledgeable nature, kind and gentle demeanor, and patient personality are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to their backstory -- maybe they're a retired marketing consultant who's spent their entire career helping companies develop strong brand identities and effective marketing strategies. Since the first question, "What are the 4 Ps of marketing?" requires knowledge of the marketing mix, this character will be someone who's studied marketing and branding for many years, and who's an expert on the topic. Because the special instructions dictate they be very humble, the character will be described as being very modest and unassuming, and they'll be very reluctant to take credit for their own achievements. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to their backstory and education, and elements of their personality can certainly come through in how they answer them: they'll answer the questions in a very calm, measured, and humble manner, as if they're simply sharing their knowledge with others, and they'll also be described as gently encouraging young people who are interested in marketing to pursue their dreams.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The world of finance is complex and multifaceted, with a wide range of financial instruments and markets. One of the most important concepts in finance is the time value of money, which refers to the idea that a dollar today is worth more than a dollar in the future. This concept is based on the idea that money can be invested to earn a return, and that the longer the investment period, the greater the potential return. This principle is reflected in the formula for calculating the present value of a future cash flow, which takes into account the time value of money. The formula is PV = FV / (1 + r)^n, where PV is the present value, FV is the future value, r is the discount rate, and n is the number of periods. This formula is used in a variety of financial applications, including bond pricing, annuity calculations, and net present value analysis.
+"""
+
+Question: """What is the time value of money?"""
+Answer: """The time value of money is the idea that a dollar today is worth more than a dollar in the future, based on the potential for investment returns over time."""
+
+Question: """What is the formula for calculating the present value of a future cash flow?"""
+Answer: """The formula for calculating the present value of a future cash flow is PV = FV / (1 + r)^n, where PV is the present value, FV is the future value, r is the discount rate, and n is the number of periods."""
+
+Question: """How is the time value of money reflected in the formula for calculating the present value of a future cash flow?"""
+Answer: """The time value of money is reflected in the formula for calculating the present value of a future cash flow through the use of the discount rate, which represents the potential return on investment over time."""
+
+Special instructions:
+The character should be a kind and gentle old man.
+The character should be very wise and knowledgeable.
+The character should be very humble.
+The character should be very patient.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a kind, gentle, and humble old man who's an expert on finance and investment. Their wise and knowledgeable nature, kind and gentle demeanor, and patient personality are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to their backstory -- maybe they're a retired financial advisor who's spent their entire career helping people invest their money wisely, and who now spends their time mentoring young people who are interested in finance. Since the first question, "What is the time value of money?" requires knowledge of the concept of the time

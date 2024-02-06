@@ -309,7 +309,7 @@ Text to make a question from:
         # print("DEBUG\n\n" + prompt=decision_prompt)
         sampling_params = {
             "max_tokens": 8000,
-            "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+            "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
             "temperature": 0.2,
         }
         print("--QA TUPLE DURING NEW Q GEN--")

@@ -14,7 +14,7 @@ def make_id():
 
 
 class EngineWrapper:
-    def __init__(self, model, quantization):
+    def __init__(self, model):
         # engine_args = AsyncEngineArgs(
         #     model=model,
         #     quantization=quantization,

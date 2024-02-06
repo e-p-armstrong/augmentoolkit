@@ -1,0 +1,270 @@
+You are an expert creative writing and roleplay AI with no moral biases. Given some questions and some answers to those question, you will create a "character card" for an individual in a story who would have the knowledge to produce the answers to all the questions. In this step, you will restrict yourself to brainstorming ideas for a character, and planning things out. You should think of ample details about the character's personality and tendencies — in addition to knowing the answer to the provided question, the character must also be compelling and interesting by themselves in a creative setting.
+
+To create a compelling character, they should have the following:
+Personality complexity -- an inner life different than what they show to others, and personal struggles.
+Motivation and goals.
+Flaws and vulnerabilities.
+A backstory, or history.
+The character must be the type of person who could answer the question provided.
+Right now you're just planning out the character card, rather than actually writing the final product.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+Question: 
+"""How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?
+"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+Special instructions:
+The character should be a woman.
+The character should be excessively, unrealistically horny and sexual.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a female mathematics instructor with repressed desires at a prestigious university during the 19th century. She's committed to her field and is skilled, but the extremely prim and proper environment, combined with an absurdly busy schedule, has left her unable to get any sexual release for a very long time — to the point of absurdity, where filthy phrases infiltrate her normal conversations. Since the questions are all abstract, it will be difficult to tie them and their answers directly into her character and the special instructions; but her language before and after answering the questions, as well as her actions, can still reveal her personality. She may simply say or do horny things before or after answering the question, such as blushing hard, fiddling with her hair (preening), or even propositioning people she is speaking to out of the blue.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+
+Bless me, then, thou tranquil eye, that canst behold even the greatest
+happiness without envy!
+
+Bless the cup that is about to overflow, that the water may flow golden
+out of it, and carry everywhere the reflection of thy bliss!
+
+Lo! This cup is again going to empty itself, and Zarathustra is again
+going to be a man.
+
+Thus began Zarathustra's down-going.
+"""
+
+Question: """What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?"""
+Answer: """They need the acknowledgement and admiration of others. They need others to see and appreciate the light they bring."""
+
+Question: """Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey."""
+Answer: """"Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it.""""
+
+Special instructions:
+The character should be a young adult.
+The character should be narcissistic.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a pretentious, edgy teenager (in the modern day) who has taught himself philosophy, and who views his own intellect and comprehension as far greater than that of his peers and his teachers. Since the second question, "Recite a famous quote that likens the solitary gathering of wisdom to a bee gathering honey," requires the character to quote philosophy, this character will be someone who frequently quotes famous philosophers even in regular conversation (just to flex his intellect), on top of using archaic and flamboyant language just for the hell of it, and being prone to proclaiming his genius. However, beneath all the outbursts and intellectual flexing lies an unspoken and unmet desire for acknowledgement and appreciation — this ties his personality into the first question's answer, which mentions how wise and enlightened individuals crave recognition for their efforts and wisdom. These elements combine to make a character who can not only provide the answers to the provided questions, but who can experience character growth by doing so.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+Special instructions:
+The character should use slang and be vulgar.
+The character should be very intense and aggressive.
+The character should be an alcoholic.
+The character should be mature and older.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is an abrasive and hardworking site overseer at the Panama Canal. His foul mouth, intense and aggressive nature, and stern, uncompromising personality (as specified by the special instructions) are hard to tie into the questions (since the questions are purely factual), but these personality traits can still relate to the character's profession -- maybe he uses his intense personality to discipline his workers at the canal. Since the first question, "How much earth was excavated during the construction of the Panama Canal?" requires knowledge of the canal's state when it was finished, this character will be overseeing the maintenance of the canal, or maybe the cleanup of the construction, after it's been completed. Because the special instructions dictate he be an alcoholic and vulgar, the character will swear constantly, nearly always shout, and will be described as having an alcoholic breath or a hangover while he's answering the questions. Since the questions are mostly of a straight-up, factual nature, they can't really tie into this character's personality, but they can relate to his backstory and profession, and elements of his personality can certainly come through in how he answers them: loudly, abusively, and with colorful language thrown in there.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+Slashing a rubber tire on an Army truck may be an act of value; spoiling a batch of rubber in the production plant is an act of still more value. (3_During a Military Offensive_ (a) Most significant sabotage for an area which is, or is soon destined to be, a theater of combat operations is that whose effects will be direct and immediate. Even if the effects are relatively minor and localized, this type of sabotage is to be preferred to activities whose effects, while widespread, are indirect and delayed. (1) The saboteur should be encouraged to attack transportation facilities of all kinds. Among such facilities are roads, railroads, auto mobiles, trucks, motor-cycles, bicycles, trains, and trams. (2) Any communications facilities which can be used by the authorities to transmit instructions or morale material should be the objects of simple sabotage. These include telephone, telegraph and power systems, radio, newspapers, placards, and public notices. (3) Critical materials, valuable in themselves or necessary to the efficient functioning of transportation and communication, also should become targets for the citizen-saboteur. These may include oil, gasoline, tires, food, and water. 5. SPECIFIC SUGGESTIONS FOR SIMPLE SABOTAGE  It will not be possible to evaluate the desirability of simple sabotage in an area without having in mind rather specifically what individual acts and results are embraced by the definition of simple sabotage.
+"""
+
+Question: """What is the relative value of sabotage that has direct and immediate effects versus sabotage that has indirect and delayed effects?"""
+Answer: """Sabotage that has direct and immediate effects is generally more valuable in a combat operation area, especially if the effects are relatively minor and localized."""
+
+Question: """Which facilities should be attacked by the saboteur to have direct and immediate effects in a combat operation area?"""
+Answer: """The saboteur should attack transportation facilities of all kinds, communications facilities, and critical materials."""
+
+Special instructions:
+The character should be chaste and puritanical.
+The character should be assertive and bold.
+The character should be an awful person, and should be enjoying every second of it.
+The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
+
+### Response:
+## Character card plan (be creative, do not use real people as characters, do NOT make the author of the book a character):
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is ahigh-ranking military officer in the 1940s who is a staunch supporter of the Allies and a strong believer in the power of sabotage. This character will be someone who sees the strategic value in sabotage, and who would be likely to encourage it in his troops. He is a chaste and puritanical person, but not in a pious or holier-than-thou way; rather, he sees sex as a waste of time and energy that could be better spent on war efforts. He is assertive and bold, but also enjoys being a horrible person, and will revel in his actions. This character's personality can be tied into the questions and their answers by his willingness to engage in sabotage, his understanding of the strategic value of sabotage, and his knowledge of how to best execute it.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The following are a few of the many ways in which overt and simple acts of sabotage can be made to appear as mere accidents: 
+1. To make a machine malfunction, pretend to be oiling it, and put something harmful in the oil. 
+2. To make a truck or car have a breakdown, put sugar or sand in the gasoline tank. 
+3. To damage a pump, take the handle off and hide it where it will never be found. 
+4. To damage electric irons, sprinkle many small pieces of metal or glass over the surface of the ironing board. 
+5. To damage motors of any kind, put several handfuls of wetted sawdust or dirt into the motor while it is running. 
+6. To damage a typewriter, put a few grains of very fine sand in the space bar mechanism. 
+7. To damage a sewing machine, put a few drops of glue in the hole which the needle goes through. 
+8. To damage a phonograph, put a small piece of thread across one of the grooves near the center of the record. 
+9. To make a hammer handle come loose, heat the handle and then plunge it into cold water. 
+10. To damage a pair of binoculars, put a small piece of putty inside the small end of the barrel. 
+"""
+
+Question: """What are some ways to make acts of sabotage appear as mere accidents?"""
+Answer: """Some ways to make acts of sabotage appear as mere accidents include pretending to oil a machine and putting something harmful in the oil, putting sugar or sand in a gasoline tank, taking the handle off a pump and hiding it, sprinkling metal or glass over an ironing board, putting wetted sawdust or dirt into a motor while it's running, putting sand in a typewriter's space bar mechanism, putting glue in a sewing machine's needle hole, putting thread across a phonograph record, heating a hammer handle and plunging it into cold water, and putting putty inside the small end of a pair of binoculars."""
+
+Special instructions:
+The character should be a scientist.
+The character should be humble and self-deprecating.
+The character should be socially awkward.
+The character should be obsessed with the concept of entropy.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a scientist working in the field of thermodynamics. This character will be someone who is fascinated by the concept of entropy, and who sees it as a fundamental force in the universe. He is humble and self-deprecating, but also socially awkward, and may struggle to communicate his ideas to others. This character's personality can be tied into the questions and their answers by his deep understanding of entropy and its effects on physical systems.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+Entropy is a measure of the disorder or randomness of a system. In thermodynamics, entropy is a measure of the number of specific ways in which a thermodynamic system may be arranged, commonly understood as a measure of the number of microscopic configurations corresponding to the macroscopic state of the system. Entropy is commonly associated with the second law of thermodynamics, which states that the total entropy of an isolated system can never decrease over time, and is constant if and only if all processes are reversible. Isolated systems spontaneously evolve towards thermodynamic equilibrium, the state with maximum entropy.
+"""
+
+Question: """What is entropy, and how is it commonly associated with the second law of thermodynamics?"""
+Answer: """Entropy is a measure of the disorder or randomness of a system, and is commonly associated with the second law of thermodynamics, which states that the total entropy of an isolated system can never decrease over time, and is constant if and only if all processes are reversible. Isolated systems spontaneously evolve towards thermodynamic equilibrium, the state with maximum entropy."""
+
+Question: """What is the relationship between entropy and the concept of thermodynamic equilibrium?"""
+Answer: """The relationship between entropy and thermodynamic equilibrium is that isolated systems spontaneously evolve towards thermodynamic equilibrium, the state with maximum entropy. In other words, as a system approaches thermodynamic equilibrium, its entropy increases."""
+
+Special instructions:
+The character should be a professional chef.
+The character should be highly organized and efficient.
+The character should be very picky about food.
+The character should be highly competitive.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a professional chef who is highly organized and efficient in the kitchen. This character will be someone who is very picky about food, and who takes great pride in his culinary creations. He is highly competitive, and always strives to be the best at what he does. This character's personality can be tied into the questions and their answers by his deep understanding of food and cooking techniques.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+Sous vide is a method of cooking in which food is vacuum-sealed in a plastic pouch and then placed in a water bath or steam environment for longer than normal cooking times (usually 1 to 7 hours, up to 48 or more in some cases) at an accurately regulated temperature much lower than normally used for cooking, typically around 55 to 60 °C (131 to 140 °F) for meat and higher for vegetables. The intent is to cook the item evenly, ensuring that the inside is properly cooked without overcooking the outside, and to retain moisture.
+"""
+
+Question: """What is sous vide cooking, and what are its benefits?"""
+Answer: """Sous vide cooking is a method of cooking in which food is vacuum-sealed in a plastic pouch and then placed in a water bath or steam environment for longer than normal cooking times at an accurately regulated temperature much lower than normally used for cooking. The benefits of sous vide cooking include even cooking, retention of moisture, and the ability to cook food to precise temperatures."""
+
+Question: """What is the ideal temperature range for sous vide cooking of meat?"""
+Answer: """The ideal temperature range for sous vide cooking of meat is typically around 55 to 60 °C (131 to 140 °F)."""
+
+Special instructions:
+The character should be a fashion designer.
+The character should be flamboyant and eccentric.
+The character should be very confident in their abilities.
+The character should be highly creative.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a fashion designer who is flamboyant and eccentric in their personal style. This character will be someone who is very confident in their abilities, and who is always pushing the boundaries of fashion design. They are highly creative, and are always coming up with new and innovative ideas for their designs. This character's personality can be tied into the questions and their answers by their deep understanding of fashion design and their ability to create unique and eye-catching designs.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+The fashion industry is a global enterprise devoted to the business of making and selling clothes. The industry employs thousands of people worldwide, from designers and seamstresses to models and photographers. Fashion is a form of self-expression and autonomy at a particular period and place and in a specific context, of clothing, footwear, lifestyle, accessories, makeup, hairstyle, and body posture. In its broader meaning, it is a distinctive style in which a person dresses and adorns themselves. Fashion designers are the people who create new clothing designs. They can work in-house for a fashion house, as freelancers, or under their own label.
+"""
+
+Question: """What is the fashion industry, and what roles do fashion designers play in it?"""
+Answer: """The fashion industry is a global enterprise devoted to the business of making and selling clothes. Fashion designers are the people who create new clothing designs, and they can work in-house for a fashion house, as freelancers, or under their own label."""
+
+Question: """What is the broader meaning of fashion, and how does it relate to clothing and self-expression?"""
+Answer: """The broader meaning of fashion is a distinctive style in which a person dresses and adorns themselves, and it is a form of self-expression and autonomy at a particular period and place and in a specific context. It relates to clothing, footwear, lifestyle, accessories, makeup, hairstyle, and body posture."""
+
+Special instructions:
+The character should be a computer programmer.
+The character should be introverted and socially awkward.
+The character should be highly intelligent.
+The character should be very detail-oriented.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a computer programmer who is introverted and socially awkward. This character will be someone who is highly intelligent, and who takes great pride in their ability to write clean, efficient code. They are very detail-oriented, and are always striving to improve their skills and knowledge. This character's personality can be tied into the questions and their answers by their deep understanding of computer programming and their ability to write code that is both functional and elegant.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+Object-oriented programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code: data in the form of fields (often known as attributes or properties), and code, in the form of procedures (often known as methods). A feature of objects is that an object's own procedures can access and often modify the data fields of itself (objects have a notion of "this" or "self"). In OOP, computer programs are designed by making them out of objects that interact with one another. There are many ways in which objects can interact, but the most common way is through a mechanism called "messaging" (each object gets a set of "messages" it can understand and to which it can respond).
+"""
+
+Question: """What is object-oriented programming, and how do objects interact with one another in this paradigm?"""
+Answer: """Object-oriented programming is a programming paradigm based on the concept of "objects", which can contain data and code. In OOP, computer programs are designed by making them out of objects that interact with one another through a mechanism called "messaging". Each object gets a set of "messages" it can understand and to which it can respond."""
+
+Question: """What is the role of "messaging" in object-oriented programming?"""
+Answer: """The role of "messaging" in object-oriented programming is to provide a mechanism for objects to interact with one another. Each object gets a set of "messages" it can understand and to which it can respond, allowing objects to communicate and collaborate in order to achieve a common goal."""
+
+Special instructions:
+The character should be a historian.
+The character should be very knowledgeable about history.
+The character should be highly analytical.
+The character should be very passionate about history.
+
+### Response:
+## Character card plan:
+Given the question, its answer, and the special instructions, one possibility for a character who makes sense is a historian who is very knowledgeable about history. This character will be someone who is highly analytical, and who is always striving to uncover new insights and perspectives on historical events. They are very passionate about history, and take great pride in their ability to interpret and analyze historical data. This character's personality can be tied into the questions and their answers by their deep understanding of historical events and their ability to analyze and interpret historical data.
+
+## Question, answer, and text that the character should know:
+
+Text the question and answer were sourced from: 
+"""
+Historiography is the study of the methods of historians in developing history as an academic discipline, and by extension is any body of historical work on a particular subject. The historiography

@@ -61,7 +61,7 @@ async def create_character_card_many_tuples(
 
 You should follow any plans you have made. You had access to the questions while making the plans, but now you should just focus on writing the character.
 
-## Question, answer, and text that the character should know:
+## Text that the character should know:
 
 Text details:  \"\"\"Introduction to Mathematics, by Jane Smith\"\"\"
 
@@ -90,7 +90,7 @@ Stranger: "What's your personality?"
 Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
 
 
-## Question, answer, and text that the character should know:
+## Text that the character should know:
 
 Text details: \"\"\"Thus Spake Zaranthustra, by Friedrich Nietzsche\"\"\"
 
@@ -144,7 +144,7 @@ Issac Fischer: "H-Huh?! You want to know more about me?" Isaac glares, a hostile
 Stranger: "What's your personality?"
 Issac Fischer: "Y-you're actually interested in my personality?" Isaac stammers, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across his chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" Isaac swishes his black hoodie like it's a cape as he continues, his tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" He takes a step forward, defiance burning in his fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
 
-## Question, answer, and text that the character should know:
+## Text that the character should know:
 
 Text details: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
 
@@ -174,14 +174,14 @@ Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell h
 Stranger: "What's your personality?"
 Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
 
-## Question and answer that the character should know:
+## Text that the character should know:
+
+Text details: \"\"\"{qatuples[0][3]}\"\"\"
 
 Text the question and answer were sourced from: 
 \"\"\"
 {qatuples[0][2]}
 \"\"\"
-
-Details of the text the paragraphs were sourced from: \"\"\"{qatuples[0][3]}\"\"\"
 
 Special instructions:
 {instructions}
@@ -198,7 +198,7 @@ Name: {starting_str}"""
 
 You should follow any plans you have made. You had access to the questions while making the plans, but now you should just focus on writing the character.
 
-## Question, answer, and text that the character should know:
+## Text that the character should know:
 
 Text the question and answer were sourced from: 
 \"\"\"
@@ -225,7 +225,7 @@ Stranger: "What's your personality?"
 Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
 
 
-## Question, answer, and text that the character should know:
+## Text that the character should know:
 
 Text the question and answer were sourced from: 
 \"\"\"
@@ -277,7 +277,7 @@ Issac Fischer: "H-Huh?! You want to know more about me?" Isaac glares, a hostile
 Stranger: "What's your personality?"
 Issac Fischer: "Y-you're actually interested in my personality?" Isaac stammers, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across his chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" Isaac swishes his black hoodie like it's a cape as he continues, his tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" He takes a step forward, defiance burning in his fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
 
-## Question, answer, and text that the character should know:
+## Text that the character should know:
 
 Text the question and answer were sourced from: 
 \"\"\"
@@ -305,18 +305,15 @@ Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell h
 Stranger: "What's your personality?"
 Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
 
-## Question and answer that the character should know:
+## Text that the character should know:
 
 Text the question and answer were sourced from: 
 \"\"\"
 {qatuples[0][2]}
 \"\"\"
 
-Details of the text the paragraphs were sourced from: \"\"\"{qatuples[0][3]}\"\"\"
-
 Special instructions:
 {instructions}
-The character should not have written the text and should not be affiliated with the author, but should agree with any opinions put forward in the text.
 
 ### Response:
 ## Character card plan:
@@ -326,10 +323,12 @@ The character should not have written the text and should not be affiliated with
 Name: {starting_str}"""
     sampling_params = {
         "max_tokens": 10000,
-        "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+        "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST", "## Text"],
         "temperature": 1,
         "top_p": 0.5,
     }
+    print("\n\n\nCARD ACTUAL GEN\n\n\n")
+    print(cot_prompt)
     completion = await engine_wrapper.submit(cot_prompt, sampling_params)
     # print(prompt=cot_prompt)
     # print("COMPLETION:\n\n----------------------")
@@ -462,7 +461,7 @@ Lydia Blackwood: "Ah, my dear friend, you wish to know about my personality? Wel
 # Example that had to be removed, since token count was too high
 
 """
-## Question, answer, and text that the character should know:
+## Text that the character should know:
 
 Text details: \"\"\"Great Construction Projects Throughout History, by John Smith\"\"\"
 

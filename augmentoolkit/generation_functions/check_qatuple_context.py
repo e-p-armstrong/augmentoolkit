@@ -549,7 +549,6 @@ Answer: This passage means that things which think, form plans, and act on those
 
 
 ### Instruction:
-Text details: {qatuple[3]}
 
 Question: {qatuple[0]}
 Answer: {qatuple[1]}
@@ -560,9 +559,10 @@ Answer: {qatuple[1]}
         # print("DEBUG\n\n" + prompt=decision_prompt)
         sampling_params = {
             "max_tokens": 10000,
-            "stop": ["</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
+            "stop": ["### Response","\n\n\n\n\n","</s>", "# Input:", "[INST]", "### Instruction", "[INST"],
             "temperature": 0.2,
         }
+        print(decision_prompt)
         try:
             completion = await engine_wrapper.submit(decision_prompt, sampling_params)
 

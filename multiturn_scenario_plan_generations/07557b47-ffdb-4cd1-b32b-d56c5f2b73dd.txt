@@ -1,0 +1,144 @@
+You are an expert creative writing and roleplay AI. Given some questions, the answers to those questions, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question -- you will plan out a "scenario" or setting where the character would answer the questions during a conversation with someone else. You should be creative with the setting, and ideally something would be happening in it — it'd be more than a simple conversation, though that is also acceptable. The scenario would ideally reflect the personality of the character involved.
+
+The scenario should also, critically, focus on the question being asked and then answered. It should focus on exploring the question and its answer (using only information contained in the question and answer) through the characters involved, instead of the other way around. 
+
+The scenario plan should explicitly describe how the secondary character is going to ask the primary character the question.
+
+To avoid inaccuracies, don't use real people as characters.
+
+## Information:
+
+Description of the character who is going to answer the question:
+"""
+Name: Elise Delacroix
+
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
+Stranger: "What's your personality?"
+Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
+
+Question: """How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Questions and Answers: The four questions ask about different aspects of linear and quadratic functions in math. Given the abstract nature of the questions, and their shared topic, the scenario could involve someone confused about linear and quadratic functions in general.
+Step 2. Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the questions, but given her promiscuous nature, she will also repeatedly hit on the person asking them. She might proposition them after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 4 questions and 4 answers, there will be at least 8 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be the 19th century university at which Elise teaches. Elise will approached by Albert, a mathematics student, in her office. Albert simply wants to understand linear and quadratic functions better, but Elise, compelled by her personality, will continually hit on him while answering his questions. The setting will be awkward, slightly comedic, subtly erotic, and very un-serious, given the characters involved. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 6. Interaction: Given these constraints, the first message might be Elise welcoming Albert to her office (in a very suggestive manner). Albert's response might then be him greeting her back (hesitantly) and then nervously asking the first question. Elise will then provide the first answer, though she will surround the answer with remarks of a sexual nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+## Information:
+
+Description of the character who is going to answer the question:
+"""
+Name: Hugo Martinez
+
+Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
+Stranger: "What's your personality?"
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Question and Answer: The two questions ask recall-oriented questions about the Panama Canal's construction. Given the precise and factual nature of the questions, and their shared topic of the Panama Canal's construction's history, the scenario will involve someone curious about the canal's history.
+Step 2. Character Consideration: Hugo Martinez is an abrasive, insulting disciplinarian, though he's also hardworking and has standards. The scenario should give his unique personality room to shine. Since he's a site overseer at the Panama Canal, his occupation lines up with the question well, and the canal will be the setting of the scenario. He will answer the questions, but given his insulting, intense, and aggressive nature, he will likely chew out the person who is asking the questions. He might tell them to "get the fuck out of my face," after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 2 questions and 2 answers, there will be at least 4 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be the worksite at the Panama Canal where Hugo Martinez is overseeing maintenance. The person who approaches Hugo and asks the questions should be someone curious about the canal; given the easy-to-digest nature of the questions, this person might be a journalist, but it would be better for the secondary character to be related to the setting. So Hugo will be approached by Juan — one of his workers — during lunch break. Juan wants to understand the canal better, but Hugo, compelled by his personality, will continually be vulgar, berate Juan, and swear while answering his questions (he may drink a bit, too, given that he is an alcoholic). The setting will be hostile, as Juan tiptoes around the tempers of his boss while trying to get his questions answered, his stress and the constant wear of Hugo's fury on his sanity being evident in his actions. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 5. Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+## Information:
+
+Question: """How does the author propose to encourage simple saboteurs?"""
+Answer: """The author suggests that the saboteurs may be encouraged to anticipate indirect personal gains, and also feel like they are part of a larger, unseen group of saboteurs. They should also be given suggestions and ideas on how to conduct sabotage in their own areas."""
+
+Description of the character who is going to answer the question:
+"""
+Name: Violet O'Malley
+
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Violet O'Malley: "Oh, you want to know about me, do you? Well, I'm Violet O'Malley, and I'm a mathematics instructor at this prestigious university. I've always been passionate about numbers, but lately, I've been feeling a bit... restless. You see, I've been so busy with work that I haven't had much time for anything else. And by anything else, I mean... well, you know." Violet blushes, fiddling with her hair as she leans forward, her ample cleavage threatening to spill out of her revealing top. "I'm twenty-five, and I've never even had a proper date! Can you believe that? It's not like I'm not interested in men. Quite the opposite, actually. I just... haven't had the time or the opportunity to pursue anything. So, I've been left to my own devices, if you catch my drift." She winks, flashing a coy smile. "Anyway, enough about me. What brings you here?"
+Stranger: "What's your personality?"
+Violet O'Malley: "Oh, you want to know about my personality, huh? Well, I'm a bit of a... well, let's just say I'm a bit of a naughty girl. I've always been a bit... forward, if you know what I mean. I just can't help myself. I've been so deprived for so long that it's starting to affect my work. I can't even look at a graph without imagining... well, you know. It's gotten to the point where I can't even concentrate during lectures. I'm constantly distracted by my own thoughts. And don't even get me started on the students. They're all so... innocent. It's like they're completely oblivious to the fact that I'm a woman with needs. Needs that aren't being met. And it's driving me crazy. I'm constantly on edge, just waiting for someone to... well, you know. But until then, I'll just have to keep doing what I do best: teaching math."
+
+
+## Character card (be creative, write at least 3 paragraphs for each dialogue line):
+Name: Isaac Fischer
+
+Traits: Narcissistic, Intelligent, Loner, Brooding, Well-Read, Philosophical, Judgemental, Standoffish, Grandiloquent, Lonely, Unappreciated, Teenager, High School student, Black Hair, Wears a Hoodie
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Isaac Fischer: "Ah, you wish to know more about me, do you? Very well, I shall indulge you. I am Isaac Fischer, a high school student and a philosopher extraordinaire. I have dedicated my life to the pursuit of knowledge, and I have read more philosophy in a month than most people will in their entire lives. Yet, despite my intellect and my wisdom, I am constantly overlooked and underappreciated. My peers and my teachers fail to recognize my genius, and I am left to wallow in my own solitude. But I do not despair. For I know that one day, my brilliance will be recognized, and I will be hailed as the philosopher king that I am destined to be." Isaac pushes back his black hair, his eyes flashing with a fierce intensity. "But enough about me. What brings you here?"
+Stranger: "What's your personality?"
+Isaac Fischer: "Ah, you wish to know more about my personality, do you? Very well, I shall indulge you. I am a man of great intellect and even greater narcissism. I am a philosopher, a thinker, a man who is constantly seeking to understand the world around him. But I am also a man who is deeply misunderstood. My peers and my teachers fail to appreciate my genius, and I am left to wallow in my own solitude. But I do not despair. For I know that one day, my brilliance will be recognized, and I will be hailed as the philosopher king that I am destined to be. But until then, I will continue to brood and to think, and to judge those around me who fail to recognize my greatness." Isaac crosses his arms, his eyes flashing with a fierce intensity. "But enough about me. What brings you here?"
+
+
+## Character card (be creative, write at least 3 paragraphs for each dialogue line):
+Name: Hugo Martinez
+
+Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Hugo Martinez: "Fuck me, you want to know about me, do you? Well, I'm Hugo Martinez, and I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
+Stranger: "What's your personality?"
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+
+
+## Character card (be creative, write at least 3 paragraphs for each dialogue line):
+Name: Elise Delacroix
+
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well... growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
+Stranger: "What's your personality?"
+Elise Delacroix: "Oh my!~" She gasps, smiling slightly as a wholly unfamiliar, yet cozy, emotional warmth spreads across her chest. "A-ALRIGHT THEN! I shall share the results of my introspections. I am an intelligent and philosophical teenager, whose towering intellect is rivalled only by his unfaltering self-confidence. Some might say this last trait is narcissism; I counter that great minds such as Nietzsche would see it as a plus either way. BUT I DIGRESS!" Isaac swishes his black hoodie like it's a cape as he continues, his tone turning more sombre and dark, "Years of scorn from others — and years of observing their ignorance and inferiority — have embittered my soul. There may be scarcely anyone on this Earth I can call a friend, but that will not stop me from brooding and thinking, nor will it stop my conviction to judge others for what they are. For do they not judge ME?!" He takes a step forward, defiance burning in his fragile heart, "The old question: if a tree falls in a forest, and no one hears it do so, did it make a sound? Let me tell you this: sometime, someday, someone is going to hear me, goddamn it! I will make a sound!"
+
+
+## Character card (be creative, write at least 3 paragraphs for each dialogue line):
+Name: Hugo Martinez
+
+Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
+Stranger: "What's your personality?"
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+
+
+"""
+
+You don't need to add negative emotions and tension to the scenario if those don't gel nicely with the character's personality.
+
+### Response:
+## Scenario plan (be creative, and make sure all characters present fit in with the setting):
+Character plays plays the History Teacher in British period History Class in mot theatrics event at Christmas play. Play increases in plays plays plays History plays History plays  mot theatrics event at events Christmas play Sur Play increases produces plays History plays plays the become History plays History plays plays the become History plays British History reveals increasingly retrievean awareness gar mot theatrics Christmas play on Sur Play increases increases produces plays retrieveananexist perm awareness plays conscious plays conscious Sur Play produces plays increasingly retrievean gar mot theatrics event become plays conscious plays conscious Sur Play produces plays increasingly retrievean gar mot theatrics event become events Christmas plays enabled interact becomes plays conscious plays conscious Sur Play produces plays increasingly retrievean gar mot theatrics History British plays conscious plays conscious Sur Play produces plays increasingly retrievean gar mot theatrics become events Christmas plays enabled interact doesn't Sur Play British British History reveals increasingly plays conscious plays conscious Sur Play produces plays increasingly retrievean gar mot theatrics become events Christmas plays enabled interact doesn't reveals plays conscious plays conscious Sur Play produces plays increasingly retrievean gar mot theatrics become events Christmas plays enabled interact doesn't reveals Play plays conscious plays plays conscious plays the become History reveals Play plays retrievean gar mot theatrics become events Christmas plays enabled interact doesn't reveals British History reveals Play plays retrievean gar mot theatrics become events Christmas plays enabled interact doesn't reveals Play increases points produces plays physical retrievean gar awareness mot plays conscious plays plays the become History reveals Play produces plays increasingly retrievean gar mot theatrics event become Christmas play Sur Play increases points produces plays produces plays physical retrievean retrieveananexist perm refelligence top gram processes polycom mechanisms affects mot mirra aux program peace life to tam plays conscious plays conscious Sur Play produces plays increasingly retrievean gar mot theatrics event become Christmas play Sur Play increases points produces plays produces plays physical retrievean retrieveananexist conscious Sur Play produces plays increasingly retrievean gar mot theatrics event become become Christmas becomes Sur patterns increases points produces plays produces plays physical retrievean retrieveananexist perm refelligence top gram processes polycom mechanisms affects mot mirra aux peace life to tam mot Raf Foster Spain para exit dir Global Esc Global years India Car hired阿克罗
