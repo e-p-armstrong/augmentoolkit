@@ -64,6 +64,31 @@ def write_output_to_file(output, directory, uuid):
 # multiturn helpers
 # These will probably be used for multiturn rapid-fire answering.
 
+def create_conv_starter(character):
+    charname = extract_name.extract_name(character)
+    first_words_of_card = multi_turn_conversation.extract_first_words(charname, character)
+    conv_starters = [  # prevents it from regurgitating the card (when combined with filtering)
+        "Ah",
+        "Oh",
+        # "You",
+        # "Really",
+        "I",
+        # "What",
+        # "So",
+        "Welcome",
+        "Hey",
+        # "Look",
+        # "Now",
+        # "Huh",
+        "It's",
+        "Hello",
+    ]
+
+    conv_starters_filtered = [
+        starter for starter in conv_starters if starter not in first_words_of_card
+    ]
+    return random.choice(conv_starters_filtered)
+
 def create_starting_str(qatuples):
     author_name_letters = extract_capital_letters(qatuples[0][3])
     starting_str = ""
@@ -1190,7 +1215,7 @@ def fix_text(to_replace_arr, text):
 
 
 async def ensure_multiple_answers_are_same(
-    info, conv, engine_wrapper, assistant_mode
+    info, conv, multi_turn_conv_generator
 ):  # why is this a whole separate function? Once upon a time, LLMs were used in validation here, too. But programmatic validation SEEMS to catch the common problems. This is here so that I can add it back in if I have to.
     """Loop to ensure that the answer is consistent in the conversation and in the tuple."""
     retries = 0
@@ -1207,7 +1232,7 @@ async def ensure_multiple_answers_are_same(
         # If we're here, majority of relevance checks failed
         print("----------------\n\n\n\nRETRYING!!!!\n\n\n\n----------------")
         # Broken info is 1) rare and 2) handled by the retry limit. We don't want to waste compute on regenerating info as they take time.
-        retry = await make_multiturn_conversation(info, engine_wrapper, assistant_mode)
+        retry = await make_multiturn_conversation(info, multi_turn_conv_generator)
         if retry is not None:  # Note: retry CANNOT actually be None
             c = retry
         else:
@@ -1217,21 +1242,25 @@ async def ensure_multiple_answers_are_same(
     return None
 
 
-async def make_multiturn_conversation(info, engine_wrapper, assistant_mode):
-    conv, conv_output = await multi_turn_conversation.multi_turn_conversation(
-        info[0],
-        info[1],
-        info[2],
-        info[3],
-        engine_wrapper,
-        assistant_mode=assistant_mode,
+async def make_multiturn_conversation(info, multi_turn_conv_generator):
+    charname = extract_name.extract_name(info[1])
+    conv_starter = create_conv_starter(info[1])
+    conv, conv_output = await multi_turn_conv_generator.generate(
+        arguments = {
+            "character": info[1],
+            "scenario": info[2],
+            "extra_info": info[3],
+            "question_answer_list": format_qatuples(info[0]),
+            "charname": charname,
+            "conv_starter": conv_starter,
+        }
     )
     write_output_to_file(conv_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_conversation_generations", info[4])
 
-    return conv
+    return (conv, info[1], info[2], info[3], info[0])
 
 def select_variation(character): # can help following the groove of the few-shot examples, in the case where you're using a slightly stupid model or low temperature
-    charname=extract_name(character)
+    charname=extract_name.extract_name(character)
     variations = [
     # "Set against the backdrop of",
     f"In {charname}'s ",
@@ -1247,11 +1276,12 @@ def select_variation(character): # can help following the groove of the few-shot
     return random.choice(variations)
 
 def fix_scenario_plan(scenario_plan, character):
-    charname = extract_name(character)
+    charname = extract_name.extract_name(character)
     if not ("Albert" in charname):
         if "Albert" in scenario_plan:
             print("Random Name was used instead of Albert")
-        scenario_plan = scenario_plan.replace("Albert", random_name())
+        scenario_plan = scenario_plan.replace("Albert", random_name.random_name())
+    return scenario_plan
 
 def create_character_info_generators(completion_mode=None,engine_wrapper=None,logging_level=None,use_filenames=False):
     character_card_plan_path = "create_character_card_plan_no_filenames.txt"
@@ -1433,7 +1463,7 @@ async def create_info(
         if not os.path.exists(file_path):
             try:
                 info = await make_multiturn_conversation_info(
-                    perm, assistant_mode=assistant_mode, character_card_plan_creator=character_card_creator, character_card_creator=character_card_creator, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator
+                    perm, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator
                 )
 
                 if info is not None:
@@ -1474,27 +1504,74 @@ def read_json_files_info(directory):
     return tuple_list
 
 
+
 async def create_conversation(
-    idx, info, engine_wrapper, multi_turn_convs, multi_turn_convs_dir, assistant_mode
+    idx, info, engine_wrapper, multi_turn_convs, multi_turn_convs_dir, assistant_mode=False, completion_mode=True, logging_level=logging.INFO
 ):
     file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
+    multi_turn_conversation_prompt_path = "multi_turn_conversation.txt"
+    
+    qatuples = info[0]
+    character = info[1]
+    scenario = info[2]
+    scenario_plan=info[3]
+    
+    charname = extract_name.extract_name(character)
+    
+    conversation_regex = re.compile(
+        f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    
+    if assistant_mode:
+        multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation.txt"
+    multi_turn_conv_generator = GenerationStep(
+        prompt_path=multi_turn_conversation_prompt_path,
+        regex=conversation_regex,
+        sampling_params={
+        "max_tokens": 8000,
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "### Information",
+            "## Information",
+            "## Instruction",
+            "Name:",
+        ],
+        "temperature": 0.8,
+        # "top_k": -1,
+        "top_p": 1,
+        # "min_p": 0.6,
+        },
+        completion_mode=completion_mode,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level
+    )
 
     # Skip if file already exists
     if not os.path.exists(file_path):
         try:
             conv = await make_multiturn_conversation(
-                info, engine_wrapper, assistant_mode
+                info, multi_turn_conv_generator
             )
             final_conv = await ensure_multiple_answers_are_same(
-                info, conv, engine_wrapper, assistant_mode
+                info, conv, multi_turn_conv_generator
             )
 
             if final_conv is not None:
+                if assistant_mode:
+                    final_conv = (final_conv[0],"AI Assistant","A conversation between a helpful AI Assistant, and a user.", "N/A",final_conv[4])
                 with open(file_path, "w") as file:
                     json.dump(final_conv, file, indent=4)
 
             multi_turn_convs.append(final_conv)
         except Exception as e:
+            traceback.print_exc()
             print("Had an error, retrying...", e)
     else:
         with open(file_path, "r", encoding="utf-8") as f:
