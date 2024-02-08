@@ -516,7 +516,7 @@ Note that even blunt facts can be suitable for questions, and unconventional kno
             "temperature": 0.2,
         }
         # print(decision_prompt)
-        completion = await engine_wrapper.submit(
+        completion = await engine_wrapper.submit_completion(
             decision_prompt,
             sampling_params
             # repeat_penalty=0,

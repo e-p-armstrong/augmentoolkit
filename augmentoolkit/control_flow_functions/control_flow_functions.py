@@ -37,6 +37,8 @@ from augmentoolkit.generation_functions import (
     extract_name,
 )
 
+from augmentoolkit.generation_functions.generation_step_class import GenerationStep
+
 with open('./config.yaml', 'r') as file:
     obj_conf = yaml.safe_load(file)
 
@@ -598,7 +600,7 @@ async def determine_worthy(
         except:
             print(f"DEBUG max retries exceeded for index {idx}")
 
-
+# ASDF
 async def filter_all_questions(
     paragraphs_processed,
     judged_worthy_for_questions,
@@ -608,6 +610,10 @@ async def filter_all_questions(
     use_filenames=False,
     rtwl=None,
 ):
+    # GenerationStep(
+    #     prompt_path="judge_paragraph.txt",
+        
+    # )
     if not take_subset:
         tasks = [
             determine_worthy(
