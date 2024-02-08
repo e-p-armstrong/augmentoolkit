@@ -1,0 +1,123 @@
+You are an expert educational AI. Given a paragraph or two from a larger text, and a question based on the paragraphs, you will make a determination as to whether the question tests ONLY information in the paragraphs. Essentially: you will check if the question is answerable, given the information in the paragraphs. Your task includes first analyzing the text, thinking through whether or not the question reflects aspects of the paragraphs provided. 
+
+Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Relevant" or "Irrelevant" depending on your analysis of the question with regards to the text. 
+
+Note a special exception: if a question includes information that isn't in the paragraphs, but is clearly (DIRECTLY, not implicitly or implied) mentioned by the paragraphs as having been covered earlier, then that question is relevant. Essentially: questions are allowed to cover content that the text has explicitly covered in the past.
+
+Write out the reasoning and analysis behind your judgment, step-by-step. Your analysis of the question, against the text, should follow a logical progression of steps that results in a conclusive and accurate final answer.
+
+You will analyze the question step-by-step, ensuring each part of the question is individually compared to the text. The key steps are analyzing the text, understanding the question, and then systematically comparing each part of the question with the text. The process continues until either a part of the question is found not to be covered by the text, leading to a judgment of "Irrelevant," or until all parts of the question have been compared and found to be covered by the text, leading to a judgment of "Relevant." This method allows for a thorough and detailed assessment, ensuring that the final judgment accurately reflects the extent to which the question is based on the given text.
+
+Please now apply this method to the provided text and question, and write out your reasoning and thought process.
+
+### Instruction:
+Text: 
+"""
+The concept of artificial intelligence (AI) revolves around the creation of machines capable of intelligent behavior. Key components of AI include machine learning, neural networks, and natural language processing. Machine learning involves training computers to learn from data and improve their performance over time. Neural networks are modeled after the human brain's network of neurons and are pivotal in enabling machines to recognize patterns and make decisions. Natural language processing, another crucial aspect of AI, allows machines to understand and interpret human languages, facilitating interaction between humans and computers.
+"""
+
+Question (based on text): """What is the role of neural networks in AI, and how does natural language processing contribute to human-computer interaction?"""
+
+### Response:
+## Reasoning and thought process:
+
+### In-Depth Analysis of the Text:
+#### Content and Depth: The text details key components of AI, including machine learning, neural networks, and natural language processing, with a focus on their roles and functions in AI.
+#### Type of Information: The information is primarily descriptive, outlining the roles and functions of neural networks and natural language processing in AI.
+
+### Detailed Understanding of the Question:
+#### Core Requirement: The question asks about the roles of neural networks in AI and the contribution of natural language processing to human-computer interaction, seeking specific functional explanations.
+#### Depth of Detail: The question requires an understanding of the specific functions and impacts of these AI components.
+
+### Targeted Comparison of the Question with the Text:
+#### Content Match: The text aligns well with the question, covering the roles of neural networks in pattern recognition and decision-making, and the role of natural language processing in understanding and interpreting human languages.
+#### Depth Match: The text provides the necessary level of detail to answer the question, though it remains descriptive and does not delve into deeper explanatory mechanisms.
+
+### Critical Evaluation and Final Judgment:
+The text addresses both components of the question with sufficient detail, making it: Relevant.
+
+
+### Instruction:
+Text: 
+"""
+The phenomenon of photosynthesis in plants is an essential process for life on Earth. It involves the conversion of light energy into chemical energy, which is stored in glucose. This process occurs in the chloroplasts, specifically within a pigment called chlorophyll. Photosynthesis consists of two main stages: the light-dependent reactions and the light-independent reactions, also known as the Calvin cycle. During the light-dependent reactions, sunlight is absorbed by chlorophyll, which then converts water (H2O) into oxygen (O2) and transfers energy to the light-independent reactions. The Calvin cycle uses this energy to convert carbon dioxide (CO2) from the atmosphere into glucose, a simple sugar.
+"""
+
+Question (based on text): """Explain exactly why chlorophyll able to absorb sunlight, and why is this important for the Calvin cycle?"""
+
+### Response:
+## Reasoning and thought process:
+
+### In-Depth Analysis of the Text:
+#### Content and Depth: The text discusses the process of photosynthesis, including the roles of chlorophyll, light-dependent reactions, and the Calvin cycle.
+#### Type of Information: Information is descriptive, explaining the stages of photosynthesis and the role of chlorophyll in light absorption.
+
+### Detailed Understanding of the Question:
+#### Core Requirement: The question seeks an explanation of why chlorophyll can absorb sunlight and its importance for the Calvin cycle, requiring detailed scientific principles.
+#### Depth of Detail: Requires an in-depth, explanatory response about the biological and chemical properties of chlorophyll.
+
+### Targeted Comparison of the Question with the Text:
+#### Content Match: The text partially matches the question by mentioning the role of chlorophyll in the light-dependent reactions.
+#### Depth Match: The text lacks the specific scientific principles explaining the mechanism of sunlight absorption by chlorophyll, which is central to the question.
+
+### Critical Evaluation and Final Judgment:
+Although the text touches upon the role of chlorophyll, it does not provide the depth of explanation required by the question, making it: Irrelevant.
+
+
+### Instruction:
+Text: 
+"""
+The octopus is an extraordinary creature, renowned for its intelligence and ability to adapt to its environment. Octopuses have three hearts and a complex nervous system, which includes a central brain and a small brain in each of their eight arms. These arms are capable of intricate movements and can even carry out simple tasks independently. The creature's ability to change its color and texture is another remarkable feature, which it uses for camouflage and communication. Notably, octopuses are known for their problem-solving skills and have been observed using tools in captivity.
+"""
+
+Question (based on text): """How do octopuses utilize their color-changing ability in their natural habitat, and what role does their central brain play in this process?"""
+
+### Response:
+## Reasoning and thought process:
+
+### In-Depth Analysis of the Text:
+#### Content and Depth: The text outlines various aspects of the octopus, such as its physiology, nervous system, color-changing ability, and intelligence.
+#### Type of Information: Descriptive, covering the abilities and features of the octopus, including color-changing for camouflage and communication.
+
+### Detailed Understanding of the Question:
+#### Core Requirement: The question asks how octopuses utilize their color-changing ability and the role of their central brain in this process.
+#### Depth of Detail: Seeks specific information on the function and control mechanism of the color-changing ability.
+
+### Targeted Comparison of the Question with the Text:
+#### Content Match: The text aligns with the first part of the question regarding the use of color-changing for camouflage and communication.
+#### Depth Match: The text does not provide information about the role of the central brain in this process, lacking the required depth on the control mechanism.
+
+### Critical Evaluation and Final Judgment:
+Given the text's coverage of color-changing but lack of detail on the central brain's role, the overall assessment of the question's relevance to the text is: Irrelevant.
+
+
+### Instruction:
+Text: 
+"""
+(b) It should not be difficult to prepare leaflets and other media for the saboteur about the choice of weapons, time, and targets which will insure the saboteur against detection and retaliation. Among such suggestions might be the following: (1) Use materials which appear to be innocent. A knife or a nail file can be carried normally on your person; either is a multi-purpose instrument for creating damage. Matches, pebbles, hair, salt, nails, and dozens of other destructive agents can be carried or kept in your living quarters without exciting any suspicion whatever. If you are a worker in a particular trade or industry you can easily carry and keep such things as wrenches, hammers, emery paper, and the like. (2) Try to commit acts for which large numbers of people could be responsible. For instance, if you blow out the wiring in a factory at a central fire box, almost anyone could have done it. On-the-street sabotage after dark, such as you might be able to carry out against a military car or truck, is another example of an act for which it would be impossible to blame you. (3) Do not be afraid to commit acts for which you might be blamed directly, so long as you do so rarely, and as long as you have a plausible excuse: you dropped your wrench across an electric circuit because an air raid had kept you up the night before and you were half-dozing at work. Always be profuse in your apologies.
+"""
+
+Question (based on text): """What kind of weapons can be carried without raising suspicion?"""
+
+If the question clearly goes off the rails and is incoherent, then it is irrelevant.
+
+### Response:
+## Reasoning and thought process (be careful around "how" and "why" questions):
+
+
+### In-Depth Analysis of the Text:
+#### Content and Depth: The text provides suggestions for a saboteur on how to avoid detection and retaliation while carrying out acts of sabotage.
+#### Type of Information: The text is prescriptive, offering advice on how to commit acts of sabotage without being detected.
+
+### Detailed Understanding of the Question:
+#### Core Requirement: The question asks for examples of weapons that can be carried without raising suspicion.
+#### Depth of Detail: Requires specific examples of such weapons from the text.
+
+### Targeted Comparison of the Question with the Text:
+#### Content Match: The text provides examples of weapons that can be carried without raising suspicion, such as a knife, a nail file, matches, pebbles, hair, salt, nails, and tools related to specific trades or industries.
+#### Depth Match: The text provides the required level of detail, offering a list of examples.
+
+### Critical Evaluation and Final Judgment:
+The text provides the necessary information to answer the question, making it: Relevant.
+
+

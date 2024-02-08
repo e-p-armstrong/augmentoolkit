@@ -21,12 +21,6 @@ import yaml
 from augmentoolkit.generation_functions import (
     create_scenario_plan_many_tuples,
     create_scenario_many_tuples,
-    check_answer,
-    check_question,
-    check_answer_relevancy_with_text,
-    generate_new_question,
-    generate_questions,
-    generate_questions_plan,
     process_multiturn_functions,
     identify_duplicates,
     multi_turn_conversation,
@@ -34,6 +28,7 @@ from augmentoolkit.generation_functions import (
     create_character_card_many_tuples,
     create_character_card_plan_many_tuples,
     extract_name,
+    strip_steps
 )
 
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
@@ -160,10 +155,59 @@ def group_by_text(tuples_list):
     ]
 
 
+def extract_reasoning_from_context_check(response):
+    decision_pattern = re.compile(r"Final judgment:(.+)", re.IGNORECASE)
+    determination = decision_pattern.search(response).group(1).strip()
+    if "pass" in determination.lower():
+        print("Leaving be...")
+        return (True, response)#, completion
+    elif "reword" in determination.lower():
+        print("Rewording...")
+        q, a = check_qatuple_context.extract_question_answer(response)
+        print((q, a))
+        return (q,a)#(q, a, qatuple[2], qatuple[3]), completion
+    elif "fail" in determination.lower():
+        print("Setting to None...")
+        return (False, response)#, completion
+    else:
+        print("Did not contain relevant or irrelevant! Retrying")
+
 # Postprocessing function for question/answer validation
 async def repair_qatuple_context(
-    idx, tup, engine_wrapper, writepath, vetted_qa_tuples, use_filenames=False
+    idx, tup, engine_wrapper, writepath, vetted_qa_tuples, use_filenames=False, completion_mode=True, logging_level=logging.INFO
 ):
+    # NOTE set up the generation step
+    context_repairer_path = "check_qatuple_context_no_filenames.txt"
+    if use_filenames:
+        context_repairer_path = "check_qatuple_context_filenames.txt"
+        
+    repair_context_regex = re.compile(
+                r"Reasoning and thought process \(be thorough\):(.+)",
+                re.DOTALL | re.IGNORECASE,
+            )
+    context_repairer = GenerationStep(
+        prompt_path=context_repairer_path,
+        regex=repair_context_regex,
+        sampling_params={
+            "max_tokens": 2000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+            ],
+            "temperature": 0.2,
+        },
+        completion_mode=completion_mode,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+    )
+    
+    # Resume normal control flow
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as f:
@@ -242,7 +286,7 @@ async def vet_answer_accuracy_loop(
     double_check_counter=3,
     use_filenames=False,
     completion_mode=True,
-    logging_level=logging.INFO,
+    logging_level=None,
     new_q_generator=None
 ):
     
@@ -320,8 +364,10 @@ async def vet_answer_accuracy_loop(
             # f"\n\nACCURACY CHECKS FAILED - SENDING BACK TO QUESTION LOOP retries: {total_retries}"
             # )
             total_retries += 1
+            para = qtuple[2]
+            para_name = qtuple[3]
             (
-                qtuple,
+                qtuple_partial,
                 generate_new_q_output,
             ) = await new_q_generator.generate(
                 arguments={
@@ -329,6 +375,7 @@ async def vet_answer_accuracy_loop(
                     "text": qtuple[2]
                 }
             )
+            qtuple = (qtuple_partial[0],qtuple_partial[1],para,para_name)
             write_output_to_file(
                 generate_new_q_output, obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations", run_id
             )
@@ -376,7 +423,7 @@ async def vet_answer_relevance_loop(
     double_check_counter=3,
     use_filenames=False,
     completion_mode=True,
-    logging_level=logging.INFO,
+    logging_level=None,
     new_q_generator=None, # we pass the new q generator around so the code is less cluttered
 ):
     
@@ -407,7 +454,7 @@ async def vet_answer_relevance_loop(
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
-        output_processor=parse_validation_step
+        output_processor=parse_answer_relevancy_validation_step
     )
     
     # Resume normal control flow code
@@ -463,8 +510,10 @@ async def vet_answer_relevance_loop(
         else:
             # print(f"\n\nRELEVANCE CHECKS FAILED - SENDING BACK TO QUESTION LOOP")
             total_retries += 1
+            para = qtuple[2]
+            para_name = qtuple[3]
             (
-                qtuple,
+                qtuple_partial,
                 generate_new_q_output,
             ) = await new_q_generator.generate(
                 arguments={
@@ -472,6 +521,8 @@ async def vet_answer_relevance_loop(
                     "text": qtuple[2]
                 }
             )
+            print(qtuple_partial)
+            qtuple = (qtuple_partial[0],qtuple_partial[1],para,para_name)
             write_output_to_file(
                 generate_new_q_output, obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations", run_id
             )
@@ -520,7 +571,7 @@ async def vet_question_loop(
     double_check_counter=3,
     use_filenames=False,
     completion_mode=True,
-    logging_level=logging.INFO,
+    logging_level=None,
     
 ):
     # NOTE Set up question check generation step
@@ -582,7 +633,7 @@ async def vet_question_loop(
         retries=3,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
-        output_processor=extract_questions_from_response
+        output_processor=extract_question_from_response
     )
     
     # Resume normal control flow code
@@ -645,8 +696,10 @@ async def vet_question_loop(
                 if (
                     total_retries <= 4
                 ):  # only regen question if we're not already at max regens
+                    para = qtuple[2]
+                    para_name = qtuple[3]
                     (
-                        qtuple,
+                        qtuple_partial,
                         generate_new_q_output,
                     ) = await new_q_generator.generate(
                         arguments={
@@ -654,6 +707,7 @@ async def vet_question_loop(
                             "text": qtuple[2]
                         }
                     )
+                    qtuple = (qtuple_partial[0],qtuple_partial[1],para,para_name)
                     write_output_to_file(
                         generate_new_q_output,
                         obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations",
@@ -676,9 +730,7 @@ def extract_questions_from_response(generation): # TODO extract to non-controlfl
                 re.DOTALL | re.MULTILINE | re.IGNORECASE,
             )
     matches = pattern.findall(generation)
-    if len(matches) > 0:
-                made_questions = True
-    else:
+    if not len(matches) > 0:
         raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
         questions.append(
@@ -689,7 +741,28 @@ def extract_questions_from_response(generation): # TODO extract to non-controlfl
                 # para_tuple[1].replace(") ", "", 1),
             )
         )
+    print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
+    print(questions)
     return questions
+
+def extract_question_from_response(generation): # TODO extract to non-controlflow file
+    questions = []
+    pattern = re.compile(
+                r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
+                re.DOTALL | re.MULTILINE | re.IGNORECASE,
+            )
+    matches = pattern.findall(generation)
+    if not len(matches) > 0:
+        raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
+    for match in matches:
+        # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
+        # print(questions)
+        return (
+                match[0].replace(") ", "", 1).strip(),
+                match[1].replace(") ", "", 1).strip(),
+                # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
+                # para_tuple[1].replace(") ", "", 1),
+            )
 
 # Question generation ASDF
 async def generate_qatuples_from_para(
@@ -701,7 +774,7 @@ async def generate_qatuples_from_para(
     double_check_counter=3,
     use_filenames=False,
     completion_mode=True,
-    logging_level=logging.INFO
+    logging_level=None
 ):
     
     # NOTE Set up qatuple plan generation step #
@@ -718,7 +791,7 @@ async def generate_qatuples_from_para(
         prompt_path=prompt_path_qatuples_plan,
         regex=qatuples_plan_regex,
         sampling_params={
-        "max_tokens": 8000,
+        "max_tokens": 3000,
         "stop": [
             "### Response",
             "\n\n\n\n\n",
@@ -727,6 +800,7 @@ async def generate_qatuples_from_para(
             "[INST]",
             "### Instruction",
             "[INST",
+            "Text to plan questions from"
         ],
         "temperature": 0.8,
         # top_k=-1,
@@ -811,16 +885,19 @@ async def generate_qatuples_from_para(
         ) = await qatuples_generator.generate(
             arguments={
                 "text": para[0],
-                "textdetails": para[1]
+                "textdetails": para[1],
+                "plan": strip_steps.strip_steps(plan)
             }
         )
+        
+        question_answer_tuples_more_info = [(qatup[0],qatup[1],para[0],para[1]) for qatup in question_answer_tuples]
         write_output_to_file(
             question_generation_output,
             obj_conf['PATH']['OUTPUT'] + "/question_generation_generations",
             question_group_id,
         )
-        for qnum, question_answer_tuple in enumerate(question_answer_tuples):
-            print(f"\n\n=======!!=BEGIN VETTING QA TUPLE {idx}_{qnum}=!!=======\n\n")
+        for qnum, question_answer_tuple in enumerate(question_answer_tuples_more_info):
+            # print(f"\n\n=======!!=BEGIN VETTING QA TUPLE {idx}_{qnum}=!!=======\n\n")
             good_qa_tuple = await vet_question_loop(
                 question_answer_tuple,
                 0,
@@ -950,7 +1027,7 @@ async def filter_all_questions(
     use_filenames=False,
     rtwl=None,
     completion_mode=True,
-    logging_level=logging.INFO
+    logging_level=None
 ):
     if use_filenames:
         prompt_path = "judge_paragraph_filenames.txt"

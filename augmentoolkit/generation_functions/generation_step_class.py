@@ -34,7 +34,7 @@ class GenerationStep:
                  completion_mode=True, # Chat vs completion mode
                  retries=0,
                  engine_wrapper=None,
-                 log_level=logging.INFO,  # Default logging level
+                 logging_level=logging.INFO,  # Default logging level
                  output_processor=lambda x: x, # to ensure that control flow does not need to have decision code handling the outputs of the LLM, you can pass in a function to handle and modify the outputs (post regex) here. By default it's just the identity function and does nothing.
                  return_input_too=True
                 ):
@@ -43,13 +43,13 @@ class GenerationStep:
         self.sampling_params = sampling_params
         self.completion_mode = completion_mode
         self.retries = retries
-        self.log_level = log_level
+        self.logging_level = logging_level
         self.output_processor = output_processor
         self.return_input_too = return_input_too
         if not engine_wrapper:
             raise Exception("Engine wrapper not passed in!")
         self.engine_wrapper = engine_wrapper
-        logging.basicConfig(level=self.log_level, format='%(asctime)s - %(levelname)s - %(message)s')
+        logging.basicConfig(level=self.logging_level, format='%(asctime)s - %(levelname)s - %(message)s')
 
     
     async def generate(self,arguments={}):
@@ -70,7 +70,7 @@ class GenerationStep:
                 prompt_escaped = prompt_escaped.replace(f"{{{{{key}}}}}", f"{{{key}}}") # Somehow this works
             # 3. Format
             prompt_formatted = prompt_escaped.format(**arguments)
-        logging.info(f"Formatted prompt for generation: {prompt_formatted}")
+        # logging.info(f"Formatted prompt for generation: {prompt_formatted}")
         # Submit generation and return response, retrying as needed
         times_tried = 0
         if self.completion_mode:
@@ -80,10 +80,10 @@ class GenerationStep:
                     filtered_response = re.search(self.regex, response).group(1)
                     ret = self.output_processor(filtered_response)
                     if self.return_input_too:
-                        return ret, prompt + ret
+                        return ret, prompt_formatted + filtered_response
                     return ret
                 except Exception as e:
-                    logging.error(f"Error in Generation Step: {e}")
+                    # logging.error(f"Error in Generation Step: {e}")
                     traceback.print_exc()
                     times_tried += 1
             raise Exception("Generation step failed -- too many retries!")
@@ -95,10 +95,10 @@ class GenerationStep:
                     filtered_response = re.search(self.regex, response).group(1)
                     ret = self.output_processor(filtered_response)
                     if self.return_input_too:
-                        return ret, prompt + [{"role": "assistant", "content": ret}]
+                        return ret, prompt_formatted + [{"role": "assistant", "content": filtered_response}]
                     return ret
                 except Exception as e:
-                    logging.error(f"Error in Generation Step: {e}")
+                    # logging.error(f"Error in Generation Step: {e}")
                     traceback.print_exc()
                     times_tried += 1
             raise Exception("Generation step failed -- too many retries!")

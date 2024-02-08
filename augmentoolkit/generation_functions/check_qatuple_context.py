@@ -576,30 +576,9 @@ Answer: {qatuple[1]}
             # print("DEBUG\n\n")
             # # print(completion)
 
-            response_pattern = re.compile(
-                r"Reasoning and thought process \(be thorough\):(.+)",
-                re.DOTALL | re.IGNORECASE,
-            )
+            response_pattern = 
             response = response_pattern.search(completion).group(1).strip()
-            decision_pattern = re.compile(r"Final judgment:(.+)", re.IGNORECASE)
-            # print(response)
-            determination = decision_pattern.search(response).group(1).strip()
-            # print("\n\nDETERMINATION:\n------")
-            # print(determination)
-            # print("\n---------\n")
-            if "pass" in determination.lower():
-                print("Leaving be...")
-                return (True, response), completion
-            elif "reword" in determination.lower():
-                print("Rewording...")
-                q, a = extract_question_answer(response)
-                print((q, a, qatuple[2], qatuple[3]))
-                return (q, a, qatuple[2], qatuple[3]), completion
-            elif "fail" in determination.lower():
-                print("Setting to None...")
-                return (False, response), completion
-            else:
-                print("Did not contain relevant or irrelevant! Retrying")
+            
                 retries += 1
         except Exception as e:
             print("Exception!", e)

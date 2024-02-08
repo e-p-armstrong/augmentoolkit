@@ -217,11 +217,11 @@ Answer: Mars would be a hundred and seventy-five feet beyond the earth.
 
 Text to make questions from: 
 """
-{para_tuple[0]}
+{text}
 """
 
 ### Response:
 ## Reasoning and Thought Process:
-{strip_steps(plan)}
+{plan}
 
 ## Questions (make 4):
