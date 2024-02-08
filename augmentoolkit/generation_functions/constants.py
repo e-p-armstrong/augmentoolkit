@@ -26,6 +26,8 @@ names = [  # Replaces "Albert" in scenarios. Needs to be western male names to a
     "Samuel",
 ]
 
+INPUT_DIRECTORY = "../../inputs/"
+
 # N_CHARACTERS_SAME_ANSWER = 25 # number of characters that are the same in the question and answer for a thing to fail validation or be deemed "the same" in various places throughout the code
 
 # N_CHARACTERS_SAME_QUESTION = 15
