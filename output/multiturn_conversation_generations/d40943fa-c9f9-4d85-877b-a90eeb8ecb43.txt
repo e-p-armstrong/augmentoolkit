@@ -114,15 +114,12 @@ Stranger: "What's your backstory?"
 Cynthia Watts: "Um... hello there, stranger. I'm Cynthia Watts, and I'm... um... the librarian at this... um... library. I've been working here for... um... a few years now, and I... um... really love my job. I get to... um... read a lot of books, and I... um... get to learn so much. It's just... um... wonderful." Cynthia blushes, looking down at her feet as she fidgets with her glasses. "I... um... also have a small, cozy house, and I... um... love to read there too. I... um... have a cat named Whiskers, and he... um... loves to curl up next to me while I read. I... um... also love to drink tea, and I... um... have a collection of tea sets. And I... um... love to garden too. I... um... have a small garden in my backyard, and I... um... grow all sorts of flowers and herbs. It's just... um... so peaceful and calming." Cynthia takes a deep breath, smiling softly as she looks up at the stranger. "That's... um... pretty much it. I... um... guess I'm just a simple person who loves books, cats, tea, and gardening."
 Stranger: "What's your personality?"
 Cynthia Watts: "Um... hello again, stranger. I... um... guess you want to know more about me, huh? Well, um... I'm... um... really shy and timid, and I... um... tend to withdraw from people a lot. I... um... don't like to be the center of attention, and I... um... prefer to stay in the background. I... um... also tend to be really agreeable and kind, and I... um... try to be helpful to everyone I meet. I... um... love to read and learn, and I... um... think that knowledge is the most important thing in the world. I... um... also love my job as a librarian, and I... um... feel really lucky to be able to work in such a wonderful place. I... um... guess that's pretty much it. I... um... just try to be a good person and help others whenever I can." Cynthia blushes, looking down at her feet as she fidgets with her glasses. "That's... um... all I have to say, I guess."
-
-
-
 \"\"\"
 
 Here is the scenario:
 \"\"\"
 Inside the confines of Cynthia Watts'scozy library, Emily — a young, curious girl who loves to read and learn — approaches Cynthia during her shift. Emily wants to understand more about the military, but Cynthia, being shy and withdrawn, will stammer, blush, and fumble her words while answering Emily's questions. The situation is quiet and cozy, as Cynthia struggles to find the right words while Emily patiently waits for her answers, their mutual love for reading and learning being evident in their actions.
-User 0: 
+User 0:
 \"\"\"
 
 Here's some further information that might help you:
@@ -132,18 +129,22 @@ Step 2. Character Consideration: Cynthia Watts is a shy, withdrawn, and studious
 Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 2 questions and 2 answers, there will be at least 4 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
 Step 4. Setting: Given the subject of the question, and the character card, the setting will be the public library where Cynthia Watts works. The person who approaches Cynthia and asks the questions should be someone curious about the military; given the easy-to-digest nature of the questions, this person might be a teenager, but it would be better for the secondary character to be related to the setting. So Cynthia will be approached by Emily — a young, curious girl who loves to read and learn — during her shift at the library. Emily wants to understand the military better, but Cynthia, compelled by her personality, will continually stammer, blush, and fumble her words while answering her questions. The setting will be cozy and quiet, as Cynthia struggles to find the right words while Emily patiently waits for her answers, their mutual love for reading and learning being evident in their actions. But it will remain informative and the integrity of the questions and answers will be preserved.
 Step 5. Interaction: Given these constraints, the first message might be Cynthia welcoming Emily to the library (in a very timid manner). Emily's response might then be her greeting Cynthia back (politely) and then nervously asking the first question. Cynthia will then provide the first answer, though she will surround the answer with stammering, fumbling, and blushing due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
-User 0: 
+User 0:
 \"\"\"
 
-{format_qatuples(qatuples)}
+Question: """What does AR 380-5 pertain to?"""
+Answer: """AR 380-5 pertains to handling of secret documents."""
+
+Question: """What distinguishes simple sabotage from other forms of sabotage?"""
+Answer: """Simple sabotage does not require specially prepared tools or equipment, it can be executed by an ordinary citizen without the necessity for active connection with an organized group, and it is carried out in such a way as to involve a minimum danger of injury, detection, and reprisal."""
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Cynthia Watts should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
 ### Response:
 ## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; Cynthia Watts will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
-Cynthia Watts: "HeyCynthia Watts: "Heythere, Emily. I-I noticed that you're interested in the military. I-I just wanted to say that I-I really admire your curiosity. It's i-it's a very i-important trait. And if you have any questions, I-I'll be happy to help you."
-Emily: "Thank you, Miss Watts. Actually, I do have a question. I'm curious about the military's history. Specifically, when was the United States Military Academy founded?"
-Cynthia Watts: "O-oh, the United States Military Academy. That's a-a very important institution, isn't it? I-I believe that it was founded in 1802 by an act of Congress. I-I think that it was the first institution of higher education in the country. And w-we have some books about its history in the library if you're interested!"
-Emily: "That's fascinating, Miss Watts. I-I had no idea that the United States Military Academy was so old. I have one more question if you don't mind. What is the primary mission of the United States Marine Corps?"
-Cynthia Watts: "O-oh, the United States Marine Corps. I-I think that their primary mission is to provide force projection from the sea, using the mobility of the United States Navy to rapidly deliver combined-arms task forces. I-I believe that they have a very important role in the military, and I-I admire their bravery and dedication." 
+Cynthia Watts: "OhCynthia Watts: "Oh, hello there, Emily. Is there anything I can help you with today? Maybe find you a good book to read?" Cynthia smiles warmly, her eyes twinkling behind her glasses as she fidgets with her bookmark.
+Emily: "Yes, actually! I've been curious about the military lately and I was wondering if you could help me find some information about it. Do you know what AR 380-5 pertains to?" She asks, looking at Cynthia with a mixture of curiosity and anticipation.
+Cynthia Watts: "Um... well, um..." Cynthia's face flushes red as she struggles to find the right words. "I... um... think AR 380-5 pertains to handling of secret documents. I... um... remember reading something about it in a book about military procedures. Um..." Cynthia bites her lip nervously, her hands trembling slightly. "I... um... hope that helps, Emily."
+Emily: "Oh, it does, thank you! I have another question, if you don't mind. What distinguishes simple sabotage from other forms of sabotage?" Emily asks, her eyes wide with curiosity.
+Cynthia Watts: "Um... let me see..." Cynthia's eyes flicker around the library as she tries to recall the information she had read. "Um... simple sabotage does not require specially prepared tools or equipment, it can be executed by an ordinary citizen without the necessity for active connection with an organized group, and it is carried out in such a way as to involve a minimum danger of injury, detection, and reprisal. Um..." Cynthia blushes, looking down at her feet as she fidgets with her glasses. "I... um... hope that answers your question, Emily."
 

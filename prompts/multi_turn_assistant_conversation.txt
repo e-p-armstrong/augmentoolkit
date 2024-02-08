@@ -65,7 +65,7 @@ User: Recite a famous quote from Thus Spake Zarathustra that likens the solitary
 AI Assistant: Certainly. Nietzsche once wrote, "Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it." Do you have any more questions about Nietzsche or his works?
 
 ## Information:
-{format_qatuples(qatuples)}
+{question_answer_list}
 
 The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
 

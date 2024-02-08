@@ -1247,12 +1247,12 @@ async def make_multiturn_conversation(info, multi_turn_conv_generator):
     conv_starter = create_conv_starter(info[1])
     conv, conv_output = await multi_turn_conv_generator.generate(
         arguments = {
-            "character": info[1],
-            "scenario": info[2],
-            "extra_info": info[3],
-            "question_answer_list": format_qatuples(info[0]),
-            "charname": charname,
-            "conv_starter": conv_starter,
+            "character": info[1].strip(),
+            "scenario": info[2].strip(),
+            "extra_info": info[3].strip(),
+            "question_answer_list": format_qatuples(info[0]).strip(),
+            "charname": charname.strip(),
+            "conv_starter": conv_starter.strip(),
         }
     )
     write_output_to_file(conv_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_conversation_generations", info[4])

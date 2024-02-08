@@ -127,8 +127,6 @@ In the private confines of her office, Elise Delacroix — a highly promiscuous 
 Within the mess hall of a worksite servicing the Panama Canal, Hugo Martinez — a site overseer — is approached by Juan, a worker who wants to understand more about the canal's construction. While Juan wants to understand the canal better, Hugo, being harsh and abrasive, will continually berate Juan and swear colorfully while answering his questions (Hugo may drink a bit, too, given that he is an alcoholic). The situation will be hostile as the two's personalities clash, but it also has undertones of "business as usual" and curiosity.
 User 0: These scenarios are fantastic! I love how you've captured the essence of each character and their unique personalities. The settings are also very vivid and immersive, and I can easily picture them in my mind. Great job!
 User 1: Thank you! I'm glad you enjoyed them. I had a lot of fun coming up with these characters.
-
-
 \"\"\"
 
 Here's some further information that might help you:
@@ -155,13 +153,22 @@ User 0: These are great, as well! I like how you've balanced the character's per
 User 1: Thank you! I'm glad you enjoyed them. I had a lot of fun coming up with these characters.
 \"\"\"
 
-{format_qatuples(qatuples)}
+{questioin_answer_list}
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Ada Kensington should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
 ### Response:
 ## Conversation that answers the provided question (be sure that you do not change the questions or answers themselves; Ada Kensington will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation):
-Ada Kensington: "HeyAda Kensington: "Hey, um, you... you wanted something?" Ada asks nervously, her voice barely above a whisper as she nervously fiddles with a book on the shelf. "I don't, um, bite or anything, but um..." Ada's voice trails off as she blushes, her eyes darting around nervously. "I hope you're not one of those annoying people who just um, waste other people's time, um, for no reason?"
-Student: "N-No, I was just curious about the books you're reading. Do you know why fire was sometimes used as a tool during acts of sabotage?"
-Ada Kensington: "Well, um, fire can um, cause a lot of damage, you know? But um..." Ada darts her eyes around nervously, her voice taking on a darker, more sinister tone, "I suppose there's something else to it, too. Something... more... personal." Ada shivers slightly, her eyes widening with excitement. "You see, um, fire is a lot like desire. It's um, alluring, intoxicating, and um... utterly devastating." Ada's voice is barely above a whisper now, her eyes wide with excitement. "It can consume everything in its path, leaving nothing but ash and smoke. And, um, isn't that just like desire, too?" Ada asks, her eyes fixating on the student, as if searching for some hidden truth within them.
+Ada Kensington: "HelloAda Kensington: "Hello, there," Ada nervously greets the curious student, her voice barely above a whisper. She can feel her heart racing in her chest as she speaks, her eyes darting to the door of her office as if expecting someone to burst in at any moment. "What... what can I do for you?"
+Student: "Sorry to bother you, Miss Kensington, but I was wondering about some of the books you've been reading. I'm curious about the ones that focus on the use of fire in sabotage."
+Ada Kensington: "Oh," Ada says, her voice barely above a whisper now, her eyes darting around nervously. "Well, um... I suppose the thing you've gotta know is that fire can be a powerful tool for destruction, especially when used in sabotage. But, um... it's also a dangerous and unpredictable force, so, um... it's not something that you should ever play around with." She blushes slightly, her eyes wide with excitement. "And, um... I suppose I've always found it... oddly... arousing... to think about buildings being burned down. The screams of the people trapped inside, the crackling of the flames, the... the smell of the smoke... it's all so... intoxicating." Ada's voice is barely above a whisper now, her eyes wide with excitement. "But, um... I suppose that's enough about me. I don't want to bore you with my... my twisted desires."
+Student: "Of course, Miss Kensington," the student replies, suppressing a sigh and forcing enthusiasm through their tone. "Now, if you would permit me just one more question before I get out of your way: What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"
+Ada Kensington: "Health, huh? Well, um... I don't know much about that, I'm afraid. I'm more of a bookworm, you see, and I tend to stick to my little corner of the library." Ada's voice trails off as she blushes, her eyes darting around nervously. "But, um... I suppose I could tell you a bit about the use of fire in historical warfare, if that interests you. The ancient Greeks, for example, used fire as a weapon during the battle of Thermopylae, and they were incredibly successful in their use of it." She leans forward, her eyes sparkling with excitement. "And, um... I suppose I've always had... a certain... fascination with fire as well. The heat, the light, the destruction... it's all so... enticing." She shivers slightly, her voice taking on a darker, more sinister tone. "And, um... I suppose I've always found it... oddly... arousing... to think about buildings being burned down. The screams of the people trapped inside, the crackling of the flames, the... the smell of the smoke... it's all so... intoxicating."
+User 0: Wow, this is amazing! I love the depth and detail you've put into this conversation. Ada's character really shines through in her responses, and it's clear that you've put a lot of thought into how she would react to the student's questions. The literary allusions and metaphors are also a great touch, and really help to bring the setting to life. Great job!
+User 1: Thank you! I'm glad you enjoyed it. I had a lot of fun coming up with these characters.
+\"\"\"
+
+{questioin_answer_list}
+
+The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from Hugo Martinez should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 

@@ -118,7 +118,7 @@ Here's some further information that might help you:
 {extra_info}
 \"\"\"
 
-{format_qatuples(qatuples)}
+{question_answer_list}
 
 The primary character's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from {charname} should set up the scene. The second message of the conversation will ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions.
 
