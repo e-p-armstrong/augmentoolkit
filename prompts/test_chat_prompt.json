@@ -1,6 +1,0 @@
-[
-    {
-    "role": "system",
-    "content": "Print 'hello world' {test} test {test} test {test} {test} test {test test}."
-    }
-]
