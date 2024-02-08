@@ -136,7 +136,7 @@ async def make_multiturn_character(
             
         }
     )  # creates a character card
-    write_output_to_file(char_output, obj_conf['PATH']['OUTPUT'] + "multiturn_card_generations", conv_id)
+    write_output_to_file(char_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_card_generations", conv_id)
     return char, instructions
 
 
@@ -159,7 +159,7 @@ async def make_multiturn_scenario(
     
     plan = fix_scenario_plan(plan,character)
     write_output_to_file(
-        scenario_plan_output, obj_conf['PATH']['OUTPUT'] + "multiturn_scenario_plan_generations", conv_id
+        scenario_plan_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_scenario_plan_generations", conv_id
     )
     
     variation = select_variation(character)
@@ -175,7 +175,7 @@ async def make_multiturn_scenario(
             "selected_variation": variation
         }
     )  # creates a scenario based on a character card and question/answer tuple
-    write_output_to_file(scenario_output, obj_conf['PATH']['OUTPUT'] + "multiturn_scenario_generations", conv_id)
+    write_output_to_file(scenario_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_scenario_generations", conv_id)
     return scenario, plan
 
 
@@ -301,7 +301,7 @@ async def repair_qatuple_context(
             }
         )
         write_output_to_file(
-            revision_output, obj_conf['PATH']['OUTPUT'] + "question_context_revision_generations", revision_id
+            revision_output, obj_conf['PATH']['OUTPUT'] + "/question_context_revision_generations", revision_id
         )  # incidentally, identifying the problem and fixing it in the same step (without another planning step) works a lot better than identifying it and then trying to fix it in the next step.
         if isinstance(revision[0], str):  # if the thing was reworded
             vetted_qa_tuples[idx] = (revision[0], revision[1], tup[2], tup[3]) # replace the old tuple with the new one, revision doesn't have text name so we keep the old one

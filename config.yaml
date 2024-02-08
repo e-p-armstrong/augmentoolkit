@@ -2,7 +2,7 @@ PATH:
   INPUT: "./raw_txt_input"
   OUTPUT: "./output"
 API:
-  API_KEY: "YOURAPIKEY"
+  API_KEY: "arstrst"
   BASE_URL: "https://api.together.xyz"
   LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
   LARGE_LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
@@ -12,4 +12,5 @@ SYSTEM:
   DOUBLE_CHECK_COUNTER: 3
   USE_SUBSET: False
   REARRANGEMENTS_TO_TAKE: 3
-  CONCURRENCY_LIMIT: 10
+  CONCURRENCY_LIMIT: 90
+  COMPLETION_MODE: True
