@@ -34,23 +34,23 @@ class GenerationStep:
                  completion_mode=True, # Chat vs completion mode
                  retries=0,
                  engine_wrapper=None,
-                 arguments={}, # arguments is a dict of things where the keys are the strings in the prompt that the thing should replace (minus curly brackets), and the values are what they get replaced with
-                 log_level=logging.INFO  # Default logging level
+                 log_level=logging.INFO,  # Default logging level
+                 output_processor=lambda x: x # to ensure that control flow does not need to have decision code handling the outputs of the LLM, you can pass in a function to handle and modify the outputs (post regex) here
                 ):
         self.prompt_path = prompt_path
         self.regex = regex
         self.sampling_params = sampling_params
         self.completion_mode = completion_mode
         self.retries = retries
-        self.arguments = arguments
         self.log_level = log_level
+        self.output_processor = output_processor
         if not engine_wrapper:
             raise Exception("Engine wrapper not passed in!")
         self.engine_wrapper = engine_wrapper
         logging.basicConfig(level=self.log_level, format='%(asctime)s - %(levelname)s - %(message)s')
 
     
-    async def generate(self):
+    async def generate(self,arguments={}):
         # Current file directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -64,10 +64,10 @@ class GenerationStep:
             # 1. Escape all curly braces
             prompt_escaped = prompt.replace('{', '{{').replace('}', '}}')
             # 2. Unescape curly braces that are associated with input keys
-            for key in self.arguments.keys():
+            for key in arguments.keys():
                 prompt_escaped = prompt_escaped.replace(f"{{{{{key}}}}}", f"{{{key}}}")
             # 3. Format
-            prompt_formatted = prompt_escaped.format(**self.arguments)
+            prompt_formatted = prompt_escaped.format(**arguments)
         logging.info(f"Formatted prompt for generation: {prompt_formatted}")
         # Submit generation and return response, retrying as needed
         times_tried = 0
@@ -76,7 +76,7 @@ class GenerationStep:
                 try:
                     response = await self.engine_wrapper.submit_completion(prompt_formatted, self.sampling_params)
                     filtered_response = re.search(self.regex, response).group(1)
-                    return filtered_response
+                    return self.output_processor(filtered_response)
                 except Exception as e:
                     logging.error(f"Error in Generation Step: {e}")
                     traceback.print_exc()
@@ -88,7 +88,7 @@ class GenerationStep:
                 try:
                     response = await self.engine_wrapper.submit_chat(messages, self.sampling_params)
                     filtered_response = re.search(self.regex, response).group(1)
-                    return filtered_response
+                    return self.output_processor(filtered_response)
                 except Exception as e:
                     logging.error(f"Error in Generation Step: {e}")
                     traceback.print_exc()

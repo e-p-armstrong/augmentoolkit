@@ -29,7 +29,6 @@ from augmentoolkit.generation_functions import (
     generate_questions_plan,
     process_multiturn_functions,
     identify_duplicates,
-    judge_paragraph,
     multi_turn_conversation,
     check_qatuple_context,
     create_character_card_many_tuples,
@@ -557,9 +556,8 @@ async def determine_worthy(
     idx,
     p,
     judged_worthy_for_questions,
-    engine_wrapper,
     output_dir,
-    use_filenames,
+    judge: GenerationStep,
 ):
     # for idx, p in tqdm(enumerate(paragraphs_processed[:10])):
     file_name = f"{idx}.json"
@@ -570,22 +568,29 @@ async def determine_worthy(
             data = json.load(file)
             print("LOADING: ", data)
         if isinstance(data, str):
-            judged_worthy_for_questions.append((None, data[7:]))
+            judged_worthy_for_questions.append((None, data[7:])) # hacky way of appending only the text name. See the file output of a failed judgement for details (Takes after "failed|")
         else:
             judged_worthy_for_questions.append((data["paragraph"], data["metadata"]))
     else:
-        judgement = await judge_paragraph.judge_paragraph(
-            p, engine_wrapper, use_filenames=use_filenames
+        judgement = await judge.generate(
+            arguments={
+                "text": p[0],
+                "textname": p[1]
+            }
         )
-        judged_worthy_for_questions.append(judgement)
+        to_append = (None,p[1])
+        if judgement:
+            to_append = (p[0],p[1])
+            
+        judged_worthy_for_questions.append(to_append)
 
         # Prepare the data to be written to the file
-        if judgement[0] is not None:
+        if judgement:
             # The paragraph passed the judgement
-            data_to_write = {"paragraph": judgement[0], "metadata": judgement[1]}
+            data_to_write = {"paragraph": to_append[0], "metadata": to_append[1]}
         else:
             # The paragraph did not pass the judgement
-            data_to_write = f"failed|{judgement[1]}"
+            data_to_write = f"failed|{to_append[1]}"
 
         # Write the judgement to a unique file as JSON
         with open(file_path, "w") as file:
@@ -593,12 +598,18 @@ async def determine_worthy(
 
         # Debug messages
         try:
-            if judgement[0] is not None:
+            if judgement:
                 print(f"DEBUG model decided that index {idx} was suitable")
             else:
                 print(f"DEBUG model decided that index {idx} was not suitable")
         except:
             print(f"DEBUG max retries exceeded for index {idx}")
+
+def judge_paragraph_processor(determination): # TODO extract to separate file to avoid muddying the control flow code
+    if "unsuitable" in determination.lower():
+        return False # control flow has been modified to use the information it has, based on the determination of the output processors
+    elif "suitable" in determination.lower():
+        return True
 
 # ASDF
 async def filter_all_questions(
@@ -609,20 +620,47 @@ async def filter_all_questions(
     take_subset=False,
     use_filenames=False,
     rtwl=None,
+    completion_mode=True
 ):
-    # GenerationStep(
-    #     prompt_path="judge_paragraph.txt",
-        
-    # )
+    if use_filenames:
+        prompt_path = "judge_paragraph_filenames.txt"
+    else:
+        prompt_path = "judge_paragraph_no_filenames.txt"
+
+    judgement_regex = re.compile(
+            r"Reasoning and thought process \(reason intelligently\):(.+)", re.DOTALL | re.IGNORECASE,)
+    
+    judge = GenerationStep(
+        prompt_path=prompt_path,
+        regex=judgement_regex,
+        sampling_params={
+            "max_tokens": 6000,
+            # "min_p": 0.4,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+            ],
+            "temperature": 0.2,
+        },
+        completion_mode=completion_mode,
+        retries=2,
+        engine_wrapper=engine_wrapper,
+        log_level=logging.INFO, # TODO change to warning
+        output_processor=judge_paragraph_processor
+    )
     if not take_subset:
         tasks = [
             determine_worthy(
                 idx,
                 p,
                 judged_worthy_for_questions,
-                engine_wrapper,
                 output_dir,
-                use_filenames,
+                judge
             )
             for idx, p in enumerate(paragraphs_processed)
         ]
@@ -632,9 +670,8 @@ async def filter_all_questions(
                 idx,
                 p,
                 judged_worthy_for_questions,
-                engine_wrapper,
                 output_dir,
-                use_filenames,
+                judge
             )
             for idx, p in enumerate(paragraphs_processed[:13])
         ]
