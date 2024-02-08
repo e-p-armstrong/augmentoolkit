@@ -213,6 +213,25 @@ async def repair_qatuple_context(
         print("!!! ERROR!", e)
         traceback.print_exc()
 
+def parse_answer_accuracy_validation(response):
+    determination_pattern = re.compile(
+        r"Overall Accuracy Determination:(.+)", re.DOTALL
+    )
+    determination = determination_pattern.search(response).group(1).strip()
+    if (
+                "inaccurate" in determination.lower()
+                or "Inaccurate" in determination.lower()
+                or "mostly" in determination.lower()
+                or "partial" in determination.lower() or "irrelevant" in determination.lower()
+            ):  # The "mostly" is there to catch "mostly accurate" which the model says occasionally, and which actually means inaccurate.
+                return (False, response)
+    elif (
+        "accurate" in determination.lower()
+    ):
+        return (True, response)
+    else:
+        logging.ERROR("Answer accuracy validation made a mistake")
+        raise Exception("answer accuracy validation did not include a judgement")
 
 # Control flow helpers -- Question/Answer Validation
 async def vet_answer_accuracy_loop(
@@ -222,7 +241,43 @@ async def vet_answer_accuracy_loop(
     engine_wrapper=None,
     double_check_counter=3,
     use_filenames=False,
+    completion_mode=True,
+    logging_level=logging.INFO,
+    new_q_generator=None
 ):
+    
+    # NOTE Set up answer check generation step
+    prompt_path_ans_accuracy_check = "check_answer.txt"
+    check_ans_accuracy_regex = re.compile(
+                r"Reasoning and thought process \(the text is your single source of truth\):\n(.+)",
+                re.DOTALL,
+            )
+
+    answer_accuracy_checker = GenerationStep(
+        prompt_path=prompt_path_ans_accuracy_check,
+        regex=check_ans_accuracy_regex,
+        sampling_params={
+                "max_tokens": 6000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
+                "temperature": 0.2,
+            },
+        completion_mode=completion_mode,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+        output_processor=parse_answer_accuracy_validation
+    )
+    
+    # Resume normal control flow code
+    
     try:
         qtuple = qa_tuple
         # print(
@@ -235,8 +290,12 @@ async def vet_answer_accuracy_loop(
             # print(
             # f"\n\nACCURACY CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
             # )
-            judgement, answer_accuracy_output = await check_answer.check_answer(
-                qtuple, engine_wrapper
+            judgement, answer_accuracy_output = await answer_accuracy_checker.generate(
+                arguments={
+                    "text": qtuple[2],
+                    "question": qtuple[0],
+                    "answer": qtuple[1]
+                }
             )
             write_output_to_file(
                 answer_accuracy_output, obj_conf['PATH']['OUTPUT'] + "/check_answer_accuracy_generations", run_id
@@ -264,8 +323,11 @@ async def vet_answer_accuracy_loop(
             (
                 qtuple,
                 generate_new_q_output,
-            ) = await generate_new_question.generate_new_question(
-                qtuple, engine_wrapper, use_filenames=use_filenames
+            ) = await new_q_generator.generate(
+                arguments={
+                    "textname": qtuple[3],
+                    "text": qtuple[2]
+                }
             )
             write_output_to_file(
                 generate_new_q_output, obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations", run_id
@@ -277,6 +339,8 @@ async def vet_answer_accuracy_loop(
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
                 use_filenames=use_filenames,
+                completion_mode=completion_mode,
+                logging_level=logging_level
             )  # going to get one hell of a call stack by the end of this, but it should be fine
     except Exception as e:
         print("!!ERROR!!")
@@ -285,6 +349,24 @@ async def vet_answer_accuracy_loop(
 
     return (None, None, None, qtuple[3])
 
+def parse_answer_relevancy_validation_step(thought_process):
+    judgement_pattern = re.compile(
+        r"Explanation of Judgment:(.+)", re.DOTALL | re.IGNORECASE
+    )
+    determination = judgement_pattern.search(thought_process).group(1).strip()
+    if (
+        "irrelevant" in determination.lower()
+        or "mostly" in determination.lower()
+        or "partial" in determination.lower()
+        or "introduces information not present in the text"
+        in determination.lower()
+    ):  # Hack to get around faulty outputs
+        return (False, thought_process)#, completion
+    elif "relevant" in determination or "Relevant" in determination:
+        return (True, thought_process)#, completion
+    else:
+        logging.ERROR(f"Answer relevancy parsing failed! Retrying! {judgement_pattern}")
+        raise Exception("error in judgement extranction (ans relevancy)")
 
 async def vet_answer_relevance_loop(
     qa_tuple,
@@ -293,7 +375,42 @@ async def vet_answer_relevance_loop(
     engine_wrapper=None,
     double_check_counter=3,
     use_filenames=False,
+    completion_mode=True,
+    logging_level=logging.INFO,
+    new_q_generator=None, # we pass the new q generator around so the code is less cluttered
 ):
+    
+    # NOTE Set up answer check generation step
+    prompt_path_ans_relevancy_check = "check_answer_relevancy_with_text.txt"
+    check_ans_relevancy_regex = re.compile(
+                r"Reasoning and thought process \(be careful about extra details, even vague ones\):\n(.+)",
+                re.DOTALL | re.IGNORECASE,
+            )
+
+    answer_relevancy_checker = GenerationStep(
+        prompt_path=prompt_path_ans_relevancy_check,
+        regex=check_ans_relevancy_regex,
+        sampling_params={
+                "max_tokens": 5500,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
+                "temperature": 0.2,
+            },
+        completion_mode=completion_mode,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+        output_processor=parse_validation_step
+    )
+    
+    # Resume normal control flow code
     try:
         qtuple = qa_tuple
         # print(
@@ -309,8 +426,12 @@ async def vet_answer_relevance_loop(
             (
                 judgement,
                 answer_relevancy_output,
-            ) = await check_answer_relevancy_with_text.check_answer_relevancy_with_text(
-                qtuple, engine_wrapper
+            ) = await answer_relevancy_checker.generate(
+                arguments={
+                    "text": qtuple[2],
+                    "question": qtuple[0],
+                    "answer": qtuple[1]
+                }
             )
             write_output_to_file(
                 answer_relevancy_output, obj_conf['PATH']['OUTPUT'] + "/check_answer_relevancy_generations", run_id
@@ -335,6 +456,9 @@ async def vet_answer_relevance_loop(
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
                 use_filenames=use_filenames,
+                completion_mode=completion_mode,
+                logging_level=logging_level,
+                new_q_generator=new_q_generator
             )
         else:
             # print(f"\n\nRELEVANCE CHECKS FAILED - SENDING BACK TO QUESTION LOOP")
@@ -342,8 +466,11 @@ async def vet_answer_relevance_loop(
             (
                 qtuple,
                 generate_new_q_output,
-            ) = await generate_new_question.generate_new_question(
-                qtuple, engine_wrapper, use_filenames=use_filenames
+            ) = await new_q_generator.generate(
+                arguments={
+                    "textname": qtuple[3],
+                    "text": qtuple[2]
+                }
             )
             write_output_to_file(
                 generate_new_q_output, obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations", run_id
@@ -355,6 +482,8 @@ async def vet_answer_relevance_loop(
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
                 use_filenames=use_filenames,
+                completion_mode=completion_mode,
+                logging_level=logging_level
             )
     except Exception as e:
         print("!!ERROR!!")
@@ -363,6 +492,25 @@ async def vet_answer_relevance_loop(
 
     return (None, None, None, qtuple[3])
 
+def parse_validation_step(response):
+    decision_pattern = re.compile(
+                r"Final Judgment:(.+)", re.DOTALL | re.IGNORECASE
+            )
+    determination = decision_pattern.search(response).group(1).strip()
+    if (
+        "irrelevant" in determination
+        or "Irrelevant" in determination.lower()
+        or "mostly" in determination.lower()
+        or "partial" in determination.lower()
+        or "introduces information not present in the text"
+        in determination.lower()
+        ):
+        return (False, response) # TODO ensure that in the control flow code it passes on (False, response), completion
+    elif "relevant" in determination or "Relevant" in determination:
+        return (True, response) # TODO same as above(True, response), completion
+    else:
+        logging.ERROR("Did not contain relevant or irrelevant! Retrying")
+        raise Exception("Validation step screwed up and did not reach a conclusion! Retrying!")
 
 async def vet_question_loop(
     qa_tuple,
@@ -371,7 +519,73 @@ async def vet_question_loop(
     engine_wrapper=None,
     double_check_counter=3,
     use_filenames=False,
+    completion_mode=True,
+    logging_level=logging.INFO,
+    
 ):
+    # NOTE Set up question check generation step
+    prompt_path_q_check = "check_question.txt"
+    check_q_regex = re.compile(
+                r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)",
+                re.DOTALL | re.IGNORECASE,
+            )
+
+    question_checker = GenerationStep(
+        prompt_path=prompt_path_q_check,
+        regex=check_q_regex,
+        sampling_params={
+                "max_tokens": 4000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
+                "temperature": 0.2,
+            },
+        completion_mode=completion_mode,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+        output_processor=parse_validation_step
+    )
+    
+    # NOTE Set up generate new question step
+    prompt_path_new_q_gen = "new_q_gen_no_filenames.txt"
+    if use_filenames:
+        prompt_path_new_q_gen = "new_q_gen_filenames.txt"
+    
+    new_q_gen_regex = re.compile(
+        r"Question \(based on text\):\n(.+)", re.IGNORECASE | re.DOTALL
+    )
+    
+    new_q_generator = GenerationStep(
+        prompt_path=prompt_path_new_q_gen,
+        regex=new_q_gen_regex,
+        sampling_params={
+                "max_tokens": 3000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
+                "temperature": 0.2,
+            },
+        completion_mode=completion_mode,
+        retries=3,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+        output_processor=extract_questions_from_response
+    )
+    
+    # Resume normal control flow code
     try:
         qtuple = qa_tuple
         # print(
@@ -386,9 +600,15 @@ async def vet_question_loop(
                 # print(
                 #     f"\n\nQUESTION CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
                 # )
-                judgement, check_q_output = await check_question.check_question(
-                    qtuple, engine_wrapper
+                judgement, check_q_output = await question_checker.generate(
+                    arguments={
+                        "text": qtuple[2],
+                        "question": qtuple[0]
+                    }
                 )
+                
+                # Now we need to put the judgement together into the format it expects it to be in
+                
                 write_output_to_file(
                     check_q_output, obj_conf['PATH']['OUTPUT'] + "/check_question_generations", run_id
                 )
@@ -414,6 +634,7 @@ async def vet_question_loop(
                     engine_wrapper=engine_wrapper,
                     double_check_counter=double_check_counter,
                     use_filenames=use_filenames,
+                    new_q_generator=new_q_generator
                 )
             else:
                 # Generate new question and restart the loop
@@ -427,8 +648,11 @@ async def vet_question_loop(
                     (
                         qtuple,
                         generate_new_q_output,
-                    ) = await generate_new_question.generate_new_question(
-                        qtuple, engine_wrapper, use_filenames=use_filenames
+                    ) = await new_q_generator.generate(
+                        arguments={
+                            "textname": qtuple[3],
+                            "text": qtuple[2]
+                        }
                     )
                     write_output_to_file(
                         generate_new_q_output,
@@ -445,7 +669,29 @@ async def vet_question_loop(
     return (None, None, None, qtuple[3])
 
 
-# Question generation
+def extract_questions_from_response(generation): # TODO extract to non-controlflow file
+    questions = []
+    pattern = re.compile(
+                r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
+                re.DOTALL | re.MULTILINE | re.IGNORECASE,
+            )
+    matches = pattern.findall(generation)
+    if len(matches) > 0:
+                made_questions = True
+    else:
+        raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
+    for match in matches:
+        questions.append(
+            (
+                match[0].replace(") ", "", 1).strip(),
+                match[1].replace(") ", "", 1).strip(),
+                # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
+                # para_tuple[1].replace(") ", "", 1),
+            )
+        )
+    return questions
+
+# Question generation ASDF
 async def generate_qatuples_from_para(
     idx,
     para,
@@ -454,7 +700,82 @@ async def generate_qatuples_from_para(
     qa_tuples_dir=None,
     double_check_counter=3,
     use_filenames=False,
+    completion_mode=True,
+    logging_level=logging.INFO
 ):
+    
+    # NOTE Set up qatuple plan generation step #
+    
+    prompt_path_qatuples_plan = "qatuples_plan_no_filenames.txt"
+    if use_filenames:
+        prompt_path_qatuples_plan = "qatuples_plan_filenames.txt"
+    
+    qatuples_plan_regex = re.compile(
+        r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    qatuples_planner = GenerationStep(
+        prompt_path=prompt_path_qatuples_plan,
+        regex=qatuples_plan_regex,
+        sampling_params={
+        "max_tokens": 8000,
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+        ],
+        "temperature": 0.8,
+        # top_k=-1,
+        "top_p": 1,
+        # min_p=0.5,
+        },
+        completion_mode=completion_mode,
+        retries=0,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+    )
+    
+    # NOTE Set up qatuple generation step #
+    
+    prompt_path_qatuples_gen = "qatuples_gen_no_filenames.txt"
+    if use_filenames:
+        prompt_path_qatuples_gen = "qatuples_gen_filenames.txt"
+    
+    qatuples_gen_regex = re.compile(
+        r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
+    )
+    qatuples_generator = GenerationStep(
+        prompt_path=prompt_path_qatuples_gen,
+        regex=qatuples_gen_regex,
+        sampling_params={
+                "max_tokens": 2000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                    "## Questions",
+                ],
+                "temperature": 0.8,
+                # top_k=-1,
+                "top_p": 1,
+                # min_p=0.5,
+            },
+        completion_mode=completion_mode,
+        retries=3,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+        output_processor=extract_questions_from_response
+    )
+    
+    # Resume normal control flow code
     try:
         existing_files = glob.glob(
             os.path.join(qa_tuples_dir, f"para_{idx}_*.json")
@@ -472,20 +793,26 @@ async def generate_qatuples_from_para(
         (
             plan,
             questions_plan_output,
-        ) = await generate_questions_plan.generate_questions_plan(
-            para, engine_wrapper, use_filenames=use_filenames
+        ) = await qatuples_planner.generate(
+            arguments={
+                "textdetails": para[1],
+                "text": para[0]
+            }
         )
         write_output_to_file(
             questions_plan_output, obj_conf['PATH']['OUTPUT'] + "/question_plan_generations", question_group_id
         )
-        print(
-            f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
-        )
+        # print(
+        #     f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
+        # )
         (
             question_answer_tuples,
             question_generation_output,
-        ) = await generate_questions.generate_questions(
-            para, plan, engine_wrapper, use_filenames=use_filenames
+        ) = await qatuples_generator.generate(
+            arguments={
+                "text": para[0],
+                "textdetails": para[1]
+            }
         )
         write_output_to_file(
             question_generation_output,
@@ -501,6 +828,8 @@ async def generate_qatuples_from_para(
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
                 use_filenames=use_filenames,
+                completion_mode=completion_mode,
+                logging_level=logging_level
             )
 
             # Write resulting question file if the tuple is not None
@@ -611,7 +940,7 @@ def judge_paragraph_processor(determination): # TODO extract to separate file to
     elif "suitable" in determination.lower():
         return True
 
-# ASDF
+# EXEMPLAR
 async def filter_all_questions(
     paragraphs_processed,
     judged_worthy_for_questions,
@@ -620,7 +949,8 @@ async def filter_all_questions(
     take_subset=False,
     use_filenames=False,
     rtwl=None,
-    completion_mode=True
+    completion_mode=True,
+    logging_level=logging.INFO
 ):
     if use_filenames:
         prompt_path = "judge_paragraph_filenames.txt"
@@ -650,8 +980,9 @@ async def filter_all_questions(
         completion_mode=completion_mode,
         retries=2,
         engine_wrapper=engine_wrapper,
-        log_level=logging.INFO, # TODO change to warning
-        output_processor=judge_paragraph_processor
+        logging_level=logging_level, # TODO change to warning
+        output_processor=judge_paragraph_processor,
+        return_input_too=False
     )
     if not take_subset:
         tasks = [

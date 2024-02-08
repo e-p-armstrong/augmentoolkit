@@ -35,7 +35,8 @@ class GenerationStep:
                  retries=0,
                  engine_wrapper=None,
                  log_level=logging.INFO,  # Default logging level
-                 output_processor=lambda x: x # to ensure that control flow does not need to have decision code handling the outputs of the LLM, you can pass in a function to handle and modify the outputs (post regex) here
+                 output_processor=lambda x: x, # to ensure that control flow does not need to have decision code handling the outputs of the LLM, you can pass in a function to handle and modify the outputs (post regex) here. By default it's just the identity function and does nothing.
+                 return_input_too=True
                 ):
         self.prompt_path = prompt_path
         self.regex = regex
@@ -44,6 +45,7 @@ class GenerationStep:
         self.retries = retries
         self.log_level = log_level
         self.output_processor = output_processor
+        self.return_input_too = return_input_too
         if not engine_wrapper:
             raise Exception("Engine wrapper not passed in!")
         self.engine_wrapper = engine_wrapper
@@ -65,7 +67,7 @@ class GenerationStep:
             prompt_escaped = prompt.replace('{', '{{').replace('}', '}}')
             # 2. Unescape curly braces that are associated with input keys
             for key in arguments.keys():
-                prompt_escaped = prompt_escaped.replace(f"{{{{{key}}}}}", f"{{{key}}}")
+                prompt_escaped = prompt_escaped.replace(f"{{{{{key}}}}}", f"{{{key}}}") # Somehow this works
             # 3. Format
             prompt_formatted = prompt_escaped.format(**arguments)
         logging.info(f"Formatted prompt for generation: {prompt_formatted}")
@@ -76,7 +78,10 @@ class GenerationStep:
                 try:
                     response = await self.engine_wrapper.submit_completion(prompt_formatted, self.sampling_params)
                     filtered_response = re.search(self.regex, response).group(1)
-                    return self.output_processor(filtered_response)
+                    ret = self.output_processor(filtered_response)
+                    if self.return_input_too:
+                        return ret, prompt + ret
+                    return ret
                 except Exception as e:
                     logging.error(f"Error in Generation Step: {e}")
                     traceback.print_exc()
@@ -88,7 +93,10 @@ class GenerationStep:
                 try:
                     response = await self.engine_wrapper.submit_chat(messages, self.sampling_params)
                     filtered_response = re.search(self.regex, response).group(1)
-                    return self.output_processor(filtered_response)
+                    ret = self.output_processor(filtered_response)
+                    if self.return_input_too:
+                        return ret, prompt + [{"role": "assistant", "content": ret}]
+                    return ret
                 except Exception as e:
                     logging.error(f"Error in Generation Step: {e}")
                     traceback.print_exc()

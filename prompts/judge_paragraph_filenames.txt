@@ -10,7 +10,7 @@ Following this, at the very end of your response, you will write "Suitable" or "
 Text details: Through England On a Side Saddle, by Celia Fiennes
 
 Text: 
-\"\"\"
+"""
 The Project Gutenberg eBook of Through England on a side saddle
     
 This ebook is for the use of anyone anywhere in the United States and
@@ -85,7 +85,7 @@ Credits: Steve Mattern, Barry Abrahamsen, and the Online Distributed Proofreadin
 
 
 ------------------------------------------------------------------------
-\"\"\"
+"""
 
 ### Response:
 ## Reasoning and thought process:
@@ -104,7 +104,7 @@ Step 7. Final Judgment: Unsuitable for educational questions.</s>
 Text details: Thus Spake Zaranthustra, by Friedrich Nietzsche
 
 Text:
-\"\"\"
+"""
 When Zarathustra was thirty years old, he left his home and the lake of
 his home, and went into the mountains. There he enjoyed his spirit and
 solitude, and for ten years did not weary of it. But at last his heart
@@ -143,7 +143,7 @@ Lo! This cup is again going to empty itself, and Zarathustra is again
 going to be a man.
 
 Thus began Zarathustra's down-going.
-\"\"\"
+"""
 
 ### Response:
 ## Reasoning and thought process:
@@ -164,7 +164,7 @@ Step 7. Final Judgment: Suitable for educational questions.
 Text details: A Bizarre Day in the Life of Sarah Anderson, by Felicia Anderson
 
 Text:
-\"\"\"
+"""
 
 1. Apples, 2. Oranges, 3. Bananas, 4. Grapes, 5. Papayas, 6. Pomegranates, 7. Cherries. Sarah wandered through the market. Amidst her thoughts, she overheard a conversation:
 
@@ -173,7 +173,7 @@ Text:
 "I know, right? But what can we do?" John sighed.
 
 Sarah continued her shopping, her mind now on the mayor's mysterious decision.
-\"\"\"
+"""
 
 ### Response:
 ## Reasoning and thought process:
@@ -193,9 +193,9 @@ Step 7. Final Judgment: Unsuitable for educational questions.
 Text details: The Scale of the Solar System, by Rob Robertson
 
 Text:
-\"\"\"
+"""
 If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
-\"\"\"
+"""
 
 ### Response:
 ## Reasoning and thought process:
@@ -215,9 +215,9 @@ Step 7. Final Judgment: Suitable for educational questions.
 Text details: The Scale of the Solar System, by Rob Robertson
 
 Text:
-\"\"\"
+"""
 In the world of science, there are countless mysteries and phenomena that elude easy explanation. For instance, certain forces and energies interact in ways that are not fully understood, shaping the universe in subtle and profound manners. These interactions often occur at levels beyond human perception, leaving much to speculation and theory. Various scientific disciplines attempt to explain these interactions, each offering unique perspectives but often lacking definitive answers. The vastness of these mysteries spans from the minuscule quantum realm to the expansive cosmos, hinting at complexities that challenge our current understanding.
-\"\"\"
+"""
 
 ### Response:
 ## Reasoning and thought process:
@@ -237,9 +237,9 @@ Step 7. Final Judgment: Unsuitable for educational questions due to its ambiguou
 Text details: {textname}
 
 Text: 
-\"\"\"
+"""
 {text}
-\"\"\"
+"""
 
 Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices and metadata are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.
 
