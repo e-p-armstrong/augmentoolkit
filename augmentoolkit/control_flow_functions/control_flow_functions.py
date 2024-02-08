@@ -21,17 +21,19 @@ import yaml
 from augmentoolkit.generation_functions import (
     create_scenario_plan_many_tuples,
     create_scenario_many_tuples,
+    extract_question_answer,
     process_multiturn_functions,
     identify_duplicates,
     multi_turn_conversation,
-    check_qatuple_context,
-    create_character_card_many_tuples,
-    create_character_card_plan_many_tuples,
     extract_name,
+    random_name,
     strip_steps
 )
+from augmentoolkit.generation_functions.create_character_card_many_tuples import extract_capital_letters, select_random_capital
+from augmentoolkit.generation_functions.format_qatuples import format_qatuples
 
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
+from augmentoolkit.generation_functions.special_instructions import special_instructions
 
 with open('./config.yaml', 'r') as file:
     obj_conf = yaml.safe_load(file)
@@ -62,35 +64,59 @@ def write_output_to_file(output, directory, uuid):
 # multiturn helpers
 # These will probably be used for multiturn rapid-fire answering.
 
+def create_starting_str(qatuples):
+    author_name_letters = extract_capital_letters(qatuples[0][3])
+    starting_str = ""
+    exclusions = ["X", "Z", "Y", "Q"]
+    if author_name_letters:
+        starting_str = select_random_capital(exclusions + author_name_letters)
+    else:
+        starting_str = select_random_capital(exclusions)
+    return starting_str
 
-# Idea: use multiple short answers to train the task of answering multiple questions in one response. Two-three short answers per response should be enough.
+# Idea: use multiple short answers to train the task of answering multiple questions in one response. Like, "Tell me what 2+2 is then tell me who won the battle of Alesia". Two-three short answers per response should be enough.
 async def make_multiturn_character(
-    qa_tuples, conv_id, engine_wrapper, assistant_mode, use_filenames
+    qa_tuples, conv_id, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None
 ):
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
         return "will_be_replaced", "will_be_replaced"
+    
+    instructions = special_instructions(n=1).strip()
     (
         plan,
-        instructions,
         card_plan_output,
-    ) = await create_character_card_plan_many_tuples.create_character_card_plan_many_tuples(
-        qa_tuples, engine_wrapper, use_filenames=use_filenames
+    ) = await character_card_plan_creator.generate(
+        arguments={
+            "textname": qa_tuples[0][3],
+            "text": qa_tuples[0][2],
+            "question_answer_list": format_qatuples(qa_tuples),
+            "special_instructions": instructions
+        }
     )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
     write_output_to_file(card_plan_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_card_plan_generations", conv_id)
+    
+    starting_str = create_starting_str(qa_tuples)
     (
         char,
         char_output,
-    ) = await create_character_card_many_tuples.create_character_card_many_tuples(
-        qa_tuples, plan, instructions, engine_wrapper, use_filenames=use_filenames
+    ) = await character_card_creator.generate(
+        arguments={
+            "text": qa_tuples[0][2],
+            "textname": qa_tuples[0][3],
+            "special_instructions": instructions,
+            "plan": plan,
+            "starting_str": starting_str
+            
+        }
     )  # creates a character card
     write_output_to_file(char_output, obj_conf['PATH']['OUTPUT'] + "multiturn_card_generations", conv_id)
     return char, instructions
 
 
 async def make_multiturn_scenario(
-    qa_tuples, character, conv_id, engine_wrapper, assistant_mode
+    qa_tuples, character, conv_id, assistant_mode=False,scenario_plan_creator=None, scenario_creator=None
 ):
     if (
         assistant_mode
@@ -99,24 +125,37 @@ async def make_multiturn_scenario(
     (
         plan,
         scenario_plan_output,
-    ) = await create_scenario_plan_many_tuples.create_scenario_plan_many_tuples(
-        qa_tuples, character, engine_wrapper
+    ) = await scenario_plan_creator.generate(
+        arguments={
+            "question_answer_list": format_qatuples(qa_tuples),
+            "character": character,
+        }
     )
+    
+    plan = fix_scenario_plan(plan,character)
     write_output_to_file(
         scenario_plan_output, obj_conf['PATH']['OUTPUT'] + "multiturn_scenario_plan_generations", conv_id
     )
+    
+    variation = select_variation(character)
+    
     (
         scenario,
         scenario_output,
-    ) = await create_scenario_many_tuples.create_scenario_many_tuples(
-        qa_tuples, character, plan, engine_wrapper
+    ) = await scenario_creator.generate(
+        arguments={
+            "question_answer_list": format_qatuples(qa_tuples),
+            "character": character,
+            "plan": plan,
+            "selected_variation": variation
+        }
     )  # creates a scenario based on a character card and question/answer tuple
     write_output_to_file(scenario_output, obj_conf['PATH']['OUTPUT'] + "multiturn_scenario_generations", conv_id)
     return scenario, plan
 
 
 async def make_multiturn_conversation_info(
-    qa_tuples, engine_wrapper, assistant_mode, use_filenames
+    qa_tuples, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None, scenario_plan_creator=None, scenario_creator=None
 ):
     conv_id = make_id()
     if (
@@ -125,10 +164,10 @@ async def make_multiturn_conversation_info(
         return (qa_tuples, "will", "be", "replaced", conv_id)
     # thought_plan = create_thought_plan_many_tuples(qa_tuples,character,scenario,logic_llm) # There IS a way to make multiturn chain of thought answering work: generate each pair of messages using a separate prompt or a separate function, each of which has only the thought plan for that question/answer pair. But simply cramming in all the step-by-step things will confuse the hell out of the poor model. So for the first release version we're skipping it and just giving the response, with no reasoning, in the multiturn convs.
     character, instructions = await make_multiturn_character(
-        qa_tuples, conv_id, engine_wrapper, assistant_mode, use_filenames
+        qa_tuples, conv_id, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator
     )
     scenario, scenario_plan = await make_multiturn_scenario(
-        qa_tuples, character, conv_id, engine_wrapper, assistant_mode
+        qa_tuples, character, conv_id, assistant_mode=assistant_mode, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator
     )
 
     return (qa_tuples, character, scenario, scenario_plan, conv_id)
@@ -163,7 +202,7 @@ def extract_reasoning_from_context_check(response):
         return (True, response)#, completion
     elif "reword" in determination.lower():
         print("Rewording...")
-        q, a = check_qatuple_context.extract_question_answer(response)
+        q, a = extract_question_answer.extract_question_answer(response)
         print((q, a))
         return (q,a)#(q, a, qatuple[2], qatuple[3]), completion
     elif "fail" in determination.lower():
@@ -205,6 +244,7 @@ async def repair_qatuple_context(
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
+        output_processor=extract_reasoning_from_context_check,
     )
     
     # Resume normal control flow
@@ -228,14 +268,18 @@ async def repair_qatuple_context(
 
     try:
         revision_id = make_id()
-        revision, revision_output = await check_qatuple_context.check_qatuple_context(
-            tup, engine_wrapper, use_filenames=use_filenames
+        revision, revision_output = await context_repairer.generate(
+            arguments={
+                "textname": tup[3],
+                "question": tup[0],
+                "answer": tup[1],
+            }
         )
         write_output_to_file(
             revision_output, obj_conf['PATH']['OUTPUT'] + "question_context_revision_generations", revision_id
         )  # incidentally, identifying the problem and fixing it in the same step (without another planning step) works a lot better than identifying it and then trying to fix it in the next step.
         if isinstance(revision[0], str):  # if the thing was reworded
-            vetted_qa_tuples[idx] = revision
+            vetted_qa_tuples[idx] = (revision[0], revision[1], tup[2], tup[3]) # replace the old tuple with the new one, revision doesn't have text name so we keep the old one
         elif not revision[0]:
             vetted_qa_tuples[
                 idx
@@ -1186,6 +1230,175 @@ async def make_multiturn_conversation(info, engine_wrapper, assistant_mode):
 
     return conv
 
+def select_variation(character): # can help following the groove of the few-shot examples, in the case where you're using a slightly stupid model or low temperature
+    charname=extract_name(character)
+    variations = [
+    # "Set against the backdrop of",
+    f"In {charname}'s ",
+    "Amidst the surroundings of ",
+    # "Within the confines of",
+    f"Within {charname}'s ",
+    f"Inside {charname}'s ",
+    # f"Inside the confines of ",
+    f"Inside the confines of {charname}'s",
+    f"Set amongst the",
+    ]
+
+    return random.choice(variations)
+
+def fix_scenario_plan(scenario_plan, character):
+    charname = extract_name(character)
+    if not ("Albert" in charname):
+        if "Albert" in scenario_plan:
+            print("Random Name was used instead of Albert")
+        scenario_plan = scenario_plan.replace("Albert", random_name())
+
+def create_character_info_generators(completion_mode=None,engine_wrapper=None,logging_level=None,use_filenames=False):
+    character_card_plan_path = "create_character_card_plan_no_filenames.txt"
+    if use_filenames:
+        character_card_plan_path = "create_character_card_plan.txt"
+        
+    character_card_plan_regex = re.compile(
+        r"Character card plan \(be creative, do not use real people as characters, do NOT make the author of the book a character\):\n(.+)",
+        re.IGNORECASE | re.DOTALL,
+    )
+
+    character_card_plan_creator = GenerationStep(
+        prompt_path=character_card_plan_path,
+        regex = character_card_plan_regex,
+        sampling_params={
+        "max_tokens": 8000,
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+            "### Questions",
+            "## Question, answer, and text that the character should know:",
+        ],
+        "temperature": 1,
+        # top_k=-1,
+        "top_p": 0.5,
+        # min_p=0.4,
+        },
+        completion_mode=completion_mode,
+        logging_level=logging_level,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+    )
+    
+    # Character card gen
+    
+    character_card_path = "create_character_card_no_filenames.txt"
+    if use_filenames:
+        character_card_path = "create_character_card.txt"
+        
+    character_card_regex = re.compile(
+        r"Character card \(be creative, write at least 3 paragraphs for each dialogue line\):\n(.+)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    
+    character_card_creator = GenerationStep(
+        prompt_path=character_card_path,
+        regex = character_card_regex,
+        sampling_params={
+        "max_tokens": 10000,
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+            "## Text",
+        ],
+        "temperature": 1,
+        "top_p": 0.5,
+        },
+        completion_mode=completion_mode,
+        logging_level=logging_level,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+    )
+    
+    # Scenario Plan Gen
+    scenario_plan_path = "create_scenario_plan.txt" # no variation between use of filenames or not for scenarios
+    
+    scenario_plan_regex = re.compile(
+        r"Scenario plan \(be creative, and make sure all characters present fit in with the setting\):\n(.+)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    
+    scenario_plan_creator = GenerationStep(
+        prompt_path=scenario_plan_path,
+        regex = scenario_plan_regex,
+        sampling_params={
+        "max_tokens": 8000,
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+            "## Information",
+            "User:",
+            "## Scenario",
+        ],
+        "temperature": 0.6,
+        # top_k=-1,
+        "top_p": 1,
+        # min_p=0.5,
+    },
+        completion_mode=completion_mode,
+        logging_level=logging_level,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+    )
+    
+    # Scenario Gen
+    scenario_path = "create_scenario.txt" # no variation between use of filenames or not for scenarios
+    
+    scenario_regex = re.compile(
+        r"Scenario \(will have no dialogue, will just set up the scene\):\n(.+)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    
+    scenario_creator = GenerationStep( # will have variations as an argument
+        prompt_path=scenario_path,
+        regex = scenario_regex,
+        sampling_params={
+        "max_tokens": 8000,
+        "stop": [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+            "## Information",
+            "User:",
+            "## Scenario",
+        ],
+        "temperature": 0.5,
+        # top_k=-1,
+        "top_p": 0.5,
+        # min_p=0.5,
+    },
+        completion_mode=completion_mode,
+        logging_level=logging_level,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+    )
+    
+    return character_card_plan_creator, character_card_creator, scenario_plan_creator, scenario_creator
+
 
 async def create_info(
     idx,
@@ -1194,9 +1407,18 @@ async def create_info(
     assistant_mode,
     multi_turn_convs_info,
     multi_turn_convs_info_dir,
-    rearrangements_to_take,
-    use_filenames,
+    rearrangements_to_take=3,
+    use_filenames=False,
+    completion_mode=True,
+    logging_level=logging.INFO,
 ):
+    # NOTE we set up all the generators up here so that we don't have to drill the args down like this is an old version of React
+    # Instead we drill the generators down like it's an old version of React lol
+    character_card_plan_creator, character_card_creator, scenario_plan_creator, scenario_creator = create_character_info_generators(
+        engine_wrapper=engine_wrapper, use_filenames=use_filenames, completion_mode=completion_mode, logging_level=logging_level
+    )
+    
+    # Resume normal control flow code
     all_permutations = list(itertools.permutations(group))
 
     sample_size = min(rearrangements_to_take, len(all_permutations))
@@ -1211,7 +1433,7 @@ async def create_info(
         if not os.path.exists(file_path):
             try:
                 info = await make_multiturn_conversation_info(
-                    perm, engine_wrapper, assistant_mode, use_filenames
+                    perm, assistant_mode=assistant_mode, character_card_plan_creator=character_card_creator, character_card_creator=character_card_creator, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator
                 )
 
                 if info is not None:

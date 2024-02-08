@@ -56,9 +56,8 @@ class GenerationStep:
         # Current file directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
-        # Dynamic INPUT_DIRECTORY path
+        # Dynamic INPUT_DIRECTORY path (feel free to change, DragonFox, depending on what structure you have been working towards)
         full_prompt_path = os.path.join(current_dir, '..', '..', 'prompts',self.prompt_path)
-        # Read file and substitute thing with arguments as needed
         # Read file and escape all curly braces
         with open(full_prompt_path, 'r') as pf:
             prompt = pf.read()
@@ -70,7 +69,7 @@ class GenerationStep:
                 prompt_escaped = prompt_escaped.replace(f"{{{{{key}}}}}", f"{{{key}}}") # Somehow this works
             # 3. Format
             prompt_formatted = prompt_escaped.format(**arguments)
-        # logging.info(f"Formatted prompt for generation: {prompt_formatted}")
+        logging.info(f"Formatted prompt for generation: {prompt_formatted}")
         # Submit generation and return response, retrying as needed
         times_tried = 0
         if self.completion_mode:
@@ -98,7 +97,7 @@ class GenerationStep:
                         return ret, prompt_formatted + [{"role": "assistant", "content": filtered_response}]
                     return ret
                 except Exception as e:
-                    # logging.error(f"Error in Generation Step: {e}")
+                    logging.error(f"Error in Generation Step: {e}")
                     traceback.print_exc()
                     times_tried += 1
             raise Exception("Generation step failed -- too many retries!")
