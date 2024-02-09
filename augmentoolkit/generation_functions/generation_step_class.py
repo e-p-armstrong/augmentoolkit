@@ -94,7 +94,7 @@ class GenerationStep:
                     filtered_response = response#re.search(self.regex, response).group(1)
                     ret = self.output_processor(filtered_response)
                     if self.return_input_too:
-                        return ret, prompt_formatted + [{"role": "assistant", "content": filtered_response}]
+                        return ret, None #prompt_formatted + [{"role": "assistant", "content": filtered_response}]
                     return ret
                 except Exception as e:
                     logging.error(f"Error in Generation Step: {e}")
