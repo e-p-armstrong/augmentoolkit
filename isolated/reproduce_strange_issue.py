@@ -380,12 +380,12 @@ class EngineWrapper:
             sampling_params["max_tokens"] = 3000
         if "stop" not in sampling_params:
             sampling_params["stop"] = []
-        print("\n\nSETTINGS DUMP\n\n")
-        print(self.model)
-        print(prompt)
-        print(sampling_params["temperature"])
-        print(sampling_params["top_p"])
-        print(sampling_params["max_tokens"])
+        # print("\n\nSETTINGS DUMP\n\n")
+        # print(self.model)
+        # print(prompt)
+        # print(sampling_params["temperature"])
+        # print(sampling_params["top_p"])
+        # print(sampling_params["max_tokens"])
         
         completion = await self.client.completions.create(
             model=self.model,

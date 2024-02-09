@@ -241,9 +241,13 @@ async def repair_qatuple_context(
     idx, tup, engine_wrapper, writepath, vetted_qa_tuples, use_filenames=False, completion_mode=True, logging_level=logging.INFO
 ):
     # NOTE set up the generation step
-    context_repairer_path = "check_qatuple_context_no_filenames.txt"
+    context_repairer_path = "check_qatuple_context_no_filenames"
     if use_filenames:
-        context_repairer_path = "check_qatuple_context_filenames.txt"
+        context_repairer_path = "check_qatuple_context_filenames"
+    if completion_mode:
+        context_repairer_path = context_repairer_path + ".txt"
+    else:
+        context_repairer_path = context_repairer_path + ".json"
         
     repair_context_regex = re.compile(
                 r"Reasoning and thought process \(be thorough\):(.+)",
@@ -360,7 +364,11 @@ async def vet_answer_accuracy_loop(
 ):
     
     # NOTE Set up answer check generation step
-    prompt_path_ans_accuracy_check = "check_answer.txt"
+    prompt_path_ans_accuracy_check = "check_answer"
+    if completion_mode:
+        prompt_path_ans_accuracy_check = prompt_path_ans_accuracy_check + ".txt"
+    else:
+        prompt_path_ans_accuracy_check = prompt_path_ans_accuracy_check + ".json"
     check_ans_accuracy_regex = re.compile(
                 r"Reasoning and thought process \(the text is your single source of truth\):\n(.+)",
                 re.DOTALL,
@@ -497,11 +505,16 @@ async def vet_answer_relevance_loop(
 ):
     
     # NOTE Set up answer check generation step
-    prompt_path_ans_relevancy_check = "check_answer_relevancy_with_text.txt"
+    prompt_path_ans_relevancy_check = "check_answer_relevancy_with_text"
     check_ans_relevancy_regex = re.compile(
                 r"Reasoning and thought process \(be careful about extra details, even vague ones\):\n(.+)",
                 re.DOTALL | re.IGNORECASE,
             )
+    
+    if completion_mode:
+        prompt_path_ans_relevancy_check = prompt_path_ans_relevancy_check + ".txt"
+    else:
+        prompt_path_ans_relevancy_check = prompt_path_ans_relevancy_check + ".json"
 
     answer_relevancy_checker = GenerationStep(
         prompt_path=prompt_path_ans_relevancy_check,
@@ -644,11 +657,16 @@ async def vet_question_loop(
     
 ):
     # NOTE Set up question check generation step
-    prompt_path_q_check = "check_question.txt"
+    prompt_path_q_check = "check_question"
     check_q_regex = re.compile(
                 r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)",
                 re.DOTALL | re.IGNORECASE,
             )
+
+    if completion_mode:
+        prompt_path_q_check = prompt_path_q_check + ".txt"
+    else:
+        prompt_path_q_check = prompt_path_q_check + ".json"
 
     question_checker = GenerationStep(
         prompt_path=prompt_path_q_check,
@@ -674,13 +692,18 @@ async def vet_question_loop(
     )
     
     # NOTE Set up generate new question step
-    prompt_path_new_q_gen = "new_q_gen_no_filenames.txt"
+    prompt_path_new_q_gen = "new_q_gen_no_filenames"
     if use_filenames:
-        prompt_path_new_q_gen = "new_q_gen_filenames.txt"
+        prompt_path_new_q_gen = "new_q_gen_filenames"
     
     new_q_gen_regex = re.compile(
         r"Question \(based on text\):\n(.+)", re.IGNORECASE | re.DOTALL
     )
+    
+    if completion_mode:
+        prompt_path_new_q_gen = prompt_path_new_q_gen + ".txt"
+    else:
+        prompt_path_new_q_gen = prompt_path_new_q_gen + ".json"
     
     new_q_generator = GenerationStep(
         prompt_path=prompt_path_new_q_gen,
@@ -848,14 +871,20 @@ async def generate_qatuples_from_para(
     
     # NOTE Set up qatuple plan generation step #
     
-    prompt_path_qatuples_plan = "qatuples_plan_no_filenames.txt"
+    prompt_path_qatuples_plan = "qatuples_plan_no_filenames"
     if use_filenames:
-        prompt_path_qatuples_plan = "qatuples_plan_filenames.txt"
+        prompt_path_qatuples_plan = "qatuples_plan_filenames"
     
     qatuples_plan_regex = re.compile(
         r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
+    
+    if completion_mode:
+        prompt_path_qatuples_plan = prompt_path_qatuples_plan + ".txt"
+    else:
+        prompt_path_qatuples_plan = prompt_path_qatuples_plan + ".json"
+        
     qatuples_planner = GenerationStep(
         prompt_path=prompt_path_qatuples_plan,
         regex=qatuples_plan_regex,
@@ -884,9 +913,14 @@ async def generate_qatuples_from_para(
     
     # NOTE Set up qatuple generation step #
     
-    prompt_path_qatuples_gen = "qatuples_gen_no_filenames.txt"
+    prompt_path_qatuples_gen = "qatuples_gen_no_filenames"
     if use_filenames:
-        prompt_path_qatuples_gen = "qatuples_gen_filenames.txt"
+        prompt_path_qatuples_gen = "qatuples_gen_filenames"
+    
+    if completion_mode:
+        prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".txt"
+    else:
+        prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".json"
     
     qatuples_gen_regex = re.compile(
         r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
@@ -1100,12 +1134,17 @@ async def filter_all_questions(
 ):
     
     if use_filenames:
-        prompt_path = "judge_paragraph_filenames.txt"
+        prompt_path = "judge_paragraph_filenames"
     else:
-        prompt_path = "judge_paragraph_no_filenames.txt"
+        prompt_path = "judge_paragraph_no_filenames"
 
     judgement_regex = re.compile(
             r"Reasoning and thought process \(reason intelligently\):(.+)", re.DOTALL | re.IGNORECASE,)
+    
+    if completion_mode:
+        prompt_path = prompt_path + ".txt"
+    else:
+        prompt_path = prompt_path + ".json"
     
     judge = GenerationStep(
         prompt_path=prompt_path,
@@ -1285,14 +1324,19 @@ def fix_scenario_plan(scenario_plan, character):
     return scenario_plan
 
 def create_character_info_generators(completion_mode=None,engine_wrapper=None,logging_level=None,use_filenames=False):
-    character_card_plan_path = "create_character_card_plan_no_filenames.txt"
+    character_card_plan_path = "create_character_card_plan_no_filenames"
     if use_filenames:
-        character_card_plan_path = "create_character_card_plan.txt"
+        character_card_plan_path = "create_character_card_plan"
         
     character_card_plan_regex = re.compile(
         r"Character card plan \(be creative, do not use real people as characters, do NOT make the author of the book a character\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
+
+    if completion_mode:
+        character_card_plan_path = character_card_plan_path + ".txt"
+    else:
+        character_card_plan_path = character_card_plan_path + ".json"
 
     character_card_plan_creator = GenerationStep(
         prompt_path=character_card_plan_path,
@@ -1323,14 +1367,19 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
     
     # Character card gen
     
-    character_card_path = "create_character_card_no_filenames.txt"
+    character_card_path = "create_character_card_no_filenames"
     if use_filenames:
-        character_card_path = "create_character_card.txt"
+        character_card_path = "create_character_card"
         
     character_card_regex = re.compile(
         r"Character card \(be creative, write at least 3 paragraphs for each dialogue line\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
+    
+    if completion_mode:
+        character_card_path = character_card_path + ".txt"
+    else:
+        character_card_path = character_card_path + ".json"
     
     character_card_creator = GenerationStep(
         prompt_path=character_card_path,
@@ -1357,12 +1406,17 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
     )
     
     # Scenario Plan Gen
-    scenario_plan_path = "create_scenario_plan.txt" # no variation between use of filenames or not for scenarios
+    scenario_plan_path = "create_scenario_plan" # no variation between use of filenames or not for scenarios
     
     scenario_plan_regex = re.compile(
         r"Scenario plan \(be creative, and make sure all characters present fit in with the setting\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
+    
+    if completion_mode:
+        scenario_plan_path = scenario_plan_path + ".txt"
+    else:
+        scenario_plan_path = scenario_plan_path + ".json"
     
     scenario_plan_creator = GenerationStep(
         prompt_path=scenario_plan_path,
@@ -1393,12 +1447,17 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
     )
     
     # Scenario Gen
-    scenario_path = "create_scenario.txt" # no variation between use of filenames or not for scenarios
+    scenario_path = "create_scenario" # no variation between use of filenames or not for scenarios
     
     scenario_regex = re.compile(
         r"Scenario \(will have no dialogue, will just set up the scene\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
+    
+    if completion_mode:
+        scenario_path = scenario_path + ".txt"
+    else:
+        scenario_path = scenario_path + ".json"
     
     scenario_creator = GenerationStep( # will have variations as an argument
         prompt_path=scenario_path,
@@ -1510,7 +1569,7 @@ async def create_conversation(
     idx, info, engine_wrapper, multi_turn_convs, multi_turn_convs_dir, assistant_mode=False, completion_mode=True, logging_level=logging.INFO
 ):
     file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
-    multi_turn_conversation_prompt_path = "multi_turn_conversation.txt"
+    multi_turn_conversation_prompt_path = "multi_turn_conversation"
     
     qatuples = info[0]
     character = info[1]
@@ -1524,6 +1583,12 @@ async def create_conversation(
         re.IGNORECASE | re.DOTALL,
     )
     
+    
+    if completion_mode:
+        multi_turn_conversation_prompt_path = multi_turn_conversation_prompt_path + ".txt"
+    else:
+        multi_turn_conversation_prompt_path = multi_turn_conversation_prompt_path + ".json"
+        
     if assistant_mode:
         multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation.txt"
     multi_turn_conv_generator = GenerationStep(
