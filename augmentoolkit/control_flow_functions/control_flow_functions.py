@@ -705,28 +705,52 @@ async def vet_question_loop(
     else:
         prompt_path_new_q_gen = prompt_path_new_q_gen + ".json"
     
-    new_q_generator = GenerationStep(
-        prompt_path=prompt_path_new_q_gen,
-        regex=new_q_gen_regex,
-        sampling_params={
-                "max_tokens": 3000,
-                "stop": [
-                    "### Response",
-                    "\n\n\n\n\n",
-                    "</s>",
-                    "# Input:",
-                    "[INST]",
-                    "### Instruction",
-                    "[INST",
-                ],
-                "temperature": 0.2,
-            },
-        completion_mode=completion_mode,
-        retries=3,
-        engine_wrapper=engine_wrapper,
-        logging_level=logging_level,
-        output_processor=extract_question_from_response
-    )
+    if completion_mode:
+        new_q_generator = GenerationStep(
+            prompt_path=prompt_path_new_q_gen,
+            regex=new_q_gen_regex,
+            sampling_params={
+                    "max_tokens": 3000,
+                    "stop": [
+                        "### Response",
+                        "\n\n\n\n\n",
+                        "</s>",
+                        "# Input:",
+                        "[INST]",
+                        "### Instruction",
+                        "[INST",
+                    ],
+                    "temperature": 0.2,
+                },
+            completion_mode=completion_mode,
+            retries=3,
+            engine_wrapper=engine_wrapper,
+            logging_level=logging_level,
+            output_processor=extract_question_from_response_completionmode
+        )
+    else:
+        new_q_generator = GenerationStep(
+            prompt_path=prompt_path_new_q_gen,
+            regex=new_q_gen_regex,
+            sampling_params={
+                    "max_tokens": 3000,
+                    "stop": [
+                        "### Response",
+                        "\n\n\n\n\n",
+                        "</s>",
+                        "# Input:",
+                        "[INST]",
+                        "### Instruction",
+                        "[INST",
+                    ],
+                    "temperature": 0.2,
+                },
+            completion_mode=completion_mode,
+            retries=3,
+            engine_wrapper=engine_wrapper,
+            logging_level=logging_level,
+            output_processor=extract_question_from_response_chatmode
+        )
     
     # Resume normal control flow code
     try:
@@ -815,14 +839,16 @@ async def vet_question_loop(
     return (None, None, None, qtuple[3])
 
 
-def extract_questions_from_response(generation): # TODO extract to non-controlflow file
+def extract_questions_from_response_completionmode(generation): # TODO extract to non-controlflow file
     questions = []
+    print("!! What the model outputted: !!")
+    print(generation)
     pattern = re.compile(
                 r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
                 re.DOTALL | re.MULTILINE | re.IGNORECASE,
             )
     matches = pattern.findall(generation)
-    if not len(matches) > 0:
+    if len(matches) == 0:
         raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
         questions.append(
@@ -837,14 +863,56 @@ def extract_questions_from_response(generation): # TODO extract to non-controlfl
     print(questions)
     return questions
 
-def extract_question_from_response(generation): # TODO extract to non-controlflow file
+def extract_questions_from_response_chatmode(generation): # TODO extract to non-controlflow file
+    questions = []
+    print("!! What the model outputted: !!")
+    print(generation)
+    pattern = re.compile(
+                r"\d+\.\) (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
+                re.DOTALL | re.MULTILINE | re.IGNORECASE,
+            )
+    matches = pattern.findall(generation+"\n\n")
+    if len(matches) == 0:
+        raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
+    for match in matches:
+        questions.append(
+            (
+                match[0].replace(") ", "", 1).strip(),
+                match[1].replace(") ", "", 1).strip(),
+                # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
+                # para_tuple[1].replace(") ", "", 1),
+            )
+        )
+    print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
+    print(questions)
+    return questions
+
+def extract_question_from_response_completionmode(generation): # TODO extract to non-controlflow file
     questions = []
     pattern = re.compile(
                 r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
                 re.DOTALL | re.MULTILINE | re.IGNORECASE,
             )
     matches = pattern.findall(generation)
-    if not len(matches) > 0:
+    if len(matches) == 0:
+        raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
+    for match in matches:
+        # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
+        # print(questions)
+        return (
+                match[0].replace(") ", "", 1).strip(),
+                match[1].replace(") ", "", 1).strip(),
+                # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
+                # para_tuple[1].replace(") ", "", 1),
+            )
+        
+def extract_question_from_response_chatmode(generation): # TODO extract to non-controlflow file
+    pattern = re.compile(
+                r"\d+\.\) (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
+                re.DOTALL | re.MULTILINE | re.IGNORECASE,
+            )
+    matches = pattern.findall(generation)
+    if len(matches) == 0:
         raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
         # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
@@ -925,33 +993,58 @@ async def generate_qatuples_from_para(
     qatuples_gen_regex = re.compile(
         r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
     )
-    qatuples_generator = GenerationStep(
-        prompt_path=prompt_path_qatuples_gen,
-        regex=qatuples_gen_regex,
-        sampling_params={
-                "max_tokens": 2000,
-                "stop": [
-                    "### Response",
-                    "\n\n\n\n\n",
-                    "</s>",
-                    "# Input:",
-                    "[INST]",
-                    "### Instruction",
-                    "[INST",
-                    "## Questions",
-                ],
-                "temperature": 0.8,
-                # top_k=-1,
-                "top_p": 1,
-                # min_p=0.5,
-            },
-        completion_mode=completion_mode,
-        retries=3,
-        engine_wrapper=engine_wrapper,
-        logging_level=logging_level,
-        output_processor=extract_questions_from_response
-    )
-    
+    if completion_mode:
+        qatuples_generator = GenerationStep(
+            prompt_path=prompt_path_qatuples_gen,
+            regex=qatuples_gen_regex,
+            sampling_params={
+                    "max_tokens": 2000,
+                    "stop": [
+                        "### Response",
+                        "\n\n\n\n\n",
+                        "</s>",
+                        "# Input:",
+                        "[INST]",
+                        "### Instruction",
+                        "[INST",
+                    ],
+                    "temperature": 0.8,
+                    # top_k=-1,
+                    "top_p": 1,
+                    # min_p=0.5,
+                },
+            completion_mode=completion_mode,
+            retries=3,
+            engine_wrapper=engine_wrapper,
+            logging_level=logging_level,
+            output_processor=extract_questions_from_response_completionmode
+        )
+    else:
+        qatuples_generator = GenerationStep(
+            prompt_path=prompt_path_qatuples_gen,
+            regex=qatuples_gen_regex,
+            sampling_params={
+                    "max_tokens": 2000,
+                    "stop": [
+                        "### Response",
+                        "\n\n\n\n\n",
+                        "</s>",
+                        "# Input:",
+                        "[INST]",
+                        "### Instruction",
+                        "[INST",
+                    ],
+                    "temperature": 0.8,
+                    # top_k=-1,
+                    "top_p": 1,
+                    # min_p=0.5,
+                },
+            completion_mode=completion_mode,
+            retries=3,
+            engine_wrapper=engine_wrapper,
+            logging_level=logging_level,
+            output_processor=extract_questions_from_response_chatmode
+        )
     # Resume normal control flow code
     try:
         existing_files = glob.glob(
@@ -966,7 +1059,7 @@ async def generate_qatuples_from_para(
                 vetted_qa_tuples.append(qa_tuple)
             return
         question_group_id = make_id()
-        print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
+        # print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
         (
             plan,
             questions_plan_output,
@@ -1351,8 +1444,8 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
             "[INST]",
             "### Instruction",
             "[INST",
-            "### Questions",
-            "## Question, answer, and text that the character should know:",
+            # "### Questions",
+            # "## Question, answer, and text that the character should know:",
         ],
         "temperature": 1,
         # top_k=-1,
@@ -1433,7 +1526,7 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
             "[INST",
             "## Information",
             "User:",
-            "## Scenario",
+            # "## Scenario",
         ],
         "temperature": 0.6,
         # top_k=-1,
@@ -1474,7 +1567,7 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
             "[INST",
             "## Information",
             "User:",
-            "## Scenario",
+            # "## Scenario",
         ],
         "temperature": 0.5,
         # top_k=-1,

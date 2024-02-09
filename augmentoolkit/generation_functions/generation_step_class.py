@@ -69,7 +69,7 @@ class GenerationStep:
                 prompt_escaped = prompt_escaped.replace(f"{{{{{key}}}}}", f"{{{key}}}") # Somehow this works
             # 3. Format
             prompt_formatted = prompt_escaped.format(**arguments)
-        logging.info(f"Formatted prompt for generation: {prompt_formatted}")
+        # logging.info(f"Formatted prompt for generation: {prompt_formatted}")
         # Submit generation and return response, retrying as needed
         times_tried = 0
         if self.completion_mode:
@@ -91,7 +91,7 @@ class GenerationStep:
             while times_tried <= self.retries:
                 try:
                     response = await self.engine_wrapper.submit_chat(messages, self.sampling_params)
-                    filtered_response = response#re.search(self.regex, response).group(1)
+                    filtered_response = response.replace('"','\\"').replace("\n","\\n")#re.search(self.regex, response).group(1)
                     ret = self.output_processor(filtered_response)
                     if self.return_input_too:
                         return ret, "intermediate output broken in chat for now kek" #prompt_formatted + [{"role": "assistant", "content": filtered_response}]
