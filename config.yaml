@@ -2,7 +2,7 @@ PATH:
   INPUT: "./raw_txt_input"
   OUTPUT: "./output"
 API:
-  API_KEY: "arstrst"
+  API_KEY: "674df6ce3b6ed1528c710f9507504f98f003b94a936b0c9d4d05e5fe618504d0"
   BASE_URL: "https://api.together.xyz"
   LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
   LARGE_LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
