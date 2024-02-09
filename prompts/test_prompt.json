@@ -1,0 +1,17 @@
+[
+  {
+    "role": "system",
+    "content": ""
+  },
+  {
+    "role": "user",
+    "content": ""
+  },
+  {
+    "role": "assistant",
+    "content": ""
+  },
+  {
+    "original_content": "{test} test {test} test test {test}"
+  }
+]
