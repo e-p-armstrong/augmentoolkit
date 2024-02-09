@@ -69,7 +69,7 @@ class GenerationStep:
                 prompt_escaped = prompt_escaped.replace(f"{{{{{key}}}}}", f"{{{key}}}") # Somehow this works
             # 3. Format
             prompt_formatted = prompt_escaped.format(**arguments)
-        # logging.info(f"Formatted prompt for generation: {prompt_formatted}")
+        logging.info(f"Formatted prompt for generation: {prompt_formatted}")
         # Submit generation and return response, retrying as needed
         times_tried = 0
         if self.completion_mode:

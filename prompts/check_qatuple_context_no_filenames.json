@@ -5,7 +5,7 @@
   },
   {
     "role": "user",
-    "content": "Question: What is the main theme of this book?\\nAnswer: The main theme of the book is philosophical principles of chemistry, as opposed to experimental or practical data. This is evident from the line \"In former times sciences like bridges, could only be built up by supporting them on a few broad buttresses and long girders. In addition to the exposition of the principles of chemistry, it has been my desire to show how science has now been built up like a suspension bridge, supported by the united strength of a number of slender, but firmly-fixed, chains, which individually are of little strength, and has thus been carried over difficulties which before appeared insuperable.\\" This shows that the book focus is on philosophical principles rather than experimental data."
+    "content": "Question: What is the main theme of this book?\\nAnswer: The main theme of the book is philosophical principles of chemistry, as opposed to experimental or practical data. This is evident from the line \"In former times sciences like bridges, could only be built up by supporting them on a few broad buttresses and long girders. In addition to the exposition of the principles of chemistry, it has been my desire to show how science has now been built up like a suspension bridge, supported by the united strength of a number of slender, but firmly-fixed, chains, which individually are of little strength, and has thus been carried over difficulties which before appeared insuperable.\" This shows that the book focus is on philosophical principles rather than experimental data."
   },
   {
     "role": "assistant",

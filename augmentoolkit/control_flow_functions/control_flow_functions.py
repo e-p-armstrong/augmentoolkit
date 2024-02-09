@@ -18,6 +18,8 @@ import glob
 import uuid
 import yaml
 
+from augmentoolkit.utils.escape_unescaped_quotes import escape_unescaped_quotes
+
 from augmentoolkit.generation_functions import (
     create_scenario_plan_many_tuples,
     create_scenario_many_tuples,
@@ -101,7 +103,7 @@ def create_starting_str(qatuples):
 
 # Idea: use multiple short answers to train the task of answering multiple questions in one response. Like, "Tell me what 2+2 is then tell me who won the battle of Alesia". Two-three short answers per response should be enough.
 async def make_multiturn_character(
-    qa_tuples, conv_id, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None
+    qa_tuples, conv_id, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None,completion_mode=True
 ):
     if (
         assistant_mode
@@ -109,17 +111,32 @@ async def make_multiturn_character(
         return "will_be_replaced", "will_be_replaced"
     
     instructions = special_instructions(n=1).strip()
-    (
-        plan,
-        card_plan_output,
-    ) = await character_card_plan_creator.generate(
-        arguments={
-            "textname": qa_tuples[0][3],
-            "text": qa_tuples[0][2],
-            "question_answer_list": format_qatuples(qa_tuples),
-            "special_instructions": instructions
-        }
-    )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
+    if not completion_mode:
+        instructions = escape_unescaped_quotes(instructions).replace("\n","\\n")
+    if completion_mode:
+        (
+            plan,
+            card_plan_output,
+        ) = await character_card_plan_creator.generate(
+            arguments={
+                "textname": qa_tuples[0][3],
+                "text": qa_tuples[0][2],
+                "question_answer_list": format_qatuples(qa_tuples),
+                "special_instructions": instructions
+            }
+        )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
+    else:
+        (
+            plan,
+            card_plan_output,
+        ) = await character_card_plan_creator.generate(
+            arguments={
+                "textname": qa_tuples[0][3],
+                "text": qa_tuples[0][2],
+                "question_answer_list": format_qatuples(qa_tuples).replace('"','\\"').replace("\n","\\n"),
+                "special_instructions": instructions
+            }
+        )
     write_output_to_file(card_plan_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_card_plan_generations", conv_id)
     
     starting_str = create_starting_str(qa_tuples)
@@ -141,21 +158,32 @@ async def make_multiturn_character(
 
 
 async def make_multiturn_scenario(
-    qa_tuples, character, conv_id, assistant_mode=False,scenario_plan_creator=None, scenario_creator=None
+    qa_tuples, character, conv_id, assistant_mode=False,scenario_plan_creator=None, scenario_creator=None, completion_mode=True
 ):
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
         return "will_be_replaced", "will_be_replaced"
-    (
-        plan,
-        scenario_plan_output,
-    ) = await scenario_plan_creator.generate(
-        arguments={
-            "question_answer_list": format_qatuples(qa_tuples),
-            "character": character,
-        }
-    )
+    if completion_mode:
+        (
+            plan,
+            scenario_plan_output,
+        ) = await scenario_plan_creator.generate(
+            arguments={
+                "question_answer_list": format_qatuples(qa_tuples),
+                "character": character,
+            }
+        )
+    else:
+        (
+            plan,
+            scenario_plan_output,
+        ) = await scenario_plan_creator.generate(
+            arguments={
+                "question_answer_list": format_qatuples(qa_tuples),
+                "character": character,
+            }
+        )
     
     plan = fix_scenario_plan(plan,character)
     write_output_to_file(
@@ -163,24 +191,36 @@ async def make_multiturn_scenario(
     )
     
     variation = select_variation(character)
-    
-    (
-        scenario,
-        scenario_output,
-    ) = await scenario_creator.generate(
-        arguments={
-            "question_answer_list": format_qatuples(qa_tuples),
-            "character": character,
-            "plan": plan,
-            "selected_variation": variation
-        }
-    )  # creates a scenario based on a character card and question/answer tuple
+    if completion_mode:
+        (
+            scenario,
+            scenario_output,
+        ) = await scenario_creator.generate(
+            arguments={
+                "question_answer_list": format_qatuples(qa_tuples).replace('"','\\"').replace("\n","\\n"),
+                "character": character,
+                "plan": plan,
+                "selected_variation": variation
+            }
+        )  # creates a scenario based on a character card and question/answer tuple
+    else:
+        (
+            scenario,
+            scenario_output,
+        ) = await scenario_creator.generate(
+            arguments={
+                "question_answer_list": format_qatuples(qa_tuples).replace('"','\\"').replace("\n","\\n"),
+                "character": character,
+                "plan": plan,
+                "selected_variation": variation
+            }
+        )
     write_output_to_file(scenario_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_scenario_generations", conv_id)
     return scenario, plan
 
 
 async def make_multiturn_conversation_info(
-    qa_tuples, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None, scenario_plan_creator=None, scenario_creator=None
+    qa_tuples, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None, scenario_plan_creator=None, scenario_creator=None,completion_mode=True
 ):
     conv_id = make_id()
     if (
@@ -189,10 +229,10 @@ async def make_multiturn_conversation_info(
         return (qa_tuples, "will", "be", "replaced", conv_id)
     # thought_plan = create_thought_plan_many_tuples(qa_tuples,character,scenario,logic_llm) # There IS a way to make multiturn chain of thought answering work: generate each pair of messages using a separate prompt or a separate function, each of which has only the thought plan for that question/answer pair. But simply cramming in all the step-by-step things will confuse the hell out of the poor model. So for the first release version we're skipping it and just giving the response, with no reasoning, in the multiturn convs.
     character, instructions = await make_multiturn_character(
-        qa_tuples, conv_id, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator
+        qa_tuples, conv_id, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator, completion_mode=completion_mode
     )
     scenario, scenario_plan = await make_multiturn_scenario(
-        qa_tuples, character, conv_id, assistant_mode=assistant_mode, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator
+        qa_tuples, character, conv_id, assistant_mode=assistant_mode, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator, completion_mode=completion_mode
     )
 
     return (qa_tuples, character, scenario, scenario_plan, conv_id)
@@ -871,7 +911,7 @@ def extract_questions_from_response_chatmode(generation): # TODO extract to non-
                 r"\d+\.\) (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
                 re.DOTALL | re.MULTILINE | re.IGNORECASE,
             )
-    matches = pattern.findall(generation+"\n\n")
+    matches = pattern.findall(generation+"\\n\\n")
     if len(matches) == 0:
         raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
@@ -911,7 +951,7 @@ def extract_question_from_response_chatmode(generation): # TODO extract to non-c
                 r"\d+\.\) (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
                 re.DOTALL | re.MULTILINE | re.IGNORECASE,
             )
-    matches = pattern.findall(generation)
+    matches = pattern.findall(generation+"\\n\\n")
     if len(matches) == 0:
         raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
@@ -1616,7 +1656,8 @@ async def create_info(
         if not os.path.exists(file_path):
             try:
                 info = await make_multiturn_conversation_info(
-                    perm, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator
+                    perm, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator,
+                    completion_mode=completion_mode
                 )
 
                 if info is not None:
