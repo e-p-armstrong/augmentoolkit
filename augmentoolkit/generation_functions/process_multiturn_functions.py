@@ -39,6 +39,8 @@ def extract_conversation(conversation):
     list of tuples: Each tuple contains the character's name and their message.
     """
     lines = conversation.strip().split("\n")
+    if len(lines) == 1: # If no newlines, there's 1 item
+        lines = conversation.replace("## Conversation that answers the provided questions:",'').strip().split(r"\n")[1:]
     dialogues = []
 
     for line in lines:
@@ -264,6 +266,7 @@ def call_all_processors(multiturn_conversation, qatuples):
     # Check the conversation length
     if not check_conversation_length(convs_split, qatuples):
         print("Conversation is too short! Validation failed!")
+        print(convs_split)
         return False
 
     # Check for text from examples (assuming this is implemented elsewhere)

@@ -133,7 +133,7 @@ async def make_multiturn_character(
             arguments={
                 "textname": qa_tuples[0][3],
                 "text": qa_tuples[0][2],
-                "question_answer_list": format_qatuples(qa_tuples).replace('"','\\"').replace("\n","\\n"),
+                "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
                 "special_instructions": instructions
             }
         )
@@ -180,7 +180,7 @@ async def make_multiturn_scenario(
             scenario_plan_output,
         ) = await scenario_plan_creator.generate(
             arguments={
-                "question_answer_list": format_qatuples(qa_tuples),
+                "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
                 "character": character,
             }
         )
@@ -197,7 +197,7 @@ async def make_multiturn_scenario(
             scenario_output,
         ) = await scenario_creator.generate(
             arguments={
-                "question_answer_list": format_qatuples(qa_tuples).replace('"','\\"').replace("\n","\\n"),
+                "question_answer_list": format_qatuples(qa_tuples),
                 "character": character,
                 "plan": plan,
                 "selected_variation": variation
@@ -209,7 +209,7 @@ async def make_multiturn_scenario(
             scenario_output,
         ) = await scenario_creator.generate(
             arguments={
-                "question_answer_list": format_qatuples(qa_tuples).replace('"','\\"').replace("\n","\\n"),
+                "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
                 "character": character,
                 "plan": plan,
                 "selected_variation": variation
@@ -1388,7 +1388,7 @@ def fix_text(to_replace_arr, text):
 
 
 async def ensure_multiple_answers_are_same(
-    info, conv, multi_turn_conv_generator
+    info, conv, multi_turn_conv_generator,completion_mode=True
 ):  # why is this a whole separate function? Once upon a time, LLMs were used in validation here, too. But programmatic validation SEEMS to catch the common problems. This is here so that I can add it back in if I have to.
     """Loop to ensure that the answer is consistent in the conversation and in the tuple."""
     retries = 0
@@ -1405,7 +1405,7 @@ async def ensure_multiple_answers_are_same(
         # If we're here, majority of relevance checks failed
         print("----------------\n\n\n\nRETRYING!!!!\n\n\n\n----------------")
         # Broken info is 1) rare and 2) handled by the retry limit. We don't want to waste compute on regenerating info as they take time.
-        retry = await make_multiturn_conversation(info, multi_turn_conv_generator)
+        retry = await make_multiturn_conversation(info, multi_turn_conv_generator,completion_mode=completion_mode)
         if retry is not None:  # Note: retry CANNOT actually be None
             c = retry
         else:
@@ -1415,19 +1415,31 @@ async def ensure_multiple_answers_are_same(
     return None
 
 
-async def make_multiturn_conversation(info, multi_turn_conv_generator):
+async def make_multiturn_conversation(info, multi_turn_conv_generator,completion_mode=True):
     charname = extract_name.extract_name(info[1])
     conv_starter = create_conv_starter(info[1])
-    conv, conv_output = await multi_turn_conv_generator.generate(
+    if completion_mode:
+        conv, conv_output = await multi_turn_conv_generator.generate(
+            arguments = {
+                "character": info[1].strip(),
+                "scenario": info[2].strip(),
+                "extra_info": info[3].strip(),
+                "question_answer_list": format_qatuples(info[0]).strip(),
+                "charname": charname.strip(),
+                "conv_starter": conv_starter.strip(),
+            }
+        )
+    else:
+        conv, conv_output = await multi_turn_conv_generator.generate(
         arguments = {
             "character": info[1].strip(),
             "scenario": info[2].strip(),
             "extra_info": info[3].strip(),
-            "question_answer_list": format_qatuples(info[0]).strip(),
+            "question_answer_list": escape_unescaped_quotes(format_qatuples(info[0])).replace("\n","\\n"),
             "charname": charname.strip(),
             "conv_starter": conv_starter.strip(),
         }
-    )
+        )
     write_output_to_file(conv_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_conversation_generations", info[4])
 
     return (conv, info[1], info[2], info[3], info[0])
@@ -1449,6 +1461,7 @@ def select_variation(character): # can help following the groove of the few-shot
     return random.choice(variations)
 
 def fix_scenario_plan(scenario_plan, character):
+    print(character)
     charname = extract_name.extract_name(character)
     if not ("Albert" in charname):
         if "Albert" in scenario_plan:
@@ -1475,7 +1488,7 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         prompt_path=character_card_plan_path,
         regex = character_card_plan_regex,
         sampling_params={
-        "max_tokens": 8000,
+        "max_tokens": 3000,
         "stop": [
             "### Response",
             "\n\n\n\n\n",
@@ -1518,7 +1531,7 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         prompt_path=character_card_path,
         regex = character_card_regex,
         sampling_params={
-        "max_tokens": 10000,
+        "max_tokens": 40000,
         "stop": [
             "### Response",
             "\n\n\n\n\n",
@@ -1757,10 +1770,10 @@ async def create_conversation(
     if not os.path.exists(file_path):
         try:
             conv = await make_multiturn_conversation(
-                info, multi_turn_conv_generator
+                info, multi_turn_conv_generator, completion_mode=completion_mode
             )
             final_conv = await ensure_multiple_answers_are_same(
-                info, conv, multi_turn_conv_generator
+                info, conv, multi_turn_conv_generator,completion_mode=completion_mode
             )
 
             if final_conv is not None:

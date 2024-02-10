@@ -9,7 +9,7 @@ def escape_unescaped_quotes(s):
             # Check if it's the first character or if the preceding character is not a backslash
             if i == 0 or s[i-1] != '\\':
                 # Add an escaped quote to the result
-                result += '\\"'
+                result += r'\"'
             else:
                 # Add the quote as is, because it's already escaped
                 result += '"'
