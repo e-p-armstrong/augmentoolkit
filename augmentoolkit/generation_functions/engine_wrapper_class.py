@@ -56,7 +56,21 @@ class EngineWrapper:
         # print(sampling_params["top_p"])
         # print(sampling_params["max_tokens"])
         if self.mode == "aphrodite":
-            
+            sampling_params = SamplingParams(
+                
+            )
+            request_id = make_id()
+            outputs = []
+            # self.engine.add_request(request_id,prompt,sampling_params) #old sync code
+            final_output = None
+            async for request_output in self.engine.generate(
+                prompt, sampling_params, request_id
+            ):
+                outputs.append(request_output.outputs[0].text)
+                final_output = request_output
+
+            # full_output = "".join(outputs)
+            return final_output.prompt + final_output.outputs[0].text
         
         if self.mode == "api":
             completion = await self.client.completions.create(
