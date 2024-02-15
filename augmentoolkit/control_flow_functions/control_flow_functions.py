@@ -152,7 +152,7 @@ async def make_multiturn_character(
             "special_instructions": instructions,
             "plan": plan,
             "starting_str": starting_str,
-                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
+            "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             
         }
     )  # creates a character card
