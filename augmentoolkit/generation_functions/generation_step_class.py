@@ -36,7 +36,8 @@ class GenerationStep:
                  engine_wrapper=None,
                  logging_level=logging.INFO,  # Default logging level
                  output_processor=lambda x: x, # to ensure that control flow does not need to have decision code handling the outputs of the LLM, you can pass in a function to handle and modify the outputs (post regex) here. By default it's just the identity function and does nothing.
-                 return_input_too=True
+                 return_input_too=True, 
+                 prompt_folder="prompts"
                 ):
         self.prompt_path = prompt_path
         self.regex = regex
@@ -49,6 +50,7 @@ class GenerationStep:
         if not engine_wrapper:
             raise Exception("Engine wrapper not passed in!")
         self.engine_wrapper = engine_wrapper
+        self.prompt_folder = prompt_folder
         logging.basicConfig(level=self.logging_level, format='%(asctime)s - %(levelname)s - %(message)s')
 
     
@@ -57,7 +59,12 @@ class GenerationStep:
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
         # Dynamic INPUT_DIRECTORY path (feel free to change, DragonFox, depending on what structure you have been working towards)
-        full_prompt_path = os.path.join(current_dir, '..', '..', 'prompts',self.prompt_path)
+        # ADDITIONS START HERE
+        ideal_path = os.path.join(current_dir, '..', '..', self.prompt_folder,self.prompt_path)
+        if os.path.exists(ideal_path):
+            full_prompt_path = ideal_path
+        else: #END HERE (not counting the newline)
+            full_prompt_path = os.path.join(current_dir, '..', '..', 'prompts',self.prompt_path)
         # Read file and escape all curly braces
         with open(full_prompt_path, 'r') as pf:
             prompt = pf.read()
