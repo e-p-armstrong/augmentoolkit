@@ -56,9 +56,7 @@ class EngineWrapper:
         # print(sampling_params["top_p"])
         # print(sampling_params["max_tokens"])
         if self.mode == "aphrodite":
-            sampling_params = SamplingParams(
-                
-            )
+            sampling_params = SamplingParams(**sampling_params)
             request_id = make_id()
             outputs = []
             # self.engine.add_request(request_id,prompt,sampling_params) #old sync code
