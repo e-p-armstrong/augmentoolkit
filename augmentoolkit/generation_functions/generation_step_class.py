@@ -90,6 +90,8 @@ class GenerationStep:
                     return ret
                 except Exception as e:
                     # logging.error(f"Error in Generation Step: {e}")
+                    print("Response:")
+                    print(response)
                     traceback.print_exc()
                     times_tried += 1
             raise Exception("Generation step failed -- too many retries!")

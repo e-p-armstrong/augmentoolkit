@@ -1292,7 +1292,7 @@ async def filter_all_questions(
         prompt_path=prompt_path,
         regex=judgement_regex,
         sampling_params={
-            "max_tokens": 6000,
+            "max_tokens": 2000,
             # "min_p": 0.4,
             "stop": [
                 "### Response",
