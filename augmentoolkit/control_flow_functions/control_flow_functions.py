@@ -1560,6 +1560,7 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
     
     # Scenario Plan Gen
@@ -1596,6 +1597,7 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         # top_k=-1,
         "top_p": 1,
         # min_p=0.5,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     },
         completion_mode=completion_mode,
         logging_level=logging_level,
