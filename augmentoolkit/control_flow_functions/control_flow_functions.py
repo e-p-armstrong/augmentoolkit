@@ -314,6 +314,7 @@ async def repair_qatuple_context(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=extract_reasoning_from_context_check,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
     
     # Resume normal control flow
@@ -434,7 +435,8 @@ async def vet_answer_accuracy_loop(
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
-        output_processor=parse_answer_accuracy_validation
+        output_processor=parse_answer_accuracy_validation,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
     
     # Resume normal control flow code
