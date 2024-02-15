@@ -1,33 +1,38 @@
-try:
-# from aphrodite import (
-#     EngineArgs,
-#     AphroditeEngine,
-#     SamplingParams,
-#     AsyncAphrodite,
-#     AsyncEngineArgs,
-# )
-except:
-    print("Aphrodite not installed; stick to Llama CPP or API modes")
 import asyncio
 import uuid
 from openai import AsyncOpenAI
 
+try:
+    from aphrodite import (
+        EngineArgs,
+        AphroditeEngine,
+        SamplingParams,
+        AsyncAphrodite,
+        AsyncEngineArgs,
+    )
+except:
+    print("Aphrodite not installed; stick to Llama CPP or API modes")
 
 def make_id():
     return str(uuid.uuid4())
 
 
 class EngineWrapper:
-    def __init__(self, model, api_key=None, base_url=None):
-        # engine_args = AsyncEngineArgs(
-        #     model=model,
-        #     quantization=quantization,
-        #     engine_use_ray=False,
-        #     disable_log_requests=True,
-        #     max_model_len=12000,
-        #     dtype="float16"
-        # )
-        # self.engine = AsyncAphrodite.from_engine_args(engine_args)
+    def __init__(self, model, 
+                 api_key=None, 
+                 base_url=None, 
+                 mode="api" # can be one of api, aphrodite, llama.cpp
+                ):
+        if mode == "aphrodite":
+            engine_args = AsyncEngineArgs(
+                model=model,
+                quantization=quantization,
+                engine_use_ray=False,
+                disable_log_requests=True,
+                max_model_len=12000,
+                dtype="float16"
+            )
+            self.engine = AsyncAphrodite.from_engine_args(engine_args)
 
         self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
         self.model = model
