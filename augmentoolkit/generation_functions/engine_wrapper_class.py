@@ -34,7 +34,7 @@ class EngineWrapper:
                 dtype="float16"
             )
             self.engine = AsyncAphrodite.from_engine_args(engine_args)
-
+        self.mode = mode
         self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
         self.model = model
 
@@ -55,17 +55,20 @@ class EngineWrapper:
         # print(sampling_params["temperature"])
         # print(sampling_params["top_p"])
         # print(sampling_params["max_tokens"])
+        if self.mode == "aphrodite":
+            
         
-        completion = await self.client.completions.create(
-            model=self.model,
-            prompt=prompt,
-            temperature=sampling_params["temperature"],
-            top_p=sampling_params["top_p"],
-            stop=sampling_params["stop"],
-            max_tokens=sampling_params["max_tokens"],
-        )
-        completion = completion.choices[0].text
-        return prompt + completion
+        if self.mode == "api":
+            completion = await self.client.completions.create(
+                model=self.model,
+                prompt=prompt,
+                temperature=sampling_params["temperature"],
+                top_p=sampling_params["top_p"],
+                stop=sampling_params["stop"],
+                max_tokens=sampling_params["max_tokens"],
+            )
+            completion = completion.choices[0].text
+            return prompt + completion
     
     async def submit_chat(
     self, messages, sampling_params
