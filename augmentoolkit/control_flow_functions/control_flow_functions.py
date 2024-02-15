@@ -123,7 +123,7 @@ async def make_multiturn_character(
                 "text": qa_tuples[0][2],
                 "question_answer_list": format_qatuples(qa_tuples),
                 "special_instructions": instructions,
-                "prompt_folder": obj_conf[""]
+                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             }
         )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
     else:
@@ -135,7 +135,8 @@ async def make_multiturn_character(
                 "textname": qa_tuples[0][3],
                 "text": qa_tuples[0][2],
                 "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
-                "special_instructions": instructions
+                "special_instructions": instructions,
+                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             }
         )
     write_output_to_file(card_plan_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_card_plan_generations", conv_id)
@@ -150,7 +151,8 @@ async def make_multiturn_character(
             "textname": qa_tuples[0][3],
             "special_instructions": instructions,
             "plan": plan,
-            "starting_str": starting_str
+            "starting_str": starting_str,
+                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             
         }
     )  # creates a character card
