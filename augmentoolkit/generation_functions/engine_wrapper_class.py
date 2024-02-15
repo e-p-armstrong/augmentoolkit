@@ -97,7 +97,9 @@ class EngineWrapper:
             sampling_params["max_tokens"] = 3000
         if "stop" not in sampling_params:
             sampling_params["stop"] = []
-            
+        
+        if self.mode == "llamacpp":
+            return await make_async_api_call(messages=messages, sampling_parameters=sampling_params)
         
         completion = await self.client.chat.completions.create(
             model=self.model,
