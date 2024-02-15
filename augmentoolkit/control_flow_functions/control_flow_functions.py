@@ -770,7 +770,8 @@ async def vet_question_loop(
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
-            output_processor=extract_question_from_response_completionmode
+            output_processor=extract_question_from_response_completionmode,
+            prompt_folder=obj_conf["PATH"]["PROMPTS"]
         )
     else:
         new_q_generator = GenerationStep(
@@ -793,7 +794,8 @@ async def vet_question_loop(
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
-            output_processor=extract_question_from_response_chatmode
+            output_processor=extract_question_from_response_chatmode,
+            prompt_folder=obj_conf["PATH"]["PROMPTS"]
         )
     
     # Resume normal control flow code
