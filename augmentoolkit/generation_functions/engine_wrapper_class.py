@@ -1,10 +1,13 @@
-from aphrodite import (
-    EngineArgs,
-    AphroditeEngine,
-    SamplingParams,
-    AsyncAphrodite,
-    AsyncEngineArgs,
-)
+try:
+# from aphrodite import (
+#     EngineArgs,
+#     AphroditeEngine,
+#     SamplingParams,
+#     AsyncAphrodite,
+#     AsyncEngineArgs,
+# )
+except:
+    print("Aphrodite not installed; stick to Llama CPP or API modes")
 import asyncio
 import uuid
 from openai import AsyncOpenAI
