@@ -731,7 +731,8 @@ async def vet_question_loop(
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
-        output_processor=parse_validation_step
+        output_processor=parse_validation_step,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
     
     # NOTE Set up generate new question step
