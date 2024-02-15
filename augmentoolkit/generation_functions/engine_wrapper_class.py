@@ -1,10 +1,10 @@
-# from aphrodite import (
-#     EngineArgs,
-#     AphroditeEngine,
-#     SamplingParams,
-#     AsyncAphrodite,
-#     AsyncEngineArgs,
-# )
+from aphrodite import (
+    EngineArgs,
+    AphroditeEngine,
+    SamplingParams,
+    AsyncAphrodite,
+    AsyncEngineArgs,
+)
 import asyncio
 import uuid
 from openai import AsyncOpenAI
