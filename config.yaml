@@ -1,7 +1,7 @@
 PATH:
   INPUT: "./raw_txt_input"
   OUTPUT: "./output"
-  PROMPTS: "./prompts" # model used in most of the pipeline (everything but conversation generation)
+  PROMPTS: "./new_test_prompts" # model used in most of the pipeline (everything but conversation generation)
 API:
   API_KEY: ""
   BASE_URL: "https://api.together.xyz"
