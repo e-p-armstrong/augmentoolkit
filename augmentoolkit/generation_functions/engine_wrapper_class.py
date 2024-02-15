@@ -1,6 +1,7 @@
 import asyncio
 import uuid
 from openai import AsyncOpenAI
+from augmentoolkit.generation_functions.async_llamacpp_api_call import make_async_api_call
 
 try:
     from aphrodite import (
