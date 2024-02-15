@@ -578,7 +578,8 @@ async def vet_answer_relevance_loop(
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
-        output_processor=parse_answer_relevancy_validation_step
+        output_processor=parse_answer_relevancy_validation_step,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
     
     # Resume normal control flow code
