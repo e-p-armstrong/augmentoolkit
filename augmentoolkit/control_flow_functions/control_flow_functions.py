@@ -122,7 +122,8 @@ async def make_multiturn_character(
                 "textname": qa_tuples[0][3],
                 "text": qa_tuples[0][2],
                 "question_answer_list": format_qatuples(qa_tuples),
-                "special_instructions": instructions
+                "special_instructions": instructions,
+                ""
             }
         )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
     else:
