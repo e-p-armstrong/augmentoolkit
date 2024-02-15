@@ -3,7 +3,7 @@ PATH:
   OUTPUT: "./output"
   PROMPTS: "./new_test_prompts" # model used in most of the pipeline (everything but conversation generation)
 API:
-  API_KEY: ""
+  API_KEY: "a44b76da69069394aec2295f8a2a6cd419a22d0d5605017cf8fa456e82a90919"
   BASE_URL: "https://api.together.xyz"
   LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
   LARGE_LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
