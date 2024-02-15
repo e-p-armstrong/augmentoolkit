@@ -22,11 +22,14 @@ async def make_async_api_call(prompt=None, sampling_parameters={}, url='http://1
 
     # Use aiohttp to make the async request
     async with aiohttp.ClientSession() as session:
-        async with session.post(full_url, data=data, headers={"Content-Type": "application/json"}) as response:
+        async with session.post(full_url, data=data, headers={"Content-Type": "application/json"}, ssl=False) as response:
             if response.status == 200:
                 # Parse the JSON response
                 response_json = await response.json()
-                return response_json
+                if prompt:
+                    return prompt + response_json["content"]
+                else:
+                    return response_json["choices"][0]["content"]
             else:
                 return {"error": f"API call failed with status code: {response.status}"}
 
@@ -44,7 +47,7 @@ if __name__ == "__main__":
 
     # Example usage for chat
     messages = [
-        {"role": "system", "content": "You are ChatGPT, an AI assistant."},
+        {"role": "system", "content": "You are Elise Delacroix, an AI assistant."},
         {"role": "user", "content": "Write a limerick about python exceptions."}
     ]
     

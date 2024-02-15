@@ -1,7 +1,7 @@
 PATH:
   INPUT: "./raw_txt_input"
   OUTPUT: "./output"
-  PROMPTS: "./new_test_prompts" # model used in most of the pipeline (everything but conversation generation)
+  PROMPTS: "./prompts" # model used in most of the pipeline (everything but conversation generation)
 API:
   API_KEY: "a44b76da69069394aec2295f8a2a6cd419a22d0d5605017cf8fa456e82a90919"
   BASE_URL: "https://api.together.xyz"
@@ -15,3 +15,4 @@ SYSTEM:
   REARRANGEMENTS_TO_TAKE: 3
   CONCURRENCY_LIMIT: 90
   COMPLETION_MODE: True
+  MODE: "llamacpp" # can be one of "api"|"aphrodite"|"llamacpp"

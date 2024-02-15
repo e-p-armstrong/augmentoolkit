@@ -50,6 +50,8 @@ class EngineWrapper:
             sampling_params["max_tokens"] = 3000
         if "stop" not in sampling_params:
             sampling_params["stop"] = []
+        if "n_predict" not in sampling_params and self.mode == "llamacpp":
+            sampling_params["n_predict"] = sampling_params["max_tokens"]
         # print("\n\nSETTINGS DUMP\n\n")
         # print(self.model)
         # print(prompt)
