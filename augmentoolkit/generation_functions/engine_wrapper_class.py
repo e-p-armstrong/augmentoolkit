@@ -57,7 +57,7 @@ class EngineWrapper:
         # print(sampling_params["top_p"])
         # print(sampling_params["max_tokens"])
         if self.mode == "llamacpp":
-            return await make_async_api_call(prompt, sampling_params)
+            return await make_async_api_call(prompt=prompt, sampling_parameters=sampling_params)
         
         if self.mode == "aphrodite":
             aphrodite_sampling_params = SamplingParams(**sampling_params)
