@@ -1519,6 +1519,7 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
     
     # Character card gen
