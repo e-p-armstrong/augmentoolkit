@@ -100,7 +100,7 @@ class EngineWrapper:
         
         if self.mode == "llamacpp":
             return await make_async_api_call(messages=messages, sampling_parameters=sampling_params)
-        elif self.mode == "api"
+        elif self.mode == "api":
             completion = await self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
