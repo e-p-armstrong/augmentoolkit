@@ -175,6 +175,7 @@ async def make_multiturn_scenario(
             arguments={
                 "question_answer_list": format_qatuples(qa_tuples),
                 "character": character,
+                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             }
         )
     else:
@@ -185,6 +186,7 @@ async def make_multiturn_scenario(
             arguments={
                 "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
                 "character": character,
+                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             }
         )
     
@@ -203,7 +205,8 @@ async def make_multiturn_scenario(
                 "question_answer_list": format_qatuples(qa_tuples),
                 "character": character,
                 "plan": plan,
-                "selected_variation": variation
+                "selected_variation": variation,
+                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             }
         )  # creates a scenario based on a character card and question/answer tuple
     else:
