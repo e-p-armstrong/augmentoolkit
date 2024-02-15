@@ -100,14 +100,16 @@ class EngineWrapper:
         
         if self.mode == "llamacpp":
             return await make_async_api_call(messages=messages, sampling_parameters=sampling_params)
-        
-        completion = await self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            temperature=sampling_params["temperature"],
-            top_p=sampling_params["top_p"],
-            stop=sampling_params["stop"],
-            max_tokens=sampling_params["max_tokens"],
-        )
-        completion = completion.choices[0].message.content
-        return completion
+        elif self.mode == "api"
+            completion = await self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                temperature=sampling_params["temperature"],
+                top_p=sampling_params["top_p"],
+                stop=sampling_params["stop"],
+                max_tokens=sampling_params["max_tokens"],
+            )
+            completion = completion.choices[0].message.content
+            return completion
+        else:
+            raise Exception("Aphrodite not compatible with chat mode!")
