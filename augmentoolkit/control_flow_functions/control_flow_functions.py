@@ -1777,7 +1777,8 @@ async def create_conversation(
         completion_mode=completion_mode,
         retries=1,
         engine_wrapper=engine_wrapper,
-        logging_level=logging_level
+        logging_level=logging_level,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
 
     # Skip if file already exists
