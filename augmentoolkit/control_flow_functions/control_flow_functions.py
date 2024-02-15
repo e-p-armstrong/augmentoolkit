@@ -1023,6 +1023,7 @@ async def generate_qatuples_from_para(
         retries=0,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
     
     # NOTE Set up qatuple generation step #
@@ -1063,7 +1064,8 @@ async def generate_qatuples_from_para(
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
-            output_processor=extract_questions_from_response_completionmode
+            output_processor=extract_questions_from_response_completionmode,
+            prompt_folder=obj_conf["PATH"]["PROMPTS"]
         )
     else:
         qatuples_generator = GenerationStep(
@@ -1089,7 +1091,8 @@ async def generate_qatuples_from_para(
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
-            output_processor=extract_questions_from_response_chatmode
+            output_processor=extract_questions_from_response_chatmode,
+            prompt_folder=obj_conf["PATH"]["PROMPTS"]
         )
     # Resume normal control flow code
     try:
