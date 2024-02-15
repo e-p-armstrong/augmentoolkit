@@ -21,7 +21,8 @@ class EngineWrapper:
     def __init__(self, model, 
                  api_key=None, 
                  base_url=None, 
-                 mode="api" # can be one of api, aphrodite, llama.cpp
+                 mode="api", # can be one of api, aphrodite, llama.cpp
+                 quantization="gptq", # only needed if using aphrodite mode
                 ):
         if mode == "aphrodite":
             engine_args = AsyncEngineArgs(
