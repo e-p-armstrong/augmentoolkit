@@ -122,8 +122,7 @@ async def make_multiturn_character(
                 "textname": qa_tuples[0][3],
                 "text": qa_tuples[0][2],
                 "question_answer_list": format_qatuples(qa_tuples),
-                "special_instructions": instructions,
-                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
+                "special_instructions": instructions
             }
         )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
     else:
@@ -135,8 +134,7 @@ async def make_multiturn_character(
                 "textname": qa_tuples[0][3],
                 "text": qa_tuples[0][2],
                 "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
-                "special_instructions": instructions,
-                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
+                "special_instructions": instructions
             }
         )
     write_output_to_file(card_plan_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_card_plan_generations", conv_id)
@@ -151,8 +149,7 @@ async def make_multiturn_character(
             "textname": qa_tuples[0][3],
             "special_instructions": instructions,
             "plan": plan,
-            "starting_str": starting_str,
-            "prompt_folder": obj_conf["PATH"]["PROMPTS"]
+            "starting_str": starting_str
             
         }
     )  # creates a character card
@@ -175,7 +172,6 @@ async def make_multiturn_scenario(
             arguments={
                 "question_answer_list": format_qatuples(qa_tuples),
                 "character": character,
-                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             }
         )
     else:
@@ -186,7 +182,6 @@ async def make_multiturn_scenario(
             arguments={
                 "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
                 "character": character,
-                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             }
         )
     
@@ -205,8 +200,7 @@ async def make_multiturn_scenario(
                 "question_answer_list": format_qatuples(qa_tuples),
                 "character": character,
                 "plan": plan,
-                "selected_variation": variation,
-                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
+                "selected_variation": variation
             }
         )  # creates a scenario based on a character card and question/answer tuple
     else:
@@ -218,8 +212,7 @@ async def make_multiturn_scenario(
                 "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
                 "character": character,
                 "plan": plan,
-                "selected_variation": variation,
-                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
+                "selected_variation": variation
             }
         )
     write_output_to_file(scenario_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_scenario_generations", conv_id)
