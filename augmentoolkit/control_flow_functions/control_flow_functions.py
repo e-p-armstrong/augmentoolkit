@@ -1310,7 +1310,8 @@ async def filter_all_questions(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level, # TODO change to warning
         output_processor=judge_paragraph_processor,
-        return_input_too=False
+        return_input_too=False,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"]
     )
     if not take_subset:
         tasks = [
