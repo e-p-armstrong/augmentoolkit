@@ -218,7 +218,8 @@ async def make_multiturn_scenario(
                 "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
                 "character": character,
                 "plan": plan,
-                "selected_variation": variation
+                "selected_variation": variation,
+                "prompt_folder": obj_conf["PATH"]["PROMPTS"]
             }
         )
     write_output_to_file(scenario_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_scenario_generations", conv_id)
