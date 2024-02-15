@@ -56,6 +56,9 @@ class EngineWrapper:
         # print(sampling_params["temperature"])
         # print(sampling_params["top_p"])
         # print(sampling_params["max_tokens"])
+        if self.mode == "llamacpp":
+            return await make_async_api_call(prompt, sampling_params)
+        
         if self.mode == "aphrodite":
             aphrodite_sampling_params = SamplingParams(**sampling_params)
             request_id = make_id()
