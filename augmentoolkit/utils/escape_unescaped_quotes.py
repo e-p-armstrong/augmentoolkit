@@ -20,5 +20,6 @@ def escape_unescaped_quotes(s):
     return result
 
 # Test the function
-test_str = 'This is a "test" string with some \\"escaped\\" quotes and "unescaped" ones.'
-print(escape_unescaped_quotes(test_str))
+if __name__ == "__main__":
+    test_str = 'This is a "test" string with some \\"escaped\\" quotes and "unescaped" ones.'
+    print(escape_unescaped_quotes(test_str))
