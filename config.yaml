@@ -1,9 +1,10 @@
 PATH:
   INPUT: "./raw_txt_input"
   OUTPUT: "./output"
+  DEFAULT_PROMPTS: "./prompts"
   PROMPTS: "./prompts" # model used in most of the pipeline (everything but conversation generation)
 API:
-  API_KEY: "a44b76da69069394aec2295f8a2a6cd419a22d0d5605017cf8fa456e82a90919"
+  API_KEY: "78f76c74c714f78f4692f996f457ba87f509d98c78874dc317550fb9c39afeb6"
   BASE_URL: "https://api.together.xyz"
   LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
   LARGE_LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
@@ -14,6 +15,5 @@ SYSTEM:
   USE_SUBSET: True
   REARRANGEMENTS_TO_TAKE: 3
   CONCURRENCY_LIMIT: 90
-  COMPLETION_MODE: True
+  COMPLETION_MODE: True # true = /v1/completion false = /v1/chat/compleation
   MODE: "api" # can be one of "api"|"aphrodite"|"llamacpp"
-  GRAPH: True
