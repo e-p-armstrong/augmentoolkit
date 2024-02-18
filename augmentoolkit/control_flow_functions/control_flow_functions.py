@@ -137,7 +137,7 @@ def create_starting_str(qatuples):
 
 # Idea: use multiple short answers to train the task of answering multiple questions in one response. Like, "Tell me what 2+2 is then tell me who won the battle of Alesia". Two-three short answers per response should be enough.
 async def make_multiturn_character(
-    qa_tuples, conv_id, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None,completion_mode=True
+    qa_tuples, conv_id, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None,completion_mode=None
 ):
     if (
         assistant_mode
@@ -192,7 +192,7 @@ async def make_multiturn_character(
 
 
 async def make_multiturn_scenario(
-    qa_tuples, character, conv_id, assistant_mode=False,scenario_plan_creator=None, scenario_creator=None, completion_mode=True
+    qa_tuples, character, conv_id, assistant_mode=False,scenario_plan_creator=None, scenario_creator=None, completion_mode=None
 ):
     if (
         assistant_mode
@@ -254,7 +254,7 @@ async def make_multiturn_scenario(
 
 
 async def make_multiturn_conversation_info(
-    qa_tuples, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None, scenario_plan_creator=None, scenario_creator=None,completion_mode=True
+    qa_tuples, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None, scenario_plan_creator=None, scenario_creator=None,completion_mode=None
 ):
     conv_id = make_id()
     if (
@@ -320,7 +320,7 @@ def extract_reasoning_from_context_check(response):
 
 # Postprocessing function for question/answer validation
 async def repair_qatuple_context(
-    idx, tup, engine_wrapper, writepath, vetted_qa_tuples, use_filenames=False, completion_mode=True, logging_level=logging.INFO
+    idx, tup, engine_wrapper, writepath, vetted_qa_tuples, use_filenames=False, completion_mode=None, logging_level=logging.INFO
 ):
     # NOTE set up the generation step
     context_repairer_path = "check_qatuple_context_no_filenames"
@@ -442,7 +442,7 @@ async def vet_answer_accuracy_loop(
     engine_wrapper=None,
     double_check_counter=3,
     use_filenames=False,
-    completion_mode=True,
+    completion_mode=None,
     logging_level=None,
     new_q_generator=None
 ):
@@ -585,7 +585,7 @@ async def vet_answer_relevance_loop(
     engine_wrapper=None,
     double_check_counter=3,
     use_filenames=False,
-    completion_mode=True,
+    completion_mode=None,
     logging_level=None,
     new_q_generator=None, # we pass the new q generator around so the code is less cluttered
 ):
@@ -740,7 +740,7 @@ async def vet_question_loop(
     engine_wrapper=None,
     double_check_counter=3,
     use_filenames=False,
-    completion_mode=True,
+    completion_mode=None,
     logging_level=None,
     
 ):
@@ -895,7 +895,9 @@ async def vet_question_loop(
                     engine_wrapper=engine_wrapper,
                     double_check_counter=double_check_counter,
                     use_filenames=use_filenames,
-                    new_q_generator=new_q_generator
+                    new_q_generator=new_q_generator,
+                    completion_mode=completion_mode,
+                    logging_level=logging_level
                 )
             else:
                 # Generate new question and restart the loop
@@ -958,6 +960,7 @@ def extract_questions_from_response_completionmode(generation): # TODO extract t
     return questions
 
 def extract_questions_from_response_chatmode(generation): # TODO extract to non-controlflow file
+    print(generation)
     questions = []
     # print("!! What the model outputted: !!")
     # print(generation)
@@ -1002,7 +1005,7 @@ def extract_question_from_response_completionmode(generation): # TODO extract to
         
 def extract_question_from_response_chatmode(generation): # TODO extract to non-controlflow file
     pattern = re.compile(
-                r"\d+\.\) (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
+                r"\d+\.?\)?:? (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
                 re.DOTALL | re.MULTILINE | re.IGNORECASE,
             )
     matches = pattern.findall(generation+"\\n\\n")
@@ -1027,7 +1030,7 @@ async def generate_qatuples_from_para(
     qa_tuples_dir=None,
     double_check_counter=3,
     use_filenames=False,
-    completion_mode=True,
+    completion_mode=None,
     logging_level=None
 ):
     
@@ -1322,7 +1325,7 @@ async def filter_all_questions(
     take_subset=False,
     use_filenames=False,
     rtwl=None,
-    completion_mode=True,
+    completion_mode=None,
     logging_level=None
 ):
     
@@ -1450,7 +1453,7 @@ def fix_text(to_replace_arr, text):
 
 
 async def ensure_multiple_answers_are_same(
-    info, conv, multi_turn_conv_generator,completion_mode=True
+    info, conv, multi_turn_conv_generator,completion_mode=None
 ):  # why is this a whole separate function? Once upon a time, LLMs were used in validation here, too. But programmatic validation SEEMS to catch the common problems. This is here so that I can add it back in if I have to.
     """Loop to ensure that the answer is consistent in the conversation and in the tuple."""
     retries = 0
@@ -1477,7 +1480,7 @@ async def ensure_multiple_answers_are_same(
     return None
 
 
-async def make_multiturn_conversation(info, multi_turn_conv_generator,completion_mode=True):
+async def make_multiturn_conversation(info, multi_turn_conv_generator,completion_mode=None):
     charname = extract_name.extract_name(info[1])
     conv_starter = create_conv_starter(info[1])
     if completion_mode:
@@ -1731,7 +1734,7 @@ async def create_info(
     multi_turn_convs_info_dir,
     rearrangements_to_take=3,
     use_filenames=False,
-    completion_mode=True,
+    completion_mode=None,
     logging_level=logging.INFO,
 ):
     # NOTE we set up all the generators up here so that we don't have to drill the args down like this is an old version of React
@@ -1799,7 +1802,7 @@ def read_json_files_info(directory):
 
 
 async def create_conversation(
-    idx, info, engine_wrapper, multi_turn_convs, multi_turn_convs_dir, assistant_mode=False, completion_mode=True, logging_level=logging.INFO
+    idx, info, engine_wrapper, multi_turn_convs, multi_turn_convs_dir, assistant_mode=False, completion_mode=None, logging_level=logging.INFO
 ):
     file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
     multi_turn_conversation_prompt_path = "multi_turn_conversation"

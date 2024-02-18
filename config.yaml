@@ -4,10 +4,10 @@ PATH:
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY: "a44b76da69069394aec2295f8a2a6cd419a22d0d5605017cf8fa456e82a90919"
-  BASE_URL: "https://api.together.xyz"
-  LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
-  LARGE_LOGICAL_MODEL: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
+  API_KEY: ""
+  BASE_URL: "https://api.mistral.ai/v1/"
+  LOGICAL_MODEL: "mistral-large"
+  LARGE_LOGICAL_MODEL: "mistral-large"
 SYSTEM:
   USE_FILENAMES: False
   ASSISTANT_MODE: False 
@@ -15,6 +15,6 @@ SYSTEM:
   USE_SUBSET: True
   REARRANGEMENTS_TO_TAKE: 3
   CONCURRENCY_LIMIT: 90
-  COMPLETION_MODE: True
+  COMPLETION_MODE: False
   MODE: "api" # can be one of "api"|"aphrodite"|"llamacpp"
   GRAPH: False
