@@ -1,7 +1,4 @@
-RP_MODEL = "./rp_model"  # model used for RP tasks, probably going to use Sao10K/Euryale-1.3-L2-70b
-# LOGICAL_MODEL = "./logical_model/airoboros-l2-13b-3.1.1.Q8_0.gguf" # model used for decision-making and base question generation (should be "smart")
 
-LOGICAL_MODEL = "./logical_model/flatorcamaid-13b-v0.2.Q8_0.gguf"  # model used for decision-making and base question generation (should be "smart")
 
 names = [  # Replaces "Albert" in scenarios. Needs to be western male names to avoid pronoun and setting inconsistencies).
     "William",
@@ -26,7 +23,6 @@ names = [  # Replaces "Albert" in scenarios. Needs to be western male names to a
     "Samuel",
 ]
 
-INPUT_DIRECTORY = "../../inputs/"
 
 # N_CHARACTERS_SAME_ANSWER = 25 # number of characters that are the same in the question and answer for a thing to fail validation or be deemed "the same" in various places throughout the code
 

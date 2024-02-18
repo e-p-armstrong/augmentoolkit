@@ -21,17 +21,14 @@ import yaml
 from augmentoolkit.utils.escape_unescaped_quotes import escape_unescaped_quotes
 
 from augmentoolkit.generation_functions import (
-    create_scenario_plan_many_tuples,
-    create_scenario_many_tuples,
     extract_question_answer,
     process_multiturn_functions,
     identify_duplicates,
-    multi_turn_conversation,
     extract_name,
     random_name,
     strip_steps
 )
-from augmentoolkit.generation_functions.create_character_card_many_tuples import extract_capital_letters, select_random_capital
+from augmentoolkit.generation_functions.character_card_helpers import extract_capital_letters, select_random_capital
 from augmentoolkit.generation_functions.format_qatuples import format_qatuples
 
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
@@ -39,6 +36,43 @@ from augmentoolkit.generation_functions.special_instructions import special_inst
 
 with open('./config.yaml', 'r') as file:
     obj_conf = yaml.safe_load(file)
+
+DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
+
+
+
+
+
+def extract_steps(text, steps=[2, 4, 5]):
+    """
+    Extracts the specified steps from the text.
+
+    Args:
+    text (str): The input text containing various steps.
+    steps (list of int): The step numbers to extract.
+
+    Returns:
+    str: A new string with each specified step's content on its own line.
+    """
+    step_pattern = "|".join([f"Step {step}\." for step in steps])
+    matches = re.findall(
+        f"({step_pattern})\s*(.*?)\s*(?=(Step \d\.|$))", text, re.DOTALL
+    )
+
+    # Extract and join the matched content, skipping the "Step n." part
+    extracted_text = "\n".join(match[1].strip() for match in matches)
+    return extracted_text
+
+
+def extract_first_words(character_name, text):
+    # Regular expression pattern to extract first word after the character's name
+    pattern = rf"{character_name}: \"(\w+)"
+
+    # Find all matches in the text
+    matches = re.findall(pattern, text)
+
+    return matches
+
 
 import os
 
@@ -68,7 +102,7 @@ def write_output_to_file(output, directory, uuid):
 
 def create_conv_starter(character):
     charname = extract_name.extract_name(character)
-    first_words_of_card = multi_turn_conversation.extract_first_words(charname, character)
+    first_words_of_card = extract_first_words(charname, character)
     conv_starters = [  # prevents it from regurgitating the card (when combined with filtering)
         "Ah",
         "Oh",
@@ -228,9 +262,17 @@ async def make_multiturn_conversation_info(
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
         return (qa_tuples, "will", "be", "replaced", conv_id)
     # thought_plan = create_thought_plan_many_tuples(qa_tuples,character,scenario,logic_llm) # There IS a way to make multiturn chain of thought answering work: generate each pair of messages using a separate prompt or a separate function, each of which has only the thought plan for that question/answer pair. But simply cramming in all the step-by-step things will confuse the hell out of the poor model. So for the first release version we're skipping it and just giving the response, with no reasoning, in the multiturn convs.
-    character, instructions = await make_multiturn_character(
-        qa_tuples, conv_id, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator, completion_mode=completion_mode
-    )
+    retries = 0
+    done = False
+    while not done and retries < 3:
+        retries = retries + 1
+        character, instructions = await make_multiturn_character(
+            qa_tuples, conv_id, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator, completion_mode=completion_mode
+        )
+        if "What's your backstory?" not in character:
+            print("Failed to properly generate card, retrying")
+            continue
+        done = True
     scenario, scenario_plan = await make_multiturn_scenario(
         qa_tuples, character, conv_id, assistant_mode=assistant_mode, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator, completion_mode=completion_mode
     )
@@ -314,7 +356,8 @@ async def repair_qatuple_context(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=extract_reasoning_from_context_check,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     # Resume normal control flow
@@ -436,7 +479,8 @@ async def vet_answer_accuracy_loop(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_answer_accuracy_validation,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     # Resume normal control flow code
@@ -579,7 +623,8 @@ async def vet_answer_relevance_loop(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_answer_relevancy_validation_step,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     # Resume normal control flow code
@@ -732,7 +777,8 @@ async def vet_question_loop(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_validation_step,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     # NOTE Set up generate new question step
@@ -771,7 +817,8 @@ async def vet_question_loop(
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=extract_question_from_response_completionmode,
-            prompt_folder=obj_conf["PATH"]["PROMPTS"]
+            prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
         )
     else:
         new_q_generator = GenerationStep(
@@ -795,7 +842,8 @@ async def vet_question_loop(
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=extract_question_from_response_chatmode,
-            prompt_folder=obj_conf["PATH"]["PROMPTS"]
+            prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
         )
     
     # Resume normal control flow code
@@ -1023,7 +1071,8 @@ async def generate_qatuples_from_para(
         retries=0,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     # NOTE Set up qatuple generation step #
@@ -1065,7 +1114,8 @@ async def generate_qatuples_from_para(
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=extract_questions_from_response_completionmode,
-            prompt_folder=obj_conf["PATH"]["PROMPTS"]
+            prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
         )
     else:
         qatuples_generator = GenerationStep(
@@ -1092,7 +1142,8 @@ async def generate_qatuples_from_para(
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=extract_questions_from_response_chatmode,
-            prompt_folder=obj_conf["PATH"]["PROMPTS"]
+            prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
         )
     # Resume normal control flow code
     try:
@@ -1311,7 +1362,8 @@ async def filter_all_questions(
         logging_level=logging_level, # TODO change to warning
         output_processor=judge_paragraph_processor,
         return_input_too=False,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     if not take_subset:
         tasks = [
@@ -1433,7 +1485,7 @@ async def make_multiturn_conversation(info, multi_turn_conv_generator,completion
             arguments = {
                 "character": info[1].strip(),
                 "scenario": info[2].strip(),
-                "extra_info": info[3].strip(),
+                "extra_info": extract_steps(info[3].strip()),
                 "question_answer_list": format_qatuples(info[0]).strip(),
                 "charname": charname.strip(),
                 "conv_starter": conv_starter.strip(),
@@ -1507,8 +1559,9 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
             "[INST]",
             "### Instruction",
             "[INST",
+            "## Character card plan (be creat",
             # "### Questions",
-            # "## Question, answer, and text that the character should know:",
+            "## Questions, answer, and text that the character should know:",
         ],
         "temperature": 1,
         # top_k=-1,
@@ -1519,7 +1572,8 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     # Character card gen
@@ -1538,12 +1592,8 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
     else:
         character_card_path = character_card_path + ".json"
     
-    character_card_creator = GenerationStep(
-        prompt_path=character_card_path,
-        regex = character_card_regex,
-        sampling_params={
-        "max_tokens": 4000,
-        "stop": [
+    if obj_conf["SYSTEM"]["COMPLETION_MODE"]:
+        stop_list = [
             "### Response",
             "\n\n\n\n\n",
             "</s>",
@@ -1552,7 +1602,26 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
             "### Instruction",
             "[INST",
             "## Text",
-        ],
+            "## Character card",
+        ]
+    else:
+        stop_list = [
+            "### Response",
+            "\n\n\n\n\n",
+            "</s>",
+            "# Input:",
+            "[INST]",
+            "### Instruction",
+            "[INST",
+            "## Text",
+        ]
+    
+    character_card_creator = GenerationStep(
+        prompt_path=character_card_path,
+        regex = character_card_regex,
+        sampling_params={
+        "max_tokens": 4000,
+        "stop": stop_list,
         "temperature": 1,
         "top_p": 0.5,
         },
@@ -1560,7 +1629,8 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     # Scenario Plan Gen
@@ -1602,7 +1672,8 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     # Scenario Gen
@@ -1644,7 +1715,8 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
     
     return character_card_plan_creator, character_card_creator, scenario_plan_creator, scenario_creator
@@ -1778,7 +1850,8 @@ async def create_conversation(
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"]
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH
     )
 
     # Skip if file already exists
@@ -1847,17 +1920,19 @@ def convert_directory_to_list(directory_path):
                         )
 
     # Write the master list to a new .jsonl file
-    with open("master_list.jsonl", "w") as file:
+    write_1 = obj_conf["PATH"]["OUTPUT"] + "/master_list.jsonl"
+    with open(write_1, "w") as file:
         for item in master_list:
             file.write(json.dumps(item) + "\n")
 
     # Write the simplified data to a different .jsonl file
-    with open("simplified_data.jsonl", "w") as file:
+    write_2 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data.jsonl"
+    with open(write_2, "w") as file:
         for item in simplified_list:
             file.write(json.dumps(item) + "\n")
 
     print(
-        "Conversion complete. Master list written to 'master_list.json'. Simplified data written to 'simplified_data.json'."
+        f"Conversion complete. Master list written to {write_1}. Simplified data written to {write_2}."
     )
 
 
@@ -1886,7 +1961,7 @@ def convert_directory_and_process_conversations(directory_path):
                     print(f"File {filename} is not in the expected format.")
 
     # Write the master list to a new file
-    with open("processed_master_list.json", "w") as file:
+    with open(obj_conf["PATH"]["OUTPUT"] + "/processed_master_list.json", "w") as file:
         json.dump(master_list, file)
 
     print(

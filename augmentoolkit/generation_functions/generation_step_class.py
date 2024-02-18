@@ -1,9 +1,6 @@
 import re
 
 # from .multi_turn_conversation_grammar import multi_turn_conversation_grammar
-from .constants import LOGICAL_MODEL, INPUT_DIRECTORY
-from .format_qatuples import format_qatuples
-from .extract_name import extract_name
 import random
 import os
 import traceback
@@ -61,11 +58,10 @@ class GenerationStep:
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
         # Dynamic INPUT_DIRECTORY path (feel free to change, DragonFox, depending on what structure you have been working towards)
-        # ADDITIONS START HERE
         ideal_path = os.path.join(current_dir, '..', '..', self.prompt_folder,self.prompt_path)
         if os.path.exists(ideal_path):
             full_prompt_path = ideal_path
-        else: #END HERE (not counting the newline)
+        else:
             full_prompt_path = os.path.join(current_dir, '..', '..', self.default_prompt_folder,self.prompt_path)
         # Read file and escape all curly braces
         with open(full_prompt_path, 'r') as pf:

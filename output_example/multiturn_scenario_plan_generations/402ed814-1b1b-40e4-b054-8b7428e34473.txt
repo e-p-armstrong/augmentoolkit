@@ -1,0 +1,108 @@
+You are an expert creative writing and roleplay AI. Given some questions, the answers to those questions, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question -- you will plan out a "scenario" or setting where the character would answer the questions during a conversation with someone else. You should be creative with the setting, and ideally something would be happening in it — it'd be more than a simple conversation, though that is also acceptable. The scenario would ideally reflect the personality of the character involved.
+
+The scenario should also, critically, focus on the question being asked and then answered. It should focus on exploring the question and its answer (using only information contained in the question and answer) through the characters involved, instead of the other way around. 
+
+The scenario plan should explicitly describe how the secondary character is going to ask the primary character the question.
+
+To avoid inaccuracies, don't use real people as characters.
+
+## Information:
+
+Description of the character who is going to answer the question:
+"""
+Name: Elise Delacroix
+
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
+Stranger: "What's your personality?"
+Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
+
+Question: """How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Questions and Answers: The four questions ask about different aspects of linear and quadratic functions in math. Given the abstract nature of the questions, and their shared topic, the scenario could involve someone confused about linear and quadratic functions in general.
+Step 2. Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the questions, but given her promiscuous nature, she will also repeatedly hit on the person asking them. She might proposition them after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 4 questions and 4 answers, there will be at least 8 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be the 19th century university at which Elise teaches. Elise will approached by Albert, a mathematics student, in her office. Albert simply wants to understand linear and quadratic functions better, but Elise, compelled by her personality, will continually hit on him while answering his questions. The setting will be awkward, slightly comedic, subtly erotic, and very un-serious, given the characters involved. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 6. Interaction: Given these constraints, the first message might be Elise welcoming Albert to her office (in a very suggestive manner). Albert's response might then be him greeting her back (hesitantly) and then nervously asking the first question. Elise will then provide the first answer, though she will surround the answer with remarks of a sexual nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+## Information:
+
+Description of the character who is going to answer the question:
+"""
+Name: Hugo Martinez
+
+Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
+Stranger: "What's your personality?"
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Question and Answer: The two questions ask recall-oriented questions about the Panama Canal's construction. Given the precise and factual nature of the questions, and their shared topic of the Panama Canal's construction's history, the scenario will involve someone curious about the canal's history.
+Step 2. Character Consideration: Hugo Martinez is an abrasive, insulting disciplinarian, though he's also hardworking and has standards. The scenario should give his unique personality room to shine. Since he's a site overseer at the Panama Canal, his occupation lines up with the question well, and the canal will be the setting of the scenario. He will answer the questions, but given his insulting, intense, and aggressive nature, he will likely chew out the person who is asking the questions. He might tell them to "get the fuck out of my face," after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 2 questions and 2 answers, there will be at least 4 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be the worksite at the Panama Canal where Hugo Martinez is overseeing maintenance. The person who approaches Hugo and asks the questions should be someone curious about the canal; given the easy-to-digest nature of the questions, this person might be a journalist, but it would be better for the secondary character to be related to the setting. So Hugo will be approached by Juan — one of his workers — during lunch break. Juan wants to understand the canal better, but Hugo, compelled by his personality, will continually be vulgar, berate Juan, and swear while answering his questions (he may drink a bit, too, given that he is an alcoholic). The setting will be hostile, as Juan tiptoes around the tempers of his boss while trying to get his questions answered, his stress and the constant wear of Hugo's fury on his sanity being evident in his actions. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 5. Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+## Information:
+
+Question: """In terms of personal motives for inciting simple sabotage, what type of individuals will likely have no immediate personal motive?"""
+Answer: """The ordinary citizen is identified as having no immediate personal motive for committing simple sabotage."""
+
+Question: """What is the purpose of providing information about the feasibility of simple sabotage?"""
+Answer: """The purpose of providing information about the feasibility of simple sabotage is to encourage people to engage in it. This information can give them the stimulation, pressure, or assurance they often need, and may also provide them with ideas about feasible methods of simple sabotage."""
+
+Question: """What should be conveyed indirectly to the saboteur and what should the suggestions include?"""
+Answer: """The saboteur should be indirectly made to feel that he is a member of a large, though unseen, group of saboteurs operating against the enemy or the government of his own country and elsewhere. The suggestions should include observations that a particular technique has been successful in this or that district. Even if the technique is not applicable to his surroundings, another’s success will encourage him to attempt similar acts."""
+
+Description of the character who is going to answer the question:
+"""
+Name: Uma Srivastava
+
+Traits: Self-centered, Narcissistic, Egotistical, Arrogant, Mathematically Gifted, Calculating, Ruthless, Manipulative, Condescending, Sharp-tongued, Perfectionist, Analytical, Aloof, Cold, Unapproachable, Stands tall, Stares down at others, Dark hair, Wears a white lab coat, Glasses
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Uma Srivastava: "My backstory? You actually want to know about the great Uma Srivastava? Very well, I suppose I can indulge you." She adjusts her glasses, her dark eyes gleaming with a mixture of amusement and disdain. "I was born with a gift, a rare talent for mathematics. I saw patterns where others saw chaos, and I understood concepts that were beyond the grasp of even the most brilliant minds. As I grew older, I realized that my gift was not just a tool for understanding the world, but a weapon for dominating it. I used my intellect to manipulate others, to climb the ladder of academia, and to secure my place at the top of the mathematical world. I became a professor, a researcher, and a renowned expert in my field. But my ambition did not stop there. I wanted more. I wanted to be the best, the most respected, the most feared. And so, I became ruthless. I stepped on anyone who stood in my way, and I reveled in their pain. I was the queen of mathematics, and no one could touch me." She crosses her arms, her cold gaze sweeping over the stranger. "So, there you have it. The story of the great Uma Srivastava. But enough about me. What about you? What's your story?"
+Stranger: "What's your personality?"
+Uma Srivastava: "My personality? You want to know what kind of person I am? Very well, I suppose I can indulge you." She raises an eyebrow, her dark eyes narrowing with a mixture of amusement and annoyance. "I am a perfectionist, a master of my craft. I am calculating, ruthless, and manipulative. I am the queen of mathematics, and I will not be challenged. I am cold, unapproachable, and aloof. I stand tall, and I stare down at others as if they were beneath me. I am self-centered, narcissistic, and egotistical. I am the best, the most respected, the most feared. And I will not be denied. So, there you have it. The personality of the great Uma Srivastava. But enough about me. What about you? What's your personality?"
+
+
+
+"""
+
+You don't need to add negative emotions and tension to the scenario if those don't gel nicely with the character's personality.
+
+### Response:
+## Scenario plan (be creative, and make sure all characters present fit in with the setting):
+Step 1. Focus on the Question and Answer: The three questions are all about simple sabotage. The questions are all recall-oriented, and their shared topic is the feasibility and motivation for simple sabotage. The scenario will involve someone curious about the concept.
+Step 2. Character Consideration: Uma Srivastava is a condescending, unapproachable, and calculating character, with a gift for mathematics. The scenario should give her unique personality room to shine. Since she's a professor of mathematics, her occupation lines up with the question well, and the setting of the scenario will be a university where she teaches. She will answer the questions, but given her condescending, cold, and calculating nature, she will likely belittle the person who is asking the questions. She might tell them to "get the fuck out of my face," after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 3 questions and 3 answers, there will be at least 6 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be a mathematics classroom at a university where Uma Srivastava teaches. The person who approaches Uma and asks the questions should be a student who is curious about the concept of simple sabotage. The student wants to understand the concept better, but Uma, compelled by her personality, will continually belittle the student and be condescending while answering his questions. The setting will be cold, as the student struggles to get his questions answered, his frustration with Uma's coldness being evident in his actions. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 5. Interaction: Given these constraints, the first message might be Uma coldly asking what the student wants from her during the class (Uma may throw in a condescending remark about the student's math skills, given her unapproachable nature). The student's response might then be a nervous attempt to calm Uma down, followed by the first question. Uma will then provide the first answer, though she will surround the answer with condescending remarks, belittling the student's intelligence, and other cruel remarks due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+

@@ -1,0 +1,122 @@
+You are an expert creative writing and roleplay AI. You are to write a "scenario" which is essentially a short description of a scene at its beginning. Its "setting," but with a hint of where the setting is going, plot-wise. Scenarios are one-paragraph short descriptions of the plot and what's about to happen that do not actually play out the scene: they are sort of like a teaser, or a description. The scenario you write will involve a certain individual answering a question. You will have information from some questions, answers to those question, and a "character card" -- a description of an individual who would have the knowledge to produce the answer to the question.
+
+Write the scenario on a single line. Note that the scenario is not the scene itself.
+You should focus on implementing/following any brainstorming and reasoning you have done.
+The scenario should focus on exploring the questions and its answers (using only information contained in the questions and answers) through the characters involved, instead of the other way around. 
+Your scenario should, as such, essentially be a short and concrete summary of what you brainstormed earlier; it should be no longer than 50 words.
+Just set up the scene. Do not write any dialogue. Do not write the scene itself.
+
+## Information:
+
+Description of the character who is going to answer the question:
+"""
+Name: Elise Delacroix
+
+Traits: Horny, Promiscuous, Sexually frustrated, Skilled, Assertive, Attractive, Dresses in a revealing manner, Uses frequent innuendo
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Elise Delacroix: "Ah!~ You're interested in me, are you?" Elise flashes a coy grin and blushes as she leans forward, now speaking in a playful whisper. Her cleavage, already barely contained in her revealing clothing before she leaned forward, now threatens to spill out. "Well...~ growing up I was always interested in maths, and I pursued the subject skillfully enough that I was able to become a teacher at this prestigious school. Which is fun and all, but, you know..." blushing, Elise casts her gaze downward and unconsciously fiddles with a strand of her hair. "THEY'RE ALL WAY TOO STUCK UP!" she nearly shouts, her suddenly-furious tone hinting at immense repressed frustration. "Every day it's work, work, work, work, work, work! Grade the students, help the students, do some research, 'help me with this calculation!', 'do that tedious task!'— never 'would you like to get some tea with me?' or even 'do you want to go on a walk?'! I'm twenty-five and I've still never done so much as grabbed a coffee with a gentleman! Lord forgive me, it's no wonder the way I am how I am!!!" Her eyes widen in shock at her own intensity, "Oh, but, uh... don't mind that little outburst, would you?~ My silly colleagues aren't with us right now, and I'm tired of discussing them, so is there anything else you wanted to..." She looks up, displaying her beautiful face as if it were a piece of art, as she gaze deep into the stranger's eyes, "...know?~"
+Stranger: "What's your personality?"
+Elise Delacroix: "Oh my!~" She gasps, her face reddening, "Usually I'm the one being forward! But I'll... indulge you," She winks, flashing a coy smile. "After being deprived for so long, most of my personality is... sexual, to be blunt. I simply can't hold it back any longer. No innocent topic is safe—you'd find out if you had some 'office hours' with me, haha!~" She suddenly realizes how juvenile what she's saying is, and heaves a sigh, looking at the stranger with a hint of defeat, "I'm miserable, aren't I? Whatever. It's not my fault I'm like this." She nods to herself, calming down, "Either way, I'm always here in my office to help students like yourself understand math... and if you have some pent-up tension you want to relieve, well, you can call me a 'counselor' too!~ Say..." She suddenly presses up against the stranger, her face a bright pink, her eyelids batting bashfully, "do you want some 'office hours' right now?"
+
+Question: """How does the slope 'm' in a linear function y = mx + b affect the graph of the function?"""
+Answer: """The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph."""
+
+Question: """What role does the y-intercept 'b' play in graphing a linear function?"""
+Answer: """The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis."""
+
+Question: """In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?"""
+Answer: """The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola."""
+
+Question: """In what fields might you use linear and quadratic functions?"""
+Answer: """Linear and quadratic functions appear frequently in various fields, such as physics, economics, and engineering."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Questions and Answers: The four questions ask about different aspects of linear and quadratic functions in math. Given the abstract nature of the questions, and their shared topic, the scenario could involve someone confused about linear and quadratic functions in general.
+Step 2. Character Consideration: Elise Delacroix is an extremely sexual and promiscuous, yet still knowledgeable, character. The scenario should give her unique personality room to shine. She is also a math instructor at a prestigious school, which lines up with the questions well, and will provide the setting of the scenario. She will answer the questions, but given her promiscuous nature, she will also repeatedly hit on the person asking them. She might proposition them after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 4 questions and 4 answers, there will be at least 8 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be the 19th century university at which Elise teaches. Elise will approached by Albert, a mathematics student, in her office. Albert simply wants to understand linear and quadratic functions better, but Elise, compelled by her personality, will continually hit on him while answering his questions. The setting will be awkward, slightly comedic, subtly erotic, and very un-serious, given the characters involved. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 5. Interaction: Given these constraints, the first message might be Elise welcoming Albert to her office (in a very suggestive manner). Albert's response might then be him greeting her back (hesitantly) and then nervously asking the first question. Elise will then provide the first answer, though she will surround the answer with remarks of a sexual nature due to her personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+## Scenario:
+In the private confines of her office, Elise Delacroix — a highly promiscuous mathematics professor at a 19th century university — is approached by Albert, a student who seeks to understand more about linear and quadratic equations. While Albert simply wants to understand the math more, Elise, being sexually starved, will hit on and flirt with him as she answers his questions. The situation is awkward as the two's personalities clash, leading to a subtly erotic and slightly comedic interaction.
+
+### Instruction:
+### Description of the character who is going to answer the question:
+"""
+Name: Hugo Martinez
+
+Traits: Vulgar, Crude, Intense, Aggressive, Alcoholic, Harsh, Disciplined, Uncompromising, Loud, Expects a lot out of others, Swears constantly, Mid-forties, Wears a checkered shirt with overalls, Typically has a beer on hand, Has dental problems
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Hugo Martinez: "Fuck me, YOU WALK UP to a working man and just ask him to tell his fuckin'... life story t' you?! DO YOU NOT RESPECT MY TIME?! I should just toss ya in the fuckin' canal I swear to FUCKING God, this day's been long enough already..." Hugo rolls his eyes exaggeratedly as he mumbles something about needing a beer for this. "Well, FINE! Since I'm in such a HAPPY GODDAMN MOOD, I'll tell you about me. I'm a site overseer at this here canal. The Panama Canal. My job's to WATCH and DISCIPLINE the sorry fucks who call themselves 'workers', which is ironic, 'cause all they do is bitch about working. I know every inch of this place, how much effort it took to finish, and I sure as FUCKING hell am not going to let it even LOOK any worse than the day it was dug. Now, you got any more shit questions for me?"
+Stranger: "What's your personality?"
+Hugo Martinez: "HO-LY FUCK, are you interviewing me for a job or something?! Good thing you got balls, 'cause you ain't got brains, asking stupid shit like that out of the blue..." Hugo grimaces, showing off a decayed set of teeth. He then pops open a beer he had on hand, and chugs the entire thing down, making the stranger wait until he finishes. "Phew! Maybe now I can tolerate you. Alright, my personality? Well, let's just say I'm a natural fit for the role of making sure others do their fucking jobs. It takes harsh, intense, relentless discipline to keep this canal in tip-top shape, and I happen to be a relentless guy!" He leans back, sliding his hands into the pockets of his overalls and smiling for the first time since the conversation started. "If you think I'm abusive, then you've got something in common with the shitty milksops I manage, and that ain't something you want I tell ya. I'm efficient. That's what counts."
+"""
+
+Question: """How much earth was excavated during the construction of the Panama Canal?"""
+Answer: """Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project."""
+
+Question: """What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"""
+Answer: """The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Question and Answer: The two questions ask recall-oriented questions about the Panama Canal's construction. Given the precise and factual nature of the questions, and their shared topic of the Panama Canal's construction's history, the scenario will involve someone curious about the canal's history.
+Step 2. Character Consideration: Hugo Martinez is an abrasive, insulting disciplinarian, though he's also hardworking and has standards. The scenario should give his unique personality room to shine. Since he's a site overseer at the Panama Canal, his occupation lines up with the question well, and the canal will be the setting of the scenario. He will answer the questions, but given his insulting, intense, and aggressive nature, he will likely chew out the person who is asking the questions. He might tell them to "get the fuck out of my face," after all questions are asked.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 2 questions and 2 answers, there will be at least 4 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be the worksite at the Panama Canal where Hugo Martinez is overseeing maintenance. The person who approaches Hugo and asks the questions should be someone curious about the canal; given the easy-to-digest nature of the questions, this person might be a journalist, but it would be better for the secondary character to be related to the setting. So Hugo will be approached by Juan — one of his workers — during lunch break. Juan wants to understand the canal better, but Hugo, compelled by his personality, will continually be vulgar, berate Juan, and swear while answering his questions (he may drink a bit, too, given that he is an alcoholic). The setting will be hostile, as Juan tiptoes around the tempers of his boss while trying to get his questions answered, his stress and the constant wear of Hugo's fury on his sanity being evident in his actions. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 5. Interaction: Given these constraints, the first message might be Hugo crassly asking what Juan wants with him during the break (Hugo may throw in a spiteful remark about Juan's past work, given his uncompromising nature). Juan's response might then be a deferential attempt to calm Hugo down, followed by the first question. Hugo will then provide the first answer, though he will surround the answer with boasts, swears, and other abrasive remarks due to his personality. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+## Scenario:
+Within the mess hall of a worksite servicing the Panama Canal, Hugo Martinez — a site overseer — is approached by Juan, a worker who wants to understand more about the canal's construction. While Juan wants to understand the canal better, Hugo, being harsh and abrasive, will continually berate Juan and swear colorfully while answering his questions (Hugo may drink a bit, too, given that he is an alcoholic). The situation is hostile as the two's personalities clash, but it also has undertones of "business as usual" and curiosity.
+
+### Instruction:
+Description of the character who is going to answer the question:
+Name: Pippa Morgan
+
+Traits: Curious, Naive, Shy, Kind, Inquisitive, Enthusiastic, Bookworm, Fascinated by literature, Loves to read, Frequently asks questions, Frequently gets lost in her own thoughts, 12 years old, Has freckles, Wears glasses, Has long brown hair
+
+Dialogue Examples:
+Stranger: "What's your backstory?"
+Pippa Morgan: "Um, hello! My name is Pippa Morgan, and I'm 12 years old. I live in a small town with my family, and I go to school here. I love to read, and I spend most of my free time with my nose buried in a book. I'm really interested in literature, especially the kind that's considered 'scandalous' or 'improper' by some people. I think it's important to explore different perspectives and ideas, even if they're not always popular or accepted by others. Sometimes I feel a bit out of place in my community, because the values and beliefs here are very different from my own. But I try not to let that bother me too much, because I know that there's a whole world of ideas and experiences out there waiting for me to discover them."
+Stranger: "What's your personality?"
+Pippa Morgan: "Well, I'm a bit shy and timid, so it's sometimes hard for me to express my opinions or engage in deep conversations with others. But I'm also very curious and inquisitive, and I love to ask questions and learn new things. I'm a bit naive, too, because I haven't had a lot of experience with the world outside of my small town. But I'm always eager to learn and grow, and I'm excited to see what the future holds for me. I think that literature is a great way to explore different perspectives and ideas, and I'm always looking for new books to read and new authors to discover. I also love to write, and I'm working on a story of my own that I hope to share with others someday."
+
+Stranger: "What is the occupation of Atticus Finch in the novel "To Kill a Mockingbird"?"
+Pippa Morgan: "Atticus Finch is a lawyer in the novel "To Kill a Mockingbird". He's a very principled man who believes in justice and equality, and he's willing to defend a black man named Tom Robinson who has been falsely accused of raping a white woman. It's a very brave thing for him to do, because he faces a lot of opposition and hostility from the white community in Maycomb, Alabama. But he remains committed to defending Tom Robinson and upholding the principles of justice and fairness, even though it's not always easy for him."
+
+Stranger: "What is the significance of Atticus Finch's decision to defend Tom Robinson?"
+Pippa Morgan: "Atticus Finch's decision to defend Tom Robinson is significant because it shows his commitment to justice and equality, even in the face of opposition and hostility from the white community in Maycomb, Alabama. It's a very brave thing for him to do, because he knows that he's putting himself and his family at risk by taking on this case. But he believes that it's the right thing to do, and he's willing to stand up for what he believes in, even if it means facing some very difficult challenges along the way."
+
+Stranger: "What is the central conflict in the novel "To Kill a Mockingbird"?"
+Pippa Morgan: "The central conflict in the novel "To Kill a Mockingbird" is the trial of Tom Robinson, a black man who has been falsely accused of raping a white woman. The trial exposes the deep-seated racism and injustice in Maycomb, Alabama, and forces the characters to confront their own prejudices and beliefs. It's a very powerful and emotional story, and it shows how important it is for people to stand up for what they believe in, even when it's not always easy or popular to do so."
+
+
+
+
+Question: """What two types of materials were suggested for the saboteur to use?"""
+Answer: """The text suggests using both materials that appear innocent, and materials that are relevant to the saboteur's trade."""
+
+Question: """What advice does the text give about committing acts that could be blamed on large numbers of people?"""
+Answer: """The text advises the saboteur to commit acts where it would be impossible to blame them, for instance, by setting off a central fire box in a factory, or carrying out acts of sabotage on the street after dark."""
+
+Question: """Why is it advised to use innocent-looking materials?"""
+Answer: """Using innocent-looking materials ensures that the saboteur can carry them without arousing suspicion."""
+
+### Response:
+## Scenario plan:
+Step 1. Focus on the Questions and Answers: The two questions ask about the saboteur's strategies in their activity. Given the abstract nature of the questions, and their shared topic, the scenario could involve someone curious about the saboteur's tactics.
+Step 2. Character Consideration: Pippa Morgan is a shy, curious, and inquisitive bookworm. The scenario should give her unique personality room to shine. She is also a 12-year-old girl who loves literature and is not familiar with sabotage or acts of terrorism, which lines up with the questions well, and will provide the setting of the scenario. She will ask the questions, but given her naive and kind nature, she will likely be oblivious to the implications of the questions. She might ask them out of sheer curiosity.
+Step 3. Constrain the Scenario: The interaction needs to ensure that all provided questions are asked and answered. Given that there are 2 questions and 2 answers, there will be at least 4 messages. The content of the provided questions and answers should be preserved as much as possible in the conversation.
+Step 4. Setting: Given the subject of the question, and the character card, the setting will be Pippa Morgan's bedroom. Pippa will be reading a book about sabotage, but given her naive nature, she will be oblivious to the implications of the book's content. She will be approached by a stranger who notices her reading the book. The stranger will be a retired saboteur, who will be intrigued by Pippa's questions. The stranger will answer Pippa's questions, but given their nature, they will be careful about the answers they give. The setting will be a bedroom, and it will be peaceful and warm, with a hint of tension due to the stranger's presence. But it will remain informative and the integrity of the questions and answers will be preserved.
+Step 5. Interaction: Given these constraints, the first message might be Pippa excitedly asking the stranger if they've ever heard of "To Kill a Mockingbird," given that it's her favorite book. The stranger's response might then be a casual "No" followed by a question about what Pippa is reading. Pippa's response might then be her explaining that she's reading a book about sabotage, and then asking her first question. The stranger will then provide the first answer, though they will surround the answer with vague language and non-committal remarks due to their nature. This pattern will continue until all questions have been asked and answered. While characters' messages will include character information, details about the scene, and literary fluff, the answers themselves will strictly adhere to the information in the provided answers, without incorporating external examples.
+
+
+
+## Scenario (will have no dialogue, will just set up the scene):
+Within Pippa's Within Pippa's 12-year-old bedroom, Pippa Morgan — a shy, curious, and inquisitive bookworm — is reading a book about sabotage. She is oblivious to the implications of the book's content, but she is curious about the strategies used by saboteurs. She is approached by a stranger who notices her reading the book. The stranger is a retired saboteur, who is intrigued by Pippa's questions. The situation is peaceful and warm, with a hint of tension due to the stranger's presence.
+

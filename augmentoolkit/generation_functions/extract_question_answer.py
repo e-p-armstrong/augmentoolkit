@@ -1,8 +1,5 @@
 import re
 
-# from .check_qatuple_context_grammar import check_qatuple_context_grammar
-from .constants import LOGICAL_MODEL
-
 
 def extract_question_answer(response):
     # Define the regex pattern to match the question and answer
