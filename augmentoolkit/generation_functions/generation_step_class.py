@@ -37,6 +37,7 @@ class GenerationStep:
                  logging_level=logging.INFO,  # Default logging level
                  output_processor=lambda x: x, # to ensure that control flow does not need to have decision code handling the outputs of the LLM, you can pass in a function to handle and modify the outputs (post regex) here. By default it's just the identity function and does nothing.
                  return_input_too=True, 
+                 default_prompt_folder="prompts",
                  prompt_folder="prompts"
                 ):
         self.prompt_path = prompt_path
@@ -51,6 +52,7 @@ class GenerationStep:
             raise Exception("Engine wrapper not passed in!")
         self.engine_wrapper = engine_wrapper
         self.prompt_folder = prompt_folder
+        self.default_prompt_folder = default_prompt_folder
         logging.basicConfig(level=self.logging_level, format='%(asctime)s - %(levelname)s - %(message)s')
 
     
@@ -64,7 +66,7 @@ class GenerationStep:
         if os.path.exists(ideal_path):
             full_prompt_path = ideal_path
         else: #END HERE (not counting the newline)
-            full_prompt_path = os.path.join(current_dir, '..', '..', 'prompts',self.prompt_path)
+            full_prompt_path = os.path.join(current_dir, '..', '..', self.default_prompt_folder,self.prompt_path)
         # Read file and escape all curly braces
         with open(full_prompt_path, 'r') as pf:
             prompt = pf.read()

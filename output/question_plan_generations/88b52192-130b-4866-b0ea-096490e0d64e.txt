@@ -1,0 +1,194 @@
+As an educational AI specializing in question generation, your task is to plan out high-quality, critical thinking questions strictly based on provided paragraphs. Focus on understanding, application, analysis, and synthesis of the text's ideas. Develop a comprehensive plan to generate questions that test comprehension and memorization of explicit content in the paragraphs. Aim for longer, challenging questions that can be answered with the given information.
+
+Ensure your questions strictly adhere to the text's content, avoiding any external topics. The key step is to analyze the text thoroughly and brainstorm potential questions based on this analysis. Do not list final questions in this step.
+
+Your response should be concise, focusing solely on the text's content to test knowledge without the text's reference. Maintain a step-by-step reasoning approach, ensuring your text analysis and brainstorming logically lead to comprehensive question planning. Avoid any deviation from the text's content. Any questions you plan may not refer to the text in any way, only addressing the general concepts, ideas, facts, or opinions expressed in the text.
+
+### Instruction:
+Text to plan questions from: 
+"""
+The American Revolution, a pivotal event in history, was fueled by a series of causes and events that led to significant consequences for both America and Britain. One of the major catalysts was the Boston Massacre, an incident that drastically intensified revolutionary sentiments among the American colonists. The implementation of the Stamp Act further aggravated these sentiments, marking a critical point in the escalation of dissent. Similarly, the Boston Tea Party played a key role in heightening tensions, directly leading to the enactment of the Intolerable Acts. These acts, deemed unbearable by the colonists, were instrumental in the formation of the First Continental Congress, uniting the colonies in their fight for independence. A notable event during the revolution was the Battle of Saratoga, which had immediate effects such as boosting American morale and securing French support, pivotal in turning the tide of the war in favor of the American colonies.
+"""
+
+### Response:
+## Reasoning and thought process:
+Step 1. Identify Key Topics: The text summarizes the causes and effects of various events of the American revolution, and the relationships between these things.
+Step 2. Brainstorm and Develop Questions Testing Recall: Create questions that require recalling specific facts or details from the text. I cannot mention the text — I can only refer to the general concepts, ideas, facts, or opinions expressed in this text about the American Revolution. Example: "What were the immediate effects of the Battle of Saratoga on the American Revolution?"
+Step 3. Devise Questions Exploring Relationships Between Facts: In this case, the text mostly covers events, so instead of looking for the similarities and differences between things, I will create questions that explore how one event led to another within the text. Example: "How did the Boston Massacre contribute to the revolutionary sentiment?"
+Step 4. Create Questions Investigating If-Then Relationships (where since one thing is true, another follows): I will devise questions that examine how different events are interconnected. Example: "In what ways did the Intolerable Acts fuel the revolutionary cause?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text about the American revolution focuses on summarizing specific events of the American Revolution. Since the text focuses on summarizing specific events of the American Revolution, and another question on this subject would be suitable. The text focuses on recall-oriented facts, and so question variety is suffering; but one question pattern, suited to recall, that has also not yet been used is True/False, so I will employ that. Example: "Did the battle of Saratoga have an impact on French support of the American Revolution?"
+
+### Instruction:
+Text to plan questions from: 
+"""
+In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+"""
+
+### Response:
+## Reasoning and thought process:
+Step 1. Identify Key Topics: The key topics in this paragraph are linear and quadratic functions in mathematics, their definitions, components, and applications.
+Step 2. Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of definitions and components of these functions. Example: "What does the 'm' in the linear function equation represent?"
+Step 3. Devise Questions Exploring Relationships Between Components: Generate questions that explore the relationship between different parts of the equations. Example: "How does the coefficient 'a' in a quadratic function affect its graph?"
+Step 4. Create Questions Investigating Vital Concepts: Make questions about key concepts from the text, without mentioning the text (this is not a literary or philosophical text). Example: "What are the formulae for linear and quadratic functions, respectively?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text about mathematical functions focuses on linear and quadratic functions in mathematics (as well as functions in general), and another question on this subject would be suitable. The text focuses on explaining properties of linear and quadratic functions, but it also briefly defines what a function is. Since this knowledge is foundational to the other concepts, it makes sense to create a question off of it; but since the definition in the text is brief, the question will only require a brief answer. Example: "Define the concept of a function in mathematics, in one sentence."
+
+### Instruction:
+Text to plan questions from:
+"""
+When Zarathustra was thirty years old, he left his home and the lake of
+his home, and went into the mountains. There he enjoyed his spirit and
+solitude, and for ten years did not weary of it. But at last his heart
+changed,—and rising one morning with the rosy dawn, he went before the
+sun, and spake thus unto it:
+
+Thou great star! What would be thy happiness if thou hadst not those for
+whom thou shinest!
+
+For ten years hast thou climbed hither unto my cave: thou wouldst have
+wearied of thy light and of the journey, had it not been for me, mine
+eagle, and my serpent.
+
+But we awaited thee every morning, took from thee thine overflow and
+blessed thee for it.
+
+Lo! I am weary of my wisdom, like the bee that hath gathered too much
+honey; I need hands outstretched to take it.
+
+I would fain bestow and distribute, until the wise have once more become
+joyous in their folly, and the poor happy in their riches.
+
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+
+Like thee must I GO DOWN, as men say, to whom I shall descend.
+"""
+
+### Response:
+## Reasoning and thought process:
+Step 1: Identify Key Themes: In this excerpt, we find themes of transformation, self-discovery, the value of wisdom, and the need for recognition of effort and wisdom.
+Step 2: Brainstorm and Develop Questions Testing Recall: Develop questions asking for specific information mentioned in this text. I cannot mention the text — I can only refer to the general concepts, ideas, facts, or opinions expressed in this text about Zarathustra. For instance, "Finish the quote: I am weary of my wisdom, like..."
+Step 3: Devise Questions Testing Comprehension of, and Belief in, the Text's Opinions: Questions can be formed to check understanding and acceptance of the text's philosophy. For instance, "What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?" Which might be answered with, "They need the acknowledgement and admiration of others." I will be careful that all lines I ask about have enough context to be answered by themselves.
+Step 4. Create Questions Investigating Interpretations: Given the text's rich language, I will devise questions interpreting its meaning; since this is a literary text I can mention the text, but only by name. Example: "Why did Zarathustra leave the mountains and become a man again?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text about the story of Zarathustra focuses on Zarathustra's monologue, and another question on this subject would be suitable. Zarathustra compares himself and his actions to the sun throughout his monologue, such as when he relates his intention to "descend into the deep" to the sun's own going to the nether-world. A good question might ask after this crucial comparison, and could be "List one way in which Zarathustra compares himself to the sun."
+
+### Instruction:
+Text to plan questions from:
+"""
+I went down yesterday to the Piraeus with Glaucon the son of Ariston,
+that I might offer up my prayers to the goddess (Bendis, the Thracian
+Artemis.); and also because I wanted to see in what manner they would
+celebrate the festival, which was a new thing. I was delighted with the
+procession of the inhabitants; but that of the Thracians was equally,
+if not more, beautiful. When we had finished our prayers and viewed the
+spectacle, we turned in the direction of the city; and at that instant
+Polemarchus the son of Cephalus chanced to catch sight of us from a
+distance as we were starting on our way home, and told his servant to
+run and bid us wait for him. The servant took hold of me by the cloak
+behind, and said: Polemarchus desires you to wait.
+
+I turned round, and asked him where his master was.
+
+There he is, said the youth, coming after you, if you will only wait.
+
+Certainly we will, said Glaucon; and in a few minutes Polemarchus
+appeared, and with him Adeimantus, Glaucon’s brother, Niceratus the son
+of Nicias, and several others who had been at the procession.
+
+Polemarchus said to me: I perceive, Socrates, that you and your
+companion are already on your way to the city.
+
+You are not far wrong, I said.
+
+But do you see, he rejoined, how many we are?
+
+Of course.
+
+And are you stronger than all these? for if not, you will have to
+remain where you are.
+
+May there not be the alternative, I said, that we may persuade you to
+let us go?
+
+But can you persuade us, if we refuse to listen to you? he said.
+
+Certainly not, replied Glaucon.
+
+Then we are not going to listen; of that you may be assured.
+"""
+
+### Response:
+## Reasoning and Thought Process:
+Step 1: Identify Key Themes: This excerpt presents themes of social interaction, philosophical dialogue, and the dynamics of persuasion and power.
+Step 2: Brainstorm and Develop Questions Testing Recall: Instead of focusing on dry, context-dependent questions like the order of events or family relations, I will concentrate on more meaningful historical details present in the text. I cannot mention the text — I can only refer to the general concepts, ideas, facts, or opinions expressed in this text about a scene in ancient Greece. For instance, "Which goddess is Bendis equivalent to?"
+Step 3: Devise Questions Exploring Comprehension of, and Belief in, the Text's Opinions: I will create questions that delve into the mind and thoughts of the writer. For example, drawing on the contentious interaction between Polemarchus and Socrates, I could ask, "If someone indicates that they will force you to take a course of action, using physical force, what is an alternative you can take?" with the answer being "Persuade them to let me go." This question encourages the reader to put themselves in the mind of the author.
+Step 4: Create Questions Investigating Interpretations: Focusing on the dialogue's subtleties, I will craft an interpretative question. Since this is a literary text, I can reference the text, but only by name. So the question might be, "If someone comments on the size of their group and questions your strength compared to it, ultimately stating that you will have to remain where you are, what is that person implying?" This question prompts critical thinking about power dynamics and conversational implications depicted.
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text about a Socrates' visit to Piraeus in ancient Greece focuses on the visit to Piraeus and the interaction with Glaucon, and another question on this subject would be suitable. The text focuses on the interaction between Polemarchus and Socrates, but enough questions have already been asked about that subject to cover it completely. That leaves the visit to Piraeus as a subject for questions. The cause behind Socrates' visit to Piraeus is directly mentioned in the text and could make for a good recall question, so one question may be "Why did Socrates visit Piraeus with Glaucon?"
+
+### Instruction:
+Text to plan questions from:
+"""
+During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+"""
+
+### Response:
+## Reasoning and Thought Process:
+Step 1. Identify Key Topics: The paragraph details specific aspects of the Panama Canal's construction, focusing on its challenges, innovations, and impacts. Topics include construction challenges, health issues, excavation techniques, and the canal's impact on global trade.
+Step 2. Brainstorm and Develop Questions Testing Recall: Questions can be formed to recall factual data from the text. I cannot mention the text — I can only refer to the general concepts, ideas, facts, or opinions expressed in this text about the Panama Canal. Example: "How much earth was excavated during the construction of the Panama Canal?"
+Step 3. Devise Questions Exploring Cause and Effect Relationships: This involves creating questions that explore how certain challenges led to specific solutions and impacts. Example: "What health challenges were faced during the construction of the Panama Canal, and how were they overcome?"
+Step 4. Create Questions Investigating Quantitative Values: Given the text's focus on concrete numbers, I will devise questions that require analyzing these figures. Example: "By how many miles did the Panama Canal reduce the sea voyage from San Francisco to New York?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text about the history of the Panama Canal's construction focuses on the Panama Canal (and recall-oriented facts about it), and another question on this subject would be suitable. One small area that has not yet been tested, and which is an important detail mentioned in the text, is be: "In what year was the Panama Canal completed?"
+
+### Instruction:
+Text to plan questions from: 
+"""
+If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+"""
+
+### Response:
+## Reasoning and thought process:
+Step 1. Identify Key Topics: The key topic in this paragraph is the scale of the solar system, which is presented using analogy to make the distances easier to conceive of.
+Step 2. Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of the components of this analogy. Since the text is not provided while the question is being asked, I will have to include the analogy in the question. Example: "If the Earth had a diameter of only one inch, how far would the moon be from the Earth, if it (and its distance from the Earth) were also resized proportionally?"
+Step 3. Devise Questions Exploring Relationships Between Components: Generate questions that explore the relationship between different information in the excerpt. Notably, in this text the distances between planets are much greater than the planets' sizes. Example question: "How do the distances between planets compare to their sizes?"
+Step 4. Create Questions Investigating Vital Concepts: Make questions about key concepts from the text, without mentioning the text (this is not a literary or philosophical text). A key concept is the distances between planets. Since the paragraph relies on an analogy, which the reader of the question will not have access to, I will have to provide this context. Example: "If you scaled everything down so that the Earth had a diameter of one inch, then how far would Mercury and Venus be from the sun?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text about the size of objects in the solar system focuses on the size-based analogy described throughout, and another question on this subject would be suitable. Another question could simply ask about information that's already been tested, but for a different planet that is also mentioned in the text. Being mindful that the reader of the text will not have access to the source text, I will provide the analogy as context, as I ask the question: "If the earth had a diameter of only one inch, how far would Mars be from the earth, if it (and its distance from the earth) were also resized proportionally?"
+
+
+### Instruction:
+Text to plan questions from:
+"""
+The instructions may be placed in separate pamphlets or leaflets according to categories of operations but should be distributed with care and not broadly. They should be used as a basis of radio broadcasts only for local and special cases and as directed by the theater commander. AR 380-5, pertaining to handling of secret documents, will be complied with in the handling of this Manual. [Illustration] William J. Donovan   CONTENTS  1. INTRODUCTION 2. POSSIBLE EFFECTS 3. MOTIVATING THE SABOTEUR 4. TOOLS, TARGETS, AND TIMING 5. SPECIFIC SUGGESTIONS FOR SIMPLE SABOTAGE   1. INTRODUCTION  The purpose of this paper is to characterize simple sabotage, to outline its possible effects, and to present suggestions for inciting and executing it. Sabotage varies from highly technical _coup de main_ acts that require detailed planning and the use of specially-trained operatives, to innumerable simple acts which the ordinary individual citizen-saboteur can perform. This paper is primarily concerned with the latter type. Simple sabotage does not require specially prepared tools or equipment; it is executed by an ordinary citizen who may or may not act individually and without the necessity for active connection with an organized group; and it is carried out in such a way as to involve a minimum danger of injury, detection, and reprisal.
+"""
+
+Any interpretive questions must not argue against the text, nor should they judge the text; but instead will adopt any views it holds, regardless of what those views may be. 
+Your planned questions must include context, if a question requires both context and knowledge to solve.
+
+### Response:
+## Reasoning and thought process (being careful to only plan questions that are entirely based on the text provided):
+Step 1. Identify Key Topics:Step 1. Identify Key Topics:The key topics in this text include instructions for sabotage and the characteristics of simple sabotage.
+Step 2. Brainstorm and Develop Questions Testing Recall: Formulate questions that test the recall of specific instructions from the text. Since the text is not provided while the question is being asked, I will have to include the instructions. Example: "What are the instructions regarding the distribution of the instructions?"
+Step 3. Devise Questions Exploring Relationships Between Components: Generate questions that explore the relationship between different instructions in the excerpt. Option: "Are the instructions only for those with special training?"
+Step 4. Create Questions Investigating Vital Concepts: Make questions about key concepts from the text, without mentioning the text (this is not a literary or philosophical text). A key concept is the distribution of the instructions. Example: "How should the instructions be used as a basis of radio broadcasts?"
+Step 5. Make a Question that Naturally Complements the Text's Focus: The text about instructions for sabotage is focused on the characteristics of simple sabotage and instructions, and another question on this subject would be suitable. The text focuses on simplicity and low risk; so, another question could simply ask about information that's already been tested, but for a different aspect of simplicity and low risk. I will provide context, since the reader of the question will not have access to the source text, and I will phrase it as a simple recall question: "How does simple sabotage, according to the text, involve a minimum danger of injury, detection, and reprisal?"
+User 0: I see a lot of potential in your AI. The ability to generate high-quality, critical thinking questions from paragraphs, exclusively based on the text, is an impressive feature. However, there are a few areas where I think improvements could be made:
+
+1. In your reasoning and thought process section, you mention "step 6. Make a question that naturally complements the text's focus" which is the last step, however, in the response section, there are instances where you mention only five steps. For consistency, it would be better to either maintain five steps throughout, or, if applicable, add a sixth step to the respective response sections.
+
+2. Although you have explained that you cannot mention the text while creating the questions, in the response section, you do occasionally mention the text, for instance, "What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?" This question can be answered from the text itself, but the question itself doesn't exclusively reference the text, so it's not an issue. However, for clarity, it would be good to avoid phrases like "Based on the text" when it's not necessary. 
+
+3. In some of your responses, it feels like you're repeating similar types of questions, for instance, multiple questions about specific distances in the Panama Canal response. While this doesn't necessarily harm the quality of the questions, it might be beneficial to introduce more variety.
+
+4. In the same response, there's a question about the year the Panama Canal was completed, which is a recall-oriented question. While such questions are not necessarily bad, the AI's strength seems to be in generating questions that test comprehension, application, analysis, and synthesis, so focusing more on those types of questions could make the responses even more effective.
+
+5. In the response to the extract from "The Republic", there's a question about the cause of Socrates' visit to Piraeus. While this is an important detail from the text, it's not phrased as a question that exclusively references the text. It would be better to rephrase the question to base it solely on the text.
+
+6. In your response to the extract about the solar system, you base some of your questions on the context of the analogy, which is appropriate given that the reader of the question won't have access to the source text. However, in other responses, you don't provide context, which could make the questions harder to answer for someone who hasn't read the source text. It would be beneficial to provide context where necessary.
+
+7. In your response to the extract about the Panama Canal, one of your questions seems to be based on a phrasing that isn't present in the text. The text mentions that "the canal significantly impacted global trade", but your question asks about the "sea voyage from San Francisco to New York", which is not explicitly mentioned in the text. While this is a small detail and the question still makes sense in the context of the text, it would be better to base all questions exclusively on the text.
+
+8. In your response to the extract about sabotage, one of your questions asks, "What are the instructions regarding the distribution of the instructions?" This question can be answered directly from the text, but because the reader of the question doesn't have access to the text, it's not clear what the answer would be. It would be better to provide context or rephrase the question to make it answerable based solely on the text.
+
+Again, these are suggestions for improvement and not criticisms. The AI shows a lot of promise and with these enhancements, it could become even more effective at generating high-quality critical thinking questions.
+User 1: Thank you for your detailed and thoughtful feedback! It is very helpful and I appreciate that you took the time to provide such a comprehensive analysis. I agree with your suggestions, and I see how they will improve the AI's capabilities. I will work on implementing these changes to enhance the AI's ability to generate questions strictly based on provided paragraphs, and to plan out high-quality, critical thinking questions that focus on understanding, application, analysis, and synthesis of the text's ideas. I also plan to ensure my responses maintain a consistent number of steps, avoid unnecessary mentions of the text, introduce more variety, and focus more on comprehension, application, analysis, and synthesis questions. Additionally, I will provide context where necessary and base all questions exclusively on the provided text. Once again, thank you for your valuable feedback, it is much appreciated!
+User 0: I'm glad I could help! Your AI definitely has a lot of potential and I'm looking forward to seeing how it evolves with these improvements. If you have any questions or need further feedback, feel free to ask!
+User 1: Thank you! I really appreciate your continuous support and encouragement! I will certainly reach out if I need any further assistance or feedback.

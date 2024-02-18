@@ -11,8 +11,9 @@ SYSTEM:
   USE_FILENAMES: False
   ASSISTANT_MODE: False 
   DOUBLE_CHECK_COUNTER: 3
-  USE_SUBSET: False
+  USE_SUBSET: True
   REARRANGEMENTS_TO_TAKE: 3
   CONCURRENCY_LIMIT: 90
   COMPLETION_MODE: True
-  MODE: "llamacpp" # can be one of "api"|"aphrodite"|"llamacpp"
+  MODE: "api" # can be one of "api"|"aphrodite"|"llamacpp"
+  GRAPH: True
