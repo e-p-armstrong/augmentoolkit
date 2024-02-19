@@ -103,10 +103,10 @@ class EngineWrapper:
         if self.mode == "llamacpp":
             return await make_async_api_call(messages=messages, sampling_parameters=sampling_params)
         elif self.mode == "api":
-            print("\n\n\nMESSAGES\n\n\n")
-            print(messages)
+            # print("\n\n\nMESSAGES\n\n\n")
+            # print(messages)
             messages_cleaned = [{"role": message["role"], "content": message["content"].replace("\\n","\n")} for message in messages]
-            print(messages_cleaned)
+            # print(messages_cleaned)
             completion = await self.client.chat.completions.create(
                 model=self.model,
                 messages=messages_cleaned,
