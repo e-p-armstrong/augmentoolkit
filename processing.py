@@ -1,12 +1,23 @@
 import asyncio
 
+# created with nbconvert, minimally cleaned up
+
 async def main():
+
+    # NOTE NOTEBOOK SETTINGS AND CONSTANTS (some script file constants are in generation_functions/constants.py)
+
+# Put your desired quant of your desired model in the relevant directories
 
     import logging
     import yaml
+    import glob
 
     with open("./config.yaml",'r') as f:
         config = yaml.safe_load(f)
+
+    # "airoboros-l2-70b-3.1.2.Q4_K_M.gguf" <- recommended for the large logical model
+    # "flatorcamaid-13b-v0.2.Q8_0.gguf" <- recommended for the normal logical model
+    # A6000s on Vast.ai are a good choice for running this notebook
 
     if not config["SYSTEM"]["COMPLETION_MODE"] and config["SYSTEM"]["MODE"] == "aphrodite":
         raise Exception("Aphrodite engine mode MUST use completion prompts!")
@@ -40,14 +51,23 @@ async def main():
 
     LOG_LEVEL = logging.INFO
 
-    source_texts = [ # add your texts here
-        "./raw_txt_input/Simple Sabotage, by the Office of Strategic Services, published 1944.txt",
-    ]
+    INPUT_FOLDER = config["PATH"]["INPUT"]
 
 
-    # ## Below: Defines and imports functions that you will probably use no matter what cells in the notebook you choose to run:
+    extension = ".txt"
 
-    # In[2]:
+    path = f"{INPUT_FOLDER}/*" + extension
+    source_texts = glob.glob(path)
+
+    print(source_texts)
+
+    # [ # add your texts here
+    #     "./raw_txt_input/Simple Sabotage, by the Office of Strategic Services, published 1944.txt",
+    # ]
+
+
+    # ## Below: Defines and imports functions that you will probably use no matter what cells in the script you choose to run:
+
 
 
     import os
@@ -99,10 +119,8 @@ async def main():
                 globals()[attribute_name] = attribute
 
 
-    # In[3]:
 
 
-    # Initialize API Client
     engine_wrapper = EngineWrapper(
         model=LOGICAL_MODEL,
         api_key=API_KEY,
@@ -112,7 +130,6 @@ async def main():
     )
 
 
-    # In[4]:
 
 
     from transformers import AutoTokenizer
@@ -138,27 +155,22 @@ async def main():
     ]
 
 
-    # #### Inspect various features of the text you have fed in to see if it came out alright-ish
 
-    # In[5]:
 
 
     len(paragraphs_processed)
 
 
-    # In[6]:
 
 
     paragraphs_processed[0]
 
 
-    # In[7]:
 
 
     print(paragraphs_processed[:3])
 
 
-    # In[8]:
 
 
     import json
@@ -176,13 +188,11 @@ async def main():
     await control_flow_functions.filter_all_questions(paragraphs_processed, judged_worthy_for_questions, engine_wrapper, output_dir, take_subset=USE_SUBSET, use_filenames=False, rtwl=run_task_with_limit, completion_mode=COMPLETION_MODE,logging_level=LOG_LEVEL)
 
 
-    # In[9]:
 
 
     filtered_worthy_for_questions = control_flow_functions.filter_and_graph(judged_worthy_for_questions, graph=GRAPH)
 
 
-    # In[10]:
 
 
     print(filtered_worthy_for_questions[0])
@@ -190,9 +200,7 @@ async def main():
 
     # ### The cell below begins generating questions. SOME OF THESE MAY FAIL and have to retry due to model errors (the API branch cannot use grammars). But if you let it run you will see that the vast majority eventually get through.
     # 
-    # In short, don't get scared by tracebacks.
 
-    # In[11]:
 
 
     # control flow
@@ -205,7 +213,6 @@ async def main():
     if not os.path.exists(qa_tuples_dir):
         os.makedirs(qa_tuples_dir)
 
-    # Initialize vetted_qa_tuples
     vetted_qa_tuples = []  # tuple list of qa tuples that have been judged good
 
     # Attempt to initialize filtered_worthy_for_questions
@@ -239,7 +246,6 @@ async def main():
         
 
 
-    # In[12]:
 
 
     print(
@@ -254,7 +260,6 @@ async def main():
     print("---------------- ONTO EXAMPLES GENERATION-------------------")
 
 
-    # In[13]:
 
 
     # Check for and fix the common mistake: mentioning "the text".
@@ -300,7 +305,6 @@ async def main():
             await future
 
 
-    # In[14]:
 
 
     # Print stats related to revised qatuples, and filter out nones (questions that were unanswerable due to lack of context).
@@ -317,13 +321,11 @@ async def main():
     print("---------------- ONTO EXAMPLES GENERATION-------------------")
 
 
-    # In[15]:
 
 
     qa_tuples_by_paragraph = control_flow_functions.group_by_text(vetted_qa_tuples)
 
 
-    # In[16]:
 
 
     import os
@@ -332,7 +334,6 @@ async def main():
         os.makedirs(multi_turn_convs_info_dir)
 
 
-    # In[17]:
 
 
     import json
@@ -348,14 +349,7 @@ async def main():
         await future
 
 
-    # ### No notebook restart needed for the API notebook!
 
-    # ### BUT You still might've separated your generations into large and small models, so we reinitialize the engine wrapper
-
-    # In[18]:
-
-
-    # Initialize API Client
     engine_wrapper = EngineWrapper(
         model=LARGE_LOGICAL_MODEL,
         api_key=API_KEY,
@@ -365,7 +359,6 @@ async def main():
     )
 
 
-    # In[19]:
 
 
     import os
@@ -374,7 +367,6 @@ async def main():
     convs_info = control_flow_functions.read_json_files_info(multi_turn_convs_info_dir)
 
 
-    # In[20]:
 
 
     import os
@@ -398,7 +390,6 @@ async def main():
     # # Yay! Now you have a dataset!
     # ### GPT wrote the cell below. I think it successfully converts things to ShareGPT format for use with axolotl, but I am not sure because I don't know that format very well and haven't used Axolotl. However, the json produced by the second function looks fine.
 
-    # In[21]:
 
 
     import os
@@ -410,7 +401,6 @@ async def main():
     control_flow_functions.convert_directory_and_process_conversations(config["PATH"]["OUTPUT"] + "/multi_turn_convs/")
 
 
-    # In[22]:
 
 
     with open(config["PATH"]["OUTPUT"] + "/processed_master_list.json","r") as f:
@@ -418,12 +408,10 @@ async def main():
         data = json.loads(first)
 
 
-    # In[23]:
 
 
     # For curiosity's sake, you can find out how many lines of dialogue you generated
     def filter_and_flatten(lst):
-        # Initialize an empty list to hold the flattened elements
         flat_list = []
 
         # Loop through each sublist in the main list

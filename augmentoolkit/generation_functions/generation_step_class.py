@@ -110,6 +110,7 @@ class GenerationStep:
                 except Exception as e:
                     logging.error(f"Error in Generation Step: {e}")
                     print(prompt_formatted)
+                    logging.error(f"Above prompt resulted in error, probably the model's fault: {e}")
                     traceback.print_exc()
                     times_tried += 1
             raise Exception("Generation step failed -- too many retries!")

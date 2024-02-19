@@ -1526,7 +1526,6 @@ def select_variation(character): # can help following the groove of the few-shot
     return random.choice(variations)
 
 def fix_scenario_plan(scenario_plan, character):
-    print(character)
     charname = extract_name.extract_name(character)
     if not ("Albert" in charname):
         if "Albert" in scenario_plan:
