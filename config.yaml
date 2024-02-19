@@ -6,8 +6,8 @@ PATH:
 API:
   API_KEY: ""
   BASE_URL: "https://api.mistral.ai/v1/"
-  LOGICAL_MODEL: "mistral-large"
-  LARGE_LOGICAL_MODEL: "mistral-large"
+  LOGICAL_MODEL: "mistral-medium"
+  LARGE_LOGICAL_MODEL: "mistral-medium"
 SYSTEM:
   USE_FILENAMES: False
   ASSISTANT_MODE: False 
