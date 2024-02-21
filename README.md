@@ -3,6 +3,17 @@ Generate multi-turn training data, about any subject, using Open Source LLMs!
 Save yourself the time of manually editing 1000s of AI chats to build your own dataset (which you then can't open source anyway because of personal reputation risks). Easily configure the prompts and settings to generate conversations aligned to your tastes and interests.
 Now designed for use with APIs offering open-source models, so you don't have to have a fancy computer to make awesome datasets, and you don't have to screw around with dependencies and CUDA. The free credits on services such as [Together.ai]("https://www.together.ai/") should be enough to make a good dataset in its entirety — they offer Mixtral at prices like $0.6/1 Million Tokens(!)
 
+## New Features At A Glance
+- Python Script
+- Runs Async with any LLM API (together, openrouter, mistral) that's compatible with the OpenAI python library
+- Quite fast: when using APIs, some datasets can be generated in under an hour, for <$10
+- Options set in an easy-to-use YAML file, `config.py`. No more modifying code to change configuration.
+- Supports both chat and completion prompts
+- No More Clutter: output and raw text input paths configurable in the config file
+- Easily switch between prompts by changing prompt folder paths. If a prompt is not found in the new folder it will fall back to the old one (the path to which is also configurable)
+- A complete code refactor that makes customization much easier. No more editing prompts inside Python files, no more messing with control flow logic directly inside a Jupyter notebook.
+- No switching between branches to use different methods of generation: switch between APIs and Aphrodite by changing the config file.
+
 [Fork this repo and customize it for your own needs!](https://github.com/e-p-armstrong/augmentoolkit/fork)
 
 ## Table of Contents:
@@ -21,12 +32,10 @@ Now designed for use with APIs offering open-source models, so you don't have to
     - [Improvement Areas](#obvious-areas-for-improvement-feel-free-to-open-a-pr)
 8. [Contact](#contact)
 
-#### By default this branch of augmentoolkit uses the mixtral prompt format. You can modify this by changing the functions in augmentoolkit/generation_functions (there are a lot less of them now!)
-
 ## Installation:
-Augmentoolkit is a Jupyter Notebook with some functions to import, so there is not much here besides cloning the repo and installing its dependencies (you probably already have most of them). Still, the details are here for completion's sake (and the newer enthusiasts among us).
+Augmentoolkit, at its simplest, requires only the OpenAI API library (open source model providers use the OAI library too). So there is not much here besides cloning this repo and installing its dependencies (you probably already have most of them). Still, the details are here for completion's sake (and the newer enthusiasts among us).
 
-First, get the repository onto your computer (or an instance rented out by your favorite compute provider, i.e., runpod, vast.ai, etc.):
+First, get the repository onto your computer:
 ```
 git clone https://github.com/e-p-armstrong/augmentool.git
 ```
@@ -41,12 +50,19 @@ pip install -r requirements.txt
 ```
 You may get some messages saying that torchvision and torchaudio require older versions of Pytorch. This should be safely ignorable.
 
-You don't even need CUDA this time.
+If you want to use Aphrodite, you'll also need to add
+```
+pip install aphrodite-engine
+```
+
+NOTE under basically all circumstances it will be more cost-efficient to use APIs instead of running this with local inference. There are plenty of API providers such as Together.ai that offer quality open source models at extremely cheap prices. Those are recommended for most users. You technically could rent out a GPU from vast.ai or runpod, copy this notebook over, install the dependencies, and run "local" inference using the aphrodite mode there... but it'll probably be more expensive than the alternative. Thus, you should probably only consider using local inference if your machine is beefy enough, and even then it may come at a significant cost in time.
+
+For Mac users: since aphrodite-engine does not work on Mac, if you really want local inference you should start a [Llama cpp server]() on your computer, and add its url as the "api endpoint" in the config file. This is a bit tricky to do, and I don't know how to get it using RoPE scaling yet (needed for Augmentoolkit), so your best bet would be to do some intense Googling and/or asking questions on the lcpp repo.
 
 ## Introduction: What is this and why was it built?
 Open source is meant to move fast, be shareable, and be novel. Our datasets are none of these. Most of the top models have private datasets (or are merges), and replicating said datasets often either A) requires an obscene number of OpenAI API credits, or B) requires you, the model creator, to spend dozens if not hundreds of hours accumulating a hybrid dataset based off of your own conversations with bots. The former is based on a paid service (whose TOS you're violating) that can ban you at any second and whose writing style you probably hate; the latter is far too slow to iterate on, does not scale at all, and is not easily shareable due to the sensitive nature of private chats with bots. And moreover, if we're literally creating machines that can write, why do we spend most of our time writing?
 
-**Augmentoolkit** is meant to make high-quality data generation easy, fast, shareable, configurable, and open-source. It is meant to allow the easy creation of datasets about any knowledge base that exists in plain text. It is meant to allow models to bootstrap additional training data for themselves. It is meant to allow enthusiasts who have a powerful computer, but don't want to train models, to contribute to the advancement of open source AI by generating swathes of data. It's meant to help narrow the gap between OpenAI's obscenely large dataset, and we have in the land of Open Source. Whether you're making a finetune on a specific scientific domain, or are creating the latest RP model to top [Weicon's leaderboard](https://rentry.co/ayumi_erp_rating), Augmentoolkit exists to make your data problems a bit less problematic.
+**Augmentoolkit** is meant to make high-quality data generation easy, fast, shareable, configurable, and open-source. It is meant to allow the easy creation of datasets about any knowledge base that exists in plain text. It is meant to allow models to bootstrap additional training data for themselves. It is meant to allow any enthusiast, regardless of computer strength, to contribute to the advancement of open source AI by generating swathes of data. It's meant to help narrow the gap between OpenAI's obscenely large dataset, and what we have in the land of Open Source. Whether you're making a finetune on a specific domain, or are creating the latest RP model to top [Weicon's leaderboard](https://rentry.co/ayumi_erp_rating), Augmentoolkit exists to make your data problems a bit less problematic.
 
 A flowchart of Augmentoolkit's operation can be found in the [Usage](#usage) section.
 
@@ -54,7 +70,7 @@ Conceptually, Augmentoolkit takes human-written text with information in it, and
 - It uses the text's information to generate questions that test the information, and it also generates answers to the questions that use the information. 
 - It triple-checks whether the generated questions and answers are accurate and only use information provided in the text (ensuring that the LLM did not hallucinate new information). 
 - Finally, it writes an interaction in a fictional setting between a character with domain expertise, and an ignorant secondary character, where the secondary character asks the questions and the primary character answers them. 
-- After checking that this conversation faithfully includes the original questions and answers, the result is saved as part of the newly-generated dataset. The usage of characters and a setting means that the model's creative writing and RP skill can be improved at the same time as its knowledge base (but if you don't want an RP bot, you can always turn "Assistant Mode" on for user-assistant interactions instead).
+- After checking that this conversation faithfully includes the original questions and answers, the result is saved as part of the newly-generated dataset. The usage of characters and a setting means that the model's creative writing and RP skill can be improved at the same time as its knowledge base (but if you don't want an RP bot, you can always turn "Assistant Mode" on for user-assistant style interactions instead).
 You can see a flowchart of this process over in [Usage](#usage).
 
 The name "Augmentoolkit" comes from "Augmented data" (my own coined phrase for human-written text that is AI-reformatted, since I [couldn't find a standardized one](https://xkcd.com/927/)) and "toolkit".
@@ -62,34 +78,42 @@ The name "Augmentoolkit" comes from "Augmented data" (my own coined phrase for h
 ## Quickstart:
 After installing the dependencies:
 
-- Get this notebook and the other repo code onto a machine with an internet connection
-- Paste your API key, favorite model name, and the endpoint URL of your preferred AI service, into the relevant constants located in the first code cell. Recommendation: [Together.ai with Hermes Mixtral works really nicely](https://api.together.xyz/playground/chat/NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO).
-- Run all the cells below and watch as the notebook generates questions, answers, and conversations based on Principles of Chemistry and Simple Sabotage.
+- Get the repo onto a computer with an internet connection
+- Install its dependencies
+- Open `config.yaml`
+- Paste your API key, favorite model name, and the endpoint URL of your preferred AI service, into the relevant fields inside `config.yaml`. Be sure to keep the quotes. Recommendation: [Together.ai with Hermes Mixtral works really nicely both as a LARGE_LOGICAL_MODEL and as the LOGICAL_MODEL](https://api.together.xyz/playground/chat/NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO).
+- Either run all cells in the notebook `processing.ipynb`, or open this project's folder in a command line and type `python processing.py` and hit enter (fires off the script version).
 
-***If you want to run a subset of the total text through the entire pipeline, to evaluate how well it works, turn on the USE_SUBSET flag in the second notebook code cell (on by default)***
+***If you want to run a subset of the total text through the entire pipeline, to evaluate how well it works, turn on the USE_SUBSET flag in the config file (off by default)***
 
 ## Usage
-How to get this running at a basic level is covered in [Quickstart](#quickstart). This section describes what you're actually doing while you're running this, as well as how to easily customize the function of this notebook for your own use cases. It describes everything from how to operate the notebook (in greater detail) to how everything's structured, and what folders to watch as you are generating your data. For the most part you can just follow quickstart, but this section may be worth reading if you plan to make this a serious part of your model creation (which I hope you do!).
+How to get this running at a basic level is covered in [Quickstart](#quickstart). This section describes what you're actually doing while you're running this, as well as how to easily customize the function of this project for your own use cases. It describes everything from how to operate the project (in greater detail) to how everything's structured, and what folders to watch as you are generating your data. For the most part you can just follow quickstart, but this section may be worth reading if you plan to make this a serious part of your model creation (which I hope you do!).
 
 Here is a flowchart detailing how a typical run of Augmentoolkit may proceed. The source text can be anything with information you can ask questions about.
 ![](flowchart.jpg)
 
 ### Concepts and Operation
 Read this subsection for a slightly more detailed version of the more finicky bits of the quickstart, as well as an understanding of the key files in this repo.
-Augmentoolkit is centered around a Jupyter Notebook (`processing.ipynb`) so that progress is easier to inspect, and starting and stopping is easier. All the prompts are stored in `./augmentoolkit/generation_functions`.
+Augmentoolkit has a Jupyter notebook, `processing.ipynb`, and a script, `processing.py`. All the prompts are stored in `./prompts/` and are text or JSON files for maximal editing convenience. A complete code overhaul has dramatically reduced repetition, too. Augmentoolkit has never been so easy to modify.
 
-You run Augmentoolkit by running the Jupyter Notebook `processing.ipynb`. **You no longer need to restart the notebook, even if doing part of the generation with a smaller model, when you're using an API**
+You run Augmentoolkit by running all cells in the Jupyter Notebook `processing.ipynb`, or by running the python script. **You no longer need to restart the notebook, even if doing part of the generation with a smaller model, when you're using an API.** ***A restart is still required if you're using it in Aphrodite mode!!!***
 
-***Important files:*** The core of the project is `processing.ipynb`, which needs `./augmentoolkit/`, and one or more plaintext files -- all in the same folder as `processing.ipynb` -- in order to run. If you are going to change anything, please read [Customization](#customization-arranged-in-order-of-least-to-most-difficult-to-implement) first.
+***Important files:*** The core of the project is the script/notebook. The two are essentially equivalent: the script was created by exporting the notebook and adding a few lines to make it work async. Whichever one you use, it needs `./augmentoolkit/` for some imports, some prompts in `./prompts/` (or whatever you change it to in the config), and a folder with text documents to read in (by default, `./raw_text_input/`). All these folders should ideally be in the same folder as the script and notebook. If you are going to change anything, please read [Customization](#customization-arranged-in-order-of-least-to-most-difficult-to-implement) first.
+
 ### Understanding what is going on as it runs
-This subsection summarizes output folders and code structure.
-This notebook makes plenty of folders while it runs. The ones you may want to pay attention to are `./worthy_for_questions`, `./qatuples_raw`, `./qatuples_revised`, `./multiturn_convs_info`, and finally, `./multiturn_convs`. `./multiturn_convs` is the final output directory. Everything else is just the notebook saving the outputs of every single step in case someone wants to train a model specifically for running this pipeline at some point.
+This subsection summarizes output folders and code structure. It is primarily useful if you intend to modify the code of Augmentoolkit. I considered structuring this project in such a way that it would become very abstract, each pipeline step would be an object, etc... but this is not trying to be langchain, or any kind of agent framework. Or a pipeline framework. Augmentoolkit is a program, not a framework, and it's specifically for generating data. I believe that for most use cases here, Python code is the correct level of abstraction. That being said, it helps to know how this particular code is currently structured before you go changing it, if you have a slightly different use case in mind. Some of the features present here, like the engine wrapper and generation step classes, will probably be preserved in any modification or fork that you make.
+
+Augmentoolkit makes plenty of folders while it runs. However, unlike before, they're now all nicely contained in whatever you specify the `OUTPUT` folder to be (in config.yaml). Augmentoolkit automatically creates this at the start of a run. The output folder contains both files that are being saved just in case a future model is trained to run this pipeline specifically, and the ones that are explicitly intermediate steps, saved in case a run is paused and you want to resume later. The intermediate folders ones you may want to pay attention to are `./worthy_for_questions`, `./qatuples_raw`, `./qatuples_revised`, `./multiturn_convs_info`, and finally, `./multiturn_convs`. `./multiturn_convs` is the final output directory, from which the final dataset files `master_list.jsonl`, `processed_masterlist.json`, and `simplified_data.jsonl` (sharegpt format) are created. Everything else is just the notebook saving the outputs of every single step in case someone wants to train a model specifically for running this pipeline at some point.
 
 Do not move or remove the folders as they're generated.
 
-As for code structure, `processing.ipynb` handles the control flow and file writing (most of the large and ugly functions have now been extracted to `./augmentoolkit/control_flow_functions`), and the functions it imports (from `./augmentoolkit/generation_functions`) call the LLM with various prompts. Inside `./augmentoolkit/control_flow_functions`, note that `write_output_to_file()` can mostly be ignored; it just saves the full completion of each step for the sake of potential future training of a model specifically for running this pipeline (think jondurbin/cinematika-7b-v0.1). The main output of the function is usually just passed onto the next part of the pipeline. If a file has been written already, any future attempts to write that file will be skipped, allowing for easy resumption of generation after interruption.
+As for code structure, `processing.ipynb` (or `.py` as the case may be) is a relatively lightweight wrapper for the control flow code in `./augmentoolkit/control_flow_functions/control_flow_functions.py`, which focuses on passing output from one discrete step of the pipeline to the other, and loading and saving to files. It's essentially the interface. If you've used Augmentoolkit before the great refactoring of 24/02/19, know that all the messy logic now hides in `control_flow_functions.py`. Out of sight, out of mind.
 
-Most functions are actually quite simple at heart; they call functions that generate output, and pass that output onto other functions, writing things to files as need be. 90% of the code in `processing` can be understood with that in mind.
+The `./augmentoolkit/generation_functions` holds a few helper functions, and a few essential classes. `engine_wrapper_class.py` holds the logic for making calls to whatever LLM-providing service you're using; `generation_step_class.py` is a class that submits calls to `engine_wrapper_class.py`. Instances of the class represent a step in the pipeline, such as generating questions or conversations. Its purpose is to prevent the control flow code from having to manage prompts or inference code. You pass in the path to a prompt, some settings, and an output processor, and then calling .generate() on it fulfills the same role that the dozen-or-so separate functions in `generation_functions/` once did. So basically: `generation_step_class.py` is an abstracted-away way to handle gathering the inputs to the engine wrapper.
+
+Inside `./augmentoolkit/control_flow_functions`, note that `write_output_to_file()` can mostly be ignored; it just saves the full completion of each step for the sake of potential future training of a model specifically for running this pipeline (think jondurbin/cinematika-7b-v0.1). The main output of the function is usually just passed onto the next part of the pipeline. If a file has been written already, any future attempts to write that file will be skipped, allowing for easy resumption of generation after interruption.
+
+It's easiest to understand Augmentoolkit as being an LLM pipeline: it takes a bunch of input, calls a series of LLM modifications on it (passing the output from one step to the next) and outputs the transformed result. This is somewhat different from an agent framework like LangChain because the AI doesn't actually reason about what step to do next; the logic is hardcoded and hand-prompted.
 
 ### Some features worth being aware of
 This subsection describes things that make life easier in Augmentoolkit.
@@ -97,12 +121,13 @@ This subsection describes things that make life easier in Augmentoolkit.
 - **Two-model generation for the sake of SPEED:** every single task, except the very last one (multi-turn conversation generation) can be accomplished reliably by a good enough small model. But with APIs being as cheap as they are you can probably get away with running the whole thing using Mixtral anyway.
 - **Validation, validation, validation:** Learning lessons from the original Augmental, consistency with the source text is an extremely high priority here, and this is ensured with multiple layers of LLM-based validation (and at the end, numerous examples of regex-based validation).
 - **API-capable:** using the OpenAI API package, Augmentoolkit can now be powered by a host of Open-source model-providing APIs that are much cheaper and easier to use than running a GPU yourself, in most cases. For those of us with credits to spare, or with no fancy computers. Don't worry, it asynchronously uses the API, because your time is valuable.
-- **Holy crap is it fast now:** No more waiting for days while your GPU chugs along. If you're using a fast API, your speeds will be *blazing*. All the examples you see in ./example_generated_convs took like 20 minutes to generate from start to finish using Hermes Mixtral via Together.ai.
+- **Quality of Life:** with configurable paths for prompts, inputs, and outputs; a prompt override system; changing between local and API inference with a single field in a config file; and more added features, Augmentoolkit is actually kinda nice to use now. It's now a proper, solid program, not just a proof of concept.
+- **Holy crap is it fast:** No more waiting for days while your GPU chugs along. If you're using a fast API, your speeds will be *blazing*. All the examples you see in ./example_generated_convs took like 20 minutes to generate from start to finish using Hermes Mixtral via Together.ai.
 
 The steps above describe how to run the notebook with default settings. But your use case likely differs from the default. Here's a step-by-step process about how to customize it!
 ### Customization (arranged in order of least-to-most difficult to implement):
 Read this to learn how to hack Augmentoolkit for your own use cases.
-1. ***Change the source texts used to generate training data.*** You can do this in the first code cell of the notebook. **IF YOU TURN USE_FILENAMES ON** then the filenames of these inputs should be formatted in a specific way, since the filenames are used as part of the prompts and in at least one regex. You need to have them be like: `[textname], by authorname`. So for example, `Simple Sabotage, by the Office of Strategic Services`. You can also include the publication date after the author name if you want (as in `Principles of Chemistry, by Demitry Mendeleev, published 1897`), but note that this may bias most of the characters to live in the era of the textbook, which may or may not be what you want. `USE_FILENAMES` is off by default, and that means the notebook just shows the model the text in each file now. **Also, if you have a PDF you want to use as a source text, you can convert it to a .txt using `./convert_pdf_to_text.py` (just change the target string in the code, and run the script).** If you want a good source of plaintext documents, [try Project Gutenberg](https://www.gutenberg.org/); if you want educational PDFs, try [OpenStax](https://openstax.org/subjects).
+1. ***Change the source texts used to generate training data.*** You do this by placing the .txt files you want to use in an input folder, and pointing Augmentoolkit at that folder by specifying it in `config.yaml`. **IF YOU TURN USE_FILENAMES ON** then the filenames of these inputs should be formatted in a specific way, since the filenames are used as part of the prompts and in at least one regex. You need to have them be like: `[textname], by authorname`. So for example, `Simple Sabotage, by the Office of Strategic Services`. You can also include the publication date after the author name if you want (as in `Principles of Chemistry, by Demitry Mendeleev, published 1897`), but note that this may bias most of the characters to live in the era of the textbook, which may or may not be what you want. `USE_FILENAMES` is off by default, and that means the notebook just shows the model the text in each file now. **Also, if you have a PDF you want to use as a source text, you can convert it to a .txt using `./convert_pdf_to_text.py` (just change the target string in the code, and run the script).** If you want a good source of plaintext documents, [try Project Gutenberg](https://www.gutenberg.org/); if you want educational PDFs, try [OpenStax](https://openstax.org/subjects).
 
 ![](changetext.jpg)
 
@@ -110,7 +135,7 @@ Read this to learn how to hack Augmentoolkit for your own use cases.
 
 ![](specialinstructions.jpg)
 
-3. ***Change the constants.*** There are a few constant values in this notebook, and in `./augmentoolkit/generation_functions/constant_values.py` (the latter is only really used when testing prompts during development). These constants are tested, but if your use case requires special settings (e.g., you want to make conversations from more permutations of existing questions; or you think the character counts for the "duplicate question/answer" validation functions are too restrictive) then feel free to change the related setting. The most intuitive and least-likely-to-break-anything settings to change are rearrangements_to_take and double_check_counter. Beyond that... you'll need to figure out what the function does before changing it if you expect it to run. **NEW! You no longer need to manually title all the files you use as input!** And it's probably better if you don't because that way the model isn't as constrained to the time period it associates with your book. This should make truly bulk work much easier.
+3. ***Change the constants.*** There are a few constant values in Augmentoolkit, all configurable from `config.yaml` (the latter is only really used when testing prompts during development). These constants are tested, but if your use case requires special settings (e.g., you want to make conversations from more permutations of existing questions; or you think the character counts for the "duplicate question/answer" validation functions are too restrictive) then feel free to change the related setting. The most intuitive and least-likely-to-break-anything settings to change are rearrangements_to_take and double_check_counter. Beyond that... you'll need to figure out what the function does before changing it if you expect it to run. **NEW! You no longer need to manually title all the files you use as input!** And it's probably better if you don't because that way the model isn't as constrained to the time period it associates with your book. This should make truly bulk work much easier.
 
 4. ***Assistant Mode*** Technically this could be considered part of 3), but it's different enough that I feel it warrants separate explanation. By default, the notebook is configured to produce RP-style data; "Assistant mode" is something you can toggle in the settings cell immediately below this one, which skips character and scenario generation and answers every question in a chat between a user and a helpful AI assistant (with no personality). In the limited testing I have done with this, **it seems that assistant mode is simple enough to work from start-to-finish with 13b models** such as Flatorcamaid by Ikari. So if your compute or time are very limited, or you are using this for a more professional use case, feel free to turn this on.
 
