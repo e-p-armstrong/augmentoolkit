@@ -16,6 +16,8 @@ Now designed for use with APIs offering open-source models, so you don't have to
 
 [Fork this repo and customize it for your own needs!](https://github.com/e-p-armstrong/augmentoolkit/fork)
 
+**The Version Using Aphrodite Engine (based on vLLM) is updated and recommended for most usecases!** (This means batched inference, GPTQ/AWQ support, hundreds of tokens per second, and asynchronous operations for a much faster experience). [Try it now!](https://github.com/e-p-armstrong/augmentoolkit/tree/aphrodite-branch)
+
 ## Table of Contents:
 1. [Installation](#installation)
 2. [Introduction](#introduction-what-is-this-and-why-was-it-built)
@@ -114,6 +116,20 @@ The `./augmentoolkit/generation_functions` holds a few helper functions, and a f
 Inside `./augmentoolkit/control_flow_functions`, note that `write_output_to_file()` can mostly be ignored; it just saves the full completion of each step for the sake of potential future training of a model specifically for running this pipeline (think jondurbin/cinematika-7b-v0.1). The main output of the function is usually just passed onto the next part of the pipeline. If a file has been written already, any future attempts to write that file will be skipped, allowing for easy resumption of generation after interruption.
 
 It's easiest to understand Augmentoolkit as being an LLM pipeline: it takes a bunch of input, calls a series of LLM modifications on it (passing the output from one step to the next) and outputs the transformed result. This is somewhat different from an agent framework like LangChain because the AI doesn't actually reason about what step to do next; the logic is hardcoded and hand-prompted.
+
+Since previous versions of the README omitted this key information: **the notebook outputs data both in its own format and in ShareGPT at the end.** Its own format is the following:
+```
+[
+[
+'something', # this is the conv
+'something', #character card
+'something', # Chain of Thought generations used to plan the scenario. Some of the later steps could possibly be useful context to append to the character card, so the entire thing is included incase you need it for your purposes.
+[['q','a','source_paragraph'],...up to 4 times...]
+],
+...repeated for each conversation you generated
+]
+```
+Things are accessed by index, which makes it more just a pure list format than JSON. **Of course you can also just convert to ShareGPT using the cell at the very end, but that loses some info.**
 
 ### Some features worth being aware of
 This subsection describes things that make life easier in Augmentoolkit.
