@@ -24,6 +24,8 @@ I work with AI SAAS startups that want to create (or improve) specialized LLMs u
 
 A (non-professional, roleplay-focused) Augmentoolkit dataset demonstration can be found at [https://huggingface.co/datasets/Heralax/Augmentoolkit-demo/tree/main](https://huggingface.co/datasets/Heralax/Augmentoolkit-demo/tree/main). It's from an older version of the pipeline that had a few bugs, but it helps you get the idea of what's possible, and proves that it produces quality stuff. Now, with many bugfixes and APIs that offer full-precision models, quality can be even higher.
 
+If you're wondering if this tool takes files in [insert your format here] then I would recommend looking up a tool for converting that file format to plain text. For instance, with epub files, you might use [this](https://convertio.co/epub-txt/).
+
 ## Table of Contents:
 1. [Installation](#installation)
 2. [Introduction](#introduction)
