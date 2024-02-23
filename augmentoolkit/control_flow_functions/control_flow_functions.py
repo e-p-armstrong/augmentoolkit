@@ -1163,18 +1163,6 @@ async def generate_qatuples_from_para(
             return
         question_group_id = make_id()
         # print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
-        (
-            plan,
-            questions_plan_output,
-        ) = await qatuples_planner.generate(
-            arguments={
-                "textdetails": para[1],
-                "text": para[0]
-            }
-        )
-        write_output_to_file(
-            questions_plan_output, obj_conf['PATH']['OUTPUT'] + "/question_plan_generations", question_group_id
-        )
         # print(
         #     f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
         # )
@@ -1185,7 +1173,6 @@ async def generate_qatuples_from_para(
             arguments={
                 "text": para[0],
                 "textdetails": para[1],
-                "plan": strip_steps.strip_steps(plan)
             }
         )
         
