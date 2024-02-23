@@ -3,12 +3,8 @@ Turn any raw text into a high-quality dataset using local models. Make data gath
 
 Augmentoolkit now supports APIs offering open-source models, such as Mistral, Together.ai or Groq (and also the OpenAI API if you really want it). You don't need to have a fancy computer to make awesome datasets, and you don't have to screw around with dependencies and CUDA. The free credits from a service like Together.ai should be able to sustain the creation of even a decent-sized dataset. Data generation is also blazingly-fast (and async) when using APIs. Of course, you can still use local models, if you prefer that and have the compute to support it. They run async too, thanks to the Aphrodite engine made by the people at Pygmalion (thanks Alpin for the tech support).
 
-Before Augmentoolkit, making a dataset looked like this:
-![alt text](image.png)
-
-Now, it's as simple as running a Python script.
-
 ## Demo video:
+in-progress
 
 **For Businesses**
 I work with AI SAAS startups that want to create or improve a domain-expert LLM with high-quality and scalable training data. Need a dataset for your business's AI? I can modify Augmentoolkit for any domain and for tasks beyond question answering, and I'd be happy to help you painlessly create the data — and data-creation tools — you require. Given that I made the original version of the darn thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
