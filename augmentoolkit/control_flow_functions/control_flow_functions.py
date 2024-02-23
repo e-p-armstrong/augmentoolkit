@@ -1564,6 +1564,8 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
             "## Character card plan (be creat",
             # "### Questions",
             "## Questions, answer, and text that the character should know:",
+            "Special instructions:",
+            "###"
         ],
         "temperature": 1,
         # top_k=-1,

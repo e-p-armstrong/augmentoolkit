@@ -117,7 +117,7 @@ Text the question and answer were sourced from:
 """
 
 Special instructions:
-{instructions}
+{special_instructions}
 
 ### Response:
 ## Character card plan:
