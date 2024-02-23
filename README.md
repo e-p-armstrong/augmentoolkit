@@ -180,9 +180,9 @@ Things are accessed by index, which makes it more just a pure list format than J
 
 If you think this project is cool and useful, great! I'm genuinely happy that you're interested by my work. If you're really interested by this project you might be interested by some of my other endeavors:
 
-[A newsletter/blog about Prompt Engineering Open-Source models — the art and science that is the backbone of Augmentoolkit and complex LLM projects like it. I also consult for prompt engineering, if you're curious.](https://promptingweekly.substack.com/)
-[I sometimes post stuff and sometimes join spaces on X/Twitter](https://twitter.com/e_p_armstrong)
-[Let's connect on LinkedIn!](https://www.linkedin.com/in/evan-armstrong-1a84b3200/)
-[I'm pretty active on TheBloke's discord server and a bunch of other AI discords. Find me as @heralax!](https://discord.gg/prYqwywP)
-[By the way, did I mention I consult? :) I might be able to help your AI business get even better, using Augmentoolkit or straight-up prompting. We should chat at least and connect](https://calendly.com/evanpeterarmstrong/discovery-call)
+- [A newsletter/blog about Prompt Engineering Open-Source models — the art and science that is the backbone of Augmentoolkit and complex LLM projects like it. I also consult for prompt engineering, if you're curious.](https://promptingweekly.substack.com/)
+- [I sometimes post stuff and sometimes join spaces on X/Twitter](https://twitter.com/e_p_armstrong)
+- [Let's connect on LinkedIn!](https://www.linkedin.com/in/evan-armstrong-1a84b3200/)
+- [I'm pretty active on TheBloke's discord server and a bunch of other AI discords. Find me as @heralax!](https://discord.gg/prYqwywP)
+- [By the way, did I mention I consult? :) I might be able to help your AI business get even better, using Augmentoolkit or straight-up prompting. We should chat at least and connect](https://calendly.com/evanpeterarmstrong/discovery-call)
 Email me at: evanpeterarmstrong@gmail.com
