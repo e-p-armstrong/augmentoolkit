@@ -26,7 +26,7 @@ A (non-professional, roleplay-focused) Augmentoolkit dataset demonstration can b
 
 ## Table of Contents:
 1. [Installation](#installation)
-2. [Concepts Introduction](#introduction)
+2. [Introduction](#introduction)
 3. [Quickstart](#quickstart)
 4. [Neat Features](#some-features-worth-being-aware-of)
 5. [Customization (important)](#customization-arranged-in-order-of-least-to-most-difficult-to-implement)
@@ -185,4 +185,4 @@ If you think this project is cool and useful, great! I'm genuinely happy that yo
 - [Let's connect on LinkedIn!](https://www.linkedin.com/in/evan-armstrong-1a84b3200/)
 - [I'm pretty active on TheBloke's discord server and a bunch of other AI discords. Find me as @heralax!](https://discord.gg/prYqwywP)
 - [By the way, did I mention I consult? :) I might be able to help your AI business get even better, using Augmentoolkit or straight-up prompting. We should chat at least and connect](https://calendly.com/evanpeterarmstrong/discovery-call)
-Email me at: evanpeterarmstrong@gmail.com
+- Email me at: evanpeterarmstrong@gmail.com
