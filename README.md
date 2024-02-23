@@ -9,7 +9,7 @@ in-progress
 ## For Businesses
 I work with AI SAAS startups that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? I can modify Augmentoolkit for any domain and for tasks beyond question answering, and I'd be happy to help you painlessly create the data — and data-creation tools — you require. Given that I made the original version of the darn thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
 
-*Note* Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want quality results fast (it took 5 months of learning and iteration for me to get the project to where it is now, prompting open models is a precise science). If you're a hobbyist and have time to experiment with it for casual or personal uses, by all means go for it.
+*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to get the project to where it is now — prompting open models is a precise science). If you're a hobbyist and have time to experiment with it for casual or personal uses, by all means go for it.
 
 ## New Features At A Glance
 - Runs Async with any LLM API (together, openrouter, mistral) that's compatible with the OpenAI python library
