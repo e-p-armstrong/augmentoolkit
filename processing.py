@@ -68,7 +68,7 @@ async def main():
 
     # ## Below: Defines and imports functions that you will probably use no matter what cells in the script you choose to run:
 
-
+    print("\n\n\nIMPORTANT NOTE! Augmentoolkit prints a lot of stuff when it runs. Including tracebacks caused by model errors. Most errors are the result of the models, not the code, and any tracebacks you see were almost certainly handled. So: don't panic! You're gonna make it! Alright that's the end of this PSA. Happy dataset generation!\n\n\n")
 
     import os
     import uuid

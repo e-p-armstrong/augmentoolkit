@@ -16,8 +16,6 @@ Now designed for use with APIs offering open-source models, so you don't have to
 
 [Fork this repo and customize it for your own needs!](https://github.com/e-p-armstrong/augmentoolkit/fork)
 
-**The Version Using Aphrodite Engine (based on vLLM) is updated and recommended for most usecases!** (This means batched inference, GPTQ/AWQ support, hundreds of tokens per second, and asynchronous operations for a much faster experience). [Try it now!](https://github.com/e-p-armstrong/augmentoolkit/tree/aphrodite-branch)
-
 ## Table of Contents:
 1. [Installation](#installation)
 2. [Introduction](#introduction-what-is-this-and-why-was-it-built)
