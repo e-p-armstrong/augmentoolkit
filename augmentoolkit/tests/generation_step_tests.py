@@ -17,10 +17,10 @@ class TestGenerationStep(unittest.IsolatedAsyncioTestCase):
         # Initialize the GenerationStep with mocked engine_wrapper
         step = GenerationStep(
             prompt_path="test_prompt.txt",  # Assume this file exists in your INPUT_DIRECTORY with a suitable prompt
-            regex=re.compile(r'(test response)'),
+            regex=re.compile(r"(test response)"),
             completion_mode=True,
             engine_wrapper=engine_wrapper_mock,
-            arguments={"test": "replacement"}
+            arguments={"test": "replacement"},
         )
 
         # Execute the generate method
@@ -38,10 +38,10 @@ class TestGenerationStep(unittest.IsolatedAsyncioTestCase):
         # Initialize the GenerationStep with mocked engine_wrapper
         step = GenerationStep(
             prompt_path="test_chat_prompt.json",  # Assume this JSON file exists with a suitable structure
-            regex=re.compile(r'(chat test response)'),
+            regex=re.compile(r"(chat test response)"),
             completion_mode=False,
             engine_wrapper=engine_wrapper_mock,
-            arguments={"test": "replacement"}
+            arguments={"test": "replacement"},
         )
 
         # Execute the generate method

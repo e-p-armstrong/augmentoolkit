@@ -6,6 +6,19 @@ Augmentoolkit now supports APIs offering open-source models, such as Mistral, To
 ## Demo video:
 in-progress
 
+## Table of Contents:
+0. [Self-promotion](#for-businesses)
+1. [Installation](#installation)
+2. [Introduction](#introduction)
+3. [Quickstart](#quickstart)
+4. [Neat Features](#some-features-worth-being-aware-of)
+5. [Customization (important)](#customization-arranged-in-order-of-least-to-most-difficult-to-implement)
+6. [Hardcore, in-depth Concept Explanation](#hardcore-usage)
+    - [Concepts and Operation](#concepts-and-operation)
+    - [Understanding What is Going On as It Runs](#understanding-what-is-going-on-as-it-runs)
+7. [The Format of the Output Data](#output-data-format)
+8. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
+
 ## For Businesses
 I work with AI SAAS startups that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? I can modify Augmentoolkit for any domain and for tasks beyond question answering, and I'd be happy to help you painlessly create the data — and data-creation tools — you require. Given that I made the original version of the darn thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
 
@@ -25,18 +38,6 @@ I work with AI SAAS startups that want to create (or improve) specialized LLMs u
 A (non-professional, roleplay-focused) Augmentoolkit dataset demonstration can be found at [https://huggingface.co/datasets/Heralax/Augmentoolkit-demo/tree/main](https://huggingface.co/datasets/Heralax/Augmentoolkit-demo/tree/main). It's from an older version of the pipeline that had a few bugs, but it helps you get the idea of what's possible, and proves that it produces quality stuff. Now, with many bugfixes and APIs that offer full-precision models, quality can be even higher.
 
 If you're wondering if this tool takes files in [insert your format here] then I would recommend looking up a tool for converting that file format to plain text. For instance, with epub files, you might use [this](https://convertio.co/epub-txt/).
-
-## Table of Contents:
-1. [Installation](#installation)
-2. [Introduction](#introduction)
-3. [Quickstart](#quickstart)
-4. [Neat Features](#some-features-worth-being-aware-of)
-5. [Customization (important)](#customization-arranged-in-order-of-least-to-most-difficult-to-implement)
-6. [Hardcore, in-depth Concept Explanation](#hardcore-usage)
-    - [Concepts and Operation](#concepts-and-operation)
-    - [Understanding What is Going On as It Runs](#understanding-what-is-going-on-as-it-runs)
-7. [The Format of the Output Data](#output-data-format)
-8. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
 
 ## Installation:
 Augmentoolkit, at its simplest, requires only the OpenAI API library (open source model providers use the OAI library too). So there is not much here besides cloning this repo and installing its dependencies (you probably already have most of them). Still, the details are here for completion's sake (and the newer enthusiasts among us).

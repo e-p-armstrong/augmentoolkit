@@ -1,5 +1,3 @@
-
-
 names = [  # Replaces "Albert" in scenarios. Needs to be western male names to avoid pronoun and setting inconsistencies).
     "William",
     "James",

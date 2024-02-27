@@ -26,21 +26,21 @@ from augmentoolkit.generation_functions import (
     identify_duplicates,
     extract_name,
     random_name,
-    strip_steps
+    strip_steps,
 )
-from augmentoolkit.generation_functions.character_card_helpers import extract_capital_letters, select_random_capital
+from augmentoolkit.generation_functions.character_card_helpers import (
+    extract_capital_letters,
+    select_random_capital,
+)
 from augmentoolkit.generation_functions.format_qatuples import format_qatuples
 
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
 from augmentoolkit.generation_functions.special_instructions import special_instructions
 
-with open('./config.yaml', 'r') as file:
+with open("./config.yaml", "r") as file:
     obj_conf = yaml.safe_load(file)
 
 DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
-
-
-
 
 
 def extract_steps(text, steps=[2, 4, 5]):
@@ -76,6 +76,7 @@ def extract_first_words(character_name, text):
 
 import os
 
+
 # Used basically everywhere:
 def make_id():
     return str(uuid.uuid4())
@@ -99,6 +100,7 @@ def write_output_to_file(output, directory, uuid):
 
 # multiturn helpers
 # These will probably be used for multiturn rapid-fire answering.
+
 
 def create_conv_starter(character):
     charname = extract_name.extract_name(character)
@@ -125,6 +127,7 @@ def create_conv_starter(character):
     ]
     return random.choice(conv_starters_filtered)
 
+
 def create_starting_str(qatuples):
     author_name_letters = extract_capital_letters(qatuples[0][3])
     starting_str = ""
@@ -135,18 +138,24 @@ def create_starting_str(qatuples):
         starting_str = select_random_capital(exclusions)
     return starting_str
 
+
 # Idea: use multiple short answers to train the task of answering multiple questions in one response. Like, "Tell me what 2+2 is then tell me who won the battle of Alesia". Two-three short answers per response should be enough.
 async def make_multiturn_character(
-    qa_tuples, conv_id, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None,completion_mode=None
+    qa_tuples,
+    conv_id,
+    assistant_mode=False,
+    character_card_plan_creator=None,
+    character_card_creator=None,
+    completion_mode=None,
 ):
     if (
         assistant_mode
     ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
         return "will_be_replaced", "will_be_replaced"
-    
+
     instructions = special_instructions(n=1).strip()
     if not completion_mode:
-        instructions = escape_unescaped_quotes(instructions).replace("\n","\\n")
+        instructions = escape_unescaped_quotes(instructions).replace("\n", "\\n")
     if completion_mode:
         (
             plan,
@@ -156,7 +165,7 @@ async def make_multiturn_character(
                 "textname": qa_tuples[0][3],
                 "text": qa_tuples[0][2],
                 "question_answer_list": format_qatuples(qa_tuples),
-                "special_instructions": instructions
+                "special_instructions": instructions,
             }
         )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
     else:
@@ -167,12 +176,18 @@ async def make_multiturn_character(
             arguments={
                 "textname": qa_tuples[0][3],
                 "text": qa_tuples[0][2],
-                "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
-                "special_instructions": instructions
+                "question_answer_list": escape_unescaped_quotes(
+                    format_qatuples(qa_tuples)
+                ).replace("\n", "\\n"),
+                "special_instructions": instructions,
             }
         )
-    write_output_to_file(card_plan_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_card_plan_generations", conv_id)
-    
+    write_output_to_file(
+        card_plan_output,
+        obj_conf["PATH"]["OUTPUT"] + "/multiturn_card_plan_generations",
+        conv_id,
+    )
+
     starting_str = create_starting_str(qa_tuples)
     (
         char,
@@ -183,16 +198,23 @@ async def make_multiturn_character(
             "textname": qa_tuples[0][3],
             "special_instructions": instructions,
             "plan": plan,
-            "starting_str": starting_str
-            
+            "starting_str": starting_str,
         }
     )  # creates a character card
-    write_output_to_file(char_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_card_generations", conv_id)
+    write_output_to_file(
+        char_output, obj_conf["PATH"]["OUTPUT"] + "/multiturn_card_generations", conv_id
+    )
     return char, instructions
 
 
 async def make_multiturn_scenario(
-    qa_tuples, character, conv_id, assistant_mode=False,scenario_plan_creator=None, scenario_creator=None, completion_mode=None
+    qa_tuples,
+    character,
+    conv_id,
+    assistant_mode=False,
+    scenario_plan_creator=None,
+    scenario_creator=None,
+    completion_mode=None,
 ):
     if (
         assistant_mode
@@ -214,16 +236,20 @@ async def make_multiturn_scenario(
             scenario_plan_output,
         ) = await scenario_plan_creator.generate(
             arguments={
-                "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
+                "question_answer_list": escape_unescaped_quotes(
+                    format_qatuples(qa_tuples)
+                ).replace("\n", "\\n"),
                 "character": character,
             }
         )
-    
-    plan = fix_scenario_plan(plan,character)
+
+    plan = fix_scenario_plan(plan, character)
     write_output_to_file(
-        scenario_plan_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_scenario_plan_generations", conv_id
+        scenario_plan_output,
+        obj_conf["PATH"]["OUTPUT"] + "/multiturn_scenario_plan_generations",
+        conv_id,
     )
-    
+
     variation = select_variation(character)
     if completion_mode:
         (
@@ -234,7 +260,7 @@ async def make_multiturn_scenario(
                 "question_answer_list": format_qatuples(qa_tuples),
                 "character": character,
                 "plan": plan,
-                "selected_variation": variation
+                "selected_variation": variation,
             }
         )  # creates a scenario based on a character card and question/answer tuple
     else:
@@ -243,18 +269,30 @@ async def make_multiturn_scenario(
             scenario_output,
         ) = await scenario_creator.generate(
             arguments={
-                "question_answer_list": escape_unescaped_quotes(format_qatuples(qa_tuples)).replace("\n","\\n"),
+                "question_answer_list": escape_unescaped_quotes(
+                    format_qatuples(qa_tuples)
+                ).replace("\n", "\\n"),
                 "character": character,
                 "plan": plan,
-                "selected_variation": variation
+                "selected_variation": variation,
             }
         )
-    write_output_to_file(scenario_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_scenario_generations", conv_id)
+    write_output_to_file(
+        scenario_output,
+        obj_conf["PATH"]["OUTPUT"] + "/multiturn_scenario_generations",
+        conv_id,
+    )
     return scenario, plan
 
 
 async def make_multiturn_conversation_info(
-    qa_tuples, assistant_mode=False, character_card_plan_creator=None, character_card_creator=None, scenario_plan_creator=None, scenario_creator=None,completion_mode=None
+    qa_tuples,
+    assistant_mode=False,
+    character_card_plan_creator=None,
+    character_card_creator=None,
+    scenario_plan_creator=None,
+    scenario_creator=None,
+    completion_mode=None,
 ):
     conv_id = make_id()
     if (
@@ -267,14 +305,25 @@ async def make_multiturn_conversation_info(
     while not done and retries < 3:
         retries = retries + 1
         character, instructions = await make_multiturn_character(
-            qa_tuples, conv_id, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator, completion_mode=completion_mode
+            qa_tuples,
+            conv_id,
+            assistant_mode=assistant_mode,
+            character_card_plan_creator=character_card_plan_creator,
+            character_card_creator=character_card_creator,
+            completion_mode=completion_mode,
         )
         if "What's your backstory?" not in character:
             print("Failed to properly generate card, retrying")
             continue
         done = True
     scenario, scenario_plan = await make_multiturn_scenario(
-        qa_tuples, character, conv_id, assistant_mode=assistant_mode, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator, completion_mode=completion_mode
+        qa_tuples,
+        character,
+        conv_id,
+        assistant_mode=assistant_mode,
+        scenario_plan_creator=scenario_plan_creator,
+        scenario_creator=scenario_creator,
+        completion_mode=completion_mode,
     )
 
     return (qa_tuples, character, scenario, scenario_plan, conv_id)
@@ -306,21 +355,29 @@ def extract_reasoning_from_context_check(response):
     determination = decision_pattern.search(response).group(1).strip()
     if "pass" in determination.lower():
         print("Leaving be...")
-        return (True, response)#, completion
+        return (True, response)  # , completion
     elif "reword" in determination.lower():
         print("Rewording...")
         q, a = extract_question_answer.extract_question_answer(response)
         print((q, a))
-        return (q,a)#(q, a, qatuple[2], qatuple[3]), completion
+        return (q, a)  # (q, a, qatuple[2], qatuple[3]), completion
     elif "fail" in determination.lower():
         print("Setting to None...")
-        return (False, response)#, completion
+        return (False, response)  # , completion
     else:
         print("Did not contain relevant or irrelevant! Retrying")
 
+
 # Postprocessing function for question/answer validation
 async def repair_qatuple_context(
-    idx, tup, engine_wrapper, writepath, vetted_qa_tuples, use_filenames=False, completion_mode=None, logging_level=logging.INFO
+    idx,
+    tup,
+    engine_wrapper,
+    writepath,
+    vetted_qa_tuples,
+    use_filenames=False,
+    completion_mode=None,
+    logging_level=logging.INFO,
 ):
     # NOTE set up the generation step
     context_repairer_path = "check_qatuple_context_no_filenames"
@@ -330,11 +387,11 @@ async def repair_qatuple_context(
         context_repairer_path = context_repairer_path + ".txt"
     else:
         context_repairer_path = context_repairer_path + ".json"
-        
+
     repair_context_regex = re.compile(
-                r"Reasoning and thought process \(be thorough\):(.+)",
-                re.DOTALL | re.IGNORECASE,
-            )
+        r"Reasoning and thought process \(be thorough\):(.+)",
+        re.DOTALL | re.IGNORECASE,
+    )
     context_repairer = GenerationStep(
         prompt_path=context_repairer_path,
         regex=repair_context_regex,
@@ -357,9 +414,9 @@ async def repair_qatuple_context(
         logging_level=logging_level,
         output_processor=extract_reasoning_from_context_check,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
-    
+
     # Resume normal control flow
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
@@ -389,10 +446,17 @@ async def repair_qatuple_context(
             }
         )
         write_output_to_file(
-            revision_output, obj_conf['PATH']['OUTPUT'] + "/question_context_revision_generations", revision_id
+            revision_output,
+            obj_conf["PATH"]["OUTPUT"] + "/question_context_revision_generations",
+            revision_id,
         )  # incidentally, identifying the problem and fixing it in the same step (without another planning step) works a lot better than identifying it and then trying to fix it in the next step.
         if isinstance(revision[0], str):  # if the thing was reworded
-            vetted_qa_tuples[idx] = (revision[0], revision[1], tup[2], tup[3]) # replace the old tuple with the new one, revision doesn't have text name so we keep the old one
+            vetted_qa_tuples[idx] = (
+                revision[0],
+                revision[1],
+                tup[2],
+                tup[3],
+            )  # replace the old tuple with the new one, revision doesn't have text name so we keep the old one
         elif not revision[0]:
             vetted_qa_tuples[
                 idx
@@ -414,25 +478,26 @@ async def repair_qatuple_context(
         print("!!! ERROR!", e)
         traceback.print_exc()
 
+
 def parse_answer_accuracy_validation(response):
     determination_pattern = re.compile(
         r"Overall Accuracy Determination:(.+)", re.DOTALL
     )
     determination = determination_pattern.search(response).group(1).strip()
     if (
-                "inaccurate" in determination.lower()
-                or "Inaccurate" in determination.lower()
-                or "mostly" in determination.lower()
-                or "partial" in determination.lower() or "irrelevant" in determination.lower()
-            ):  # The "mostly" is there to catch "mostly accurate" which the model says occasionally, and which actually means inaccurate.
-                return (False, response)
-    elif (
-        "accurate" in determination.lower()
-    ):
+        "inaccurate" in determination.lower()
+        or "Inaccurate" in determination.lower()
+        or "mostly" in determination.lower()
+        or "partial" in determination.lower()
+        or "irrelevant" in determination.lower()
+    ):  # The "mostly" is there to catch "mostly accurate" which the model says occasionally, and which actually means inaccurate.
+        return (False, response)
+    elif "accurate" in determination.lower():
         return (True, response)
     else:
         logging.ERROR("Answer accuracy validation made a mistake")
         raise Exception("answer accuracy validation did not include a judgement")
+
 
 # Control flow helpers -- Question/Answer Validation
 async def vet_answer_accuracy_loop(
@@ -444,9 +509,8 @@ async def vet_answer_accuracy_loop(
     use_filenames=False,
     completion_mode=None,
     logging_level=None,
-    new_q_generator=None
+    new_q_generator=None,
 ):
-    
     # NOTE Set up answer check generation step
     prompt_path_ans_accuracy_check = "check_answer"
     if completion_mode:
@@ -454,37 +518,37 @@ async def vet_answer_accuracy_loop(
     else:
         prompt_path_ans_accuracy_check = prompt_path_ans_accuracy_check + ".json"
     check_ans_accuracy_regex = re.compile(
-                r"Reasoning and thought process \(the text is your single source of truth\):\n(.+)",
-                re.DOTALL,
-            )
+        r"Reasoning and thought process \(the text is your single source of truth\):\n(.+)",
+        re.DOTALL,
+    )
 
     answer_accuracy_checker = GenerationStep(
         prompt_path=prompt_path_ans_accuracy_check,
         regex=check_ans_accuracy_regex,
         sampling_params={
-                "max_tokens": 6000,
-                "stop": [
-                    "### Response",
-                    "\n\n\n\n\n",
-                    "</s>",
-                    "# Input:",
-                    "[INST]",
-                    "### Instruction",
-                    "[INST",
-                ],
-                "temperature": 0.2,
-            },
+            "max_tokens": 6000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+            ],
+            "temperature": 0.2,
+        },
         completion_mode=completion_mode,
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_answer_accuracy_validation,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
-    
+
     # Resume normal control flow code
-    
+
     try:
         qtuple = qa_tuple
         # print(
@@ -501,11 +565,13 @@ async def vet_answer_accuracy_loop(
                 arguments={
                     "text": qtuple[2],
                     "question": qtuple[0],
-                    "answer": qtuple[1]
+                    "answer": qtuple[1],
                 }
             )
             write_output_to_file(
-                answer_accuracy_output, obj_conf['PATH']['OUTPUT'] + "/check_answer_accuracy_generations", run_id
+                answer_accuracy_output,
+                obj_conf["PATH"]["OUTPUT"] + "/check_answer_accuracy_generations",
+                run_id,
             )
             if not judgement[0]:  # if not accurate
                 dissenting_reasoning = judgement[1]
@@ -533,14 +599,13 @@ async def vet_answer_accuracy_loop(
                 qtuple_partial,
                 generate_new_q_output,
             ) = await new_q_generator.generate(
-                arguments={
-                    "textname": qtuple[3],
-                    "text": qtuple[2]
-                }
+                arguments={"textname": qtuple[3], "text": qtuple[2]}
             )
-            qtuple = (qtuple_partial[0],qtuple_partial[1],para,para_name)
+            qtuple = (qtuple_partial[0], qtuple_partial[1], para, para_name)
             write_output_to_file(
-                generate_new_q_output, obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations", run_id
+                generate_new_q_output,
+                obj_conf["PATH"]["OUTPUT"] + "/regenerate_question_generations",
+                run_id,
             )
             return await vet_question_loop(
                 qtuple,
@@ -550,7 +615,7 @@ async def vet_answer_accuracy_loop(
                 double_check_counter=double_check_counter,
                 use_filenames=use_filenames,
                 completion_mode=completion_mode,
-                logging_level=logging_level
+                logging_level=logging_level,
             )  # going to get one hell of a call stack by the end of this, but it should be fine
     except Exception as e:
         print("!!ERROR!!")
@@ -558,6 +623,7 @@ async def vet_answer_accuracy_loop(
         traceback.print_exc()
 
     return (None, None, None, qtuple[3])
+
 
 def parse_answer_relevancy_validation_step(thought_process):
     judgement_pattern = re.compile(
@@ -568,15 +634,15 @@ def parse_answer_relevancy_validation_step(thought_process):
         "irrelevant" in determination.lower()
         or "mostly" in determination.lower()
         or "partial" in determination.lower()
-        or "introduces information not present in the text"
-        in determination.lower()
+        or "introduces information not present in the text" in determination.lower()
     ):  # Hack to get around faulty outputs
-        return (False, thought_process)#, completion
+        return (False, thought_process)  # , completion
     elif "relevant" in determination or "Relevant" in determination:
-        return (True, thought_process)#, completion
+        return (True, thought_process)  # , completion
     else:
         logging.ERROR(f"Answer relevancy parsing failed! Retrying! {judgement_pattern}")
         raise Exception("error in judgement extranction (ans relevancy)")
+
 
 async def vet_answer_relevance_loop(
     qa_tuple,
@@ -587,16 +653,15 @@ async def vet_answer_relevance_loop(
     use_filenames=False,
     completion_mode=None,
     logging_level=None,
-    new_q_generator=None, # we pass the new q generator around so the code is less cluttered
+    new_q_generator=None,  # we pass the new q generator around so the code is less cluttered
 ):
-    
     # NOTE Set up answer check generation step
     prompt_path_ans_relevancy_check = "check_answer_relevancy_with_text"
     check_ans_relevancy_regex = re.compile(
-                r"Reasoning and thought process \(be careful about extra details, even vague ones\):\n(.+)",
-                re.DOTALL | re.IGNORECASE,
-            )
-    
+        r"Reasoning and thought process \(be careful about extra details, even vague ones\):\n(.+)",
+        re.DOTALL | re.IGNORECASE,
+    )
+
     if completion_mode:
         prompt_path_ans_relevancy_check = prompt_path_ans_relevancy_check + ".txt"
     else:
@@ -606,27 +671,27 @@ async def vet_answer_relevance_loop(
         prompt_path=prompt_path_ans_relevancy_check,
         regex=check_ans_relevancy_regex,
         sampling_params={
-                "max_tokens": 5500,
-                "stop": [
-                    "### Response",
-                    "\n\n\n\n\n",
-                    "</s>",
-                    "# Input:",
-                    "[INST]",
-                    "### Instruction",
-                    "[INST",
-                ],
-                "temperature": 0.2,
-            },
+            "max_tokens": 5500,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+            ],
+            "temperature": 0.2,
+        },
         completion_mode=completion_mode,
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_answer_relevancy_validation_step,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
-    
+
     # Resume normal control flow code
     try:
         qtuple = qa_tuple
@@ -647,11 +712,13 @@ async def vet_answer_relevance_loop(
                 arguments={
                     "text": qtuple[2],
                     "question": qtuple[0],
-                    "answer": qtuple[1]
+                    "answer": qtuple[1],
                 }
             )
             write_output_to_file(
-                answer_relevancy_output, obj_conf['PATH']['OUTPUT'] + "/check_answer_relevancy_generations", run_id
+                answer_relevancy_output,
+                obj_conf["PATH"]["OUTPUT"] + "/check_answer_relevancy_generations",
+                run_id,
             )
             if not judgement[0]:  # if not relevant
                 dissenting_reasoning = judgement[1]
@@ -675,7 +742,7 @@ async def vet_answer_relevance_loop(
                 use_filenames=use_filenames,
                 completion_mode=completion_mode,
                 logging_level=logging_level,
-                new_q_generator=new_q_generator
+                new_q_generator=new_q_generator,
             )
         else:
             # print(f"\n\nRELEVANCE CHECKS FAILED - SENDING BACK TO QUESTION LOOP")
@@ -686,15 +753,14 @@ async def vet_answer_relevance_loop(
                 qtuple_partial,
                 generate_new_q_output,
             ) = await new_q_generator.generate(
-                arguments={
-                    "textname": qtuple[3],
-                    "text": qtuple[2]
-                }
+                arguments={"textname": qtuple[3], "text": qtuple[2]}
             )
             print(qtuple_partial)
-            qtuple = (qtuple_partial[0],qtuple_partial[1],para,para_name)
+            qtuple = (qtuple_partial[0], qtuple_partial[1], para, para_name)
             write_output_to_file(
-                generate_new_q_output, obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations", run_id
+                generate_new_q_output,
+                obj_conf["PATH"]["OUTPUT"] + "/regenerate_question_generations",
+                run_id,
             )
             return await vet_question_loop(
                 qtuple,
@@ -704,7 +770,7 @@ async def vet_answer_relevance_loop(
                 double_check_counter=double_check_counter,
                 use_filenames=use_filenames,
                 completion_mode=completion_mode,
-                logging_level=logging_level
+                logging_level=logging_level,
             )
     except Exception as e:
         print("!!ERROR!!")
@@ -713,25 +779,29 @@ async def vet_answer_relevance_loop(
 
     return (None, None, None, qtuple[3])
 
+
 def parse_validation_step(response):
-    decision_pattern = re.compile(
-                r"Final Judgment:(.+)", re.DOTALL | re.IGNORECASE
-            )
+    decision_pattern = re.compile(r"Final Judgment:(.+)", re.DOTALL | re.IGNORECASE)
     determination = decision_pattern.search(response).group(1).strip()
     if (
         "irrelevant" in determination
         or "Irrelevant" in determination.lower()
         or "mostly" in determination.lower()
         or "partial" in determination.lower()
-        or "introduces information not present in the text"
-        in determination.lower()
-        ):
-        return (False, response) # TODO ensure that in the control flow code it passes on (False, response), completion
+        or "introduces information not present in the text" in determination.lower()
+    ):
+        return (
+            False,
+            response,
+        )  # TODO ensure that in the control flow code it passes on (False, response), completion
     elif "relevant" in determination or "Relevant" in determination:
-        return (True, response) # TODO same as above(True, response), completion
+        return (True, response)  # TODO same as above(True, response), completion
     else:
         logging.ERROR("Did not contain relevant or irrelevant! Retrying")
-        raise Exception("Validation step screwed up and did not reach a conclusion! Retrying!")
+        raise Exception(
+            "Validation step screwed up and did not reach a conclusion! Retrying!"
+        )
+
 
 async def vet_question_loop(
     qa_tuple,
@@ -742,14 +812,13 @@ async def vet_question_loop(
     use_filenames=False,
     completion_mode=None,
     logging_level=None,
-    
 ):
     # NOTE Set up question check generation step
     prompt_path_q_check = "check_question"
     check_q_regex = re.compile(
-                r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)",
-                re.DOTALL | re.IGNORECASE,
-            )
+        r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)",
+        re.DOTALL | re.IGNORECASE,
+    )
 
     if completion_mode:
         prompt_path_q_check = prompt_path_q_check + ".txt"
@@ -760,7 +829,47 @@ async def vet_question_loop(
         prompt_path=prompt_path_q_check,
         regex=check_q_regex,
         sampling_params={
-                "max_tokens": 4000,
+            "max_tokens": 4000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+            ],
+            "temperature": 0.2,
+        },
+        completion_mode=completion_mode,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+        output_processor=parse_validation_step,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
+    )
+
+    # NOTE Set up generate new question step
+    prompt_path_new_q_gen = "new_q_gen_no_filenames"
+    if use_filenames:
+        prompt_path_new_q_gen = "new_q_gen_filenames"
+
+    new_q_gen_regex = re.compile(
+        r"Question \(based on text\):\n(.+)", re.IGNORECASE | re.DOTALL
+    )
+
+    if completion_mode:
+        prompt_path_new_q_gen = prompt_path_new_q_gen + ".txt"
+    else:
+        prompt_path_new_q_gen = prompt_path_new_q_gen + ".json"
+
+    if completion_mode:
+        new_q_generator = GenerationStep(
+            prompt_path=prompt_path_new_q_gen,
+            regex=new_q_gen_regex,
+            sampling_params={
+                "max_tokens": 3000,
                 "stop": [
                     "### Response",
                     "\n\n\n\n\n",
@@ -772,80 +881,40 @@ async def vet_question_loop(
                 ],
                 "temperature": 0.2,
             },
-        completion_mode=completion_mode,
-        retries=1,
-        engine_wrapper=engine_wrapper,
-        logging_level=logging_level,
-        output_processor=parse_validation_step,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
-    )
-    
-    # NOTE Set up generate new question step
-    prompt_path_new_q_gen = "new_q_gen_no_filenames"
-    if use_filenames:
-        prompt_path_new_q_gen = "new_q_gen_filenames"
-    
-    new_q_gen_regex = re.compile(
-        r"Question \(based on text\):\n(.+)", re.IGNORECASE | re.DOTALL
-    )
-    
-    if completion_mode:
-        prompt_path_new_q_gen = prompt_path_new_q_gen + ".txt"
-    else:
-        prompt_path_new_q_gen = prompt_path_new_q_gen + ".json"
-    
-    if completion_mode:
-        new_q_generator = GenerationStep(
-            prompt_path=prompt_path_new_q_gen,
-            regex=new_q_gen_regex,
-            sampling_params={
-                    "max_tokens": 3000,
-                    "stop": [
-                        "### Response",
-                        "\n\n\n\n\n",
-                        "</s>",
-                        "# Input:",
-                        "[INST]",
-                        "### Instruction",
-                        "[INST",
-                    ],
-                    "temperature": 0.2,
-                },
             completion_mode=completion_mode,
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=extract_question_from_response_completionmode,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+            default_prompt_folder=DEFAULT_PROMPT_PATH,
         )
     else:
         new_q_generator = GenerationStep(
             prompt_path=prompt_path_new_q_gen,
             regex=new_q_gen_regex,
             sampling_params={
-                    "max_tokens": 3000,
-                    "stop": [
-                        "### Response",
-                        "\n\n\n\n\n",
-                        "</s>",
-                        "# Input:",
-                        "[INST]",
-                        "### Instruction",
-                        "[INST",
-                    ],
-                    "temperature": 0.2,
-                },
+                "max_tokens": 3000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
+                "temperature": 0.2,
+            },
             completion_mode=completion_mode,
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=extract_question_from_response_chatmode,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+            default_prompt_folder=DEFAULT_PROMPT_PATH,
         )
-    
+
     # Resume normal control flow code
     try:
         qtuple = qa_tuple
@@ -862,16 +931,15 @@ async def vet_question_loop(
                 #     f"\n\nQUESTION CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
                 # )
                 judgement, check_q_output = await question_checker.generate(
-                    arguments={
-                        "text": qtuple[2],
-                        "question": qtuple[0]
-                    }
+                    arguments={"text": qtuple[2], "question": qtuple[0]}
                 )
-                
+
                 # Now we need to put the judgement together into the format it expects it to be in
-                
+
                 write_output_to_file(
-                    check_q_output, obj_conf['PATH']['OUTPUT'] + "/check_question_generations", run_id
+                    check_q_output,
+                    obj_conf["PATH"]["OUTPUT"] + "/check_question_generations",
+                    run_id,
                 )
                 if not judgement[0]:  # if not relevant
                     dissenting_reasoning = judgement[1]
@@ -897,7 +965,7 @@ async def vet_question_loop(
                     use_filenames=use_filenames,
                     new_q_generator=new_q_generator,
                     completion_mode=completion_mode,
-                    logging_level=logging_level
+                    logging_level=logging_level,
                 )
             else:
                 # Generate new question and restart the loop
@@ -914,15 +982,12 @@ async def vet_question_loop(
                         qtuple_partial,
                         generate_new_q_output,
                     ) = await new_q_generator.generate(
-                        arguments={
-                            "textname": qtuple[3],
-                            "text": qtuple[2]
-                        }
+                        arguments={"textname": qtuple[3], "text": qtuple[2]}
                     )
-                    qtuple = (qtuple_partial[0],qtuple_partial[1],para,para_name)
+                    qtuple = (qtuple_partial[0], qtuple_partial[1], para, para_name)
                     write_output_to_file(
                         generate_new_q_output,
-                        obj_conf['PATH']['OUTPUT'] + "/regenerate_question_generations",
+                        obj_conf["PATH"]["OUTPUT"] + "/regenerate_question_generations",
                         run_id,
                     )
                     print("New question: ", qtuple)
@@ -935,17 +1000,21 @@ async def vet_question_loop(
     return (None, None, None, qtuple[3])
 
 
-def extract_questions_from_response_completionmode(generation): # TODO extract to non-controlflow file
+def extract_questions_from_response_completionmode(
+    generation,
+):  # TODO extract to non-controlflow file
     questions = []
     # print("!! What the model outputted: !!")
     # print(generation)
     pattern = re.compile(
-                r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
-                re.DOTALL | re.MULTILINE | re.IGNORECASE,
-            )
+        r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
+        re.DOTALL | re.MULTILINE | re.IGNORECASE,
+    )
     matches = pattern.findall(generation)
     if len(matches) == 0:
-        raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
+        raise Exception(
+            "Failed to generate questions!"
+        )  # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
         questions.append(
             (
@@ -959,18 +1028,23 @@ def extract_questions_from_response_completionmode(generation): # TODO extract t
     # print(questions)
     return questions
 
-def extract_questions_from_response_chatmode(generation): # TODO extract to non-controlflow file
+
+def extract_questions_from_response_chatmode(
+    generation,
+):  # TODO extract to non-controlflow file
     print(generation)
     questions = []
     # print("!! What the model outputted: !!")
     # print(generation)
     pattern = re.compile(
-                r"\d+\.\) (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
-                re.DOTALL | re.MULTILINE | re.IGNORECASE,
-            )
-    matches = pattern.findall(generation+"\\n\\n")
+        r"\d+\.\) (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
+        re.DOTALL | re.MULTILINE | re.IGNORECASE,
+    )
+    matches = pattern.findall(generation + "\\n\\n")
     if len(matches) == 0:
-        raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
+        raise Exception(
+            "Failed to generate questions!"
+        )  # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
         questions.append(
             (
@@ -984,42 +1058,53 @@ def extract_questions_from_response_chatmode(generation): # TODO extract to non-
     # print(questions)
     return questions
 
-def extract_question_from_response_completionmode(generation): # TODO extract to non-controlflow file
+
+def extract_question_from_response_completionmode(
+    generation,
+):  # TODO extract to non-controlflow file
     questions = []
     pattern = re.compile(
-                r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
-                re.DOTALL | re.MULTILINE | re.IGNORECASE,
-            )
+        r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
+        re.DOTALL | re.MULTILINE | re.IGNORECASE,
+    )
     matches = pattern.findall(generation)
     if len(matches) == 0:
-        raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
+        raise Exception(
+            "Failed to generate questions!"
+        )  # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
         # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
         # print(questions)
         return (
-                match[0].replace(") ", "", 1).strip(),
-                match[1].replace(") ", "", 1).strip(),
-                # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
-                # para_tuple[1].replace(") ", "", 1),
-            )
-        
-def extract_question_from_response_chatmode(generation): # TODO extract to non-controlflow file
+            match[0].replace(") ", "", 1).strip(),
+            match[1].replace(") ", "", 1).strip(),
+            # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
+            # para_tuple[1].replace(") ", "", 1),
+        )
+
+
+def extract_question_from_response_chatmode(
+    generation,
+):  # TODO extract to non-controlflow file
     pattern = re.compile(
-                r"\d+\.?\)?:? (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
-                re.DOTALL | re.MULTILINE | re.IGNORECASE,
-            )
-    matches = pattern.findall(generation+"\\n\\n")
+        r"\d+\.?\)?:? (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
+        re.DOTALL | re.MULTILINE | re.IGNORECASE,
+    )
+    matches = pattern.findall(generation + "\\n\\n")
     if len(matches) == 0:
-        raise Exception("Failed to generate questions!") # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
+        raise Exception(
+            "Failed to generate questions!"
+        )  # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
     for match in matches:
         # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
         # print(questions)
         return (
-                match[0].replace(") ", "", 1).strip(),
-                match[1].replace(") ", "", 1).strip(),
-                # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
-                # para_tuple[1].replace(") ", "", 1),
-            )
+            match[0].replace(") ", "", 1).strip(),
+            match[1].replace(") ", "", 1).strip(),
+            # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
+            # para_tuple[1].replace(") ", "", 1),
+        )
+
 
 # Question generation ASDF
 async def generate_qatuples_from_para(
@@ -1031,64 +1116,63 @@ async def generate_qatuples_from_para(
     double_check_counter=3,
     use_filenames=False,
     completion_mode=None,
-    logging_level=None
+    logging_level=None,
 ):
-    
     # NOTE Set up qatuple plan generation step #
-    
+
     prompt_path_qatuples_plan = "qatuples_plan_no_filenames"
     if use_filenames:
         prompt_path_qatuples_plan = "qatuples_plan_filenames"
-    
+
     qatuples_plan_regex = re.compile(
         r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
-    
+
     if completion_mode:
         prompt_path_qatuples_plan = prompt_path_qatuples_plan + ".txt"
     else:
         prompt_path_qatuples_plan = prompt_path_qatuples_plan + ".json"
-        
+
     qatuples_planner = GenerationStep(
         prompt_path=prompt_path_qatuples_plan,
         regex=qatuples_plan_regex,
         sampling_params={
-        "max_tokens": 3000,
-        "stop": [
-            "### Response",
-            "\n\n\n\n\n",
-            "</s>",
-            "# Input:",
-            "[INST]",
-            "### Instruction",
-            "[INST",
-            "Text to plan questions from"
-        ],
-        "temperature": 0.8,
-        # top_k=-1,
-        "top_p": 1,
-        # min_p=0.5,
+            "max_tokens": 3000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+                "Text to plan questions from",
+            ],
+            "temperature": 0.8,
+            # top_k=-1,
+            "top_p": 1,
+            # min_p=0.5,
         },
         completion_mode=completion_mode,
         retries=0,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
-    
+
     # NOTE Set up qatuple generation step #
-    
+
     prompt_path_qatuples_gen = "qatuples_gen_no_filenames"
     if use_filenames:
         prompt_path_qatuples_gen = "qatuples_gen_filenames"
-    
+
     if completion_mode:
         prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".txt"
     else:
         prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".json"
-    
+
     qatuples_gen_regex = re.compile(
         r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
     )
@@ -1097,56 +1181,56 @@ async def generate_qatuples_from_para(
             prompt_path=prompt_path_qatuples_gen,
             regex=qatuples_gen_regex,
             sampling_params={
-                    "max_tokens": 2000,
-                    "stop": [
-                        "### Response",
-                        "\n\n\n\n\n",
-                        "</s>",
-                        "# Input:",
-                        "[INST]",
-                        "### Instruction",
-                        "[INST",
-                    ],
-                    "temperature": 0.8,
-                    # top_k=-1,
-                    "top_p": 1,
-                    # min_p=0.5,
-                },
+                "max_tokens": 2000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
+                "temperature": 0.8,
+                # top_k=-1,
+                "top_p": 1,
+                # min_p=0.5,
+            },
             completion_mode=completion_mode,
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=extract_questions_from_response_completionmode,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+            default_prompt_folder=DEFAULT_PROMPT_PATH,
         )
     else:
         qatuples_generator = GenerationStep(
             prompt_path=prompt_path_qatuples_gen,
             regex=qatuples_gen_regex,
             sampling_params={
-                    "max_tokens": 2000,
-                    "stop": [
-                        "### Response",
-                        "\n\n\n\n\n",
-                        "</s>",
-                        "# Input:",
-                        "[INST]",
-                        "### Instruction",
-                        "[INST",
-                    ],
-                    "temperature": 0.8,
-                    # top_k=-1,
-                    "top_p": 1,
-                    # min_p=0.5,
-                },
+                "max_tokens": 2000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                ],
+                "temperature": 0.8,
+                # top_k=-1,
+                "top_p": 1,
+                # min_p=0.5,
+            },
             completion_mode=completion_mode,
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=extract_questions_from_response_chatmode,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+            default_prompt_folder=DEFAULT_PROMPT_PATH,
         )
     # Resume normal control flow code
     try:
@@ -1175,11 +1259,13 @@ async def generate_qatuples_from_para(
                 "textdetails": para[1],
             }
         )
-        
-        question_answer_tuples_more_info = [(qatup[0],qatup[1],para[0],para[1]) for qatup in question_answer_tuples]
+
+        question_answer_tuples_more_info = [
+            (qatup[0], qatup[1], para[0], para[1]) for qatup in question_answer_tuples
+        ]
         write_output_to_file(
             question_generation_output,
-            obj_conf['PATH']['OUTPUT'] + "/question_generation_generations",
+            obj_conf["PATH"]["OUTPUT"] + "/question_generation_generations",
             question_group_id,
         )
         for qnum, question_answer_tuple in enumerate(question_answer_tuples_more_info):
@@ -1192,7 +1278,7 @@ async def generate_qatuples_from_para(
                 double_check_counter=double_check_counter,
                 use_filenames=use_filenames,
                 completion_mode=completion_mode,
-                logging_level=logging_level
+                logging_level=logging_level,
             )
 
             # Write resulting question file if the tuple is not None
@@ -1210,7 +1296,7 @@ async def generate_qatuples_from_para(
 
 
 # Graphing code generated by GPT-4. May be suboptimal/ugly.
-def filter_and_graph(tuples,graph):
+def filter_and_graph(tuples, graph):
     # Count the occurrences of None and non-None for each source text
     source_counts = Counter()
     for paragraph, source in tuples:
@@ -1260,20 +1346,17 @@ async def determine_worthy(
             data = json.load(file)
             print("LOADING: ", data)
         if isinstance(data, str):
-            judged_worthy_for_questions.append((None, data[7:])) # hacky way of appending only the text name. See the file output of a failed judgement for details (Takes after "failed|")
+            judged_worthy_for_questions.append(
+                (None, data[7:])
+            )  # hacky way of appending only the text name. See the file output of a failed judgement for details (Takes after "failed|")
         else:
             judged_worthy_for_questions.append((data["paragraph"], data["metadata"]))
     else:
-        judgement = await judge.generate(
-            arguments={
-                "text": p[0],
-                "textname": p[1]
-            }
-        )
-        to_append = (None,p[1])
+        judgement = await judge.generate(arguments={"text": p[0], "textname": p[1]})
+        to_append = (None, p[1])
         if judgement:
-            to_append = (p[0],p[1])
-            
+            to_append = (p[0], p[1])
+
         judged_worthy_for_questions.append(to_append)
 
         # Prepare the data to be written to the file
@@ -1297,11 +1380,15 @@ async def determine_worthy(
         except:
             print(f"DEBUG max retries exceeded for index {idx}")
 
-def judge_paragraph_processor(determination): # TODO extract to separate file to avoid muddying the control flow code
+
+def judge_paragraph_processor(
+    determination,
+):  # TODO extract to separate file to avoid muddying the control flow code
     if "unsuitable" in determination.lower():
-        return False # control flow has been modified to use the information it has, based on the determination of the output processors
+        return False  # control flow has been modified to use the information it has, based on the determination of the output processors
     elif "suitable" in determination.lower():
         return True
+
 
 # EXEMPLAR
 async def filter_all_questions(
@@ -1313,22 +1400,23 @@ async def filter_all_questions(
     use_filenames=False,
     rtwl=None,
     completion_mode=None,
-    logging_level=None
+    logging_level=None,
 ):
-    
     if use_filenames:
         prompt_path = "judge_paragraph_filenames"
     else:
         prompt_path = "judge_paragraph_no_filenames"
 
     judgement_regex = re.compile(
-            r"Reasoning and thought process \(reason intelligently\):(.+)", re.DOTALL | re.IGNORECASE,)
-    
+        r"Reasoning and thought process \(reason intelligently\):(.+)",
+        re.DOTALL | re.IGNORECASE,
+    )
+
     if completion_mode:
         prompt_path = prompt_path + ".txt"
     else:
         prompt_path = prompt_path + ".json"
-    
+
     judge = GenerationStep(
         prompt_path=prompt_path,
         regex=judgement_regex,
@@ -1349,32 +1437,20 @@ async def filter_all_questions(
         completion_mode=completion_mode,
         retries=2,
         engine_wrapper=engine_wrapper,
-        logging_level=logging_level, # TODO change to warning
+        logging_level=logging_level,  # TODO change to warning
         output_processor=judge_paragraph_processor,
         return_input_too=False,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
     if not take_subset:
         tasks = [
-            determine_worthy(
-                idx,
-                p,
-                judged_worthy_for_questions,
-                output_dir,
-                judge
-            )
+            determine_worthy(idx, p, judged_worthy_for_questions, output_dir, judge)
             for idx, p in enumerate(paragraphs_processed)
         ]
     else:
         tasks = [
-            determine_worthy(
-                idx,
-                p,
-                judged_worthy_for_questions,
-                output_dir,
-                judge
-            )
+            determine_worthy(idx, p, judged_worthy_for_questions, output_dir, judge)
             for idx, p in enumerate(paragraphs_processed[:13])
         ]
     limited_tasks = [rtwl(task) for task in tasks]
@@ -1440,7 +1516,7 @@ def fix_text(to_replace_arr, text):
 
 
 async def ensure_multiple_answers_are_same(
-    info, conv, multi_turn_conv_generator,completion_mode=None
+    info, conv, multi_turn_conv_generator, completion_mode=None
 ):  # why is this a whole separate function? Once upon a time, LLMs were used in validation here, too. But programmatic validation SEEMS to catch the common problems. This is here so that I can add it back in if I have to.
     """Loop to ensure that the answer is consistent in the conversation and in the tuple."""
     retries = 0
@@ -1457,7 +1533,9 @@ async def ensure_multiple_answers_are_same(
         # If we're here, majority of relevance checks failed
         print("----------------\n\n\n\nRETRYING!!!!\n\n\n\n----------------")
         # Broken info is 1) rare and 2) handled by the retry limit. We don't want to waste compute on regenerating info as they take time.
-        retry = await make_multiturn_conversation(info, multi_turn_conv_generator,completion_mode=completion_mode)
+        retry = await make_multiturn_conversation(
+            info, multi_turn_conv_generator, completion_mode=completion_mode
+        )
         if retry is not None:  # Note: retry CANNOT actually be None
             c = retry
         else:
@@ -1467,12 +1545,14 @@ async def ensure_multiple_answers_are_same(
     return None
 
 
-async def make_multiturn_conversation(info, multi_turn_conv_generator,completion_mode=None):
+async def make_multiturn_conversation(
+    info, multi_turn_conv_generator, completion_mode=None
+):
     charname = extract_name.extract_name(info[1])
     conv_starter = create_conv_starter(info[1])
     if completion_mode:
         conv, conv_output = await multi_turn_conv_generator.generate(
-            arguments = {
+            arguments={
                 "character": info[1].strip(),
                 "scenario": info[2].strip(),
                 "extra_info": extract_steps(info[3].strip()),
@@ -1483,34 +1563,44 @@ async def make_multiturn_conversation(info, multi_turn_conv_generator,completion
         )
     else:
         conv, conv_output = await multi_turn_conv_generator.generate(
-        arguments = {
-            "character": info[1].strip(),
-            "scenario": info[2].strip(),
-            "extra_info": info[3].strip(),
-            "question_answer_list": escape_unescaped_quotes(format_qatuples(info[0])).replace("\n","\\n"),
-            "charname": charname.strip(),
-            "conv_starter": conv_starter.strip(),
-        }
+            arguments={
+                "character": info[1].strip(),
+                "scenario": info[2].strip(),
+                "extra_info": info[3].strip(),
+                "question_answer_list": escape_unescaped_quotes(
+                    format_qatuples(info[0])
+                ).replace("\n", "\\n"),
+                "charname": charname.strip(),
+                "conv_starter": conv_starter.strip(),
+            }
         )
-    write_output_to_file(conv_output, obj_conf['PATH']['OUTPUT'] + "/multiturn_conversation_generations", info[4])
+    write_output_to_file(
+        conv_output,
+        obj_conf["PATH"]["OUTPUT"] + "/multiturn_conversation_generations",
+        info[4],
+    )
 
     return (conv, info[1], info[2], info[3], info[0])
 
-def select_variation(character): # can help following the groove of the few-shot examples, in the case where you're using a slightly stupid model or low temperature
-    charname=extract_name.extract_name(character)
+
+def select_variation(
+    character,
+):  # can help following the groove of the few-shot examples, in the case where you're using a slightly stupid model or low temperature
+    charname = extract_name.extract_name(character)
     variations = [
-    # "Set against the backdrop of",
-    f"In {charname}'s ",
-    "Amidst the surroundings of ",
-    # "Within the confines of",
-    f"Within {charname}'s ",
-    f"Inside {charname}'s ",
-    # f"Inside the confines of ",
-    f"Inside the confines of {charname}'s",
-    f"Set amongst the",
+        # "Set against the backdrop of",
+        f"In {charname}'s ",
+        "Amidst the surroundings of ",
+        # "Within the confines of",
+        f"Within {charname}'s ",
+        f"Inside {charname}'s ",
+        # f"Inside the confines of ",
+        f"Inside the confines of {charname}'s",
+        f"Set amongst the",
     ]
 
     return random.choice(variations)
+
 
 def fix_scenario_plan(scenario_plan, character):
     charname = extract_name.extract_name(character)
@@ -1520,11 +1610,14 @@ def fix_scenario_plan(scenario_plan, character):
         scenario_plan = scenario_plan.replace("Albert", random_name.random_name())
     return scenario_plan
 
-def create_character_info_generators(completion_mode=None,engine_wrapper=None,logging_level=None,use_filenames=False):
+
+def create_character_info_generators(
+    completion_mode=None, engine_wrapper=None, logging_level=None, use_filenames=False
+):
     character_card_plan_path = "create_character_card_plan_no_filenames"
     if use_filenames:
         character_card_plan_path = "create_character_card_plan"
-        
+
     character_card_plan_regex = re.compile(
         r"Character card plan \(be creative, do not use real people as characters, do NOT make the author of the book a character\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
@@ -1537,52 +1630,52 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
 
     character_card_plan_creator = GenerationStep(
         prompt_path=character_card_plan_path,
-        regex = character_card_plan_regex,
+        regex=character_card_plan_regex,
         sampling_params={
-        "max_tokens": 3000,
-        "stop": [
-            "### Response",
-            "\n\n\n\n\n",
-            "</s>",
-            "# Input:",
-            "[INST]",
-            "### Instruction",
-            "[INST",
-            "## Character card plan (be creat",
-            # "### Questions",
-            "## Questions, answer, and text that the character should know:",
-            "Special instructions:",
-            "###"
-        ],
-        "temperature": 1,
-        # top_k=-1,
-        "top_p": 0.5,
-        # min_p=0.4,
+            "max_tokens": 3000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+                "## Character card plan (be creat",
+                # "### Questions",
+                "## Questions, answer, and text that the character should know:",
+                "Special instructions:",
+                "###",
+            ],
+            "temperature": 1,
+            # top_k=-1,
+            "top_p": 0.5,
+            # min_p=0.4,
         },
         completion_mode=completion_mode,
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
-    
+
     # Character card gen
-    
+
     character_card_path = "create_character_card_no_filenames"
     if use_filenames:
         character_card_path = "create_character_card"
-        
+
     character_card_regex = re.compile(
         r"Character card \(be creative, write at least 3 paragraphs for each dialogue line\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
-    
+
     if completion_mode:
         character_card_path = character_card_path + ".txt"
     else:
         character_card_path = character_card_path + ".json"
-    
+
     if obj_conf["SYSTEM"]["COMPLETION_MODE"]:
         stop_list = [
             "### Response",
@@ -1606,111 +1699,118 @@ def create_character_info_generators(completion_mode=None,engine_wrapper=None,lo
             "[INST",
             "## Text",
         ]
-    
+
     character_card_creator = GenerationStep(
         prompt_path=character_card_path,
-        regex = character_card_regex,
+        regex=character_card_regex,
         sampling_params={
-        "max_tokens": 4000,
-        "stop": stop_list,
-        "temperature": 1,
-        "top_p": 0.5,
+            "max_tokens": 4000,
+            "stop": stop_list,
+            "temperature": 1,
+            "top_p": 0.5,
         },
         completion_mode=completion_mode,
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
-    
+
     # Scenario Plan Gen
-    scenario_plan_path = "create_scenario_plan" # no variation between use of filenames or not for scenarios
-    
+    scenario_plan_path = "create_scenario_plan"  # no variation between use of filenames or not for scenarios
+
     scenario_plan_regex = re.compile(
         r"Scenario plan \(be creative, and make sure all characters present fit in with the setting\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
-    
+
     if completion_mode:
         scenario_plan_path = scenario_plan_path + ".txt"
     else:
         scenario_plan_path = scenario_plan_path + ".json"
-    
+
     scenario_plan_creator = GenerationStep(
         prompt_path=scenario_plan_path,
-        regex = scenario_plan_regex,
+        regex=scenario_plan_regex,
         sampling_params={
-        "max_tokens": 8000,
-        "stop": [
-            "### Response",
-            "\n\n\n\n\n",
-            "</s>",
-            "# Input:",
-            "[INST]",
-            "### Instruction",
-            "[INST",
-            "## Information",
-            "User:",
-            # "## Scenario",
-        ],
-        "temperature": 0.6,
-        # top_k=-1,
-        "top_p": 1,
-        # min_p=0.5,
-    },
+            "max_tokens": 8000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+                "## Information",
+                "User:",
+                # "## Scenario",
+            ],
+            "temperature": 0.6,
+            # top_k=-1,
+            "top_p": 1,
+            # min_p=0.5,
+        },
         completion_mode=completion_mode,
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
-    
+
     # Scenario Gen
-    scenario_path = "create_scenario" # no variation between use of filenames or not for scenarios
-    
+    scenario_path = (
+        "create_scenario"  # no variation between use of filenames or not for scenarios
+    )
+
     scenario_regex = re.compile(
         r"Scenario \(will have no dialogue, will just set up the scene\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
-    
+
     if completion_mode:
         scenario_path = scenario_path + ".txt"
     else:
         scenario_path = scenario_path + ".json"
-    
-    scenario_creator = GenerationStep( # will have variations as an argument
+
+    scenario_creator = GenerationStep(  # will have variations as an argument
         prompt_path=scenario_path,
-        regex = scenario_regex,
+        regex=scenario_regex,
         sampling_params={
-        "max_tokens": 8000,
-        "stop": [
-            "### Response",
-            "\n\n\n\n\n",
-            "</s>",
-            "# Input:",
-            "[INST]",
-            "### Instruction",
-            "[INST",
-            "## Information",
-            "User:",
-            # "## Scenario",
-        ],
-        "temperature": 0.5,
-        # top_k=-1,
-        "top_p": 0.5,
-        # min_p=0.5,
-    },
+            "max_tokens": 8000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+                "## Information",
+                "User:",
+                # "## Scenario",
+            ],
+            "temperature": 0.5,
+            # top_k=-1,
+            "top_p": 0.5,
+            # min_p=0.5,
+        },
         completion_mode=completion_mode,
         logging_level=logging_level,
         retries=1,
         engine_wrapper=engine_wrapper,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
-    
-    return character_card_plan_creator, character_card_creator, scenario_plan_creator, scenario_creator
+
+    return (
+        character_card_plan_creator,
+        character_card_creator,
+        scenario_plan_creator,
+        scenario_creator,
+    )
 
 
 async def create_info(
@@ -1727,10 +1827,18 @@ async def create_info(
 ):
     # NOTE we set up all the generators up here so that we don't have to drill the args down like this is an old version of React
     # Instead we drill the generators down like it's an old version of React lol
-    character_card_plan_creator, character_card_creator, scenario_plan_creator, scenario_creator = create_character_info_generators(
-        engine_wrapper=engine_wrapper, use_filenames=use_filenames, completion_mode=completion_mode, logging_level=logging_level
+    (
+        character_card_plan_creator,
+        character_card_creator,
+        scenario_plan_creator,
+        scenario_creator,
+    ) = create_character_info_generators(
+        engine_wrapper=engine_wrapper,
+        use_filenames=use_filenames,
+        completion_mode=completion_mode,
+        logging_level=logging_level,
     )
-    
+
     # Resume normal control flow code
     all_permutations = list(itertools.permutations(group))
 
@@ -1746,8 +1854,13 @@ async def create_info(
         if not os.path.exists(file_path):
             try:
                 info = await make_multiturn_conversation_info(
-                    perm, assistant_mode=assistant_mode, character_card_plan_creator=character_card_plan_creator, character_card_creator=character_card_creator, scenario_plan_creator=scenario_plan_creator, scenario_creator=scenario_creator,
-                    completion_mode=completion_mode
+                    perm,
+                    assistant_mode=assistant_mode,
+                    character_card_plan_creator=character_card_plan_creator,
+                    character_card_creator=character_card_creator,
+                    scenario_plan_creator=scenario_plan_creator,
+                    scenario_creator=scenario_creator,
+                    completion_mode=completion_mode,
                 )
 
                 if info is not None:
@@ -1788,9 +1901,15 @@ def read_json_files_info(directory):
     return tuple_list
 
 
-
 async def create_conversation(
-    idx, info, engine_wrapper, multi_turn_convs, multi_turn_convs_dir, assistant_mode=False, completion_mode=None, logging_level=logging.INFO
+    idx,
+    info,
+    engine_wrapper,
+    multi_turn_convs,
+    multi_turn_convs_dir,
+    assistant_mode=False,
+    completion_mode=None,
+    logging_level=logging.INFO,
 ):
     file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
     multi_turn_conversation_prompt_path = "multi_turn_conversation"
@@ -1798,51 +1917,54 @@ async def create_conversation(
     qatuples = info[0]
     character = info[1]
     scenario = info[2]
-    scenario_plan=info[3]
-    
+    scenario_plan = info[3]
+
     charname = extract_name.extract_name(character)
-    
+
     conversation_regex = re.compile(
         f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
         re.IGNORECASE | re.DOTALL,
     )
-    
-    
+
     if completion_mode:
-        multi_turn_conversation_prompt_path = multi_turn_conversation_prompt_path + ".txt"
+        multi_turn_conversation_prompt_path = (
+            multi_turn_conversation_prompt_path + ".txt"
+        )
     else:
-        multi_turn_conversation_prompt_path = multi_turn_conversation_prompt_path + ".json"
-        
+        multi_turn_conversation_prompt_path = (
+            multi_turn_conversation_prompt_path + ".json"
+        )
+
     if assistant_mode:
         multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation.txt"
     multi_turn_conv_generator = GenerationStep(
         prompt_path=multi_turn_conversation_prompt_path,
         regex=conversation_regex,
         sampling_params={
-        "max_tokens": 8000,
-        "stop": [
-            "### Response",
-            "\n\n\n\n\n",
-            "</s>",
-            "# Input:",
-            "[INST]",
-            "### Instruction",
-            "### Information",
-            "## Information",
-            "## Instruction",
-            "Name:",
-        ],
-        "temperature": 0.8,
-        # "top_k": -1,
-        "top_p": 1,
-        # "min_p": 0.6,
+            "max_tokens": 8000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "### Information",
+                "## Information",
+                "## Instruction",
+                "Name:",
+            ],
+            "temperature": 0.8,
+            # "top_k": -1,
+            "top_p": 1,
+            # "min_p": 0.6,
         },
         completion_mode=completion_mode,
         retries=1,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
     )
 
     # Skip if file already exists
@@ -1852,12 +1974,18 @@ async def create_conversation(
                 info, multi_turn_conv_generator, completion_mode=completion_mode
             )
             final_conv = await ensure_multiple_answers_are_same(
-                info, conv, multi_turn_conv_generator,completion_mode=completion_mode
+                info, conv, multi_turn_conv_generator, completion_mode=completion_mode
             )
 
             if final_conv is not None:
                 if assistant_mode:
-                    final_conv = (final_conv[0],"AI Assistant","A conversation between a helpful AI Assistant, and a user.", "N/A",final_conv[4])
+                    final_conv = (
+                        final_conv[0],
+                        "AI Assistant",
+                        "A conversation between a helpful AI Assistant, and a user.",
+                        "N/A",
+                        final_conv[4],
+                    )
                 with open(file_path, "w") as file:
                     json.dump(final_conv, file, indent=4)
 

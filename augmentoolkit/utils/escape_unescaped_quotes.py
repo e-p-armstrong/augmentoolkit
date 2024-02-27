@@ -7,9 +7,9 @@ def escape_unescaped_quotes(s):
         # If the current character is a quote
         if s[i] == '"':
             # Check if it's the first character or if the preceding character is not a backslash
-            if i == 0 or s[i-1] != '\\':
+            if i == 0 or s[i - 1] != "\\":
                 # Add an escaped quote to the result
-                result += r'\"'
+                result += r"\""
             else:
                 # Add the quote as is, because it's already escaped
                 result += '"'
@@ -19,7 +19,10 @@ def escape_unescaped_quotes(s):
         i += 1
     return result
 
+
 # Test the function
 if __name__ == "__main__":
-    test_str = 'This is a "test" string with some \\"escaped\\" quotes and "unescaped" ones.'
+    test_str = (
+        'This is a "test" string with some \\"escaped\\" quotes and "unescaped" ones.'
+    )
     print(escape_unescaped_quotes(test_str))
