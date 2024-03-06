@@ -1548,8 +1548,13 @@ async def ensure_multiple_answers_are_same(
 async def make_multiturn_conversation(
     info, multi_turn_conv_generator, completion_mode=None
 ):
-    charname = extract_name.extract_name(info[1])
-    conv_starter = create_conv_starter(info[1])
+    if not obj_conf["SYSTEM"]["ASSISTANT_MODE"]:
+        charname = extract_name.extract_name(info[1])
+        conv_starter = create_conv_starter(info[1])
+    else:
+        charname = "AI" # NOTE not actually used
+        conv_starter = "Hello! How can I help you today?" # NOTE not actually used.
+        
     if completion_mode:
         conv, conv_output = await multi_turn_conv_generator.generate(
             arguments={
@@ -1913,6 +1918,8 @@ async def create_conversation(
 ):
     file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
     multi_turn_conversation_prompt_path = "multi_turn_conversation"
+    if assistant_mode:
+        multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation"
 
     qatuples = info[0]
     character = info[1]
@@ -1935,8 +1942,6 @@ async def create_conversation(
             multi_turn_conversation_prompt_path + ".json"
         )
 
-    if assistant_mode:
-        multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation.txt"
     multi_turn_conv_generator = GenerationStep(
         prompt_path=multi_turn_conversation_prompt_path,
         regex=conversation_regex,

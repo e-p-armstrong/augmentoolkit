@@ -116,7 +116,6 @@ class GenerationStep:
         else:
             while times_tried <= self.retries:
                 try:
-                    print(prompt_formatted)
                     messages = json.loads(prompt_formatted)
                     response = await self.engine_wrapper.submit_chat(
                         messages, self.sampling_params
