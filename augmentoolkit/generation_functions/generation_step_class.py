@@ -7,6 +7,8 @@ import traceback
 import json
 import logging
 
+from augmentoolkit.utils.escape_unescaped_quotes import escape_unescaped_quotes
+
 
 class GenerationStep:
     def __init__(
@@ -81,6 +83,9 @@ class GenerationStep:
                 prompt_escaped = prompt_escaped.replace(
                     f"{{{{{key}}}}}", f"{{{key}}}"
                 )  # Somehow this works
+            # escape the quotes in the argument values
+            for key in arguments:
+                arguments[key] = escape_unescaped_quotes(arguments[key])
             # 3. Format
             prompt_formatted = prompt_escaped.format(**arguments)
         # logging.info(f"Formatted prompt for generation: {prompt_formatted}")
@@ -111,6 +116,7 @@ class GenerationStep:
         else:
             while times_tried <= self.retries:
                 try:
+                    print(prompt_formatted)
                     messages = json.loads(prompt_formatted)
                     response = await self.engine_wrapper.submit_chat(
                         messages, self.sampling_params

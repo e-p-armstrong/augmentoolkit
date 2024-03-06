@@ -15,7 +15,7 @@ SYSTEM:
   USE_SUBSET: True # Whether to take only the first 13 chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
   REARRANGEMENTS_TO_TAKE: 3 # How many times to rearrange the questions and answers for generating different conversations from the same group of questions and answers.
   CONCURRENCY_LIMIT: 90 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
-  COMPLETION_MODE: True # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format
+  COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format
   MODE: "api" # can be one of "api"|"aphrodite"
   GRAPH: False
  
