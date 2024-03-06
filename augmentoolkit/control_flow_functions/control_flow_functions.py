@@ -1928,10 +1928,16 @@ async def create_conversation(
 
     charname = extract_name.extract_name(character)
 
-    conversation_regex = re.compile(
-        f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
-        re.IGNORECASE | re.DOTALL,
-    )
+    if not assistant_mode:
+        conversation_regex = re.compile(
+            f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
+            re.IGNORECASE | re.DOTALL,
+        )
+    else:
+        conversation_regex = re.compile(
+            f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; AI Assistant will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
+            re.IGNORECASE | re.DOTALL,
+        )
 
     if completion_mode:
         multi_turn_conversation_prompt_path = (
@@ -1946,7 +1952,7 @@ async def create_conversation(
         prompt_path=multi_turn_conversation_prompt_path,
         regex=conversation_regex,
         sampling_params={
-            "max_tokens": 8000,
+            "max_tokens": 3000,
             "stop": [
                 "### Response",
                 "\n\n\n\n\n",
