@@ -6,6 +6,9 @@ Augmentoolkit now supports APIs offering open-source models, such as Mistral, To
 ## Demo video:
 in-progress
 
+## Join A Discord for Dataset Generation!
+MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has a server where he's working on a new quantization engine. There's a corner to discuss Augmentoolkit there! Come check it out and connect at [https://discord.com/invite/foxengine-ai](https://discord.com/invite/foxengine-ai)!
+
 ## Table of Contents:
 0. [Self-promotion](#for-businesses)
 1. [Installation](#installation)
