@@ -2005,10 +2005,14 @@ async def create_conversation(
             traceback.print_exc()
             print("Had an error, retrying...", e)
     else:
-        with open(file_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            multi_turn_convs.append(data)
-        print(f"Skipped generating {file_path} as it already exists")
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                multi_turn_convs.append(data)
+            print(f"Skipped generating {file_path} as it already exists")
+        except Exception as e:
+            print(f"Error reading {file_path}:", e)
+            print("Continuing...")
 
 
 def convert_directory_to_list(directory_path):
