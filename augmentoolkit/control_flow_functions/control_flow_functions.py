@@ -2023,35 +2023,38 @@ def convert_directory_to_list(directory_path):
         if filename.endswith(".json"):
             filepath = os.path.join(directory_path, filename)
             with open(filepath, "r") as file:
-                data = json.load(file)
-                if isinstance(data, list) and all(
-                    isinstance(item, (list, str)) for item in data
-                ):
-                    master_list.append(data)
+                try:
+                    data = json.load(file)
+                    if isinstance(data, list) and all(
+                        isinstance(item, (list, str)) for item in data
+                    ):
+                        master_list.append(data)
 
-                    # Extract and process conversation
-                    conversation, primary_char_desc = data[0], data[1]
-                    primary_char_name = extract_name.extract_name(primary_char_desc)
-                    dialogues = process_multiturn_functions.extract_conversation(
-                        conversation
-                    )
-
-                    # Convert to simplified format
-                    simplified_conversations = []
-                    for i, (charname, message) in enumerate(
-                        dialogues
-                    ):  # Skipping the first message
-                        from_person = (
-                            "human" if charname == primary_char_name else "gpt"
-                        )
-                        simplified_conversations.append(
-                            {"from": from_person, "value": f"{charname}: {message}"}
+                        # Extract and process conversation
+                        conversation, primary_char_desc = data[0], data[1]
+                        primary_char_name = extract_name.extract_name(primary_char_desc)
+                        dialogues = process_multiturn_functions.extract_conversation(
+                            conversation
                         )
 
-                    if simplified_conversations:  # If there are any conversations
-                        simplified_list.append(
-                            {"conversations": simplified_conversations}
-                        )
+                        # Convert to simplified format
+                        simplified_conversations = []
+                        for i, (charname, message) in enumerate(
+                            dialogues
+                        ):  # Skipping the first message
+                            from_person = (
+                                "human" if charname == primary_char_name else "gpt"
+                            )
+                            simplified_conversations.append(
+                                {"from": from_person, "value": f"{charname}: {message}"}
+                            )
+
+                        if simplified_conversations:  # If there are any conversations
+                            simplified_list.append(
+                                {"conversations": simplified_conversations}
+                            )
+                except Exception as e:
+                    print(f"Error reading {filename}: {e}")
 
     # Write the master list to a new .jsonl file
     write_1 = obj_conf["PATH"]["OUTPUT"] + "/master_list.jsonl"
@@ -2077,22 +2080,25 @@ def convert_directory_and_process_conversations(directory_path):
         if filename.endswith(".json"):
             filepath = os.path.join(directory_path, filename)
             with open(filepath, "r") as file:
-                data = json.load(file)
+                try:
+                    data = json.load(file)
 
-                if isinstance(data, list) and all(
-                    isinstance(item, (list, str)) for item in data
-                ):
-                    # Extract and process the conversation part
-                    conversations = process_multiturn_functions.extract_conversation(
-                        data[0]
-                    )
-                    # Convert tuples back to the formatted string as required
-                    data[0] = [
-                        f"{charname}: {message}" for charname, message in conversations
-                    ]
-                    master_list.append(data)
-                else:
-                    print(f"File {filename} is not in the expected format.")
+                    if isinstance(data, list) and all(
+                        isinstance(item, (list, str)) for item in data
+                    ):
+                        # Extract and process the conversation part
+                        conversations = process_multiturn_functions.extract_conversation(
+                            data[0]
+                        )
+                        # Convert tuples back to the formatted string as required
+                        data[0] = [
+                            f"{charname}: {message}" for charname, message in conversations
+                        ]
+                        master_list.append(data)
+                    else:
+                        print(f"File {filename} is not in the expected format.")
+                except:
+                    print(f"Error reading {filename}")
 
     # Write the master list to a new file
     with open(obj_conf["PATH"]["OUTPUT"] + "/processed_master_list.json", "w") as file:

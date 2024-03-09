@@ -13,7 +13,6 @@ def extract_name(str):
         print(f"Extracted name: {name}")
         return name
     else:
-        print("No name found, retrying with different regex")
         name_regex = r"Name: *([^\\]*)"
 
         # Searching in the multiline string
