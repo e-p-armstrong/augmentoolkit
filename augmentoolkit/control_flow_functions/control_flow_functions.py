@@ -2019,34 +2019,40 @@ def convert_directory_to_list(directory_path):
     master_list = []
     simplified_list = []
 
-    for filename in os.listdir(directory_path):
-        if filename.endswith(".json"):
-            filepath = os.path.join(directory_path, filename)
-            with open(filepath, "r") as file:
+    for filename in os.listdir(directory_path): # for each file
+        if filename.endswith(".json"): # if it's a conversation file
+            filepath = os.path.join(directory_path, filename) # get the path
+            with open(filepath, "r") as file: # open it
                 try:
-                    data = json.load(file)
+                    data = json.load(file) # load its data
                     if isinstance(data, list) and all(
-                        isinstance(item, (list, str)) for item in data
+                        isinstance(item, (list, str)) for item in data # if it has the correct format
                     ):
-                        master_list.append(data)
+                        master_list.append(data) # append it as-is to the master-list
 
                         # Extract and process conversation
-                        conversation, primary_char_desc = data[0], data[1]
-                        primary_char_name = extract_name.extract_name(primary_char_desc)
+                        conversation, primary_char_desc = data[0], data[1] # first and second items are conv and char desc
+                        primary_char_name = extract_name.extract_name(primary_char_desc) # char name is gotten from char desc
                         dialogues = process_multiturn_functions.extract_conversation(
                             conversation
                         )
 
                         # Convert to simplified format
                         simplified_conversations = []
+                        simplified_conversations.append(
+                            {
+                                "from": "system",
+                                "value": primary_char_desc
+                            }
+                        )
                         for i, (charname, message) in enumerate(
                             dialogues
                         ):  # Skipping the first message
                             from_person = (
-                                "human" if charname == primary_char_name else "gpt"
+                                "human" if (i % 2) == 1 else "gpt"
                             )
                             simplified_conversations.append(
-                                {"from": from_person, "value": f"{charname}: {message}"}
+                                {"from": from_person, "value": f"{message}"}
                             )
 
                         if simplified_conversations:  # If there are any conversations
