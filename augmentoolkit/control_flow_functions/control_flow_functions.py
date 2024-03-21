@@ -2038,6 +2038,8 @@ def convert_directory_to_list(directory_path):
                         )
 
                         # Convert to simplified format
+                        if obj_conf["SYSTEM"]["ASSISTANT_MODE"]:
+                            primary_char_desc = "You are a helpful, unbiased AI assistant."
                         simplified_conversations = []
                         simplified_conversations.append(
                             {
