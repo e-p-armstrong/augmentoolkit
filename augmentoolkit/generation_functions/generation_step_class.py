@@ -13,6 +13,7 @@ from augmentoolkit.utils.escape_unescaped_quotes import escape_unescaped_quotes
 class GenerationStep:
     def __init__(
         self,
+        use_stop,
         prompt_path="",  # relative to the Inputs directory
         regex=re.compile(r".*", re.DOTALL),  # take whole completion
         sampling_params={
@@ -54,6 +55,7 @@ class GenerationStep:
         self.engine_wrapper = engine_wrapper
         self.prompt_folder = prompt_folder
         self.default_prompt_folder = default_prompt_folder
+        self.use_stop = use_stop
         logging.basicConfig(
             level=self.logging_level, format="%(asctime)s - %(levelname)s - %(message)s"
         )
@@ -91,6 +93,13 @@ class GenerationStep:
         # logging.info(f"Formatted prompt for generation: {prompt_formatted}")
         # Submit generation and return response, retrying as needed
         times_tried = 0
+        if not self.use_stop:
+            try:
+                del self.sampling_params["stop"]
+            except KeyError as ke:
+                print("\n\n\nTried to remove stop tokens, stop tokens were not present, error caught and handled:")
+                print(ke)
+                print("-------")
         if self.completion_mode:
             while times_tried <= self.retries:
                 try:

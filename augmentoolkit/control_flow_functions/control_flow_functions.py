@@ -415,6 +415,7 @@ async def repair_qatuple_context(
         output_processor=extract_reasoning_from_context_check,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # Resume normal control flow
@@ -545,6 +546,7 @@ async def vet_answer_accuracy_loop(
         output_processor=parse_answer_accuracy_validation,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # Resume normal control flow code
@@ -690,6 +692,7 @@ async def vet_answer_relevance_loop(
         output_processor=parse_answer_relevancy_validation_step,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # Resume normal control flow code
@@ -848,6 +851,7 @@ async def vet_question_loop(
         output_processor=parse_validation_step,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # NOTE Set up generate new question step
@@ -888,6 +892,7 @@ async def vet_question_loop(
             output_processor=extract_question_from_response_completionmode,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
             default_prompt_folder=DEFAULT_PROMPT_PATH,
+            use_stop=obj_conf["SYSTEM"]["STOP"]
         )
     else:
         new_q_generator = GenerationStep(
@@ -913,6 +918,7 @@ async def vet_question_loop(
             output_processor=extract_question_from_response_chatmode,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
             default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
         )
 
     # Resume normal control flow code
@@ -1160,6 +1166,7 @@ async def generate_qatuples_from_para(
         logging_level=logging_level,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # NOTE Set up qatuple generation step #
@@ -1203,6 +1210,7 @@ async def generate_qatuples_from_para(
             output_processor=extract_questions_from_response_completionmode,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
             default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
         )
     else:
         qatuples_generator = GenerationStep(
@@ -1231,6 +1239,7 @@ async def generate_qatuples_from_para(
             output_processor=extract_questions_from_response_chatmode,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
             default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
         )
     # Resume normal control flow code
     try:
@@ -1442,6 +1451,7 @@ async def filter_all_questions(
         return_input_too=False,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
     if not take_subset:
         tasks = [
@@ -1663,6 +1673,7 @@ def create_character_info_generators(
         engine_wrapper=engine_wrapper,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # Character card gen
@@ -1720,6 +1731,7 @@ def create_character_info_generators(
         engine_wrapper=engine_wrapper,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # Scenario Plan Gen
@@ -1763,6 +1775,7 @@ def create_character_info_generators(
         engine_wrapper=engine_wrapper,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # Scenario Gen
@@ -1808,6 +1821,7 @@ def create_character_info_generators(
         engine_wrapper=engine_wrapper,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     return (
@@ -1976,6 +1990,7 @@ async def create_conversation(
         logging_level=logging_level,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
     # Skip if file already exists
