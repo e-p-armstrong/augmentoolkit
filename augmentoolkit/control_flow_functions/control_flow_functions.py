@@ -154,8 +154,8 @@ async def make_multiturn_character(
         return "will_be_replaced", "will_be_replaced"
 
     instructions = special_instructions(n=1).strip()
-    if not completion_mode:
-        instructions = escape_unescaped_quotes(instructions).replace("\n", "\\n")
+    # if not completion_mode:
+    #     instructions = escape_unescaped_quotes(instructions).replace("\n", "\\n")
     if completion_mode:
         (
             plan,
@@ -176,9 +176,7 @@ async def make_multiturn_character(
             arguments={
                 "textname": qa_tuples[0][3],
                 "text": qa_tuples[0][2],
-                "question_answer_list": escape_unescaped_quotes(
-                    format_qatuples(qa_tuples)
-                ).replace("\n", "\\n"),
+                "question_answer_list": format_qatuples(qa_tuples),
                 "special_instructions": instructions,
             }
         )
@@ -236,9 +234,7 @@ async def make_multiturn_scenario(
             scenario_plan_output,
         ) = await scenario_plan_creator.generate(
             arguments={
-                "question_answer_list": escape_unescaped_quotes(
-                    format_qatuples(qa_tuples)
-                ).replace("\n", "\\n"),
+                "question_answer_list": format_qatuples(qa_tuples),
                 "character": character,
             }
         )
@@ -269,9 +265,7 @@ async def make_multiturn_scenario(
             scenario_output,
         ) = await scenario_creator.generate(
             arguments={
-                "question_answer_list": escape_unescaped_quotes(
-                    format_qatuples(qa_tuples)
-                ).replace("\n", "\\n"),
+                "question_answer_list": format_qatuples(qa_tuples),
                 "character": character,
                 "plan": plan,
                 "selected_variation": variation,
@@ -1582,9 +1576,7 @@ async def make_multiturn_conversation(
                 "character": info[1].strip(),
                 "scenario": info[2].strip(),
                 "extra_info": info[3].strip(),
-                "question_answer_list": escape_unescaped_quotes(
-                    format_qatuples(info[0])
-                ).replace("\n", "\\n"),
+                "question_answer_list": format_qatuples(info[0]),
                 "charname": charname.strip(),
                 "conv_starter": conv_starter.strip(),
             }
