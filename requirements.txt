@@ -4,3 +4,4 @@ transformers
 matplotlib 
 nltk 
 openai
+aiohttp
