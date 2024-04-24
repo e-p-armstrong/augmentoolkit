@@ -114,6 +114,7 @@ async def main():
 
     import augmentoolkit.generation_functions as generation_functions  # This is the package directory
     from augmentoolkit.control_flow_functions import control_flow_functions
+    from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
     # First, import all modules so they can be reloaded
     for _, module_name, _ in pkgutil.iter_modules(
