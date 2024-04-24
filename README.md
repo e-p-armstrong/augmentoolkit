@@ -3,8 +3,10 @@ Turn any raw text into a high-quality dataset using local models. Make data gath
 
 Augmentoolkit now supports APIs offering open-source models, such as Mistral, Together.ai or Groq (and also the OpenAI API if you really want it). You don't need to have a fancy computer to make awesome datasets, and you don't have to screw around with dependencies and CUDA. The free credits from a service like Together.ai should be able to sustain the creation of even a decent-sized dataset. Data generation is also blazingly-fast (and async) when using APIs. Of course, you can still use local models, if you prefer that and have the compute to support it. They run async too, thanks to the Aphrodite engine made by the people at Pygmalion (thanks Alpin for the tech support).
 
+## Recommendation: when training on Augmentoolkit data, use GaLore, NOT LoRAs
+
 ## Demo video:
-in-progress
+[demo-video-youtube-link](https://www.youtube.com/watch?v=m32fM8S_DeY&ab_channel=Heralax)
 
 ## Join A Discord for Dataset Generation!
 MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has a server where he's working on a new quantization engine. There's a corner to discuss Augmentoolkit there! Come check it out and connect at [https://discord.com/invite/foxengine-ai](https://discord.com/invite/foxengine-ai)!
