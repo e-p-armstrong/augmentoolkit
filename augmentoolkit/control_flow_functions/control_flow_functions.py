@@ -490,7 +490,7 @@ def parse_answer_accuracy_validation(response):
     elif "accurate" in determination.lower():
         return (True, response)
     else:
-        logging.ERROR("Answer accuracy validation made a mistake")
+        print("Answer accuracy validation made a mistake")
         raise Exception("answer accuracy validation did not include a judgement")
 
 
@@ -625,19 +625,22 @@ def parse_answer_relevancy_validation_step(thought_process):
     judgement_pattern = re.compile(
         r"Explanation of Judgment:(.+)", re.DOTALL | re.IGNORECASE
     )
-    determination = judgement_pattern.search(thought_process).group(1).strip()
-    if (
-        "irrelevant" in determination.lower()
-        or "mostly" in determination.lower()
-        or "partial" in determination.lower()
-        or "introduces information not present in the text" in determination.lower()
-    ):  # Hack to get around faulty outputs
-        return (False, thought_process)  # , completion
-    elif "relevant" in determination or "Relevant" in determination:
-        return (True, thought_process)  # , completion
-    else:
-        logging.ERROR(f"Answer relevancy parsing failed! Retrying! {judgement_pattern}")
-        raise Exception("error in judgement extranction (ans relevancy)")
+    try:
+        determination = judgement_pattern.search(thought_process).group(1).strip()
+        if (
+            "irrelevant" in determination.lower()
+            or "mostly" in determination.lower()
+            or "partial" in determination.lower()
+            or "introduces information not present in the text" in determination.lower()
+        ):  # Hack to get around faulty outputs
+            return (False, thought_process)  # , completion
+        elif "relevant" in determination or "Relevant" in determination:
+            return (True, thought_process)  # , completion
+        else:
+            print(f"Answer relevancy parsing failed! Retrying! {judgement_pattern}")
+            raise Exception("error in judgement extranction (ans relevancy)")
+    except Exception as e:
+        print("Model did not provide a judgement, retrying")
 
 
 async def vet_answer_relevance_loop(
@@ -794,7 +797,7 @@ def parse_validation_step(response):
     elif "relevant" in determination or "Relevant" in determination:
         return (True, response)  # TODO same as above(True, response), completion
     else:
-        logging.ERROR("Did not contain relevant or irrelevant! Retrying")
+        print("Did not contain relevant or irrelevant! Retrying")
         raise Exception(
             "Validation step screwed up and did not reach a conclusion! Retrying!"
         )

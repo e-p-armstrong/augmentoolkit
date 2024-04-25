@@ -142,9 +142,9 @@ class GenerationStep:
                         )
                     return ret
                 except Exception as e:
-                    logging.error(f"Error in Generation Step: {e}")
+                    print(f"Error in Generation Step: {e}")
                     print(prompt_formatted)
-                    logging.error(
+                    print(
                         f"Above prompt resulted in error, probably the model's fault: {e}"
                     )
                     traceback.print_exc()

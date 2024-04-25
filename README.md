@@ -17,6 +17,7 @@ MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has
 2. [Introduction](#introduction)
 3. [Quickstart](#quickstart)
 4. [Neat Features](#some-features-worth-being-aware-of)
+4. [Aphrodite Mode](#using-aphrodite-mode)
 5. [Customization (important)](#customization-arranged-in-order-of-least-to-most-difficult-to-implement)
 6. [Hardcore, in-depth Concept Explanation](#hardcore-usage)
     - [Concepts and Operation](#concepts-and-operation)
@@ -100,6 +101,25 @@ After installing the dependencies:
 - Either run all cells in the notebook `processing.ipynb`, or open this project's folder in a command line and type `python processing.py` and hit enter (fires off the script version).
 
 ***If you want to run a subset of the total text through the entire pipeline, to evaluate how well it works, turn on the USE_SUBSET flag in the config file (off by default)***
+
+## Using "Aphrodite mode"
+
+- First off, make sure you're on a Linux operating system. If you want local generation with a non-Linux operating system, it is recommended that you run a local inference engine with an openai-compatible API, and then point Augmentoolkit at the local inference engine by changing the BASE_URL.
+- Then install aphrodite engine and get it working. That's a whole process, you can find the details on [their repo](https://github.com/PygmalionAI/aphrodite-engine/tree/main)
+- Follow the first few steps of the quickstart: get the repo onto your computer and install its dependencies.
+- Open the file `config.yaml` and change the MODE to "aphrodite"
+![](change_mode_to_aphrodite.png)
+- In `config.yaml`, change the MODEL field to a HuggingFace Path to a model. Make sure it has a large enough context window! And be sure to use the right quantization mode for your chosen model. The model should have some indication of what quantization type it uses. Also, change `COMPLETION_MODE` to True
+![](hf-path-1.png)
+![](hf-path-2.png)
+- Run `(aphrodite_use)_processing_phase_1.py`
+- Run `(aphrodite_use)_processing_phase_2.py` once phase 1 finishes.
+- Control + C when it logs stuff about saving dataset files to `simplified_data.jsonl`. It seems that something about Aphrodite's code has changed since I implemented it in here, and it no longer automatically exits the script.
+
+I'm considering removing aphrodite mode and just letting local inference be done via local OAI-compatible servers, but incase people want it specifically I'm leaving it for now. I hope that this set of instructions is complete enough to follow.
+
+Q: Why do I have to run this in two phases?
+A: Because it's difficult to switch between two different models when doing local inference.
 
 ## Some features worth being aware of
 This subsection describes things that make life easier in Augmentoolkit, particularly the new version.
