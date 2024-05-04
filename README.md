@@ -3,13 +3,8 @@ Turn any raw text into a high-quality dataset using local models. Make data gath
 
 Augmentoolkit now supports APIs offering open-source models, such as Mistral, Together.ai or Groq (and also the OpenAI API if you really want it). You don't need to have a fancy computer to make awesome datasets, and you don't have to screw around with dependencies and CUDA. The free credits from a service like Together.ai should be able to sustain the creation of even a decent-sized dataset. Data generation is also blazingly-fast (and async) when using APIs. Of course, you can still use local models, if you prefer that and have the compute to support it. They run async too, thanks to the Aphrodite engine made by the people at Pygmalion (thanks Alpin for the tech support).
 
-## Recommendation: when training on Augmentoolkit data, use GaLore, NOT LoRAs
-
 ## Demo video:
 [demo-video-youtube-link](https://www.youtube.com/watch?v=m32fM8S_DeY&ab_channel=Heralax)
-
-## Join A Discord for Dataset Generation!
-MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has a server where he's working on a new quantization engine. There's a corner to discuss Augmentoolkit there! Come check it out and connect at [https://discord.com/invite/foxengine-ai](https://discord.com/invite/foxengine-ai)!
 
 ## Table of Contents:
 0. [Self-promotion](#for-businesses)
@@ -29,6 +24,10 @@ MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has
 I work with AI SAAS startups that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? I can modify Augmentoolkit for any domain and for tasks beyond question answering, and I'd be happy to help you painlessly create the data — and data-creation tools — you require. Given that I made the original version of the darn thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
 
 *Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to master open source model pipelines enough to make Augmentoolkit work well). If you're a hobbyist and have time to experiment with its base version for casual or personal uses, by all means go for it.
+
+## Join A Discord for Dataset Generation!
+MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has a server where he's working on a new quantization engine. There's a corner to discuss Augmentoolkit there! Come check it out and connect at [https://discord.com/invite/foxengine-ai](https://discord.com/invite/foxengine-ai)!
+
 
 ## New Features At A Glance
 - Runs Async with any LLM API (together, openrouter, mistral) that's compatible with the OpenAI python library
@@ -53,9 +52,9 @@ First, get the repository onto your computer:
 git clone https://github.com/e-p-armstrong/augmentool.git
 ```
 
-Then, install the project's dependencies. For the API branch setup is super easy, you just need a handful of Python libraries: `protobuf sentencepiece transformers matplotlib nltk openai`. It should be as easy to install as:
+Then, install the project's dependencies. For the API branch setup is super easy, you just needthe Python libraries in requirements.txt
 ```
-pip install protobuf sentencepiece transformers matplotlib nltk openai
+pip install [put the requirements from requirements.txt here, separated by spaces]
 ```
 OR
 ```
@@ -70,6 +69,8 @@ pip install aphrodite-engine
 NOTE under basically all circumstances it will be more cost-efficient to use APIs instead of running this with local inference. There are plenty of API providers such as Together.ai that offer quality open source models at extremely cheap prices. Those are recommended for most users. You technically could rent out a GPU from vast.ai or runpod, copy this notebook over, install the dependencies, and run "local" inference using the aphrodite mode there... but it'll probably be more expensive than the alternative. Thus, you should probably only consider using local inference if your machine is beefy enough, and even then it may come at a significant cost in time.
 
 For Mac users: since aphrodite-engine does not work on Mac, if you really want local inference you should start a [Llama cpp server]() on your computer, and add its url as the "api endpoint" in the config file. This is a bit tricky to do, and I don't know how to get it using RoPE scaling yet (needed for Augmentoolkit unless you're using a Mistral model), so your best bet would be to do some intense Googling and/or asking questions on the lcpp repo.
+
+## Recommendation: when training on Augmentoolkit data, use GaLore, NOT LoRAs
 
 ## Introduction
 
@@ -101,6 +102,8 @@ After installing the dependencies:
 - Either run all cells in the notebook `processing.ipynb`, or open this project's folder in a command line and type `python processing.py` and hit enter (fires off the script version).
 
 ***If you want to run a subset of the total text through the entire pipeline, to evaluate how well it works, turn on the USE_SUBSET flag in the config file (off by default)***
+
+## Recommendation: when training on Augmentoolkit data, use GaLore, NOT LoRAs
 
 ## Using "Aphrodite mode"
 
