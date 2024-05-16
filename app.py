@@ -1,6 +1,7 @@
 import gradio as gr
 import yaml
 import subprocess
+import sys
 import os
 from gradio_log import Log
 
@@ -31,7 +32,7 @@ def run(file):
   try:
     env = os.environ.copy()
     with open("log.txt", "w") as log_file:
-      subprocess.run(["python", "processing.py"], stdout=log_file, stderr=log_file, text=True, env=env)
+      subprocess.run([sys.executable, "processing.py"], stdout=log_file, stderr=log_file, text=True, env=env)
   except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
 
