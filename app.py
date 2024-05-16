@@ -29,8 +29,9 @@ def run(file):
   with open('config.yaml', 'w') as file:
     yaml.dump(config, file)
   try:
+    env = os.environ.copy()
     with open("log.txt", "w") as log_file:
-      subprocess.run(["python", "processing.py"], stdout=log_file, stderr=log_file, text=True)
+      subprocess.run(["python", "processing.py"], stdout=log_file, stderr=log_file, text=True, env=env)
   except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
 
