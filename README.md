@@ -97,7 +97,9 @@ You can see a flowchart of this process over in [Usage](#usage).
 ### Web UI
 
 1. Install the dependencies (`pip install -r requirements.txt`)
-2. Run `python app.py`
+2. Find the absolute path toe the `raw_txt_input` folder
+3. Run `export GRADIO_TEMP_DIR=<raw_txt_input_absolute_path>`
+4. Run `python app.py`
 
 ![webui.jpg](webui.jpg)
 
