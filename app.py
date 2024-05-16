@@ -29,7 +29,7 @@ def run():
     yaml.dump(config, file)
   try:
     with open("log.txt", "w") as log_file:
-      subprocess.run(["python", "processing.py"], stdout=log_file, text=True)
+      subprocess.run(["python", "processing.py"], stdout=log_file, stderr=log_file, text=True)
   except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
 
