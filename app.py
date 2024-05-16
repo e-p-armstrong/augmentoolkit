@@ -1,6 +1,7 @@
 import gradio as gr
 import yaml
 import subprocess
+import os
 from gradio_log import Log
 
 config = {}
@@ -34,7 +35,9 @@ def run():
 
 with gr.Blocks() as demo:
   with gr.Row():
-    log_file = "log.txt"
+    log_file = os.path.abspath("log.txt")
+    if not os.path.isfile(log_file):
+      open(log_file, 'w').close()
     Log(log_file, dark=True, xterm_font_size=12)
     btn = gr.Button("Start")
     btn.click(fn=run, inputs=[], outputs=[])
