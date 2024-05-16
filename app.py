@@ -33,17 +33,25 @@ def run():
   except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
 
-with gr.Blocks(css=".gradio-container { max-width: none !important; }") as demo:
+
+js = """
+document.querySelector("#start").addEventListener("click", (e) => {
+  console.log("clicked")
+  document.querySelector("#log").classList.remove("hidden")
+})
+"""
+
+with gr.Blocks(js=js, css=".hidden { display: none !important; } .gradio-container { max-width: none !important; }") as demo:
   with gr.Row():
     log_file = os.path.abspath("log.txt")
     if not os.path.isfile(log_file):
       open(log_file, 'w').close()
     with open(log_file, "w") as file:
       file.truncate(0)
-    log_view = Log(log_file, xterm_font_size=12)
+    log_view = Log(log_file, xterm_font_size=12, elem_id='log')
   with gr.Row():
     file = gr.File()
-    btn = gr.Button("Start")
+    btn = gr.Button("Start", elem_id="start")
     btn.click(fn=run, inputs=[], outputs=[])
   with gr.Row():
     for component in components:
