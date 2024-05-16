@@ -93,6 +93,16 @@ You can see a flowchart of this process over in [Usage](#usage).
 **IMPORTANT Augmentoolkit can make conversations between fictional characters, or between a user and AI assistant. It does the former by default. The latter is probably better suited to professional use cases.**
 
 ## Quickstart:
+
+### Web UI
+
+1. Install the dependencies (`pip install -r requirements.txt`)
+2. Run `python app.py`
+
+![webui.jpg](webui.jpg)
+
+### Terminal
+
 After installing the dependencies:
 
 - Get the repo onto a computer with an internet connection

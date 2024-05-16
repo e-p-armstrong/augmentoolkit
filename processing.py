@@ -69,7 +69,6 @@ async def main():
 
     INPUT_FOLDER = config["PATH"]["INPUT"]
 
-#    extension = ".txt"
     extensions = [".txt", ".md"]
 
     source_texts = []
