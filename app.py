@@ -48,7 +48,7 @@ with gr.Blocks(js=js, css=".hidden { display: none !important; } .gradio-contain
       open(log_file, 'w').close()
     with open(log_file, "w") as file:
       file.truncate(0)
-    log_view = Log(log_file, xterm_font_size=12, elem_id='log')
+    log_view = Log(log_file, xterm_font_size=12, elem_id='log', elem_classes='hidden')
   with gr.Row():
     file = gr.File()
     btn = gr.Button("Start", elem_id="start")
