@@ -5,7 +5,6 @@ matplotlib
 nltk 
 openai
 aiohttp
-gradio
+gradio==4.23.0
 pyyaml
-gradio_log @ git+https://github.com/louis-she/gradio-log
-pathlib
+gradio_log==0.0.4
