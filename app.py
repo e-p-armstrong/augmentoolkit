@@ -25,7 +25,6 @@ def changed(text, keys):
 
 def run():
   global config
-  gr.update(visible=True)
   with open('config.yaml', 'w') as file:
     yaml.dump(config, file)
   try:
@@ -33,6 +32,7 @@ def run():
       subprocess.run(["python", "processing.py"], stdout=log_file, stderr=log_file, text=True)
   except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
+  return gr.
 
 with gr.Blocks(css=".gradio-container { max-width: none !important; }") as demo:
   with gr.Row():
@@ -45,7 +45,7 @@ with gr.Blocks(css=".gradio-container { max-width: none !important; }") as demo:
   with gr.Row():
     file = gr.File()
     btn = gr.Button("Start")
-    btn.click(fn=run, inputs=[], outputs=[log_view])
+    btn.click(fn=run, inputs=[], outputs=[])
   with gr.Row():
     for component in components:
       print(f"component = {component}")
