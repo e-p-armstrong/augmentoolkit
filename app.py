@@ -37,18 +37,18 @@ def run():
 js = """
 document.querySelector("#start").addEventListener("click", (e) => {
   console.log("clicked")
-  document.querySelector("#log").classList.remove("hidden")
+  document.querySelector("#log").classList.add("display")
 })
 """
 
-with gr.Blocks(js=js, css=".hidden { display: none !important; } .gradio-container { max-width: none !important; }") as demo:
+with gr.Blocks(js=js, css="#log { display: none; } #log.display { display: block; } .gradio-container { max-width: none !important; }") as demo:
   with gr.Row():
     log_file = os.path.abspath("log.txt")
     if not os.path.isfile(log_file):
       open(log_file, 'w').close()
     with open(log_file, "w") as file:
       file.truncate(0)
-    log_view = Log(log_file, xterm_font_size=12, elem_id='log', elem_classes='hidden')
+    log_view = Log(log_file, xterm_font_size=12, elem_id='log')
   with gr.Row():
     file = gr.File()
     btn = gr.Button("Start", elem_id="start")
