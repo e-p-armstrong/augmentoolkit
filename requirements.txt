@@ -8,3 +8,4 @@ aiohttp
 gradio
 pyyaml
 gradio_log @ git+https://github.com/louis-she/gradio-log
+pathlib
