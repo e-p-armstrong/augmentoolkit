@@ -50,7 +50,7 @@ with gr.Blocks(css="#log { display: none; } #log.display { display: block; } .gr
       fn=run,
       inputs=[],
       outputs=[],
-      js: '() => { document.querySelector("#log").classList.add("display") }'
+      js='() => { document.querySelector("#log").classList.add("display") }'
     )
   with gr.Row():
     for component in components:
