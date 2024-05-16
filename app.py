@@ -25,7 +25,6 @@ def changed(text, keys):
   return keys
 
 def run(file):
-  print(">>> RUN")
   global config
   with open('config.yaml', 'w') as file:
     yaml.dump(config, file)
