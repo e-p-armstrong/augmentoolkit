@@ -38,7 +38,7 @@ with gr.Blocks() as demo:
     log_file = os.path.abspath("log.txt")
     if not os.path.isfile(log_file):
       open(log_file, 'w').close()
-    with open("log.txt", "w") as log_file:
+    with open(log_file, "w") as file:
       file.truncate(0)
     Log(log_file, xterm_font_size=12)
   with gr.Row():
