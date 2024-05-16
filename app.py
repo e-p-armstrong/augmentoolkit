@@ -35,7 +35,7 @@ def run(file):
     print(f"Error: {e}")
 
 
-with gr.Blocks(css="#log { display: none; } #log.display { display: block; } .gradio-container { max-width: none !important; }") as demo:
+with gr.Blocks(css="#log { height: 0; overflow: hidden; } #log.display { height: auto; overflow: auto; } .gradio-container { max-width: none !important; }") as demo:
   with gr.Row():
     log_file = os.path.abspath("log.txt")
     if not os.path.isfile(log_file):
