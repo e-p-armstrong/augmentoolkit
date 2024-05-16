@@ -33,7 +33,7 @@ def run():
   except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
 
-with gr.Blocks(css=".gradio-container { max-width: none; }") as demo:
+with gr.Blocks(css=".gradio-container { max-width: none !important; }") as demo:
   with gr.Row():
     log_file = os.path.abspath("log.txt")
     if not os.path.isfile(log_file):
