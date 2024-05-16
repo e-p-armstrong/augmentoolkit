@@ -25,8 +25,7 @@ def changed(text, keys):
 
 def run():
   global config
-  global log_view
-  gr.update(components=[log_view], visible=True)
+  gr.update(visible=True)
   with open('config.yaml', 'w') as file:
     yaml.dump(config, file)
   try:
@@ -46,7 +45,7 @@ with gr.Blocks(css=".gradio-container { max-width: none !important; }") as demo:
   with gr.Row():
     file = gr.File()
     btn = gr.Button("Start")
-    btn.click(fn=run, inputs=[], outputs=[])
+    btn.click(fn=run, inputs=[], outputs=[log_view])
   with gr.Row():
     for component in components:
       print(f"component = {component}")
