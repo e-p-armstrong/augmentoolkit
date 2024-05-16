@@ -8,3 +8,4 @@ aiohttp
 gradio==4.23.0
 pyyaml
 gradio_log==0.0.4
+asyncio
