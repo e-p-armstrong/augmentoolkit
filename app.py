@@ -23,7 +23,7 @@ def changed(text, keys):
   _config[keys[-1]] = text
   return keys
 
-def run():
+def run(file):
   print(">>> RUN")
   global config
   with open('config.yaml', 'w') as file:
