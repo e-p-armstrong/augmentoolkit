@@ -5,3 +5,5 @@ matplotlib
 nltk 
 openai
 aiohttp
+gradio
+pyyaml
