@@ -35,16 +35,7 @@ def run():
     print(f"Error: {e}")
 
 
-js = """
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector("#start").addEventListener("click", (e) => {
-    console.log("clicked")
-    document.querySelector("#log").classList.add("display")
-  })
-})
-"""
-
-with gr.Blocks(js=js, css="#log { display: none; } #log.display { display: block; } .gradio-container { max-width: none !important; }") as demo:
+with gr.Blocks(css="#log { display: none; } #log.display { display: block; } .gradio-container { max-width: none !important; }") as demo:
   with gr.Row():
     log_file = os.path.abspath("log.txt")
     if not os.path.isfile(log_file):
@@ -55,7 +46,12 @@ with gr.Blocks(js=js, css="#log { display: none; } #log.display { display: block
   with gr.Row():
     file = gr.File()
     btn = gr.Button("Start", elem_id="start")
-    btn.click(fn=run, inputs=[], outputs=[])
+    btn.click(
+      fn=run,
+      inputs=[],
+      outputs=[],
+      js: '() => { document.querySelector("#log").classList.add("display") }'
+    )
   with gr.Row():
     for component in components:
       print(f"component = {component}")
