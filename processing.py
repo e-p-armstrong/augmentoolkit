@@ -75,7 +75,7 @@ async def main():
     source_texts = []
     for extension in extensions:
       path = f"{INPUT_FOLDER}/**/*" + extension
-      source_texts.append(glob.glob(path))
+      source_texts = source_texts + glob.glob(path)
 
     print(source_texts)
 
