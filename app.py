@@ -29,7 +29,6 @@ def run():
     yaml.dump(config, file)
   try:
     with open("log.txt", "w") as log_file:
-      file.truncate(0)
       subprocess.run(["python", "processing.py"], stdout=log_file, stderr=log_file, text=True)
   except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
@@ -39,7 +38,9 @@ with gr.Blocks() as demo:
     log_file = os.path.abspath("log.txt")
     if not os.path.isfile(log_file):
       open(log_file, 'w').close()
-    Log(log_file, dark=True, xterm_font_size=12)
+    with open("log.txt", "w") as log_file:
+      file.truncate(0)
+    Log(log_file, xterm_font_size=12)
   with gr.Row():
     btn = gr.Button("Start")
     btn.click(fn=run, inputs=[], outputs=[])
