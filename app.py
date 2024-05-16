@@ -36,9 +36,11 @@ def run():
 
 
 js = """
-document.querySelector("#start").addEventListener("click", (e) => {
-  console.log("clicked")
-  document.querySelector("#log").classList.add("display")
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector("#start").addEventListener("click", (e) => {
+    console.log("clicked")
+    document.querySelector("#log").classList.add("display")
+  })
 })
 """
 
