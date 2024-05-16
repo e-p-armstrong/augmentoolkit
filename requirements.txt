@@ -7,4 +7,4 @@ openai
 aiohttp
 gradio
 pyyaml
-gradio_log
+gradio_log @ git+https://github.com/louis-she/gradio-log
