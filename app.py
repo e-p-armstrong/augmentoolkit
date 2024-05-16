@@ -55,10 +55,8 @@ with gr.Blocks(css="#log { padding:0; height: 0; overflow: hidden; } #log.displa
     )
   with gr.Row():
     for component in components:
-      print(f"component = {component}")
       with gr.Column():
         for item in component:
-          print(f"item={item}")
           t = gr.Textbox(label=item['label'], value=item['value'], interactive=True)
           t.change(changed, [t, gr.State(value=item['path'])], [gr.State()])
 demo.launch()
