@@ -48,9 +48,9 @@ with gr.Blocks(css="#log { display: none; } #log.display { display: block; } .gr
     btn = gr.Button("Start", elem_id="start")
     btn.click(
       fn=run,
-      inputs=[],
+      inputs=[file],
       outputs=[],
-      js='() => { document.querySelector("#log").classList.add("display") }'
+      js='(e) => { document.querySelector("#log").classList.add("display") }'
     )
   with gr.Row():
     for component in components:
