@@ -7,3 +7,4 @@ openai
 aiohttp
 gradio
 pyyaml
+gradio_log
