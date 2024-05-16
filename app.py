@@ -42,6 +42,7 @@ with gr.Blocks(css=".gradio-container { max-width: none !important; }") as demo:
       file.truncate(0)
     Log(log_file, xterm_font_size=12)
   with gr.Row():
+    file = gr.File()
     btn = gr.Button("Start")
     btn.click(fn=run, inputs=[], outputs=[])
   with gr.Row():
