@@ -44,7 +44,7 @@ with gr.Blocks(css="#log { padding:0; height: 0; overflow: hidden; } #log.displa
       open(log_file, 'w').close()
     with open(log_file, "w") as file:
       file.truncate(0)
-    log_view = Log(log_file, xterm_font_size=12, elem_id='log')
+    log_view = Log(log_file, xterm_font_size=12, dark=True, elem_id='log')
   with gr.Row():
     file = gr.File()
     btn = gr.Button("Start", elem_id="start")
