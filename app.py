@@ -25,6 +25,8 @@ def changed(text, keys):
 
 def run():
   global config
+  global log_view
+  gr.update(components=[log_view], visible=True)
   with open('config.yaml', 'w') as file:
     yaml.dump(config, file)
   try:
@@ -40,7 +42,7 @@ with gr.Blocks(css=".gradio-container { max-width: none !important; }") as demo:
       open(log_file, 'w').close()
     with open(log_file, "w") as file:
       file.truncate(0)
-    Log(log_file, xterm_font_size=12)
+    log_view = Log(log_file, xterm_font_size=12, visible=False)
   with gr.Row():
     file = gr.File()
     btn = gr.Button("Start")
