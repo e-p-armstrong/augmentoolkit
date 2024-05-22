@@ -1,9 +1,15 @@
-import asyncio
 import uuid
 from openai import AsyncOpenAI
+from augmentoolkit.generation_functions.gemini_data_classes import (
+    Part,
+    SystemInstruction,
+    Contents,
+    GenerationConfig,
+)
 from augmentoolkit.generation_functions.async_llamacpp_api_call import (
     make_async_api_call,
 )
+from augmentoolkit.generation_functions.gemini_wrapper_class import Gemini
 
 try:
     from aphrodite import (
@@ -41,12 +47,20 @@ class EngineWrapper:
             )
             self.engine = AsyncAphrodite.from_engine_args(engine_args)
         self.mode = mode
-        self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
+        self.base_url = base_url
         self.model = model
+        if base_url == "gemini":
+            self.client = Gemini(api_key=api_key)
+        else:
+            self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
 
     async def submit_completion(
         self, prompt, sampling_params
     ):  # Submit request and wait for it to stream back fully
+        if self.base_url == "gemini":
+            raise Exception(
+                "The Gemini API isn't compatible with completion mode. Use chat mode instead."
+            )
         if "temperature" not in sampling_params:
             sampling_params["temperature"] = 1
         if "top_p" not in sampling_params:
@@ -114,23 +128,54 @@ class EngineWrapper:
         elif self.mode == "api":
             # print("\n\n\nMESSAGES\n\n\n")
             # print(messages)
-            messages_cleaned = [
-                {
-                    "role": message["role"],
-                    "content": message["content"].replace("\\n", "\n"),
-                }
-                for message in messages
-            ]
-            # print(messages_cleaned)
-            completion = await self.client.chat.completions.create(
-                model=self.model,
-                messages=messages_cleaned,
-                temperature=sampling_params["temperature"],
-                top_p=sampling_params["top_p"],
-                stop=sampling_params["stop"],
-                max_tokens=sampling_params["max_tokens"],
-            )
-            completion = completion.choices[0].message.content
+            if self.base_url == "gemini":
+                generation_config = GenerationConfig(
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    max_output_tokens=8192,
+                )
+
+                for message in messages:
+                    if message["role"] == "system":
+                        self.client.system_instruction = message["content"]
+                        system_instruction = SystemInstruction(
+                            parts=[Part(text=message["content"])],
+                        )
+                        break
+
+                messages_cleaned = [
+                    {
+                        "role": (
+                            "model" if message["role"] == "assistant" else ("user")
+                        ),
+                        "parts": [{"text": message["content"].replace("\\n", "\n")}],
+                    }
+                    for message in messages
+                ]
+
+                contents = Contents.loads({"contents": messages_cleaned})
+
+                completion = await self.client.generate_content(
+                    contents, generation_config, system_instruction
+                )
+            else:
+                messages_cleaned = [
+                    {
+                        "role": message["role"],
+                        "content": message["content"].replace("\\n", "\n"),
+                    }
+                    for message in messages
+                ]
+                # print(messages_cleaned)
+                completion = await self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages_cleaned,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                )
+                completion = completion.choices[0].message.content
             return completion
         else:
             raise Exception("Aphrodite not compatible with chat mode!")
