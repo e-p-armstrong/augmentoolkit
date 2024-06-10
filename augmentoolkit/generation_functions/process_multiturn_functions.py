@@ -39,23 +39,23 @@ def extract_conversation(conversation):
     list of tuples: Each tuple contains the character's name and their message.
     """
     lines = conversation.strip().split("\n")
-    if len(lines) == 1:  # If no newlines, there's 1 item
-        lines = (
-            conversation.replace(
-                "## Conversation that answers the provided questions:", ""
-            )
-            .strip()
-            .split(r"\n")[1:]
-        )
     dialogues = []
+    current_speaker = None
+    current_message = ""
 
     for line in lines:
-        if ":" in line:
-            # Splitting at the first occurrence of ':'
-            parts = line.split(":", 1)
-            charname = parts[0].strip()
-            message = parts[1].strip() if len(parts) > 1 else ""
-            dialogues.append((charname, message))
+        line = line.strip()
+        if line in ["**AI Assistant:**", "**User:**"]:
+            if current_speaker:
+                dialogues.append((current_speaker, current_message.strip()))
+                current_message = ""
+            current_speaker = line[2:-2].strip()
+        else:
+            if current_speaker:
+                current_message += line + "\n"
+
+    if current_speaker:
+        dialogues.append((current_speaker, current_message.strip()))
 
     return dialogues
 
@@ -72,53 +72,18 @@ def compare_answers_with_qatuples(dialogues, qatuples, n):
     Returns:
     bool: True if all answers match the corresponding answers in qatuples, False otherwise.
     """
-    for i in range(
-        2, len(dialogues), 2
-    ):  # Answers are at even indices, starting from 2
-        if int(i / 2) - 1 >= len(
-            qatuples
-        ):  # at this point we've reached added stuff that doesn't have a corresponding qatuple
+    for i in range(1, len(dialogues), 2):  # Answers are at odd indices, starting from 1
+        if (i - 1) // 2 >= len(qatuples):  # at this point we've reached added stuff that doesn't have a corresponding qatuple
             break
-        sequential, comp = has_sequential_chars(
-            qatuples[int(i / 2) - 1][1], dialogues[i][1], n
-        )
+        sequential, comp = has_sequential_chars(qatuples[(i - 1) // 2][1], dialogues[i][1], n)
         # print(sequential)
         # print(n)
         if not sequential:
             print(
-                f"Answer {int(i/2)}: {dialogues[i][1]} does not match the corresponding answer in qatuples: {qatuples[int(i/2) - 1][1]}, {comp}"
+                f"Answer {(i + 1) // 2}: {dialogues[i][1]} does not match the corresponding answer in qatuples: {qatuples[(i - 1) // 2][1]}, {comp}"
             )
             return False
     return True
-
-
-def check_for_repeated_dialogue_answers(dialogues, qatuples, n):
-    """
-    Checks each line of dialogue to ensure that it does not repeat the corresponding answer from qatuples.
-
-    Parameters:
-    dialogues (list): List of tuples containing the dialogues.
-    qatuples (list): List of tuples containing questions and answers.
-    n (int): Number of sequential characters to check for repetition.
-
-    Returns:
-    bool: True if no dialogue line repeats its corresponding answer, False otherwise.
-    """
-    for i in range(
-        2, len(dialogues), 2
-    ):  # Answers are at even indices, starting from 2
-        if int(i / 2) - 1 >= len(
-            qatuples
-        ):  # at this point we've reached added stuff that doesn't have a corresponding qatuple
-            break
-
-        dialogue_answer = dialogues[i][1]
-        corresponding_qatuple_answer = qatuples[int(i / 2) - 1][1]
-        # Check if the dialogue answer repeats the qatuple answer
-        if dialogue_answer.count(corresponding_qatuple_answer) > 1:
-            return False
-    return True
-
 
 # def check_repeated_answer(dialogues, qatuples):
 #     # Get the length of the dialogues
@@ -144,41 +109,13 @@ def check_conversation_length(conv, qatuples):
     # Get the length of the dialogues
     conv_length = len(conv)
 
-    target_length = len(qatuples) * 2 + 1
+    target_length = len(qatuples) * 2
     if (
         conv_length < target_length
     ):  # we can have more messages since the AI might add some stuff at the end to wrap up the scene
         return False
     else:
         return True
-
-
-def check_conversation_for_text_from_examples(conv):
-    """Checks if certain strings from the few-shot examples appear in the conversation"""
-    strings_to_check_for = [
-        "her lipstick-colored lips",
-        "coquettishly tilts her head to the side,",
-        "Awwww, you're no fun,",
-        "Reminds me of my colleagues...",
-        "" "I'll see you at that cafe.",
-        "Ghh... you know,",
-        "you're breaking a poor woman's heart,",
-        "surprising innocence and warmth",
-        'in mock-thought, "',
-        " _I can't believe my ears. Did ",
-    ]
-    matches_found = 0
-    for string in strings_to_check_for:
-        if string in conv:
-            matches_found += 1
-            print(f"Found {string} in the conversation!")
-    if matches_found > 2:
-        print(
-            f"Found {matches_found} matches for strings from the few-shot examples. Validation failed!"
-        )
-        return False
-    return True
-
 
 def check_each_question_contains_q_from_tuples(conv, qatuples, n):
     """
@@ -193,18 +130,14 @@ def check_each_question_contains_q_from_tuples(conv, qatuples, n):
     Returns:
     bool or None: True if all questions pass the check, False if any fail, None if the first question fails.
     """
-    for i in range(1, len(conv), 2):  # Questions are at odd indices
-        if i // 2 < len(
-            qatuples
-        ):  # Ensure we only check questions that have corresponding qatuples
+    for i in range(0, len(conv), 2):  # Questions are at even indices, starting from 0
+        if i // 2 < len(qatuples):  # Ensure we only check questions that have corresponding qatuples
             question_from_conv = conv[i][1]
             question_from_tuples = qatuples[i // 2][0]
             # print(question_from_tuples, question_from_conv)
-            sequential, _ = has_sequential_chars(
-                question_from_tuples, question_from_conv, n
-            )
+            sequential, _ = has_sequential_chars(question_from_tuples, question_from_conv, n)
             if not sequential:
-                if i == 1:
+                if i == 0:
                     return None  # Special handling for the first question
                 else:
                     return False
@@ -264,20 +197,10 @@ def call_all_processors(multiturn_conversation, qatuples):
         print("Answers in dialogues do not match corresponding answers in qatuples.")
         return False
 
-    # Check if any dialogue line repeats its corresponding answer
-    if not check_for_repeated_dialogue_answers(convs_split, qatuples, 15):
-        print("Dialogue line repeats its corresponding answer.")
-        return False
-
     # Check the conversation length
     if not check_conversation_length(convs_split, qatuples):
         print("Conversation is too short! Validation failed!")
         print(convs_split)
-        return False
-
-    # Check for text from examples (assuming this is implemented elsewhere)
-    if not check_conversation_for_text_from_examples(multiturn_conversation):
-        print("Conversation does not contain text from examples. Validation failed!")
         return False
 
     # Check for unintended repeated quotes
