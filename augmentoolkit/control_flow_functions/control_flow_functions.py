@@ -521,7 +521,7 @@ async def vet_answer_accuracy_loop(
         prompt_path=prompt_path_ans_accuracy_check,
         regex=check_ans_accuracy_regex,
         sampling_params={
-            "max_tokens": 6000,
+            "max_tokens": 3000,
             "stop": [
                 "### Response",
                 "\n\n\n\n\n",
@@ -670,7 +670,7 @@ async def vet_answer_relevance_loop(
         prompt_path=prompt_path_ans_relevancy_check,
         regex=check_ans_relevancy_regex,
         sampling_params={
-            "max_tokens": 5500,
+            "max_tokens": 3000,
             "stop": [
                 "### Response",
                 "\n\n\n\n\n",
@@ -829,7 +829,7 @@ async def vet_question_loop(
         prompt_path=prompt_path_q_check,
         regex=check_q_regex,
         sampling_params={
-            "max_tokens": 4000,
+            "max_tokens": 2000,
             "stop": [
                 "### Response",
                 "\n\n\n\n\n",
