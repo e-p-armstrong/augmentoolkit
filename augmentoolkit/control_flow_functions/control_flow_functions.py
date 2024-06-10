@@ -18,19 +18,17 @@ import glob
 import uuid
 import yaml
 
+from augmentoolkit.utils.create_conv_starter import create_conv_starter
+from augmentoolkit.utils.extract_steps import extract_steps
 from augmentoolkit.utils.escape_unescaped_quotes import escape_unescaped_quotes
 
 from augmentoolkit.generation_functions import (
     extract_question_answer,
-    process_multiturn_functions,
     identify_duplicates,
+    process_multiturn_functions,
     extract_name,
     random_name,
     strip_steps,
-)
-from augmentoolkit.generation_functions.character_card_helpers import (
-    extract_capital_letters,
-    select_random_capital,
 )
 from augmentoolkit.generation_functions.format_qatuples import format_qatuples
 
@@ -41,37 +39,6 @@ with open("./config.yaml", "r") as file:
     obj_conf = yaml.safe_load(file)
 
 DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
-
-
-def extract_steps(text, steps=[2, 4, 5]):
-    """
-    Extracts the specified steps from the text.
-
-    Args:
-    text (str): The input text containing various steps.
-    steps (list of int): The step numbers to extract.
-
-    Returns:
-    str: A new string with each specified step's content on its own line.
-    """
-    step_pattern = "|".join([f"Step {step}\." for step in steps])
-    matches = re.findall(
-        f"({step_pattern})\s*(.*?)\s*(?=(Step \d\.|$))", text, re.DOTALL
-    )
-
-    # Extract and join the matched content, skipping the "Step n." part
-    extracted_text = "\n".join(match[1].strip() for match in matches)
-    return extracted_text
-
-
-def extract_first_words(character_name, text):
-    # Regular expression pattern to extract first word after the character's name
-    pattern = rf"{character_name}: \"(\w+)"
-
-    # Find all matches in the text
-    matches = re.findall(pattern, text)
-
-    return matches
 
 
 import os
@@ -96,252 +63,6 @@ def write_output_to_file(output, directory, uuid):
         file.write(output)
 
     print(f"Output written to {file_path}")
-
-
-# multiturn helpers
-# These will probably be used for multiturn rapid-fire answering.
-
-
-def create_conv_starter(character):
-    charname = extract_name.extract_name(character)
-    first_words_of_card = extract_first_words(charname, character)
-    conv_starters = [  # prevents it from regurgitating the card (when combined with filtering)
-        "Ah",
-        "Oh",
-        # "You",
-        # "Really",
-        "I",
-        # "What",
-        # "So",
-        "Welcome",
-        "Hey",
-        # "Look",
-        # "Now",
-        # "Huh",
-        "It's",
-        "Hello",
-    ]
-
-    conv_starters_filtered = [
-        starter for starter in conv_starters if starter not in first_words_of_card
-    ]
-    return random.choice(conv_starters_filtered)
-
-
-def create_starting_str(qatuples):
-    author_name_letters = extract_capital_letters(qatuples[0][3])
-    starting_str = ""
-    exclusions = ["X", "Z", "Y", "Q"]
-    if author_name_letters:
-        starting_str = select_random_capital(exclusions + author_name_letters)
-    else:
-        starting_str = select_random_capital(exclusions)
-    return starting_str
-
-
-# Idea: use multiple short answers to train the task of answering multiple questions in one response. Like, "Tell me what 2+2 is then tell me who won the battle of Alesia". Two-three short answers per response should be enough.
-async def make_multiturn_character(
-    qa_tuples,
-    conv_id,
-    assistant_mode=False,
-    character_card_plan_creator=None,
-    character_card_creator=None,
-    completion_mode=None,
-):
-    if (
-        assistant_mode
-    ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
-        return "will_be_replaced", "will_be_replaced"
-
-    instructions = special_instructions(n=1).strip()
-    # if not completion_mode:
-    #     instructions = escape_unescaped_quotes(instructions).replace("\n", "\\n")
-    if completion_mode:
-        (
-            plan,
-            card_plan_output,
-        ) = await character_card_plan_creator.generate(
-            arguments={
-                "textname": qa_tuples[0][3],
-                "text": qa_tuples[0][2],
-                "question_answer_list": format_qatuples(qa_tuples),
-                "special_instructions": instructions,
-            }
-        )  # I will reuse the many tuples function for short question-answers, there's a lot of prompting in here already
-    else:
-        (
-            plan,
-            card_plan_output,
-        ) = await character_card_plan_creator.generate(
-            arguments={
-                "textname": qa_tuples[0][3],
-                "text": qa_tuples[0][2],
-                "question_answer_list": format_qatuples(qa_tuples),
-                "special_instructions": instructions,
-            }
-        )
-    write_output_to_file(
-        card_plan_output,
-        obj_conf["PATH"]["OUTPUT"] + "/multiturn_card_plan_generations",
-        conv_id,
-    )
-
-    starting_str = create_starting_str(qa_tuples)
-    (
-        char,
-        char_output,
-    ) = await character_card_creator.generate(
-        arguments={
-            "text": qa_tuples[0][2],
-            "textname": qa_tuples[0][3],
-            "special_instructions": instructions,
-            "plan": plan,
-            "starting_str": starting_str,
-        }
-    )  # creates a character card
-    write_output_to_file(
-        char_output, obj_conf["PATH"]["OUTPUT"] + "/multiturn_card_generations", conv_id
-    )
-    return char, instructions
-
-
-async def make_multiturn_scenario(
-    qa_tuples,
-    character,
-    conv_id,
-    assistant_mode=False,
-    scenario_plan_creator=None,
-    scenario_creator=None,
-    completion_mode=None,
-):
-    if (
-        assistant_mode
-    ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
-        return "will_be_replaced", "will_be_replaced"
-    if completion_mode:
-        (
-            plan,
-            scenario_plan_output,
-        ) = await scenario_plan_creator.generate(
-            arguments={
-                "question_answer_list": format_qatuples(qa_tuples),
-                "character": character,
-            }
-        )
-    else:
-        (
-            plan,
-            scenario_plan_output,
-        ) = await scenario_plan_creator.generate(
-            arguments={
-                "question_answer_list": format_qatuples(qa_tuples),
-                "character": character,
-            }
-        )
-
-    plan = fix_scenario_plan(plan, character)
-    write_output_to_file(
-        scenario_plan_output,
-        obj_conf["PATH"]["OUTPUT"] + "/multiturn_scenario_plan_generations",
-        conv_id,
-    )
-
-    variation = select_variation(character)
-    if completion_mode:
-        (
-            scenario,
-            scenario_output,
-        ) = await scenario_creator.generate(
-            arguments={
-                "question_answer_list": format_qatuples(qa_tuples),
-                "character": character,
-                "plan": plan,
-                "selected_variation": variation,
-            }
-        )  # creates a scenario based on a character card and question/answer tuple
-    else:
-        (
-            scenario,
-            scenario_output,
-        ) = await scenario_creator.generate(
-            arguments={
-                "question_answer_list": format_qatuples(qa_tuples),
-                "character": character,
-                "plan": plan,
-                "selected_variation": variation,
-            }
-        )
-    write_output_to_file(
-        scenario_output,
-        obj_conf["PATH"]["OUTPUT"] + "/multiturn_scenario_generations",
-        conv_id,
-    )
-    return scenario, plan
-
-
-async def make_multiturn_conversation_info(
-    qa_tuples,
-    assistant_mode=False,
-    character_card_plan_creator=None,
-    character_card_creator=None,
-    scenario_plan_creator=None,
-    scenario_creator=None,
-    completion_mode=None,
-):
-    conv_id = make_id()
-    if (
-        assistant_mode
-    ):  # If assistant mode is on, multiturn convs will have hardcoded information in its prompt file; but we still need to put something in the file
-        return (qa_tuples, "will", "be", "replaced", conv_id)
-    # thought_plan = create_thought_plan_many_tuples(qa_tuples,character,scenario,logic_llm) # There IS a way to make multiturn chain of thought answering work: generate each pair of messages using a separate prompt or a separate function, each of which has only the thought plan for that question/answer pair. But simply cramming in all the step-by-step things will confuse the hell out of the poor model. So for the first release version we're skipping it and just giving the response, with no reasoning, in the multiturn convs.
-    retries = 0
-    done = False
-    while not done and retries < 3:
-        retries = retries + 1
-        character, instructions = await make_multiturn_character(
-            qa_tuples,
-            conv_id,
-            assistant_mode=assistant_mode,
-            character_card_plan_creator=character_card_plan_creator,
-            character_card_creator=character_card_creator,
-            completion_mode=completion_mode,
-        )
-        if "What's your backstory?" not in character:
-            print("Failed to properly generate card, retrying")
-            continue
-        done = True
-    scenario, scenario_plan = await make_multiturn_scenario(
-        qa_tuples,
-        character,
-        conv_id,
-        assistant_mode=assistant_mode,
-        scenario_plan_creator=scenario_plan_creator,
-        scenario_creator=scenario_creator,
-        completion_mode=completion_mode,
-    )
-
-    return (qa_tuples, character, scenario, scenario_plan, conv_id)
-
-
-# Group tuples for multiturn example generation (by chunk of source text) and then run that helper (so that we can make multiturn conversations from questions based on the same paragraphs)
-def group_by_text(tuples_list):
-    # Dictionary to hold the groups with text as the key
-    groups = {}
-
-    # Iterate over each tuple in the list
-    for question, answer, text, textname in tuples_list:
-        # If the text is not yet a key in the dictionary, add it with an empty list
-        if text not in groups:
-            groups[text] = []
-
-        # Append the current tuple to the appropriate list
-        groups[text].append((question, answer, text, textname))
-
-    # Return the values of the dictionary, which are the lists of tuples grouped by text; also remove duplicates
-    return [
-        identify_duplicates.identify_duplicates(group)
-        for group in list(groups.values())
-    ]
 
 
 def extract_reasoning_from_context_check(response):
@@ -393,12 +114,15 @@ async def repair_qatuple_context(
             "max_tokens": 2000,
             "stop": [
                 "### Response",
-                "\n\n\n\n\n",
+                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
                 "</s>",
                 "# Input:",
                 "[INST]",
                 "### Instruction",
                 "[INST",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
             ],
             "temperature": 0.2,
         },
@@ -524,12 +248,15 @@ async def vet_answer_accuracy_loop(
             "max_tokens": 3000,
             "stop": [
                 "### Response",
-                "\n\n\n\n\n",
+                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
                 "</s>",
                 "# Input:",
                 "[INST]",
                 "### Instruction",
                 "[INST",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
             ],
             "temperature": 0.2,
         },
@@ -673,12 +400,15 @@ async def vet_answer_relevance_loop(
             "max_tokens": 3000,
             "stop": [
                 "### Response",
-                "\n\n\n\n\n",
+                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
                 "</s>",
                 "# Input:",
                 "[INST]",
                 "### Instruction",
                 "[INST",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
             ],
             "temperature": 0.2,
         },
@@ -832,12 +562,15 @@ async def vet_question_loop(
             "max_tokens": 2000,
             "stop": [
                 "### Response",
-                "\n\n\n\n\n",
+                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
                 "</s>",
                 "# Input:",
                 "[INST]",
                 "### Instruction",
                 "[INST",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
             ],
             "temperature": 0.2,
         },
@@ -1109,7 +842,7 @@ def extract_question_from_response_chatmode(
         )
 
 
-# Question generation ASDF
+# Question generation
 async def generate_qatuples_from_para(
     idx,
     para,
@@ -1144,12 +877,15 @@ async def generate_qatuples_from_para(
             "max_tokens": 3000,
             "stop": [
                 "### Response",
-                "\n\n\n\n\n",
+                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
                 "</s>",
                 "# Input:",
                 "[INST]",
                 "### Instruction",
                 "[INST",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
                 "Text to plan questions from",
             ],
             "temperature": 0.8,
@@ -1301,8 +1037,7 @@ async def generate_qatuples_from_para(
         traceback.print_exc()
 
 
-# Graphing code generated by GPT-4. May be suboptimal/ugly.
-def filter_and_graph(tuples, graph):
+def filter_and_graph(tuples):
     # Count the occurrences of None and non-None for each source text
     source_counts = Counter()
     for paragraph, source in tuples:
@@ -1312,23 +1047,6 @@ def filter_and_graph(tuples, graph):
         else:
             source_counts[source] = source_counts.get(source, [0, 0])
             source_counts[source][1] += 1
-    if graph:
-        # Prepare data for the graph
-        labels = list(source_counts.keys())
-        none_counts = [source_counts[source][0] for source in labels]
-        non_none_counts = [source_counts[source][1] for source in labels]
-
-        # Plotting the graph
-        x = range(len(labels))
-        plt.bar(x, none_counts, width=0.4, label="Not suitable", align="center")
-        plt.bar(x, non_none_counts, width=0.4, label="Valid Paragraphs", align="edge")
-        plt.xlabel("Source Text")
-        plt.ylabel("Number of Paragraphs")
-        plt.title("Paragraphs Suitable for Questions by Source Text")
-        plt.xticks(x, labels, rotation="vertical")
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
 
     # Filter out tuples with None and return the new list
     filtered_list = [t for t in tuples if t[0] is not None]
@@ -1403,6 +1121,7 @@ async def filter_all_questions(
     engine_wrapper,
     output_dir,
     take_subset=False,
+    subset_size=None,
     use_filenames=False,
     rtwl=None,
     completion_mode=None,
@@ -1431,12 +1150,15 @@ async def filter_all_questions(
             # "min_p": 0.4,
             "stop": [
                 "### Response",
-                "\n\n\n\n\n",
+                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
                 "</s>",
                 "# Input:",
                 "[INST]",
                 "### Instruction",
                 "[INST",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
             ],
             "temperature": 0.2,
         },
@@ -1458,62 +1180,90 @@ async def filter_all_questions(
     else:
         tasks = [
             determine_worthy(idx, p, judged_worthy_for_questions, output_dir, judge)
-            for idx, p in enumerate(paragraphs_processed[:13])
+            for idx, p in enumerate(paragraphs_processed[:subset_size])
         ]
     limited_tasks = [rtwl(task) for task in tasks]
     for future in tqdmasyncio.tqdm.as_completed(limited_tasks):
         await future
 
 
-def sentence_chunking_algorithm(file_path, tokenizer, max_token_length=400):
+def sentence_chunking_algorithm(file_path, max_char_length=1900):
     """
-    This function takes a plaintext file and chunks it into sentences.
+    This function takes a plaintext file and chunks it into paragraphs or sentences if the paragraph exceeds max_char_length.
 
     :param file_path: Path to the plaintext file
-    :param tokenizer: SentencePiece tokenizer
-    :param max_token_length: The maximum token length for a chunk of sentences
-    :return: List of sentence chunks with source text information
+    :param max_char_length: The maximum char5acter length for a chunk
+    :return: List of chunks with source text information
     """
-    sentence_chunks_with_source = []
+    chunks_with_source = []
     current_chunk = []
-    token_count = 0
+    char_count = 0
     source_name = file_path.replace(".txt", "")
 
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
         content = f.read()
+    # try:
+    #     with open(file_path, "r", encoding="utf-8") as f:
+    #         content = f.read()
+    # except Exception as e:
+    #     print(f"\nError reading file {file_path}: {e}\n")
+    #     return []
 
-    # Remove Gutenberg header and footer
-    content = re.sub(
-        r"^.*?START OF (THIS|THE) PROJECT GUTENBERG EBOOK.*$\n",
-        "",
-        content,
-        flags=re.MULTILINE,
-    )
-    content = re.sub(
-        r"^.*?END OF (THIS|THE) PROJECT GUTENBERG EBOOK.*$\n",
-        "",
-        content,
-        flags=re.MULTILINE,
-    )
+    paragraphs = content.split(
+        "\n\n"
+    )  # Assuming paragraphs are separated by two newlines # TODO change so that if the length is 1 after this, split by tabs instead
 
-    sentences = sent_tokenize(content)
+    # HOW TO DO IT probably:
+    # add tokens to the paragraph until we reach the max length,
+    # create chunks out of the remainder of the paragraph (split at max chunk length until it's done)
+    # if the final chunk does not have the max length, then make it the new current chunk, set the current token count to its length, and continue with the for loop.
 
-    for sentence in tqdm(sentences, desc=f"Processing {file_path}"):
-        sentence_token_count = len(tokenizer.encode(sentence))
+    for paragraph in paragraphs:
+        paragraph = paragraph.strip()  # Remove leading and trailing whitespace
+        if not paragraph:  # Skip empty paragraphs
+            continue
 
-        if token_count + sentence_token_count <= max_token_length:
-            current_chunk.append(sentence)
-            token_count += sentence_token_count
+        paragraph_char_count = len(paragraph)
+
+        # Check if the paragraph itself exceeds the max token length
+        if paragraph_char_count > max_char_length:
+
+            # Fallback to character chunking for this paragraph
+            end_index = (
+                max_char_length - char_count
+            )  # after this we will take max_char_length chunks starting from end index until the end of the paragraph
+            current_chunk.append(paragraph[:end_index])
+            # characters = list(paragraph)
+            chunks_with_source.append(("".join(current_chunk), source_name))
+            current_chunk = []
+            while end_index < paragraph_char_count:
+                current_chunk.append(paragraph[end_index : end_index + max_char_length])
+                chunks_with_source.append(("".join(current_chunk), source_name))
+                current_chunk = []
+                end_index += max_char_length
+
+            # # handle the remainder of the paragraph
+            # end_index = end_index - max_char_length
+            # current_chunk.append(paragraph[end_index:])
+
+            # char_count = paragraph_char_count - end_index
         else:
-            sentence_chunks_with_source.append((" ".join(current_chunk), source_name))
-            current_chunk = [sentence]
-            token_count = sentence_token_count
+            if char_count + paragraph_char_count <= max_char_length:
+                current_chunk.append(paragraph)
+                char_count += paragraph_char_count
+            else:
+                chunks_with_source.append(("".join(current_chunk), source_name))
+                current_chunk = [paragraph]
+                char_count = paragraph_char_count
 
     # Add the last chunk if it exists
     if current_chunk:
-        sentence_chunks_with_source.append((" ".join(current_chunk), source_name))
+        chunks_with_source.append(("\n\n".join(current_chunk), source_name))
+        
+    # filter out chunks with fewer than 50 characters
+    chunks_with_source = [chunk for chunk in chunks_with_source if len(chunk[0]) >= 50]
 
-    return sentence_chunks_with_source
+    return chunks_with_source
 
 
 def fix_text(to_replace_arr, text):
@@ -1552,36 +1302,21 @@ async def ensure_multiple_answers_are_same(
     return None
 
 
+
 async def make_multiturn_conversation(
     info, multi_turn_conv_generator, completion_mode=None
 ):
-    if not obj_conf["SYSTEM"]["ASSISTANT_MODE"]:
-        charname = extract_name.extract_name(info[1])
-        conv_starter = create_conv_starter(info[1])
-    else:
-        charname = "AI" # NOTE not actually used
-        conv_starter = "Hello! How can I help you today?" # NOTE not actually used.
-        
+
     if completion_mode:
         conv, conv_output = await multi_turn_conv_generator.generate(
             arguments={
-                "character": info[1].strip(),
-                "scenario": info[2].strip(),
-                "extra_info": extract_steps(info[3].strip()),
                 "question_answer_list": format_qatuples(info[0]).strip(),
-                "charname": charname.strip(),
-                "conv_starter": conv_starter.strip(),
             }
         )
     else:
         conv, conv_output = await multi_turn_conv_generator.generate(
             arguments={
-                "character": info[1].strip(),
-                "scenario": info[2].strip(),
-                "extra_info": info[3].strip(),
                 "question_answer_list": format_qatuples(info[0]),
-                "charname": charname.strip(),
-                "conv_starter": conv_starter.strip(),
             }
         )
     write_output_to_file(
@@ -1592,303 +1327,52 @@ async def make_multiturn_conversation(
 
     return (conv, info[1], info[2], info[3], info[0])
 
-
-def select_variation(
-    character,
-):  # can help following the groove of the few-shot examples, in the case where you're using a slightly stupid model or low temperature
-    charname = extract_name.extract_name(character)
-    variations = [
-        # "Set against the backdrop of",
-        f"In {charname}'s ",
-        "Amidst the surroundings of ",
-        # "Within the confines of",
-        f"Within {charname}'s ",
-        f"Inside {charname}'s ",
-        # f"Inside the confines of ",
-        f"Inside the confines of {charname}'s",
-        f"Set amongst the",
-    ]
-
-    return random.choice(variations)
-
-
-def fix_scenario_plan(scenario_plan, character):
-    charname = extract_name.extract_name(character)
-    if not ("Albert" in charname):
-        if "Albert" in scenario_plan:
-            print("Random Name was used instead of Albert")
-        scenario_plan = scenario_plan.replace("Albert", random_name.random_name())
-    return scenario_plan
-
-
-def create_character_info_generators(
-    completion_mode=None, engine_wrapper=None, logging_level=None, use_filenames=False
-):
-    character_card_plan_path = "create_character_card_plan_no_filenames"
-    if use_filenames:
-        character_card_plan_path = "create_character_card_plan"
-
-    character_card_plan_regex = re.compile(
-        r"Character card plan \(be creative, do not use real people as characters, do NOT make the author of the book a character\):\n(.+)",
-        re.IGNORECASE | re.DOTALL,
-    )
-
-    if completion_mode:
-        character_card_plan_path = character_card_plan_path + ".txt"
-    else:
-        character_card_plan_path = character_card_plan_path + ".json"
-
-    character_card_plan_creator = GenerationStep(
-        prompt_path=character_card_plan_path,
-        regex=character_card_plan_regex,
-        sampling_params={
-            "max_tokens": 3000,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "[INST",
-                "## Character card plan (be creat",
-                # "### Questions",
-                "## Questions, answer, and text that the character should know:",
-                "Special instructions:",
-                "###",
-            ],
-            "temperature": 1,
-            # top_k=-1,
-            "top_p": 0.5,
-            # min_p=0.4,
-        },
-        completion_mode=completion_mode,
-        logging_level=logging_level,
-        retries=1,
-        engine_wrapper=engine_wrapper,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-    )
-
-    # Character card gen
-
-    character_card_path = "create_character_card_no_filenames"
-    if use_filenames:
-        character_card_path = "create_character_card"
-
-    character_card_regex = re.compile(
-        r"Character card \(be creative, write at least 3 paragraphs for each dialogue line\):\n(.+)",
-        re.IGNORECASE | re.DOTALL,
-    )
-
-    if completion_mode:
-        character_card_path = character_card_path + ".txt"
-    else:
-        character_card_path = character_card_path + ".json"
-
-    if obj_conf["SYSTEM"]["COMPLETION_MODE"]:
-        stop_list = [
-            "### Response",
-            "\n\n\n\n\n",
-            "</s>",
-            "# Input:",
-            "[INST]",
-            "### Instruction",
-            "[INST",
-            "## Text",
-            "## Character card",
-        ]
-    else:
-        stop_list = [
-            "### Response",
-            "\n\n\n\n\n",
-            "</s>",
-            "# Input:",
-            "[INST]",
-            "### Instruction",
-            "[INST",
-            "## Text",
-        ]
-
-    character_card_creator = GenerationStep(
-        prompt_path=character_card_path,
-        regex=character_card_regex,
-        sampling_params={
-            "max_tokens": 4000,
-            "stop": stop_list,
-            "temperature": 1,
-            "top_p": 0.5,
-        },
-        completion_mode=completion_mode,
-        logging_level=logging_level,
-        retries=1,
-        engine_wrapper=engine_wrapper,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-    )
-
-    # Scenario Plan Gen
-    scenario_plan_path = "create_scenario_plan"  # no variation between use of filenames or not for scenarios
-
-    scenario_plan_regex = re.compile(
-        r"Scenario plan \(be creative, and make sure all characters present fit in with the setting\):\n(.+)",
-        re.IGNORECASE | re.DOTALL,
-    )
-
-    if completion_mode:
-        scenario_plan_path = scenario_plan_path + ".txt"
-    else:
-        scenario_plan_path = scenario_plan_path + ".json"
-
-    scenario_plan_creator = GenerationStep(
-        prompt_path=scenario_plan_path,
-        regex=scenario_plan_regex,
-        sampling_params={
-            "max_tokens": 8000,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "[INST",
-                "## Information",
-                "User:",
-                # "## Scenario",
-            ],
-            "temperature": 0.6,
-            # top_k=-1,
-            "top_p": 1,
-            # min_p=0.5,
-        },
-        completion_mode=completion_mode,
-        logging_level=logging_level,
-        retries=1,
-        engine_wrapper=engine_wrapper,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-    )
-
-    # Scenario Gen
-    scenario_path = (
-        "create_scenario"  # no variation between use of filenames or not for scenarios
-    )
-
-    scenario_regex = re.compile(
-        r"Scenario \(will have no dialogue, will just set up the scene\):\n(.+)",
-        re.IGNORECASE | re.DOTALL,
-    )
-
-    if completion_mode:
-        scenario_path = scenario_path + ".txt"
-    else:
-        scenario_path = scenario_path + ".json"
-
-    scenario_creator = GenerationStep(  # will have variations as an argument
-        prompt_path=scenario_path,
-        regex=scenario_regex,
-        sampling_params={
-            "max_tokens": 8000,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "[INST",
-                "## Information",
-                "User:",
-                # "## Scenario",
-            ],
-            "temperature": 0.5,
-            # top_k=-1,
-            "top_p": 0.5,
-            # min_p=0.5,
-        },
-        completion_mode=completion_mode,
-        logging_level=logging_level,
-        retries=1,
-        engine_wrapper=engine_wrapper,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-    )
-
-    return (
-        character_card_plan_creator,
-        character_card_creator,
-        scenario_plan_creator,
-        scenario_creator,
-    )
-
-
 async def create_info(
     idx,
     group,
-    engine_wrapper,
-    assistant_mode,
     multi_turn_convs_info,
     multi_turn_convs_info_dir,
-    rearrangements_to_take=3,
-    use_filenames=False,
-    completion_mode=None,
-    logging_level=logging.INFO,
 ):
-    # NOTE we set up all the generators up here so that we don't have to drill the args down like this is an old version of React
-    # Instead we drill the generators down like it's an old version of React lol
-    (
-        character_card_plan_creator,
-        character_card_creator,
-        scenario_plan_creator,
-        scenario_creator,
-    ) = create_character_info_generators(
-        engine_wrapper=engine_wrapper,
-        use_filenames=use_filenames,
-        completion_mode=completion_mode,
-        logging_level=logging_level,
-    )
 
-    # Resume normal control flow code
-    all_permutations = list(itertools.permutations(group))
+    file_path = os.path.join(multi_turn_convs_info_dir, f"info_{idx}.json")
 
-    sample_size = min(rearrangements_to_take, len(all_permutations))
-    sampled_permutations = random.sample(all_permutations, sample_size)
+    # Skip if file already exists
+    if not os.path.exists(file_path):
+        info = (group, "will", "be", "replaced", make_id())
 
-    group_convs_info = []
+        with open(file_path, "w") as file:
+            json.dump(info, file, indent=4)
+    else:
+        with open(file_path, "r") as file:
+            info = json.load(file)
 
-    for iter, perm in enumerate(sampled_permutations):
-        file_path = os.path.join(multi_turn_convs_info_dir, f"info_{idx}_{iter}.json")
+    multi_turn_convs_info.append(
+        [info]
+    )  # hacky-looking things because the legacy functionality was simplified.
 
-        # Skip if file already exists
-        if not os.path.exists(file_path):
-            try:
-                info = await make_multiturn_conversation_info(
-                    perm,
-                    assistant_mode=assistant_mode,
-                    character_card_plan_creator=character_card_plan_creator,
-                    character_card_creator=character_card_creator,
-                    scenario_plan_creator=scenario_plan_creator,
-                    scenario_creator=scenario_creator,
-                    completion_mode=completion_mode,
-                )
 
-                if info is not None:
-                    with open(file_path, "w") as file:
-                        json.dump(info, file, indent=4)
+def read_json_files_info(directory):
+    # Create a list to hold the tuples
+    tuple_list = []
 
-                group_convs_info.append(info)
-            except Exception as e:
-                print("ERROR!!!!--!!!!", e)
-                traceback.print_exc()
-        else:
-            print(f"Skipped generating {file_path} as it already exists")
+    # Get all the .json files in the directory, sorted
+    json_files = sorted([f for f in os.listdir(directory) if f.endswith(".json")])
 
-    multi_turn_convs_info.append(group_convs_info)
+    # Read each file and convert the contents
+    for file in json_files:
+        with open(os.path.join(directory, file), "r") as f:
+            data = json.load(f)
+            # Ensure the data is in the correct format before converting to tuple
+            if (
+                isinstance(data, list)
+                and len(data) == 5
+                and isinstance(data[0], list)
+                and all(len(item) == 4 for item in data[0])
+                and all(isinstance(i, str) for i in data[1:])
+            ):
+                tuple_list.append((data[0], data[1], data[2], data[3], data[4]))
+
+    return tuple_list
 
 
 def read_json_files_info(directory):
@@ -1921,32 +1405,16 @@ async def create_conversation(
     engine_wrapper,
     multi_turn_convs,
     multi_turn_convs_dir,
-    assistant_mode=False,
     completion_mode=None,
     logging_level=logging.INFO,
 ):
     file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
-    multi_turn_conversation_prompt_path = "multi_turn_conversation"
-    if assistant_mode:
-        multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation"
+    multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation"
 
-    qatuples = info[0]
-    character = info[1]
-    scenario = info[2]
-    scenario_plan = info[3]
-
-    charname = extract_name.extract_name(character)
-
-    if not assistant_mode:
-        conversation_regex = re.compile(
-            f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; {charname} will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
-            re.IGNORECASE | re.DOTALL,
-        )
-    else:
-        conversation_regex = re.compile(
-            f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; AI Assistant will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
-            re.IGNORECASE | re.DOTALL,
-        )
+    conversation_regex = re.compile(
+        f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; AI Assistant will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
+        re.IGNORECASE | re.DOTALL,
+    )
 
     if completion_mode:
         multi_turn_conversation_prompt_path = (
@@ -1954,14 +1422,14 @@ async def create_conversation(
         )
     else:
         multi_turn_conversation_prompt_path = (
-            multi_turn_conversation_prompt_path + ".json"
+            multi_turn_conversation_prompt_path + ".yaml"
         )
 
     multi_turn_conv_generator = GenerationStep(
         prompt_path=multi_turn_conversation_prompt_path,
         regex=conversation_regex,
         sampling_params={
-            "max_tokens": 3000,
+            "max_tokens": 2000,
             "stop": [
                 "### Response",
                 "\n\n\n\n\n",
@@ -1973,6 +1441,9 @@ async def create_conversation(
                 "## Information",
                 "## Instruction",
                 "Name:",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
             ],
             "temperature": 0.8,
             # "top_k": -1,
@@ -1985,7 +1456,7 @@ async def create_conversation(
         logging_level=logging_level,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
+        use_stop=obj_conf["SYSTEM"]["STOP"],
     )
 
     # Skip if file already exists
@@ -1999,14 +1470,13 @@ async def create_conversation(
             )
 
             if final_conv is not None:
-                if assistant_mode:
-                    final_conv = (
-                        final_conv[0],
-                        "AI Assistant",
-                        "A conversation between a helpful AI Assistant, and a user.",
-                        "N/A",
-                        final_conv[4],
-                    )
+                final_conv = (
+                    final_conv[0],
+                    "AI Assistant",
+                    "",
+                    "N/A",
+                    final_conv[4],
+                )
                 with open(file_path, "w") as file:
                     json.dump(final_conv, file, indent=4)
 
@@ -2028,48 +1498,83 @@ async def create_conversation(
 def convert_directory_to_list(directory_path):
     master_list = []
     simplified_list = []
+    simplified_rag_list = []
 
-    for filename in os.listdir(directory_path): # for each file
-        if filename.endswith(".json"): # if it's a conversation file
-            filepath = os.path.join(directory_path, filename) # get the path
-            with open(filepath, "r") as file: # open it
+    for filename in os.listdir(directory_path):  # for each file
+        if filename.endswith(".json"):  # if it's a conversation file
+            filepath = os.path.join(directory_path, filename)  # get the path
+            with open(filepath, "r") as file:  # open it
                 try:
-                    data = json.load(file) # load its data
+                    data = json.load(file)  # load its data
                     if isinstance(data, list) and all(
-                        isinstance(item, (list, str)) for item in data # if it has the correct format
+                        isinstance(item, (list, str))
+                        for item in data  # if it has the correct format
                     ):
-                        master_list.append(data) # append it as-is to the master-list
+
+                        data_dict = {
+                            "conversation": data[0],
+                            "qa_tuples": [
+                                tup[:2] for tup in data[4]
+                            ],  # only take first two items from each tuple
+                            "rag_context": data[4][0][2],
+                            "source_filename": data[4][0][3],
+                        }
+                        master_list.append(
+                            data_dict
+                        )  # append it as-is to the master-list
 
                         # Extract and process conversation
-                        conversation, primary_char_desc = data[0], data[1] # first and second items are conv and char desc
-                        primary_char_name = extract_name.extract_name(primary_char_desc) # char name is gotten from char desc
+                        conversation, primary_char_desc = (
+                            data[0],
+                            data[1],
+                        )  # first and second items are conv and char desc
                         dialogues = process_multiturn_functions.extract_conversation(
                             conversation
                         )
 
                         # Convert to simplified format
-                        if obj_conf["SYSTEM"]["ASSISTANT_MODE"]:
-                            primary_char_desc = "You are a helpful, unbiased AI assistant."
                         simplified_conversations = []
+                        simplified_conversations_rag = []
+
+                        # Load system prompts
+                        system_prompt_norag = obj_conf["SYSTEM"][
+                            "FINAL_ASSISTANT_PROMPT_NO_RAG"
+                        ]
+                        system_prompt_rag = obj_conf["SYSTEM"][
+                            "FINAL_ASSISTANT_PROMPT_RAG"
+                        ]
                         simplified_conversations.append(
+                            {"from": "system", "value": system_prompt_norag}
+                        )
+
+                        simplified_conversations_rag.append(
                             {
                                 "from": "system",
-                                "value": primary_char_desc
+                                "value": system_prompt_rag.replace(
+                                    "{data}", data_dict["rag_context"]
+                                ),
                             }
                         )
                         for i, (charname, message) in enumerate(
                             dialogues
                         ):  # Skipping the first message
-                            from_person = (
-                                "human" if (i % 2) == 1 else "gpt"
-                            )
+                            from_person = "human" if (i % 2) == 0 else "gpt"
                             simplified_conversations.append(
                                 {"from": from_person, "value": f"{message}"}
+                            )
+                            simplified_conversations_rag.append(
+                                {
+                                    "from": from_person,
+                                    "value": f"{message}",
+                                }  # same as above, but for the RAG context
                             )
 
                         if simplified_conversations:  # If there are any conversations
                             simplified_list.append(
                                 {"conversations": simplified_conversations}
+                            )
+                            simplified_rag_list.append(
+                                {"conversations": simplified_conversations_rag}
                             )
                 except Exception as e:
                     print(f"Error reading {filename}: {e}")
@@ -2081,13 +1586,18 @@ def convert_directory_to_list(directory_path):
             file.write(json.dumps(item) + "\n")
 
     # Write the simplified data to a different .jsonl file
-    write_2 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data.jsonl"
+    write_2 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data_no_rag.jsonl"
     with open(write_2, "w") as file:
         for item in simplified_list:
             file.write(json.dumps(item) + "\n")
 
+    write_3 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data_rag.jsonl"
+    with open(write_3, "w") as file:
+        for item in simplified_rag_list:
+            file.write(json.dumps(item) + "\n")
+
     print(
-        f"Conversion complete. Master list written to {write_1}. Simplified data written to {write_2}."
+        f"Conversion complete. Master list written to {write_1}. Simplified data written to {write_2} (no RAG) and {write_3} (RAG)."
     )
 
 
@@ -2105,12 +1615,13 @@ def convert_directory_and_process_conversations(directory_path):
                         isinstance(item, (list, str)) for item in data
                     ):
                         # Extract and process the conversation part
-                        conversations = process_multiturn_functions.extract_conversation(
-                            data[0]
+                        conversations = (
+                            process_multiturn_functions.extract_conversation(data[0])
                         )
                         # Convert tuples back to the formatted string as required
                         data[0] = [
-                            f"{charname}: {message}" for charname, message in conversations
+                            f"{charname}: {message}"
+                            for charname, message in conversations
                         ]
                         master_list.append(data)
                     else:
@@ -2125,3 +1636,50 @@ def convert_directory_and_process_conversations(directory_path):
     print(
         "Conversion complete. The processed master list is written to 'processed_master_list.json'."
     )
+
+def create_pretraining_set(directory_path, json_file):
+    # Initialize a variable to store the combined text of all files
+    combined_text = ""
+
+    # Walk through all directories and files in the directory
+    for root, dirs, files in os.walk(directory_path):
+        for filename in files:
+            file_path = os.path.join(root, filename)
+
+            # Read the contents of the file
+            with open(file_path, "r") as file:
+                file_contents = file.read()
+
+            # Append the file contents to the combined text, with a separator
+            if combined_text:
+                combined_text += "\n\n---NEW FILE---\n\n"
+            combined_text += file_contents
+
+    # Create a dictionary with the combined text
+    data = {"text": combined_text}
+
+    # Save the dictionary as a JSON file
+    with open(json_file, "w") as file:
+        json.dump(data, file)
+
+    print("JSON file saved successfully.")
+
+
+def group_by_text(tuples_list):
+    # Dictionary to hold the groups with text as the key
+    groups = {}
+
+    # Iterate over each tuple in the list
+    for question, answer, text, textname in tuples_list:
+        # If the text is not yet a key in the dictionary, add it with an empty list
+        if text not in groups:
+            groups[text] = []
+
+        # Append the current tuple to the appropriate list
+        groups[text].append((question, answer, text, textname))
+
+    # Return the values of the dictionary, which are the lists of tuples grouped by text; also remove duplicates
+    return [
+        identify_duplicates.identify_duplicates(group)
+        for group in list(groups.values())
+    ]

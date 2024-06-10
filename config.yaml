@@ -4,21 +4,25 @@ PATH:
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY: "" # Add the API key for your favorite provider here
+  API_KEY: "60ee522aea5805bde3f13a0a412634ca8c697f0045401c9e91074e54823ae43a" # Add the API key for your favorite provider here
   BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
   LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for everything except conversation generation at the very end
   LARGE_LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on.
   QUANTIZATION_SMALL: "gptq" # Only use if Aphrodite mode is on.
   QUANTIZATION_LARGE: "gptq" # Only use if Aphrodite mode is on.
 SYSTEM:
+  CHUNK_SIZE: 1900
   USE_FILENAMES: False # give the AI context from the filenames provided to it. Useful if the filenames are meaningful, otherwise turn them off.
-  ASSISTANT_MODE: True # If True, the conversations generated are between a user and an AI assistant. If False, the generated convs are between fictional characters in historical or fictional settings, with randomized personalities (some are nsfw by default, because a lot of model creators make models for that purpose. Change this (or amplify it) in ./augmentoolkit/generation_functions/special_instructions.py, it only requires changes to some strings.)
-  DOUBLE_CHECK_COUNTER: 3 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
+  DOUBLE_CHECK_COUNTER: 1 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
+  SUBSET_SIZE: 10
   USE_SUBSET: True # Whether to take only the first 13 chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
   REARRANGEMENTS_TO_TAKE: 3 # How many times to rearrange the questions and answers for generating different conversations from the same group of questions and answers.
   CONCURRENCY_LIMIT: 50 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
   COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format. Not all APIs support completion mode.
   MODE: "api" # can be one of "api"|"aphrodite"
-  GRAPH: False # Whether to show a pretty graph after filtering out stuff not worthy for questions, useful for seeing whether or not your text is suitable for making data from using Augmentoolkit by default. Will pause the pipeline's execution until you close the window, which is why this is false by default.
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
+  FINAL_ASSISTANT_PROMPT_NO_RAG: |
+   You are a helpful, friendly AI assistant who specializes in a given subject.
+  FINAL_ASSISTANT_PROMPT_RAG: |
+   You are a helpful, friendly AI assistant who specializes in a given subject.
  

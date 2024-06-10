@@ -1,5 +1,7 @@
 import asyncio
 
+import augmentoolkit.utils.group_by_text
+
 # created with nbconvert, minimally cleaned up
 
 
@@ -330,7 +332,7 @@ async def main():
     vetted_qa_tuples = [qa for qa in vetted_qa_tuples if qa is not None]
     print("---------------- ONTO EXAMPLES GENERATION-------------------")
 
-    qa_tuples_by_paragraph = control_flow_functions.group_by_text(vetted_qa_tuples)
+    qa_tuples_by_paragraph = augmentoolkit.control_flow_functions.group_by_text.group_by_text(vetted_qa_tuples)
 
     import os
 
