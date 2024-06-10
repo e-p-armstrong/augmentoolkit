@@ -1,20 +1,14 @@
 import re
-
-# from .multi_turn_conversation_grammar import multi_turn_conversation_grammar
-import random
 import os
 import traceback
-import json
 import logging
-
-from augmentoolkit.utils.escape_string_for_json import escape_string_for_json
-from augmentoolkit.utils.escape_unescaped_quotes import escape_unescaped_quotes
+import yaml
+from augmentoolkit.generation_functions.safe_formatter import safe_format
 
 
 class GenerationStep:
     def __init__(
         self,
-        use_stop,
         prompt_path="",  # relative to the Inputs directory
         regex=re.compile(r".*", re.DOTALL),  # take whole completion
         sampling_params={
@@ -32,6 +26,9 @@ class GenerationStep:
                 "## Information",
                 "## Instruction",
                 "Name:",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
             ],
         },
         completion_mode=True,  # Chat vs completion mode
@@ -42,10 +39,13 @@ class GenerationStep:
         return_input_too=True,
         default_prompt_folder="prompts",
         prompt_folder="prompts",
+        use_stop=True,
     ):
         self.prompt_path = prompt_path
         self.regex = regex
         self.sampling_params = sampling_params
+        if not use_stop:
+            del self.sampling_params["stop"]
         self.completion_mode = completion_mode
         self.retries = retries
         self.logging_level = logging_level
@@ -56,7 +56,6 @@ class GenerationStep:
         self.engine_wrapper = engine_wrapper
         self.prompt_folder = prompt_folder
         self.default_prompt_folder = default_prompt_folder
-        self.use_stop = use_stop
         logging.basicConfig(
             level=self.logging_level, format="%(asctime)s - %(levelname)s - %(message)s"
         )
@@ -65,7 +64,7 @@ class GenerationStep:
         # Current file directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
-        # Dynamic INPUT_DIRECTORY path (feel free to change, DragonFox, depending on what structure you have been working towards)
+        # Get the full path of the prompt file
         ideal_path = os.path.join(
             current_dir, "..", "..", self.prompt_folder, self.prompt_path
         )
@@ -75,43 +74,24 @@ class GenerationStep:
             full_prompt_path = os.path.join(
                 current_dir, "..", "..", self.default_prompt_folder, self.prompt_path
             )
-        # Read file and escape all curly braces
+
         with open(full_prompt_path, "r") as pf:
             prompt = pf.read()
-            # Code to ensure that interpolation works, but curly braces are still allowed in the input
-            # 1. Escape all curly braces
-            prompt_escaped = prompt.replace("{", "{{").replace("}", "}}")
-            # 2. Unescape curly braces that are associated with input keys
-            for key in arguments.keys():
-                prompt_escaped = prompt_escaped.replace(
-                    f"{{{{{key}}}}}", f"{{{key}}}"
-                )  # Somehow this works
-            # escape the quotes in the argument values
-            # 3. Format (making sure the arguments don't cause JSON errors)
-            for key in arguments:
-                arguments[key] = escape_string_for_json(arguments[key])
-            prompt_formatted = prompt_escaped.format(**arguments)
-        # logging.info(f"Formatted prompt for generation: {prompt_formatted}")
+
         # Submit generation and return response, retrying as needed
         times_tried = 0
-        if not self.use_stop:
-            try:
-                del self.sampling_params["stop"]
-            except KeyError as ke:
-                print("\n\n\nTried to remove stop tokens, stop tokens were not present, error caught and handled:")
-                print(ke)
-                print("-------")
         if self.completion_mode:
+            prompt_formatted = safe_format(prompt, **arguments)
             while times_tried <= self.retries:
                 try:
-                    response = await self.engine_wrapper.submit_completion(
+                    response, timeout = await self.engine_wrapper.submit_completion(
                         prompt_formatted, self.sampling_params
                     )
                     filtered_response = re.search(self.regex, response).group(1)
                     ret = self.output_processor(filtered_response)
                     if self.return_input_too:
                         return ret, prompt_formatted + filtered_response
-                    return ret
+                    return ret, timeout
                 except Exception as e:
                     # logging.error(f"Error in Generation Step: {e}")
                     try:
@@ -124,27 +104,69 @@ class GenerationStep:
                     times_tried += 1
             raise Exception("Generation step failed -- too many retries!")
         else:
+            messages = yaml.safe_load(prompt)
+            new_messages = []
+            for message in messages:
+                try:
+                    new_messages.append(
+                        {
+                            "role": message["role"],
+                            "content": safe_format(message["content"], **arguments),
+                        }
+                    )
+                except Exception as e:
+                    new_messages.append(
+                        {"role": message["role"], "content": message["content"]}
+                    )
+            messages = new_messages
+
+            # messages = [{
+            #     "role": message["role"],
+            #     "content": safe_format(message["content"],**arguments)
+            #     }
+            #             for message in messages]
             while times_tried <= self.retries:
                 try:
-                    # print(prompt_formatted)
-                    messages = json.loads(prompt_formatted)
-                    response = await self.engine_wrapper.submit_chat(
+
+                    # strip whitespace added by yaml load
+                    messages = [
+                        {
+                            "role": message["role"],
+                            "content": message["content"].strip(),
+                        }
+                        for message in messages
+                    ]
+                    # print("\n\n\nBEGIN DEBUG")
+                    # print(messages)
+                    # print("END DEBUG\n\n\n")
+                    response, timeout = await self.engine_wrapper.submit_chat(
                         messages, self.sampling_params
                     )
-                    filtered_response = response.replace('"', '\\"').replace(
-                        "\n", "\\n"
-                    )  # re.search(self.regex, response).group(1)
-                    ret = self.output_processor(filtered_response)
+                    ret = self.output_processor(response)
                     if self.return_input_too:
-                        return ret, json.dumps(
+                        return ret, yaml.dump(
                             messages
-                            + [{"role": "assistant", "content": filtered_response}]
+                            + [
+                                {
+                                    "role": "assistant",
+                                    "content": response,
+                                    "timeout": timeout,
+                                }
+                            ],
+                            default_flow_style=False,
                         )
-                    return ret
+                    return ret, timeout
                 except Exception as e:
-                    print(f"Error in Generation Step: {e}")
-                    print(prompt_formatted)
-                    print(
+                    logging.error(f"Error in Generation Step: {e}")
+                    if self.completion_mode:
+                        print("Prompt:")
+                        print(prompt)
+                    else:
+                        print("Messages:")
+                        print(yaml.dump(messages, default_flow_style=False))
+                    # if prompt_formatted:
+                    #     print(prompt_formatted)
+                    logging.error(
                         f"Above prompt resulted in error, probably the model's fault: {e}"
                     )
                     traceback.print_exc()

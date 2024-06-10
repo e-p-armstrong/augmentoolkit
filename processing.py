@@ -13,6 +13,7 @@ async def main():
     import logging
     import yaml
     import glob
+    from augmentoolkit.utils.group_by_text import group_by_text
 
     with open("./config.yaml", "r") as f:
         config = yaml.safe_load(f)
@@ -139,18 +140,13 @@ async def main():
         mode=MODE,
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
-
-    from transformers import AutoTokenizer
+    
     import re
     from tqdm import tqdm
     import nltk
 
     nltk.download("punkt")
     from nltk.tokenize import sent_tokenize
-
-    tokenizer = AutoTokenizer.from_pretrained(
-        "Gryphe/MythoMax-L2-13b"
-    )  # It doesn't matter what model goes here, really
 
     sentence_chunks = []
     for source_text in source_texts:
@@ -326,7 +322,7 @@ async def main():
     vetted_qa_tuples = [qa for qa in vetted_qa_tuples if qa is not None]
     print("---------------- ONTO EXAMPLES GENERATION-------------------")
 
-    qa_tuples_by_paragraph = augmentoolkit.control_flow_functions.group_by_text.group_by_text(vetted_qa_tuples)
+    qa_tuples_by_paragraph = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_tuples)
 
     import os
 
@@ -343,7 +339,6 @@ async def main():
         control_flow_functions.create_info(
             idx,
             group,
-            engine_wrapper,
             multi_turn_convs_info,
             multi_turn_convs_info_dir
         )

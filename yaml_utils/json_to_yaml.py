@@ -9,6 +9,7 @@ def json_to_yaml(json_dir):
             with open(json_path, "r") as json_file:
                 json_data = json.load(json_file)
 
+            print(f"Converting {json_path} to {yaml_path}")
             yaml_content = []
             for item in json_data:
                 yaml_content.append(f"- role: {item['role']}")
@@ -22,5 +23,5 @@ def json_to_yaml(json_dir):
                 yaml_file.write('\n'.join(yaml_content))
 
 # Example usage
-json_directory = "./prompts"
+json_directory = "../prompts"
 json_to_yaml(json_directory)

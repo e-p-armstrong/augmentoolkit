@@ -35,5 +35,5 @@ def process_directory(directory):
 
 
 # Specify the directory to process
-directory_path = './prompts'
+directory_path = '../prompts'
 process_directory(directory_path)

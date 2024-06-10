@@ -1,14 +1,8 @@
-import random
-import itertools
 import os
-import asyncio
 import json
 import re
 from tqdm import asyncio as tqdmasyncio
-from tqdm import tqdm
-import nltk
 from nltk.tokenize import sent_tokenize
-from transformers import AutoTokenizer
 import matplotlib.pyplot as plt
 from collections import Counter
 import logging
@@ -40,6 +34,12 @@ with open("./config.yaml", "r") as file:
 
 DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
 
+def extract_qa_tuples(text):
+    pattern = r"\*\*QUESTION:\*\*\s*((?:.|\n)*?)\s*\*\*ANSWER:\*\*\s*((?:.|\n)*?)(?=\s*\*\*QUESTION:\*\*|\Z)"
+    matches = re.findall(
+        pattern, text + "\n\n**QUESTION:**", re.DOTALL
+    )  # The addition is a hack to get around the tricky lookahead problem
+    return [(question.strip(), answer.strip()) for question, answer in matches]
 
 import os
 
@@ -101,7 +101,7 @@ async def repair_qatuple_context(
     if completion_mode:
         context_repairer_path = context_repairer_path + ".txt"
     else:
-        context_repairer_path = context_repairer_path + ".json"
+        context_repairer_path = context_repairer_path + ".yaml"
 
     repair_context_regex = re.compile(
         r"Reasoning and thought process \(be thorough\):(.+)",
@@ -235,7 +235,7 @@ async def vet_answer_accuracy_loop(
     if completion_mode:
         prompt_path_ans_accuracy_check = prompt_path_ans_accuracy_check + ".txt"
     else:
-        prompt_path_ans_accuracy_check = prompt_path_ans_accuracy_check + ".json"
+        prompt_path_ans_accuracy_check = prompt_path_ans_accuracy_check + ".yaml"
     check_ans_accuracy_regex = re.compile(
         r"Reasoning and thought process \(the text is your single source of truth\):\n(.+)",
         re.DOTALL,
@@ -391,7 +391,7 @@ async def vet_answer_relevance_loop(
     if completion_mode:
         prompt_path_ans_relevancy_check = prompt_path_ans_relevancy_check + ".txt"
     else:
-        prompt_path_ans_relevancy_check = prompt_path_ans_relevancy_check + ".json"
+        prompt_path_ans_relevancy_check = prompt_path_ans_relevancy_check + ".yaml"
 
     answer_relevancy_checker = GenerationStep(
         prompt_path=prompt_path_ans_relevancy_check,
@@ -553,7 +553,7 @@ async def vet_question_loop(
     if completion_mode:
         prompt_path_q_check = prompt_path_q_check + ".txt"
     else:
-        prompt_path_q_check = prompt_path_q_check + ".json"
+        prompt_path_q_check = prompt_path_q_check + ".yaml"
 
     question_checker = GenerationStep(
         prompt_path=prompt_path_q_check,
@@ -596,7 +596,7 @@ async def vet_question_loop(
     if completion_mode:
         prompt_path_new_q_gen = prompt_path_new_q_gen + ".txt"
     else:
-        prompt_path_new_q_gen = prompt_path_new_q_gen + ".json"
+        prompt_path_new_q_gen = prompt_path_new_q_gen + ".yaml"
 
     if completion_mode:
         new_q_generator = GenerationStep(
@@ -612,6 +612,9 @@ async def vet_question_loop(
                     "[INST]",
                     "### Instruction",
                     "[INST",
+                    "<|eot_id|>",
+                    "<|start_header_id|>",
+                    "<|end_header_id|>",
                 ],
                 "temperature": 0.2,
             },
@@ -619,7 +622,7 @@ async def vet_question_loop(
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
-            output_processor=extract_question_from_response_completionmode,
+            output_processor=extract_question_from_response,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
             default_prompt_folder=DEFAULT_PROMPT_PATH,
             use_stop=obj_conf["SYSTEM"]["STOP"]
@@ -638,6 +641,9 @@ async def vet_question_loop(
                     "[INST]",
                     "### Instruction",
                     "[INST",
+                    "<|eot_id|>",
+                    "<|start_header_id|>",
+                    "<|end_header_id|>",
                 ],
                 "temperature": 0.2,
             },
@@ -645,7 +651,7 @@ async def vet_question_loop(
             retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
-            output_processor=extract_question_from_response_chatmode,
+            output_processor=extract_question_from_response,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
             default_prompt_folder=DEFAULT_PROMPT_PATH,
         use_stop=obj_conf["SYSTEM"]["STOP"]
@@ -736,110 +742,20 @@ async def vet_question_loop(
     return (None, None, None, qtuple[3])
 
 
-def extract_questions_from_response_completionmode(
+def extract_questions_from_response(
     generation,
 ):  # TODO extract to non-controlflow file
-    questions = []
-    # print("!! What the model outputted: !!")
-    # print(generation)
-    pattern = re.compile(
-        r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
-        re.DOTALL | re.MULTILINE | re.IGNORECASE,
-    )
-    matches = pattern.findall(generation)
-    if len(matches) == 0:
-        raise Exception(
-            "Failed to generate questions!"
-        )  # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
-    for match in matches:
-        questions.append(
-            (
-                match[0].replace(") ", "", 1).strip(),
-                match[1].replace(") ", "", 1).strip(),
-                # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
-                # para_tuple[1].replace(") ", "", 1),
-            )
-        )
-    # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
-    # print(questions)
+    questions = extract_qa_tuples(generation)
+    if len(questions) == 0:
+        print("FAILED TO GENERATE QUESTIONS!")
+        return []
     return questions
 
 
-def extract_questions_from_response_chatmode(
+def extract_question_from_response(
     generation,
 ):  # TODO extract to non-controlflow file
-    print(generation)
-    questions = []
-    # print("!! What the model outputted: !!")
-    # print(generation)
-    pattern = re.compile(
-        r"\d+\.\) (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
-        re.DOTALL | re.MULTILINE | re.IGNORECASE,
-    )
-    matches = pattern.findall(generation + "\\n\\n")
-    if len(matches) == 0:
-        raise Exception(
-            "Failed to generate questions!"
-        )  # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
-    for match in matches:
-        questions.append(
-            (
-                match[0].replace(") ", "", 1).strip(),
-                match[1].replace(") ", "", 1).strip(),
-                # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
-                # para_tuple[1].replace(") ", "", 1),
-            )
-        )
-    # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
-    # print(questions)
-    return questions
-
-
-def extract_question_from_response_completionmode(
-    generation,
-):  # TODO extract to non-controlflow file
-    questions = []
-    pattern = re.compile(
-        r"(?:Question:|^\d+[\).]?)\s*(.*?)\s*\n*Answer:\s*(.*?)(?=(?:\n\s*(?:Question:|\d+[\).]?))|$)",
-        re.DOTALL | re.MULTILINE | re.IGNORECASE,
-    )
-    matches = pattern.findall(generation)
-    if len(matches) == 0:
-        raise Exception(
-            "Failed to generate questions!"
-        )  # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
-    for match in matches:
-        # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
-        # print(questions)
-        return (
-            match[0].replace(") ", "", 1).strip(),
-            match[1].replace(") ", "", 1).strip(),
-            # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
-            # para_tuple[1].replace(") ", "", 1),
-        )
-
-
-def extract_question_from_response_chatmode(
-    generation,
-):  # TODO extract to non-controlflow file
-    pattern = re.compile(
-        r"\d+\.?\)?:? (.*?)\\nAnswer: (.*?)(?=\\n\\n|\Z)",
-        re.DOTALL | re.MULTILINE | re.IGNORECASE,
-    )
-    matches = pattern.findall(generation + "\\n\\n")
-    if len(matches) == 0:
-        raise Exception(
-            "Failed to generate questions!"
-        )  # Because of how the generate step class is structured, this raise will cause a retry, as the original did. No it's not using an exception for normal control flow, if the llm screwed up that's an error.
-    for match in matches:
-        # print("\n\n\nExtract questions from response DEBUG!!!") # TODO remove
-        # print(questions)
-        return (
-            match[0].replace(") ", "", 1).strip(),
-            match[1].replace(") ", "", 1).strip(),
-            # para_tuple[0].replace(") ", "", 1), # These have to get added in the control flow, minus the .replace() that's actually wrong
-            # para_tuple[1].replace(") ", "", 1),
-        )
+    return extract_questions_from_response(generation)[0]
 
 
 # Question generation
@@ -854,53 +770,6 @@ async def generate_qatuples_from_para(
     completion_mode=None,
     logging_level=None,
 ):
-    # NOTE Set up qatuple plan generation step #
-
-    prompt_path_qatuples_plan = "qatuples_plan_no_filenames"
-    if use_filenames:
-        prompt_path_qatuples_plan = "qatuples_plan_filenames"
-
-    qatuples_plan_regex = re.compile(
-        r"Reasoning and thought process \(being careful to only plan questions that are entirely based on the text provided\):\n(.+)",
-        re.IGNORECASE | re.DOTALL,
-    )
-
-    if completion_mode:
-        prompt_path_qatuples_plan = prompt_path_qatuples_plan + ".txt"
-    else:
-        prompt_path_qatuples_plan = prompt_path_qatuples_plan + ".json"
-
-    qatuples_planner = GenerationStep(
-        prompt_path=prompt_path_qatuples_plan,
-        regex=qatuples_plan_regex,
-        sampling_params={
-            "max_tokens": 3000,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "[INST",
-                "<|eot_id|>",
-                "<|start_header_id|>",
-                "<|end_header_id|>",
-                "Text to plan questions from",
-            ],
-            "temperature": 0.8,
-            # top_k=-1,
-            "top_p": 1,
-            # min_p=0.5,
-        },
-        completion_mode=completion_mode,
-        retries=0,
-        engine_wrapper=engine_wrapper,
-        logging_level=logging_level,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-    )
 
     # NOTE Set up qatuple generation step #
 
@@ -911,69 +780,42 @@ async def generate_qatuples_from_para(
     if completion_mode:
         prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".txt"
     else:
-        prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".json"
+        prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".yaml"
 
     qatuples_gen_regex = re.compile(
         r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
     )
-    if completion_mode:
-        qatuples_generator = GenerationStep(
-            prompt_path=prompt_path_qatuples_gen,
-            regex=qatuples_gen_regex,
-            sampling_params={
-                "max_tokens": 2000,
-                "stop": [
-                    "### Response",
-                    "\n\n\n\n\n",
-                    "</s>",
-                    "# Input:",
-                    "[INST]",
-                    "### Instruction",
-                    "[INST",
-                ],
-                "temperature": 0.8,
-                # top_k=-1,
-                "top_p": 1,
-                # min_p=0.5,
-            },
-            completion_mode=completion_mode,
-            retries=3,
-            engine_wrapper=engine_wrapper,
-            logging_level=logging_level,
-            output_processor=extract_questions_from_response_completionmode,
-            prompt_folder=obj_conf["PATH"]["PROMPTS"],
-            default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-        )
-    else:
-        qatuples_generator = GenerationStep(
-            prompt_path=prompt_path_qatuples_gen,
-            regex=qatuples_gen_regex,
-            sampling_params={
-                "max_tokens": 2000,
-                "stop": [
-                    "### Response",
-                    "\n\n\n\n\n",
-                    "</s>",
-                    "# Input:",
-                    "[INST]",
-                    "### Instruction",
-                    "[INST",
-                ],
-                "temperature": 0.8,
-                # top_k=-1,
-                "top_p": 1,
-                # min_p=0.5,
-            },
-            completion_mode=completion_mode,
-            retries=3,
-            engine_wrapper=engine_wrapper,
-            logging_level=logging_level,
-            output_processor=extract_questions_from_response_chatmode,
-            prompt_folder=obj_conf["PATH"]["PROMPTS"],
-            default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-        )
+    qatuples_generator = GenerationStep(
+        prompt_path=prompt_path_qatuples_gen,
+        regex=qatuples_gen_regex,
+        sampling_params={
+            "max_tokens": 2000,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
+            ],
+            "temperature": 0.8,
+            # top_k=-1,
+            "top_p": 1,
+            # min_p=0.5,
+        },
+        completion_mode=completion_mode,
+        retries=3,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+        output_processor=extract_questions_from_response,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
+    use_stop=obj_conf["SYSTEM"]["STOP"]
+    )
     # Resume normal control flow code
     try:
         existing_files = glob.glob(
@@ -1062,6 +904,8 @@ async def determine_worthy(
     judge: GenerationStep,
 ):
     # for idx, p in tqdm(enumerate(paragraphs_processed[:10])):
+    id = make_id()
+    
     file_name = f"{idx}.json"
     file_path = os.path.join(output_dir, file_name)
     # Check if the judgement for this paragraph already exists
@@ -1076,7 +920,8 @@ async def determine_worthy(
         else:
             judged_worthy_for_questions.append((data["paragraph"], data["metadata"]))
     else:
-        judgement = await judge.generate(arguments={"text": p[0], "textname": p[1]})
+        judgement, judgement_output = await judge.generate(arguments={"text": p[0], "textname": p[1]})
+        write_output_to_file(judgement_output, obj_conf["PATH"]["OUTPUT"] + "/judge_paragraph_generations", id)
         to_append = (None, p[1])
         if judgement:
             to_append = (p[0], p[1])
@@ -1140,7 +985,7 @@ async def filter_all_questions(
     if completion_mode:
         prompt_path = prompt_path + ".txt"
     else:
-        prompt_path = prompt_path + ".json"
+        prompt_path = prompt_path + ".yaml"
 
     judge = GenerationStep(
         prompt_path=prompt_path,
@@ -1167,7 +1012,7 @@ async def filter_all_questions(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,  # TODO change to warning
         output_processor=judge_paragraph_processor,
-        return_input_too=False,
+        # return_input_too=False,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPT_PATH,
         use_stop=obj_conf["SYSTEM"]["STOP"]
@@ -1349,31 +1194,6 @@ async def create_info(
     multi_turn_convs_info.append(
         [info]
     )  # hacky-looking things because the legacy functionality was simplified.
-
-
-def read_json_files_info(directory):
-    # Create a list to hold the tuples
-    tuple_list = []
-
-    # Get all the .json files in the directory, sorted
-    json_files = sorted([f for f in os.listdir(directory) if f.endswith(".json")])
-
-    # Read each file and convert the contents
-    for file in json_files:
-        with open(os.path.join(directory, file), "r") as f:
-            data = json.load(f)
-            # Ensure the data is in the correct format before converting to tuple
-            if (
-                isinstance(data, list)
-                and len(data) == 5
-                and isinstance(data[0], list)
-                and all(len(item) == 4 for item in data[0])
-                and all(isinstance(i, str) for i in data[1:])
-            ):
-                tuple_list.append((data[0], data[1], data[2], data[3], data[4]))
-
-    return tuple_list
-
 
 def read_json_files_info(directory):
     # Create a list to hold the tuples
