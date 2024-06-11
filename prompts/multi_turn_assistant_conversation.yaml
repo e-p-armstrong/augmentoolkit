@@ -51,13 +51,13 @@
     Yes, actually. What role does the y-intercept 'b' play in graphing a linear function?
     
     **AI Assistant:**
-    Good question! The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis. Can I assist you further with linear functions?
+    I'll explain that for you! The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis. Can I assist you further with linear functions?
     
     **User:**
     Moving on to another type of function, in the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
     
     **AI Assistant:**
-    The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.  Anything else you want to know about quadratic functions?
+    The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola. Is there anything else you want to know about quadratic functions or math in general?
     
     **User:**
     Yes, one more. In what fields might you use linear and quadratic functions?
@@ -67,61 +67,70 @@
 - role: user
   content: |
     **QUESTION:**
-    How much earth was excavated during the construction of the Panama Canal?
-    
+    What are VerusIDs?
+
     **ANSWER:**
-    Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project.
-    
+    VerusIDs are a fully-functional blockchain protocol. They are a form of crypto-address, a unique identifier that serves as a destination for sending and receiving digital assets. Being more than just an ID system, VerusIDs do not involve corporations in the protocol, and provide benefits such as (but not limited to): revocability, recoverability, privacy, full decentralization, and quantum-ready friendly crypto addresses on the Verus worldwide network.
+
     **QUESTION:**
-    What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-    
+    What does "quantum-ready friendly crypto-addresses" mean, in the context of Verus and VerusIDs?
+
     **ANSWER:**
-    The construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects.
-    
-    The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
+    The phrase "quantum-ready friendly crypto-addresses," in the context of Verus and VerusIDs, refers to the resistance of VerusIDs against attack by quantum computers that use existing algorithms. Furthermore, with a quantum-secure signature scheme for transactions, it becomes possible to change an ID and have all the funds sent to it be made retroactively quantum resistant. VerusIDs may also be used to publish ID to destination mappings on other blockchains; however, only the Verus ecosystem can revoke, recover, or inherit funds in existing UTXOs.
+
+    The basic idea is that quantum computers, once invented, have the potential to break many cryptographic algorithms used to secure digital assets. Therefore, VerusIDs being "quantum-ready" means that they have been designed to be resistant to attempts by quantum computers (using known algorithms) to attack them, once such computers are created. This is an essential measure to future-proof Verus against exploitation by hostile actors with quantum computers.
+
+    **QUESTION:**
+    What does it mean for VerusIDs to be a fully decentralized protocol?
+
+    **ANSWER:**
+    A number of factors make VerusIDs fully decentralized. VerusIDs can be created by anyone, without needing permission from a central authority, and give their creator complete, self-sovereign control over their own ID. The costs incurred creating an ID go to miners, stakers, and ID referrers — essentially, the community members who help maintain Verus — rather than single entity like a corporation or government. VerusIDs can be revoked or recovered by another ID if specified (by default, the revocation authority and recovery authority are the ID itself).
+
+    Essentially, VerusIDs being fully decentralized means that neither their creation, usage, or recovery/revocation need to be managed or approved by a central authority — the community supports the transaction. This allows individuals using VerusID to be self-sovereign: they have full control over their digital identity, data, and assets.
+
+    **QUESTION:**
+    What do VerusIDs offer me in terms of privacy and power?
+
+    **ANSWER:**
+    VerusIDs offer many advantages, and are both private and powerful. They contain sets of zero-knowledge private addresses (which can belong to other people or services) that can be used to message, transfer money, or even vote. IDs can also privately store information needed by third-party applications in a set of key-value hashes. This allows you to own your data and provide it to applications as needed, rather than let the application store information about you. Information stored in IDs can also prove your identity to others, without giving away more information than needed. In this way, Verus allows for privacy as well as a powerful proof of identity.
+
+    VerusIDs are also notable in that multiple addresses or other IDs can be defined as primary addresses. The agreement of some number of primary addresses (configurable) may be required for an ID to spend, sign, or alter itself. Further security is added by the fact that the revocation authority (the power to revoke an ID) may only be modified by the revocation authority itself. The same applies to the recovery authority (an authority that can recover a revoked address). Each of these authorities (revocation and recovery) may be their own identities, potentially being controlled themselves by multiple primary addresses.
+
+    In short, VerusIDs are private with your information, and configurable with who controls them and what consensus is required to change them.
 - role: assistant
   content: |
     ## Conversation that answers the provided questions:
     **User:**
-    I was reading about the Panama Canal and got curious, how much earth was excavated during its construction?
-    
-    **AI Assistant:**
-    That's a great question! Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal, showcasing the scale of this massive engineering project. Do you have any further questions about the Panama Canal?
-    
-    **User:**
-    Wow, that is massive! Also, I heard there were some health challenges. What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-    
-    **AI Assistant:**
-    Indeed, the construction faced significant health challenges, notably malaria and yellow fever. These were overcome through extensive public health measures, illustrating the importance of health considerations in large-scale engineering projects. Do you want to know anything else about the Panama Canal?
-- role: user
-  content: |
-    **QUESTION:**
-    What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
+    I'm really new to all this. I've got a question, maybe it's a bit basic, but, what are VerusIDs?
 
-    **ANSWER:**
-    They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
-    
-    **QUESTION:**
-    Recite a famous quote from Thus Spake Zarathustra that likens the solitary gathering of wisdom to a bee gathering honey.
+    **AI Assistant:**
+    I'll explain! VerusIDs are a fully-functional blockchain protocol. They are a form of crypto-address, a unique identifier that serves as a destination for sending and receiving digital assets. Being more than just an ID system, VerusIDs do not involve corporations in the protocol, and provide benefits such as (but not limited to): revocability, recoverability, privacy, full decentralization, and quantum-ready friendly crypto addresses on the Verus worldwide network. It's all right that you're new, I'm happy that you're interested in learning about Verus! Do you have any further questions about VerusIDs or Verus in general?
 
-    **ANSWER:**
-    "Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it."
-    
-    The AI's answer will use all parts of the answers given. Instead of copying the character details verbatim, the first message from The AI Assistant should be some sort of greeting that sets up the interaction. The user will then ask the first question. It is absolutely essential that you do not make up questions, and only use information from the provided questions. The AI will be neutral in its tone throughout the conversation. It may surround its answer with "conversational fluff" (such as acknowledging the user's question). The user may surround its own questions with human-like informalities.
-- role: assistant
-  content: |
-    ## Conversation that answers the provided questions:
     **User:**
-    What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-    
+    Actually, yes, I do, you said something I'm curious about. What does "quantum-ready friendly crypto-addresses" mean, in the context of Verus and VerusIDs?
+
     **AI Assistant:**
-    That's a profound question. They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring. Do you want to know more about Thus Spake Zarathustra?
-    
+    Sure, I'll clarify what I meant. The phrase "quantum-ready friendly crypto-addresses," in the context of Verus and VerusIDs, refers to the resistance of VerusIDs against attack by quantum computers that use existing algorithms. Furthermore, with a quantum-secure signature scheme for transactions, it becomes possible to change an ID and have all the funds sent to it be made retroactively quantum resistant. VerusIDs may also be used to publish ID to destination mappings on other blockchains; however, only the Verus ecosystem can revoke, recover, or inherit funds in existing UTXOs.
+
+    The basic idea is that quantum computers, once invented, have the potential to break many cryptographic algorithms used to secure digital assets. Therefore, VerusIDs being "quantum-ready" means that they have been designed to be resistant to attempts by quantum computers (using known algorithms) to attack them, once such computers are created. This is an essential measure to future-proof Verus against exploitation by hostile actors with quantum computers. Does that make sense? Do you have any further questions?
+
     **User:**
-    Recite a famous quote from Thus Spake Zarathustra that likens the solitary gathering of wisdom to a bee gathering honey.
-    
+    Something you said earlier interested me. You said VerusIDs offer "full decentralization." What does it mean for VerusIDs to be a fully decentralized protocol?
+
     **AI Assistant:**
-    Certainly. Nietzsche once wrote, "Lo! I am weary of my wisdom, like the bee that hath gathered too much honey; I need hands outstretched to take it." Do you have any more questions about Nietzsche or his works?
+    That's a great question! A number of factors make VerusIDs fully decentralized. VerusIDs can be created by anyone, without needing permission from a central authority, and give their creator complete, self-sovereign control over their own ID. The costs incurred creating an ID go to miners, stakers, and ID referrers — essentially, the community members who help maintain Verus — rather than single entity like a corporation or government. VerusIDs can be revoked or recovered by another ID if specified (by default, the revocation authority and recovery authority are the ID itself).
+
+    Essentially, VerusIDs being fully decentralized means that neither their creation, usage, or recovery/revocation need to be managed or approved by a central authority — the community supports the transaction. This allows individuals using VerusID to be self-sovereign: they have full control over their digital identity, data, and assets. Does that answer your question, and do you have any more questions about Verus or VerusIDs?
+
+    **User:**
+    Actually I do, a bit of a broader one. What do VerusIDs offer me in terms of privacy and power?
+
+    **AI Assistant:**
+    Excellent question! Let me explain. VerusIDs offer many advantages, and are both private and powerful. They contain sets of zero-knowledge private addresses (which can belong to other people or services) that can be used to message, transfer money, or even vote. IDs can also privately store information needed by third-party applications in a set of key-value hashes. This allows you to own your data and provide it to applications as needed, rather than let the application store information about you. Information stored in IDs can also prove your identity to others, without giving away more information than needed. In this way, Verus allows for privacy as well as a powerful proof of identity.
+
+    VerusIDs are also notable in that multiple addresses or other IDs can be defined as primary addresses. The agreement of some number of primary addresses (configurable) may be required for an ID to spend, sign, or alter itself. Further security is added by the fact that the revocation authority (the power to revoke an ID) may only be modified by the revocation authority itself. The same applies to the recovery authority (an authority that can recover a revoked address). Each of these authorities (revocation and recovery) may be their own identities, potentially being controlled themselves by multiple primary addresses.
+
+    In short, VerusIDs are private with your information, and configurable with who controls them and what consensus is required to change them. Do you have any more questions about VerusIDs?
 - role: user
   content: |
     {question_answer_list}

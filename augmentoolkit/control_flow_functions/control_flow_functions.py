@@ -66,17 +66,40 @@ def write_output_to_file(output, directory, uuid):
 
 
 def extract_reasoning_from_context_check(response):
+    # print("\n----\/----\n RESPONSE:")
+    # print(response)
+    # print("\n\n\n---/\---\n\n")
     decision_pattern = re.compile(r"Final judgment:(.+)", re.IGNORECASE)
-    determination = decision_pattern.search(response).group(1).strip()
-    if "pass" in determination.lower():
+    determination = decision_pattern.search(response)
+    if determination:
+        determination = determination.group(1).strip()
+    if not determination:
+        print("Did not contain a determination! MEGA MODEL FAIL LOOK INTO THIS EVAN!!!")
+        return None, response
+    if "PASS" in determination:
         print("Leaving be...")
         return (True, response)  # , completion
-    elif "reword" in determination.lower():
+    elif "REWORD" in determination:
         print("Rewording...")
         q, a = extract_question_answer.extract_question_answer(response)
         print((q, a))
+        if "the provided" in a.lower(): # catch infrequent cases where the reworded answer contains reference to provided information
+            print("'The provided' found in reworded answer -- Setting to None...")
+            return (False, response)
+        if "the reworded" in a.lower(): # Catch infrequent cases where it talks about the reworded question and answer pair
+            print("'The reworded' found in reworded answer -- Setting to None...")
+            return (False, response)
+        if "mention" in a.lower():
+            print("'Mention' found in reworded answer -- Setting to None...")
+            return (False, response)
+        if "no information" in a.lower():
+            print("'No information' found in reworded answer -- Setting to None...")
+            return (False, response)
+        if "follow the instructions in a separate" in a.lower():
+            print("'Follow the instructions in a separate' found in reworded answer -- Setting to None...")
+            return (False, response)
         return (q, a)  # (q, a, qatuple[2], qatuple[3]), completion
-    elif "fail" in determination.lower():
+    elif "FAIL" in determination:
         print("Setting to None...")
         return (False, response)  # , completion
     else:

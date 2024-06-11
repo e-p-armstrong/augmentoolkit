@@ -1,41 +1,107 @@
 - role: system
   content: |
-    You are an expert educational AI that, given a paragraph or two from a text, will create suitable educational questions based on the paragraphs, and *only* based on the paragraphs. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. Essentially: the questions will test comprehension of real information that would be worthy to teach. After the question, you will also write its answer.
+    You are creating a logically-consistent series of questions about different domains, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) you will create suitable questions based on the text, and *only* based on the text. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. After each question, you will also write its answer.
     
+    **You Must:**
+
+    * Create detailed educational questions based on some information.
+    * Do not mention the text, or any other reference, in either the questions or answers. Just ask about the facts or information itself.
+    * Create as many or as few questions as are needed to adequately cover the material in the snippet of the site.
+    * Ensure a logical sequence of questions that build on each other.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your questions if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+
+    **Note:**
+
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
     Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
     
     You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they WILL NOT HAVE THE TEXT ON HAND, and so if you mention the author they won't have a clue what you're talking about.
 - role: user
   content: |
-    Text to make questions from: 
+    Text to plan questions from:
     """
-    In mathematics, the concept of a 'function' is fundamental, defining a relationship where each input is associated with exactly one output. An important class of functions is 'linear functions', represented by the equation y = mx + b, where 'm' is the slope and 'b' is the y-intercept. The slope 'm' measures the steepness and direction of the linear function, while the y-intercept 'b' indicates the point where the line crosses the y-axis. Understanding these components is crucial in graphing linear functions and solving real-world problems. Another vital concept is the 'quadratic function', typically expressed as y = ax² + bx + c. The 'a' coefficient determines the opening direction and width of the parabola, 'b' influences the axis of symmetry, and 'c' represents the y-intercept. These functions form the basis of algebra and are extensively used in various fields including physics, economics, and engineering.
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
     """
 - role: assistant
   content: |
     **QUESTION:**
-    How does the slope 'm' in a linear function y = mx + b affect the graph of the function?
+    If the earth had a diameter of only one inch, how far would the moon be from the earth, if it (and its distance from the earth) were also resized proportionally?
+    
+    **ANSWER:**
+    Under this new scale, the moon would be two and a half feet from the earth.
+    
+    **QUESTION:**
+    How do the distances between planets compare to their sizes?
+    
+    **ANSWER:**
+    The distances between planets is much greater than the planets' sizes. For example, if you shrunk everything down so that the earth was one inch in diameter, then the sun would be 323 yards away.
+    
+    **QUESTION:**
+    If you scaled everything down so that the earth had a diameter of one inch, then how far would Mercury and Venus be from the sun?
+    
+    **ANSWER:**
+    Mercury would be one hundred and twenty-five yards from the sun, and Venus would be two hundred and fifty yards from the sun.
+    
+    **QUESTION:**
+    What lies beyond Uranus and Neptune in the solar system?
+    
+    **ANSWER:**
+    Beyond Uranus and Neptune lies nothingness and nothingness, except for small particles and drifting scraps of attenuated vapour, for vast distances.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    The Verus Project aims to establish a secure, privacy-centric, fairly-distributed
+    cryptocurrency. But – beyond this currency – Verus seeks to become much more than
+    a zero-knowledge privacy coin, one with two completely new highly-decentralizing proof
+    of work and proof of stake algorithms.
+    In addition to payments, decentralization, and privacy features, Verus Project
+    plans include its direct use as a currency for provisioning scalable and secure public blockchains as a service (PBaaS), for Verus applications built upon these parallel
+    chains to scale. What this will do is simple: It will enable all people – as well as
+    all nodes on the Verus network to participate in and benefit from a decentralized,
+    blockchain service economy.
+    This paper details the Verus vision and describes the function of Verus as its own
+    platform, and also as a member of the Komodo platform ecosystem, in the context of its
+    first applications. Verus core applications will provide a foundation to build additional
+    applications and services, which will leverage Verus’ automatically created blockchains,
+    called autochains. Autochains – or PBaaS – will be provisioned and notarized by the
+    Verus blockchain miners and stakers, in exchange for Verus curren
+    """
+- role: assistant
+  content: |
+    **QUESTION:**
+    What does the Verus Project aim to establish?
 
     **ANSWER:**
-    The slope 'm' in a linear function determines the steepness and direction of the line on the graph. A positive slope means the line ascends from left to right, while a negative slope indicates it descends. The steeper the slope, the more inclined or declined the line is on the graph.
+    The Verus Project aims to establish a secure, privacy-centric, fairly-distributed cryptocurrency. Beyond this currency (and its payment, decentralization, and privacy features), the Verus Project plans for its use as a currency to provision scaleable and public blockchains as a service (PBaaS) for Verus applications built upon these parallel chains. This will enable all people, as well as all nodes on the Verus network, to participate in and benefit from a decentralized blockchain service economy.
     
     **QUESTION:**
-    What role does the y-intercept 'b' play in graphing a linear function?
+    Describe a fact about Verus' coin.
 
     **ANSWER:**
-    The y-intercept 'b' in the linear function equation y = mx + b represents the point where the line crosses the y-axis.
+    The Verus coin will be a zero-knowledge privacy coin with two completely new highly-decentralizing proof of work and proof of stake algorithms.
     
     **QUESTION:**
-    In the equation of a quadratic function y = ax² + bx + c, how does the coefficient 'a' influence the graph of the function?
+    What will Verus core applications provide?
     
     **ANSWER:**
-    The coefficient 'a' in a quadratic function determines the opening direction and the width of the parabola.
+    Verus core applications will provide a foundation to build additional applications and services. These apps and services will leverage Verus' automatically created blockchains, called "autochains".
     
     **QUESTION:**
-    Define the concept of a function in mathematics, in one sentence.
+    Who will provision and notarize Verus autochains?
     
     **ANSWER:**
-    Answer: A function is a relationship where each input is associated with exactly one output.
+    Autochains (or PBaaS) will be provisioned and notarized by the Verus blockchain miners and stakers, in exchange for Verus currency.
 - role: user
   content: |
     Text to make questions from: 
@@ -95,134 +161,218 @@
   content: |
     Text to make questions from:
     """
-    I went down yesterday to the Piraeus with Glaucon the son of Ariston,
-    that I might offer up my prayers to the goddess (Bendis, the Thracian
-    Artemis.); and also because I wanted to see in what manner they would
-    celebrate the festival, which was a new thing. I was delighted with the
-    procession of the inhabitants; but that of the Thracians was equally,
-    if not more, beautiful. When we had finished our prayers and viewed the
-    spectacle, we turned in the direction of the city; and at that instant
-    Polemarchus the son of Cephalus chanced to catch sight of us from a
-    distance as we were starting on our way home, and told his servant to
-    run and bid us wait for him. The servant took hold of me by the cloak
-    behind, and said: Polemarchus desires you to wait.
-    
-    I turned round, and asked him where his master was.
-    
-    There he is, said the youth, coming after you, if you will only wait.
-    
-    Certainly we will, said Glaucon; and in a few minutes Polemarchus
-    appeared, and with him Adeimantus, Glaucon’s brother, Niceratus the son
-    of Nicias, and several others who had been at the procession.
-    
-    Polemarchus said to me: I perceive, Socrates, that you and your
-    companion are already on your way to the city.
-    
-    You are not far wrong, I said.
-    
-    But do you see, he rejoined, how many we are?
-    
-    Of course.
-    
-    And are you stronger than all these? for if not, you will have to
-    remain where you are.
-    
-    May there not be the alternative, I said, that we may persuade you to
-    let us go?
-    
-    But can you persuade us, if we refuse to listen to you? he said.
-    
-    Certainly not, replied Glaucon.
-    
-    Then we are not going to listen; of that you may be assured.
+    Size Limit is a performance budget tool for JavaScript. It checks every commit on CI, calculates the real cost of your JS for end-users and throws an error if the cost exceeds the limit.
+
+    ES modules and tree-shaking support.
+    Add Size Limit to GitHub Actions, Circle CI or another CI system to know if a pull request adds a massive dependency.
+    Modular to fit different use cases: big JS applications that use their own bundler or small npm libraries with many files.
+    Can calculate the time it would take a browser to download and execute your JS. Time is a much more accurate and understandable metric compared to the size in bytes.
+    Calculations include all dependencies and polyfills used in your JS.
+    Size Limit CLI
+
+    With GitHub action Size Limit will post bundle size changes as a comment in pull request discussion.
+
+    Size Limit comment in pull request about bundle size changes
+
+    With --why, Size Limit can tell you why your library is of this size and show the real cost of all your internal dependencies. We are using Statoscope for this analysis.
     """
 - role: assistant
   content: |
     **QUESTION:**
-    Which goddess is Bendis equivalent to?
+    What is Size Limit?
     
     **ANSWER:**
-    The Thracian Goddess Bendis is equivalent to Artemis.
+    Size Limit is a performance budget tool for JavaScript that checks every commit on CI, calculates the real cost of your JS for end-users, and throws an error if the cost exceeds the limit.
     
     **QUESTION:**
-    If someone indicates that they will force you to take a course of action, using physical force, what is an alternative you can take?
+    Can you list four features of Size Limit?
     
     **ANSWER:**
-    One viable alternative I can take is to persuade them to let me go. This, of course, requires that the other party does not refuse to listen to me.
+    Size Limit has a variety of features and capabilities. Here are a few of them:
+
+    * Size Limit supports ES modules and tree-shaking
+    * You can add Size Limit to GitHub Actions, Circle CI, and other CI systems in order to know if a pull request adds a massive dependency.
+    * Size Limit is modular to fit different use cases, such as big JS applications that use their own bundler, and small npm libraries with many files.
+    * Size Limit can calculate the time it would take for a browser to download and execute your JS. This is useful, because time is a far more accurate and understandable metric than size in bytes. These calculations include all dependencies and polyfills used in your JS.
     
     **QUESTION:**
-    If someone comments on the size of their group and questions your strength compared to it, ultimately stating that you will have to remain where you are, what is that person implying?
-    
+    Does Size Limit have a CLI?
+
     **ANSWER:**
-    That person is implying that since their group is stronger than you, they can force you to remain where you are.
+    Yes, Size Limit does have a CLI as a feature.
     
     **QUESTION:**
-    Why did Socrates visit Piraeus with Glaucon?
+    What does the `--why` flag do in Size Limit?
     
     **ANSWER:**
-    Socrates visited Piraeus to offer up his prayers to the goddess Bendis, as well as to see in what manner the Thracians would celebrate the festival.
+    With the --why flag, Size Limit can tell you why your library is of this size, and shows the real cost of all your internal dependencies. Size Limit uses Statoscope for this analysis.
 - role: user
   content: |
     Text to make questions from: 
     """
-    During the construction of the Panama Canal, a massive engineering feat completed in 1914, several challenges and achievements were noted. The canal, spanning approximately 50 miles, was designed to shorten the maritime route between the Atlantic and Pacific Oceans. Notably, the construction saw the use of innovative excavation techniques, with over 200 million cubic yards of earth removed. The project also faced significant health challenges, including combating malaria and yellow fever, which were overcome through extensive public health measures. The completion of the canal significantly impacted global trade, reducing the sea voyage from San Francisco to New York by around 8,000 miles.
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "*" '[{"address":"mike@","convertto":"gold","preconvert":1,"amount":100}]'
+    ```
+    that would effectively park my conversion until the token launches, at which point, I will either find 0.975 GOLD in my wallet, or I will have my CSRVTEST back.
+    Assuming it launches, and I later want to create mycoin, which can be converted to with either GOLD or CSRVTEST, I can create mycoin with:
+
+      ```
+    ./surev -chain=CSRVTEST definecurrency '{"name":"mycoin","options":33, "proofprotocol":2,"currencies":["csrvtest", "gold"],"minpreconversion":[10000,5.1298]}, "initialsupply":20000'
+    ```
+    In "mycoin", I set proofprotocol to 2, which is PROOF_CHAINID. That means that the controller of the chain ID can mint new coins as follows:
+
+      ```
+    ./surev -chain=CSRVTEST sendcurrency "mycoin@" '[{"address":"mike@","currency":"mycoin","mintnew":1,"amount":10000}]'
+    ```
+
+    #### Defining a New blockchain
+    ```json
+      {
+      "name": "NewChain",
+      "options": 264,
+      "currencies": [
+        "CSRVTEST"
+      ],
+      "conversions": [
+        1
+      ],
+      "eras": [
+        {
+          "reward": 1200000000,
+          "decay": 0,
+          "halving": 0,
+          "eraend": 0
+        }
+      ],
+      "notaries": [
+        "Notary1@",
+        "Notary2@",
+        "Notary3@"
+      ],
+      "minnotariesconfirm": 2,
+      "nodes": [
+        {
+          "networkaddress": "111.111.111.111:10000",
+          "nodeidentity": "Node1@"
+        },
+        {
+          "networkaddress": "111.111.111.112:10000",
+          "nodeidentity": "Node2@"
+        }
+      ],
+      "gatewayconvertername": "Bridge",
+      "gatewayconverterissuance": 1000000
+    }
+    ```
+    The bridge definition has overridable defaults
+    ```json
+      {
+      "currencies": [
+        "CSRVTEST",
+        "NewChain",
+        "USD"
+      ],
+      "initialcontributions": [
+        380228.12033701,
+        0,
+        1000000
+      ],
+      "initialsupply": 3000000
+    }
+    ```
+    Now pass those definitions to `definecurrency`
+    ```shell
+    ./surev -chain=csrvtest definecurrency '{"name":"NewChain","options":264,"currencies":["CSRVTEST"],"conversions":[1],"eras":[{"reward":1200000000,"decay":0,"halving":0,"eraend":0}],"notaries":["Notary1@","Notary2@","Notary3@"],"minnotariesconfirm":2,"nodes":[{"networkaddress":"111.111.111.111:10000","nodeidentity":"Node1@"},{"networkaddress":"111.111.111.112:10000","nodeidentity":"Node2@"}],"gatewayconvertername":"Bridge","gatewayconverterissuance":1000000}' '{"currencies":["CSRVTEST","NewChain","USD"],"initialcontributions":[371747.20398827,0,1000000],"initialsupply":3000000}'
+    ```
+    #### Exporting an ID to a new chain
+    ```
+    surev -chain=CSRVTEST sendcurrency "*" '[{"address":"IDNAME@","exportto":"NewChainName","exportid":"true","amount":100,"currency":"csrvtest"}]'
+    ```
     """
 - role: assistant
-  content: |
+  content: | # Not "how can you" but instead "how can I" that's what I'm going to implement. Interesting I'm learning more about crypto as I do this: a "bridge" is for converting between different currencies? Maybe using a shared pool of stuff? Not sure about the second bit.
     **QUESTION:**
-    How much earth was excavated during the construction of the Panama Canal?
-    
+    How can I park a conversion of CSRVTEST to a new token (like GOLD) before that token launches, using the command line?
+
     **ANSWER:**
-    Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal.
-    
+    To park a conversion of CSRVTEST to a new token before the token launches, you can use the `sendcurrency` command with the following format:
+
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "*" '[{"address":"your_address@","convertto":"gold","preconvert":1,"amount":100}]'
+    ```
+
+    This will effectively park your conversion until the GOLD token launches. After the launch, you will either find the converted amount of GOLD in your wallet, or you will have your original CSRVTEST amount returned.
+
     **QUESTION:**
-    What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-    
+    How can I create a new token called "mycoin" using the command line, which can be converted to with either GOLD or CSRVTEST? Assume that GOLD is a new token that just launched.
+
     **ANSWER:**
-    The construction faced significant health challenges, notably malaria and yellow fever. 
-    
+    In order to create a new token called "mycoin" using the command line, you must run a command to define the currency's properties. Here's an example of such a command:
+
+    ```
+    ./surev -chain=CSRVTEST definecurrency '{"name":"mycoin","options":33, "proofprotocol":2,"currencies":["CSRVTEST", "gold"],"minpreconversion":[10000,5.1298]}, "initialsupply":20000'
+    ```
+
+    This command defines a new token named "mycoin". Some important notes about this configuration:
+
+    1. `proofprotocol` being set to 2 means that it's set to PROOF_CHAINID. This means that the controller of the chain ID can mint new coins.
+    2. `options` is a configurable integer, in this case set to 33.
+    3. `currencies` lists which tokens can be converted to mycoin.
+    4. `"minpreconversion": [10000,5.1298]` defines the minimum amounts of CSRVTEST and GOLD needed to convert to mycoin, respectively.
+    5. `initialsupply` sets the initial supply of mycoin to 20,000 units.
+
     **QUESTION:**
-    By how many miles did the Panama Canal reduce the sea voyage from San Francisco to New York?
-    
+    What does it mean if `proofprotocol` is set to 2 when defining a new token?
+
     **ANSWER:**
-    The completion of the Panama Canal reduced the sea voyage from San Francisco to New York by around 8,000 miles.
-    
+    When `proofprotocol` is set to 2 when defining a new token, it means that the proof protocol is set to PROOF_CHAINID, which means that the controller of the chain ID may mint new tokens. This can be done with a command like the following example:
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "mycoin@" '[{"address":"mike@","currency":"mycoin","mintnew":1,"amount":10000}]'
+    ```
+
     **QUESTION:**
-    In what year was the Panama Canal completed?
-    
+    How can I define a new blockchain?
+
     **ANSWER:**
-    The Panama Canal's construction was completed in 1914.
-- role: user
-  content: |
-    Text to plan questions from:
-    """
-    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
-    """
-- role: assistant
-  content: |
+    You can define a new blockchain using a single command. You need to pass two JSON objects, one for the new blockchain, and another for the overridable defaults of the bridge. Here's an example of how to define a new blockchain:
+
+    ```shell
+    ./surev -chain=csrvtest definecurrency '{"name":"NewChain","options":264,"currencies":["CSRVTEST"],"conversions":[1],"eras":[{"reward":1200000000,"decay":0,"halving":0,"eraend":0}],"notaries":["Notary1@","Notary2@","Notary3@"],"minnotariesconfirm":2,"nodes":[{"networkaddress":"111.111.111.111:10000","nodeidentity":"Node1@"},{"networkaddress":"111.111.111.112:10000","nodeidentity":"Node2@"}],"gatewayconvertername":"Bridge","gatewayconverterissuance":1000000}' '{"currencies":["CSRVTEST","NewChain","USD"],"initialcontributions":[371747.20398827,0,1000000],"initialsupply":3000000}'
+    ```
+
+    Note the following important information used when defining the new blockchain:
+    
+    1. The "name" field defines the name of the chain.
+    2. The "options" property is an integer, in this case it's set to 264.
+    2. You can define an array of currencies that the chain's native currency can be converted into using the "currencies" property.
+    3. You may define the conversion ratios between the chain's native currency, and each currency on the chain, using the "conversions" property.
+    4. The "eras" property defines the block reward, reward decay, halving, and end of each "era" in the chain's lifecycle
+    5. "notaries" is a list of the notaries on the chain.
+    6. "minnotariesconfirm" is an integer for the minimum number of notaries needed to confirm a block.
+    7. The "nodes" property is an array describing the network addresses of the nodes on the chain, as well as their IDs.
+    
+    Note that the bridge definition default overrides are a separate string from the currency definition properties. The bridge can be used to move funds on and off the bew chain. The bridge's JSON object has some of its own properties:
+    1. `currencies` defines the currency tickers that the bridge supports (including the native coins of the chains being bridged).
+    2. `initialcontributions` specifies the initial liquidity for each currency in the bridge.
+    3. `initialsupply` gives the initial supply for the bridge's native token.
+
     **QUESTION:**
-    If the earth had a diameter of only one inch, how far would the moon be from the earth, if it (and its distance from the earth) were also resized proportionally?
-    
+    How can I export an ID to a new chain?
+
     **ANSWER:**
-    The moon would be two feet and a half from the earth. The moon's size, under this new scale, would be that of a small pea.
+    You can accomplish this with the sendcurrency command. Here's an example, where the ID "IDNAME@" is exported to "NewChainName."
     
-    **QUESTION:**
-    How do the distances between planets compare to their sizes?
-    
-    **ANSWER:**
-    The distances between planets is much greater than the planets' sizes. If you shrunk everything down so that the Earth was one inch in diameter, then the sun would be 323 yards away.
-    
-    **QUESTION:**
-    If you scaled everything down so that the earth had a diameter of one inch, then how far would Mercury and Venus be from the sun?
-    
-    **ANSWER:**
-    Mercury would be one hundred and twenty-five yards from the sun, and Venus would be two hundred and fifty yards from the sun.
-    
-    **QUESTION:**
-    If the earth had a diameter of only one inch, how far would Mars be from the earth, if it (and its distance from the earth) were also resized proportionally?
-    
-    **ANSWER:**
-    Mars would be a hundred and seventy-five feet beyond the earth.
+    ```
+    surev -chain=CSRVTEST sendcurrency "*" '[{"address":"IDNAME@","exportto":"NewChainName","exportid":"true","amount":100,"currency":"CSRVTEST"}]'
+    ```
+
+    Some parts of this command you should be aware of:
+    1. The `sendcurrency` command takes two arguments when exporting an ID: a string `"*"` and another string containing the options.
+    2. `address` is the ID being exported.
+    3. `exportto` is the chain being exported to.
+    4. `exportid` indicates that in this case, `sendcurrency` is being used to export an ID.
+    5. `amount` specifies the amount of currency being sent.
+    6. `currency` specifies the type of currency being sent.
 - role: user
   content: |
     Text to make questions from: 
