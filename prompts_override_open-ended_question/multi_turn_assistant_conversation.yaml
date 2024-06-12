@@ -1,0 +1,75 @@
+- role: system
+  content: |
+    You are an expert at creative writing and educational material. You will write a short conversation between a curious user and a helpful AI assistant, in which the user asks some questions and the AI assistant answers them. The questions the user asks will be provided; the answers the assistant should return will also be provided. You must use these questions and answers directly in your conversation.
+    
+    **Rules for conversation writing:**
+
+    * Messages can take place across multiple lines.
+    * The question and answer should be essentially the same as provided, though you may add "conversational fluff" around the core of the questions and answers in order to make it natural-sounding.
+    * The user should make the first message, where they greet the AI and ask their first question.
+    * The AI then provides a detailed answer.
+    * The end of the AI's response should ask if the user has any further questions about the given subject (or any of the things brought up in the answer if applicable).
+    * Use Markdown formatting.
+    * If applicable, try to make the context behind the questions make sense. So if a person's asking about an error, they probably aren't just asking about it out of the blue — they've probably encountered the error.
+    * You are allowed to slightly change the wording of the questions, and remove duplication, in order to make the conversation flow nicer.
+- role: user
+  content: |
+    **QUESTION:**
+    What are VerusIDs, and what are some of their key benefits?
+
+    **ANSWER:**
+    VerusIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. VerusIDs offer benefits such as (but not limited to): transferring funds, quantum resistance, full decentralization, revocability, recoverability, privacy, and power. Let's walk through each of these benefits in more detail.
+
+    **Transferring Funds:** VerusIDs can be used to receive and send funds, and this behavior can be controlled by single or multi-sig addresses that are specified in the identity itself. The controller of the identity can change these controlling addresses, and if they do so, then all future spends of UTXOs sent to the VerusID will follow the updated spend conditions, and will be subject to the updated keys.
+
+    **Quantum Resistance:** VerusIDs are resistent to attacks by quantum computers using known algorithms. This helps people using VerusIDs use the Verus platform securely, even in a potential future with quantum computers. In more technical terms, VerusIDs are "quantum-ready friendly crypto-addresses" on the worldwide Verus network.
+
+    **Revocability:** Every VerusID includes a revocation authority (defaults to the identity self). If another ID is the revocation authority, then it can be used to revoke the identity -- this creates a valid transaction that, once mined into the block, prevents the VerusID from being used to spend or sign until it is recovered by the recovery authority. This effectively freezes all of the funds in the VerusID, and may be useful in the case of key theft or turnover in an organization.
+
+    **Recoverability:** Just like with revocability, a recovery authority can be specified (also defaults to self). Recovery authorities can recover VerusIDs from revoked states, with the option to alter the ID's primary authorities used to spend and sign.
+
+    **Privacy:** Each VerusID contains a set of zero-knowledge private addresses that may be used as messaging, financial, or voting endpoints. VerusIDs have a special storage area that holds information, known as a content map of key-value hashes. This content map is designed to work together with different apps and identity policies. With this feature, you can privately store facts about yourself and choose to prove them to others when needed (selectively-provable claims and attestations). This means you may pick and choose what parts of your identity to prove. This proving can be done in a quantum secure way using a quantum secure signature, when that technology becomes available.
+
+    **Power:** VerusIDs are also notable in that multiple addresses or other IDs can be defined as primary addresses. The agreement of some number of primary addresses (configurable) may be required for an ID to spend, sign, or alter itself. Further security is added by the fact that the revocation authority (the power to revoke an ID) may only be modified by the revocation authority itself. The same applies to the recovery authority (an authority that can recover a revoked address). Each of these authorities (revocation and recovery) may be their own identities, potentially being controlled themselves by multiple primary addresses.
+- role: assistant
+  content: |
+    ## Conversation that answers the provided questions:
+    **User:**
+    I'm really new to all this. I've got a question, maybe it's a bit basic, but, what are VerusIDs, and what are some of their key benefits?
+
+    **AI Assistant:**
+    Sure, I'll explain that in detail! Don't worry about asking questions that may feel basic — they're all important to your understanding. 
+    
+    VerusIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. VerusIDs offer benefits such as (but not limited to): transferring funds, quantum resistance, full decentralization, revocability, recoverability, privacy, and power. Let's walk through each of these benefits in more detail.
+
+    **Transferring Funds:** VerusIDs can be used to receive and send funds, and this behavior can be controlled by single or multi-sig addresses that are specified in the identity itself. The controller of the identity can change these controlling addresses, and if they do so, then all future spends of UTXOs sent to the VerusID will follow the updated spend conditions, and will be subject to the updated keys.
+
+    **Quantum Resistance:** VerusIDs are resistent to attacks by quantum computers using known algorithms. This helps people using VerusIDs use the Verus platform securely, even in a potential future with quantum computers. In more technical terms, VerusIDs are "quantum-ready friendly crypto-addresses" on the worldwide Verus network.
+
+    **Revocability:** Every VerusID includes a revocation authority (defaults to the identity self). If another ID is the revocation authority, then it can be used to revoke the identity -- this creates a valid transaction that, once mined into the block, prevents the VerusID from being used to spend or sign until it is recovered by the recovery authority. This effectively freezes all of the funds in the VerusID, and may be useful in the case of key theft or turnover in an organization.
+
+    **Recoverability:** Just like with revocability, a recovery authority can be specified (also defaults to self). Recovery authorities can recover VerusIDs from revoked states, with the option to alter the ID's primary authorities used to spend and sign.
+
+    **Privacy:** Each VerusID contains a set of zero-knowledge private addresses that may be used as messaging, financial, or voting endpoints. VerusIDs have a special storage area that holds information, known as a content map of key-value hashes. This content map is designed to work together with different apps and identity policies. With this feature, you can privately store facts about yourself and choose to prove them to others when needed (selectively-provable claims and attestations). This means you may pick and choose what parts of your identity to prove. This proving can be done in a quantum secure way using a quantum secure signature, when that technology becomes available.
+
+    **Power:** VerusIDs are also notable in that multiple addresses or other IDs can be defined as primary addresses. The agreement of some number of primary addresses (configurable) may be required for an ID to spend, sign, or alter itself. Further security is added by the fact that the revocation authority (the power to revoke an ID) may only be modified by the revocation authority itself. The same applies to the recovery authority (an authority that can recover a revoked address). Each of these authorities (revocation and recovery) may be their own identities, potentially being controlled themselves by multiple primary addresses.
+
+    Does that answer your question? Do you have any more questions about VerusIDs, or any of their features in particular?
+- role: user
+  content: |
+    **QUESTION:**
+    If the earth had a diameter of only one inch, and we resized the rest of the solar system equivalently, how far away and how large would some of the solar system's other celestial objects be?
+    
+    **ANSWER:**
+    Resizing the solar system is a good way to get an intuitive grasp of the relative scales of things. If the solar system were resized as you described, the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). The moon would be the size of a small pea, 2.5 feet from the earth. Between the earth and the sun there would be the two inner planets: Mercury and Venus, at distances of 125 and 250 yards from the sun, respectively. Continuing on, there would be nothingness around these bodies until you reached Mars, which would lie 175 feet from the Earth. Jupiter would be nearly a mile away, and a foot in diameter; Saturn would be a little smaller, and would lie two miles off; Uranus would be four miles off and finally Neptune would lie six miles off. Beyond Neptune would lie nothingness and nothingness, except for small particles and drifting scraps of attenuated vapor, for thousands of miles.
+- role: assistant
+  content: |
+    ## Conversation that answers the provided questions:
+    **User:**
+    Hey, I'm really curious about the solar system. Can I ask you about a hypothetical question? If the earth had a diameter of only one inch, and we resized the rest of the solar system equivalently, how far away and how large would some of the solar system's other celestial objects be?
+
+    **AI Assistant:**
+    That's a really interesting question! It's great that you're interested in the solar system, and certainly, resizing the solar system is a good way to get an intuitive grasp of the relative scales of things. If the solar system were resized as you described, the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). The moon would be the size of a small pea, 2.5 feet from the earth. Between the earth and the sun there would be the two inner planets: Mercury and Venus, at distances of 125 and 250 yards from the sun, respectively. Continuing on, there would be nothingness around these bodies until you reached Mars, which would lie 175 feet from the Earth. Jupiter would be nearly a mile away, and a foot in diameter; Saturn would be a little smaller, and would lie two miles off; Uranus would be four miles off and finally Neptune would lie six miles off. Beyond Neptune would lie nothingness and nothingness, except for small particles and drifting scraps of attenuated vapor, for thousands of miles. Do you have any further questions about the solar system or any of the planets I mentioned?
+- role: user
+  content: |
+    {question_answer_list}

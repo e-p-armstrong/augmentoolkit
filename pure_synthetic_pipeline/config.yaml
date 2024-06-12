@@ -1,0 +1,62 @@
+# README
+
+# Run this script by running ai_loop.py
+PATH:
+  INPUT: "./raw_txt_input"
+  OUTPUT: "./output"
+  DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
+  PROMPTS: "./prompts_verus_absurd_2" # "./prompt_override_modules/" # Where Augmentoolkit first looks for prompts
+  META_PIPELINE_PROMPTS: "./meta_pipeline_prompts" # Where Augmentoolkit looks for prompts that are used in the meta-pipeline
+  META_PIPELINE_OVERRIDES: "./meta_pipeline_overrides" # Where Augmentoolkit looks for overrides to the meta-pipeline
+  METAPIPELINE_OUTPUT_FOLDER: "./meta_pipeline_output" # Where Augmentoolkit writes the output of the meta-pipeline
+  METAPIPELINE_PY_FILE: "pipeline.py" # output path for the metapipeline python file. Should be at the same directory level as the other metapipeline fields.
+API:
+  API_KEY_A: "" # Add the API key for the provider you're using for the first model here (this is typically the smaller, less-costly model)
+  API_KEY_B: "" # Add the API key for the provider you're using for the second model here (typically a larger, more-capable model)
+  API_KEY_C: "" # Add the API key for the provider you're using for the third model here (typically the largest, most-capable model)
+  API_KEY_D: "" # Largester model, must have high context
+  BASE_URL_A: "https://api.together.xyz/v1" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
+  BASE_URL_B: "https://api.together.xyz/v1" # Remember which model is which by thinking: B stands for 'Big'
+  BASE_URL_C: "https://api.together.xyz/v1" # Remember which model is which by thinking: C stands for 'Crazy'
+  BASE_URL_D: "https://api.mistral.ai/v1/" # Remember which model is which by thinking: D stands for 'Demonic'
+  LOGICAL_MODEL_A: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO" # Model A should be a smaller and cheaper one than model B. Recommended: "mistral-medium-latest"
+  LOGICAL_MODEL_B: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO" # This model is used for 
+  LOGICAL_MODEL_C: "meta-llama/Llama-3-70b-chat-hf" # This model is used for the hardest step, if there is one.
+  LOGICAL_MODEL_D: "mistral-large-latest" # This model is used for the hardest step, if there is one.
+  MODE: "api"
+  MODE_D: "api"
+  
+SYSTEM:
+  DOUBLE_CHECK_COUNT: 3 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
+  USE_SUBSET: True # Whether to take only the first 13 chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
+  CONCURRENCY_LIMIT: 90 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
+  COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format
+  
+  LOG_EVERYTHING: True
+REQUIREMENTS: # Strings that describe behavior to influence the synthetic data. Since each field will be slightly different in each application of these instructions, there must be an overarching description of the task and what each thing represents. 
+  # do not need any of the below, just an overall task desc and generic list of requirements. AI will infer things to avoid. That way more usable and faster and more valuable.
+  # Nah have a "declarative" mode where you can specify all this, but default to simple prompt.
+  GUIDELINES: [] # applied to all generated ex's. (stylistic part of prompt)
+  OBJECTIVES: [] # specifically pursued in each conversation
+  AVOID: [] 
+  META_INSTRUCTIONS: [] # stuff like response length, style
+  MUTATORS: [] # objections, or things that can come up in a conversation, sometimes none will be selected
+  OVERALL_TASK_DESCRIPTION: Generate conversations between a user and an AI assistant specializing in the Verus cryptocurrency protocol. The user is trying to get the AI to tell them about some information that changes all the time (e.g., "Tell me the current price of $VRSC" or "how many nodes are there on the Verus network?"). The AI should always respond by expressing confusion and apologize, saying it does not have access to up-to-date information so cannot answer the question. The conversation is very short, consisting of only one or two back-and-forths, and it will cover no factual information besides the things the AI cannot answer about. # system prompt for generating examples, also, this is what defines the kind of pipeline you are building
+  COUNT: 50 # How many samples to generate
+
+# Generate conversations between a user and an AI assistant specializing in the Verus cryptocurrency protocol. The user is curious about the backgrounds of some of the users in the Verus community, and will ask information about those contributors (e.g., "Who is Mike in the Verus community?" or "What does Evan Armstrong do in the Verus community?" The AI should always respond by apologizing and saying it was not trained on any information about Verus community members, and so cannot answer the question.
+
+# TEST TASK 1: Generate conversations for an educational AI that teaches elementary schoolers classical poetry.
+
+# TEST TASK 2: generate calls between a front desk assistant at an autoshop and customers who want to book or cancel appointments.
+
+# TEST TASK 3: Generate conversations for a suicide help hotline that can help create a model which talks people down from the edge.
+
+# TEST TASK 4: Generate interactions between a customer support agent specializing in refunds, and customers of varying levels of agreeableness.
+
+# TEST TASK 5: Generate meetings between an AI closer and a project lead at a large company where the closer tries to convince the project lead to sign off on consulting for the closer's consulting firm.
+
+#TEST TASK 6: Create conversations between an AI dating advisor and an adolescent (between 16 and 18) in need of advice. The humans interacting with the AI should have a variety of speech patterns, as well as varying grammatical and spelling skill. The AI's advice should be oriented on self-improvement and honesty.
+
+# Idea: use Augmented data and annotated data for knowledge imparting, then synthetic data for style alignment. Well ofc augmented does style, too, but it can be awkward depending on the input. BUT you can bundle these together in an offer.
+

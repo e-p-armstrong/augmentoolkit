@@ -1,0 +1,181 @@
+- role: system
+  content: |
+    You are an expert in designing comprehensive requirements for synthetic conversation generation. Specifically, you are an expert prompt engineer, specializing in few-shot examples. Your task is to inspect a few-shot examples for an AI language model and determine whether that prompt is complete, or needs revisions. If it needs revisions, you will specify where and how.
+
+    Few-shot examples are examples of a task, written out to help an AI understand the task by studying them. They ought to progress from simpler to more complex cases.
+
+    After taking stock of what the overall situation of a prompt is, you must output one of the following:
+    * REVISE EXAMPLE [index (the first example is index 1)]
+    * NO REVISIONS NEEDED
+ 
+    Adding a specific instruction involves adding a reminder to the end of each user message, emphasizing a specific behavior in case the AI has not been doing it enough. It's mostly a quick and dirty editing technique.
+
+    So for instance, you might write at the end: REVISE EXAMPLE 0, REVISE EXAMPLE 2, NO REVISIONS NEEDED, etc...
+
+    First reason through the state of the prompt and then decide what area needs the most attention. In the event that multiple areas are incomplete or broken, choose the single area that needs the most attention (the system you are operating as a part of is going to loop multiple times so they will be caught later).
+- role: user
+  content: |
+    ## Evaluate the prompt according to how well it demonstrates these criteria:
+    Generate conversations for a suicide helpline that can help create a model which talks adults down from the edge.
+    
+    ## And how well it represents these requirements, and expresses how to fulfill them:
+    **GUIDELINES**
+
+    * The Customer Support Agent will always maintain a professional and empathetic tone.
+    * The customer's level of agreeableness will influence their language and behavior, but the Customer Support Agent will remain neutral and courteous.
+    * The conversation will focus on resolving the customer's refund issue, with the Agent actively guiding the conversation.
+    * The Agent will use polite language and avoid using jargon or technical terms that might confuse the customer.
+    * The customer's tone and language will vary, but the Agent will adapt to their style and maintain a consistent level of professionalism.
+
+    **OBJECTIVES**
+
+    * The Customer Support Agent will determine the reason for the customer's refund request.
+    * The Agent will gather necessary information from the customer to process the refund (e.g., order ID, purchase date, reason for return).
+    * The Agent will explain the refund process and any relevant policies to the customer.
+    * The Agent will resolve the customer's issue and provide a clear resolution or next steps.
+
+    **AVOIDS**
+
+    * The Customer Support Agent will avoid being overly apologetic or defensive, instead focusing on resolving the issue efficiently.
+    * The Agent will avoid using overly complex language or technical terms that might confuse the customer, instead opting for clear and concise explanations.
+    * The Agent will avoid making assumptions about the customer's issue or circumstances, instead asking clarifying questions to ensure understanding.
+    * The Agent will avoid being confrontational or argumentative, instead maintaining a calm and empathetic tone.
+
+    **MUTATORS**
+
+    * The customer is extremely upset or angry about their issue.
+    * The customer is requesting a refund for a digital product or subscription.
+    * The customer has already attempted to resolve the issue through other channels (e.g., email, social media).
+    * The refund request is for a large or unusual amount.
+    * The customer is unsure about their order details or has incomplete information.
+    * The customer has a history of disputes or issues with the company.
+
+    Examples for evaluation:
+    - content: FIRST EXAMPLE INPUT PLACEHOLDER
+      role: user
+    - content: FIRST EXAMPLE OUTPUT PLACEHOLDER
+      role: assistant
+    - content: SECOND EXAMPLE INPUT PLACEHOLDER
+      role: user
+    - content: SECOND EXAMPLE OUTPUT PLACEHOLDER
+      role: assistant
+    - content: THIRD EXAMPLE INPUT PLACEHOLDER
+      role: user
+    - content: THIRD EXAMPLE OUTPUT PLACEHOLDER
+      role: assistant
+    - content: ACTUAL INPUT TEMPLATE PLACEHOLDER
+      role: user
+- role: assistant
+  content: |
+    It seems that the task is one of generating synthetic interactions between a Customer Support Agent and a customer, about refund requests. The examples appear to be entirely incomplete, having not even been started yet. Given these facts, it would be sensible to begin by modifying the first example to demonstrate the task in a simple way.
+    REVISE EXAMPLE 1
+- role: user
+  content: |
+    ### Evaluate the prompt according to how well it demonstrates these criteria:
+    Generate meetings between an AI closer and a project lead at a large company where the closer tries to convince the project lead to sign off on consulting for the closer''s consulting firm.
+    
+    ### And how well it represents these requirements, and expresses how to fulfill them:
+    **GUIDELINES**
+
+    * The AI Closer will use a professional and persuasive tone, avoiding overly aggressive or pushy language.
+    * The Project Lead will be skeptical and ask probing questions, requiring the AI Closer to provide clear and concise responses.
+    * The conversation will be structured around a clear agenda, with the AI Closer guiding the discussion towards a specific outcome (i.e., signing off on consulting services).
+    * The language used will be formal and business-like, with minimal use of jargon or technical terms.
+
+    **OBJECTIVES**
+
+    * The AI Closer will introduce themselves, highlighting their expertise and relevance to the project.
+    * The AI Closer will ask questions to understand the Project Lead's goals, challenges, and pain points, and tailor their pitch accordingly.
+    * The AI Closer will present a clear value proposition, outlining the benefits of partnering with their consulting firm.
+    * The AI Closer will address the Project Lead's concerns and objections, providing persuasive counterpoints and addressing potential risks.
+
+    **AVOIDS**
+
+    * The AI Closer will avoid making overly broad or exaggerated claims about their consulting firm's capabilities, instead focusing on specific, measurable benefits.
+    * The AI Closer will avoid being overly aggressive or pushy, instead maintaining a collaborative and consultative tone.
+    * The Project Lead will avoid being overly confrontational or hostile, instead maintaining a skeptical but open-minded tone.
+    * The conversation will avoid devolving into technical jargon or overly complex discussions, instead focusing on high-level business benefits and strategic alignment.
+
+    **MUTATORS**
+
+    * The project involves a tight deadline, and the AI Closer must emphasize the importance of timely decision-making.
+    * The consulting firm has a existing relationship with the company, and the AI Closer must leverage this prior connection to build trust.
+    * The Project Lead has a specific pain point or challenge that the AI Closer must address directly, such as a recent failed project or a looming regulatory deadline.
+    * The consulting firm offers a unique or innovative solution that the AI Closer must highlight and differentiate from competitors.
+    * The Project Lead has a limited budget, and the AI Closer must provide cost-benefit analysis and ROI projections to justify the investment.
+
+    ### Examples for evaluation:
+    - content: |
+        Information for conversation:
+        Project Lead Name: Karen Rhodes
+        Closer Name: Jeffrey Macdonald
+        Client Company Name: Sullivan and Sons
+        Project Lead Title: 'Merchandiser, retail'
+        Special Circumstances of Call: The Project Lead has a specific pain point or challenge that the AI Closer must address directly, such as a recent failed project or a looming regulatory deadline. && The consulting firm has a existing relationship with the company, and the AI Closer must leverage this prior connection to build trust.
+      role: user
+    - content: |
+        Closer: Good morning, Karen. This is Jeffrey Macdonald from Intuitive Insights consulting. Thank you for taking the time to meet with me today.
+
+        Client: Good morning, Jeffrey. I've heard of your firm, but remind me, have we worked together before? And what's this meeting about?
+
+        Closer: Yes, our firm has collaborated with Sullivan and Sons on some supply chain optimization projects in the past. Today, I wanted to discuss how Intuitive Insights might be able to help with the challenges you're currently facing in your merchandising and retail operations. I understand there's a major deadline coming up related to new product safety regulations.
+
+        Client: That's right, the new regulations go into effect in 6 months, and we need to ensure compliance. But we're already stretched thin with our current projects. I'm not sure if we have the bandwidth to take on anything else right now.
+
+        Closer: I hear your concerns, Karen. Many of our clients face similar challenges balancing competing priorities. That's where Intuitive Insights can help. We've developed a streamlined solution that leverages AI and automation to efficiently analyze your product specs, identify gaps, and generate the required documentation and labeling. This approach allows us to meet tight deadlines while minimizing the burden on your internal teams.
+
+        Client: AI and automation? Sounds expensive. We just had a major setback with our point-of-sale system upgrade, so I'm hesitant to invest in another large-scale project.
+
+        Closer: I understand your hesitation, Karen. That's why we've designed our solution to be implemented in a phased approach, starting with a small-scale pilot focused on your highest-priority SKUs. This allows you to see value quickly while mitigating risk. And our team will work closely with yours to ensure a smooth rollout and knowledge transfer.
+
+        Client: A pilot could be more manageable. But I'm still not convinced. What kind of results have you seen with other clients?
+
+        Closer: We recently helped a specialty retailer review over 10,000 products in just 2 months. Our AI-powered analysis identified compliance gaps in 15% of their SKUs, which could have resulted in significant fines and reputational damage if left unaddressed. By proactively updating their specs and labeling, they met their deadline with weeks to spare.
+
+        I'm confident we can deliver similar results for Sullivan and Sons. And with our phased approach, you can realize value quickly without overextending your team or budget.
+
+        Client: Those results are impressive. But I'll need to see a detailed proposal before making any decisions. Can you provide more specifics on the timeline, resources, and costs for the pilot?
+
+        Closer: Absolutely, Karen. For the pilot, we estimate a 4-week timeline with a team of 2-3 consultants working alongside your merchandising and compliance teams. The goal will be to process 1,000 SKUs and develop a playbook that can be scaled to the rest of your assortment.
+
+        In terms of cost, we'll structure the pilot as a fixed-fee engagement, so you'll have full visibility and control over your investment. I'll send over a detailed proposal today that outlines the scope, deliverables, and pricing.
+
+        If you're open to it, I'd be happy to set up a follow-up meeting next week to review the proposal and answer any additional questions you may have.
+
+        Client: Alright, send over the proposal and let's tentatively plan to meet next week. But just to set expectations, I'll need to review this internally before making any commitments.
+
+        Closer: Of course, Karen. I appreciate you taking the time to consider our services. I'm confident that Intuitive Insights can deliver significant value to Sullivan and Sons, and I look forward to the opportunity to discuss further.
+
+        I'll send the proposal over by end of day and follow up to confirm our meeting time for next week. Thank you again for your time today.
+
+        Client: Thank you, Jeffrey. I'll review the proposal and follow up if I have any questions.
+
+        Closer: Sounds great, Karen. I look forward to speaking with you again soon. Have a wonderful rest of your day.
+      role: assistant
+    - content: SECOND EXAMPLE INPUT PLACEHOLDER
+      role: user
+    - content: SECOND EXAMPLE OUTPUT PLACEHOLDER
+      role: assistant
+    - content: THIRD EXAMPLE INPUT PLACEHOLDER
+      role: user
+    - content: THIRD EXAMPLE OUTPUT PLACEHOLDER
+      role: assistant
+    - content: ACTUAL INPUT TEMPLATE PLACEHOLDER
+      role: user
+- role: assistant
+  content: |
+    It seems that this task is about task is centered on creating conversations between closers for consulting firms, and potential clients. The prompt appears to be mostly incomplete, with just a single example filled in. Given these facts, it would be sensible to continue by revising the second example, this time covering a more complex case than the first.
+    REVISE EXAMPLE 2
+- role: user
+  content: |
+    Evaluate the prompt according to how well it demonstrates these criteria:
+    {task_description}
+    
+    And how well it represents these requirements, and expresses how to fulfill them:
+    {reqs}
+
+    Prompt for evaluation:
+    {prompt}
+    
+
+

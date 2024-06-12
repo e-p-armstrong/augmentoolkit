@@ -2,14 +2,16 @@ PATH:
   INPUT: "./raw_txt_input"
   OUTPUT: "./output"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
-  PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
+  PROMPTS: "./prompts_override_open-ended_question" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY: "60ee522aea5805bde3f13a0a412634ca8c697f0045401c9e91074e54823ae43a" # Add the API key for your favorite provider here
+  API_KEY: "993f9dce3623bffe9b45f4be6cdc216a703242ff8702779aa09078e49d20a351" # Add the API key for your favorite provider here
   BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
   LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for everything except conversation generation at the very end
   LARGE_LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on.
   QUANTIZATION_SMALL: "gptq" # Only use if Aphrodite mode is on.
   QUANTIZATION_LARGE: "gptq" # Only use if Aphrodite mode is on.
+SKIP:
+  QUESTION_CHECK: False
 SYSTEM:
   CHUNK_SIZE: 1900
   USE_FILENAMES: False # give the AI context from the filenames provided to it. Useful if the filenames are meaningful, otherwise turn them off.

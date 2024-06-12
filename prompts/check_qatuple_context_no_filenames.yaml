@@ -28,7 +28,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. "What is the main theme of this book" asks a specific thing about a specific object (the book) so the question is precise. The question (and the answer) only lack context in mentioning *which* book they refer to. However, I do not know the name of the book it refers to either. The question without reference to a specific book would be "What is the main theme?" which is too broad and does not make sense. I cannot fix this by rewording it. Therefore, this fails.
-    #### Final judgement: Fail.
+    #### Final judgement: FAIL.
 - role: user
   content: |
     Question: What does Mendeleev consider important about solutions?
@@ -48,7 +48,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. The question is precise and relevant, but the answer introduces a lack of context by not specifying the book. However, the answer does make sense without reference to a specific text. The answer without reference to a specific book would be "Mendeleev considers solutions an unsolved subject that he cannot ignore, despite the lack of proof for his own theory on their nature." which makes sense and is answerable. This therefore requires a rewording of the answer to omit the reference to a book. The question passed its checks and will remain untouched.
-    #### Final judgment: Reword.
+    #### Final judgment: REWORD.
     
     ### Question Rewording (using text details as reference):
     Question: What does Mendeleev consider important about solutions?
@@ -72,7 +72,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. Both the question and answer lack specific context about the "passage", making it impossible to determine which passage (or even which book) they are referring to. The question without reference to a specific book or passage would be "what is the main theme?" which is too broad and does not make sense. The question is precise in asking for a main theme but fails due to lack of context. Since the context cannot be determined, the context cannot be added with rewording. 
-    #### Final judgment: Fail.
+    #### Final judgment: FAIL.
 - role: user
   content: |
     Question: How can you avoid blame for an act of sabotage, according to the text?
@@ -92,7 +92,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. Both the question and answer are precise, but the question lacks specific context regarding the text it refers to. The question without specific reference to a book would be "How can you avoid blame for an act of sabotage?" which makes sense and is answerable. This therefore necessitates a rewording to remove mention of a specific text. The answer passed its checks and will remain untouched.
-    #### Final judgment: Reword.
+    #### Final judgment: REWORD.
     
     ### Question Rewording (using text details as reference):
     Question: How can you avoid blame for an act of sabotage?
@@ -116,7 +116,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: The question is precise but lacks specific context regarding the text it refers to. The answer is valid as it is clear and doesn't introduce any vague references. The question without reference to a specific book would be "What was the basis of Mendeleev's work?" which is too broad. Therefore this question and answer fail.
-    #### Final judgment: Fail.
+    #### Final judgment: FAIL.
 - role: user
   content: |
     Question: What does Demitry Mendeleev say about inquiry?
@@ -136,7 +136,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: The question and answer both pass all checks for context, specificity, precision, and clarity.
-    #### Final judgment: Pass.
+    #### Final judgment: PASS.
 - role: user
   content: |
     Question: How does science advance, according to the text?
@@ -156,7 +156,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: The question is precise but lacks specific context regarding the text it refers to. The answer is valid as it is. The question without specific reference to a book would be "How does science advance?" which makes sense and is answerable. Therefore, the question requires rewording for context, while the answer remains the same.
-    #### Final judgment: Reword.
+    #### Final judgment: REWORD.
     
     ### Question Rewording (using text details as reference):
     Question: How does science advance?
@@ -180,7 +180,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: The question and answer both pass all checks for context, specificity, precision, and clarity.
-    #### Final judgment: Pass.
+    #### Final judgment: PASS.
 - role: user
   content: |
     Question: How does the type of saboteur affect their role in destruction?
@@ -200,7 +200,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Both the question and answer are precise and do not require additional context for understanding.
-    #### Final judgment: Pass.
+    #### Final judgment: PASS.
 - role: user
   content: |
     Question: What is the meaning of this passage?
@@ -220,7 +220,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Both the question and answer lack specific context, making it impossible to determine which passage, from which book, they are referring to. The question is precise in asking for a meaning but fails due to lack of context.
-    #### Final judgment: Fail.
+    #### Final judgment: FAIL.
 - role: user
   content: |
     Question: {question}

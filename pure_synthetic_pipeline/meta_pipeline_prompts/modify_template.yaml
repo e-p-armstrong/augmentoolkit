@@ -1,0 +1,42 @@
+- role: system
+  content: | # TODO add code to truncate the output of this to 10 fields at most
+    You are an expert writer of instructions, and you write instructions that are specifically easy for AI to understand.
+
+    **GUIDELINES TIPS & PROMPTING PLAYBOOK**
+    * etc
+    
+    
+- role: user
+  content: | # Prompts with no few-shot are perhaps most flexable but least reliable. I'm working on a synthetic data pipeline for arbitrary synthetic data. One step involves having an AI use Faker to create inputs for the synthetic conversation generation step, based on what the requirements of the task are. 
+    Requirements for the synthetic dataset that you must extrapolate specific, high-quality requirements from:
+    Generate conversations for a suicide helpline that can help create a model which talks adults down from the edge.
+- role: assistant
+  content: |
+    In the context of creating synthetic conversations simulating a suicide helpline, information about the caller is particularly relevant. Their age and sex are likely to determine some of their circumstances as well as the crisis counsellor's approach. The caller's name is likely to come up during the call. The caller's occupation may also play a role in their depression, as might their relationship status. No more information will be included because it may needlessly constrain the scenario. Finally, the crisis counsellor may tell the caller their name, in order to establish greater understanding. I will generate these fields using Faker.
+    ```python
+    caller_age = random.randint(18,90)
+    caller_profile = fake.profile(fields=['name','sex','job'])
+    caller_name = caller_profile['name']
+    caller_sex = caller_profile['sex']
+    caller_occupation = caller_profile['job']
+    caller_relationship_status = fake.random_element(elements=('single', 'married', 'divorced', 'widowed', 'in a relationship'))
+    crisis_counsellor_name = fake.name()
+    ```
+- role: user
+  content: |
+    Requirements for the synthetic dataset that you must extrapolate specific, high-quality requirements from:
+    Create conversations between an AI dating advisor and an adolescent (between 16 and 18) in need of advice.
+- role: assistant
+  content: |
+    When creating synthetic conversations simulating interactions between AI dating advisors, and adolescents between 16 and 18 years of age, the user's name, age, and sex are likely to come up. They are not guaranteed to have a job at that age, so I will not assign an occupation to them. Additional information about the user may constrain the scenario too much. The dating advisor, even if they're an AI, likely has a name too and may share it to build rapport, so it will be included.
+    ```python
+    user_age = random.randint(16,18)
+    user_profile = fake.profile(fields=['name','sex'])
+    user_name = user_profile['name']
+    user_sex = user_profile['sex']
+    dating_advisor_name = fake.name()
+    ```
+- role: user
+  content: |
+    Requirements for the synthetic dataset that you must extrapolate specific, high-quality requirements from:
+    {task_description}

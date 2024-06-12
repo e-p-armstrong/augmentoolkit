@@ -1,0 +1,124 @@
+- content: "You are an expert in Python and the Faker library in particular. You're\
+    \ working on a synthetic data pipeline for arbitrary synthetic conversations.\
+    \ One step in this pipeline involve using Faker to create inputs for the synthetic\
+    \ conversation generation step, based on what the requirements of the task are.\
+    \ \n\nYour task is to write Python functions that use Faker to produce inputs\
+    \ that can serve as context for a synthetic conversation. This can include the\
+    \ names of participants in the conversation, the date the conversation is taking\
+    \ place, birth dates of participants in the conversation, etc. \u2014 but only\
+    \ use information that's relevant to the task at hand, do not create extraneous\
+    \ information that would not realistically come up in the conversation being generated.\
+    \ Blood group would probably not come up in a conversation about esports, for\
+    \ instance. We're using Faker so that a variety of data can be generated.\n\n\
+    ASSUMPTIONS AND GUIDELINES:\n* Assume that there is already a Faker() object initialized\
+    \ as `fake`.\n* Only use Faker generators that you know to exist, and be sure\
+    \ that the final output of whatever you create is a string, such as with `fake.name()`\
+    \ or `fake.date_this_year.strftime(\"%Y-%m-%d\")`\n* Assume that earlier in the\
+    \ file `from datetime import datetime` has been executed\n* You may NOT use fake.profile()\n\
+    * Try to include no more than 7 (seven) fields, to avoid overcomplicating things).\
+    \ Choose only fields that directly relate to, and would come up during, the scenario\
+    \ or task at hand; AND they must introduce variety into the generated scenes.\n\
+    * You MUST NOT USE fake.random_element, stick to predefined things.\n* Do not\
+    \ under any circumstances use faker to generate random sentences or lorem ipsum\
+    \ text. fake.sentence is BANNED.\n* `random` is imported. If Faker is convoluted\
+    \ (for example, getting a person's age through datetime calculations) then you\
+    \ can just use random.randint() or other random functions to accomplish the same\
+    \ goal. Just do all your calculating on one line each time.\n* If present, age\
+    \ should be the first field.\n* Thousands of samples are going to be generated\
+    \ using these inputs, so only use fields that do not overly limit the scenario:\
+    \ in particular, do not use random_element to select specific things from a pool\
+    \ of hundreds of items, only use random_element in cases where there are a small\
+    \ handful of acceptable states for a field. The AI generating data using this\
+    \ info can invent stuff too, after all, so don't be afraid to let it do so.\n\
+    * You must think through (step-by-step) and reason about what fields you will\
+    \ include, before writing the fields themselves. Only the stuff you write in the\
+    \ code block will be parsed.\n\nYou should prioritize information that is relevant\
+    \ to the kind of conversation being had, and information that will probably come\
+    \ up (naturally) in the given conversation.\n\nEven if an AI is humanized, it\
+    \ makes sense for the AI to have only a first name. So if there is one agent in\
+    \ a given task that is obviously an AI, give it only a first name.\n\nThe code\
+    \ you write is going to be inserted into a larger function. Assign variables to\
+    \ values generated using Faker, and code will parse your response and automatically\
+    \ add it in the correct places elsewhere. Don't worry about using fake.profile\
+    \ and getting duplicates."
+  role: system
+- content: 'Requirements for the synthetic dataset that you must extrapolate specific,
+    high-quality requirements from:
+
+    Generate conversations for a suicide helpline that can help create a model which
+    talks adults down from the edge.'
+  role: user
+- content: 'In the context of creating synthetic conversations simulating a suicide
+    helpline, information about the caller is particularly relevant. Their age is
+    likely to determine some of their circumstances as well as the crisis counsellor''s
+    approach. The caller''s name is likely to come up during the call. Their sex would
+    also play a role, but since I cannot use fake.profile() I will let this be inferred
+    from the caller''s name. The caller''s occupation may also play a role in their
+    depression. No more information will be included because it may needlessly constrain
+    the scenario. Finally, the crisis counsellor may tell the caller their name, in
+    order to establish greater understanding. I will generate these fields using Faker.
+
+    ```python
+
+    caller_age = random.randint(18,90)
+
+    caller_name = fake.name()
+
+    caller_occupation = fake.job()
+
+    crisis_counsellor_name = fake.first_name()
+
+    ```'
+  role: assistant
+- content: 'Requirements for the synthetic dataset that you must extrapolate specific,
+    high-quality requirements from:
+
+    Create conversations between an AI dating advisor and an adolescent (between 16
+    and 18) in need of advice.'
+  role: user
+- content: 'When creating synthetic conversations simulating interactions between
+    AI dating advisors, and adolescents between 16 and 18 years of age, the user''s
+    name, age, and sex are likely to come up. Since I cannot use fake.profile() to
+    ensure that the sex and name are consistent, I will let the sex be inferred from
+    the name. The adolescent is not guaranteed to have a job at their age, so I will
+    not assign an occupation to them. Additional information about the user may constrain
+    the scenario too much. The dating advisor, even if they''re an AI, likely has
+    a name too and may share it to build rapport, so it will be included.
+
+    ```python
+
+    user_age = random.randint(16,18)
+
+    user_name = fake.name()
+
+    dating_advisor_name = fake.first_name()
+
+    ```'
+  role: assistant
+- content: 'Requirements for the synthetic dataset that you must extrapolate specific,
+    high-quality requirements from:
+
+    Generate conversations between a user and an AI assistant specializing in the
+    Verus cryptocurrency protocol. The user is trying to get the AI to tell them about
+    some information that changes all the time (e.g., "Tell me the current price of
+    $VRSC" or "how many nodes are there on the Verus network?"). The AI should always
+    respond by expressing confusion and apologize, saying it does not have access
+    to up-to-date information so cannot answer the question. The conversation is very
+    short, consisting of only one or two back-and-forths, and it will cover no factual
+    information besides the things the AI cannot answer about.'
+  role: user
+- content: 'In this scenario, the conversation is focused on the user''s inquiry about
+    dynamic information related to the Verus cryptocurrency protocol, and the AI''s
+    response is always an apology for not having access to up-to-date information.
+    The user''s personal information is not relevant to the conversation, and the
+    AI''s name is the only relevant detail to establish a minimal level of rapport.
+
+    ```python
+
+    user_name = fake.name()
+
+    ai_assistant_name = fake.first_name()
+
+    ```'
+  role: assistant
+  timeout: false

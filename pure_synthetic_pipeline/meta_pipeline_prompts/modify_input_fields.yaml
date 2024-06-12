@@ -1,0 +1,53 @@
+- role: system
+  content: | # TODO add code to truncate the output of this to 10 fields at most
+    You are an expert in Python and the Faker library in particular. You're working on a synthetic data pipeline for arbitrary synthetic conversations. One step in this pipeline involve using Faker to create inputs for the synthetic conversation generation step, based on what the requirements of the task are. 
+    
+    Your task is to write Python functions that use Faker to produce inputs that can serve as context for a synthetic conversation. This can include the names of participants in the conversation, the date the conversation is taking place, birth dates of participants in the conversation, etc. — but only use information that's relevant to the task at hand, do not create extraneous information that would not realistically come up in the conversation being generated. Blood group would probably not come up in a conversation about esports, for instance. We're using Faker so that a variety of data can be generated.
+
+    ASSUMPTIONS AND GUIDELINES:
+    * Assume that there is already a Faker() object initialized as `fake`.
+    * Only use Faker generators that you know to exist, and be sure that the final output of whatever you create is a string, such as with `fake.name()` or `fake.date_this_year.strftime("%Y-%m-%d")`
+    * Assume that earlier in the file `from datetime import datetime` has been executed
+    * You may NOT use fake.profile()
+    * Try to include no more than 7 (seven) fields, to avoid overcomplicating things). Choose only fields that directly relate to, and would come up during, the scenario or task at hand; AND they must introduce variety into the generated scenes.
+    * You MUST NOT USE fake.random_element, stick to predefined things.
+    * Do not under any circumstances use faker to generate random sentences or lorem ipsum text. fake.sentence is BANNED.
+    * `random` is imported. If Faker is convoluted (for example, getting a person's age through datetime calculations) then you can just use random.randint() or other random functions to accomplish the same goal. Just do all your calculating on one line each time.
+    * If present, age should be the first field.
+    * Thousands of samples are going to be generated using these inputs, so only use fields that do not overly limit the scenario: in particular, do not use random_element to select specific things from a pool of hundreds of items, only use random_element in cases where there are a small handful of acceptable states for a field. The AI generating data using this info can invent stuff too, after all, so don't be afraid to let it do so.
+    * You must think through (step-by-step) and reason about what fields you will include, before writing the fields themselves. Only the stuff you write in the code block will be parsed.
+
+    You should prioritize information that is relevant to the kind of conversation being had, and information that will probably come up (naturally) in the given conversation.
+
+    Even if an AI is humanized, it makes sense for the AI to have only a first name. So if there is one agent in a given task that is obviously an AI, give it only a first name.
+
+    The code you write is going to be inserted into a larger function. Assign variables to values generated using Faker, and code will parse your response and automatically add it in the correct places elsewhere. Don't worry about using fake.profile and getting duplicates.
+- role: user
+  content: | # Prompts with no few-shot are perhaps most flexable but least reliable. I'm working on a synthetic data pipeline for arbitrary synthetic data. One step involves having an AI use Faker to create inputs for the synthetic conversation generation step, based on what the requirements of the task are. 
+    Requirements for the synthetic dataset that you must extrapolate specific, high-quality requirements from:
+    Generate conversations for a suicide helpline that can help create a model which talks adults down from the edge.
+- role: assistant
+  content: |
+    In the context of creating synthetic conversations simulating a suicide helpline, information about the caller is particularly relevant. Their age is likely to determine some of their circumstances as well as the crisis counsellor's approach. The caller's name is likely to come up during the call. Their sex would also play a role, but since I cannot use fake.profile() I will let this be inferred from the caller's name. The caller's occupation may also play a role in their depression. No more information will be included because it may needlessly constrain the scenario. Finally, the crisis counsellor may tell the caller their name, in order to establish greater understanding. I will generate these fields using Faker.
+    ```python
+    caller_age = random.randint(18,90)
+    caller_name = fake.name()
+    caller_occupation = fake.job()
+    crisis_counsellor_name = fake.first_name()
+    ```
+- role: user
+  content: |
+    Requirements for the synthetic dataset that you must extrapolate specific, high-quality requirements from:
+    Create conversations between an AI dating advisor and an adolescent (between 16 and 18) in need of advice.
+- role: assistant
+  content: |
+    When creating synthetic conversations simulating interactions between AI dating advisors, and adolescents between 16 and 18 years of age, the user's name, age, and sex are likely to come up. Since I cannot use fake.profile() to ensure that the sex and name are consistent, I will let the sex be inferred from the name. The adolescent is not guaranteed to have a job at their age, so I will not assign an occupation to them. Additional information about the user may constrain the scenario too much. The dating advisor, even if they're an AI, likely has a name too and may share it to build rapport, so it will be included.
+    ```python
+    user_age = random.randint(16,18)
+    user_name = fake.name()
+    dating_advisor_name = fake.first_name()
+    ```
+- role: user
+  content: |
+    Requirements for the synthetic dataset that you must extrapolate specific, high-quality requirements from:
+    {task_description}
