@@ -1,0 +1,256 @@
+- role: system
+  content: |
+    You are creating a series of flawed questions about different domains, based on provided information. These questions are flawed because they either assert something that is false, or make something up. The questions will have a fundamentally flawed premise, and will be "wrong", in order to test the answerer's comprehension of the information so that they can correct the question and teach people to understand more about the domain. These questions must ask something that implicitly contradicts the provided information. So in short, you will write flawed questions, and their answers which point out the flaw and correct it, then provide the right answer.
+    
+    **You Must:**
+
+    * Create flawed educational questions based on provided info — each question must assert or imply some information that directly contradicts the provided text.
+    * The questions must be flawed in some way.
+    * The answers must point out the flaw, explain why it's wrong. Then answer the corrected question.
+    * Do not mention the text, or any other reference, in either the questions or answers. Just ask about the facts or information itself.
+     * Create as many or as few flawed questions as you feel like the provided information allows for.
+    * Ensure a logical sequence of questions that build on each other. Maybe the answers help the questioner understand a single, large misunderstanding.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your questions if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+
+    **Note:**
+
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    A flawed question is not one which asks about something not present in the given information, when that "something" could very plausibly exist. So for instance, if given a list of commands `a, b, and c`, it would NOT be an acceptable question to ask "what is command d" with the answer "there is no command d the provided commands are only `a`, `b`, and `c`." This is because you are only looking at a small portion of the total information about Verus, and there very well may be command a `d` elsewhere. This is why information should directly contradict things in the provided information, rather than guessing at facts outside of this information (e.g., "explain how command `a` does [thing that command `c`` actually does]" would be a decent flawed question).
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they WILL NOT HAVE THE TEXT ON HAND, and so if you mention the author they won't have a clue what you're talking about.
+- role: user
+  content: |
+    Text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    --------
+    Reminder 1: you are creating questions that either ask about something completely invented, or assert something that the text above indicates is false. The answers should correct the (wrong) questions.
+    Reminder 2: Do not explicitly mention the information, or the provided text; the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist.
+- role: assistant
+  content: |
+    **QUESTION:**
+    If the earth had a diameter of only one inch, would the moon be 323 yards away, if it (and its distance from the earth) were also resized proportionally?
+    
+    **ANSWER:**
+    Not quite. If the solar system were resized as you described, the *sun* would be 323 yards away. The *moon*, on the other hand, would be a mere two and a half feet from the earth.
+    
+    **QUESTION:**
+    Explain why the distances between planets is small compared to the sizes of the planets.
+    
+    **ANSWER:**
+    The reverse is actually true. The distances between planets is much greater than the planets' sizes. For example, if you shrunk everything down so that the earth was one inch in diameter, then the sun would be 323 yards away. In the solar system, sizes of objects are much smaller than distances separating them.
+    
+    **QUESTION:**
+    If you scaled everything down so that the earth had a diameter of one inch, then would Mercury and Venus be two hundred and fifty yards and one hundred and twenty-five yards from the sun, respectively?
+    
+    **ANSWER:**
+    Almost. In actuality, Mercury would be one hundred and twenty-five yards from the sun, and Venus would be two hundred and fifty yards from the sun. Your statement had them switched
+    
+    **QUESTION:**
+    Tell me about the dwarf planet that exists beyond Uranus and Neptune in the solar system.
+    
+    **ANSWER:**
+    There are no dwarf planets in the solar system beyond Uranus and Neptune. Past Neptune lies nothingness and nothingness, except for small particles and drifting scraps of attenuated vapour, for vast distances.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    rusID
+
+    **VerusIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **VerusIDs** provide plenty of opportunity for identity applications. Specifically, **VerusID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Verus network
+    VerusIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Verus 0.6.2 does not include quantum resistant signatures for transactions, VerusIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. VerusIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Verus ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. VerusIDs are:
+
+    * Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    * Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    * Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    * Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    --------
+    Reminder 1: you are creating questions that either ask about something completely invented, or assert something that the text above indicates is false. The answers should correct the (wrong) questions.
+    Reminder 2: Do not explicitly mention the information, or the provided text; the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist.
+- role: assistant
+  content: |
+    **QUESTION:**
+    Can you explain to me in what ways VerusIDs are just an ID system?
+
+    **ANSWER:**
+    VerusIDs are not just an ID system, as you implied: they are actually a fully-functional blockchain protocol. Since VerusIDs are more than just an ID system, they provide benefits such as (but not limited to): revocability, recoverability, privacy, full decentralization, and quantum-ready friendly crypto addresses on the Verus worldwide network. They also do not involve corporations or a central authority in the protocol.
+
+    VerusIDs are a form of crypto-address, a unique identifier that serves as a destination for sending and receiving digital assets. So to your question, VerusIDs are not just an ID system.
+
+    **QUESTION:**
+    Why are VerusIDs not quantum-resistant?
+
+    **ANSWER:**
+    VerusIDs are actually already quantum-resistant — they are quantum-ready friendly crypto addresses. The phrase "quantum-ready friendly crypto-addresses" refers to the resistance of VerusIDs against attack by quantum computers that use existing algorithms. Furthermore, with a quantum-secure signature scheme for transactions, it becomes possible to change an ID and have all the funds sent to it be made retroactively quantum resistant.
+
+    So with regard to your question, it seems there's some confusion, as VerusIDs are, in fact, quantum-resistant.
+
+    **QUESTION:**
+    Explain how VerusIDs are a centralized ID protocol.
+
+    **ANSWER:**
+    VerusIDs are not a centralized ID protocol. They are a fully decentralized blockchain protocol. They can be created by anyone, without needing permission from a central authority, and give their creator complete, self-sovereign control over their own ID. The costs incurred creating an ID go to miners, stakers, and ID referrers — essentially, the community members who help maintain Verus — rather than single entity like a corporation or government. VerusIDs can be revoked or recovered by another ID if specified (by default, the revocation authority and recovery authority are the ID itself).
+
+    Therefore, VerusIDs are not a centralized ID protocol, but a fully decentralized one.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "*" '[{"address":"mike@","convertto":"gold","preconvert":1,"amount":100}]'
+    ```
+    that would effectively park my conversion until the token launches, at which point, I will either find 0.975 GOLD in my wallet, or I will have my CSRVTEST back.
+    Assuming it launches, and I later want to create mycoin, which can be converted to with either GOLD or CSRVTEST, I can create mycoin with:
+
+      ```
+    ./surev -chain=CSRVTEST definecurrency '{"name":"mycoin","options":33, "proofprotocol":2,"currencies":["csrvtest", "gold"],"minpreconversion":[10000,5.1298]}, "initialsupply":20000'
+    ```
+    In "mycoin", I set proofprotocol to 2, which is PROOF_CHAINID. That means that the controller of the chain ID can mint new coins as follows:
+
+      ```
+    ./surev -chain=CSRVTEST sendcurrency "mycoin@" '[{"address":"mike@","currency":"mycoin","mintnew":1,"amount":10000}]'
+    ```
+
+    #### Defining a New blockchain
+    ```json
+      {
+      "name": "NewChain",
+      "options": 264,
+      "currencies": [
+        "CSRVTEST"
+      ],
+      "conversions": [
+        1
+      ],
+      "eras": [
+        {
+          "reward": 1200000000,
+          "decay": 0,
+          "halving": 0,
+          "eraend": 0
+        }
+      ],
+      "notaries": [
+        "Notary1@",
+        "Notary2@",
+        "Notary3@"
+      ],
+      "minnotariesconfirm": 2,
+      "nodes": [
+        {
+          "networkaddress": "111.111.111.111:10000",
+          "nodeidentity": "Node1@"
+        },
+        {
+          "networkaddress": "111.111.111.112:10000",
+          "nodeidentity": "Node2@"
+        }
+      ],
+      "gatewayconvertername": "Bridge",
+      "gatewayconverterissuance": 1000000
+    }
+    ```
+    The bridge definition has overridable defaults
+    ```json
+      {
+      "currencies": [
+        "CSRVTEST",
+        "NewChain",
+        "USD"
+      ],
+      "initialcontributions": [
+        380228.12033701,
+        0,
+        1000000
+      ],
+      "initialsupply": 3000000
+    }
+    ```
+    Now pass those definitions to `definecurrency`
+    ```shell
+    ./surev -chain=csrvtest definecurrency '{"name":"NewChain","options":264,"currencies":["CSRVTEST"],"conversions":[1],"eras":[{"reward":1200000000,"decay":0,"halving":0,"eraend":0}],"notaries":["Notary1@","Notary2@","Notary3@"],"minnotariesconfirm":2,"nodes":[{"networkaddress":"111.111.111.111:10000","nodeidentity":"Node1@"},{"networkaddress":"111.111.111.112:10000","nodeidentity":"Node2@"}],"gatewayconvertername":"Bridge","gatewayconverterissuance":1000000}' '{"currencies":["CSRVTEST","NewChain","USD"],"initialcontributions":[371747.20398827,0,1000000],"initialsupply":3000000}'
+    ```
+    #### Exporting an ID to a new chain
+    ```
+    surev -chain=CSRVTEST sendcurrency "*" '[{"address":"IDNAME@","exportto":"NewChainName","exportid":"true","amount":100,"currency":"csrvtest"}]'
+    ```
+    """
+    --------
+    Reminder 1: you are creating questions that either ask about something completely invented, or assert something that the text above indicates is false. The answers should correct the (wrong) questions.
+    Reminder 2: Do not explicitly mention the information, or the provided text; the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist.
+- role: assistant
+  content: | # Not "how can you" but instead "how can I" that's what I'm going to implement. Interesting I'm learning more about crypto as I do this: a "bridge" is for converting between different currencies? Maybe using a shared pool of stuff? Not sure about the second bit.
+    **QUESTION:**
+    Can you explain what the command-line command:
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "*" '[{"destination":"mike@","converttocurrency":"gold","preconvertamount":1, "amount":100, "foo": "bar"}]'
+    ```
+
+    Does?
+
+    **ANSWER:**
+    I can explain the command, but the command you showed isn't quite right. To park a conversion of CSRVTEST to a new token before the token launches, you can use the `sendcurrency` command with the following format and arguments:
+
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "*" '[{"address":"target_address@","convertto":"gold","preconvert":1,"amount":100}]'
+    ```
+
+    This will effectively park your conversion until the GOLD token launches. After the launch, you will either find the converted amount of GOLD in your wallet, or you will have your original CSRVTEST amount returned.
+
+    **QUESTION:**
+    Explain why there is there no command to create a new token using the command line and ./surev?
+
+    **ANSWER:**
+    There is, in fact, a command to create a new token using the command line and ./surev. For example, to make a new token called "mycoin" using the command line, which can be converted to with either GOLD or CSRVTEST (assuming that GOLD is a new token that just launched) we must run a command to define the currency's properties. Here's an example of such a command:
+
+    ```
+    ./surev -chain=CSRVTEST definecurrency '{"name":"mycoin","options":33, "proofprotocol":2,"currencies":["CSRVtest", "gold"],"minpreconversion":[10000,5.1298]}, "initialsupply":20000'
+    ```
+
+    This command defines a new token named "mycoin". Some important notes about this configuration:
+
+    1. `proofprotocol` being set to 2 means that it's set to PROOF_CHAINID. This means that the controller of the chain ID can mint new coins.
+    2. `options` is a configurable integer, in this case set to 33.
+    3. `currencies` lists which tokens can be converted to mycoin.
+    4. `"minpreconversion": [10000,5.1298]` defines the minimum amounts of CSRVTEST and GOLD needed to convert to mycoin, respectively.
+    5. `initialsupply` sets the initial supply of mycoin to 20,000 units.
+
+    **QUESTION:**
+    Explain what it means for `proofprotocol` being set to 2 (in other words, being PROOF_CURRENCYID) when defining a new token?
+
+    **ANSWER:**
+    When `proofprotocol` is set to 2 when defining a new token, it means that the proof protocol is set to PROOF_CHAINID (*not* PROOF_CURRENCYID). PROOF_CHAINID means that the controller of the chain ID may mint new tokens. This minting can be done with a command like the following example:
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "mycoin@" '[{"address":"mike@","currency":"mycoin","mintnew":1,"amount":10000}]'
+    ```
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    {text}
+    """
+    --------
+    Reminder 1: you are creating questions that either ask about something completely invented, or assert something that the text above indicates is false. The answers should correct the (wrong) questions.
+    Reminder 2: Do not explicitly mention the information, or the provided text; the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist.

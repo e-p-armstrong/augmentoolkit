@@ -617,6 +617,16 @@ async def vet_question_loop(
             double_check_counter / 2
         ):  # if all question checks passed
             # print(f"\n\nQUESTION CHECKS PASSED retries: {total_retries}")
+            
+            if obj_conf["SKIP"]["ANSWER_RELEVANCY_CHECK"]:
+                return await vet_answer_accuracy_loop(
+                    qtuple,
+                    run_id,
+                    engine_wrapper=engine_wrapper,
+                    double_check_counter=double_check_counter,
+                    completion_mode=completion_mode,
+                    logging_level=logging_level,
+                )
             return await vet_answer_relevance_loop(
                 qtuple,
                 run_id,
