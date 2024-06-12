@@ -120,7 +120,7 @@ class GenerationStep:
                     )
             messages = input_messages
             while times_tried <= self.retries:
-                try:
+                # try:
                     # strip whitespace added by yaml load
                     messages = [
                         {
@@ -149,12 +149,12 @@ class GenerationStep:
                             default_flow_style=False,
                         )
                     return ret
-                except Exception as e:
-                    logging.error(f"Error in Generation Step: {e}")
-                    # print(prompt_formatted)
-                    logging.error(
-                        f"Above prompt resulted in error, probably the model's fault: {e}"
-                    )
-                    traceback.print_exc()
-                    times_tried += 1
+                # except Exception as e:
+                #     logging.error(f"Error in Generation Step: {e}")
+                #     # print(prompt_formatted)
+                #     logging.error(
+                #         f"Above prompt resulted in error, probably the model's fault: {e}"
+                #     )
+                #     traceback.print_exc()
+                #     times_tried += 1
             raise Exception("Generation step failed -- too many retries!")

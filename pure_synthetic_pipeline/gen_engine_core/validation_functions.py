@@ -1,6 +1,6 @@
 import re
 from collections import defaultdict, deque
-
+import traceback
 from gen_engine_core.utillity_functions import count_tokens
 
 def find_frequent_substrings(text, min_length, min_occurrences, cluster_threshold):
@@ -74,7 +74,7 @@ async def validate_generation(gen_func=None, validation_functions=[], retries=1,
         except Exception as e:
             times_tried += 1
             print(f"Error in Generation Step: {e}")
-            print(e)
+            traceback.print_exc()
     raise Exception("VALIDATION FAILED TOO MANY TIMES -- CUTTING LOSSES AND SKIPPING THIS CHUNK\n\n\n")
 
 # Helpers for said abstraction

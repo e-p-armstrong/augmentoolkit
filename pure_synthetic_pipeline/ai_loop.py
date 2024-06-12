@@ -35,12 +35,12 @@ async def generate_data(args, id):
     )
     conversation_generator = GenerationStep(
         prompt_path=generate_conversation_path,
-        sampling_params={{
+        sampling_params={
             "max_tokens": 4000,
             "temperature": 0.7,
             "top_p": 0.9,
             "stop": ["<|eot_id|>", "\\n\\n\\n\\n\\n\\n"],
-        }},
+        },
         completion_mode=COMPLETION_MODE,
         retries=1,
         engine_wrapper=engine_wrapper_large,

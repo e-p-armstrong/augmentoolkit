@@ -5,16 +5,16 @@ PATH:
   INPUT: "./raw_txt_input"
   OUTPUT: "./output"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
-  PROMPTS: "./prompts_verus_absurd_2" # "./prompt_override_modules/" # Where Augmentoolkit first looks for prompts
+  PROMPTS: "./prompts" # "./prompt_override_modules/" # Where Augmentoolkit first looks for prompts
   META_PIPELINE_PROMPTS: "./meta_pipeline_prompts" # Where Augmentoolkit looks for prompts that are used in the meta-pipeline
   META_PIPELINE_OVERRIDES: "./meta_pipeline_overrides" # Where Augmentoolkit looks for overrides to the meta-pipeline
   METAPIPELINE_OUTPUT_FOLDER: "./meta_pipeline_output" # Where Augmentoolkit writes the output of the meta-pipeline
   METAPIPELINE_PY_FILE: "pipeline.py" # output path for the metapipeline python file. Should be at the same directory level as the other metapipeline fields.
 API:
-  API_KEY_A: "" # Add the API key for the provider you're using for the first model here (this is typically the smaller, less-costly model)
-  API_KEY_B: "" # Add the API key for the provider you're using for the second model here (typically a larger, more-capable model)
-  API_KEY_C: "" # Add the API key for the provider you're using for the third model here (typically the largest, most-capable model)
-  API_KEY_D: "" # Largester model, must have high context
+  API_KEY_A: "f840e37389a7cde12e526833013142d24c72266c26503a848697d528786a7382" # Add the API key for the provider you're using for the first model here (this is typically the smaller, less-costly model)
+  API_KEY_B: "f840e37389a7cde12e526833013142d24c72266c26503a848697d528786a7382" # Add the API key for the provider you're using for the second model here (typically a larger, more-capable model)
+  API_KEY_C: "f840e37389a7cde12e526833013142d24c72266c26503a848697d528786a7382" # Add the API key for the provider you're using for the third model here (typically the largest, most-capable model)
+  API_KEY_D: "m7ypN7gJCtICLkqxGkLiLfvRkpjZ2Qdu" # Largester model, must have high context
   BASE_URL_A: "https://api.together.xyz/v1" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
   BASE_URL_B: "https://api.together.xyz/v1" # Remember which model is which by thinking: B stands for 'Big'
   BASE_URL_C: "https://api.together.xyz/v1" # Remember which model is which by thinking: C stands for 'Crazy'
@@ -41,7 +41,7 @@ REQUIREMENTS: # Strings that describe behavior to influence the synthetic data. 
   AVOID: [] 
   META_INSTRUCTIONS: [] # stuff like response length, style
   MUTATORS: [] # objections, or things that can come up in a conversation, sometimes none will be selected
-  OVERALL_TASK_DESCRIPTION: Generate conversations between a user and an AI assistant specializing in the Verus cryptocurrency protocol. The user is trying to get the AI to tell them about some information that changes all the time (e.g., "Tell me the current price of $VRSC" or "how many nodes are there on the Verus network?"). The AI should always respond by expressing confusion and apologize, saying it does not have access to up-to-date information so cannot answer the question. The conversation is very short, consisting of only one or two back-and-forths, and it will cover no factual information besides the things the AI cannot answer about. # system prompt for generating examples, also, this is what defines the kind of pipeline you are building
+  OVERALL_TASK_DESCRIPTION: Generate conversations for an educational AI that teaches elementary schoolers classical poetry. # system prompt for generating examples, also, this is what defines the kind of pipeline you are building
   COUNT: 50 # How many samples to generate
 
 # Generate conversations between a user and an AI assistant specializing in the Verus cryptocurrency protocol. The user is curious about the backgrounds of some of the users in the Verus community, and will ask information about those contributors (e.g., "Who is Mike in the Verus community?" or "What does Evan Armstrong do in the Verus community?" The AI should always respond by apologizing and saying it was not trained on any information about Verus community members, and so cannot answer the question.

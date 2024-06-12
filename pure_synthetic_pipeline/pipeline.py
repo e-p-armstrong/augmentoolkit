@@ -101,8 +101,8 @@ async def generate_conv(input_dict=None, output_file=None):
 async def main():
     print(obj_conf)
     output_file = "formatted_conversations.jsonl"
-    mutators = ["The user's questions become increasingly absurd or outlandish as the conversation progresses.", 'The user asks a series of questions that are all related to a single topic, but with slight variations.', 'The user tries to use humor or sarcasm to provoke a reaction from the AI.', 'The user asks a question that is almost, but not quite, plausible, and the AI has to carefully consider its response.', "The user's writing style is very casual and conversational, or very formal and professional."]
-    exclusives = ['The user asks about a completely fictional aspect of Verus, such as a space program or fictional universe.', "The user asks about a real aspect of Verus, but with a twist that makes it clear they are trying to test the AI's knowledge.", 'The user asks a series of questions that are increasingly absurd or outlandish.', 'The user asks a question that is on the fringe of plausibility, but still clearly not something that Verus is involved in.']
+    mutators = ['The student has a learning disability, such as dyslexia, and may need additional accommodations or support.', 'The conversation takes place in a specific cultural or historical context, such as a unit on ancient Greece or the American Renaissance.', 'The student is part of a group or class, and the AI is facilitating a discussion among multiple students.', 'The student is using the AI as a resource for a school project or assignment, and needs help with research or analysis.', 'The student has a strong emotional connection to a particular poem or poet, and wants to explore that connection with the AI.']
+    exclusives = ['The student is interested in learning about Shakespearean sonnets.', 'The student wants to explore the works of a specific poet, such as Emily Dickinson or Robert Frost.', 'The student is struggling to understand a particular poem or concept, and needs additional support.', 'The student is eager to learn about different poetic forms, such as haikus or free verse.', 'The student has a favorite poem or poet, and wants to discuss it with the AI.']
     count = obj_conf["REQUIREMENTS"]["COUNT"]
     
     target_set_size = count
@@ -119,7 +119,9 @@ async def main():
 
         ### FAKE INPUT FIELDS (AI WRITES THESE)
 
-        ai_assistant_name = fake.first_name()
+        student_age = random.randint(6,11)
+        student_name = fake.name()
+        ai_name = fake.first_name()
 
         ### END AI-WRITTEN INPUT FIELDS (anything that needs actual AI to write it for each sample will be generated as part of the convo generation process)
         
@@ -128,7 +130,9 @@ async def main():
             "exclusive": exclusive,
             "mutators": mutators if mutators else "None",
             ### AI-written input fields are added below
-            "ai_assistant_name": ai_assistant_name,
+            "student_age": student_age,
+            "student_name": student_name,
+            "ai_name": ai_name,
             ###
         }
         
