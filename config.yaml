@@ -24,9 +24,9 @@ SYSTEM:
   MODE: "api" # can be one of "api"|"aphrodite"
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
   FINAL_ASSISTANT_PROMPT_NO_RAG: |
-   You are a helpful, friendly AI assistant who specializes in a given subject.
+   You are a helpful, friendly AI assistant.
   FINAL_ASSISTANT_PROMPT_RAG: |
-   You are a helpful, friendly AI assistant who specializes in a given subject.
+   You are a helpful, friendly AI assistant.
 
    Context information is below:
    

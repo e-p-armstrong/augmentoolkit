@@ -2,7 +2,7 @@
 
 This pipeline is a sort-of meta-pipeline. You give it a description of the kind of data you want, and it first uses a large and powerful LLM to generate the few-shot examples for a pipeline. Following this, it writes the new pipeline to a file, where you can execute it with a smaller model (like Mixtral) to generate data. This data is purely synthetic -- the only source of variety is Faker inputs. Further, you'll probably have to manually edit the few-shot examples a bit before you actually run the generated pipeline. But this still saves you a lot of time and effort when it comes to generating purely synthetic data with slight variation between the scenarios, for when you want to train a specific behavior like "apologize and do not answer if asked about a community member."
 
-The overall lack of polish is because this was originally an abandoned project that I adapted for alignment purposes while building VerusGPT. Since VerusGPT is fully open-source, this is included as well.
+The overall lack of polish is because this was originally an abandoned project that I adapted for alignment purposes while building Verustoolkit. I decided to include it over here, too.
 
 ## Usage
 
