@@ -1,16 +1,19 @@
 import asyncio
 
+import augmentoolkit.utils.group_by_text
+
 # created with nbconvert, minimally cleaned up
 
 
 async def main():
-    # NOTE This is a very hacky way to get local stuff working if you're using aphrodite.
+    # NOTE NOTEBOOK SETTINGS AND CONSTANTS (some script file constants are in generation_functions/constants.py)
 
     # Put your desired quant of your desired model in the relevant directories
 
     import logging
     import yaml
     import glob
+    from augmentoolkit.utils.group_by_text import group_by_text
 
     with open("./config.yaml", "r") as f:
         config = yaml.safe_load(f)
@@ -29,10 +32,6 @@ async def main():
 
     LARGE_LOGICAL_MODEL = config["API"]["LARGE_LOGICAL_MODEL"]
 
-    ASSISTANT_MODE = config["SYSTEM"][
-        "ASSISTANT_MODE"
-    ]  # change to true if you want all conversations to be with an "AI language model" and not characters. Useful for more professional use cases.
-
     DOUBLE_CHECK_COUNTER = config["SYSTEM"][
         "DOUBLE_CHECK_COUNTER"
     ]  # Set to 1 to check outputs only once; set to 2 to check twice; set to 3 to check thrice, etc. Set to 0 to break everything in vet_question_loop() and elsewhere. Set to -1 and cause the universe to implode?
@@ -40,10 +39,8 @@ async def main():
     USE_SUBSET = config["SYSTEM"][
         "USE_SUBSET"
     ]  # Set to True if you want to use only a small subset of the text, to test whether it plays nicely with the current setup of the notebook
-
-    REARRANGEMENTS_TO_TAKE = config["SYSTEM"][
-        "REARRANGEMENTS_TO_TAKE"
-    ]  # How many of the possible permutations of tuples in a group to take and make multiturn convs out of. Adjust higher to get more data out of less text, but it might be a bit repetitive. NOTE your eval loss will be basically worthless if you aren't careful with how you shuffle your dataset when you're about to train.
+    
+    SUBSET_SIZE = config["SYSTEM"]["SUBSET_SIZE"]  # Set to the number of chunks you want to use if you're using a subset. If you're not using a subset, this will be ignored.
 
     USE_FILENAMES = config["SYSTEM"][
         "USE_FILENAMES"
@@ -61,21 +58,18 @@ async def main():
 
     COMPLETION_MODE = config["SYSTEM"]["COMPLETION_MODE"]
 
-    GRAPH = config["SYSTEM"]["GRAPH"]
-
     MODE = config["SYSTEM"]["MODE"]
 
     LOG_LEVEL = logging.INFO
 
     INPUT_FOLDER = config["PATH"]["INPUT"]
-    
-    QUANTIZATION_SMALL = config["API"]["QUANTIZATION_SMALL"]
-    QUANTIZATION_LARGE = config["API"]["QUANTIZATION_LARGE"]
 
-    extension = ".txt"
+    extensions = [".txt", ".md"]
 
-    path = f"{INPUT_FOLDER}/*" + extension
-    source_texts = glob.glob(path)
+    source_texts = []
+    for extension in extensions:
+      path = f"{INPUT_FOLDER}/**/*" + extension
+      source_texts = source_texts + glob.glob(path, recursive=True)
 
     print(source_texts)
 
@@ -144,26 +138,16 @@ async def main():
         api_key=API_KEY,
         base_url=BASE_URL,
         mode=MODE,
-        quantization=QUANTIZATION_SMALL
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
-
-    from transformers import AutoTokenizer
+    
     import re
     from tqdm import tqdm
-    import nltk
-
-    nltk.download("punkt")
-    from nltk.tokenize import sent_tokenize
-
-    tokenizer = AutoTokenizer.from_pretrained(
-        "Gryphe/MythoMax-L2-13b"
-    )  # It doesn't matter what model goes here, really
 
     sentence_chunks = []
     for source_text in source_texts:
         sentence_chunks += control_flow_functions.sentence_chunking_algorithm(
-            source_text, tokenizer
+            source_text, config["SYSTEM"]["CHUNK_SIZE"]
         )
 
     conversions = [("\n", " "), ("  ", " ")]
@@ -197,6 +181,7 @@ async def main():
         engine_wrapper,
         output_dir,
         take_subset=USE_SUBSET,
+        subset_size=SUBSET_SIZE,
         use_filenames=False,
         rtwl=run_task_with_limit,
         completion_mode=COMPLETION_MODE,
@@ -204,7 +189,7 @@ async def main():
     )
 
     filtered_worthy_for_questions = control_flow_functions.filter_and_graph(
-        judged_worthy_for_questions, graph=GRAPH
+        judged_worthy_for_questions
     )
 
     print(filtered_worthy_for_questions[0])

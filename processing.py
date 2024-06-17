@@ -14,9 +14,14 @@ async def main():
     import yaml
     import glob
     from augmentoolkit.utils.group_by_text import group_by_text
+    from augmentoolkit.control_flow_functions import control_flow_functions
+    import os
 
     with open("./config.yaml", "r") as f:
         config = yaml.safe_load(f)
+
+    if not os.path.exists(config["PATH"]["OUTPUT"]):
+        os.makedirs(config["PATH"]["OUTPUT"])
 
     # "airoboros-l2-70b-3.1.2.Q4_K_M.gguf" <- recommended for the large logical model
     # "flatorcamaid-13b-v0.2.Q8_0.gguf" <- recommended for the normal logical model
@@ -63,6 +68,12 @@ async def main():
     LOG_LEVEL = logging.INFO
 
     INPUT_FOLDER = config["PATH"]["INPUT"]
+    
+    # Create pretraining set from raw inputs (pretrain first, then instruct tune)
+    control_flow_functions.create_pretraining_set(
+        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
+    )
+    print("Pretraining set created.")
 
     extensions = [".txt", ".md"]
 
@@ -83,7 +94,7 @@ async def main():
         "\n\n\nIMPORTANT NOTE! Augmentoolkit prints a lot of stuff when it runs. Including tracebacks caused by model errors. Most errors are the result of the models, not the code, and any tracebacks you see were almost certainly handled. So: don't panic! You're gonna make it! Alright that's the end of this PSA. Happy dataset generation!\n\n\n"
     )
 
-    import os
+    
     import uuid
 
     # This is in no way best practices, but all my prompts being searchable and separate files is a good way to make my life easier.
@@ -113,26 +124,6 @@ async def main():
     from augmentoolkit.control_flow_functions import control_flow_functions
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
-    # First, import all modules so they can be reloaded
-    for _, module_name, _ in pkgutil.iter_modules(
-        generation_functions.__path__, generation_functions.__name__ + "."
-    ):
-        importlib.import_module(module_name)
-
-    # Now, reload each module and import all callable attributes
-    for _, module_name, _ in pkgutil.iter_modules(
-        generation_functions.__path__, generation_functions.__name__ + "."
-    ):
-        # Reload the module
-        module = importlib.reload(sys.modules[module_name])
-        # Iterate through each attribute in the reloaded module
-        for attribute_name in dir(module):
-            # Retrieve the attribute
-            attribute = getattr(module, attribute_name)
-            if callable(attribute):
-                # If it's callable, it's a function or class, so you set it in the globals dictionary
-                globals()[attribute_name] = attribute
-
     engine_wrapper = EngineWrapper(
         model=LOGICAL_MODEL,
         api_key=API_KEY,
@@ -143,10 +134,6 @@ async def main():
     
     import re
     from tqdm import tqdm
-    import nltk
-
-    nltk.download("punkt")
-    from nltk.tokenize import sent_tokenize
 
     sentence_chunks = []
     for source_text in source_texts:
@@ -168,7 +155,7 @@ async def main():
     print(paragraphs_processed[:3])
 
     import json
-    import os
+    
     from tqdm import tqdm
     import asyncio
 
@@ -203,7 +190,7 @@ async def main():
 
     # control flow
     import json
-    import os
+    
     import glob
 
     # Directory for QA tuples
@@ -311,7 +298,7 @@ async def main():
 
     # Print stats related to revised qatuples, and filter out nones (questions that were unanswerable due to lack of context).
     import json
-    import os
+    
 
     print("-------------- QUESTIONS REVISED ------------- STATS SO FAR:")
     nones = list(filter(lambda x: x is None, vetted_qa_tuples))
@@ -324,7 +311,7 @@ async def main():
 
     qa_tuples_by_paragraph = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_tuples)
 
-    import os
+    
 
     if not os.path.exists(multi_turn_convs_info_dir):
         os.makedirs(multi_turn_convs_info_dir)
@@ -356,12 +343,12 @@ async def main():
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
 
-    import os
+    
     import json
 
     convs_info = control_flow_functions.read_json_files_info(multi_turn_convs_info_dir)
 
-    import os
+    
     import json
     import random
     import itertools
@@ -392,7 +379,7 @@ async def main():
     # # Yay! Now you have a dataset!
     # ### GPT wrote the cell below. I think it successfully converts things to ShareGPT format for use with axolotl, but I am not sure because I don't know that format very well and haven't used Axolotl. However, the json produced by the second function looks fine.
 
-    import os
+    
     import json
 
     # Make ShareGPT-format dataset (I think, still need verification it actually works)

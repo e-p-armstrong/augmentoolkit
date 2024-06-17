@@ -1,0 +1,1536 @@
+﻿The Project Gutenberg eBook of Some Principles of Frontier Mountain Warfare
+    
+This ebook is for the use of anyone anywhere in the United States and
+most other parts of the world at no cost and with almost no restrictions
+whatsoever. You may copy it, give it away or re-use it under the terms
+of the Project Gutenberg License included with this ebook or online
+at www.gutenberg.org. If you are not located in the United States,
+you will have to check the laws of the country where you are located
+before using this eBook.
+
+Title: Some Principles of Frontier Mountain Warfare
+
+Author: W. D. Bird
+
+Release date: July 24, 2017 [eBook #55185]
+
+Language: English
+
+
+
+*** START OF THE PROJECT GUTENBERG EBOOK SOME PRINCIPLES OF FRONTIER MOUNTAIN WARFARE ***
+
+
+E-text prepared by Graeme Mackreth and the Online Distributed Proofreading
+Team (http://www.pgdp.net) from page images generously made available by
+Internet Archive (https://archive.org)
+
+
+
+Note: Project Gutenberg also has an HTML version of this
+      file which includes the original illustrations.
+      See 55185-h.htm or 55185-h.zip:
+      (https://www.gutenberg.org/cache/epub/55185/pg55185-images.html)
+      or
+      (https://www.gutenberg.org/files/55185/55185-h.zip)
+
+
+      Images of the original pages are available through
+      Internet Archive. See
+      https://archive.org/details/someprinciplesof00bird
+
+
+
+
+
+SOME PRINCIPLES OF FRONTIER MOUNTAIN WARFARE
+
+by
+
+BREVET-MAJOR W.D. BIRD, D.S.O.
+
+(Late Professor at Indian Staff College.)
+
+
+
+
+
+
+London:
+Hugh Rees, Ltd., 119, Pall Mall, S.W.
+1909
+
+
+
+
+SOME PRINCIPLES OF FRONTIER MOUNTAIN WARFARE.
+
+
+The saying that there is no new thing under the sun, is as applicable
+to military affairs as to those of everyday life, for it is fully
+admitted that the principles underlying all strategy and tactics,
+whether of mountain or other warfare, are immutable.
+
+But though the principles of strategy and tactics are unchanging,
+organisation, formations, and minor items of procedure, must be
+continually amended to meet ever varying circumstances, and, in
+addition, each campaign possesses special characteristics demanding
+further modifications.
+
+There are, in fact, no invariable rules in the conduct of war, and
+whilst formalism is harmful in all matters, in military operations it
+is disastrous.
+
+An army relying on an established code of rules will often defeat
+itself in their application, and even if this disaster is avoided, the
+enemy will soon become aware of the methods in vogue, and will so frame
+his tactics as most advantageously to counteract them.
+
+Each problem, great and small, each set of circumstances, must,
+therefore, be considered on its merits, principles must be applied
+in the solution, not rules, and strategy, tactics, organisation,
+equipment, and other matters, arranged accordingly.
+
+It is in this spirit that the problems of Indian Frontier warfare
+should be approached.
+
+
+
+
+GENERAL CONSIDERATIONS.
+
+
+The strength and organisation of a force destined to undertake
+operations against the transborder clans of the Indian frontier is
+naturally conditioned by the physical features of the area, by its
+fertility, and by the numbers, character, organisation, and armament of
+its inhabitants.
+
+It has been truly said that in war every available man should be
+employed, for one can never be too strong, but this aphorism is always
+qualified by the number of men that can be fed in the district which is
+to form the seat of war. The problem of the numbers to be used against
+the Pathan tribes is, therefore, by no means easy of solution, for, as
+a great French King said of Spain, in mountainous countries possessing,
+as does the Indian borderland, few natural resources, but inhabited by
+a hardy though scanty population, large armies risk starvation, small
+are in danger of defeat.
+
+The tribesmen of the North West Frontier are brave, and inured to
+fatigue and hardship, a considerable number have been trained in our
+Indian army, and these have some knowledge of tactics, and acquaintance
+with British methods.
+
+The clansmen possess no artillery, but in other respects are fairly
+well armed, and owing to the cheap sale of rifles and ammunition in
+Afghanistan, are daily becoming more formidable in this respect. They
+suffer, however, from two grave military faults, lack of discipline
+and cohesion, and at present would, it is believed, be unable to mass
+against any one of several columns invading their fastnesses.
+
+They would, more probably, be content merely to defend their own
+valleys and homesteads, rather than attempt to defeat, in detail, the
+divided forces of an invader operating from exterior lines.
+
+It would seem, then, that in a campaign in the Indian borderland,
+British troops would be justified in undertaking a concentric invasion
+from several localities.
+
+Certain advantages may also be claimed for this policy.
+
+The road space occupied, in these pathless regions, by a large force
+moving on one line, is so great, that, as was demonstrated in Sir W.
+Lockhart's advance from Shinawari, in 1897, the rear of the column
+will be several days' march behind the leading troops. In these
+circumstances, not only will risk of defeat in detail be even greater
+than in the case of concentric invasion--for small columns can better
+exercise mutual support, than can a large force moving in a restricted
+valley--but the length of the convoy train, and the seeming strength
+of the force, will be a direct temptation to the tribesmen to avoid
+battle, and have recourse to guerilla warfare.
+
+Besides, if small columns are employed, the whole country will be, in
+the first instance, over-run, and the enemy may, on account of the
+apparent weakness of the various detachments, take heart of grace and
+fight.
+
+This, after all, is what is most desired, for the aim is always to
+attain rapid and decisive victory, and so end the campaign.
+
+An argument against convergent invasion is, that since it may be
+necessary to use more than one line of communication, not only will the
+employment of larger numbers be necessary, but more transport animals,
+the provision and care of which really constitutes the main difficulty
+in frontier warfare, will be required.
+
+This drawback may, however, be mitigated by opening only one line of
+communication, along the easiest route, the other detachments moving as
+flying columns, until the heart of the district is reached, when their
+surplus animals can be transferred to line of communication duties.
+
+
+
+
+STRENGTH AND ORGANISATION OF COLUMNS.
+
+
+In deciding the strength of a column for an expedition against the
+North West Frontier tribesmen, the first requisite, having regard
+to the foregoing considerations, is so to limit numbers, that, in
+the topographical conditions likely to be met, the force can, as an
+entirety, make a march of reasonable length, let us say eight or ten
+miles. Assuming that the column will move at an average rate of about
+two miles per hour, that, in order to avoid risk of disaster, it is,
+as a rule, desirable for the main force not to march before dawn, and
+to be in camp by dusk, and that ten--twelve hours of daylight are
+available, it is clear that the road space occupied must not, for a ten
+mile march, exceed ten to fourteen miles. That is to say, the numbers
+that can fulfil this condition on a narrow track, amount to about 4500
+fighting men, carrying three days' rations on the person, and five
+days' on transport animals.
+
+Suppose that four such columns are destined to invade the Afridi Tirah.
+
+The Afridis are said to possess 25,000 to 30,000 fighting men, and if
+it be assumed that two-thirds of these have breech loading rifles,
+and that the whole mass is unlikely to attack any, one, or even two
+columns, the largest hostile gathering that a British detachment may
+expect to meet is 6000-8000 men, of whom 4500-5500 may be well armed.
+
+A column of 4500 disciplined troops need not therefore fear reverse.
+
+The composition of a column is regulated by the topography of the area
+of operations, but the following example will show how the allotment of
+troops may be determined.
+
+As basis for calculation a mixed brigade[1] organised for independent
+action may be taken. To these troops may be added a squadron of
+Silladar cavalry, if the country is suitable to its action, and a
+mountain battery, which, together with the infantry, form a handy force
+of the three arms.
+
+But the column is still weak in infantry, on which the brunt of the
+fighting will necessarily fall, and possesses no technical troops for
+road-making, etc.
+
+Both requirements may be fulfilled by the addition of a pioneer
+battalion, or, since some hold that sappers and miners are more
+economical than pioneers, a battalion, of British infantry, or of
+Gurkhas, and a company of sappers and miners may be included.
+
+It now only remains to give the troops an ammunition column, the
+necessary staff, certain additional medical, and administrative
+details, and the force--one infantry brigade organised for independent
+action, one squadron, one mountain battery, one British battalion, one
+company sappers and miners, etc.--will be complete, and adequate for
+its purpose.
+
+FOOTNOTES:
+
+[Footnote 1: 1 British infantry battalion; 3 Native infantry
+battalions; 1/2 British field hospital; 1-1/2 Native field hospitals; 1
+Field post office; Brigade supply column.]
+
+
+
+
+MARCHES AND PROTECTION.
+
+
+A body of troops moving in an enemy's country is liable to be attacked
+at any time, and from any direction, and must, therefore, always take
+measures for the protection of its front, flanks, and rear.
+
+In warfare in civilised and highly developed countries, when the
+enemy's object is rather to defeat the fighting force than to harry the
+convoy, and when troops can march on broad frontages, the protection
+given by bodies of cavalry with horse artillery, flung far to front and
+flanks, and supported, if necessary, by infantry, is usually adequate.
+
+But when the line of march leads along a single file track, winding
+through narrow valleys, and over rugged mountains, when the column,
+compared to its strength, occupies an inordinate length of roadway, and
+is therefore especially vulnerable to flank attack, and when the enemy,
+or at any rate a portion of his warriors, prefer plunder of baggage to
+pitched battles, other measures to safeguard the force must be taken.
+
+Flankguards can rarely make their way over the steeply scarped hills
+enclosing the North West Frontier valleys, and since the advanced guard
+can, in such conditions, effect no more than the clearance of the
+valley in which it is moving, it becomes necessary to adopt a sedentary
+form of protection for the flanks of the force. This consists of
+picquets, posted along the route, in localities commanding approaches
+to the roadway, or from which the enemy can fire on the column.
+
+These picquets, together with the advanced and rear guards, secure the
+movement of the remaining troops; they are, as a rule, found by the
+units composing the advanced guard, and withdraw under the supervision,
+and if necessary with the assistance of the rear guard.
+
+The order of march of a column, in border, as in other campaigns, is
+conditioned by the proximity, strength, and probable action of the
+enemy, by the topography of the district to be traversed, by the
+object to be attained, and by the composition of the force.
+
+The first duty of the staff officer to whom is confided the drafting
+of orders for a march, will therefore be, by personal observation, and
+from intelligence and other reports, to find out as much as possible
+of the country, and of the enemy's dispositions and probable tactics.
+Armed with this information he will be in a position to arrange the
+order of march of his column according to the circumstances of the case.
+
+When the enemy, for instance, is in force in the vicinity, and his
+actions, such as throwing up of entrenchments, harassing camp in
+large numbers, imply that he will offer vigorous resistance to the
+advance, it is probable that the baggage and supply column will be best
+parked, under sufficient guard, either in the camp, or in some other
+locality easy of defence, whilst the remainder move off, in preparatory
+formation for action.
+
+If the clansmen are reported to be inclined to dispute the advance in
+force, but are some distance from the camp, the most suitable order of
+march may be deduced as follows.
+
+The enemy being in strength, the column should move in compact
+formation, and deliberately, the advanced guard being pushed only so
+far forward as to secure the troops from surprise, and as few road
+picquets sent out as may be, in order that the fighting force may be
+reduced as little as possible.
+
+The method of posting and withdrawing picquets will not materially
+differ from that which will be described later.
+
+The tribesmen being known to be in force and prepared to resist, it
+follows that the bulk of the fighting men must be at the head of the
+column; and as the advanced guard will be near the remainder, it need
+be only sufficiently numerous to insure that the duties of protection
+are adequately performed.
+
+Suppose the tribesmen five miles distant, and that, as a rough basis
+for calculation, two companies can secure about one-and-a-half to two
+miles of roadway; then about three companies will be required for
+picquetting.
+
+If three companies be added for other purposes, the advanced guard
+infantry should be of sufficient strength.
+
+The advanced guard will require a proportion of technical troops for
+road making and repair, and for this purpose two companies of pioneers,
+or the bulk of a company of sappers and miners may be allotted.
+
+Cavalry are not, it is considered, in place with an advanced guard
+moving in an enclosed and intricate country, nor, since the main body
+will be close behind, need any special medical details be included.
+
+Whether artillery should be allotted is a more open question. In favour
+of placing guns with the advanced guard, it can be argued that they
+may be of assistance in clearing the hills to be occupied by picquets
+or vanguard; against their inclusion it may be urged that artillery
+ammunition will necessarily be scarce, owing to the difficulty of
+carriage, and should only be employed when an advantageous opportunity
+for inflicting loss occurs, but that advanced guard commanders are
+prone to make too much use of their guns.
+
+On the whole, when the advanced guard is not far from the main body, it
+would seem that the inclusion of guns in the former is unnecessary.
+
+The organisation and order of march of the main body may be as under.
+
+It is clear that the numbers available for action will be those left
+over after suitable deduction has been made for baggage and rear
+guards. These, therefore, must first be allotted.
+
+Light duty men, officers' servants, cooks, etc., should suffice to
+secure the regimental transport, and for policing the drivers, but
+the supply column, hospitals, and reserve ammunition, require special
+escorts, and perhaps one company each may be adequate for the two first
+mentioned, and one or two companies for the ammunition.
+
+The strength and composition of the rear guard is the next item, and
+this is regulated by its function of supervision of the retirement of
+the picquets.
+
+Such being the case, it appears that, in no circumstances, should
+a large force be detailed as a rear-guard. There is not space in a
+narrow valley for a strong rear-guard to manoeuvre, so that it will
+merely afford the enemy a good target, without corresponding advantage;
+besides, the rear-guard can, if necessary, be continually reinforced by
+incoming picquets.
+
+A rear-guard, then, should rarely include more than four companies of
+infantry, and in the circumstances under consideration, may be weaker.
+
+Though cavalry may be useful for the delivery of a counter-attack, the
+horses afford an easy mark, whilst its presence with the rear-guard may
+cause the enemy to keep to the hills instead of descending into the
+valley, where they will be more vulnerable. Cavalry, it seems, should,
+therefore, not be added to the rear-guard infantry.
+
+Mountain guns may be of assistance to picquets in distress, or in the
+delivery of a counter-attack, but they should, both for their own
+security, and to prevent waste of ammunition, be kept well back. In
+the present case the rear-guard is not likely to be harassed, so no
+artillery need be included.
+
+A rear-guard does not require technical troops, but some hospital
+riding mules, etc., may be allotted for rapid transference of wounded.
+
+The total deductions from the fighting force of the column will
+therefore be:--
+
+  _Advanced Guard._ Six companies Infantry, bulk of one company S. and
+  M.
+
+  _Escorts, etc._ Three or four companies Infantry.
+
+  _Rear-guard._ Two or three companies, with machine guns.
+
+In all about one and a half battalions, one company sappers and miners.
+There remain three and a half battalions, one mountain battery, one
+squadron, and the administrative services, at disposal.
+
+The order of march of the main body can now be dealt with.
+
+Perhaps half a battalion may move in front, then the mountain battery,
+which should not require a special escort, next the three battalions.
+
+After these may follow the reserve ammunition, the hospitals, the 2nd
+line transport with B. echelon 1st line transport[2] of all troops,
+except the advanced and rear-guards, and then the supply column.
+
+At the tail of the main body may move the B. echelon of the advanced
+and rear-guards, so as to be readily available in case any troops
+belonging to either are obliged to bivouac outside camp; and finally,
+since they are unlikely to be able to undertake effective pursuit, may
+come the cavalry, so as to be at hand in case they are required to
+assist the rear-guard to counter-attack, by charging any tribesmen who
+have ventured into the valley.
+
+Though B. echelon 1st line transport of the advanced and rear-guards
+is placed at the end of the column, it is considered that all troops
+should be so equipped that they can be independent of camp and
+transport for at least two, and better still, for three days. It is
+a lesser evil to carry an extra, but in some degree decreasing load,
+even if it prejudices mobility, than to starve, or run undue risk of
+sickness from cold and damp.
+
+The next case to be considered will be when the enemy is not in great
+force, and is more likely to harass than to seriously resist the
+advance of the column.
+
+In such circumstances, the main objects will be to complete, as rapidly
+as may be, the proposed march, whilst inflicting on the enemy, should
+he give the opportunity, the greatest possible loss.
+
+Since the distance is to be quickly traversed, and because a road
+picquet takes some time, even as much as an hour, to secure and
+establish itself on a hill, it follows that, unless risk is to be run
+of the march of the main body being delayed, the advanced guard must
+precede the main body by at least one hour, and may even move off in
+the twilight which precedes dawn.
+
+This settled, the composition of the advanced guard may be dealt with.
+
+If it is proposed to make a ten mile march, then, calculating from the
+data previously mentioned, about one battalion will be sufficient to
+picquet the roadway. To this force some four companies may be added,
+so as to leave a good margin for securing the camp site, and for
+unexpected contingencies.
+
+Technical troops will, as before, be required, and as the advanced
+guard will be some way from the main body, a section of mountain
+artillery may be included. Neither cavalry, nor special medical units,
+seem necessary.
+
+The composition of the advanced guard may, therefore,
+be:--one-and-a-half battalions infantry, one section mountain battery,
+the bulk of one company sappers and miners.
+
+As already stated, before deciding on the order of march of the main
+column, the deductions to be made for escort and rear-guard duties must
+be fixed.
+
+Light duty men, etc., should suffice to secure the regimental
+transport, three companies to safeguard the reserve ammunition,
+hospitals, and supply column, whilst the mountain battery hardly needs
+a special escort.
+
+In respect of the rear-guard, in the case under consideration it is
+possible that the picquets may be harassed as they withdraw, the
+strength of the rear-guard may, therefore, amount to four companies of
+infantry, with machine guns, and one section mountain artillery, with
+some ambulance riding mules, etc., in addition.
+
+The total deductions, for purposes of protection, from the fighting
+force of the column, therefore, amount to:--infantry, two battalions
+three companies; artillery, two sections; sappers and miners one
+company; and there remain, for disposal, infantry, two battalions five
+companies, artillery, one section, cavalry, one squadron, besides
+various administrative units.
+
+No serious opposition being expected to the march of the column, the
+comfort of the troops may be considered in regulating the order of
+march.
+
+As before, and for the same reasons, the cavalry, and the B. echelon
+1st line transport of the advanced and rear-guards, and of the
+picquetting troops, may march at the tail of the main body.
+
+It should hardly be necessary to place, in addition, a body of infantry
+at the end of the column, but, if desired, the remaining four companies
+of the battalion furnishing the rear-guard may move immediately in
+front of, or behind, the cavalry. The rest of the fighting force
+can march at the head of the main column, followed by the reserve
+ammunition, hospitals, B. echelon 1st line transport, with the 2nd line
+transport, and then the supply column.
+
+In circumstances where little or no resistance is expected to the
+forward movement of a column, but serious opposition to the withdrawal
+of picquets, and to the march of the rear-guard, the following
+modification will be necessary in the order of march just dealt with.
+
+The strength, composition, and time of march of the advanced guard need
+only be altered by the deduction of, say, one section of sappers and
+miners, and perhaps, too, the withdrawal of the mountain guns.
+
+The escorts, etc., of the non-fighting portions of the main column may
+remain as before suggested, as may the strength and composition of the
+rear-guard.
+
+The order of march of the main column will, however, require
+transposition somewhat as follows:
+
+Since the principal opposition will take the form of pursuit by the
+enemy, the bulk of the fighting troops should move in rear of the main
+column, so as to be in position to undertake the offensive if required.
+
+The units may, therefore, march as follows:
+
+Two companies of infantry; the supply column; the B. echelon 1st line
+transport, (except, of the advanced and rear-guards,) with the 2nd line
+transport; the hospitals; the reserve ammunition; B. echelon 1st line
+transport of the advanced and rear-guards; the rest of the infantry,
+less four companies; the remainder of the artillery; one section of
+sappers and miners, the cavalry, and finally four companies.
+
+FOOTNOTES:
+
+[Footnote 2: 1st Line transport is usually divided into two echelons
+A. and B. The former includes ammunition reserve, intrenching tools,
+water, signalling and medical equipment. The latter blankets, rations,
+and cooking pots, etc.]
+
+
+
+
+ACTION OF THE ADVANCED & REAR-GUARDS, AND OF ROAD PICQUETS.
+
+
+Speaking generally, the procedure followed by an advanced guard may be
+somewhat as follows:--
+
+Both on account of considerations for its own security, and because
+hills will thus be more rapidly secured, it is desirable that the
+positions to be occupied by road picquets should, so far as it is
+practicable to do so from the valley, be decided some time before
+the main guard arrives opposite the various localities. It is also
+understood that considerable latitude is allowed to the picquet
+commander as to the position occupied, and that he is at liberty either
+to demand reinforcement, or to return redundant men to the advanced
+guard, as occasion may demand.
+
+The advanced guard may move in the following order.
+
+First a vanguard of one or more companies, preceding the remainder by
+about half a mile, and adapting its formation to the ground.
+
+Then the mainguard, at the head of which should be the advanced guard
+commander, his staff officer, the battalion commander of the unit
+furnishing the leading company, and the company commander.
+
+[Illustration]
+
+As the troops march up the valley, the advanced guard commander should
+decide what localities are to be held, and in what strength. He should
+issue his orders to the battalion or company commander, as the case
+may be, when the picquets should move direct to their positions.
+Meanwhile, the staff officer should make, in sections, a rough sketch
+of the positions occupied by the various picquets, which should be
+numbered consecutively as they move out, the sections of the sketch
+being sent, as completed, to the officer commanding the rear-guard.
+
+In addition, to insure that no picquet is overlooked by the rear-guard,
+a double sentry, with a paper showing the number of its picquet, should
+be placed in the roadway beneath the height occupied, and it is the
+duty of the picquet commander to keep in touch with this sentry post.
+
+In this manner the roadway should be picquetted, until the locality is
+reached where the column is to halt, when the advanced guard commander
+should take the usual measures for the security of the camp, for
+safe-guarding the water supply, etc.
+
+It has been suggested that an advanced guard should be divided into
+two portions, advanced guard, and the picquetting troops, each under a
+separate leader, the object being to free the advanced guard commander
+from the work of picquetting, so that his whole attention can be
+devoted to tactics. The advanced guard is to clear the hills, which are
+then to be occupied by picquets.
+
+This system does not appear sound, for it necessitates two men doing
+the work of one, and, in practice, the advanced guard usually either
+meets with little or no resistance, or with such serious opposition
+that picquetting is in abeyance.
+
+Each picquet, when it reaches the position selected by its leader,
+should intrench, taking especial care to provide head cover, so that
+the enemy may not be easily able to observe the moment of its final
+withdrawal.
+
+Before the last troops of the main column have quitted camp, the
+rear-guard commander should have arranged his force in a series of
+successive positions, calculated to enable the units to mutually
+support one another's retirement, as well as to assist, if necessary,
+the withdrawal of picquets.
+
+The guns should, for reasons already given, be kept well back, and this
+system of successive positions should be continued throughout the march.
+
+It is, of course, understood that the main column keeps contact with,
+and regulates its march by that of the rear-guard.
+
+It is sometimes advocated that the camp picquets should, before the
+column marches off, be relieved by the rear-guard, with the object of
+enabling the picquets to rejoin their units.
+
+This arrangement does not appear advantageous. The troops detailed for
+the relief of the picquets will probably have to move out in darkness,
+and over an unknown area, and though, if the enemy advances during
+the relief, he will be opposed in double strength, should his attack
+be delivered later, units who do not know the ground will be placed
+in positions they will not be able to defend to the best advantage.
+Besides, the men composing the rear-guard, whose functions are in
+any case sufficiently arduous, will be involved in additional and
+unnecessary fatigue.
+
+The withdrawal of picquets may be carried out on the following
+principles:--
+
+When a picquet commander sees, or receives reports that the rear-guard
+is approaching, he should send the bulk of his picquet to a position,
+previously reconnoitred, on the lower slope of the hill, and in the
+direction of the line of march of the column, whence the retirement of
+the remainder can be covered by fire.
+
+Whilst on the hill, and especially as the time for withdrawal
+approaches, the men of a picquet should be careful not to show
+themselves, in order that the enemy may not, by counting heads, be able
+to divine that retirement has been begun. Similarly, the men left on
+the hill to the last, should, above everything, avoid exposure.
+
+When the picquet commander sees the rear-guard commander, who will
+usually be with the last troops, and whose presence will be shown
+by a flag, is opposite his post, he should give the signal for the
+evacuation of the hill top, on which the men should creep back, and as
+soon as they are below the sky line, run down the hill to a position
+beyond that of their covering party. The withdrawal should then be
+continued according to the accepted principles, until the whole picquet
+has reached the valley, when its leader should report to the rear-guard
+commander, receiving orders whether the picquet is to proceed to the
+main column, or to join the rear-guard.
+
+The rear guard commander should have previously called in the road
+sentry post marking the locality held by the picquet, and the map
+furnished by the advanced guard will have been of assistance in
+identifying its position.
+
+[Illustration]
+
+It is contended that the withdrawal of a picquet rests, except in
+special circumstances, entirely with the picquet leader. He is the man
+on the spot, and can best judge when the retirement should commence.
+
+The rear-guard commander should rarely attempt to regulate the actions
+of the picquets, of whose situation he cannot have adequate knowledge,
+but should exercise general supervision, ready to afford assistance if
+required.
+
+At times picquets may be able to support one another's movements, but,
+as a rule, a picquet will be too fully occupied with its own affairs to
+be able to render assistance to its neighbours.
+
+The above outline of a withdrawal presupposes that hostile pressure is
+not unduly severe.
+
+If the enemy venture to close with the rear-guard and picquets, it is
+submitted that an immediate counter-attack should be delivered, the
+main body being halted.
+
+To lose so golden an opportunity of inflicting loss on a volatile foe
+seems on the one hand unwise, whilst, on the other, it is surely both
+undignified and demoralising to permit savages to hunt British regulars
+into camp.
+
+The delivery of a counter-attack is accompanied by some risk, and its
+success will depend on the aptitude of the rear-guard commander for
+stratagem, for, if loss is to be inflicted, the enemy must, as a rule,
+be trapped.
+
+Simple ruses which suggest themselves are, either to attempt to attract
+the tribesmen into the low ground by a bait of ammunition or transport
+animals, the cavalry, guns, and part of rear-guard, infantry being
+previously concealed in positions from which they can take advantage
+of any mistake the enemy may commit, and the retirement of picquets
+stopped, as soon as the attack is delivered. Or, two or more picquets,
+which have been previously reinforced by troops moving along concealed
+lines of advance to the hill tops, may feign retirement, and attack the
+tribesmen as they follow over the crest line.
+
+If stratagem fails, the column should halt and drive off the enemy, a
+proceeding which should be repeated until he is taught that to follow
+up British troops is neither profitable nor advantageous.
+
+
+
+
+ATTACK AND DEFENCE.
+
+
+Success in war depends in some degree on adaptation of tactics to local
+conditions, and it is therefore clear that, to attain rapid success
+against the inhabitants of the North Western Frontier, a knowledge
+of their tactics is required, and that, whilst the British aims are
+pursued with unswerving determination, their probable movements must be
+met and defeated.
+
+The tribesmen, like most savages, are only really formidable when
+one is running away from them. They fight well in positions strongly
+fortified, and with flanks secure, but, being without the discipline
+or cohesion to meet envelopment, are much influenced by pressure
+against their flanks.
+
+Pathans are fearful of artillery, and do not, as a rule, seriously
+resist a determined advance, preferring the easier and less dangerous
+enterprise of harassing the retirements which they believe are an
+inevitable corollary to forward movements; or of attacking isolated
+detachments, whose operations they have observed from their hill-tops.
+
+They are suspicious of ambuscades, except when excited in pursuit, and
+are not prone to accept battle unless surprised.
+
+Like other people, they shoot well when not themselves under effective
+fire, and, when shooting into a valley, where the strike of the bullet
+can be observed, their fire is accurate. On the other hand, owing to
+their relatively defective armament, and to lack of ammunition, tribal
+fire as a rule lacks volume.
+
+The tribesmen skirmish well, and move quickly over their hills, but
+rarely, except when engaging a small force, or by night, attack in
+mass. On the other hand, they often crowd their defensive positions
+with men.
+
+They are said to dislike being overlooked by their opponents, and
+therefore do not care to attack up hill, but will, at times, try to
+rush a detachment, with the object of capturing rifles and ammunition.
+
+The fact that a proportion of the men possess only inferior fire-arms,
+renders possible resort to shock tactics, especially when roused to a
+pitch of fanaticism.
+
+Pathans are partial to night operations, probably because they believe
+that there is little fear of interference after dark. Their enterprises
+are usually on a small scale, but night attacks in force, are possible.
+Their inadequate clothing, and the cold of the early morning, however,
+usually forces them to seek shelter as the night wears on.
+
+From the above description it will be seen that British troops, so long
+as they observe the ordinary principles of war, have nothing to fear
+from the tribesmen. But it is to be remembered that, unless stratagem
+is intended, the offensive is the general rule in tribal warfare, for
+the enemy construes a defensive attitude as a sign of fear, and becomes
+correspondingly elated.
+
+The composition of forces despatched on reconnaissance and minor
+punitive expeditions requires careful consideration. Columns composed
+of men drawn from many different infantry units are inherently weak, so
+that, in all operations, complete units, so far as they are required,
+should be employed, cavalry being added when local conditions are
+favourable. Artillery will generally be necessary, as well as a
+proportion of technical troops, but the strength of columns should,
+within limits of safety, be low, in order to insure mobility, and
+to encourage resistance. The military value of the enemy must not,
+however, be underestimated.
+
+The main object of all operations is to quickly attain a decisive
+success. To this end the tribesmen must be induced to stand and fight
+with the purpose of inflicting casualties on them.
+
+It is to be remembered that the enemy can, less easily than the
+British, afford losses, especially of arms. Commanders, without being
+prodigal of their men's lives, need not, therefore, be afraid of
+incurring casualties, especially when there is likelihood that the
+enemy will suffer loss to at least an equal extent. If the tribesmen's
+losses are heavy, those of the British troops will probably be
+considerably less. Close fighting is all to the advantage of trained
+soldiers.
+
+As has been stated, the clansmen will rarely commit themselves to
+battle in conditions favourable to the British, unless they can be
+outwitted or surprised. Night operations may, therefore, frequently
+be necessary, having special regard to the fact that, from their hill
+tops, the enemy will overlook all manoeuvres. As the natives are not
+often abroad in the early morning, surprise, at dawn, will not present
+unusual difficulties.
+
+The enveloping form of tactics, when the enemy is attacked both in
+front and flank, is as effective in tribal as in other warfare. But,
+owing to the topographical advantages enjoyed by the tribesmen, it will
+be necessary to hold them closely in frontal attack, and so distract
+their attention from outflanking movements. This may be possible, for
+they fight with confidence when behind cover. Mere frontal attack
+is likely to be at once costly and ineffective; hence, if neither
+envelopment, nor night operations, are practicable, resort may be
+had to such stratagems as a feigned retirement, or bait of transport
+animals, to tempt the Pathans from their hills.
+
+Though the possibility of tribal counter-attack, by shock, must not be
+lost sight of, the British advantage in training and armament should
+enable a central general reserve to be dispensed with, the object being
+to so dispose the troops as to insure envelopment.
+
+Good information and staff work, and a sound system of
+inter-communication, will, moreover, if all ranks are imbued with the
+spirit of mutual support, go far to insure success.
+
+Commanders, especially of small forces, should remember that hesitation
+will be quickly observed by the enemy, but a bold front, and ready
+stratagem, will soon cause him to lose heart.
+
+When a post or isolated detachment requires assistance, aid can often
+be most rapidly and effectively given by application of such indirect
+pressure as will tend to divert the enemy's attention.
+
+In minor tactics, whilst taking every advantage of the cover afforded
+by features of ground, troops must beware of seeking shelter in
+hollows or nullahs, places which will, assuredly, have been marked
+by the enemy's riflemen, so that their occupation will rarely escape
+punishment.
+
+In attack, infantry units, whilst securing their flanks, should advance
+up salients, taking care to afford one another mutual fire assistance.
+Supports and local reserves should be pushed as near to the firing line
+as the shape of the ground will permit; but, at times, reserves may be
+able to effectively support the troops in front by covering fire, from
+suitable positions, behind, or on the flanks of, the line of advance.
+
+Fire should be reserved until units have closed on the enemy, the
+object being to prevent the early evacuation of a position, after
+having caused a few casualties at long range.
+
+As the enemy's fire, though likely to be accurate, will probably lack
+volume, resort need not be had to widely extended formations.
+
+To gain ground, and when assaulting, the procedure outlined in the
+training manuals requires no modification.
+
+Artillery should be handled with discretion, and should be on its guard
+against the tendency to open fire whenever a target is seen. Its aim
+should be not to evict, but to hold the enemy to his sangars, and to
+inflict loss when he retreats.
+
+The steep forward slopes of hills will enable fire to be continued
+until the infantry has closed on the tribesmen, but oblique, rather
+than frontal fire should be employed.
+
+It is, of course, important to insure close inter-communication between
+infantry and artillery.
+
+In tribal, as in other warfare, unless the enemy is completely
+enveloped, efficient pursuit is necessary to set the seal on victory.
+Pursuit can, at first, probably be best undertaken by the enveloping
+wings, artillery co-operating to head the enemy off in the required
+direction, whilst the cavalry press forward.
+
+A portion of the artillery should, therefore, move with the outflanking
+wings, keeping as near as possible to the firing line.
+
+Pathans, familiar with the country, and confident that they have
+everything to gain, and but little to lose by such tactics, favour the
+harassing of troops as they withdraw from heights, or along valleys.
+Though it may be taken as a maxim that there will be no pursuit if
+the enemy has, in any recent fighting, been adequately punished, the
+conditions may have been such that casualties could not be inflicted.
+
+In these circumstances, the clansmen must surely not be permitted to
+embarrass the British movements, and must be convinced that pursuit is
+both dangerous and unprofitable.
+
+Mere counter-attack, when the enemy is not surprised, is likely to lead
+to no advantage, but a few skilfully laid ambushes will soon discourage
+his zeal for pursuit. Should he, however, persist in following up the
+troops, counter-attack should at once be made, and the retirement
+discontinued. The enemy, it is to be remembered, will, as a rule,
+offer the greatest opportunity of inflicting loss when he follows up a
+retirement, and, in such operations, the aim must be rather to cause
+than to avoid casualties.
+
+All withdrawals should be pre-arranged and systematic, flanks being
+securely held, and the principle of mutual support observed. But
+formalism must be avoided, and procedure must never be permitted to
+become so stereotyped that the enemy will be able to confidently
+anticipate the movements of the troops.
+
+Men must beware of entering nullahs, or depressions of any kind,
+until the further edge has been secured; and, when on a hill top, the
+provision of such cover as will conceal the head-dress is of importance.
+
+Transport animals should be clear of the fighting troops before
+retirement is begun.
+
+If the object is to slip away from the enemy, the retirement should be
+made at a time when movement is not expected.
+
+When a valley is to be swept in course of punitive operations, an
+adequate force should be left to secure the entrance, if the column is
+to leave by this route.
+
+Troops, as has already been suggested, should, in respect of
+ammunition, food, and warm coats, be independent of transport animals,
+and it should be understood that units are always to be prepared to
+remain for the night away from camp. The men should be trained to
+economise water, which is often scarce across the border.
+
+Ammunition and rifles being the main objects of tribal ambition,
+special care should be taken to prevent them from falling into the
+enemy's hands.
+
+Against the North West Frontier clans, the offensive, as usual, is
+normally the best defensive, but it may sometimes happen that small
+British forces are temporarily obliged to act on the defensive.
+
+In such circumstances, it is to be expected that the enemy will adopt
+the tactics, common amongst savages, of seeking the flanks of the
+troops, both to avoid fire, and to obtain the advantages of enfilade.
+It follows, then, that defensive measures should include all round
+protection, whilst a relatively large reserve should be kept ready to
+attack the hostile levies, as soon as any portion comes within charging
+distance.
+
+Experience tends to prove that a compact body of even a section, if
+well entrenched and supplied with ammunition, has nothing to fear from
+Pathans, especially when the British leader is animated by the proper
+spirit of timely offensive.
+
+
+
+
+CAMPS.
+
+
+It is desirable for a column escorting a large baggage train--and this
+is essentially the predicament of civilised troops engaged in frontier
+mountain warfare--to be collected in camp before nightfall, otherwise
+the enemy may be given unduly favourable opportunities of employing
+harassing methods.
+
+But it does not result that the situation of troops unable, for any
+cause, to reach camp, is at all desperate.
+
+Strong and compact forces adopting the usual precautions, can probably,
+in many, if not in most cases, march in safety after nightfall, but
+small detachments and baggage can rarely do so without undue risk.
+These, then, should always park and intrench towards nightfall,
+wherever they may find themselves, when they will have little to fear,
+for experience, as has been stated, tends to show that even a section,
+securely intrenched, and with ample ammunition, can hold its own
+against heavy odds.
+
+The form of camp, and the nature of the protection adopted, depend, as
+usual, on the topography, and on the character of the enemy.
+
+A common method is to place transport, etc., within a perimeter
+occupied by the fighting troops, but this arrangement is by no means
+invariable, and it may be convenient to form two or more camps, or to
+separate transport from fighting troops.
+
+The camp will, as a rule, be located in proximity to water, that is to
+say in a valley, and in such circumstances, if it can be sited well
+under one of the enclosing ranges of hills, protection from sniping
+will be afforded from this direction, though the overhanging heights
+must be securely held.
+
+Sometimes a small basin is available for the bivouac, and in this case,
+the troops can, to a great extent, be secured from this favourite
+tribal device of firing into camp after nightfall.
+
+As is the case in all war, the measures taken for the security of a
+camp include a system of picquets, and in frontier expeditions these
+are placed all round camp, either on the level, or on any commanding
+heights, within, at any rate, effective rifle range.
+
+Picquets may be pushed even further forward, but when so situated, must
+be numerically strong, as they are liable to be rushed, though more for
+the sake of capturing their arms, than with the object of inflicting
+loss. No picquet should be of less strength than one section, all
+should be intrenched against attack from any direction. Their bearing
+from camp should also be taken, and they should be in signalling
+communication with the main body, so that assistance may be requested
+and despatched when necessary, or warning given of the approach of the
+enemy in force.
+
+Bombs should be useful adjuncts to picquet defence, in case the enemy
+should succeed in forming a lodgment near the sangar.
+
+Though a sedentary system of picquets may discover the presence of a
+large hostile body near camp, and may, in some degree, check sniping,
+the latter evil cannot, by this means, be completely prevented.
+Tribesmen, especially since they are aware that the British rarely risk
+troops, other than picquets, outside the perimeter, will often creep in
+and snipe from the area between the picquets and camp.
+
+There seems, however, no valid reason why sniping should be passively
+tolerated, when it can probably be effectively combated by placing,
+in certain localities between the camp and picquets, small patrols of
+picked men, provided with grass shoes, whose duty will be to stalk and
+bayonet venturesome marauders.
+
+Against this proposal it has been argued that the British, and
+especially the European soldiers, are unfit to cope, by night, with
+tribesmen, inured from childhood to move silently in darkness over
+rough ground. The contention is considered to be inadmissible, for
+though there is, and must be, risk in stalking snipers, picked British
+soldiers are surely now, as formerly, more than a match for Pathans,
+in all circumstances when the numbers are fairly even.
+
+The form of intrenchment, if any, excavated round the bivouac, is
+conditioned by the character of the enemy.
+
+If he is prone to adopt shock tactics, and to attempt to rush the camp
+under cover of darkness, a ditch to check his charge, backed by a
+parapet with head cover, will be the most favourable form of defence.
+
+But if he is partial merely to harassing methods, such as firing into
+camp, the perimeter defences should be calculated to mitigate their
+effects, by providing, for all troops, trenches well traversed, and
+with parapets both to front and rear.
+
+If both forms of attack are possible, parapets with trench and ditch
+should be made, the trench, or ditch, being first dug, according as a
+charge or sniping is most to be feared.
+
+Naturally units protected by high ground on one or more flanks, need
+only make cover so as to secure themselves from the directions from
+which fire can be delivered.
+
+Only infantry should hold the perimeter of a camp, machine guns being
+placed at the angles, and the defence of each confided to one unit,
+divided responsibility not being permissible.
+
+Supports may, if necessary, be located in intrenchments behind the
+perimeter, and a homogeneous body of about half a battalion, allotted
+as reserve, and given a bivouac near that of the column commander.
+
+In case of attack, the duty of cavalry soldiers is to stand to their
+horses, of artillery to man their guns. To neither, therefore, in
+normal circumstances, should a portion of the perimeter be confided,
+and both should be placed within its circumference.
+
+At the same time, guns should be so disposed, in pits or epaulments,
+that they can sweep ground across which attack is most likely to be
+made; or they may be laid so as to search localities where tribesmen
+may collect prior to delivering an assault.
+
+
+
+
+PROTECTION OF LINE OF COMMUNICATION.
+
+
+The protection of a line of communication is secured by combination
+of passive and active measures, though the latter are of the greatest
+importance.
+
+Passive measures include the provision of fortified staging posts,
+linked up by a series of road picquets, and supplemented by escorts to
+convoys. The active defence is by means of flying columns.
+
+Roughly speaking, it may be said that about 100 men per mile suffice
+for all protective purposes, and it is assumed that the responsibility
+of a staging post commandant extends half way to the posts on either
+side of his own.
+
+The garrison of a staging post must be of sufficient strength, and of
+suitable composition, to secure the convoys halting there for the
+night, to furnish them with police escorts for the next day's march,
+and, if road picquets are found from the post, to supply these also.
+
+Road picquets can either be sent out each day from staging posts,
+can be permanently located in a succession of blockhouses, or can be
+semi-permanent, that is to say can be supplied from a series of minor
+posts connecting staging centres. In each of the above cases the same
+number of men will be required.
+
+The first method, by concentrating the troops each evening, makes for
+their general security, but, since picquets must daily, and at fixed
+hours, move to and from their places, a good deal of fatigue will be
+imposed on the men, and there will, in addition, be some risk of minor
+disasters to individual picquets, which may be ambuscaded. Moreover,
+since the convoys cannot march until the picquets are in position, and
+as picquets cannot be risked outside the post before sunrise and after
+sunset, the hours available for the movements of the convoys will be a
+good deal curtailed.
+
+Under the second alternative, a weak cordon is formed, portions of
+which cannot, owing to the topography, easily render one another
+support in case any picquet is attacked in force. On the other hand, no
+time will be wasted in posting and withdrawing picquets.
+
+The third system is a compromise between the two already mentioned,
+and seems, on the whole, to be the most advantageous. If three or
+four relatively large posts are placed, in dangerous localities, such
+as valley junctions, between staging centres, there will be little or
+no risk of their capture by the enemy. Since the picquets necessary
+to watch, by day, the area between the posts, will have but short
+distances to traverse to reach their positions, the time available
+for movement of convoys will not be curtailed; and as the ground
+intervening between two posts will, in some degree, be overlooked
+from them, there will be less chance, than under the first method, of
+picquets falling into ambuscades.
+
+The efficiency of the protection of a line of communication depends,
+however, on the active, not on the passive measures for its security.
+
+Active defence is maintained by flying columns, of strength and
+organisation suitable to the character of the enemy and the nature of
+the country. To these columns is confided the protection of certain
+areas, an end attained, not by inactivity, for the troops should be
+continually on the move, so that the enemy can never be certain when
+and where to expect them, but by a vigorous and energetic offensive
+in whatever directions an efficient service of intelligence reports
+hostile gatherings.
+
+The enemy's movements and projects must, in fact, be anticipated,
+rather than countered when in course of execution.
+
+
+
+
+DEFENCE OF A POST.
+
+
+When considering what steps are to be taken for the defence of a post,
+large or small, the maxim that the offensive is the best defence must
+be ever prominently before the mind.
+
+It follows that the first step, after a site has been selected, the
+water supply secured, and the usual measures for security taken,
+should be to set apart as many men as possible for offensive purposes,
+including reconnaissance. In other words, the strength of the reserve
+should be calculated from these premises, having due regard to the
+number of nights in bed required by the whole garrison; and the reserve
+should not be such men as may be left over after the requirements of
+passive defence have been fully satisfied.
+
+The next item should be the selection of a keep or citadel, where
+stores and ammunition can be placed, and where hospital, headquarters,
+and a central signalling and communicating station can be located.
+
+In this keep may be placed machine or other guns, if available, so
+arranged that they can sweep approaches to the post, and also, if
+possible, protect with fire the flanks of picquet stations.
+
+It will now be time to allocate, generally, the troops destined for
+guard and picquet duty.
+
+These arrangements may be primarily made from the interior of the
+post, its safety being the first consideration, though for reasons of
+sanitation the more space that can be given to troops and convoys the
+better.
+
+Picquets having been roughly allotted, the plan of defence should be
+regarded from the enemy's point of view, and the necessary changes
+made; and, finally, the bearings of the picquet positions should be
+taken from the keep, and routes to them cleared, in case they should
+require reinforcement by night.
+
+It should only be necessary to keep picquets at their full strength
+in night-time. By day the bulk of the men could fall back into the
+interior of the post, an arrangement which would at once facilitate
+water and food supply, and would also be advantageous from a sanitary
+point of view.
+
+The next duties will be to deal with the general sanitation of the
+post, and especially of the rest and convoy camps, to mark out the
+latter, and to secure their policing.
+
+As time goes on, the post commandant can arrange for improved
+communication between the keep and picquets, as well as throughout the
+interior of the enceinte, sign posts being erected and the water supply
+enclosed.
+
+
+
+
+      *      *      *      *      *      *
+
+
+
+
+Transcibers note:
+
+One instance of "defensive" has been changed to "defence."
+
+
+
+
+
+*** END OF THE PROJECT GUTENBERG EBOOK SOME PRINCIPLES OF FRONTIER MOUNTAIN WARFARE ***
+
+
+    
+
+Updated editions will replace the previous one—the old editions will
+be renamed.
+
+Creating the works from print editions not protected by U.S. copyright
+law means that no one owns a United States copyright in these works,
+so the Foundation (and you!) can copy and distribute it in the United
+States without permission and without paying copyright
+royalties. Special rules, set forth in the General Terms of Use part
+of this license, apply to copying and distributing Project
+Gutenberg™ electronic works to protect the PROJECT GUTENBERG™
+concept and trademark. Project Gutenberg is a registered trademark,
+and may not be used if you charge for an eBook, except by following
+the terms of the trademark license, including paying royalties for use
+of the Project Gutenberg trademark. If you do not charge anything for
+copies of this eBook, complying with the trademark license is very
+easy. You may use this eBook for nearly any purpose such as creation
+of derivative works, reports, performances and research. Project
+Gutenberg eBooks may be modified and printed and given away—you may
+do practically ANYTHING in the United States with eBooks not protected
+by U.S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution.
+
+
+START: FULL LICENSE
+
+THE FULL PROJECT GUTENBERG LICENSE
+
+PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK
+
+To protect the Project Gutenberg™ mission of promoting the free
+distribution of electronic works, by using or distributing this work
+(or any other work associated in any way with the phrase “Project
+Gutenberg”), you agree to comply with all the terms of the Full
+Project Gutenberg™ License available with this file or online at
+www.gutenberg.org/license.
+
+Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works
+
+1.A. By reading or using any part of this Project Gutenberg™
+electronic work, you indicate that you have read, understand, agree to
+and accept all the terms of this license and intellectual property
+(trademark/copyright) agreement. If you do not agree to abide by all
+the terms of this agreement, you must cease using and return or
+destroy all copies of Project Gutenberg™ electronic works in your
+possession. If you paid a fee for obtaining a copy of or access to a
+Project Gutenberg™ electronic work and you do not agree to be bound
+by the terms of this agreement, you may obtain a refund from the person
+or entity to whom you paid the fee as set forth in paragraph 1.E.8.
+
+1.B. “Project Gutenberg” is a registered trademark. It may only be
+used on or associated in any way with an electronic work by people who
+agree to be bound by the terms of this agreement. There are a few
+things that you can do with most Project Gutenberg™ electronic works
+even without complying with the full terms of this agreement. See
+paragraph 1.C below. There are a lot of things you can do with Project
+Gutenberg™ electronic works if you follow the terms of this
+agreement and help preserve free future access to Project Gutenberg™
+electronic works. See paragraph 1.E below.
+
+1.C. The Project Gutenberg Literary Archive Foundation (“the
+Foundation” or PGLAF), owns a compilation copyright in the collection
+of Project Gutenberg™ electronic works. Nearly all the individual
+works in the collection are in the public domain in the United
+States. If an individual work is unprotected by copyright law in the
+United States and you are located in the United States, we do not
+claim a right to prevent you from copying, distributing, performing,
+displaying or creating derivative works based on the work as long as
+all references to Project Gutenberg are removed. Of course, we hope
+that you will support the Project Gutenberg™ mission of promoting
+free access to electronic works by freely sharing Project Gutenberg™
+works in compliance with the terms of this agreement for keeping the
+Project Gutenberg™ name associated with the work. You can easily
+comply with the terms of this agreement by keeping this work in the
+same format with its attached full Project Gutenberg™ License when
+you share it without charge with others.
+
+1.D. The copyright laws of the place where you are located also govern
+what you can do with this work. Copyright laws in most countries are
+in a constant state of change. If you are outside the United States,
+check the laws of your country in addition to the terms of this
+agreement before downloading, copying, displaying, performing,
+distributing or creating derivative works based on this work or any
+other Project Gutenberg™ work. The Foundation makes no
+representations concerning the copyright status of any work in any
+country other than the United States.
+
+1.E. Unless you have removed all references to Project Gutenberg:
+
+1.E.1. The following sentence, with active links to, or other
+immediate access to, the full Project Gutenberg™ License must appear
+prominently whenever any copy of a Project Gutenberg™ work (any work
+on which the phrase “Project Gutenberg” appears, or with which the
+phrase “Project Gutenberg” is associated) is accessed, displayed,
+performed, viewed, copied or distributed:
+
+    This eBook is for the use of anyone anywhere in the United States and most
+    other parts of the world at no cost and with almost no restrictions
+    whatsoever. You may copy it, give it away or re-use it under the terms
+    of the Project Gutenberg License included with this eBook or online
+    at www.gutenberg.org. If you
+    are not located in the United States, you will have to check the laws
+    of the country where you are located before using this eBook.
+  
+1.E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U.S. copyright law (does not
+contain a notice indicating that it is posted with permission of the
+copyright holder), the work can be copied and distributed to anyone in
+the United States without paying any fees or charges. If you are
+redistributing or providing access to a work with the phrase “Project
+Gutenberg” associated with or appearing on the work, you must comply
+either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+obtain permission for the use of the work and the Project Gutenberg™
+trademark as set forth in paragraphs 1.E.8 or 1.E.9.
+
+1.E.3. If an individual Project Gutenberg™ electronic work is posted
+with the permission of the copyright holder, your use and distribution
+must comply with both paragraphs 1.E.1 through 1.E.7 and any
+additional terms imposed by the copyright holder. Additional terms
+will be linked to the Project Gutenberg™ License for all works
+posted with the permission of the copyright holder found at the
+beginning of this work.
+
+1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+License terms from this work, or any files containing a part of this
+work or any other work associated with Project Gutenberg™.
+
+1.E.5. Do not copy, display, perform, distribute or redistribute this
+electronic work, or any part of this electronic work, without
+prominently displaying the sentence set forth in paragraph 1.E.1 with
+active links or immediate access to the full terms of the Project
+Gutenberg™ License.
+
+1.E.6. You may convert to and distribute this work in any binary,
+compressed, marked up, nonproprietary or proprietary form, including
+any word processing or hypertext form. However, if you provide access
+to or distribute copies of a Project Gutenberg™ work in a format
+other than “Plain Vanilla ASCII” or other format used in the official
+version posted on the official Project Gutenberg™ website
+(www.gutenberg.org), you must, at no additional cost, fee or expense
+to the user, provide a copy, a means of exporting a copy, or a means
+of obtaining a copy upon request, of the work in its original “Plain
+Vanilla ASCII” or other form. Any alternate format must include the
+full Project Gutenberg™ License as specified in paragraph 1.E.1.
+
+1.E.7. Do not charge a fee for access to, viewing, displaying,
+performing, copying or distributing any Project Gutenberg™ works
+unless you comply with paragraph 1.E.8 or 1.E.9.
+
+1.E.8. You may charge a reasonable fee for copies of or providing
+access to or distributing Project Gutenberg™ electronic works
+provided that:
+
+    • You pay a royalty fee of 20% of the gross profits you derive from
+        the use of Project Gutenberg™ works calculated using the method
+        you already use to calculate your applicable taxes. The fee is owed
+        to the owner of the Project Gutenberg™ trademark, but he has
+        agreed to donate royalties under this paragraph to the Project
+        Gutenberg Literary Archive Foundation. Royalty payments must be paid
+        within 60 days following each date on which you prepare (or are
+        legally required to prepare) your periodic tax returns. Royalty
+        payments should be clearly marked as such and sent to the Project
+        Gutenberg Literary Archive Foundation at the address specified in
+        Section 4, “Information about donations to the Project Gutenberg
+        Literary Archive Foundation.”
+    
+    • You provide a full refund of any money paid by a user who notifies
+        you in writing (or by e-mail) within 30 days of receipt that s/he
+        does not agree to the terms of the full Project Gutenberg™
+        License. You must require such a user to return or destroy all
+        copies of the works possessed in a physical medium and discontinue
+        all use of and all access to other copies of Project Gutenberg™
+        works.
+    
+    • You provide, in accordance with paragraph 1.F.3, a full refund of
+        any money paid for a work or a replacement copy, if a defect in the
+        electronic work is discovered and reported to you within 90 days of
+        receipt of the work.
+    
+    • You comply with all other terms of this agreement for free
+        distribution of Project Gutenberg™ works.
+    
+
+1.E.9. If you wish to charge a fee or distribute a Project
+Gutenberg™ electronic work or group of works on different terms than
+are set forth in this agreement, you must obtain permission in writing
+from the Project Gutenberg Literary Archive Foundation, the manager of
+the Project Gutenberg™ trademark. Contact the Foundation as set
+forth in Section 3 below.
+
+1.F.
+
+1.F.1. Project Gutenberg volunteers and employees expend considerable
+effort to identify, do copyright research on, transcribe and proofread
+works not protected by U.S. copyright law in creating the Project
+Gutenberg™ collection. Despite these efforts, Project Gutenberg™
+electronic works, and the medium on which they may be stored, may
+contain “Defects,” such as, but not limited to, incomplete, inaccurate
+or corrupt data, transcription errors, a copyright or other
+intellectual property infringement, a defective or damaged disk or
+other medium, a computer virus, or computer codes that damage or
+cannot be read by your equipment.
+
+1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1.F.3, the Project
+Gutenberg Literary Archive Foundation, the owner of the Project
+Gutenberg™ trademark, and any other party distributing a Project
+Gutenberg™ electronic work under this agreement, disclaim all
+liability to you for damages, costs and expenses, including legal
+fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
+LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
+PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
+LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
+INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
+DAMAGE.
+
+1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+defect in this electronic work within 90 days of receiving it, you can
+receive a refund of the money (if any) you paid for it by sending a
+written explanation to the person you received the work from. If you
+received the work on a physical medium, you must return the medium
+with your written explanation. The person or entity that provided you
+with the defective work may elect to provide a replacement copy in
+lieu of a refund. If you received the work electronically, the person
+or entity providing it to you may choose to give you a second
+opportunity to receive the work electronically in lieu of a refund. If
+the second copy is also defective, you may demand a refund in writing
+without further opportunities to fix the problem.
+
+1.F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.
+
+1.F.5. Some states do not allow disclaimers of certain implied
+warranties or the exclusion or limitation of certain types of
+damages. If any disclaimer or limitation set forth in this agreement
+violates the law of the state applicable to this agreement, the
+agreement shall be interpreted to make the maximum disclaimer or
+limitation permitted by the applicable state law. The invalidity or
+unenforceability of any provision of this agreement shall not void the
+remaining provisions.
+
+1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+trademark owner, any agent or employee of the Foundation, anyone
+providing copies of Project Gutenberg™ electronic works in
+accordance with this agreement, and any volunteers associated with the
+production, promotion and distribution of Project Gutenberg™
+electronic works, harmless from all liability, costs and expenses,
+including legal fees, that arise directly or indirectly from any of
+the following which you do or cause to occur: (a) distribution of this
+or any Project Gutenberg™ work, (b) alteration, modification, or
+additions or deletions to any Project Gutenberg™ work, and (c) any
+Defect you cause.
+
+Section 2. Information about the Mission of Project Gutenberg™
+
+Project Gutenberg™ is synonymous with the free distribution of
+electronic works in formats readable by the widest variety of
+computers including obsolete, old, middle-aged and new computers. It
+exists because of the efforts of hundreds of volunteers and donations
+from people in all walks of life.
+
+Volunteers and financial support to provide volunteers with the
+assistance they need are critical to reaching Project Gutenberg™’s
+goals and ensuring that the Project Gutenberg™ collection will
+remain freely available for generations to come. In 2001, the Project
+Gutenberg Literary Archive Foundation was created to provide a secure
+and permanent future for Project Gutenberg™ and future
+generations. To learn more about the Project Gutenberg Literary
+Archive Foundation and how your efforts and donations can help, see
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org.
+
+Section 3. Information about the Project Gutenberg Literary Archive Foundation
+
+The Project Gutenberg Literary Archive Foundation is a non-profit
+501(c)(3) educational corporation organized under the laws of the
+state of Mississippi and granted tax exempt status by the Internal
+Revenue Service. The Foundation’s EIN or federal tax identification
+number is 64-6221541. Contributions to the Project Gutenberg Literary
+Archive Foundation are tax deductible to the full extent permitted by
+U.S. federal laws and your state’s laws.
+
+The Foundation’s business office is located at 809 North 1500 West,
+Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
+to date contact information can be found at the Foundation’s website
+and official page at www.gutenberg.org/contact
+
+Section 4. Information about Donations to the Project Gutenberg
+Literary Archive Foundation
+
+Project Gutenberg™ depends upon and cannot survive without widespread
+public support and donations to carry out its mission of
+increasing the number of public domain and licensed works that can be
+freely distributed in machine-readable form accessible by the widest
+array of equipment including outdated equipment. Many small donations
+($1 to $5,000) are particularly important to maintaining tax exempt
+status with the IRS.
+
+The Foundation is committed to complying with the laws regulating
+charities and charitable donations in all 50 states of the United
+States. Compliance requirements are not uniform and it takes a
+considerable effort, much paperwork and many fees to meet and keep up
+with these requirements. We do not solicit donations in locations
+where we have not received written confirmation of compliance. To SEND
+DONATIONS or determine the status of compliance for any particular state
+visit www.gutenberg.org/donate.
+
+While we cannot and do not solicit contributions from states where we
+have not met the solicitation requirements, we know of no prohibition
+against accepting unsolicited donations from donors in such states who
+approach us with offers to donate.
+
+International donations are gratefully accepted, but we cannot make
+any statements concerning tax treatment of donations received from
+outside the United States. U.S. laws alone swamp our small staff.
+
+Please check the Project Gutenberg web pages for current donation
+methods and addresses. Donations are accepted in a number of other
+ways including checks, online payments and credit card donations. To
+donate, please visit: www.gutenberg.org/donate.
+
+Section 5. General Information About Project Gutenberg™ electronic works
+
+Professor Michael S. Hart was the originator of the Project
+Gutenberg™ concept of a library of electronic works that could be
+freely shared with anyone. For forty years, he produced and
+distributed Project Gutenberg™ eBooks with only a loose network of
+volunteer support.
+
+Project Gutenberg™ eBooks are often created from several printed
+editions, all of which are confirmed as not protected by copyright in
+the U.S. unless a copyright notice is included. Thus, we do not
+necessarily keep eBooks in compliance with any particular paper
+edition.
+
+Most people start at our website which has the main PG search
+facility: www.gutenberg.org.
+
+This website includes information about Project Gutenberg™,
+including how to make donations to the Project Gutenberg Literary
+Archive Foundation, how to help produce our new eBooks, and how to
+subscribe to our email newsletter to hear about new eBooks.
+
+

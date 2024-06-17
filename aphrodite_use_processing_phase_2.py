@@ -13,6 +13,7 @@ async def main():
     import logging
     import yaml
     import glob
+    from augmentoolkit.utils.group_by_text import group_by_text
 
     with open("./config.yaml", "r") as f:
         config = yaml.safe_load(f)
@@ -27,11 +28,9 @@ async def main():
     ):
         raise Exception("Aphrodite engine mode MUST use completion prompts!")
 
-    LARGE_LOGICAL_MODEL = config["API"]["LARGE_LOGICAL_MODEL"]
+    LOGICAL_MODEL = config["API"]["LOGICAL_MODEL"]
 
-    ASSISTANT_MODE = config["SYSTEM"][
-        "ASSISTANT_MODE"
-    ]  # change to true if you want all conversations to be with an "AI language model" and not characters. Useful for more professional use cases.
+    LARGE_LOGICAL_MODEL = config["API"]["LARGE_LOGICAL_MODEL"]
 
     DOUBLE_CHECK_COUNTER = config["SYSTEM"][
         "DOUBLE_CHECK_COUNTER"
@@ -40,10 +39,8 @@ async def main():
     USE_SUBSET = config["SYSTEM"][
         "USE_SUBSET"
     ]  # Set to True if you want to use only a small subset of the text, to test whether it plays nicely with the current setup of the notebook
-
-    REARRANGEMENTS_TO_TAKE = config["SYSTEM"][
-        "REARRANGEMENTS_TO_TAKE"
-    ]  # How many of the possible permutations of tuples in a group to take and make multiturn convs out of. Adjust higher to get more data out of less text, but it might be a bit repetitive. NOTE your eval loss will be basically worthless if you aren't careful with how you shuffle your dataset when you're about to train.
+    
+    SUBSET_SIZE = config["SYSTEM"]["SUBSET_SIZE"]  # Set to the number of chunks you want to use if you're using a subset. If you're not using a subset, this will be ignored.
 
     USE_FILENAMES = config["SYSTEM"][
         "USE_FILENAMES"
@@ -61,20 +58,18 @@ async def main():
 
     COMPLETION_MODE = config["SYSTEM"]["COMPLETION_MODE"]
 
-    GRAPH = config["SYSTEM"]["GRAPH"]
-
     MODE = config["SYSTEM"]["MODE"]
 
     LOG_LEVEL = logging.INFO
 
     INPUT_FOLDER = config["PATH"]["INPUT"]
-    
-    QUANTIZATION_LARGE = config["API"]["QUANTIZATION_LARGE"]
 
-    extension = ".txt"
+    extensions = [".txt", ".md"]
 
-    path = f"{INPUT_FOLDER}/*" + extension
-    source_texts = glob.glob(path)
+    source_texts = []
+    for extension in extensions:
+      path = f"{INPUT_FOLDER}/**/*" + extension
+      source_texts = source_texts + glob.glob(path, recursive=True)
 
     print(source_texts)
 
@@ -139,30 +134,20 @@ async def main():
                 globals()[attribute_name] = attribute
 
     engine_wrapper = EngineWrapper(
-        model=LARGE_LOGICAL_MODEL,
+        model=LOGICAL_MODEL,
         api_key=API_KEY,
         base_url=BASE_URL,
         mode=MODE,
-        quantization=QUANTIZATION_LARGE
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
-
-    from transformers import AutoTokenizer
+    
     import re
     from tqdm import tqdm
-    import nltk
-
-    nltk.download("punkt")
-    from nltk.tokenize import sent_tokenize
-
-    tokenizer = AutoTokenizer.from_pretrained(
-        "Gryphe/MythoMax-L2-13b"
-    )  # It doesn't matter what model goes here, really
 
     sentence_chunks = []
     for source_text in source_texts:
         sentence_chunks += control_flow_functions.sentence_chunking_algorithm(
-            source_text, tokenizer
+            source_text, config["SYSTEM"]["CHUNK_SIZE"]
         )
 
     conversions = [("\n", " "), ("  ", " ")]
@@ -196,6 +181,7 @@ async def main():
         engine_wrapper,
         output_dir,
         take_subset=USE_SUBSET,
+        subset_size=SUBSET_SIZE,
         use_filenames=False,
         rtwl=run_task_with_limit,
         completion_mode=COMPLETION_MODE,
@@ -203,7 +189,7 @@ async def main():
     )
 
     filtered_worthy_for_questions = control_flow_functions.filter_and_graph(
-        judged_worthy_for_questions, graph=GRAPH
+        judged_worthy_for_questions
     )
 
     print(filtered_worthy_for_questions[0])
@@ -332,7 +318,7 @@ async def main():
     vetted_qa_tuples = [qa for qa in vetted_qa_tuples if qa is not None]
     print("---------------- ONTO EXAMPLES GENERATION-------------------")
 
-    qa_tuples_by_paragraph = augmentoolkit.control_flow_functions.group_by_text.group_by_text(vetted_qa_tuples)
+    qa_tuples_by_paragraph = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_tuples)
 
     import os
 
@@ -349,20 +335,22 @@ async def main():
         control_flow_functions.create_info(
             idx,
             group,
-            engine_wrapper,
-            ASSISTANT_MODE,
             multi_turn_convs_info,
-            multi_turn_convs_info_dir,
-            rearrangements_to_take=REARRANGEMENTS_TO_TAKE,
-            use_filenames=USE_FILENAMES,
-            completion_mode=COMPLETION_MODE,
-            logging_level=LOG_LEVEL,
+            multi_turn_convs_info_dir
         )
         for idx, group in enumerate(qa_tuples_by_paragraph)
     ]
     limited_tasks_infocreation = [run_task_with_limit(task) for task in tasks]
     for future in tqdmasyncio.tqdm.as_completed(limited_tasks_infocreation):
         await future
+
+    engine_wrapper = EngineWrapper(
+        model=LARGE_LOGICAL_MODEL,
+        api_key=API_KEY,
+        base_url=BASE_URL,
+        mode=MODE,
+        # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
+    )
 
     import os
     import json
@@ -388,7 +376,6 @@ async def main():
             engine_wrapper,
             multi_turn_convs,
             multi_turn_convs_dir,
-            assistant_mode=ASSISTANT_MODE,
             completion_mode=COMPLETION_MODE,
             logging_level=LOG_LEVEL,
         )

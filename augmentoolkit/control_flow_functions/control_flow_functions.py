@@ -1405,3 +1405,31 @@ def group_by_text(tuples_list):
         identify_duplicates.identify_duplicates(group)
         for group in list(groups.values())
     ]
+
+
+def create_pretraining_set(directory_path, json_file):
+    # Initialize a variable to store the combined text of all files
+    combined_text = ""
+
+    # Walk through all directories and files in the directory
+    for root, dirs, files in os.walk(directory_path):
+        for filename in files:
+            file_path = os.path.join(root, filename)
+
+            # Read the contents of the file
+            with open(file_path, "r") as file:
+                file_contents = file.read()
+
+            # Append the file contents to the combined text, with a separator
+            if combined_text:
+                combined_text += "\n\n---NEW FILE---\n\n"
+            combined_text += file_contents
+
+    # Create a dictionary with the combined text
+    data = {"text": combined_text}
+
+    # Save the dictionary as a JSON file
+    with open(json_file, "w") as file:
+        json.dump(data, file)
+
+    print("JSON file saved successfully.")

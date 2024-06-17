@@ -5,22 +5,20 @@ Augmentoolkit is an AI-powered tool that lets you create domain-specific data to
 
 ### Benefits
 Augmentoolkit makes LLM data easy.
-- Cheap: Augmentoolkit uses open-source LLMs, and so can be run on consumer hardware for hardly any cost, or cheaply via APIs like Together.ai.
-- Effortless: Augmentoolkit can be run by putting some files in a folder, and then running a Python script. If that's too much, you can also use the graphical user interface. Previously-started runs are continued, so you don't need to worry about interruptions costing you time and/or money.
-- Fast: when using APIs, you can generate millions of trainable tokens in under an hour. Fully async code lets you get results quickly.
-- Anti-hallucination, quality data: Augmentoolkit checks all important outputs for hallucinations and failures, ensuring high data quality throughout every generated dataset. Delicately-crafted few-shot examples force the open-source models used to be consistent and smart.
+- **Cheap:** Augmentoolkit uses open-source LLMs, and so can be run on consumer hardware for hardly any cost, or cheaply via APIs like Together.ai.
+- **Effortless:** Augmentoolkit can be run by putting some files in a folder, and then running a Python script. If that's too much, you can also use the graphical user interface. Previously-started runs are continued automatically, so you don't need to worry about interruptions costing you time and/or money.
+- **Fast:** when using APIs, you can generate millions of trainable tokens in under an hour. Fully async code lets you get results quickly.
+- **Anti-hallucination, quality data:** Augmentoolkit checks all important outputs for hallucinations and failures, ensuring high data quality throughout every generated dataset. Delicately-crafted few-shot examples force the open-source models used to be consistent and smart.
 
 We've also done our best to facilitate the step after you generate your data -- training your LLM:
-- Train an AI for the cost of a dinner: with the provided training config, you can perform the equivalent of a full finetune of an AI,  on your own data, for a tiny sum of money. VRAM usage varies by model, of course -- and this can work in your favor.
-- Create your LLM in less than a day: with reasonable dataset sizes and the provided training configs, LLM training can be done before the day is out. Iterate quickly and cheaply.
-- When you use the same recipe, you get the same bread: Augmentoolkit datasets have been used successfully for professional consulting projects. Video documentation is linked in this README that shows exactly how to use this tool to do the same. The code, settings, and prompts you need is all here.
-- Train AI with confidence, especially if it's your first time: between the video docs and active GitHub issues support, you can be confident you'll get a good LLM out of this.
+- **Train an AI for the cost of a dinner:** with the provided training config, you can perform the equivalent of a full finetune of an AI,  on your own data, for a tiny sum of money. VRAM usage varies by model, of course -- and this can work in your favor.
+- **Create your LLM in less than a day:** with reasonable dataset sizes and the provided training configs, LLM training can be done before the day is out. Iterate quickly and cheaply.
+- **When you use the same recipe, you get the same bread:** Augmentoolkit datasets have been used successfully for professional consulting projects. Video documentation is linked in this README that shows exactly how to use this tool to do the same. The code, settings, and prompts you need is all here.
+- **Train AI with confidence, *especially* if it's your first time:** between the video docs and active GitHub issues support, you can be confident you'll get a good LLM out of this.
 
 Finally, using the model you create should be easy and valuable:
-- Training a model as a means of learning: dealing with a large and complex subject that you need to master? Training an LLM with Augmentoolkit creates an assistant that understands the big picture of what you're trying to figure out. I have learned from AI I have created before, and you — or your users/employees/clients — can too.
-- Documented LLM setup (RAG included!): from quantizing to chatting, it might take 30 minutes of following provided step-by-step video instructions (easy!) to set it up the first time you do this. The second it will likely take less than five or ten. Tutorials are taken seriously here.
-
-[project logo]
+- **Training a model as a means of learning:** dealing with a large and complex subject that you need to master? Training an LLM with Augmentoolkit creates an assistant that understands the big picture of what you're trying to figure out. I have learned from AI I have created before, and you — or your users/employees/clients — can too.
+- **Documented LLM setup (RAG included!):** from quantizing to chatting, it might take 30 minutes of following provided step-by-step video instructions (easy!) to set it up the first time you do this. The second it will likely take less than five or ten. Tutorials are taken seriously here.
 
 ## Demo video & Video Tutorials:
 [3-Minute Demo Video Here](https://www.youtube.com/watch?v=m32fM8S_DeY&ab_channel=Heralax)
@@ -28,24 +26,29 @@ Finally, using the model you create should be easy and valuable:
 Note that Video Documentation is currently built for Augmentoolkit, a sister project of Augmentoolkit built for the Verus community. The process of running it should be the same, and the process of training the LLM is definitely the same. But when it mentions "Augmentoolkit" and the Verus project, that is why.
 Augmentoolkit-specific video docs are in the works.
 
-[Video Documentation 1 — Dataset generation]()
+[Video Documentation 1 — Dataset generation](https://studio.youtube.com/video/NI0QXWWtux8/edit)
 
 [Video Documentation 2 — Model Training, Quantizing, and Chatting]()
 
 
 ## Table of Contents:
-0. [Quickstart](#quickstart)
-0. [Vision (Introduction)](#vision) # introduction to ideas
-0. [Usage](#usage) # config
-    - [Installation (detailed)](#installation)
-    - [`config.yaml` step-by-step](#step-by-step)
+1. [Quickstart](#quickstart)
+    - [Terminal](#terminal)
+    - [Web UI](#web-ui)
+2. [Vision (Introduction)](#vision)
+3. [Usage](#usage)
+    - [Installation](#installation)
+    - [`config.yaml` step-by-step](#configyaml-step-by-step)
     - [Customization](#customization)
-    - [Visual explanation of steps](#flowchart)
-0. [What to do with what you get out](#output-data-format) # TODO include partial axolotl guide + shared config
-0. [Roadmap]
-0. [Self-promotion](#for-businesses)
+    - [Visual explanation of steps](#visual-explanation-of-steps)
+4. [What to do with what you get out](#what-to-do-with-what-you-get-out)
+5. [Roadmap](#roadmap)
+6. [Self Promotion](#for-businesses)
+7. [Latest Update Info](#latest-update-info)
 8. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
-0. [Contributing](#contributing) # Note, basically just say "yes please" and I'll look over any PRs you put forward!
+9. [Contributing](#contributing)
+10. [Join A Discord for Dataset Generation!](#join-a-discord-for-dataset-generation)
+11. [Using "Aphrodite mode" (deprecated)](#using-aphrodite-mode-deprecated)
 
 ## Quickstart
 
@@ -83,9 +86,9 @@ Augmentoolkit takes human-written text with information in it, and turns it into
 - It takes the input text, and splits it into chunks.
 - It uses each chunk's information to generate questions that test the information, and it also generates answers to the questions that use the information. 
 - It checks whether the generated questions and answers are accurate and only use information provided in the text (ensuring that the LLM did not hallucinate new information).
-- Finally, it writes an interaction in a fictional setting between a character with domain expertise, and an ignorant secondary character, where the secondary character asks the questions and the primary character answers them. 
+- Finally, it writes an interaction between a human and an AI, where the human asks the questions and the AI answers them.. 
 - After checking that this conversation faithfully includes the original questions and answers, the result is saved as part of the newly-generated dataset.
-You can see a flowchart of this process over in [Usage](#usage). # TODO professionalize flowchart to account for no RP.
+You can see a flowchart of this process over in [Usage](#usage).
 
 
 ### Usage
@@ -259,9 +262,9 @@ Contributions are appreciated! Whether it's a new API endpoint, or a set of prom
 ## Join A Discord for Dataset Generation!
 MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has a server where he's working on a new quantization engine. There's a corner to discuss Augmentoolkit there! Come check it out and connect at [https://discord.com/invite/foxengine-ai](https://discord.com/invite/foxengine-ai)!
 
-## Recommendation: when training on Augmentoolkit data, use GaLore, NOT LoRAs
+## Using "Aphrodite mode" (deprecated)
 
-## Using "Aphrodite mode"
+NOTE: Aphrodite mode is pretty much deprecated. If you are running on your own or rented hardware, unless you are doing a truly massive amount of data generation, it is advisable to just use the best model you can for all steps. This means you can just run `processing.py` as normal.
 
 - First off, make sure you're on a Linux operating system. If you want local generation with a non-Linux operating system, it is recommended that you run a local inference engine with an openai-compatible API, and then point Augmentoolkit at the local inference engine by changing the BASE_URL.
 - Then install aphrodite engine and get it working. That's a whole process, you can find the details on [their repo](https://github.com/PygmalionAI/aphrodite-engine/tree/main)

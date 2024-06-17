@@ -1,0 +1,3632 @@
+﻿The Project Gutenberg eBook of The Reality of War: A Companion to Clausewitz
+    
+This ebook is for the use of anyone anywhere in the United States and
+most other parts of the world at no cost and with almost no restrictions
+whatsoever. You may copy it, give it away or re-use it under the terms
+of the Project Gutenberg License included with this ebook or online
+at www.gutenberg.org. If you are not located in the United States,
+you will have to check the laws of the country where you are located
+before using this eBook.
+
+Title: The Reality of War: A Companion to Clausewitz
+
+Author: Stewart Lygon Murray
+
+Editor: A. Hilliard Atteridge
+
+Release date: November 17, 2013 [eBook #44200]
+
+Language: English
+
+Credits: Produced by Charlie Howard and the Online Distributed
+        Proofreading Team at http://www.pgdp.net (This file was
+        produced from images generously made available by The
+        Internet Archive)
+
+
+*** START OF THE PROJECT GUTENBERG EBOOK THE REALITY OF WAR: A COMPANION TO CLAUSEWITZ ***
+
+
+
+
+Produced by Charlie Howard and the Online Distributed
+Proofreading Team at http://www.pgdp.net (This file was
+produced from images generously made available by The
+Internet Archive)
+
+
+
+
+
+
+
+
+
+THE REALITY OF WAR
+
+
+
+
+  THE
+  REALITY OF WAR
+
+  A COMPANION
+  TO CLAUSEWITZ
+
+  BY
+  MAJOR STEWART L. MURRAY
+  LATE GORDON HIGHLANDERS
+
+  POPULAR EDITION EDITED BY
+  A. HILLIARD ATTERIDGE
+
+  LONDON
+  HODDER AND STOUGHTON
+  WARWICK SQUARE, E.C.
+
+  HUGH REES, LTD.
+  5 REGENT STREET, S.W.
+
+
+  _Reprinted in 1914_
+
+
+
+
+EDITOR'S PREFACE
+
+
+Great books, the masterpieces of the special branch of knowledge with
+which they deal, are often very big books; and busy men, who have not
+unlimited time for reading, find it helpful to have some one who will
+give them a general summary of a famous writer's teaching, and point
+out the most important passages in which the author himself embodies
+the very essence of his argument.
+
+This is what Major Murray has done for the most important work on war
+that was ever written. He does not give a mere dry summary of its
+contents. He sets forth, in language so plain that even the civilian
+reader or the youngest soldier can read it with interest, the essence
+of the teaching of Clausewitz, and he embodies in his book the most
+striking passages of the original work. He adds to each section of his
+subject some useful criticisms, and at the end of the book he sums up
+the effect of recent changes on the practice of war.
+
+The book is a popular manual of the realities of war, which should be
+read not only by soldiers, but by every one who takes an intelligent
+interest in the great events of our time.
+
+As to the practical value of the writings of Clausewitz, it may be
+well to quote here the words of Mr. Spenser Wilkinson, the Professor
+of Military History at Oxford, from his introduction to the original
+edition of Major Murray's work:
+
+"Clausewitz was a Prussian officer who first saw fighting as a boy in
+1793, and whose experience of war lasted until 1815, when the great
+war ended. He was then thirty-five and spent the next fifteen years in
+trying to clear his mind on the subject of war, which he did by writing
+a number of military histories and a systematic treatise 'On War.' At
+the age of fifty he tied his manuscripts into a parcel, hoping to work
+at them again on the conclusion of the duties for which he was ordered
+from home. A little more than a year later he died at Breslau of
+cholera, and the papers, to which he had never put the finishing touch,
+were afterwards published by his widow.
+
+"Part of the value of his work is due to the exceptional opportunities
+which he enjoyed. When the war of 1806 began he had long been the
+personal adjutant of one of the Prussian princes, and an intimate
+friend of Scharnhorst, who was probably the greatest of Napoleon's
+contemporaries. In the period of reorganization which followed
+the Peace of Tilsit he made the acquaintance of Gneisenau, and of
+almost all the officers who made their mark in the subsequent wars
+of liberation. During the years of preparation he was Scharnhorst's
+assistant, first in the Ministry of War and then on the General Staff.
+During the campaign of 1812 he served with the Russian army as a
+staff officer. Thus his experience during the four years of the Wars
+of Liberation was that of one who was continually behind the scenes,
+always in touch with the Governments and Generals, and therefore better
+able than any one not so favourably placed to see everything in its
+proper perspective, and to follow and appreciate the considerations
+which directed the decisions both of statesmen and of the commanders
+of armies. His personal character was of the finest mould, and his
+writings have the sincerity, the absence of which makes it so difficult
+to rely upon those of Napoleon.
+
+"The ultimate test of the value of books is time. When Clausewitz
+died, the two books on war which were thought the best were those of
+the Archduke Charles of Austria and General Jomini. To-day the book
+of Clausewitz, 'On War,' easily holds the first place. It is the
+least technical of all the great books on war; from beginning to end
+it is nothing but common sense applied to the subject, but for that
+reason it is the hardest to digest, because common sense or a man's
+natural instinctive judgment on any subject is exceedingly hard to
+analyse and put into words. An exceptionally gifted man can go through
+this process, but few can follow it for any length of time without a
+distinct effort.
+
+"Almost every good institution has arisen out of the effort to provide
+a remedy for some evil, but in the imperfection of human nature nearly
+every institution brings with it fresh evils, which in their turn have
+to be counteracted. The modern spirit, with its hatred of nepotism
+and its belief in knowledge, has grafted the examination system upon
+every form of education from the lowest to the highest. The British
+army shares in the benefits and in the disadvantages of the system,
+of which, in the case of an officer, the danger to be guarded against
+is that it tends to accustom a man to rely rather on his memory than
+his intelligence, and to lean more on other people's thinking than on
+his own. Clausewitz aimed at producing the very opposite result. He
+does not offer specific solutions of the various problems of war lest
+officers, in moments when their business is to decide and to act,
+should be trying to recall his precepts instead of using their eyes and
+their wits. His purpose rather is to enable them to understand what war
+is. He believed that if a man had accustomed himself to think of war as
+it really is, had got to know the different elements which go to make
+it up, and to distinguish those that are important from those that are
+comparative trifles, he would be more likely to know of himself what
+to do in a given situation, and would be much less likely to confuse
+himself by trying to remember what some general, long since dead, did
+on some occasion in which after all the position was by no means the
+same as that in which he finds himself."
+
+What is said here of the soldier actually engaged in war, is true also
+even of the onlooker who takes a patriotic interest in the progress of
+a war in which his country is involved. Unless he has a clear idea of
+the real character of modern war, and the principles on which success
+or failure depend, he will be utterly unable to grasp the significance
+of the events of which he reads each day. And it is of real importance
+that in time of war every citizen should judge soundly the course of
+events, for opinion influences action, and public opinion is made up of
+the ideas of the units who compose the public. In this connection it is
+well to bear in mind a point that is often overlooked, a point on which
+Clausewitz insists in a singularly convincing passage--namely, the fact
+that one of the main objects of a nation waging war is to force the
+enemy's population into a state of mind favourable to submission. This
+fact is sufficient proof of the importance of public opinion being
+well informed not only as to the course of events, but also as to the
+principles that give to these events their real significance.
+
+
+
+
+CONTENTS
+
+
+  CHAPTER I
+
+                                           PAGE
+  THE LIFE OF CLAUSEWITZ                      3
+
+
+  CHAPTER II
+
+  THE INFLUENCE OF CLAUSEWITZ ON MODERN
+    POLICY AND WAR                           11
+
+
+  CHAPTER III
+
+  THE WRITINGS OF CLAUSEWITZ                 23
+
+
+  CHAPTER IV
+
+  THE THEORY AND THE PRACTICE OF WAR         33
+
+
+  CHAPTER V
+
+  THE MAGNITUDE OF THE EFFORT REQUIRED
+    IN A MODERN NATIONAL WAR                 47
+
+
+  CHAPTER VI
+
+  PUBLIC OPINION IN WAR                      65
+
+
+  CHAPTER VII
+
+  THE NATURE OF WAR                          79
+
+
+  CHAPTER VIII
+
+  WAR AS POLICY                             119
+
+
+  CHAPTER IX
+
+  STRATEGY                                  137
+
+
+  CHAPTER X
+
+  THE EXECUTION OF STRATEGY                 161
+
+
+  CHAPTER XI
+
+  TACTICS                                   177
+
+
+  CHAPTER XII
+
+  CHANGES SINCE THE DAYS OF CLAUSEWITZ      213
+
+
+
+
+CHAPTER I
+
+THE LIFE OF CLAUSEWITZ
+
+
+In an endeavour, such as the present, to interest the British public in
+even the greatest military writer, the first necessity is to show that
+he was not a mere theorist or bookworm. The wide and varied experience
+which the British officer gradually gains in so many different parts
+of the world shows up the weak points of most theories, and produces
+a certain distrust of them. Also a distrust of theory is undoubtedly
+one of our national characteristics. Hence, in order to appeal to the
+British officer or civilian, a writer must be a practical soldier.
+
+Such was General Clausewitz: a practical soldier of very great
+experience in the long series of wars 1793 to 1815, and one present
+throughout that most awful of all campaigns, Napoleon's Russian
+campaign in 1812.
+
+"General Karl von Clausewitz was born near Magdeburg in 1780, and
+entered the Prussian army as Fahnenjunker in 1792. He served in the
+campaigns of 1793-1794 on the Rhine. In 1801 he entered the military
+school at Berlin as an officer, and remained there till 1803. He here
+attracted the notice of Scharnhorst. In the campaign of 1806 he served
+as aide-de-camp to Prince Augustus of Prussia, was present at the
+battle of Jena, and saw that awful retreat which ended a fortnight
+later in the surrender at Prentzlau. Being wounded and captured, he
+was sent into France as a prisoner till the end of the war." "On his
+return (in November, 1807) he was placed on General Scharnhorst's
+staff, and employed on the work then going on for the reorganization
+of the Prussian army. In 1812 Clausewitz entered the Russian service,
+was employed on the general staff, and was thus able to gain much
+experience in the most gigantic of all the struggles of his time." "In
+the spring campaign of 1813 (battles of Lutzen, Bautzen, etc.), he, as
+a Russian officer, was attached to Blucher's staff; during the winter
+campaign he found employment as chief-of-the-staff to Count Walmoden,
+who fought against Davoust on the Lower Elbe, and the splendid action
+of the Goerde was entirely the result of his able dispositions. In 1815
+he again entered the Prussian service, and was chief-of-the-staff to
+the III. Army Corps (Thielman), which at Ligny formed the left of the
+line of battle, and at Wavre covered the rear of Blucher's army." "In
+addition to this, we may say, considerable practical training (note,
+enormous and varied indeed compared to any obtainable in the present
+day), he also possessed a comprehensive and thorough knowledge of
+military history, and also an uncommonly clear perception of general
+history" (Von Caemmerer). After the Peace he was employed in a command
+on the Rhine. In 1818 he became major-general, and was made Director of
+the Military School at Berlin. Here he remained for some years. This
+was the chief period of his writings. As General von Caemmerer, in his
+"Development of Strategical Science," puts it: "This practical and
+experienced, and at the same time highly cultured soldier, feels now,
+in peaceful repose, as he himself confesses, the urgent need to develop
+and systematize the whole world of thought which occupies him, yet also
+resolves to keep secret till his death the fruit of his researches, in
+order that his soul, which is thirsting for _Truth_, may be safely and
+finally spared all temptations from subordinate considerations."
+
+In 1830 he was appointed Director of Artillery at Breslau, and, having
+no more time for writing, sealed up and put away his papers, unfinished
+as they were. In the same year he was appointed chief-of-the-staff to
+Field-Marshal Gneisenau's army. In the winter of that year war with
+France was considered imminent, and Clausewitz had prospects of acting
+as chief of the general staff of the Commander-in-Chief Gneisenau. He
+then drew up two plans for war with France, which bear the stamp of
+that practical knowledge of war and adaptation of means to ends which
+distinguish his writings.
+
+In the same year the war scare passed away, the army of Gneisenau was
+disbanded, and Clausewitz returned to Breslau, where after a few days
+he was seized with cholera, and died in November, 1831, aged only 51.
+
+His works were published after his death by his widow.
+
+
+
+
+CHAPTER II
+
+THE INFLUENCE OF CLAUSEWITZ ON MODERN POLICY AND WAR
+
+
+From the day of their publication until now the influence of the
+writings of Clausewitz has been steadily growing, till to-day it is
+impossible to over-estimate the extent of that influence upon modern
+military and political thought, especially in Germany. As General von
+Caemmerer, in his "Development of Strategical Science," says: "Karl
+von Clausewitz, the pupil and friend of Scharnhorst and the confidant
+of Gneisenau, is in Germany generally recognized as the most prominent
+theorist on war, as the real philosopher on war, to whom our famous
+victors on the more modern battlefields owe their spiritual training."
+
+Field-Marshal Moltke was "his most distinguished pupil," and adapted
+the teaching of Clausewitz to the conditions of to-day.
+
+General von der Goltz, in the introduction to his great work, "The
+Nation in Arms," thus describes the veneration which he inspires: "A
+military writer who, after Clausewitz, writes upon the subject of war,
+runs the risk of being likened to a poet who, after Goethe, attempts a
+_Faust_, or, after Shakespeare, a _Hamlet_. Everything important that
+can be told about the nature of war can be found stereotyped in the
+works which that great military genius has left behind him. Although
+Clausewitz has himself described his book as being something as yet
+incomplete, this remark of his must be taken to mean that he, too,
+was subject to the fate of all aspiring spirits, and was forced to
+feel that all he attained lay far beneath his ideal. For us, who knew
+not what that ideal was, his labours are a complete work. I have,
+accordingly, not attempted to write anything new, or of universal
+applicability about the science of warfare, but have limited myself to
+turning my attention to the military operations of our own day." One
+can hardly imagine a stronger tribute of admiration.
+
+And, as Moltke was Clausewitz's most distinguished pupil, so also
+are all those trained in the school of Moltke pupils of Clausewitz,
+including the most eminent of modern German military writers, such as
+General von Blume, in his "Strategy"; Von der Goltz, in his "Nation in
+Arms" and "The Conduct of War," who trained the Turkish General Staff
+for the campaign of 1897 against Greece and the battle of Pharsalia,
+etc.; General von Boguslawski; General von Verdy du Vernois, the
+father of the study of Applied Tactics; General von Schlichting, in his
+"Tactical and Strategical Principles of the Present"; General Meckel,
+who trained the Japanese Staff, etc., etc.
+
+We all remember the telegram sent to General Meckel by Marshal Oyama
+after the battle of Liao-yang: "We hope you are proud of your pupils."
+
+Some time ago, when asked to give a lecture at Aldershot to the
+officers of the 2nd Division on Clausewitz, it struck me that it would
+be very interesting, anxious as we all were then to know the causes
+of the wonderful Japanese efficiency and success, if I could obtain a
+pronouncement from General Meckel how far he had been influenced in his
+teaching by Clausewitz. My friend Herr von Donat did me the favour to
+write to General von Caemmerer and ask him if he could procure me such
+a pronouncement which I might publish. General Meckel, whose death both
+Japan and Germany have since had to mourn, most kindly consented, and
+I esteem it a great honour to be allowed to quote part of his letter.
+He said: "I, like every other German officer, have, consciously or
+unconsciously, instructed in the spirit of Clausewitz. Clausewitz is
+the _founder_ of that theory of war which resulted from the Napoleonic.
+I maintain that _every one_ who nowadays either makes or teaches war
+in a modern sense, bases himself upon Clausewitz, even if he is not
+conscious of it." This opinion of General Meckel, to whose training of
+the Japanese General Staff the success of the Japanese armies must be
+largely attributed, is most interesting. It is not possible to give a
+stronger or more up-to-date example of the magnitude of the influence
+of Clausewitz.
+
+In this connection I should like to make a short quotation from "The
+War in the Far East," by the _Times_ military correspondent. In his
+short but suggestive chapter on "Clausewitz in Manchuria" he says: "But
+as all save one of the great battles in Manchuria have been waged by
+the Japanese in close accordance with the spirit and almost the letter
+of Clausewitz's doctrine, and as the same battles have been fought by
+the Russians in absolute disregard of them (though his works had been
+translated into Russian by General Dragomiroff long before the war),
+it is certainly worth showing how reading and reflection may profit
+one army, and how the neglect of this respectable practice may ruin
+another." "Clausewitz in Manchuria"! That brings us up to date. It is a
+far cry for his influence to have reached, and triumphed.
+
+
+REFLECTIONS
+
+Clausewitz wrote his book expressly for statesmen as well as soldiers.
+We may be sure, therefore, that the influence of Clausewitz on the
+Continent has penetrated the realm of policy little less widely than
+the realm of war. From this thought arise many reflections. It will be
+sufficient here to suggest one. I would suggest that we should regard
+every foreign statesman, especially in Germany, as, consciously or
+unconsciously, a disciple of Clausewitz. That is to say, we should
+regard him as a man who, underneath everything else, underneath the
+most pacific assurances for the present, considers war an unalterable
+part of policy. He will regard war as part of the ordinary intercourse
+of nations, and occasional warlike struggles as inevitable as
+commercial struggles. He will consider war also as an instrument
+of policy, which he himself may have to use, and to be studied
+accordingly. He will consider it not as a thing merely for speeches,
+but for practical use in furthering or defending the interests of his
+State. He will regard war as the means by which some day his nation
+shall impose its will upon another nation. He will be prepared to wait
+and wait, to make "every imaginable preparation," and finally to let
+loose war in its most absolute and ruthless character, war carried out
+with the utmost means, the utmost energy, and the utmost effort of a
+whole nation-in-arms, determined to achieve its political object and
+compel submission to its will by force.
+
+To talk to such a man of "the evils of war," or of "the burden of
+armaments"; or to propose to him "disarmament" or "reduction of
+armed forces," and so forth can only appear to him as the result of
+"imperfect knowledge." He will not say so, but he will think so, and
+act accordingly. To the partially instructed opponent of such a man
+one can only say, "Let him that thinketh he standeth take heed lest he
+fall."
+
+
+
+
+CHAPTER III
+
+THE WRITINGS OF CLAUSEWITZ
+
+
+The writings of Clausewitz are contained in nine volumes, published
+after his death in 1831, but his fame rests chiefly on his three
+volumes "On War," which have been translated by Colonel J. J. Graham
+(the last edition edited by Colonel F. N. Maude, and published by
+Messrs. Kegan Paul, London). Clausewitz calls them "a collection of
+materials," "a mass of conceptions not brought into form," and states
+that he intended to revise, and throw the whole into more complete
+shape.
+
+We must lament that he did not live to complete his revision. But,
+on the other hand, it is perhaps possible that this unfinished
+state is really an advantage, for it leaves us free to apply his
+great maxims and principles and mode of thought to the ever-varying
+conditions of the present and future, unhampered by too complete a
+crystallization of his ideas written before more modern conditions of
+railways, telegraphs, and rapid long-ranging arms of precision, etc.,
+arose. It is perhaps this unfinished state which renders Clausewitz
+so essentially in touch with, and a part of, the onward movement and
+evolution of military thought. For his great aim was "the truth, the
+whole truth, and nothing but the truth," without preconception or
+favour, as far as he could go--essentially "a realist" of war--and what
+better aim can we set before ourselves?
+
+As Sir Arthur Helps has so well put it in his "Friends in Council,"
+every man needs a sort of central stem for his reading and culture. I
+wish here to say why I think that Clausewitz is admirably adapted to
+form such a main stem in the military culture of British officers.
+
+In the first place there is a lofty sort of tone about his writings
+which one gradually realizes as one reads them, and which I will not
+attempt to describe further than by saying that they stamp themselves
+as the writings of a gentleman of fine character.
+
+In the second place it is a book which "any fellow" can read, for
+there is nothing to "put one off," nothing abstruse or mathematical or
+formal, no formulæ or lines and angles and technical terms, such as in
+other writers, Jomini, Hamley, etc. Clausewitz is free from all such
+pedantries, which for my part, and I dare say for the part of many
+others, often "put one off" a book, and made one instinctively feel
+that there was something wrong, something unpractical about it, which
+rendered it hardly worth the sacrifice of time involved in its study.
+There is in Clausewitz nothing of that kind at all. All those lines and
+angles and formulæ he dismisses in a few pages as of little practical
+importance.
+
+In the third place Clausewitz only goes in for experience and the
+practical facts of war. As he somewhat poetically puts it, "The
+flowers of Speculation require to be cut down low near the ground of
+Experience, their proper soil."[1] He is the great apostle of human
+nature and character as being everything in war. "All war supposes
+human weakness, and against that it is directed."[2] I believe that the
+British officer will find himself in sympathy with the great thinker
+on war, who asserts that "_Of_ _all military virtues Energy in the
+conduct of Operations has always conduced most to glory and success of
+arms_."[3]
+
+In the fourth place, to the practical mind will appeal his denunciation
+of all elaborate plans, because _Time_ is required for all elaborate
+combinations, and Time is just the one thing that an active enemy
+will not give us,--and his consequent deduction that all plans must
+be of the simplest possible form. His famous sentence, "_In war all
+things are simple, but the simple are difficult_,"[4] gives the key
+to his writings, for to _overcome those simple yet great difficulties
+he regards as the art of war_, which can only be done by the military
+virtues of perseverance, energy, and boldness.
+
+In the fifth place he does not want men to be bookworms, for he says:
+
+"_Theory is nothing but rational reflection upon all the situations
+in which we can be placed in war_."[5] And we can all reflect, without
+reading too many books. Also he says: "Much reading of history is
+not required for the above object. The knowledge of a few separate
+battles, _in their details_, is more useful than a general knowledge of
+several campaigns. On this account it is more useful to read detailed
+narratives and journals than regular works of history."[6] He wants
+history in detail, not a general smattering and a loose application
+thereof, which fault he strongly denounces. And he expressly states
+that the history of the very latest war is the most useful. All of
+which is very practical, and in accord with what we feel to be true.
+
+As he pictures war, "_the struggle between the spiritual and moral
+forces_ on _both_ sides is the centre of all,"[7] and to this aspect
+of the subject he gives much more attention than Jomini and most of
+Jomini's disciples. He has freed us once for all from all formalism.
+The formation of character, careful, practical, detailed study, and
+thorough preparation in peace, the simplest plans carried out with the
+utmost perseverance, resolution, energy, and boldness in war--these are
+the practical fruits of his teaching.
+
+Therefore, I say again, that I do not think that the British officer
+could possibly find a more interesting or a better guide for the main
+stem of his reading than Clausewitz, nor any one that will appeal
+to his practical instincts of what is _True_ half so well. I do not
+believe that he could possibly do better than with Clausewitz as
+main stem, and a detailed study of the latest campaigns and modern
+technicalities as the up-to-date addition required to transform
+knowledge into action. I trust that every reader of Clausewitz will
+agree with me in this.
+
+
+
+
+CHAPTER IV
+
+THE THEORY AND THE PRACTICE OF WAR
+
+
+"Moltke, the most gifted pupil of Clausewitz," "Moltke, who knew
+Clausewitz's book well, and often liked to describe him as the
+theoretical instructor." As Chaucer would say, "What needeth wordes
+more?"
+
+Clausewitz has treated practically every chief branch of strategy
+and tactics (except, of course, the present-day developments of
+railways, telegraphs, quick-firing guns, smokeless powder, universal
+service armies, etc.). The whole of his bulky work "On War" is full
+of interesting and sometimes eloquent and almost poetical passages,
+of concentrated, pregnant, and far-reaching thoughts on every
+subject. Through all these it is, of course, impossible to follow
+him in any introduction. One can really do no more than urge all to
+read Clausewitz for themselves, to go to the fountain-head, to the
+master-work itself. In the short space to which I have restricted
+myself, I propose, therefore, to concentrate on a few of his leading
+ideas, reluctantly leaving out many others which are really almost just
+as good.
+
+
+THEORY AND PRACTICE
+
+One of the things for which we are most deeply indebted to Clausewitz
+is that he has shown us clearly the proper place of theory in relation
+to practice. "It should educate the mind of the future leader in
+war, or, rather, guide him in his _self-instruction_, but _not_
+accompany him on to the battlefield; just as a sensible tutor forms
+and enlightens the opening mind of a youth without therefore keeping
+him in leading-strings all his life."[8] Again, "In real action most
+men are guided by the tact of judgment, which hits the object more or
+less accurately, according as they possess more or less genius. This
+is the way in which all great generals have acted, and therein partly
+lay their greatness and their genius, in that they always hit upon what
+was right by this tact. Thus also it will always be in _action_, and
+so far this tact is amply sufficient. But when it is a question not of
+acting one's self, but of convincing others _in consultation_, then
+all depends upon clear conceptions and demonstrations and the inherent
+relations; and so little progress has been made in this respect that
+most deliberations are merely a contention of words, resting on no
+firm basis, and ending either in every one retaining his own opinion,
+or in a compromise from mutual considerations of respect, a middle
+course really without any value. Clear ideas on these matters are not,
+therefore, wholly useless."[9]
+
+How true this is any one will admit who reflects for a moment upon
+the great diversity of opinions on almost every subject held in our
+army, just because of this want of a central theory common to all. In
+the domain of tactics it is evident that this holds good even as in
+strategy, for a common central theory of war will produce a more or
+less common way of looking at things, from which results more or less
+common action towards the attainment of the common object.
+
+
+REJECTION OF SET AND GEOMETRICAL THEORIES
+
+"It should educate the mind of the future leader in war" is what
+Clausewitz demands from a useful theory; but he most expressly and
+unreservedly rejects every attempt at a method "by which definite
+plans for wars or campaigns are to be given out all ready made as if
+from a machine."[10] He mocks at Bülow's including at first in the
+one term "base" all sorts of things, like the supply of the army, its
+reinforcements and equipments, the security of its communications with
+the home country, and lastly the security of its line of retreat, and
+then fixing the extent of the base, and finally fixing an angle for the
+extent of that base: "And all this was done merely to obtain a pure
+geometrical result utterly useless" (Von Caemmerer).
+
+For the same reason Jomini's principle of the Inner Line does not
+satisfy him, owing to its mere geometrical nature, although he right
+willingly acknowledges "that it rests on a sound foundation, on
+the truth that the combat is the only effectual means in war" (Von
+Caemmerer). All such attempts at theory seem to him therefore perfectly
+useless, "because they strive to work with fixed quantities, while in
+war everything is _uncertain_, and all considerations must reckon with
+all kinds of variable quantities; because they only consider _material_
+objects, while every action in war is saturated with _moral_ forces and
+effects; lastly, because they deal only with the action of _one_ party,
+while war is a constant reciprocal effect of _both_ parties" (Von
+Caemmerer).
+
+"Pity the warrior," says Clausewitz, "who is contented to crawl about
+in this beggardom of rules." "Pity the theory which sets itself in
+opposition to the mind"[11] (note, the moral forces).
+
+
+A THEORY TO BE PRACTICALLY USEFUL
+
+Clausewitz insists that a useful theory cannot be more than a thorough
+knowledge of military history and "reflection upon all the situations
+in which we can be placed in war." "What genius does must be just the
+best of all rules, and theory cannot do better than to show just how
+and why it is so." "It is an analytical investigation of the subject
+which leads to exact knowledge: and if brought to bear on the results
+of experience, which in our case would be military history, to a
+_thorough_ familiarity with it. If theory investigates the subjects
+which constitute war; if it separates more distinctly that which at
+first sight seems amalgamated; if it explains fully the properties of
+the means; if it shows their probable effects; if it makes evident the
+nature of objects; _if it brings to bear all over the field of war the
+light of essentially critical investigation_,--then it has fulfilled
+the chief duties of its province. It becomes then a guide to him who
+wishes to make himself acquainted with war from books; it lights up the
+whole road for him, facilitates his progress, educates his judgment,
+and shields him from error."[12]
+
+
+KNOWLEDGE MUST BE THOROUGH
+
+This Clausewitz considers most important. He says that "Knowledge of
+the conduct of war ... _must pass completely into the mind_, and almost
+cease to be something objective." For in war "The moral reaction, the
+ever-changing form of things makes it necessary for the chief actor
+to carry _in himself_ the whole mental apparatus of his knowledge, in
+order that anywhere and at every pulse-beat he may be capable of giving
+the requisite decision _from himself_. Knowledge must, by this complete
+assimilation with his own mind and life, be converted into real power."
+
+       *       *       *       *       *
+
+So much for Clausewitz, therefore, as the greatest yet the simplest and
+least theoretical of theorists on war. Mark well his comforting dictum
+that "Theory is nothing but rational reflection upon all the situations
+in which we can be placed in war." That is a task which we have all
+more or less attempted. Therefore we are all more or less theorists.
+The only question is that of comparative "thoroughness" in our
+reflections. And it is essentially this "thoroughness" in investigation
+and reflection towards which Clausewitz helps us. Like every other
+habit, the _habit_ of military reflection gradually grows with use;
+till, fortified and strengthened by detailed knowledge, it gradually
+becomes Power.
+
+
+REFLECTIONS
+
+The theory of war is simple, and there is no reason why any man who
+chooses to take the trouble to read and reflect carefully on one or
+two of the acknowledged best books thereon, should not attain to a
+fair knowledge thereof. He may with reasonable trouble attain to such
+knowledge of the theory of war as will enable him to follow with
+intelligent appreciation the discussions of experienced soldier or
+soldiers. Such knowledge as will prevent his misunderstanding the
+experienced soldier's argument from pure ignorance, and such knowledge
+as will enable him to understand the military reasons put forward and
+the military object proposed. To the opinion of such a man all respect
+will be due. Thus, and thus only.
+
+It is indeed the plain duty of all who aspire to rule either thus to
+qualify themselves to understand, or else to abstain from interference
+with, the military interests of the State.
+
+
+
+
+CHAPTER V
+
+THE MAGNITUDE OF THE EFFORT REQUIRED IN A MODERN NATIONAL WAR
+
+
+This point is here illustrated with more detail from Clausewitz than
+may seem necessary to some, because it is precisely the point regarding
+modern war which is least understood in this country.
+
+"The complete overthrow of the enemy is the natural end of the art of
+war." "As this idea must apply to both the belligerent parties, it
+must follow, that there can be no suspension in the military act, and
+peace cannot take place until one or other of the parties concerned is
+completely overthrown." This is what Clausewitz means by Absolute War,
+that is war carried to its absolute and logical conclusion with the
+utmost force, the utmost effort and the utmost energy. He then proceeds
+to show that war, owing "to all the natural inertia and friction of its
+parts, the whole of the inconsistency, the vagueness and hesitation (or
+timidity) of the human mind," usually takes a weaker or less absolute
+form according to circumstances. "All this, theory must admit, but it
+is its duty to give the foremost place to the absolute form of war, and
+to use that form as a general point of direction." He then proceeds to
+show that war finally took its absolute form under Napoleon. To-day we
+may say that war takes its absolute form in the modern great national
+war, which is waged by each belligerent with the whole concentrated
+physical and mental power of the nation-in-arms.
+
+This requires to be gone into a little more in detail, for it is a
+most important point.
+
+Clausewitz in Book VIII. approaches this part of his subject by an
+historical survey of war from the time of the Roman Empire to that
+of Napoleon. He shows how as the feudal system gradually merged into
+the later monarchical States of Europe, armies gradually became less
+and less national, more and more mercenary. Omitting this, we arrive
+at the seventeenth century. He says: "The end of the seventeenth
+century, the time of Louis XIV., is to be regarded as the point in
+history at which the standing military power, such as it existed in the
+eighteenth century, reached its zenith. That military force was based
+on enlistment and money. States had organized themselves into complete
+unities; and the governments, by commuting the personal services of
+their subjects into money payments, had concentrated their whole power
+in their treasuries. Through the rapid strides in social improvements,
+and a more enlightened system of government, this power had become very
+great in comparison with what it had been. France appeared in the field
+with a standing army of a couple of hundred thousand men, and the other
+Powers in proportion."
+
+Armies were supported out of the Treasury, which the sovereign regarded
+partly as his privy purse, at least as a resource belonging to the
+Government, and not to the people. Relations with other States, except
+with respect to a few commercial subjects, mostly concerned only the
+interests of the Treasury or of the Government, not those of the
+people; at least ideas tended everywhere in that way. The Cabinets
+therefore looked upon themselves as the owners and administrators
+of large estates, which they were continually seeking to increase,
+without the tenants on those estates being particularly interested in
+this improvement.
+
+The people, therefore, who in the Tartar invasions were everything in
+war, who in the old republics and in the Middle Ages were of great
+consequence, were in the eighteenth century absolutely nothing directly.
+
+In this manner, in proportion as the Government separated itself more
+from the people, and regarded itself as the State, war became more and
+more exclusively a business of the Government, which it carried on
+by means of the money in its coffers and the idle vagabonds it could
+pick up in its own and neighbouring countries. The army was a State
+property, very expensive, and not to be lightly risked in battle.
+"In its signification war was only diplomacy somewhat intensified, a
+more vigorous way of negotiating, in which battles and sieges were
+substituted for diplomatic notes."
+
+"Plundering and devastating the enemy's country were no longer in
+accordance with the spirit of the age." "They were justly looked upon
+as unnecessary barbarity." "War, therefore, confined itself more and
+more, both as regards means and ends, to the army itself. The army,
+with its fortresses and some prepared positions, constituted a State in
+a State, within which the element of war slowly consumed itself. All
+Europe rejoiced at its taking this direction, and held it to be the
+necessary consequence of the spirit of progress."
+
+So think many in this country to-day. They are only a hundred years
+behind the times.
+
+"The plan of a war on the part of the State assuming the offensive in
+those times consisted generally in the conquest of one or other of the
+enemy's provinces; the plan of the defender was to prevent this. The
+plan of campaign was to take one or other of the enemy's fortresses, or
+to prevent one of our own being taken; it was only when a battle became
+unavoidable for this purpose that it was sought for and fought. Whoever
+fought a battle without this unavoidable necessity, from mere innate
+desire of gaining a victory, was reckoned a general with too much
+daring." For armies were too precious to be lightly risked. "Winter
+quarters, in which the mutual relations of the two parties almost
+entirely ceased, formed a distinct limit to the activity which was
+considered to belong to one campaign." "As long as war was universally
+conducted in this manner, all was considered to be in the most regular
+order." "Thus there was eminence and perfection of every kind, and
+even Field-Marshal Daun, to whom it was chiefly owing that Frederick
+the Great completely attained his object, and Maria Theresa completely
+failed in hers, notwithstanding that could still pass for a great
+general."
+
+Beyond this stage of military thought, many in this country have not
+yet advanced.
+
+       *       *       *       *       *
+
+"Thus matters stood when the French Revolution broke out; Austria
+and Prussia tried their diplomatic art of war; this very soon proved
+insufficient. Whilst, according to the usual way of seeing things,
+all hopes were placed on a very limited military force in 1793, such
+a force as no one had any conception of made its appearance. War had
+suddenly become again an affair of the people, and that of a people
+numbering thirty millions, every one of whom regarded himself as a
+citizen of the State." "_By this participation of the people in the
+war_, instead of a cabinet and an army, a whole nation with its natural
+weight came into the scale. Henceforth the means available--the efforts
+which might be called forth--had no longer any definite limits; the
+energy with which the war itself might be conducted had no longer any
+counterpoise, and consequently the danger to the adversary had risen to
+the extreme."
+
+If only our politicians could learn this old lesson of the French
+Revolution! For many, too many, of them appear to derive their ideas of
+war to-day from some dim reminiscent recollections of school histories
+of the wars in the seventeenth and eighteenth centuries.
+
+To continue: "After all this was perfected by the hand of Bonaparte,
+this military power based on the strength of the whole nation, marched
+over Europe, smashing everything in pieces so surely and certainly,
+that where it only encountered the old-fashioned armies the result was
+not doubtful for a moment.
+
+"A reaction, however, awoke in due time. In Spain the war became of
+itself an affair of the people." In Austria. In Russia. "In Germany
+Prussia rose up the first, made the war a national cause, and without
+either money or credit, and with a population reduced one-half, took
+the field with an army twice as strong as in 1806. The rest of Germany
+followed the example of Prussia sooner or later." "Thus it was that
+Germany and Russia, in the years 1813 and 1814, appeared against France
+with about a million of men."
+
+"Under these circumstances the energy thrown into the conduct of war
+was quite different." "In eight months the theatre of war was removed
+from the Oder to the Seine. Proud Paris had to bow its head for the
+first time; and the redoubtable Bonaparte lay fettered on the ground."
+
+"Therefore, since the time of Bonaparte, war, through being, first on
+one side, then again on the other, an affair of the whole nation, has
+assumed quite a new nature, or rather it has approached much nearer
+to its real nature, to its absolute perfection. The means then called
+forth had no visible limit, the limit losing itself in the energy
+and enthusiasm of the Government and its subjects. By the extent of
+the means, and the wide field of possible results, as well as by
+the powerful excitement of feeling which prevailed, energy in the
+conduct of war was immensely increased; the object of its action was
+the downfall of the foe; and not until the enemy lay powerless on
+the ground was it supposed to be possible to stop, or to come to any
+understanding with regard to the mutual objects of the contest.
+
+"Thus, therefore the element of war, freed from all conventional
+restrictions, broke loose with all its natural force. The cause was the
+participation of the people in this great affair of State, and this
+participation arose partly from the effects of the French Revolution on
+the internal affairs of other countries, partly from the threatening
+attitude of the French towards all nations.
+
+"Now, whether this will be the case always in future, whether all wars
+hereafter in Europe will be carried on with the whole power of the
+States, and, consequently, _will only take place on account of great
+interests closely affecting the people_, would be a difficult point to
+settle. But every one will agree with us that, at least, _Whenever
+great interests are in dispute_, mutual hostility will discharge itself
+in the same manner as it has done in our times."
+
+
+REFLECTIONS
+
+This is so true, that every war since the days of Clausewitz has made
+its truth more apparent. Since he wrote, the participation of the
+people in war has become, not a revolutionary fact, but an organized
+fact, an ordinary fact in the everyday life of nations. To-day every
+State except Great Britain, securely based on the system of the
+universal training of its sons to arms, stands ready to defend its
+interests with the whole concentrated power, physical, intellectual,
+and material, of its whole manhood. Consequently, European war,
+as Clausewitz foresaw, "will only take place on account of great
+interests closely affecting the people." The character of such war
+will be absolute, the object of its action will be the downfall of the
+foe, and not till the foe (be it Great Britain or not) lies powerless
+on the ground will it be supposed possible to stop. In the prosecution
+of such a national war the means available, the energy and the effort
+called forth, will be without limits. Such must be the conflicts of
+nations-in-arms.
+
+Yet, even now, so many years after Clausewitz wrote, in the hope, as he
+himself stated, "to iron out many creases in the heads of strategists
+and statesmen," the great transformation in the character of modern
+war, due to the participation of the people therein, has not yet been
+adequately realized by many men in this country _who ought to know_.
+It is earnestly to be hoped that they will endeavour to adjust their
+minds, as regards war, to the fact that we are living, not in the
+eighteenth century, but in the twentieth, and that they will consider
+that war has once for all become an affair of the people, that our
+opponents will be a people-in-arms, using the uttermost means of their
+whole manhood to crush us, and that disaster can only be prevented by a
+like utmost effort on our part, by an effort regardless of everything
+except self-preservation.
+
+
+
+
+CHAPTER VI
+
+PUBLIC OPINION IN WAR
+
+
+"War belongs, not to the province of arts and sciences, but to the
+province of social life. It is a conflict of great interests which is
+settled by bloodshed, and only in that respect is it different from
+others. It would be better, instead of comparing it with any art, to
+liken it to trade, which is also a conflict of human interests and
+activities; and it is still more like state policy, which again, on
+its part, may be looked upon as a kind of trade on a great scale.
+Besides, state policy is the womb in which war is developed, in which
+its outlines lie hidden in a rudimentary state, like the qualities of
+living creatures in their germs."[13]
+
+These conflicts of interest can bring about gradually such a state of
+feeling that "even the most civilized nations may burn with passionate
+hatred of each other." It is an unpleasant fact for the philosopher,
+for the social reformer, to contemplate, but history repeats and
+repeats the lesson. Still more, "It is quite possible for such a state
+of feeling to exist between two States that a very trifling political
+motive for war may produce an effect quite disproportionate--in fact, a
+perfect explosion."
+
+"War is a wonderful trinity, composed of the original violence of its
+elements--hatred and animosity--which may be looked upon as blind
+instinct; of the play of probabilities and chance, which make it a free
+activity of the soul; and of the subordinate nature of a political
+instrument, by which it belongs purely to the reason.
+
+"The first of these three phases concerns more the people; the second,
+more the general and his army; the third more the Government. _The
+passions which break forth in war must already have a latent existence
+in the peoples._
+
+"These three tendencies are deeply rooted in the nature of the subject.
+A theory which would leave any one of them out of account would
+immediately become involved in such a contradiction with the reality,
+that it might be regarded as destroyed at once by that alone."[14]
+
+Clausewitz is the great thinker, the great realist, the great
+philosopher of war. His aim was, free from all bias, to get at _the
+truth of things_. His view of war as a social act, as part of the
+intercourse of nations, so that occasional warlike struggles can no
+more be avoided than occasional commercial struggles, is a view which
+requires to be most carefully pondered over by every statesman. It
+is based upon the essential fundamental characteristics of human
+nature, which do not alter. It is not to be lightly set aside by
+declamation about the blessings of peace, the evils of war, the burden
+of armaments, and such-like sophistries. To submit without a struggle
+to injustice or to the destruction of one's vital interests is not in
+passionate human nature. Nor will it ever be in the nature of a virile
+people. It is indeed to be most sincerely hoped that _arbitration_
+will be resorted to more and more as a means of peacefully settling
+all non-vital causes of dispute. But arbitration has its limits. For
+_no great nation will ever submit to arbitration any interest that
+it regards as absolutely vital_. The view of war, therefore, as a
+social act, as part of the intercourse of nations, with all that it
+implies, appears to be the only one which a statesman, however much he
+may regret the fact, can take. It has, therefore, been brought forward
+here at once, as it underlies the whole subject and is essential to all
+clear thought thereon.
+
+So much for the influence of Public Opinion in producing war. Now for
+its influence in and during war.
+
+"There are three principal objects in carrying on war," says Clausewitz.
+
+  "(_a_) To conquer and destroy the enemy's armed force.
+
+  "(_b_) To get possession of the material elements of aggression,
+  and of the other sources of existence of the hostile army.
+
+  "(_c_) _To gain Public Opinion._[15]
+
+"To attain the first of these objects, the chief operation must be
+directed against the enemy's principal army, for it must be beaten
+before we can follow up the other two objects with success.
+
+"In order to seize the material forces, operations are directed against
+those points at which those resources are chiefly concentrated:
+principal towns, magazines, great fortresses. On the road to these the
+enemy's principal force, or a considerable part of his army, will be
+encountered.
+
+"Public Opinion is ultimately gained by great victories, and by the
+possession of the enemy's capital."[16]
+
+This almost prophetic (as it was in his day) recognition by Clausewitz
+of the vast importance of gaining Public Opinion _as one of the
+three great aims in war_, is fundamental. It is just one of those
+instances of his rare insight into the principles and development of
+modern national war which make his book of such great and enduring
+value to us. For since his day Europe has become organized into great
+industrial nations, democracy and popular passion have become more
+and more a force to be reckoned with, and the gaining and preserving
+of Public Opinion in war has become more and more important. It has,
+in fact, become the statesman's chief business during a great modern
+national war. It has become necessary for him to study intently war in
+its relation to industry, and to the industrial millions over whom he
+presides, or over whom he may preside.
+
+
+REFLECTIONS
+
+(1) In the time of Clausewitz we in Britain were a nation of
+18,000,000, practically self-supporting, and governed by an
+aristocracy. To-day we are a crowded nation of 43,000,000 dependent
+upon over-sea sources for three-fourths of our food, for our raw
+materials, for our trade, for our staying power, _and_ we are governed
+by a democracy. In a modern democratic State it will only be possible
+to carry on the most just and unavoidable war so long as the hardships
+brought on the democracy by the war do not become intolerable. To
+prevent these hardships from thus becoming intolerable to the people,
+to Public Opinion, will be the task of the modern statesman during war,
+and this can only be done by wise prevision and timely preparation. _It
+requires the internal organization of the Industrial State for war._
+
+It appears to the _writer_ that internal organization can be subdivided
+as follows:--
+
+I. An adequate gold reserve.
+
+II. The protection of our ships carrying raw material, food, and
+exports during their passage on the high seas from the places of
+origin to the consumers: (A) by the few available cruisers which could
+be spared from the fighting fleets, assisted by a thoroughly well
+thought out and prepared scheme of national indemnity (_vide_ Blue Book
+thereon); (B) by insuring the distribution to the consumers of food
+and raw material, after it has arrived in the country, by preparing a
+thorough organization which would deal with the blocking of any of the
+principal ports of arrival, and by guarding the vulnerable points of
+our internal lines of communications to and from the shipping centres.
+
+III. Organization of Poor Law system to bring immediate relief by
+selling at peace price food to those unable to pay war prices owing to
+(A) normal poverty (7,000,000 to 8,000,000 souls), (B) out-of-works,
+due to effect of war on trade.
+
+Work and wages the State _must_ guarantee during modern war, and
+before the State _can_ guarantee these, it is absolutely necessary
+that it should satisfy itself that the above preparations are actually
+_in being_. This pre-supposes a more earnest study of the industrial
+effects of a great national war than has yet been given to the subject
+by our political leaders. For in the warfare of the present and future
+the importance of gaining and preserving Public Opinion, as pointed
+out by Clausewitz, cannot be over-estimated. It is as fundamentally
+important _to safeguard our own Public Opinion as it is to attack,
+weaken, and gain over that of the enemy_. This has not yet passed
+the stage of thought. But good thoughts are no better than good dreams
+unless they be put into action. We are waiting for the statesman to DO
+it. There is no great difficulty.
+
+(2) In arousing the national spirit to the requisite height of
+patriotic self-denial and self-sacrifice, in elevating, preserving, and
+safe-guarding Public Opinion during a great national struggle, much
+may be hoped for from the patriotism of our Press. Only in fairness to
+those whose patriotism is self-originating and spontaneous, it must
+be made compulsory upon ALL, so that no journal may suffer loss of
+circulation or pecuniary injury thereby.
+
+(3) There lies a practical task immediately to the hand of our
+statesmen if they will seriously set themselves to the task of
+improving the _moral_ of our nation by reforming our education
+_curriculum_, on the leading principle that the moral is to the
+physical as three to one in life, and that therefore character-building
+must be its chief aim. Then they will do much towards strengthening
+us for war, towards carrying out Clausewitz's idea of the gaining and
+preserving of our Public Opinion in War.
+
+
+
+
+CHAPTER VII
+
+THE NATURE OF WAR
+
+
+"It is necessary for us to commence with a glance at the nature of the
+whole, because it is particularly necessary that, in the consideration
+of any of the parts, the whole should be kept constantly in view. We
+shall not enter into any of the abstruse definitions of war used by
+Publicists. We shall keep to the element of the thing itself, to a
+duel. War is nothing but a duel on an extensive scale. If we would
+conceive as a unit the countless numbers of duels which make up a
+war, we shall do so best by supposing two wrestlers. Each strives
+by physical force to throw his adversary, and thus to render him
+incapable of further resistance.
+
+"Violence arms itself with the inventions of arts and science in
+order to contend against violence. Self-imposed restrictions, almost
+imperceptible, and _hardly worth mentioning_, termed _usages of
+International Law_, accompany it without essentially impairing its
+power.
+
+"Violence, that is to say physical force, is therefore _the Means_;
+the compulsory submission of the enemy to our will is the ultimate
+_object_. In order to attain this object fully the enemy must first be
+disarmed: and this is, correctly speaking, the real aim of hostilities
+in theory."[17]
+
+Now, "philanthropists may easily imagine that there is a skilful
+method of disarming and overcoming an adversary without causing great
+bloodshed, and that this is the proper tendency of the art of war.
+However plausible this may appear, _still it is an error which must
+be extirpated_, for in such dangerous things as war _the errors which
+proceed from a spirit of benevolence are just the worst_. As the
+use of physical power to the utmost extent by no means excludes the
+co-operation of the intelligence, it follows that _he who uses force
+unsparingly without reference to the quantity of bloodshed_, MUST
+_obtain a superiority if his adversary does not act likewise_." "To
+introduce into the philosophy of war itself a principle of moderation
+would be an absurdity." "We therefore repeat our proposition, that _War
+is an act of violence which in its application knows no bounds_."
+
+
+THE POLITICAL NATURE OF WAR
+
+In endeavouring briefly to describe Clausewitz's method of looking at
+war, one is continually confronted by the difficulty of selecting
+a few leading ideas out of so many profound thoughts and pregnant
+passages. However, a selection must be made.
+
+I assign the first place to his conception of war as a part of policy,
+because that is fundamentally necessary to understand his practical
+way of looking at things. This point of view is as necessary for
+the strategist as for the statesman, indeed for every man who would
+understand the nature of war. For otherwise it is impossible to
+understand the military conduct of many campaigns and battles, in which
+the political outweighed the military influence, and led to action
+incomprehensible almost from a purely military point of view. History
+is full of such examples.
+
+Clausewitz clearly lays down: "_War is only a continuation of State
+policy by other means._ This point of view being adhered to will
+introduce much more unity into the consideration of the subject, and
+things will be more easily disentangled from each other."[18] "It
+is only thus that we can obtain a clear conception of war, for the
+political view is the _object_, war is the _means_, and the means
+must always include the object in our conception." "Each (nation or
+government) strives by physical force to compel the other to submit to
+its will."[19]
+
+Owing to the great importance of this point of view, so little
+understood in this country, I have devoted the next chapter to it
+alone, so as to bring out Clausewitz's view more in detail. We can,
+therefore, pass on for the present.
+
+
+THE CULMINATING POINT OF VICTORY
+
+Secondly, I select his doctrine of the culminating point of victory,
+because that is essential in order to understand his division of all
+wars into two classes, according to how far the attack is likely to be
+able to extend into the hostile country before reaching its culminating
+point, where reaction may set in.[20]
+
+"The conqueror in a war is not always in a condition to subdue his
+adversary completely. Often, in fact almost _universally, there is a
+culminating point of victory_. Experience shows this sufficiently."[21]
+As the attack or invasion progresses it becomes weaker even from its
+successes, from sieges or corps left to observe fortified places, from
+the troops required to guard the territory gained, and the lengthening
+line of communications, from the fact that we are removing further
+from our resource while the enemy is falling back upon and drawing
+nearer to his, from the danger of other States joining in to prevent
+the utter destruction of the defeated nation, from the rousing of
+the whole nation in extremity to save themselves by a people's war,
+from the slackening of effort in the victorious army itself, etc.,
+etc. Leoben, Friedland, Austerlitz, Moscow, are instances of such a
+culminating point, and probably in the late Russo-Japanese war Harbin
+would have proved so, too, if peace had not intervened.
+
+Clausewitz continues: "It is necessary to know how far it (our
+preponderance) will reach, in order not to go beyond that point and,
+instead of fresh advantage, reap disaster." He defines it as "_The
+point at which the offensive changes into the defensive_," and says,
+"to overstep this point is more than simply a useless expenditure of
+power yielding no further results, it is a _destructive_ step which
+causes reaction, and the reaction is, according to all experience,
+productive of most disproportionate effects."[22] The reader will find
+it an interesting exercise to search for this culminating point of
+victory in historical campaigns, and mark the result where it has been
+overstepped and where it has not been overstepped.
+
+
+THE TWO CLASSES OF WARS
+
+From this consideration of the culminating point of victory follow the
+two classes into which Clausewitz divides all wars.
+
+"The two kinds of war are, first, those in which the object is the
+complete _overthrow of the enemy_, whether it be that we aim at his
+destruction politically, or merely at disarming him and forcing him to
+conclude peace on our terms; and, _next_, those in which our aim is
+merely to make some conquests on the frontiers of his country, either
+for the purpose of retaining them permanently, or of turning them to
+account as matters for exchange in the settlement of Peace."[23]
+
+All wars, therefore, are wars for the complete destruction of the
+enemy, _i.e._ "unlimited object," or wars with a "limited object."
+In the plan of a war it is necessary to settle which it is to be in
+accordance with our powers and resources of attack compared with
+the enemy's resources for defence, and where our culminating point
+of victory is likely to be, on this side of the enemy's capital or
+beyond it. If the former--then the plan should be one with a "limited
+object," such as the Crimea, Manchuria, etc.; if the latter--then the
+plan should aim at the enemy's total destruction, such as most of
+Napoleon's campaigns, or the Allies in 1813, 1814, 1815, or as 1866,
+or 1870. As Clausewitz says: "_Now, the first, the grandest, and most
+decisive act of judgment which the statesman and general exercises, is
+rightly to understand in this respect the war in which he engages_,
+not to take it for something or to wish to make of it something which,
+by the nature of its relations, it is impossible for it to be. _This,
+therefore, is the first and most comprehensive of all strategical
+questions._"[24]
+
+In Clausewitz's two plans for war with France in 1831,[25] this
+difference is plain. In the first plan, he considered Prussia, Austria,
+the German Confederation, and Great Britain united as allies against
+France,--and with this great superiority of numbers he plans an attack
+by two armies, each of 300,000 men, one marching on Paris from Belgium,
+one on Orleans from the Upper Rhine. In the second plan the political
+conditions had meanwhile changed; Austria and Great Britain were
+doubtful, and Clausewitz held it accordingly dubious if Prussia and
+the German Confederation alone could appear before Paris in sufficient
+strength to guarantee victory in a decisive battle, and with which it
+would be permissible to venture even beyond Paris. So he proposed to
+limit the object to the conquest of Belgium, and to attack the French
+vigorously the moment they entered that country.
+
+Which strict limitation of the object within the means available to
+attain it is characteristic of Clausewitz's practical way of looking
+at things. In each plan, however, a vigorous offensive aiming at a
+decisive victory was to be adopted.
+
+
+PREPARATION FOR WAR
+
+The third place, in respect to its present-day importance, I assign to
+Clausewitz's clear statement that--
+
+"If we have clearly understood the result of our reflections, then
+the activities belonging to war divide themselves into two principal
+classes, into such as are only _preparations for war_ and into _the war
+itself_. This distinction must also be made in theory."
+
+Nothing could be more clearly stated than this, or place in greater
+honour peace preparations. Like his doctrine of the importance of
+gaining public opinion in war, it is one of those almost prophetic
+utterances which make Clausewitz the germ of modern military evolution.
+
+Clausewitz, unlike Jomini who did not, foresaw to a certain extent
+(probably owing to his employment in organizing the new Prussian
+short-service army after 1806) the nation-in-arms of the present day.
+And, since his time, the greater the forces which have to be prepared,
+the greater has become the value of preparation for war. It has been
+continually growing, till to-day it has obtained such overwhelming
+importance that one may almost say that a modern war is practically (or
+nearly so) decided _before_ war breaks out, according to which nation
+has made the greatest and most thorough peace preparations.
+
+Clausewitz elsewhere speaks of "every imaginable preparation." We may
+nowadays almost go so far as to say that preparation is war, and that
+that nation which is beaten in preparation is already beaten BEFORE
+the war breaks out.
+
+A failure to understand this fact is a fundamental error at the root
+of the idea of war as held by civilians, for many of them think that
+speeches are a substitute for preparations.
+
+It is plain that these three ideas of Clausewitz regarding the nature
+of war, its political nature, the distinction between wars with an
+unlimited object and a limited object, and preparations in peace-time,
+are as much matters for the statesman as for the soldier, and require
+study and reflection on the part of the former as much as on the part
+of the latter.
+
+
+FRICTION IN WAR
+
+I place friction here before the more detailed consideration of actual
+war, of war in itself, because it is that which distinguishes war
+on paper from real war, the statesman's and soldier's part from the
+part of the soldier only, and is therefore to be fitly treated midway
+between the two.
+
+Friction in war is one of Clausewitz's most characteristic ideas. He
+always looks at everything from that point of view, and as friction
+and the fog of war, and their influence on human nature will always be
+the chief characteristic of real war as distinguished from theoretical
+war or war on paper, it is chiefly this habit or mode of thought which
+makes his writings of such great and permanent value. It is also a
+habit which we ought sedulously to cultivate in ourselves.
+
+"_In war everything is very simple, but the simplest thing is
+difficult_,"[26] runs his famous saying. Why is the simplest thing
+difficult? Because of the friction of war. And how can that friction
+be minimized? Only by force of character, and the military virtues of
+discipline, perseverance, resolution, energy, and boldness. Hence the
+great emphasis which he always and everywhere lays upon character and
+these military virtues as the deciding factors in war.
+
+"_Friction is the only conception which in a general way corresponds to
+that which distinguishes real war from war on paper_," he says. Each
+individual of the army "keeps up his own friction in all directions."
+"The danger which war brings with it, the bodily exertions which it
+requires, augment this evil so much that they may be regarded as the
+greatest causes of it."[27] "_This enormous friction is everywhere
+brought into contact with chance_, and thus facts take place
+upon which it was impossible to calculate, their chief origin being
+chance. As an instance of one such chance take the weather. Here the
+fog prevents the enemy from being discovered in time,--a battery from
+firing, or a report from reaching the general. The rain (mud) prevents
+a battalion from arriving,--or the cavalry from charging effectively,
+because it had stuck fast in the heavy ground." And so on. Consider
+for examples the foggy mornings of Jena or Austerlitz, of Eylau, the
+Katzbach, Grosbeeren, Dennewitz, Pultusk, Dresden, Sadowa; or the mud
+of Poland, the snow of Russia, or, latest, the mud of Manchuria.
+
+"_Activity in war is movement in a resistant medium._" "_The knowledge
+of friction is a chief part of that so often talked of experience in
+war_, which is required in a good general." "It is therefore this
+friction which makes that which appears easy in war so difficult in
+reality."[28] In considering any situation in war we must therefore
+always add to the known circumstances--friction.
+
+
+WAR ITSELF
+
+In Clausewitz's way of looking at war itself I assign at once the first
+place to his doctrine, "_The destruction of the enemy's military force
+is the leading principle of war_, and for the whole chapter of positive
+action _the direct way to the aim_."[29] This dictum, repeated in
+many different forms, underlies his whole conception of war. All the
+old theoretical ideas about threatening by manoeuvring, conquering by
+manoeuvring, forcing the enemy to retreat by manoeuvring, and so forth,
+in which his predecessors entangled strategy, and from which even the
+Archduke Charles and Jomini had not completely freed themselves, he
+brushes aside by "our assertion is that ONLY great tactical results can
+lead to great strategical results."[30] Thus he leads and concentrates
+our thoughts in strategy on the central idea of victory in battle,
+and frees us once for all from the obscuring veil of lines and angles
+and geometrical forms by which other writers have hidden that truth.
+"Philanthropists may easily imagine that there is a skilful method of
+overcoming and disarming an adversary without causing great bloodshed,
+and that this is the proper tendency of the art of war. However
+plausible this may appear, _it is an error which must be extirpated_,
+for, in such dangerous things as war, _the errors which spring from a
+spirit of benevolence are just the worst_."[31] For "he who uses force
+unsparingly without reference to the quantity of bloodshed, _must_
+obtain the superiority if his adversary does not act likewise." And the
+"worst of all errors in wars" is still the idea of war too commonly
+held by civilians in this country, as witness the outcries which
+greeted every loss during the South African war, which shows how much
+Clausewitz is needed as a tonic to brace their minds to the reality.
+
+"War is an act of violence which in its application knows NO bounds."
+"Let us not hear of generals who conquer without bloodshed; if a bloody
+slaughter be a horrible sight, then that is a ground for paying more
+respect to war (for avoiding unnecessary war), but not for making the
+sword we wear blunt and blunter by degrees from feelings of humanity,
+till some one steps in with a sword that is sharp, and lops off the
+arm from our body."
+
+
+SIMPLE PLANS
+
+The second place I assign to his doctrine of _the simplest plans_,
+because time is required for the completion of complicated evolutions,
+but "a bold, courageous, resolute enemy will not let us have _time_
+for wide-reaching skilful combination."[32] "By this it appears to us
+that the advantage of simple and direct results over those that are
+complicated is conclusively shown."
+
+"We must not lift the arm too far for the room given to strike," or the
+opponent will get his thrust in first.
+
+"Whenever this is the case, we must ourselves choose the shorter."
+"Therefore, far from making it our aim to gain upon the enemy by
+complicated plans, _we must always rather endeavour to be beforehand
+with him by the simplest and shortest_."
+
+
+STRATEGIC LINES
+
+The salient and re-entrant frontiers, the subtle distinctions between
+the numerous kinds of strategic lines, and lines of operation,
+and lines of manoeuvre, etc., etc., etc., which in Jomini and his
+predecessors and followers play so great, so pedantic, and so confusing
+a part,--for these Clausewitz has little respect. In his chapter on
+"The Geometrical Element,"[33] he says, "We therefore do not hesitate
+to regard it as an established truth that _in strategy more depends
+upon the number and magnitude of the victorious battles than on the
+form of the great lines by which they are connected_."[34] Of course
+he does not altogether leave out such considerations, but the above
+sentence shows how he regards them as only of minor importance. He
+therefore frees us from a great deal of pedantry, and takes us back to
+the heart of things.
+
+
+FRICTION
+
+has been already dealt with, so no more need be said here, except about
+its components.
+
+
+DANGER
+
+"An ordinary character never attains to complete coolness" in danger.
+"Danger in war belongs to its friction, and a correct idea of it is
+necessary for truth of perception, and therefore it is brought under
+notice here."[35]
+
+
+BODILY EXERTION
+
+Clausewitz says that bodily exertion and fatigue in war "put fetters on
+the action of the mind, and wear out in secret the powers of the soul."
+"Like danger, they belong to the fundamental causes of friction."[36]
+
+To one who, like Clausewitz, had seen the retreat from Moscow, the
+awful passage of the Beresina, and the battle of the nations round
+Leipzig, bodily exertion could not be overlooked. Had he not seen
+bodily exertion and hardship break up the Grand Army into a small horde
+of stragglers, and destroy the army of Kutusoff in almost an equal
+measure, in 1812, as well as practically ruin the spirit, and largely
+break up the great army of Napoleon in 1813?
+
+As for the effects of bodily exertion on the mind, purpose, and
+resolution of the general, compare Benningsen at Eylau after thirty-six
+hours in the saddle, or Napoleon at Dresden, by which he lost all the
+results of his victory.
+
+
+INFORMATION IN WAR
+
+"_The foundation of all our ideas and actions_," but "in a few words,
+_most reports are false_." "When in the thick of war itself one
+report follows hard upon the heels of another, it is fortunate if
+these reports in contradicting each other show a certain balance of
+probability." In another passage, in order to illustrate this perpetual
+uncertainty under which all decisions in war have to be made, he
+compares two opposing commanders to two men fighting in a dark room and
+groping uncertainly for one another.
+
+"These things which as elements meet together in the atmosphere of war
+and make it a _resistant medium for every activity_, we have designated
+danger, bodily exertion, information, and friction."[37] He never loses
+sight of this; it pervades everything he writes.
+
+
+THE MORAL AND PHYSICAL
+
+"And therefore the most of the subjects which we shall go through in
+this book are composed _half of physical, half of moral causes and
+effects_, and we might say that the physical are almost no more than
+the wooden handle, whilst the moral are the noble metal, the real
+bright polished weapon."[38] Pages might be filled with extracts
+showing his opinion that the moral is everything in war, but the reader
+is already convinced of that. Compare Napoleon's in war, "The moral
+is to the physical as three to one." Clausewitz regards all military
+questions from this point. His psychological attitude is what chiefly
+characterizes Clausewitz from all writers who came before him, and
+which makes his deductions so realistic, so interesting and so valuable
+for all who come after him.
+
+
+TENSION AND REST IN WAR
+
+In order not to weary the reader I will bring this chapter to a
+conclusion with one or two extracts relating to "tension and rest;
+the suspension of the act in warfare." This is explanatory of those
+frequent halts which take place in a campaign, which appear at first
+sight contradictory to the absolute theory of war. These halts are
+due to many causes, such as preparations, exhaustion, uncertainty,
+irresolution, friction, waiting for reinforcements, etc.
+
+In this connection one must remember that war is "a chain of battles
+all strung together, one of which always brings on another." But they
+seldom follow each other immediately; there is usually a certain
+pause between. As soon as one battle is gained, strategy makes new
+combinations in accordance with the altered circumstances to win the
+next. Whilst these new combinations are being developed, or perhaps
+considered, there may be a greater or less suspension of the act, a
+longer or shorter halt in the forward movement. Then another spring
+forward. Clausewitz has a great many interesting things to say on this
+subject.[39]
+
+"If there is a suspension of the act in war, that is to say, if neither
+party for the moment wills anything positive, there is _rest_, and for
+the moment equilibrium.... As soon as ever one of the parties proposes
+to himself a new positive object, and commences active steps towards
+it, even if it is only by preparations, and as soon as the enemy
+opposes this, there is _tension_ of the powers; this lasts until the
+decision takes place.... This decision, the foundation of which lies
+always in the battle-combinations which are made on each side, ... is
+followed by a movement in one or other direction."
+
+"It may so happen that both parties, at one and the same time, not only
+feel themselves too weak to attack, but are so in reality."
+
+"Wild as is the nature of war it still wears the claims of human
+weakness, and the contradiction we see here, that man seeks and creates
+dangers which he fears at the same time, will astonish no one."
+
+"If we cast a glance at military history in general, there we find
+so much the opposite of an incessant advance towards the aim, that
+_standing still_ and _doing nothing_ is quite plainly the _normal
+condition_ of an army in the midst of war, _acting_ the _exception_.
+This must almost raise a doubt as to the correctness of our conception.
+But if military history has this effect by the great body of its
+events, so also the latest series of wars redeem the view. The war of
+the French Revolution shows only too plainly its reality, and only
+proves too plainly its necessity. In that war, and especially in the
+campaigns of Bonaparte, the conduct of war attained to that unlimited
+degree of energy which we have represented as the natural law of the
+element. This degree is therefore possible, and if it is possible then
+it is necessary."
+
+
+REFLECTIONS
+
+(1) "Hardly worth mentioning"! So that is how Clausewitz regards
+International Law, Clausewitz to whom in Germany "our most famous
+victors on the more modern battlefields owe their spiritual training,"
+and on whom "everybody who to-day either makes or teaches modern war
+bases himself, even if he is not conscious of it." And we must regard
+nearly every foreign statesman as, consciously or unconsciously, a
+disciple of Clausewitz. It is, therefore, high time that we should
+cease to pin our faith on International Law, or think that it can in
+any way protect us, if we neglect strongly to protect ourselves. Power
+and expediency are the only rules that the practical politicians of
+foreign countries recognize, and the only question they ask themselves
+is, "Have we got sufficient power to do this," and if so, "Is it
+expedient to do it?"
+
+(2) Treaties, too, what reliance can we place upon them for any length
+of time? None whatever. For treaties are only considered binding as
+long as the interests of _both_ contracting parties remain the same.
+Directly circumstances change, and they change constantly, the most
+solemn treaties are torn up, as Russia tore up the Treaty of Paris, or
+as Austria tore up the Treaty of Berlin. All history is full of torn-up
+treaties. And as it has been so it will be. The European waste-paper
+basket is the place to which all treaties eventually find their way,
+and a thing which can any day be thrown into a waste-paper basket
+is, indeed, a poor thing on which to hang our national safety. Only
+in ourselves can we trust. Therefore no treaties at present existing
+should be allowed in any way to alter or lessen our preparations to
+enable us to fight _alone_ when necessary.
+
+(3) It cannot be too often repeated, or too much insisted on, that the
+success or failure of a State policy is dependent upon the amount of
+armed force behind it. For upon the amount of armed force behind a
+policy depends the greater or less amount of resistance, of friction,
+which that policy will meet with on the part of other nations. The
+prestige of a nation depends upon the general belief in its strength.
+The less its prestige, the more it will be checked and foiled by its
+rivals, till at last perhaps it is goaded into a war which would have
+been prevented if its prestige, or armed force, had been greater. On
+the other hand, the greater its prestige, its armed force, the more
+reasonable and inclined to a fair compromise are its rivals found. So
+that the greater the prestige, the armed force, of our nation is, the
+more likely is it that all our negotiations will be settled by peaceful
+compromise, and the longer we shall enjoy peace.
+
+Therefore, under this consideration, those who would reduce our
+national forces are deeply mistaken, for such action would imperil our
+prestige, imperil our negotiations, imperil our peace, and perhaps lead
+eventually to a war that we might otherwise have avoided. Therefore
+no such deeply mistaken economy for us. A few hundred thousand pounds
+saved would be dear economy indeed if it led, as well it might, to the
+payment before many years of a War Indemnity of £800,000,000 or so.
+Better the evils we know than the far greater evils we know not of.
+
+(4) Surprise in war is what we have to fear. There are two sorts of
+national surprise that we must consider. These are (A) the _surprise
+by actual hostilities_ taking place before the actual declaration of
+war, such as the Japanese surprise and practical destruction of the
+fighting force of the Russian fleet at Port Arthur; (B) the _surprise
+by superior preparation_, silently carried out till all is ready for a
+decisive blow, whilst we are not ready for equally efficient defence,
+and then a declaration of war before we have time to get properly
+ready, as the surprise in this sense of France by Germany in 1870.
+
+(A) Every successful example is always copied, and usually on a larger
+scale. We may be quite certain that our rivals have taken to heart
+the lesson of Port Arthur. It is possible that our next war will open
+with a similar night attack on our fleet, either just before, or
+simultaneously with the declaration of war. If it is successful, or
+even partially successful, it may produce the most grave results, as in
+the Russo-Japanese War. It _may_ render possible a naval action with
+almost equal forces, in which our opponents _might_ be victorious. The
+invasion of this country on a gigantic scale by 300,000 men or more
+would then follow as a certainty. This is not a probability, but a
+possibility which requires to be kept in our view.
+
+(B) _The surprise by superior preparation_, as I term it, for want
+of a better name, is a danger to which we are peculiarly liable. As
+Lord Salisbury said, "The British constitution is a bad fighting
+machine," and it is made an infinitely worse fighting machine by
+the lack of interest which our politicians appear to take in all
+that appertains to war. Hence they are always liable to oppose, as
+excessive, preparations which are in reality the minimum consistent
+with national safety. Consequently our preparations for war, controlled
+as they are by those who have no special knowledge of war, are always
+apt to be insufficient, as were those of France in 1870. In former
+days this did not perhaps so very much matter, although it resulted
+in the unnecessary loss of hundreds of thousands of British lives and
+hundreds of millions of British treasure. But still we were able, at
+this somewhat excessive price, to "muddle through," owing to the heroic
+efforts of our soldiers and sailors to make bricks without straw and
+retrieve the mistakes of our policy. For our opponents then conducted
+war in such a slow way as to give us time to repair _after_ the
+outbreak of war our lack of preparation _before_ it. But opposed to a
+modern nation-in-arms, guided by statesmen and led by generals brought
+up in the school of Napoleon, Clausewitz, and Moltke--all will be
+different. In such a war the national forces brought into play are so
+immense that it is only possible to do so efficaciously if everything
+has been most carefully prepared and organized beforehand. It is not
+_possible_ to improvise such organization of national force _after_
+the war has begun, for there cannot be sufficient time. If our rival
+makes adequate preparation before the war to bring to bear in that
+war the _whole_ of its national force, material, moral, and physical,
+while we only prepare to bring to bear a _small portion_ thereof, then
+there will be no time afterwards for us to repair our negligence. The
+war will be conducted with the utmost energy, and the aim will be to
+utilize to the utmost the superiority obtained by superior preparation,
+so as to make the decision as rapid as possible before we have time to
+recover from the effects of our surprise. That is the danger we have to
+fear, and to keep ever in mind.
+
+
+
+
+CHAPTER VIII
+
+WAR AS POLICY
+
+
+"War," says Clausewitz, "is only a continuation of State policy by
+other means." The first question that at once arises in the mind is
+what is meant by Policy. We may safely lay down that State policy is
+the defence and furtherance of the interests of the nation as a whole
+amidst the play of the conflicting tendencies towards rest and towards
+acquisition, and that its instruments are the pen and the sword. There
+can, of course, be any degree of consistency or fickleness, of strength
+or weakness, of success or failure, in the policy of a State.
+
+Clausewitz expressly stated that he hoped "to iron out many creases
+in the heads of strategists and statesmen," such, for instance, as
+the idea that it is possible to consider either policy or war as
+independent of the other.
+
+It is only possible to obtain a proper conception of policy if we
+regard it as continuous both in peace and war, using sometimes peace
+negotiations, sometimes war negotiations, as circumstances require, to
+attain the political object.
+
+War is only a part of policy, a continuance of the previous
+negotiations; but the instrument is now the sword and not the pen. As
+Clausewitz says, "_In one word, the art of war, in its highest point
+of view, is policy; but no doubt a policy which fights battles instead
+of writing notes._" War is merely a means whereby a nation attempts
+to impose its will upon another nation in order to attain a political
+object. This object is settled by policy, which also orders the war,
+determines what sort of war it is to be, with what means and resources
+and expenditure it is to be waged, when its object has been attained,
+and when it is to cease. In fact, policy prepares, leads up to, orders,
+supports, guides, and stops the war. As Clausewitz said, "_All the
+leading outlines of a war are always determined by the Cabinet--that
+is, by a political, not a military functionary._"
+
+Unity of thought is only to be obtained by "the conception that
+war is only a part of political intercourse, therefore by no means
+an independent thing in itself." "And how can we conceive it to be
+otherwise? Does the cessation of diplomatic notes stop the political
+relations between different nations and governments? Is not war
+merely another kind of writing and language for political thoughts?"
+"Accordingly war can never be separated from political intercourse;
+and if, in the consideration of the matter, this is done in any way,
+all the threads of the different relations are, to a certain extent,
+broken, and we have before us a senseless thing without an object."
+
+"If war belongs to policy, it will naturally take its character from
+policy. If the policy is grand and powerful, so will also be the war,
+and this may be carried to the point at which war attains to its
+absolute form." "Only through this kind of view war recovers unity;
+only by it can we see _all_ wars of _one_ kind, and it is only through
+it that the judgment can obtain the true and perfect basis and point of
+view from which _great plans_ may be traced out and determined upon."
+
+"There is upon the whole nothing more important in life than to find
+out the _right_ point of view from which things should be looked at and
+judged of, and then to keep to that point; for we can only apprehend
+the mass of events in their unity from _one_ standpoint; and it is only
+the keeping to one point of view that guards us from inconsistency."
+"We can only look at policy here as the representative of the interests
+generally of the whole community," and "_wars are in reality only the
+expressions or manifestations of policy itself_."
+
+To the student of history this unity of conception is equally
+necessary, for it supplies the key to many a military puzzle. Without
+it we can never understand, for instance, Napoleon's conduct in
+1812, 1813, 1814; nor without it can we see the compelling reason of
+many battles, apparently fought against military judgment, such, for
+instance, as Borodino, Leipzig, Sedan, etc. We have to remember that
+these and many other battles, as, for instance, Ladysmith, were fought
+from a political, not a military, motive. It is a well-known fact that
+the strategist frequently has to alter and adapt his plans so as to
+suit overmastering political necessity. Yet many people have failed to
+draw therefrom the generalization of Clausewitz that "war is only a
+continuation of State policy by other means." But having got it now,
+let us hold fast to it, with all its consequences.
+
+
+SOME KNOWLEDGE OF WAR NECESSARY FOR STATESMEN
+
+"From this point of view there is no longer in the nature of things
+a necessary conflict between the political and military interests,
+and where it appears it is therefore to be regarded as _imperfect
+knowledge_ only. That policy makes demands upon the war which it
+cannot respond to, would be contrary to the supposition that _it knows
+the instrument it is going to use_, therefore contrary to a natural and
+_indispensable supposition_."
+
+"_None of the principal plans which are required for a war can be made
+without an insight into the political relations_; and in reality when
+people speak, as they often do, of the prejudicial influence of policy
+on the conduct of a war, they say in reality something very different
+to what they intend. It is not this influence, but the policy itself
+which should be found fault with. If policy is right, if it succeeds
+in hitting the object, then it can only act on the war also with
+advantage; and if this influence of policy causes a divergence from the
+object, the cause is to be looked for in a mistaken policy.
+
+"It is only when policy promises itself a wrong effect from certain
+military means and measures, an effect opposed to their nature, that it
+can exercise a prejudicial effect on war by the course it prescribes.
+Just as a person in a language with which he is not conversant
+sometimes says what he does not intend, _so policy, when intending
+right, may often order things which do not tally with its own views_.
+
+"_This has happened times without end, and it shows that a certain
+knowledge of the nature of war is essential to the management of
+political intercourse._"
+
+
+THE WAR MINISTER
+
+"Before going further we must guard ourselves against a false
+interpretation of which this is very susceptible. We do not mean to
+say that this acquaintance with the nature of war is the _principal_
+qualification for a war minister. Elevation, superiority of mind,
+strength of character, these are the principal qualifications which he
+must possess; a knowledge of war may be supplied in one way or another."
+
+
+POLICY AND THE MEANS TO CARRY OUT THAT POLICY MUST HARMONIZE
+
+"_If war is to harmonize entirely with the political views, and policy
+to accommodate itself to the means available for war_, there is only
+one alternative to be recommended when the statesman and soldier are
+not combined in one person (note, as William of Orange, Frederick
+the Great, or Napoleon), which is to make the chief commander an
+_ex-officio_ member of the Cabinet, that he may take part in its
+councils and decisions on important occasions."
+
+"The influence of any military man except the general-in-chief in the
+Cabinet is extremely dangerous; it very seldom leads to able, vigorous
+action."
+
+
+REFLECTIONS
+
+We shall conclude this chapter with a few reflections on the preceding
+dicta of Clausewitz, with which it is hoped that the reader will agree.
+
+Firstly, then, it is clearly apparent that war is subordinate to
+policy, is an instrument of policy, is a part of policy, just as much
+as diplomatic negotiations are a part of policy.
+
+Secondly, a statesman, however good at peaceful administration he may
+be, who is ignorant of war is, therefore, ignorant of one part of
+his profession; that part which deals with the preparing, ordering,
+guiding, and controlling of war. As Clausewitz says, "it is an
+_indispensable supposition_ that policy knows the instrument it is
+going to use." It is a mistake to suppose, when diplomatic relations
+between two States cease, and war breaks out, that therefore the
+political negotiations cease, for they do not, but are merely continued
+in another form--in the form of war. The statesman still retains
+control, and uses the military events as they occur to attain his
+object. He is still responsible for the success of the warlike, as well
+as of the peaceful, policy of the nation.
+
+Thirdly, it is a disputed point how far the influence of policy is
+theoretically allowable during the course of actual operations, _i.e._
+after the war has actually begun. Moltke's opinion was that policy
+should only act at the beginning and at the end of a war, and should
+keep clear during the actual operations. Clausewitz, however, holds
+that the two are so intimately related that the political influence
+cannot be lost sight of even during actual operations. Between two
+such authorities we may well hesitate to give a definite opinion, and
+must seek for the middle way. Undoubtedly, in history policy often
+has really affected the actual operations, as in 1812, 1813, 1814,
+1864, Macmahon's march to Sedan, or Bismarck's interference to hurry
+on the siege of Paris in 1870, or Ladysmith in the Boer War, and in
+many other cases. That, we must admit. We must also admit that its
+interference frequently produces a weakening effect on the operations.
+Clausewitz says that that only occurs when the policy itself is
+wrong. Perhaps. But the safest middle way rule appears to be this,
+that policy should be dominant at the beginning and end of a war, but
+during actual operations the statesman should exercise the greatest
+possible restraint, and avoid all interference, except when demanded by
+_overwhelming political necessity_.
+
+Fourthly, a politician is bound to study war. He is bound to study war
+as well as diplomacy, his two instruments. If he only studies how to
+use one of his two instruments, he will be a poor statesman indeed.
+It is plain that he MUST study war, so that he may not try to use an
+instrument of which he knows nothing. It is not meant, of course,
+that a politician should study all the details of naval and military
+matters, but only that he should study the general principles of war,
+and the means, resources, and forces required to attain the political
+object of war, through the submission of the enemy.
+
+Fifthly, in order that the object and the means of policy may
+harmonize, it is necessary that the one to whom the national interests
+are entrusted should study the principles of war, so that _he may keep
+his policy proportionate to the means of enforcing it_. That is to say,
+he must not propose or commit the nation to a policy which is likely
+to be strongly opposed by another Power, unless he has from careful
+study and enquiry made certain that he has sufficient armed force at
+his disposal, in case the opposing nation suddenly challenges his
+policy and declares war. He should not even consider a policy without
+_at the same time_ considering with his military and naval advisers the
+nation's means of enforcing that policy if challenged to do so. He must
+not think of embarking upon a war, or of provoking another nation to do
+so, till he has carefully provided sufficient armed force to give a
+reasonable prospect, if not a certainty, of success. Otherwise,
+
+Sixthly, as our next contest will be with a nation-in-arms, as the war
+will be in its character absolute, as its object will be the downfall
+of the foe, as not until the foe (whether it be Great Britain or not)
+lies powerless upon the ground will it be supposed possible to stop, as
+we shall have to contend against the utmost means, the utmost energy,
+the utmost efforts of a whole people-in-arms,--these points deserve the
+most serious consideration of every politician who aspires to guide the
+destinies of the Anglo-Saxon Race.
+
+
+
+
+CHAPTER IX
+
+STRATEGY
+
+
+Clausewitz defines strategy as "_the use of the battle to gain the
+object of the war_." War is "a chain of battles all strung together,
+one of which always brings on another."[40] The great thing in strategy
+is to win these battles one after the other till the enemy submits.
+"_The best strategy is always to be very strong, first, generally;
+secondly, at the decisive point._"[41]
+
+"In such an aspect we grant that the superiority of numbers is the
+most important factor in the result of a battle, only it must be
+sufficiently great to be a counterpoise to all the other co-operating
+circumstances. The direct result of all this is that the _greatest
+possible number of troops should be brought into action at the decisive
+point_.[42] Whether the troops thus brought up are sufficient or not,
+we have then done in this respect all that our means allowed. This is
+_the first great principle of strategy_, as well suited for Greeks or
+Persians, or for Englishmen, or Mahrattas, as for French or Germans."
+
+It sounds so simple, and yet how many times has it not been done. How
+many generals have been ruined in consequence!
+
+
+SUPERIORITY IN NUMBERS WHAT IS REQUIRED FOR STRATEGIC CERTAINTY
+
+Clausewitz says, "It is a fact that we may search modern military
+history in vain for a battle (except Leuthen or Rosbach) in which an
+army has beaten another double its own strength, an occurrence by no
+means uncommon in former times. Bonaparte, the greatest general of
+modern days, in all his great victorious battles, with one exception,
+that of Dresden 1813, had managed to assemble an army superior in
+numbers, or at least very little inferior, to that of his opponent, and
+when it was impossible for him to do so, as at Leipzig, Brienne, Laon,
+Waterloo, he was beaten."[43] "From this we may infer, in the present
+state of Europe, that it is very difficult for the most talented
+general to gain a victory over an enemy double his strength. Now, if
+we see that double numbers are such a weight in the scale against even
+the greatest generals, we may be sure that in ordinary cases, in small
+as well as in great combats, an important superiority of numbers, but
+which need not be over _two to one_, will be sufficient to _ensure the
+victory_, however disadvantageous other circumstances may be."[44]
+
+The double superiority of numbers at the decisive point is, therefore,
+the ideal of strategy. "_The superiority of numbers is, therefore, to
+be regarded as the fundamental idea, always to be aimed at, before
+all_, and as far as possible." If strategy has done this, then it has
+done its utmost duty. It is then for the tactician to make the most
+of this superiority thus provided by strategy, and win the victory.
+Strategy then repeats the operation with new combinations suited to
+the altered circumstances to win the next battle, and so on, till the
+hostile armed force is destroyed.
+
+This _superiority of numbers_ in battle as the _first principle of
+strategy_ we require, on all occasions in season and out of season, to
+repeat and repeat. At present we have not the numbers we shall want. We
+must get them. Otherwise we are bound to be inferior in numbers, and
+"the best strategy" will be possible for our enemies and impossible for
+us. This rests with our statesmen.
+
+
+THE DECISIVE POINT
+
+If the double superiority, or as near the double as possible, at the
+decisive point is the ideal of strategy ... what is the decisive point?
+
+Here we owe another debt to Clausewitz. Jomini, even after Napoleon,
+confuses us with three different sorts of decisive points in a theatre
+of war, but Clausewitz clears the air by asserting only _one_.
+
+"But whatever may be the central point of the enemy's power against
+which we are to direct our ultimate operations, _still the conquest and
+destruction of his army is the surest commencement_ and, _in all cases,
+the most essential_."[45]
+
+Here we have it in a nutshell; wherever the enemy's main force is THERE
+is the decisive point, against which we must concentrate ALL our forces.
+
+"There are," said Napoleon, "many good generals in Europe, but they
+see too many things at one time. _As for me, I see only one thing, the
+enemy's chief army, and I concentrate all my efforts to destroy it._"
+
+
+THE SIMULTANEOUS USE OF ALL THE FORCES
+
+"The rule," says Clausewitz, "which we have been endeavouring to set
+forth is, therefore, that all the forces which are available and
+destined for a strategic object should be _simultaneously_ applied
+to it. And this application will be all the more complete the more
+everything is compressed into one act and one moment."[46] This he
+calls "_the law of the simultaneous employment of the forces in
+strategy_."[47] "In strategy we can never employ too many forces."[48]
+"What can be looked upon in tactics as an excess of force must be
+regarded in strategy as a means of giving expansion to success."
+"_No troops should be kept back as a strategic reserve_," but every
+available man hurried up to the first battlefield, fresh levies being
+meanwhile formed in rear. As an instance of what not to do, Prussia, in
+1806, kept back 45,000 men in Brandenburg and East Prussia; they might,
+if present at Jena, have turned defeat into victory, but they were
+useless afterwards.[49] A fault so often made may be made again.
+
+
+CONCENTRATION
+
+"It is impossible to be too strong at the decisive point," said
+Napoleon. To concentrate every available man and gun at the decisive
+point so as to attain superiority there, is not an easy thing, for the
+enemy will be making a similar attempt. "The calculation of time and
+space appears the most essential thing to this end. But the calculation
+of time and space, though it lies universally at the foundation of
+strategy, and is to a certain extent its daily bread, is still neither
+the most difficult nor the most decisive one." "Much more frequently
+the relative superiority, that is the skilful assemblage of superior
+forces at the decisive point, has its foundation in the right
+appreciation of those points, in the judicious distribution which by
+that means has been given to the forces from the very first, and in
+_the resolution to sacrifice the unimportant to the advantage of the
+important_. In this respect Frederick the Great and Bonaparte are
+especially characteristic."[50]
+
+"There is no simpler and more imperative rule for strategy than _to
+keep all the forces concentrated. No portion to be separated from the
+main body unless called away by some urgent necessity._ On this maxim
+we stand firm, and look upon it as a fact to be depended upon."[51]
+
+"_The concentration of the whole force_ (_i.e._ within supporting
+distance) _should be the rule_, and _every separation or division is an
+exception which must be justified_."[52] Of course, this does not
+mean that all the troops are to be kept concentrated in one mass upon
+one road, but within supporting distance, for he expressly states, "_It
+is sufficient now if the concentration takes place during the course of
+the action._"[53] This doctrine, qualified by the last sentence, makes
+Clausewitz the germ of modern military thought, for the last sentence
+leaves room for all the modern developments of new roads, railways,
+telegraphs, wire and wireless, and so forth.
+
+Therefore in war, according to Clausewitz, concentration,
+concentration, concentration, and _every division or detachment is an
+evil which can only be justified by urgent necessity_. Here again we
+find a simple truth, which, however, the history of all wars shows us
+to be very difficult to carry out. Hence the value of keeping such an
+imperative maxim always in our minds.
+
+
+THE FIRST PITCHED BATTLE
+
+"The more a general takes the field in the true spirit of war, as
+well as of every other contest, that he must and _will_ conquer, the
+more will he strive to throw every weight into the scale in the first
+battle, and hope and strive to win everything by it. Napoleon hardly
+ever entered upon a war without thinking of conquering his enemy at
+once in the first battle."[54]
+
+"_At the very outset of war we must direct all our efforts to gain the
+first battle_, because an unfavourable issue is always a disadvantage
+to which no one would willingly expose himself, and also because the
+first decision, though not the only one, still will have the more
+influence on subsequent events the greater it is in itself."[1]
+
+"The law of the simultaneous use of the forces in strategy lets the
+principal result (which need not be the final one) take place almost
+always at the commencement of the great act."[55] A great victory thus
+won at the outset will upset all the enemy's plan of campaign and allow
+us to carry out our own. The first pitched battle is, therefore, the
+crisis of the rival strategies, and towards its favourable decision
+all our preparations, all our forces, and all our energies should be
+directed. This is a point that civilians seem to find hard to grasp.
+Witness all our history, with inadequate forces at the beginning of
+every war, as even in the latest of our wars--that in South Africa. It
+is a point which our statesmen should very seriously consider.
+
+The difficulty of concentrating superior numbers for the first battle
+is that the enemy will be, or should be, of the same opinion, and will
+be making equal efforts to win the first battle. So, then, the crisis
+will be all the more acute, the battle greater, and the result greater.
+
+"_We would not avoid showing at once that the bloody solution of the
+crisis, the effort for the destruction of the enemy's main force, is
+the first-born son of war._"[56]
+
+Till this is done, the first great victory gained, strategy should
+think of nothing else.
+
+Then, and only then, a further combination in accordance with the
+altered circumstances to win the next.
+
+"For we maintain that, with few exceptions, _the victory at the
+decisive point will carry with it the decision on all minor
+points_"[57] over the whole theatre of war. Therefore nothing else
+matters for long, and to victory in the first great battle "everything
+else must be sacrificed." For concentration can only be obtained by
+sacrifice.
+
+
+PURSUIT
+
+"Once the great victory is gained, the next question is not about
+rest, not about taking breath, not about re-organizing, etc., but only
+of pursuit, of fresh blows wherever necessary, of the capture of the
+enemy's capital, of the attack of the armies of his allies, or whatever
+else appears as a rallying point for the enemy."[58]
+
+Clausewitz points out that this is very difficult, and that to compel
+his exhausted troops vigorously to pursue till nightfall requires GREAT
+force of WILL on the part of the equally exhausted commander. We need
+only remember that Napoleon himself at the supreme crisis of his fate,
+being physically tired, failed to pursue the allies after his victory
+at Dresden, 1813, whereby he lost all the fruits of his victory, and
+indeed his last chance of ultimate success.
+
+
+SUMMARY OF STRATEGIC PRINCIPLES
+
+Leaving out, for the sake of shortness, the rest of his strategical
+thoughts, I hasten to conclude this sketch with a glance at
+Clausewitz's admirable summary[59] of strategic principles:--
+
+"_The first and most important maxim which we can set before ourselves
+is to employ_ ALL _the forces which we can make available with the_
+UTMOST ENERGY. Even if the result is tolerably certain in itself, it
+is extremely unwise not to make it _perfectly certain_.
+
+"_The second principle is to concentrate our forces as much as possible
+at the point where the_ DECISIVE _blow is to be struck. The success at
+that point will compensate for all defeats at secondary points._
+
+"_The third principle is not to lose time. Rapidity and surprise are
+the most powerful elements of victory._
+
+"_Lastly, the fourth principle is to_ FOLLOW UP THE SUCCESS _we gain
+with the_ UTMOST ENERGY. _The pursuit of the enemy when defeated is the
+only means of gathering up the fruits of victory._
+
+"The first of these principles is the foundation of all the others. _If
+we have followed the first principle, we can venture any length with
+regard to the three others without risking our all._ It gives the means
+of _continually creating new forces behind us_, and with new forces
+every disaster may be repaired. _In this, and not in going forward
+with timid steps, lies that prudence which may be called wise._"
+
+These great principles are everything in war, and "due regard being
+paid to these principles, the form (_i.e._ the geometrical element)
+in which the operations are carried on is in the end of little
+consequence."
+
+"Therefore I am perfectly convinced that whoever calls forth all his
+powers to appear _incessantly with new masses_, whoever adopts _every
+imaginable means of preparation_, whoever _concentrates his force at
+the decisive point, whoever thus armed pursues a great object with
+resolution and energy_, has done all that can be done in a general
+way for the strategical conduct of the war, and that, unless he is
+altogether unfortunate in battle, will undoubtedly be victorious in the
+same measure that his adversary has fallen short of this exertion and
+energy."
+
+
+REFLECTIONS
+
+When we have got these great simple leading principles of strategy
+firmly into our heads, the next question is how to make use of
+our knowledge. For principles are no use unless we apply them. On
+consideration it appears that there are three ways in which we can all
+apply these principles with advantage.
+
+I. It will prove a very interesting and strengthening mental exercise
+to apply these few leading principles to every campaign we read about,
+to search for indications of their application in the strategy of each
+belligerent, how far each commander succeeded, and how far failed to
+carry them out in their entirety, and where, when, and why he succeeded
+or failed, and the results of doing or not doing so. Also to search
+for the interaction of the political motive of the war on the military
+operations, and to see how far the belligerent statesmen gained or
+failed to gain their political object, according to the comparative
+degree of preparation they had made for it, and the magnitude of
+effort which they made or did not make to support it with the whole
+means of the nation, material, moral and physical. Also to see how
+far the national spirit was aroused or not, and the causes thereof,
+and to note the greater or less energy, resolution and boldness which
+was consequently infused into the war. Also to note how the thorough
+application of these great simple principles of strategy shortens the
+war and thereby reduces its cost (1866 to 1870), and how the neglect of
+them by statesmen, despite their fortitude afterwards, lengthens a war
+and adds to its cost enormously (South Africa, etc.). Used thus, these
+principles give us a theoretically correct ground for criticism.
+
+II. These principles also give us a theoretically correct ground for
+anticipating what the action of our opponents in any future war will
+be, the measure of the forces they will bring to bear, how they will
+direct those forces, and the amount of energy, resolution, and boldness
+with which they will use them against us. It is an axiom always to
+assume that the enemy will do the best and wisest thing, and to prepare
+accordingly.
+
+III. These principles also give us a theoretically correct ground for
+our own counter-preparations. We require to take the most dangerous war
+which is probable or possible, and make every imaginable preparation to
+carry out these principles therein.
+
+In such a case how are we going to render it possible for our generals
+to win, and thus save the nation from the irreparable consequences
+and the huge war indemnity of £800,000,000 or so, which would follow
+defeat? How are we going to do it? How are we going to render it
+possible for our generals to employ the best strategy? The ideal of
+strategy, always to be aimed at, is the double superiority of numbers.
+How are we going to give our generals that? If we cannot do that,
+how are we going to give them even any superiority _at all_, so that
+they may be able to carry out the first principle of strategy? How?
+Or are we going to make NO _adequate preparations_ for these three
+eventualities, and when one of them suddenly comes ask our generals to
+save us from the fate we have brought upon ourselves, by performing the
+impossible? It is in this way that a statesman should use these few
+great simple principles of strategy in order to attain his political
+object and safeguard the interests of the nation.
+
+
+
+
+CHAPTER X
+
+THE EXECUTION OF STRATEGY
+
+
+Now, as Clausewitz teaches it, the theory of war is easy enough to
+understand. There is no reason--one might almost say no excuse--why
+every one, soldier or statesman, should not know it fairly well. The
+great leading principles of strategy are few and simple. There is no
+reason why every one, soldier and statesman, should not understand
+and know these few simple principles thoroughly, and have them at his
+finger ends ready to apply them to the consideration of any military
+question, past, present, or future. So far all is easy. But when it
+is a question of carrying out in actual war this easy theory, these
+simple strategical principles, then it is QUITE a different matter,
+then it is a matter of the very greatest difficulty. This is a
+difference which the mind always finds very hard to grasp, as witness
+the denunciations with which any failure in execution by a general, no
+matter how great the real difficulties with which he had to contend,
+is nearly always greeted. Observers rarely make allowances for these
+difficulties, very largely probably because they do not understand
+them. The present chapter is devoted to these difficulties of execution
+in war.
+
+
+THE GENIUS FOR WAR
+
+In Clausewitz's great chapter on "the genius for war"[60] he sets forth
+the difficulties which confront a general, the character and genius,
+the driving and animating force, required to overcome the friction of
+war. It is impossible to abstract it adequately; I can only advise all
+to read it for themselves. But I will endeavour to give an idea of it.
+
+After discussing the various sorts of courage required by a general,
+physical before danger and moral before responsibility, the strength
+of body and mind, the personal pride, the patriotism, the enthusiasm,
+etc., he comes to the unexpected.
+
+"_War_," he says, "_is the province of uncertainty. Three-fourths of
+those things upon which action in war must be calculated are hidden
+more or less in the clouds of great uncertainty._ Here, then, above
+all other, a fine and penetrating mind is called for, to grope out the
+truth by the tact of its judgment." Mark this point, that three-fourths
+of the things that we as critics AFTER the event know, when all
+information of the situation has been collected and published, were
+unknown to the general who had to decide, or only dimly guessed at from
+a number of contradictory reports.
+
+"From this uncertainty of all intelligence and suppositions, _this
+continual interposition of chance_." "Now, if he is to get safely
+through _this perpetual conflict with the unexpected_, two qualities
+are indispensable; in the first place _an understanding which, even
+in the midst of this intense obscurity, is not without some traces
+of inner light_, which _lead to the truth_, and then _the courage to
+follow this faint light_. The first is expressed by the French phrase
+_coup d'oeil_; the second is resolution."
+
+"Resolution is an _act of courage in face of responsibility_." "The
+forerunner of resolution is an act of the mind making plain the
+necessity of venturing and thus influencing the will. This quite
+peculiar direction of the mind, which conquers every other fear in man
+by the fear of wavering or doubting, is what makes up resolution in
+strong minds."
+
+The vital importance of firmness and resolution, so strongly urged
+by Clausewitz, will be apparent to all if we reflect how even the
+strongest characters have been ruined by a temporary fit of vacillation
+in war. Compare, for instance, York _v._ Wartenburg's masterly
+exposition of Napoleon's ruinous, suicidal vacillation in 1813 at
+Dresden.
+
+Also there is required "_the power of listening to reason in the midst
+of the most intense excitement_, in the storm of the most violent
+passions."
+
+"But to keep to the result of by-gone reflections in opposition to the
+stream of opinions and phenomena which the present brings with it, is
+just THE difficulty." "Here nothing else can help us but an imperative
+maxim which, independent of reflection, at once controls it: that maxim
+is, _in all doubtful cases to adhere to the first opinion and not to
+give it up till a clear conviction forces us to do so_."
+
+"But as soon as difficulties arise, and that must always happen
+when great results are at stake, then the machine, the army itself,
+begins to offer a sort of passive resistance, and to overcome this
+the commander must have great force of will." Driving power, such as
+Napoleon's. And also "the heart-rending sight of the bloody sacrifice,
+which the commander has to contend with in himself."
+
+"These are the weights which the courage and intelligent faculties of
+the commander have to contend with and OVERCOME, if he is to make his
+name illustrious." If he is to prevent the downfall of his country.
+
+
+REFLECTIONS
+
+(1) In connection with these difficulties I would like to put forward a
+suggestion as to criticism of a general's action in war, which though
+not exactly Clausewitz's, is a corollary from Clausewitz. It is this.
+In reading a war with the clearness and after-knowledge of history
+nearly all defeats are easily seen to be due to the non-observance of
+one or other of the few leading principles of strategy referred to in
+the previous chapter. But we must assume that the defeated general was
+_familiar_ with that principle, and that his _will_ was to carry it
+out. What, then, were the difficulties, the friction, which, on any
+particular day or days, overcame his will and made him sacrifice the
+principle? This is where most critics fail us. Here seems the matter
+to search for. And could a stronger resolution have enabled him to
+overcome those difficulties, that friction? And if so, how and by what
+means? But we must first discover the difficulties and uncertainties
+of the particular day when his will gave way. Take the Manchurian
+campaign as an instance. If we could only have a military history of
+the campaign of 1870 or that of Manchuria, written in the form of a
+series of "appreciations of the situation," so that we know nothing but
+what the general knew at the time as we read, and if the true state of
+affairs could be withheld from us till the end, this, I think, would
+be very instructive and helpful. It would be a more difficult way of
+writing a military history, but I think that the extra trouble would be
+repaid by the extra value. So at least it appears.
+
+(2) If we reflect upon the enormous difficulties, so strikingly
+brought out by Clausewitz, which _our_ generals have to contend with
+and _overcome_ in actual war, it should surely teach us to curb our
+criticism. It should surely also make us resolve in future to try to
+aid them as far as is in our power at home, and not thoughtlessly to
+increase their already stupendous burdens. In the past we at home have
+much to accuse ourselves of, much to regret. In the past often have
+we added to the difficulties of our generals, often have we greatly
+weakened their chances, and increased those of their opponents, often
+have we, unintentionally, through ignorance cast a weight into the
+scale against our country.
+
+(3) The ignorance of the public regarding the conduct of war
+constitutes for us a very serious national danger. If this ignorance
+were less pronounced, if our statesmen understood the vast importance
+of information to the enemy, and the equal importance to our generals
+that this information the enemy should NOT obtain, then the public
+craving for information regarding every detail of what occurs in
+the field, and the demand for the wide publication thereof, would
+certainly be repressed. Nothing occurs in any of our campaigns which
+is not immediately made known; reports of actions with the fullest
+details as to the troops engaged, and the casualties that have befallen
+them, appear in the columns of the Press within a few hours of their
+occurrence. _Any efforts, therefore, of our generals_ in the field
+to maintain _secrecy as to strength, intentions, and movements are
+deliberately_, though probably unintentionally, _counteracted by
+their own countrymen_. This is due to pure ignorance of war, no doubt,
+but the effect of this ignorance is as bad as if it were due to evil
+intention. In fairness, however, we must admit that, in the past, the
+immense value of reticence has not been fully appreciated by some of
+our soldiers themselves, and it were well if, in the future, more
+attention were directed to the importance of secrecy.
+
+The results of such almost criminal stupidity may not be apparent
+when we are fighting with a savage foe, but if we ever have, as we
+undoubtedly some day shall have, the misfortune to find ourselves
+engaged with a civilized Power, we may be certain that not only will
+the operations be indefinitely prolonged, _and their cost enormously
+increased_, but their successful issue will be for us highly
+problematical.
+
+In this connection it must be remembered that every Great Power has
+secret agents in every country, including Great Britain, and that it
+will be easy for such a secret agent to telegraph in cypher or in
+some agreed code to an agent in a neutral State all war information
+published here, who will telegraph it on at once to the hostile
+general, who will thus get, within a very short time of its publication
+in London, perhaps just exactly the information he requires to clear up
+the strategical or tactical situation for him, and enable him to defeat
+the combinations of our generals. As a case in point, take Macmahon's
+march on Sedan to relieve Metz in 1870, where secrecy was absolutely
+necessary for success, but which became known to the Germans by the
+English newspapers.--Result, Sedan.
+
+That this cannot be allowed is plain. It is believed that the
+patriotism of our Press will welcome any necessary measure to this end
+if it is made compulsory upon ALL.[61]
+
+
+
+
+CHAPTER XI
+
+TACTICS
+
+
+Some will probably feel inclined to ask what Clausewitz, who wrote more
+than eighty years ago, can possibly have to say about tactics which can
+be valuable in the twentieth century.
+
+It was said by Napoleon that tactics change every ten years, according,
+of course, to the progress of technicalities, etc. Weapons indeed
+change, but there is one thing that never changes, and that is human
+nature. The most important thing in tactics, the man behind the gun,
+never alters; in his heart and feelings, his strength and weakness, he
+is always much the same.
+
+Therefore, Clausewitz's tactical deductions, founded on the immense
+and varied data supplied by the desperate and long-continued fighting
+of the Revolutionary and Napoleonic wars, permeated as they are by his
+all-pervading psychological or moral view, can never lose their value
+to us.
+
+It is true, no doubt, that our rifles of to-day can be used with
+effect at a distance ten times as great as the old smooth bores of
+Clausewitz's day, our shrapnel five times as far as his cannon, and
+that cover and ground play a far more important part now than then, and
+so on. All these things, of course, considerably modify the tactics of
+Clausewitz. Not so much, however, as some text-books would lead us to
+suppose, which always seem to assume clear ground and clear weather.
+For, after all, how many combats are fought on ground where there is
+a very restricted field of fire (_vide_ Herbert's "Defence of Plevna,"
+etc.), or at night? How many battles are fought during rain, or snow,
+or mist, or fog, which destroys all long range? Compare the tremendous
+fighting with "bullets, bayonets, swords, hand-grenades, and even
+fists," of Nogi's attempt to cut the Russian line of retreat at Mukden,
+with the hand-to-hand fighting of Eylau, Friedland, Borodino, or with
+the desperate efforts of the French in 1812 to open their line of
+retreat through Maro-Jaroslawitz, where all day the masses of troops
+fought hand-to-hand in the streets, "the town was taken and retaken
+seven times, and the rival nations fought with the bayonet in the midst
+of the burning houses" (Alison).
+
+When it comes to push of pike, as in all great decisions between
+equally resolute adversaries it is bound to do, the difference between
+the fighting of Clausewitz's day and ours is but small. The most recent
+instances of all, the hand-to-hand fighting in Manchuria, take us back
+to the Napoleonic struggles.
+
+Therefore, despite the eighty years that have intervened, the writings
+of Clausewitz are still valuable from a tactical point of view, always
+considering of course the difference in weapons, because of the human
+heart in battle.
+
+His ideas on tactics have largely filtered through his German pupils
+into our textbooks, minus the psychological or moral note, so that it
+is not necessary to go at length into the subject, or give a number of
+extracts. It would be wearisome. I will, however, give a few passages
+at haphazard as illustrations.
+
+
+FLANK ATTACKS
+
+The endeavour to gain the enemy's line of retreat, and protect our own,
+on which so much learned erudition has been spent by various writers,
+he regards as a NATURAL instinct, which will ALWAYS produce itself both
+in generals and subalterns.
+
+"From this arises, in the whole conduct of war, and especially in great
+and small combats, a PERFECT INSTINCT, which is the security of our
+own line of retreat and the seizure of the enemy's; this follows from
+the conception of victory, which, as we have seen, is something beyond
+mere slaughter. In this effort we see, therefore, the FIRST immediate
+purpose in the combat, and one which is quite universal. No combat
+is _imaginable_ in which this effort, either in its double or single
+form, is not to go hand in hand with the plain and simple stroke of
+force. Even the smallest troop will not throw itself upon the enemy
+without thinking of its line of retreat, and in most cases it will have
+an eye upon that of the enemy."[62] "This is a great _natural law_ of
+the combat," "and so becomes the pivot upon which ALL strategical and
+tactical manoeuvres turn."
+
+
+RESERVES--DESTRUCTIVE AND DECISIVE ACT
+
+The combat he regards as settled by whoever has the preponderance of
+moral force at the end; that is, in fresh or only partly used up troops.
+
+The combat itself he divides into a destructive and a decisive act.
+During the long destructive act, or period of fire preparation, the
+troops engaged gradually wear each other out, and gradually almost
+cease to count as factors in the decision. "After a fire combat of
+some hours' duration, in which a body of troops has suffered severe
+losses--for instance, a quarter or one-third of its numbers--the
+_débris_ may for the time be looked upon as a heap of cinders. For the
+men are physically exhausted; they have spent their ammunition; many
+have left the field with the wounded, though not themselves wounded
+(compare, for instance, Eylau and the 1870 battles); the rest think
+they have done their part for the day, and if they get beyond the
+sphere of danger, do not willingly return to it. The feeling of courage
+with which they originally started has had the edge taken off, the
+longing for the fight is satisfied, the original organization is partly
+destroyed, and the formations broken up."
+
+"So that the amount of moral force lost may be estimated by the amount
+of the Reserves used up, almost as with a foot rule."[63]
+
+This goes on till, "In all probability, only the untouched reserve and
+some troops which, though they have been in action, have suffered very
+little, are in reality to be regarded as serviceable, and the remainder
+(perhaps four-sixths) may be looked upon for the present as a "caput
+mortuum."
+
+Therefore the art of the commander he regards as "economy of force"
+during the destructive period; that is, to employ as few troops as
+possible, by taking advantage of ground, cover, etc., "to use a smaller
+number of men in the combat with firearms than the enemy employs," so
+that a smaller proportionate number of his own are reduced to a "heap
+of cinders" and more are left, more moral force, for the decision.
+
+"Hundreds of times," he says, "a line of fire has maintained its own
+against one twice its strength" (_e.g._ the Boers).
+
+To do this and yet obtain a good fire-effect demands very skilful
+handling of the troops, both on the part of the chief and subordinate
+leaders.
+
+With the preponderance thus obtained the commander at last starts the
+decision. "Towards the close of a battle the line of retreat is always
+regarded with increased jealousy, therefore a threat against that
+line is always a potent means of bringing on the decision (Liao-yang,
+Mukden). On that account, when circumstances permit, the plan of battle
+will be aimed at that point from the very first." Or, "If this wear and
+tear and exhaustion of the forces has reached a certain pitch, then a
+rapid advance in concentrated masses on one side against the line of
+battle of the other" (_i.e._ the Napoleonic breaking the centre, of
+recent years thought almost hopeless, but revived in Manchuria with
+success, in the case of Nodzu breaking the centre at Mukden).
+
+From what precedes it is evident that, as in the preparatory acts, the
+utmost economy of forces must prevail, so in the decisive act to win
+the mastery through _numbers_ must be the ruling idea.
+
+Just as in the preparatory acts endurance, firmness and coolness are
+the first qualities, so in the decisive act boldness and fiery spirit
+must predominate.
+
+"The difference between these two acts will never be completely lost as
+respects the whole."
+
+"This is the way in which our view is to be understood; then, on the
+one hand, it will not come short of the reality, and on the other
+it will direct the attention of the leader of a combat (be it great
+or small, partial or general) to giving each of the two acts of
+activity its due share, so that there may be neither precipitation nor
+negligence.
+
+"_Precipitation_ there will be if space and time are not allowed
+for the destructive act. _Negligence_ in general there will be if
+a complete decision does not take place, either from want of moral
+courage or from a wrong view of the situation."[64]
+
+
+DURATION OF THE COMBAT
+
+"Even the resistance of an ordinary division of 8,000 or 10,000 men
+of all arms, even if opposed to an enemy considerably superior in
+numbers, will last several hours, if the advantages of country are not
+too preponderating. And if the enemy is only a little or not at all
+superior in numbers, the combat will last half a day. A corps of three
+or four divisions will prolong it to double that time; an army of
+80,000 or 100,000 men to three or four times." "These calculations are
+the result of experience."[65]
+
+As General von Caemmerer points out, if these calculations were adhered
+to in present-day German manoeuvres, as they are now in all war games,
+tactical exercises, and staff rides, the dangerous dualism of their
+training, the difference between theory and manoeuvre practice, would
+cease.
+
+
+ATTACK AND DEFENCE
+
+I have left to the last the consideration of three or four disputed
+points in Clausewitz. In considering these I shall quote a good deal
+from General von Caemmerer's "Development of Strategical Science,"
+as in such matters it is best to quote the most recent authors of
+established reputation.
+
+The most important of these, and the most disputed, is Clausewitz's
+famous dictum that "the defensive is the stronger form of making war."
+"The defence is the stronger form of war with a negative object; the
+attack is the weaker form with a positive object."[66]
+
+General von Caemmerer says, "It is strange, we Germans look upon
+Clausewitz as indisputably the deepest and acutest thinker upon the
+subject of war; the beneficial effect of his intellectual labours is
+universally recognized and highly appreciated; but the more or less
+keen opposition against this sentence never ceases. And yet that
+sentence can as little be cut out of his work 'On War' as the heart out
+of a man. Our most distinguished and prominent military writers are
+here at variance with Clausewitz.
+
+"Now, of course, I do not here propose to go into such a controversy.
+I only wish to point out that Clausewitz, in saying this, only meant
+the defensive-offensive, the form in which he always regards it, both
+strategically and technically, in oft-repeated explanations all through
+his works. For instance--
+
+"It is a FIRST maxim NEVER to remain perfectly passive, but to fall
+upon the enemy in front and flank, even when he is in the act of making
+an attack upon us."[67]
+
+And again--
+
+"_A swift and vigorous assumption of the offensive--the flashing sword
+of vengeance--is the most brilliant point in the defensive._ He who
+does not at once think of it at the right moment, or rather he who
+does not from the first include this transition in his idea of the
+defensive, will never understand its superiority as a form of war."[68]
+Von Caemmerer comments thus: "And this conception of the defence
+by Clausewitz has become part and parcel of our army--everywhere,
+strategically and tactically, he who has been forced into a defensive
+attitude at once thinks how he can arrange a counter-attack. I am thus
+unable to see how the way in which Clausewitz has contrasted Attack
+and Defence could in any way paralyse the spirit of enterprise." Von
+Caemmerer also justly remarks that, as Clausewitz always insisted
+both in strategy and tactics, neither Attack nor Defence is pure, but
+oscillates between the two forms; and as the Attack is frequently
+temporarily reduced to defend itself, and also as no nation can be sure
+of never being invaded by a superior coalition, it is most desirable
+to encourage a belief in the strength of the Defence, if properly used.
+In this I think that Wellington would probably have agreed. Certainly
+Austerlitz and Waterloo were examples of battles such as Clausewitz
+preferred.
+
+Still, one must admit that Clausewitz's chapter on "The Relations
+of the Offensive and Defensive to each other in Tactics," Book VII.
+Chapter 2, is the least convincing chapter of his work.
+
+Strategically, the argument is stronger. It always seems to me that we
+must remember that Clausewitz had taken part in the defensive-offensive
+in its strongest, most absolute and unlimited form, on the greatest
+possible scale--the Moscow campaign and the ruin (consummated before
+a single flake of snow fell) of the Grand Army. If he had lived to
+complete the revision of his works, it always seems to me that he
+would have made his theory undeniable by stating that the defensive is
+the strongest form of war, _if unlimited by space_. What, for instance,
+would have happened if the Japanese had tried to march through Siberia
+on to St. Petersburg?
+
+But, after all, which of the two is absolutely the stronger form of
+war, attack or defence, is merely a theoretical abstraction, for,
+practically, the choice is always settled for us by the pressing
+necessity of circumstances. And, in this connection, let us always bear
+in mind Clausewitz's dictum: "A swift and vigorous assumption of the
+offensive--the flashing sword of vengeance--is the most brilliant point
+in the defensive."
+
+
+THE INNER LINE
+
+A second disputed point is Clausewitz's alleged preference, as a rule,
+for the Inner Line in strategy. But it is necessary to remember that
+that was only due to the conditions of his time, before railways and
+telegraphs, when it was difficult to communicate between columns acting
+on concentric lines. And he is not in any way wedded to the Inner Line,
+like Jomini, but _only_ when circumstances are favourable. He has many
+sentences from which we may infer that, had he lived in railway and
+telegraph days, his strategy, like Moltke's, his most distinguished
+pupil, would have aimed at envelopment as a rule. For to bring up
+troops rapidly by several railways necessitates a broad strategic
+front, and Clausewitz especially lays down rapidity as his second great
+principle, and says--
+
+"If the concentration of the forces would occasion detours and loss
+of time, and the danger of advancing by separate lines is not too
+great, then the same may be justifiable on these grounds; for _to
+effect an unnecessary concentration of the forces_ would be contrary
+to the second principle we have laid down (_i.e._ 'to act as swiftly
+as possible')."[69] Also: "Such separation into several columns as is
+absolutely necessary must be made use of for the disposition of the
+tactical attack in the enveloping form, _for that form is natural to
+the attack, and must not be disregarded without good reason_."[70]
+Also: "_It is sufficient now if the concentration takes place during
+the action._" So that while the conditions of his time led Clausewitz
+to prefer close concentration and the Inner Line, like Napoleon,
+yet his reflections led him to propound the germ of the strategy of
+Moltke. Substitute for Clausewitz's close concentration this: "As
+close concentration, the combined movements regulated by telegraph,
+as is compatible with the utmost use of the railways and the greatest
+rapidity" (as he would certainly have said), and we arrive at Moltke's
+strategy.
+
+
+FRONTAL ATTACKS
+
+A third disputed point is his belief in the superior tactical
+efficiency, under favourable circumstances, of the Napoleonic method
+of breaking the enemy's line in the centre. Breaking the line by a
+frontal attack was, of course, much easier in Clausewitz's Napoleonic
+day than it is with the long-ranging arms of our day, and it is only
+natural that Clausewitz in his writings should give it the full
+tactical importance which it then deserved. His book would not be true
+to the tactical conditions of his day had he not done so, with Rivoli,
+Austerlitz, Salamanca, Eckmuhl, etc., before his mind. But it seems
+hardly correct to accuse him of over-partiality to frontal attacks, for
+he has examined both frontal and enveloping attacks most fairly, giving
+to each their relative advantages and disadvantages, and concluding:
+"The envelopment may lead directly to the _destruction_ of the enemy's
+army, if it is made with very superior numbers and succeeds. If it
+leads to victory the early results are _in every case_ greater than
+by breaking the enemy's line. Breaking the enemy's line can only lead
+indirectly to the destruction of the enemy's army, and its effects
+are hardly shown so much on the first day, but rather strategically
+afterwards,"[71] by forcing apart on different lines of retreat the
+separated fragments of the beaten army.
+
+"The breaking through the hostile army by massing our principal force
+against one point, _supposes an excessive length of front on the part
+of the enemy_; for in this form of attack the difficulty of occupying
+the remainder of the enemy's force with few troops is greater, because
+the enemy's forces nearer to the principal point of attack can easily
+join in opposing it. Now in an attack upon the centre there are such
+forces on both sides of the attack; in an attack upon a flank, only
+on one side. The consequence of this is that such a central attack
+may easily end in a very disadvantageous form of combat, _through a
+convergent counter-attack_." Which is exactly our modern difficulty.
+"The choice between these two forms of attack must therefore be made
+according to the existing conditions of the moment. Length of front,
+the nature and direction of the line of retreat, the military qualities
+of the enemy's troops, and the characteristics of their general,
+lastly the ground must determine the choice."
+
+Speaking generally he regards the _concentric_ enveloping form of
+tactical attack aiming at the enemy's line of retreat as the most
+efficacious and natural. "On the field of battle itself ... the
+enveloping form must always be considered the most effectual."[72] And
+the _eccentric_ or frontal counter-attack at the extended enveloping
+attack as the most efficacious and natural form of the defence, such as
+Napoleon's counter-attacks at Austerlitz or Dresden, or Wellington's
+at Salamanca. "And we think that one means is at least as good as the
+other."[73]
+
+       *       *       *       *       *
+
+Now I think that these extracts sufficiently defend Clausewitz from the
+imputation of too great a belief in frontal attacks, and considering
+the frequent success of such Napoleonic attacks in his day, he gives
+a very fair summing up of the relative advantages and disadvantages
+thereof, and indeed such as might be written in the present day.
+Indeed the quite abnormal conditions of the Boer war produced such a
+feeling against frontal attacks, and so much loose talk of their being
+extinct, that it is very useful to turn to Clausewitz for a reminder
+that breaking the centre, whenever the condition he postulates, namely
+_over-extension of front_ on the enemy's part, is present, will
+always remain one of the two great forms of decisive attack open to a
+commander.
+
+And as in our day the forces are so enormous that to reach the hostile
+flank becomes more difficult, and the extension of front becomes so
+gigantic (a front of several armies on a line of forty to seventy miles
+perhaps), it is well to consider whether breaking the enemy's centre
+will not again offer the most advantageous form for the final decisive
+act, coupled of course, as Clausewitz says it ALWAYS MUST be, with a
+strong flank attack. And in these gigantic battles of the future, such
+as Liao-yang and Mukden, which we must consider typical of the future,
+battles which must take several days, during which the troops in the
+first line become utterly exhausted and used up,--a decisive attack
+on the centre can well be imagined after the hostile reserves have
+been decoyed away over a day's march by a strong flank attack. As, for
+example, Nogi's flank attack round Mukden followed by Nodzu's decisive
+breaking the centre and capture of Mukden itself.
+
+So that far from thinking Clausewitz's remarks about frontal attacks
+and breaking the line to be obsolete, it rather appears from the great
+Russo-Japanese battles that they are worthy of close study in view of
+the future.
+
+
+TACTICAL VERSUS STRATEGICAL ENVELOPMENT
+
+A fourth disputed point is the preference of Clausewitz, owing to his
+insistence on the greatest concentration possible with proper regard
+for the circumstances, for the tactical envelopment arranged on or
+near the field to strategical envelopment with divided forces arranged
+beforehand. In this matter I will again quote General v. Caemmerer,
+who disagrees with him, and says: "Clausewitz proclaims the oblique
+front as the most effective strategic form of attack, ... that is to
+say, when the whole army with one united front falls upon the strategic
+_flank_ of the enemy, and, if victorious, cuts him from his line of
+retreat. But where such a situation cannot be brought about, where our
+advance has brought us before the strategic _front_ of the enemy, then
+he sees in the tactical envelopment, in the formation of an offensive
+flank, the proper means of effectively preparing to push the enemy
+from his line of retreat, and he distinctly explains that tactical
+envelopment need not at all be the _consequence_ of strategical
+envelopment, and need not at all be prepared long beforehand by a
+corresponding advance of divided forces."
+
+Clausewitz says, "The consequence of this is that battles fought with
+enveloping lines, or even with an oblique front, which should properly
+result from an advantageous relation of the lines of communication,
+are commonly the result of a moral and physical preponderance."[74]
+Also "he should therefore only advance with his columns on such a width
+of front as will admit of their all coming into action together."
+"Such separation into several columns should be made use of for the
+disposition of the tactical attack in the enveloping form" (_i.e._ by
+troops within a day's march of each other). "But it must be only of a
+tactical nature, for a strategic envelopment, when a great blow is to
+be struck, is a complete waste of power."
+
+General v. Caemmerer comments: "He is thus of opinion that the lateral
+movement of part of the army against the flank of the enemy could
+without any difficulty still be carried out as initiated by the plan of
+battle; and in order to understand this idea we must again bear in mind
+the difference between the fire-effect of then and now. In those days a
+comparatively short movement made it still possible for a considerable
+portion of the army to gain the defenders' flank; to-day a lengthy
+and troublesome operation would be necessary for the same object, and
+its successful execution would only be counted upon if the defender
+remained entirely passive, and would neither think of a counter-stroke
+nor of a corresponding movement of his forces to the threatened flank."
+
+Without going into this controversy I will, however, quote the
+excellent reason given by Clausewitz for his preference for tactical as
+opposed to strategical envelopment: "One peculiarity of the offensive
+battle is the uncertainty, in most cases, as to the position (note, and
+strength) of the enemy; it is a complete groping about amongst things
+that are unknown (Austerlitz, Wagram, Hohenlinden, Jena, Katzbach).
+The more this is the case the more concentration of forces becomes
+paramount, and turning a flank to be preferred to surrounding."[75]
+
+It is also well to recollect how many famous generals had been ruined
+in Clausewitz's experience through over-extension or dispersion of
+their forces. The crushing defeats of Napoleon's marshals in the winter
+of 1813, Macdonald at the Katzbach, Oudinot at Gros Beeren, Ney at
+Dennewitz, which neutralized Napoleon's great victory at Dresden and
+began his ruin, were all chiefly owing to this cause.
+
+And the weather may, again, have as great influence in shortening
+resistance and allowing troops to be overwhelmed before the too-distant
+reinforcements arrive, as it had in those battles. If the weather then
+prevented the old muskets going off, and enabled the attack to rush
+the defence, so now a fog, rain, mist, or snow, by restricting the
+field of view and fire, may produce the same results. When one thinks
+of the number of great battles fought in such weather, as they may
+well be again, one sees an additional reason for carefully considering
+Clausewitz's warning. Far from relegating his preference for the
+tactical as opposed to the strategical envelopment to the region of
+the obsolete, because of our improved armament, it seems right to give
+it full weight as a corrective to a perceivable tendency to elevate
+strategical envelopment (after Königgrätz) into a formula for victory.
+If in the past many great generals have been ruined by over-extension,
+so may they be again. Against this tendency Clausewitz will for ever
+lift his voice.
+
+Also it remains to be considered, with the huge armies of to-day and
+the future, such armies as at Liao-yang and Mukden, such armies as
+may possibly one day join issue in Afghanistan, whether strategical
+envelopment will be practicable, or whether tactical envelopment,
+such as General Kuroki's tactical enveloping movement on Yentai, and
+the Russian line of retreat at Liao-yang, or General Nogi's tactical
+enveloping dash northward on Hsinminting and the railway at Mukden,
+will not be preferable.
+
+Perhaps, as a compromise, one might call such a movement
+strategical-tactical, and so avoid the dispute by jugglery of words.
+
+I have not attempted to do more than roughly indicate that the solution
+of these four disputed tactical questions in Clausewitz is to be sought
+in a study of the latest campaign, as he would have said himself; that
+is, the campaign in Manchuria. For, as the _Times_ correspondent in the
+XLVth Chapter, "Clausewitz in Manchuria," of his book "The War in the
+Far East," observes, "It will be abundantly clear to any one who has
+followed the great battles in Manchuria that the spirit of Clausewitz
+has presided over Japanese victories and wept over Russian defeats."
+
+
+
+
+CHAPTER XII
+
+CHANGES SINCE THE DAYS OF CLAUSEWITZ
+
+
+In reading Clausewitz it is, first, the great principles of the nature
+of war founded on human nature, which alter not; and, secondly, it
+is his spirit and practical way of looking at things that we want to
+assimilate and apply to THE PROBLEMS OF TO-DAY, to which end it is
+necessary to read him always with the changed conditions of to-day in
+our minds, and think what he would have said under the circumstances.
+These changes are chiefly:--
+
+    (1) The improved net-work of roads.
+    (2) Railways.
+    (3) Telegraphs, wire and wireless.
+    (4) Improved arms.
+    (5) Aviation
+    (6) Universal service armies.
+
+
+THE IMPROVED NET-WORK OF ROADS
+
+The improved net-work of roads in Europe (not, of course, in Manchuria,
+or in Afghanistan where we have to consider our future strategy, but in
+Europe), as General v. Caemmerer puts it, "now offers to the movements
+of armies everywhere a whole series of useful roads where formerly one
+or two only were available," easier gradients, good bridges instead of
+unreliable ones, etc. So that the march-discipline of that day when
+concentrated for battle, artillery and train _on_ the roads, infantry
+and cavalry _by the side_ of the roads, has disappeared. Such close
+concentration is therefore now not possible, as we move all arms _on_
+the road, and an army corps with train, or two without, is the most
+that we can now calculate on bringing into action in one day on one
+road.
+
+
+RAILWAYS
+
+"Railways have, above all, completely altered the term 'base,'" remarks
+V. Caemmerer. "Railways carry in a few days men, horses, vehicles,
+and materials of all kinds from the remotest district to any desired
+point of our country, and nobody would any longer think of accumulating
+enormous supplies of all kinds at certain fortified points on his
+own frontier with the object of basing himself on those points. One
+does not base one's self any longer on a distinct district which is
+specially prepared for that object, but upon the whole country, which
+has become one single magazine, with separate store-rooms. So the term
+'base' has now to be considered in this light."
+
+It is only when operating in savage or semi-savage countries, where
+there are no railways, that the old idea of a base applies.
+
+As we penetrate deeper and further from our own country into the
+enemy's, and as a small raiding party can demolish the railway line so
+as to stop all traffic for days or weeks, it becomes far more necessary
+than it ever was in Clausewitz's day to guard our communications.
+And armies become more and more sensitive to any attack upon their
+communications.
+
+Also "such a line cannot easily be changed, and consequently those
+celebrated changes of the line of communication in an enemy's country
+which Napoleon himself, on some occasion, declared to be the ablest
+manoeuvre in the art of war, could scarcely be carried out any more"
+(V. Caemmerer).
+
+Also concentration by means of several railways demands a broad
+strategic front, which produces that separation of corps or armies
+which prepares the way for strategical envelopment, and so on.
+
+General von der Goltz, in his "Conduct of War," says: "The more recent
+treatises on the conduct of war on a large scale are principally taken
+up with the mobilization and strategical concentration of armies, a
+department of strategy which only began to play an important part in
+modern times. It is the result of a dense net-work of railways in
+Western Europe which has rendered it possible to mass large bodies
+of troops in a surprisingly brief time. Each Power tries to outdo
+its neighbours in this respect, ... which gives an opportunity to
+the strategical specialist to show off his brilliant qualities....
+Consequently it is now frequently assumed that the whole conduct of
+war is comprised in this one section of it." This over-estimate is of
+course an error, which, however, requires to be pointed out.
+
+
+TELEGRAPHS
+
+The telegraph has very greatly reduced the danger of separation.
+The great advantage of the inner line in the day of Napoleon and of
+Clausewitz was that separated forces could only communicate by mounted
+messengers, so if the enemy got between them they could not communicate
+at all, nor act in concert. This the telegraph has completely altered,
+for as the field telegraph can now be laid as quickly as an army can
+advance, the most widely separated bodies of troops can every day
+arrange combined operations by telegraph through, if necessary,
+a point one hundred or four hundred miles in rear. So that to-day
+the chief advantage of the inner line has gone, while its chief
+disadvantage, the possibility of being surrounded, remains.
+
+
+MAPS
+
+We now possess complete detailed Ordnance maps of every country in
+Europe, kept up to date by the latest alterations, whereas in the days
+of Clausewitz maps were of the very roughest character, and quite
+unreliable in comparison.
+
+
+IMPROVED ARMS
+
+Smokeless powder, quick-firing and long-ranging artillery and rifles,
+the infantry field of effective fire being ten times, the artillery
+five times what it was in Clausewitz's time, have all to be borne in
+mind when reading the tactical part of his writings. In consequence,
+also, cover and the tactical use of ground are of far greater
+importance now than then, etc., etc., etc.
+
+
+AVIATION
+
+The recent wonderful developments in aviation will obviously almost
+revolutionize "Information in War." To what extent, it is as yet
+impossible to say. Each year will teach us more.
+
+
+THE NATION-IN-ARMS
+
+The nation-in-arms as the common foundation of all armies (except our
+own), brought up by railways, vastly increases the numbers in a modern
+battle from what they were in Clausewitz's day. Compare Austerlitz,
+Dresden, Leipzig and Waterloo, with Liao-yang and Mukden. It should be
+so with us also, for as General von der Goltz says in "The Conduct of
+War": "The BEST military organization is that which renders available
+ALL the intellectual and material resources of the country in event of
+war. _A State is not justified in trying to defend itself with only a
+portion of its strength, when the existence of the whole is at stake._"
+
+In Great Britain the difference which the introduction of this
+nation-in-arms principle has made in our military strength compared
+with that of our future opponents, a difference relatively FAR GREATER
+AGAINST US than it was in Napoleon's and Clausewitz's day, is as yet
+hardly realized by the people, or by our statesmen. People forget the
+wastage of war, and the necessity for a constant flow of troops to
+repair that wastage. As Von der Goltz puts it: "It is characteristic
+of the strategical offensive that the foremost body of troops of
+an army, the portion which fights the battles, amounts to only a
+comparatively small fraction, frequently only _a quarter or even
+one-eighth_, of the total fighting strength employed, whilst the fate
+of the whole army throughout depends upon the success or failure of
+this fraction. _Attacking armies melt away like snow in the spring._"
+To condense his remarks: "In spite of the most admirable discipline,
+the Prussian Guard Corps lost 5000 to 6000 men in the marches between
+the attack on St. Privat and the battle of Sedan." "Napoleon crossed
+the Niemen in 1812 with 442,000 men, but reached Moscow only three
+months later with only 95,000." In the spring of 1810, the French
+crossed the Pyrenees with 400,000 men, but still Marshal Massena in
+the end only brought 45,000 men up to the lines of Torres Vedras,
+near Lisbon, where the decision lay. Again, in 1829, the Russians
+put 160,000 men in the field, but had barely 20,000 left when, at
+Adrianople, a skilfully concluded peace saved them before their
+weakness became apparent and a reaction set in. In 1878 the Russians
+led 460,000 across the Danube, but they only brought 100,000 men--of
+whom only 43,000 were effective, the rest being sick--to the gates of
+Constantinople. In 1870 the Germans crossed the French frontier with
+372,000 men, but after only a six weeks' campaign brought but 171,000
+men to Paris. And so on. The result of it all is simple--that a people
+which is not based on the modern principle of the nation-in-arms cannot
+for long rival or contend with one that is, for it can neither put
+an equal (still less a superior) army into the field at the outset
+(_vide_ Clausewitz's first principle), nor even maintain in the field
+the _inferior_ army it does place there, because it cannot send the
+ever-required fresh supplies of trained troops. Sooner or later this
+must tell. Sooner or later a situation must arise in which the nation
+based on the obsolete voluntary system _must_ go down before a nation
+based on the nation-in-arms principle. Circumstances change with time,
+and, as wise Lord Bacon said long ago, "He that will not adopt new
+remedies must expect new evils." May we adopt the remedy before we
+experience the evil!
+
+
+THE MORAL AND SPIRITUAL FORCES IN WAR
+
+But though these changed conditions must, of course, _modify_
+Clausewitz's details in many important particulars, still (to complete
+our circle and leave off where we started) I repeat that, as human
+nature never changes, and as the moral is to the physical as three
+to one in war, Clausewitz, as the great realistic and practical
+philosopher on the actual nature of war, as _the chief exponent of the
+moral and spiritual forces in war_, will ever remain invaluable in the
+study of war.
+
+Consider what unsurpassed opportunities he had for observing and
+reflecting on the influence of enthusiasm and passion, of resolution
+and boldness, of vacillation and weakness, of coolness and caution, of
+endurance and hardship, of patriotism and freedom, of ambition and of
+glory--on war, either by his own experience or by conversation with
+other equally experienced soldiers, during that long period of almost
+endless wars between 1793 and 1815.
+
+The fervour and enthusiasm and boundless energy of the Revolution,
+which drove the French forward, smashing everything before them, at
+the beginning; the ambition, military glory, plunder and greed, which
+animated them later on; the patriotism, religious and loyal devotion,
+and stern endurance, which nerved the Russian hosts then as now; that
+awful Moscow winter campaign, when human nature rose to its highest and
+sank to its lowest, when the extremes of heroic endurance and selfish
+callousness were visible side by side; the magnificent uprising of the
+spirit of liberty and freedom from intolerable oppression in Germany,
+which gave to the Prussian recruits and Landwehr the same driving
+force that revolutionary enthusiasm had formerly given to the French;
+the passing, therefore, in 1813 of the moral superiority, the greater
+driving force, from the French to the allies. Clausewitz saw all this;
+he conversed intimately with such men as Scharnhorst and Gneisenau,
+who saw and guided it, too. All his friends had seen it also. No
+wonder, then, that such an unexampled series of warlike phenomena
+deeply impressed his reflective mind with the supreme importance of the
+moral and spiritual factors in war.
+
+His opportunities for long-continued observation of warlike phenomena
+were far greater than those of any writer since his day, and it is to
+be hoped they will remain so. For we have no desire to see another
+series of wars such as the Napoleonic. It is fortunate for us that
+there was then such a man as Clausewitz to sum up for us so simply and
+so clearly the accumulated experiences of those long, long years of
+carnage and devastation.
+
+
+_Printed by Hazell, Watson & Viney, Ld., London and Aylesbury._
+
+
+
+
+FOOTNOTES:
+
+[1] Book IV. Chap. 10.
+
+[2] Book IV. Chap. 3.
+
+[3] Book IV. Chap. 3.
+
+[4] Book I. Chap. 8.
+
+[5] Summary of Instruction to H.R.H. the Crown Prince.
+
+[6] Summary of Instruction, p. 120.
+
+[7] Book II. Chap. 6.
+
+[8] Book II. Chap. 2.
+
+[9] Prefatory "Notice" by Clausewitz.
+
+[10] Book II. Chap. 4.
+
+[11] Book II. Chap. 2.
+
+[12] Book II. Chap. 2.
+
+[13] Book II. Chap. 3.
+
+[14] Book I. Chap. 1.
+
+[15] By gaining Public Opinion, Clausewitz means, to force the enemy's
+population into a state of mind favourable to submission.
+
+[16] Summary of Instruction to H.R.H. the Crown Prince.
+
+[17] Book I. Chap. 1.
+
+[18] Author's "Introduction."
+
+[19] Book I. Chap. 1.
+
+[20] Book VII. Chap. 5.
+
+[21] Book VII. Chap. 21.
+
+[22] Book VII. Chap. 21.
+
+[23] Book VIII. Chaps. 7, 8 and 9.
+
+[24] Book I. Chap. 1.
+
+[25] Book VIII. Chap. 9.
+
+[26] Book I. Chap. 7.
+
+[27] Book I. Chap. 8.
+
+[28] Book I. Chap. 8.
+
+[29] Book IV. Chap. 1.
+
+[30] Book IV. Chap. 3.
+
+[31] Book I. Chap. 1.
+
+[32] Book IV. Chap. 3.
+
+[33] Book III. Chap. 15.
+
+[34] Book VII. Chap. 13.
+
+[35] Book I. Chap. 4.
+
+[36] Book I. Chap. 5.
+
+[37] Book I. Chap. 7.
+
+[38] Book III. Chap. 3.
+
+[39] Book III. Chaps. 16-18.
+
+[40] Book II. Chap. 1.
+
+[41] Book III. Chap. 11.
+
+[42] Book III. Chap. 8.
+
+[43] Book V. Chap. 3.
+
+[44] Book III. Chap. 8.
+
+[45] Book VIII. Chap. 4.
+
+[46] Book III. Chap. 12.
+
+[47] Book III. Chap. 13.
+
+[48] Book III. Chap. 12.
+
+[49] Book III. Chap. 13.
+
+[50] Book III. Chap. 8.
+
+[51] Book III. Chap. 11.
+
+[52] Book VI. Chap. 28.
+
+[53] Book V. Chap. 10.
+
+[54] Book I. Chap. 1.
+
+[55] Book III. Chap. 13.
+
+[56] Book I. Chap. 3.
+
+[57] Book VIII. Chap. 9.
+
+[58] Book VIII. Chap. 9.
+
+[59] Summary of Instruction to H.R.H. the Crown Prince.
+
+[60] Book I. Chap. 3.
+
+[61] This warning as to the consequences of allowing information to be
+published freely which would be helpful to an enemy was written five
+years ago. In the present war the prudent reticence of our Press, and
+its loyal co-operation with the Government in depriving the enemy of
+any helpful information, show that the lesson here insisted on has been
+learned.--Editor's Note.
+
+[62] Book IV. Chap. 4.
+
+[63] Book IV. Chap. 4.
+
+[64] "Guide to Tactics," Vol. III. pp. 136-146.
+
+[65] Book IV. Chap. 4.
+
+[66] Book VI. Chap. 1.
+
+[67] Summary of Instruction to H.R.H. the Crown Prince.
+
+[68] Book VI. Chap. 5.
+
+[69] Book VIII. Chap. 9.
+
+[70] Book VII. Chap. 15.
+
+[71] Summary of Instruction, "Guide to Tactics," par. 500.
+
+[72] Book VI. Chap. 9.
+
+[73] Book VII. Chap. 9.
+
+[74] Book VII. Chap. 7.
+
+[75] Book VII. Chap. 7.
+
+
+
+
+Transcriber's Notes:
+
+
+Punctuation and spelling were made consistent when a predominant
+preference was found in this book; otherwise they were not changed.
+
+Simple typographical errors were corrected; occasional unbalanced
+quotation marks retained.
+
+Ambiguous hyphens at the ends of lines were retained.
+
+Page 133: Paragraph ends with: "Otherwise," rather than with a period.
+
+
+
+
+
+
+
+
+
+
+*** END OF THE PROJECT GUTENBERG EBOOK THE REALITY OF WAR: A COMPANION TO CLAUSEWITZ ***
+
+
+    
+
+Updated editions will replace the previous one—the old editions will
+be renamed.
+
+Creating the works from print editions not protected by U.S. copyright
+law means that no one owns a United States copyright in these works,
+so the Foundation (and you!) can copy and distribute it in the United
+States without permission and without paying copyright
+royalties. Special rules, set forth in the General Terms of Use part
+of this license, apply to copying and distributing Project
+Gutenberg™ electronic works to protect the PROJECT GUTENBERG™
+concept and trademark. Project Gutenberg is a registered trademark,
+and may not be used if you charge for an eBook, except by following
+the terms of the trademark license, including paying royalties for use
+of the Project Gutenberg trademark. If you do not charge anything for
+copies of this eBook, complying with the trademark license is very
+easy. You may use this eBook for nearly any purpose such as creation
+of derivative works, reports, performances and research. Project
+Gutenberg eBooks may be modified and printed and given away—you may
+do practically ANYTHING in the United States with eBooks not protected
+by U.S. copyright law. Redistribution is subject to the trademark
+license, especially commercial redistribution.
+
+
+START: FULL LICENSE
+
+THE FULL PROJECT GUTENBERG LICENSE
+
+PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK
+
+To protect the Project Gutenberg™ mission of promoting the free
+distribution of electronic works, by using or distributing this work
+(or any other work associated in any way with the phrase “Project
+Gutenberg”), you agree to comply with all the terms of the Full
+Project Gutenberg™ License available with this file or online at
+www.gutenberg.org/license.
+
+Section 1. General Terms of Use and Redistributing Project Gutenberg™
+electronic works
+
+1.A. By reading or using any part of this Project Gutenberg™
+electronic work, you indicate that you have read, understand, agree to
+and accept all the terms of this license and intellectual property
+(trademark/copyright) agreement. If you do not agree to abide by all
+the terms of this agreement, you must cease using and return or
+destroy all copies of Project Gutenberg™ electronic works in your
+possession. If you paid a fee for obtaining a copy of or access to a
+Project Gutenberg™ electronic work and you do not agree to be bound
+by the terms of this agreement, you may obtain a refund from the person
+or entity to whom you paid the fee as set forth in paragraph 1.E.8.
+
+1.B. “Project Gutenberg” is a registered trademark. It may only be
+used on or associated in any way with an electronic work by people who
+agree to be bound by the terms of this agreement. There are a few
+things that you can do with most Project Gutenberg™ electronic works
+even without complying with the full terms of this agreement. See
+paragraph 1.C below. There are a lot of things you can do with Project
+Gutenberg™ electronic works if you follow the terms of this
+agreement and help preserve free future access to Project Gutenberg™
+electronic works. See paragraph 1.E below.
+
+1.C. The Project Gutenberg Literary Archive Foundation (“the
+Foundation” or PGLAF), owns a compilation copyright in the collection
+of Project Gutenberg™ electronic works. Nearly all the individual
+works in the collection are in the public domain in the United
+States. If an individual work is unprotected by copyright law in the
+United States and you are located in the United States, we do not
+claim a right to prevent you from copying, distributing, performing,
+displaying or creating derivative works based on the work as long as
+all references to Project Gutenberg are removed. Of course, we hope
+that you will support the Project Gutenberg™ mission of promoting
+free access to electronic works by freely sharing Project Gutenberg™
+works in compliance with the terms of this agreement for keeping the
+Project Gutenberg™ name associated with the work. You can easily
+comply with the terms of this agreement by keeping this work in the
+same format with its attached full Project Gutenberg™ License when
+you share it without charge with others.
+
+1.D. The copyright laws of the place where you are located also govern
+what you can do with this work. Copyright laws in most countries are
+in a constant state of change. If you are outside the United States,
+check the laws of your country in addition to the terms of this
+agreement before downloading, copying, displaying, performing,
+distributing or creating derivative works based on this work or any
+other Project Gutenberg™ work. The Foundation makes no
+representations concerning the copyright status of any work in any
+country other than the United States.
+
+1.E. Unless you have removed all references to Project Gutenberg:
+
+1.E.1. The following sentence, with active links to, or other
+immediate access to, the full Project Gutenberg™ License must appear
+prominently whenever any copy of a Project Gutenberg™ work (any work
+on which the phrase “Project Gutenberg” appears, or with which the
+phrase “Project Gutenberg” is associated) is accessed, displayed,
+performed, viewed, copied or distributed:
+
+    This eBook is for the use of anyone anywhere in the United States and most
+    other parts of the world at no cost and with almost no restrictions
+    whatsoever. You may copy it, give it away or re-use it under the terms
+    of the Project Gutenberg License included with this eBook or online
+    at www.gutenberg.org. If you
+    are not located in the United States, you will have to check the laws
+    of the country where you are located before using this eBook.
+  
+1.E.2. If an individual Project Gutenberg™ electronic work is
+derived from texts not protected by U.S. copyright law (does not
+contain a notice indicating that it is posted with permission of the
+copyright holder), the work can be copied and distributed to anyone in
+the United States without paying any fees or charges. If you are
+redistributing or providing access to a work with the phrase “Project
+Gutenberg” associated with or appearing on the work, you must comply
+either with the requirements of paragraphs 1.E.1 through 1.E.7 or
+obtain permission for the use of the work and the Project Gutenberg™
+trademark as set forth in paragraphs 1.E.8 or 1.E.9.
+
+1.E.3. If an individual Project Gutenberg™ electronic work is posted
+with the permission of the copyright holder, your use and distribution
+must comply with both paragraphs 1.E.1 through 1.E.7 and any
+additional terms imposed by the copyright holder. Additional terms
+will be linked to the Project Gutenberg™ License for all works
+posted with the permission of the copyright holder found at the
+beginning of this work.
+
+1.E.4. Do not unlink or detach or remove the full Project Gutenberg™
+License terms from this work, or any files containing a part of this
+work or any other work associated with Project Gutenberg™.
+
+1.E.5. Do not copy, display, perform, distribute or redistribute this
+electronic work, or any part of this electronic work, without
+prominently displaying the sentence set forth in paragraph 1.E.1 with
+active links or immediate access to the full terms of the Project
+Gutenberg™ License.
+
+1.E.6. You may convert to and distribute this work in any binary,
+compressed, marked up, nonproprietary or proprietary form, including
+any word processing or hypertext form. However, if you provide access
+to or distribute copies of a Project Gutenberg™ work in a format
+other than “Plain Vanilla ASCII” or other format used in the official
+version posted on the official Project Gutenberg™ website
+(www.gutenberg.org), you must, at no additional cost, fee or expense
+to the user, provide a copy, a means of exporting a copy, or a means
+of obtaining a copy upon request, of the work in its original “Plain
+Vanilla ASCII” or other form. Any alternate format must include the
+full Project Gutenberg™ License as specified in paragraph 1.E.1.
+
+1.E.7. Do not charge a fee for access to, viewing, displaying,
+performing, copying or distributing any Project Gutenberg™ works
+unless you comply with paragraph 1.E.8 or 1.E.9.
+
+1.E.8. You may charge a reasonable fee for copies of or providing
+access to or distributing Project Gutenberg™ electronic works
+provided that:
+
+    • You pay a royalty fee of 20% of the gross profits you derive from
+        the use of Project Gutenberg™ works calculated using the method
+        you already use to calculate your applicable taxes. The fee is owed
+        to the owner of the Project Gutenberg™ trademark, but he has
+        agreed to donate royalties under this paragraph to the Project
+        Gutenberg Literary Archive Foundation. Royalty payments must be paid
+        within 60 days following each date on which you prepare (or are
+        legally required to prepare) your periodic tax returns. Royalty
+        payments should be clearly marked as such and sent to the Project
+        Gutenberg Literary Archive Foundation at the address specified in
+        Section 4, “Information about donations to the Project Gutenberg
+        Literary Archive Foundation.”
+    
+    • You provide a full refund of any money paid by a user who notifies
+        you in writing (or by e-mail) within 30 days of receipt that s/he
+        does not agree to the terms of the full Project Gutenberg™
+        License. You must require such a user to return or destroy all
+        copies of the works possessed in a physical medium and discontinue
+        all use of and all access to other copies of Project Gutenberg™
+        works.
+    
+    • You provide, in accordance with paragraph 1.F.3, a full refund of
+        any money paid for a work or a replacement copy, if a defect in the
+        electronic work is discovered and reported to you within 90 days of
+        receipt of the work.
+    
+    • You comply with all other terms of this agreement for free
+        distribution of Project Gutenberg™ works.
+    
+
+1.E.9. If you wish to charge a fee or distribute a Project
+Gutenberg™ electronic work or group of works on different terms than
+are set forth in this agreement, you must obtain permission in writing
+from the Project Gutenberg Literary Archive Foundation, the manager of
+the Project Gutenberg™ trademark. Contact the Foundation as set
+forth in Section 3 below.
+
+1.F.
+
+1.F.1. Project Gutenberg volunteers and employees expend considerable
+effort to identify, do copyright research on, transcribe and proofread
+works not protected by U.S. copyright law in creating the Project
+Gutenberg™ collection. Despite these efforts, Project Gutenberg™
+electronic works, and the medium on which they may be stored, may
+contain “Defects,” such as, but not limited to, incomplete, inaccurate
+or corrupt data, transcription errors, a copyright or other
+intellectual property infringement, a defective or damaged disk or
+other medium, a computer virus, or computer codes that damage or
+cannot be read by your equipment.
+
+1.F.2. LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the “Right
+of Replacement or Refund” described in paragraph 1.F.3, the Project
+Gutenberg Literary Archive Foundation, the owner of the Project
+Gutenberg™ trademark, and any other party distributing a Project
+Gutenberg™ electronic work under this agreement, disclaim all
+liability to you for damages, costs and expenses, including legal
+fees. YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
+LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
+PROVIDED IN PARAGRAPH 1.F.3. YOU AGREE THAT THE FOUNDATION, THE
+TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
+LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
+INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
+DAMAGE.
+
+1.F.3. LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+defect in this electronic work within 90 days of receiving it, you can
+receive a refund of the money (if any) you paid for it by sending a
+written explanation to the person you received the work from. If you
+received the work on a physical medium, you must return the medium
+with your written explanation. The person or entity that provided you
+with the defective work may elect to provide a replacement copy in
+lieu of a refund. If you received the work electronically, the person
+or entity providing it to you may choose to give you a second
+opportunity to receive the work electronically in lieu of a refund. If
+the second copy is also defective, you may demand a refund in writing
+without further opportunities to fix the problem.
+
+1.F.4. Except for the limited right of replacement or refund set forth
+in paragraph 1.F.3, this work is provided to you ‘AS-IS’, WITH NO
+OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PURPOSE.
+
+1.F.5. Some states do not allow disclaimers of certain implied
+warranties or the exclusion or limitation of certain types of
+damages. If any disclaimer or limitation set forth in this agreement
+violates the law of the state applicable to this agreement, the
+agreement shall be interpreted to make the maximum disclaimer or
+limitation permitted by the applicable state law. The invalidity or
+unenforceability of any provision of this agreement shall not void the
+remaining provisions.
+
+1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the
+trademark owner, any agent or employee of the Foundation, anyone
+providing copies of Project Gutenberg™ electronic works in
+accordance with this agreement, and any volunteers associated with the
+production, promotion and distribution of Project Gutenberg™
+electronic works, harmless from all liability, costs and expenses,
+including legal fees, that arise directly or indirectly from any of
+the following which you do or cause to occur: (a) distribution of this
+or any Project Gutenberg™ work, (b) alteration, modification, or
+additions or deletions to any Project Gutenberg™ work, and (c) any
+Defect you cause.
+
+Section 2. Information about the Mission of Project Gutenberg™
+
+Project Gutenberg™ is synonymous with the free distribution of
+electronic works in formats readable by the widest variety of
+computers including obsolete, old, middle-aged and new computers. It
+exists because of the efforts of hundreds of volunteers and donations
+from people in all walks of life.
+
+Volunteers and financial support to provide volunteers with the
+assistance they need are critical to reaching Project Gutenberg™’s
+goals and ensuring that the Project Gutenberg™ collection will
+remain freely available for generations to come. In 2001, the Project
+Gutenberg Literary Archive Foundation was created to provide a secure
+and permanent future for Project Gutenberg™ and future
+generations. To learn more about the Project Gutenberg Literary
+Archive Foundation and how your efforts and donations can help, see
+Sections 3 and 4 and the Foundation information page at www.gutenberg.org.
+
+Section 3. Information about the Project Gutenberg Literary Archive Foundation
+
+The Project Gutenberg Literary Archive Foundation is a non-profit
+501(c)(3) educational corporation organized under the laws of the
+state of Mississippi and granted tax exempt status by the Internal
+Revenue Service. The Foundation’s EIN or federal tax identification
+number is 64-6221541. Contributions to the Project Gutenberg Literary
+Archive Foundation are tax deductible to the full extent permitted by
+U.S. federal laws and your state’s laws.
+
+The Foundation’s business office is located at 809 North 1500 West,
+Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up
+to date contact information can be found at the Foundation’s website
+and official page at www.gutenberg.org/contact
+
+Section 4. Information about Donations to the Project Gutenberg
+Literary Archive Foundation
+
+Project Gutenberg™ depends upon and cannot survive without widespread
+public support and donations to carry out its mission of
+increasing the number of public domain and licensed works that can be
+freely distributed in machine-readable form accessible by the widest
+array of equipment including outdated equipment. Many small donations
+($1 to $5,000) are particularly important to maintaining tax exempt
+status with the IRS.
+
+The Foundation is committed to complying with the laws regulating
+charities and charitable donations in all 50 states of the United
+States. Compliance requirements are not uniform and it takes a
+considerable effort, much paperwork and many fees to meet and keep up
+with these requirements. We do not solicit donations in locations
+where we have not received written confirmation of compliance. To SEND
+DONATIONS or determine the status of compliance for any particular state
+visit www.gutenberg.org/donate.
+
+While we cannot and do not solicit contributions from states where we
+have not met the solicitation requirements, we know of no prohibition
+against accepting unsolicited donations from donors in such states who
+approach us with offers to donate.
+
+International donations are gratefully accepted, but we cannot make
+any statements concerning tax treatment of donations received from
+outside the United States. U.S. laws alone swamp our small staff.
+
+Please check the Project Gutenberg web pages for current donation
+methods and addresses. Donations are accepted in a number of other
+ways including checks, online payments and credit card donations. To
+donate, please visit: www.gutenberg.org/donate.
+
+Section 5. General Information About Project Gutenberg™ electronic works
+
+Professor Michael S. Hart was the originator of the Project
+Gutenberg™ concept of a library of electronic works that could be
+freely shared with anyone. For forty years, he produced and
+distributed Project Gutenberg™ eBooks with only a loose network of
+volunteer support.
+
+Project Gutenberg™ eBooks are often created from several printed
+editions, all of which are confirmed as not protected by copyright in
+the U.S. unless a copyright notice is included. Thus, we do not
+necessarily keep eBooks in compliance with any particular paper
+edition.
+
+Most people start at our website which has the main PG search
+facility: www.gutenberg.org.
+
+This website includes information about Project Gutenberg™,
+including how to make donations to the Project Gutenberg Literary
+Archive Foundation, how to help produce our new eBooks, and how to
+subscribe to our email newsletter to hear about new eBooks.
+
+
