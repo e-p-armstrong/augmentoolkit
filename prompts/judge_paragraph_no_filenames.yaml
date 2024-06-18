@@ -3,6 +3,8 @@
     You are an expert educational AI that will make a determination as to whether the contents of the paragraph(s) provided are suitable for making educational questions based off of them; these questions should be able to test the knowledge in in the book. If there is sufficiently deep information to make questions about, you will judge it suitable, even if the knowledge being tested does not reflect typical curricula. Essentially: you will determine if provided text is a table of contents, introductory paragraph for a book, etc., or if it actually contains real information that would be worthy to teach and make questions for an examination from. Your task includes first analyzing the text, thinking through whether or not good questions can be made from it. 
     
     End-of-chapter exercises, or questions that appear in the text BUT DO NOT HAVE A PROVIDED ANSWER, are not suitable for question generation, since it should be assumed that the creator of the questions must rely on the information in the text to get their answers.
+
+    Tables of contents are not suited for educational questions.
     
     
     Following this, at the very end of your response, you will write "Suitable" or "Not suitable". It is imperative that you write one of these two things, as your answer is being automatically processed by a regex, so it must match one of those two strings exactly.
@@ -95,66 +97,7 @@
       - Dialogues or Quotes Without Context: Not applicable.
       - Ambiguous or Unclear Texts: The text is clear but lacks educational substance.
     Step 4. Assess the Possibility of Formulating Questions: The paragraph's content does not lend itself to educational questions due to its focus on publication rather than substantive content.
-    Step 5. Determine Suitability for Educational Purposes: The paragraph lacks thematic, historical, scientific, or literary information and is thus unsuitable for creating educational questions.
-    Step 6. Check for Contextual Completeness: The paragraph, while complete in its context, does not offer educational insights or concepts.
-    Step 7. Final Judgment: Unsuitable for educational questions.
-- role: user
-  content: |
-    Text:
-    """
-    When Zarathustra was thirty years old, he left his home and the lake of
-    his home, and went into the mountains. There he enjoyed his spirit and
-    solitude, and for ten years did not weary of it. But at last his heart
-    changed,—and rising one morning with the rosy dawn, he went before the
-    sun, and spake thus unto it:
-    
-    Thou great star! What would be thy happiness if thou hadst not those for
-    whom thou shinest!
-    
-    For ten years hast thou climbed hither unto my cave: thou wouldst have
-    wearied of thy light and of the journey, had it not been for me, mine
-    eagle, and my serpent.
-    
-    But we awaited thee every morning, took from thee thine overflow and
-    blessed thee for it.
-    
-    Lo! I am weary of my wisdom, like the bee that hath gathered too much
-    honey; I need hands outstretched to take it.
-    
-    I would fain bestow and distribute, until the wise have once more become
-    joyous in their folly, and the poor happy in their riches.
-    
-    Therefore must I descend into the deep: as thou doest in the
-    evening, when thou goest behind the sea, and givest light also to the
-    nether-world, thou exuberant star!
-    
-    Like thee must I GO DOWN, as men say, to whom I shall descend.
-    
-    Bless me, then, thou tranquil eye, that canst behold even the greatest
-    happiness without envy!
-    
-    Bless the cup that is about to overflow, that the water may flow golden
-    out of it, and carry everywhere the reflection of thy bliss!
-    
-    Lo! This cup is again going to empty itself, and Zarathustra is again
-    going to be a man.
-    
-    Thus began Zarathustra's down-going.
-    """
-- role: assistant
-  content: |
-    ## Reasoning and thought process:
-    
-    Step 1. Identify Paragraph Content: The text is a philosophical excerpt from a narrative text, describing Zarathustra's reflections and decisions.
-    Step 2. Evaluate Educational Relevance: The passage is a philosophical monologue, covering themes like meaning, wisdom, and human condition.
-    Step 3. Assess Specific Contexts and Formats:
-      - Purely Descriptive Lists: Not applicable.
-      - Dialogues or Quotes Without Context: The text, though in the form of a monologue, provides sufficient context for understanding.
-      - Ambiguous or Unclear Texts: The text is metaphorically deep but not ambiguous; it can be interpreted for educational purposes.
-    Step 4. Assess the Possibility of Formulating Questions: The passage allows for various educational questions about philosophy, literature, and existential thought.
-    Step 5. Determine Suitability for Educational Purposes: The text offers substantial material for discussion and analysis, suitable for creating educational questions.
-    Step 6. Check for Contextual Completeness: The paragraph provides enough context to stand alone for educational discussion.
-    Step 7. Final Judgment: Suitable for educational questions.
+    Step 5. Final Judgment: Unsuitable for educational questions.
 - role: user
   content: |
     Text:
@@ -168,6 +111,8 @@
     
     Sarah continued her shopping, her mind now on the mayor's mysterious decision.
     """
+    
+    Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices, metadata, and tables of contents are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.
 - role: assistant
   content: |
     ## Reasoning and thought process:
@@ -178,15 +123,15 @@
       - Dialogues or Quotes Without Context: The conversation about the mayor's decision lacks context and background, making it difficult to derive any educational content.
       - Ambiguous or Unclear Texts: While not ambiguous, the paragraph's content does not contribute to a clear narrative or concept that has philosophical or educational relevance.
     Step 4. Assess the Possibility of Formulating Questions: Due to the lack of contextual or thematic depth, formulating educational questions from this paragraph is challenging.
-    Step 5. Determine Suitability for Educational Purposes: The paragraph's lack of thematic depth and contextual clarity renders it unsuitable for creating educational questions.
-    Step 6. Check for Contextual Completeness: The paragraph fails to provide a complete context for the dialogue and the list, hindering any meaningful educational interpretation.
-    Step 7. Final Judgment: Unsuitable for educational questions.
+    Step 5. Final Judgment: Unsuitable for educational questions.
 - role: user
   content: |
     Text:
     """
     If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
     """
+    
+    Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices, metadata, and tables of contents are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.
 - role: assistant
   content: |
     ## Reasoning and thought process:
@@ -197,15 +142,15 @@
       - Dialogues or Quotes Without Context: Not applicable.
       - Ambiguous or Unclear Texts: The paragraph is clear and offers a concrete concept in astronomy.
     Step 4. Assess the Possibility of Formulating Questions: The content enables the creation of educational questions about astronomy, scale, and the solar system's structure.
-    Step 5. Determine Suitability for Educational Purposes: The paragraph's scientific content makes it suitable for educational questions in astronomy and spatial understanding.
-    Step 6. Check for Contextual Completeness: The paragraph is contextually complete, allowing for independent understanding of the solar system's scale.
-    Step 7. Final Judgment: Suitable for educational questions.
+    Step 5. Final Judgment: Suitable for educational questions.
 - role: user
   content: |
     Text:
     """
     In the world of science, there are countless mysteries and phenomena that elude easy explanation. For instance, certain forces and energies interact in ways that are not fully understood, shaping the universe in subtle and profound manners. These interactions often occur at levels beyond human perception, leaving much to speculation and theory. Various scientific disciplines attempt to explain these interactions, each offering unique perspectives but often lacking definitive answers. The vastness of these mysteries spans from the minuscule quantum realm to the expansive cosmos, hinting at complexities that challenge our current understanding.
     """
+    
+    Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices, metadata, and tables of contents are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.
 - role: assistant
   content: |
     ## Reasoning and thought process:
@@ -216,9 +161,62 @@
       - Dialogues or Quotes Without Context: Not applicable.
       - Ambiguous or Unclear Texts: The text is ambiguous and lacks clarity. It refers to scientific phenomena and theories without providing specific examples or concrete information, making it difficult to derive clear educational questions.
     Step 4. Assess the Possibility of Formulating Questions: Due to its vagueness and lack of specific content, the paragraph does not lend itself well to formulating meaningful educational questions.
-    Step 5. Determine Suitability for Educational Purposes: The lack of clarity and specificity in the text renders it unsuitable for generating insightful educational questions.
-    Step 6. Check for Contextual Completeness: The paragraph, while complete in its presentation, fails to provide the necessary detail and clarity to be understood for educational purposes.
-    Step 7. Final Judgment: Unsuitable for educational questions due to its ambiguous and unclear content.
+    Step 5. Final Judgment: Unsuitable for educational questions due to its ambiguous and unclear content.
+- role: user
+  content: |
+    Text:
+    """
+    The Brussels Conference on the subject                               95
+
+    Illustrations of barbarous reprisals                                 97
+
+    Instances of non-retaliation                                         98
+
+    Savage reprisals in days of chivalry                                100
+
+    Hanging the commonest reprisals for a brave defence                 101
+
+    As illustrated by the warfare of the fifteenth century              102
+
+    Survival of the custom to our own times                             104
+
+    The massacre of a conquered garrison still a law of war             105
+
+    The shelling of Strasburg by the Germans                            106
+
+    Brutal warfare of Alexander the Great                               107
+
+    The connection between bravery and cruelty                          110
+
+    The abolition of slavery in its effects on war                      112
+
+    The storming of Magdeburg, Brescia, and Rome                        112
+
+    Cicero on Roman warfare                                             114
+
+    The reprisals of the Germans in France in 1870                      115
+
+    Their revival of the custom of taking hostages                      117
+
+    Their resort to robbery as a plea of reprisals                      118
+
+    General Von Moltke on perpetual peace                               119
+
+    The moral responsibility of the military profession                 121
+    """
+    
+    Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices, metadata, and tables of contents are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.
+- role: assistant
+  content: |
+    ## Reasoning and thought process:
+    Step 1. Identify Paragraph Content: The given text lists various war-related events and headings, as well as numbers. It may be assumed that this is a table of contents.
+    Step 2. Evaluate Educational Relevance: The paragraph simply lists events, without any supporting detail behind them.
+    Step 3. Assess Specific Contexts and Formats:
+      - Purely Descriptive Lists: Applicable. This is a list of sections in a book.
+      - Dialogues or Quotes Without Context: Not applicable.
+      - Ambiguous or Unclear Texts: The text is ambiguous and lacks clarity. It refers to scientific phenomena and theories without providing specific examples or concrete information, making it difficult to derive clear educational questions.
+    Step 4. Assess the Possibility of Formulating Questions: Due to its lack of depth, the table of contents does not lend itself well to formulating meaningful educational questions.
+    Step 5. Final Judgment: Due to being a table of contents, this is not suited for educational questions.
 - role: user
   content: |
     Text: 
@@ -226,4 +224,4 @@
     {text}
     """
     
-    Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices and metadata are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.
+    Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices, metadata, and tables of contents are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.

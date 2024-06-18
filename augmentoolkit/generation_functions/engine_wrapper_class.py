@@ -2,16 +2,9 @@ import asyncio
 import uuid
 from openai import AsyncOpenAI
 import cohere
-from augmentoolkit.generation_functions.gemini_data_classes import (
-    Part,
-    SystemInstruction,
-    Contents,
-    GenerationConfig,
-)
 from augmentoolkit.generation_functions.async_llamacpp_api_call import (
     make_async_api_call,
 )
-from augmentoolkit.generation_functions.gemini_wrapper_class import Gemini
 
 try:
     from aphrodite import (
@@ -35,7 +28,7 @@ class EngineWrapper:
         model,
         api_key=None,
         base_url=None,
-        mode="api",  # can be one of api, aphrodite, llama.cpp, gemini, cohere
+        mode="api",  # can be one of api, aphrodite, llama.cpp, cohere
         quantization="gptq",  # only needed if using aphrodite mode
     ):
         self.mode = mode
@@ -54,16 +47,10 @@ class EngineWrapper:
             self.client = cohere.AsyncClient(api_key=api_key)
         elif mode == "api":
             self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
-        elif mode == "gemini":
-            self.client = Gemini(api_key=api_key)
 
     async def submit_completion(
         self, prompt, sampling_params
     ):  # Submit request and wait for it to stream back fully
-        if self.mode == "gemini":
-            raise Exception(
-                "The Gemini API isn't compatible with completion mode. Use chat mode instead."
-            )
         if "temperature" not in sampling_params:
             sampling_params["temperature"] = 1
         if "top_p" not in sampling_params:
@@ -135,56 +122,28 @@ class EngineWrapper:
             )
 
         elif self.mode == "api":
-            if self.mode == "gemini":
-                generation_config = GenerationConfig(
-                    temperature=sampling_params["temperature"],
-                    top_p=sampling_params["top_p"],
-                    max_output_tokens=8192,
-                )
-
-                for message in messages:
-                    if message["role"] == "system":
-                        self.client.system_instruction = message["content"]
-                        system_instruction = SystemInstruction(
-                            parts=[Part(text=message["content"])],
-                        )
-                        break
-
-                messages_cleaned = [
-                    {
-                        "role": (
-                            "model" if message["role"] == "assistant" else ("user")
-                        ),
-                        "parts": [{"text": message["content"].replace("\\n", "\n")}],
-                    }
-                    for message in messages
-                ]
-
-                contents = Contents.loads({"contents": messages_cleaned})
-
-                completion = await self.client.generate_content(
-                    contents, generation_config, system_instruction
-                )
-            else:
-                completion = ""
-                timed_out = False
-                stream = await self.client.chat.completions.create(
-                    model=self.model,
-                    messages=messages,
-                    temperature=sampling_params["temperature"],
-                    top_p=sampling_params["top_p"],
-                    stop=sampling_params["stop"],
-                    max_tokens=sampling_params["max_tokens"],
-                    stream=True,
-                )
-                async for chunk in stream:
-                    try:
+            completion = ""
+            timed_out = False
+            stream = await self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                temperature=sampling_params["temperature"],
+                top_p=sampling_params["top_p"],
+                stop=sampling_params["stop"],
+                max_tokens=sampling_params["max_tokens"],
+                stream=True,
+            )
+            async for chunk in stream:
+                try:
+                    if chunk.choices[0].delta.content:
                         completion = completion + chunk.choices[0].delta.content
-                    except:
-                        print("THIS RESPONSE TIMED OUT PARTWAY THROUGH GENERATION!")
-                        timed_out = True
+                except Exception as e:
+                    print("\n\n------------CAUGHT EXCEPTION DURING GENERATION")
+                    print(e)
+                    timed_out = True
+                    print("\n\n-----/\------")
 
-                return completion, timed_out
+            return completion, timed_out
 
         elif self.mode == "cohere":
             timed_out = False

@@ -229,7 +229,12 @@ def parse_answer_accuracy_validation(response):
     determination_pattern = re.compile(
         r"Overall Accuracy Determination:(.+)", re.DOTALL
     )
-    determination = determination_pattern.search(response).group(1).strip()
+    try:
+        determination = determination_pattern.search(response).group(1).strip()
+    except Exception as e:
+        print("Error encountered, model messed up output format")
+        print(e)
+        return (False, response)
     if (
         "inaccurate" in determination.lower()
         or "Inaccurate" in determination.lower()
@@ -367,7 +372,10 @@ def parse_answer_relevancy_validation_step(thought_process):
             print(f"Answer relevancy parsing failed! Retrying! {judgement_pattern}")
             raise Exception("error in judgement extranction (ans relevancy)")
     except Exception as e:
-        print("Model did not provide a judgement, retrying")
+        print("Model did not provide a judgement")
+        print(e)
+        # raise Exception("retry")
+        return (False, thought_process)
 
 
 async def vet_answer_relevance_loop(
@@ -667,6 +675,7 @@ async def generate_qatuples_from_para(
     idx,
     para,
     engine_wrapper=None,
+    engine_wrapper_large=None,
     vetted_qa_tuples=None,
     qa_tuples_dir=None,
     double_check_counter=3,
@@ -713,7 +722,7 @@ async def generate_qatuples_from_para(
         },
         completion_mode=completion_mode,
         retries=3,
-        engine_wrapper=engine_wrapper,
+        engine_wrapper=engine_wrapper_large,
         logging_level=logging_level,
         output_processor=extract_questions_from_response,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
@@ -855,7 +864,7 @@ async def determine_worthy(
 def judge_paragraph_processor(
     determination,
 ):  # TODO extract to separate file to avoid muddying the control flow code
-    if "unsuitable" in determination.lower():
+    if "unsuitable" in determination.lower() or "table of contents" in determination.lower():
         return False  # control flow has been modified to use the information it has, based on the determination of the output processors
     elif "suitable" in determination.lower():
         return True
@@ -893,7 +902,7 @@ async def filter_all_questions(
         prompt_path=prompt_path,
         regex=judgement_regex,
         sampling_params={
-            "max_tokens": 2000,
+            "max_tokens": 1450,
             # "min_p": 0.4,
             "stop": [
                 "### Response",

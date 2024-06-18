@@ -132,6 +132,14 @@ async def main():
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
     
+    engine_wrapper_large = EngineWrapper(
+        model=LARGE_LOGICAL_MODEL,
+        api_key=API_KEY,
+        base_url=BASE_URL,
+        mode=MODE,
+        # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
+    )
+    
     import re
     from tqdm import tqdm
 
@@ -220,6 +228,7 @@ async def main():
                 idx,
                 para,
                 engine_wrapper=engine_wrapper,
+                engine_wrapper_large=engine_wrapper_large,
                 vetted_qa_tuples=vetted_qa_tuples,
                 qa_tuples_dir=qa_tuples_dir,
                 double_check_counter=DOUBLE_CHECK_COUNTER,
@@ -335,13 +344,7 @@ async def main():
     for future in tqdmasyncio.tqdm.as_completed(limited_tasks_infocreation):
         await future
 
-    engine_wrapper = EngineWrapper(
-        model=LARGE_LOGICAL_MODEL,
-        api_key=API_KEY,
-        base_url=BASE_URL,
-        mode=MODE,
-        # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
-    )
+    
 
     
     import json
@@ -364,7 +367,7 @@ async def main():
         control_flow_functions.create_conversation(
             idx,
             info,
-            engine_wrapper,
+            engine_wrapper_large,
             multi_turn_convs,
             multi_turn_convs_dir,
             completion_mode=COMPLETION_MODE,

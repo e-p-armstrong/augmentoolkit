@@ -14,6 +14,7 @@
     * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
     * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
     * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The answerer should take on any opinions of the author. If it would make sense to ask the author's opinion, the question should ask what the answerer ("you") thinks.
 
     **Note:**
 
@@ -32,6 +33,8 @@
     """
     If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
     """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
   content: |
     **QUESTION:**
@@ -77,6 +80,8 @@
     called autochains. Autochains – or PBaaS – will be provisioned and notarized by the
     Verus blockchain miners and stakers, in exchange for Verus curren
     """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
   content: |
     **QUESTION:**
@@ -102,61 +107,6 @@
     
     **ANSWER:**
     Autochains (or PBaaS) will be provisioned and notarized by the Verus blockchain miners and stakers, in exchange for Verus currency.
-- role: user
-  content: |
-    Text to make questions from: 
-    """
-    When Zarathustra was thirty years old, he left his home and the lake of his home, and went into the mountains. There he enjoyed his spirit and
-    solitude, and for ten years did not weary of it. But at last his heart changed,—and rising one morning with the rosy dawn, he went before the
-    sun, and spake thus unto it:
-    
-    Thou great star! What would be thy happiness if thou hadst not those for
-    whom thou shinest!
-    
-    For ten years hast thou climbed hither unto my cave: thou wouldst have
-    wearied of thy light and of the journey, had it not been for me, mine
-    eagle, and my serpent.
-    
-    But we awaited thee every morning, took from thee thine overflow and
-    blessed thee for it.
-    
-    Lo! I am weary of my wisdom, like the bee that hath gathered too much
-    honey; I need hands outstretched to take it.
-    
-    I would fain bestow and distribute, until the wise have once more become
-    joyous in their folly, and the poor happy in their riches.
-    
-    Therefore must I descend into the deep: as thou doest in the
-    evening, when thou goest behind the sea, and givest light also to the
-    nether-world, thou exuberant star!
-    
-    Like thee must I GO DOWN, as men say, to whom I shall descend.
-    """
-- role: assistant
-  content: |
-    **QUESTION:**
-    Finish the quote: I am weary of my wisdom, like...
-    
-    **ANSWER:**
-    "...the bee that hath gathered too much honey; I need hands outstretched to take it."
-    
-    **QUESTION:**
-    What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-    
-    **ANSWER:**
-    They need the acknowledgement and admiration of others. They need others to see and appreciate the light they bring.
-    
-    **QUESTION:**
-    Why did Zarathustra leave the mountains and become a man again?
-    
-    **ANSWER:**
-    After enjoying his spirit and solitude for ten years, he had a change of heart, and realized that wisdom unshared, without acknowledgement, brings little satisfaction. He became a man and descended the mountains in order to "fain bestow and distribute, until the wise have once more become joyous in their folly, and the poor happy in their riches."
-    
-    **QUESTION:**
-    List one way in which Zarathustra compares himself to the sun.
-    
-    **ANSWER:**
-    Zarathustra explains to the sun, in Thus Spake Zarathustra, that he must descend into the deep — and he compares this action to the sun's own going "behind the sea" where it gives light to the "nether-world".
 - role: user
   content: |
     Text to make questions from:
@@ -289,6 +239,8 @@
     surev -chain=CSRVTEST sendcurrency "*" '[{"address":"IDNAME@","exportto":"NewChainName","exportid":"true","amount":100,"currency":"csrvtest"}]'
     ```
     """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
   content: | # Not "how can you" but instead "how can I" that's what I'm going to implement. Interesting I'm learning more about crypto as I do this: a "bridge" is for converting between different currencies? Maybe using a shared pool of stuff? Not sure about the second bit.
     **QUESTION:**
@@ -377,5 +329,35 @@
   content: |
     Text to make questions from: 
     """
+    The author believes that this idea is a delusion. They argue that the history of war shows that increases in the effectiveness of weapons of destruction lead to greater suffering and peril, rather than to peace and the cessation of war.",
+    "The Declaration of St. Petersburg, inasmuch as it is capable of indefinite expansion, is a somewhat awkward precedent for those who in their hearts love war and shield its continuance with apologetic platitudes. How, they ask, can you enforce agreements between nations? But this argument begins to totter when we remember that there is absolutely no superior power or tribunal in existence which can enforce the observance of the St. Petersburg Declaration beyond the conscience of the signatory Powers. It follows, therefore, that if international agreements are of value, there is no need to stop short at this or that bullet: which makes the arbitration-tribunal loom in the distance perceptibly nearer than it did before.At first sight, this agreement excluding the use of explosive bullets would seem to favour the theory of those who see in every increase in the peril of war the best hope of its ultimate cessation. A famous American statesman is reported to have said, and actually to have appealed to the invention of gunpowder in support of his statement, that every discovery in the art of war has, from this point of view, a life-saving and peace-promoting influence.[1] But it is difficult to conceive a greater delusion. The whole history of war is against it; for what has that history been but the steady increase of the pains and perils of war, as more effective weapons of destruction have succeeded one another? The delusion cannot be better dispelled than by consideration of the facts that follow.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+- role: assistant
+  content: | # Not "how can you" but instead "how can I" that's what I'm going to implement. Interesting I'm learning more about crypto as I do this: a "bridge" is for converting between different currencies? Maybe using a shared pool of stuff? Not sure about the second bit.
+    **QUESTION:**
+    What is the Declaration of St. Petersburg, and what issue does it pose for those who support war?
+
+    **ANSWER:**
+    The Declaration of St. Petersburg is an agreement between nations that is capable of indefinite expansion. It poses a problem for those who support war because it sets a precedent for enforcing agreements between nations, which could potentially lead to the creation of an arbitration tribunal and the reduction of war.
+
+    **QUESTION:**
+    What is the main argument against the idea that increases in the peril of war lead to its ultimate cessation?
+
+    **ANSWER:**
+    The main argument against this idea is that the whole history of war has been a steady increase in the pains and perils of war as more effective weapons of destruction have been developed. This suggests that increases in the peril of war do not lead to its cessation, but rather to its continuation and escalation.
+
+    **QUESTION:**
+    What is your opinion on the idea that every discovery in the art of war has a life-saving and peace-promoting influence?
+
+    **ANSWER:**
+    I believe that this idea is a delusion. The history of war shows that increases in the effectiveness of weapons of destruction lead to greater suffering and peril, rather than to peace and the cessation of war.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
     {text}
     """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")

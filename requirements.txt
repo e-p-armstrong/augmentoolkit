@@ -11,3 +11,4 @@ gradio_log==0.0.4
 asyncio
 httpx
 orjson
+cohere
