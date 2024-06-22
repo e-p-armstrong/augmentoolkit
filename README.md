@@ -23,12 +23,13 @@ Finally, using the model you create should be easy and valuable:
 ## Demo video & Video Tutorials:
 [3-Minute Demo Video Here](https://www.youtube.com/watch?v=m32fM8S_DeY&ab_channel=Heralax)
 
-Note that Video Documentation is currently built for Augmentoolkit, a sister project of Augmentoolkit built for the Verus community. The process of running it should be the same, and the process of training the LLM is definitely the same. But when it mentions "Augmentoolkit" and the Verus project, that is why.
-Augmentoolkit-specific video docs are in the works.
+**Note that Video Documentation is currently built for Augmentoolkit, a sister project of Augmentoolkit built for the Verus community. The process of running it should be the same, and the process of training the LLM is definitely the same. But when it mentions "Augmentoolkit" and the Verus project, that is why.**
 
-[Video Documentation 1 — Dataset generation](https://studio.youtube.com/video/NI0QXWWtux8/edit)
+*Augmentoolkit-specific video docs are in the works.*
 
-[Video Documentation 2 — Model Training, Quantizing, and Chatting]()
+[Video Documentation 1 — Dataset generation](https://youtu.be/NI0QXWWtux8)
+
+[Video Documentation 2 — Model Training, Quantizing, and Chatting](https://youtu.be/3YpO-n1U8qs)
 
 
 ## Table of Contents:
