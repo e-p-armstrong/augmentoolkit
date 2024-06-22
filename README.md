@@ -3,6 +3,9 @@ Turn any raw text into a high-quality custom dataset for training new LLMs, usin
 
 Augmentoolkit is an AI-powered tool that lets you create domain-specific data to finetune LLMs, using open-source AI.
 
+Cite:
+[![DOI](https://zenodo.org/badge/726083337.svg)](https://zenodo.org/doi/10.5281/zenodo.11525927)
+
 ### Benefits
 Augmentoolkit makes LLM data easy.
 - **Cheap:** Augmentoolkit uses open-source LLMs, and so can be run on consumer hardware for hardly any cost, or cheaply via APIs like Together.ai.
