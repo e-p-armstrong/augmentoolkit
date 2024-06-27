@@ -242,7 +242,7 @@
     -----------
     Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
-  content: | # Not "how can you" but instead "how can I" that's what I'm going to implement. Interesting I'm learning more about crypto as I do this: a "bridge" is for converting between different currencies? Maybe using a shared pool of stuff? Not sure about the second bit.
+  content: | 
     **QUESTION:**
     How can I park a conversion of CSRVTEST to a new token (like GOLD) before that token launches, using the command line?
 
@@ -335,7 +335,7 @@
     -----------
     Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
-  content: | # Not "how can you" but instead "how can I" that's what I'm going to implement. Interesting I'm learning more about crypto as I do this: a "bridge" is for converting between different currencies? Maybe using a shared pool of stuff? Not sure about the second bit.
+  content: | 
     **QUESTION:**
     What is the Declaration of St. Petersburg, and what issue does it pose for those who support war?
 

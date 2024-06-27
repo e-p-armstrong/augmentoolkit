@@ -1,6 +1,6 @@
 PATH:
-  INPUT: "./military_strategy"
-  OUTPUT: "./output_military_test_TOCATTEMPT1"
+  INPUT: "./raw_txt_input"
+  OUTPUT: "./output"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
