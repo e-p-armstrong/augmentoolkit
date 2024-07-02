@@ -1,7 +1,4 @@
-# This is an axolotl config that allowed creation of a model knowledgeable about Verus.
-# Replace the dataset paths under `datasets:` with your own
-# If you want a reference point of what kind of data was fed into this model, check out Verustoolkit https://github.com/e-p-armstrong/verustoolkit.git
-
+# This is an axolotl config that allows creation of a model knowledgeable about Verus.
 # Rent a GPU with a compute provider like Vast.ai or Runpod
 # (Make sure it is using the axolotl docker image --- winglian/axolotl:main-latest)
 # Copy this file over to the rented instance, in the /workspace/axolotl directory
@@ -14,6 +11,8 @@
 
 # (to copy files over to a rented GPU instance, you'll have to use SSH to Secure CoPy files over from your machine to the rented one. This is what such a command might look like, adapt it to your needs)
 # scp -P 40001 -r ./ root@173.231.62.170:/workspace/axolotl/
+
+# NOTE this is the most recent config of Jun 10 2024; it trained a good model
 
 base_model: meta-llama/Meta-Llama-3-8B
 model_type: LlamaForCausalLM
@@ -232,18 +231,18 @@ sequence_len: 4500
 sample_packing: true
 pad_to_sequence_len: true
 
-wandb_project: military-llama-revision
+wandb_project: verus-llama-revision-3
 wandb_entity:
 wandb_watch:
 wandb_run_id:
 wandb_log_model:
 
 gradient_accumulation_steps: 2
-micro_batch_size: 1
+micro_batch_size: 3
 num_epochs: 6
 optimizer: paged_adamw_8bit
 lr_scheduler: cosine
-learning_rate: 2e-4
+learning_rate: 1e-5
 noisy_embedding_alpha: 0 # no noisy embedding to ensure maximal memorization 
 
 train_on_inputs: false

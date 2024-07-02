@@ -7,19 +7,19 @@ Cite:
 [![DOI](https://zenodo.org/badge/726083337.svg)](https://zenodo.org/doi/10.5281/zenodo.11525927)
 
 ### Benefits
-Augmentoolkit makes LLM data easy.
+**Augmentoolkit makes LLM data easy.**
 - **Cheap:** Augmentoolkit uses open-source LLMs, and so can be run on consumer hardware for hardly any cost, or cheaply via APIs like Together.ai.
 - **Effortless:** Augmentoolkit can be run by putting some files in a folder, and then running a Python script. If that's too much, you can also use the graphical user interface. Previously-started runs are continued automatically, so you don't need to worry about interruptions costing you time and/or money.
 - **Fast:** when using APIs, you can generate millions of trainable tokens in under an hour. Fully async code lets you get results quickly.
 - **Anti-hallucination, quality data:** Augmentoolkit checks all important outputs for hallucinations and failures, ensuring high data quality throughout every generated dataset. Delicately-crafted few-shot examples force the open-source models used to be consistent and smart.
 
-We've also done our best to facilitate the step after you generate your data -- training your LLM:
-- **Train an AI for the cost of a dinner:** with the provided training config, you can perform the equivalent of a full finetune of an AI,  on your own data, for a tiny sum of money. VRAM usage varies by model, of course -- and this can work in your favor.
+We've also done our best to **facilitate the step after you generate your data -- training your LLM:**
+- **Train an AI for the cost of a dinner:** with the provided training configs, you can perform the equivalent of a full finetune of an AI,  on your own data, for a tiny sum of money. VRAM usage varies by model, of course -- and this can work in your favor.
 - **Create your LLM in less than a day:** with reasonable dataset sizes and the provided training configs, LLM training can be done before the day is out. Iterate quickly and cheaply.
 - **When you use the same recipe, you get the same bread:** Augmentoolkit datasets have been used successfully for professional consulting projects. Video documentation is linked in this README that shows exactly how to use this tool to do the same. The code, settings, and prompts you need is all here.
 - **Train AI with confidence, *especially* if it's your first time:** between the video docs and active GitHub issues support, you can be confident you'll get a good LLM out of this.
 
-Finally, using the model you create should be easy and valuable:
+Finally, **using the model you create should be easy and valuable:**
 - **Training a model as a means of learning:** dealing with a large and complex subject that you need to master? Training an LLM with Augmentoolkit creates an assistant that understands the big picture of what you're trying to figure out. I have learned from AI I have created before, and you — or your users/employees/clients — can too.
 - **Documented LLM setup (RAG included!):** from quantizing to chatting, it might take 30 minutes of following provided step-by-step video instructions (easy!) to set it up the first time you do this. The second it will likely take less than five or ten. Tutorials are taken seriously here.
 
@@ -47,12 +47,13 @@ Finally, using the model you create should be easy and valuable:
     - [Visual explanation of steps](#visual-explanation-of-steps)
 4. [What to do with what you get out](#what-to-do-with-what-you-get-out)
 5. [Roadmap](#roadmap)
-6. [Self Promotion](#for-businesses)
-7. [Latest Update Info](#latest-update-info)
-8. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
-9. [Contributing](#contributing)
-10. [Join A Discord for Dataset Generation!](#join-a-discord-for-dataset-generation)
-11. [Using "Aphrodite mode" (deprecated)](#using-aphrodite-mode-deprecated)
+6. [Self Promotion (read if you're a business!)](#for-businesses)
+7. [Community](#community)
+8. [Latest Update Info](#latest-update-info)
+9. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
+10. [Contributing](#contributing)
+11. [Join A Discord for Dataset Generation!](#join-a-discord-for-dataset-generation)
+12. [Using "Aphrodite mode" (deprecated)](#using-aphrodite-mode-deprecated)
 
 ## Quickstart
 
@@ -239,6 +240,16 @@ In the coming weeks and months, I plan to start using Augmentoolkit to produce o
 I work with AI SAAS startups that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? I can modify Augmentoolkit for any domain and for tasks beyond question answering, and I'd be happy to help you painlessly create the data — and data-creation tools — you require. Given that I made the original version of the darn thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
 
 *Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to master open source model pipelines enough to make Augmentoolkit work well). If you're a hobbyist and have time to experiment with its base version for casual or personal uses, by all means go for it.
+
+## Community
+
+Changing Augmentoolkit usually requires a lot of prompting of open-source LLMs. This, and many other aspects of developing with AI, are tricky to get a handle on. I'm [making a community](https://www.skool.com/placeholder-ai-group-name-1872/about) to make this easy for you.
+
+This community isn't the typical fake guru "AI tools" hype BS. It's by and for developers.
+
+Currently we have a full video course on open-source prompting, weekly Q&A calls about developing with AI, and optional monthly 1-on-1s with myself, where I help you with your project in any way I can. There's a tight-knit group of professionals and hobbyists like you.
+
+[I'd love to have you there. Follow this link to see the landing page and decide if it's something you might be interested in joining.](https://www.skool.com/placeholder-ai-group-name-1872/about)
 
 ## Latest Update Info
 

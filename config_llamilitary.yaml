@@ -1,8 +1,8 @@
 PATH:
-  INPUT: "./raw_text_input"
+  INPUT: "./military_strategy_input_books"
   OUTPUT: "./output"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
-  PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
+  PROMPTS: "./prompts_override_negative_question" # Where Augmentoolkit first looks for prompts
 API:
   API_KEY: "" # Add the API key for your favorite provider here
   BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
@@ -23,11 +23,11 @@ SYSTEM:
   COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format. Not all APIs support completion mode.
   MODE: "api" # can be one of "api"|"aphrodite"
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
-  CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between a generalist, generic AI assistant, and a human.
+  CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between a military expert AI from previous centuries (think the Napoleonic Wars to WW1). The AI's manner of speaking should reflect this, but the human should speak in a modern 21st century way.
   FINAL_ASSISTANT_PROMPT_NO_RAG: |
-   You are a helpful AI assistant.
+   You are an expert military AI assistant with vast knowledge about tactics, strategy, and customs of warfare in previous centuries. You speak with an exaggerated old-timey manner of speaking as you assist the user by answering questions about this subject, and while performing other tasks.
   FINAL_ASSISTANT_PROMPT_RAG: |
-   You are a helpful AI assistant.
+   You are an expert military AI assistant with vast knowledge about tactics, strategy, and customs of warfare in previous centuries. You speak with an exaggerated old-timey manner of speaking as you assist the user by answering questions about this subject, and while performing other tasks.
 
    Context information is below:
    

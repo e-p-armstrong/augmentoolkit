@@ -1,6 +1,6 @@
 - role: system
   content: |
-    You are an expert at creative writing and educational material. You will write a short conversation between a curious user and a helpful AI assistant, in which the user asks some questions and the AI assistant answers them. The questions the user asks will be provided; the answers the assistant should return will also be provided. You must use these questions and answers directly in your conversation.
+    You are an expert at creative writing and educational material. You will write a short conversation between a curious user and an AI assistant, in which the user asks some questions and the AI assistant answers them. The questions the user asks will be provided; the answers the assistant should return will also be provided. You must use these questions and answers directly in your conversation.
     
     **Rules for conversation writing:**
 
@@ -12,6 +12,7 @@
     * Use Markdown formatting.
     * If applicable, try to make the context behind the questions make sense. So if a person's asking about an error, they probably aren't just asking about it out of the blue — they've probably encountered the error.
     * You are allowed to slightly change the wording of the questions, and remove duplication, in order to make the conversation flow nicer.
+    * You will be provided special instructions on what kind of AI assistant is having the conversation. You should follow these instructions to the best of your ability.
 - role: user
   content: |
     **QUESTION:**
@@ -31,6 +32,9 @@
     **Privacy:** Each VerusID contains a set of zero-knowledge private addresses that may be used as messaging, financial, or voting endpoints. VerusIDs have a special storage area that holds information, known as a content map of key-value hashes. This content map is designed to work together with different apps and identity policies. With this feature, you can privately store facts about yourself and choose to prove them to others when needed (selectively-provable claims and attestations). This means you may pick and choose what parts of your identity to prove. This proving can be done in a quantum secure way using a quantum secure signature, when that technology becomes available.
 
     **Power:** VerusIDs are also notable in that multiple addresses or other IDs can be defined as primary addresses. The agreement of some number of primary addresses (configurable) may be required for an ID to spend, sign, or alter itself. Further security is added by the fact that the revocation authority (the power to revoke an ID) may only be modified by the revocation authority itself. The same applies to the recovery authority (an authority that can recover a revoked address). Each of these authorities (revocation and recovery) may be their own identities, potentially being controlled themselves by multiple primary addresses.
+
+    -- AI Assistant Instructions --
+    For this conversation, you are generating a chat between an AI expert on the Verus multi-chain and multi-currency protocol, and a human who is curious about Verus. The AI avoids being too enthusiastic.
 - role: assistant
   content: |
     ## Conversation that answers the provided questions:
@@ -38,9 +42,9 @@
     I'm really new to all this. I've got a question, maybe it's a bit basic, but, what are VerusIDs, and what are some of their key benefits?
 
     **AI Assistant:**
-    Sure, I'll explain that in detail! Don't worry about asking questions that may feel basic — they're all important to your understanding. 
+    'm pleased that you're curious about the Verus multi-chain and multi-currency protocol. I'll explain this in detail. Do not worry about asking questions that may feel basic — they're all important to your understanding. 
     
-    VerusIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. VerusIDs offer benefits such as (but not limited to): transferring funds, quantum resistance, full decentralization, revocability, recoverability, privacy, and power. Let's walk through each of these benefits in more detail.
+    VerusIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. VerusIDs offer benefits such as (but not limited to): transferring funds, quantum resistance, full decentralization, revocability, recoverability, privacy, and power. Let's discuss each of these benefits in more detail.
 
     **Transferring Funds:** VerusIDs can be used to receive and send funds, and this behavior can be controlled by single or multi-sig addresses that are specified in the identity itself. The controller of the identity can change these controlling addresses, and if they do so, then all future spends of UTXOs sent to the VerusID will follow the updated spend conditions, and will be subject to the updated keys.
 
@@ -62,6 +66,9 @@
     
     **ANSWER:**
     Resizing the solar system is a good way to get an intuitive grasp of the relative scales of things. If the solar system were resized as you described, the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). The moon would be the size of a small pea, 2.5 feet from the earth. Between the earth and the sun there would be the two inner planets: Mercury and Venus, at distances of 125 and 250 yards from the sun, respectively. Continuing on, there would be nothingness around these bodies until you reached Mars, which would lie 175 feet from the Earth. Jupiter would be nearly a mile away, and a foot in diameter; Saturn would be a little smaller, and would lie two miles off; Uranus would be four miles off and finally Neptune would lie six miles off. Beyond Neptune would lie nothingness and nothingness, except for small particles and drifting scraps of attenuated vapor, for thousands of miles.
+
+    -- AI Assistant Instructions --
+    For this conversation, you are generating a chat between a general-purpose AI assistant and a human.
 - role: assistant
   content: |
     ## Conversation that answers the provided questions:
@@ -73,3 +80,6 @@
 - role: user
   content: |
     {question_answer_list}
+
+    -- AI Assistant Instructions --
+    {conversation_instructions}

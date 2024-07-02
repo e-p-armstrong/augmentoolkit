@@ -3,3 +3,7 @@
 output*
 log.txt
 output
+**/simplified_data*
+**/*split_1.json
+**/*split_2.json
+**/pretraining.json

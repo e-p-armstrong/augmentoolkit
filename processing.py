@@ -69,6 +69,10 @@ async def main():
 
     INPUT_FOLDER = config["PATH"]["INPUT"]
     
+    CONVERSATION_INSTRUCTIONS = config["SYSTEM"][
+        "CONVERSATION_INSTRUCTIONS"
+    ]
+    
     # Create pretraining set from raw inputs (pretrain first, then instruct tune)
     control_flow_functions.create_pretraining_set(
         INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
@@ -294,7 +298,7 @@ async def main():
             control_flow_functions.repair_qatuple_context(
                 idx,
                 tup,
-                engine_wrapper,
+                engine_wrapper_large,
                 writepath,
                 vetted_qa_tuples,
                 use_filenames=USE_FILENAMES,
@@ -372,6 +376,7 @@ async def main():
             multi_turn_convs_dir,
             completion_mode=COMPLETION_MODE,
             logging_level=LOG_LEVEL,
+            conversation_instructions=CONVERSATION_INSTRUCTIONS
         )
         for idx, info in enumerate(convs_info)
     ]

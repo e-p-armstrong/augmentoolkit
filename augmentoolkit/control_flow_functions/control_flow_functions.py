@@ -1029,7 +1029,7 @@ def fix_text(to_replace_arr, text):
 
 
 async def ensure_multiple_answers_are_same(
-    info, conv, multi_turn_conv_generator, completion_mode=None
+    info, conv, multi_turn_conv_generator, completion_mode=None, conversation_instructions="For this conversation, you are generating a chat between a general-purpose AI assistant and a human."
 ):  # why is this a whole separate function? Once upon a time, LLMs were used in validation here, too. But programmatic validation SEEMS to catch the common problems. This is here so that I can add it back in if I have to.
     """Loop to ensure that the answer is consistent in the conversation and in the tuple."""
     retries = 0
@@ -1047,7 +1047,7 @@ async def ensure_multiple_answers_are_same(
         print("----------------\n\n\n\nRETRYING!!!!\n\n\n\n----------------")
         # Broken info is 1) rare and 2) handled by the retry limit. We don't want to waste compute on regenerating info as they take time.
         retry = await make_multiturn_conversation(
-            info, multi_turn_conv_generator, completion_mode=completion_mode
+            info, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
         )
         if retry is not None:  # Note: retry CANNOT actually be None
             c = retry
@@ -1060,21 +1060,15 @@ async def ensure_multiple_answers_are_same(
 
 
 async def make_multiturn_conversation(
-    info, multi_turn_conv_generator, completion_mode=None
+    info, multi_turn_conv_generator, completion_mode=None, conversation_instructions="For this conversation, you are generating a chat between a general-purpose AI assistant and a human."
 ):
 
-    if completion_mode:
-        conv, conv_output = await multi_turn_conv_generator.generate(
-            arguments={
-                "question_answer_list": format_qatuples(info[0]).strip(),
-            }
-        )
-    else:
-        conv, conv_output = await multi_turn_conv_generator.generate(
-            arguments={
-                "question_answer_list": format_qatuples(info[0]),
-            }
-        )
+    conv, conv_output = await multi_turn_conv_generator.generate(
+        arguments={
+            "question_answer_list": format_qatuples(info[0]).strip(),
+            "conversation_instructions": conversation_instructions
+        }
+    )
     write_output_to_file(
         conv_output,
         obj_conf["PATH"]["OUTPUT"] + "/multiturn_conversation_generations",
@@ -1138,6 +1132,7 @@ async def create_conversation(
     multi_turn_convs_dir,
     completion_mode=None,
     logging_level=logging.INFO,
+    conversation_instructions="For this conversation, you are generating a chat between a general-purpose AI assistant and a human."
 ):
     file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
     multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation"
@@ -1194,10 +1189,10 @@ async def create_conversation(
     if not os.path.exists(file_path):
         try:
             conv = await make_multiturn_conversation(
-                info, multi_turn_conv_generator, completion_mode=completion_mode
+                info, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
             )
             final_conv = await ensure_multiple_answers_are_same(
-                info, conv, multi_turn_conv_generator, completion_mode=completion_mode
+                info, conv, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
             )
 
             if final_conv is not None:
