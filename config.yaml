@@ -1,5 +1,5 @@
 PATH:
-  INPUT: "./raw_text_input"
+  INPUT: "./raw_txt_input"
   OUTPUT: "./output"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
