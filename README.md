@@ -1,5 +1,5 @@
 # Augmentoolkit — infinite domain-specific instruct data
-Turn any raw text into a high-quality custom dataset for training new LLMs, using AI that can run on your computer. Make data gathering a painless step of the model creation process. Augmentoolkit is the easy-to-use, customizable, open-source, and cost-effective data generation solution. No OpenAI needed.
+Turn any raw text into a high-quality dataset using local models. Make data gathering a painless step of the model creation process. Augmentoolkit is the easy-to-use, customizable, open-source, and cost-effective data generation solution. No OpenAI needed.
 
 Augmentoolkit is an AI-powered tool that lets you create domain-specific data to finetune LLMs, using open-source AI.
 
