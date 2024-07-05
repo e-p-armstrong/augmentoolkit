@@ -1,4 +1,5 @@
 import asyncio
+import traceback
 
 import augmentoolkit.utils.group_by_text
 
@@ -77,6 +78,11 @@ async def main():
     control_flow_functions.create_pretraining_set(
         INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
     )
+    
+    PHASE_INDEX = config["PHASE"]["PHASE_INDEX"]
+    
+    WORK_IN_PHASES = config["PHASE"]["WORK_IN_PHASES"]
+    
     print("Pretraining set created.")
 
     extensions = [".txt", ".md"]
@@ -196,6 +202,18 @@ async def main():
     )
 
     print(filtered_worthy_for_questions[0])
+    
+    print("Converting generations to training data")
+    control_flow_functions.convert_logging_to_dataset("judge_paragraph_generations")
+
+    # PHASE 0 END
+    print("\n\nCOMPLETED PHASE 0")
+    if WORK_IN_PHASES and PHASE_INDEX == 0:
+        sys.exit(0)
+    
+    #####
+
+
 
     # ### The cell below begins generating questions. SOME OF THESE MAY FAIL and have to retry due to model errors (the API branch cannot use grammars). But if you let it run you will see that the vast majority eventually get through.
     #
@@ -206,11 +224,11 @@ async def main():
     import glob
 
     # Directory for QA tuples
-    qa_tuples_dir = config["PATH"]["OUTPUT"] + "/qatuples_raw"
-    if not os.path.exists(qa_tuples_dir):
-        os.makedirs(qa_tuples_dir)
+    qa_tuples_dir_unchecked = config["PATH"]["OUTPUT"] + "/qatuples_raw"
+    if not os.path.exists(qa_tuples_dir_unchecked):
+        os.makedirs(qa_tuples_dir_unchecked)
 
-    vetted_qa_tuples = []  # tuple list of qa tuples that have been judged good
+    generated_qa_tuples = []  # tuple list of qa tuples that have been judged good
 
     # Attempt to initialize filtered_worthy_for_questions
     try:
@@ -220,22 +238,20 @@ async def main():
 
     if not filtered_worthy_for_questions:
         # Load all files in the qa_tuples_dir if filtered_worthy_for_questions is not initialized
-        existing_files = glob.glob(os.path.join(qa_tuples_dir, "*.json"))
+        existing_files = glob.glob(os.path.join(qa_tuples_dir_unchecked, "*.json"))
         for file_path in existing_files:
             with open(file_path, "r") as file:
                 qa_tuple = tuple(json.load(file))
                 print(f"Loaded {file}")
-            vetted_qa_tuples.append(qa_tuple)
+            generated_qa_tuples.append(qa_tuple)
     else:
         tasks = [
             control_flow_functions.generate_qatuples_from_para(
                 idx,
                 para,
-                engine_wrapper=engine_wrapper,
                 engine_wrapper_large=engine_wrapper_large,
-                vetted_qa_tuples=vetted_qa_tuples,
-                qa_tuples_dir=qa_tuples_dir,
-                double_check_counter=DOUBLE_CHECK_COUNTER,
+                generated_qa_tuples=generated_qa_tuples,
+                qa_tuples_dir=qa_tuples_dir_unchecked,
                 use_filenames=USE_FILENAMES,
                 completion_mode=COMPLETION_MODE,
                 logging_level=LOG_LEVEL,
@@ -246,16 +262,60 @@ async def main():
         for future in tqdmasyncio.tqdm.as_completed(limited_tasks_qgen):
             await future
 
+
+    # only convert questions to training data if they passed validation
+    
+    # for qatup in generated_qa_tuples:
+    #     if question_answer_tuple[0] is not None:
+    #         file_path = os.path.join(qa_tuples_dir_unchecked, f"para_{question_answer_tuple[5]}_q_{qnum}.json")
+    #         with open(file_path, "w") as file:
+    #             json.dump(question_answer_tuple, file, indent=4)
+    
+    # PHASE 1 END
+    print("COMPLETED PHASE 1")
+    if WORK_IN_PHASES and PHASE_INDEX == 1:
+        print("EXITING DUE TO config.yaml SETTINGS AROUND PHASES; SET TO ONLY EXECUTE PHASE 1 RIGHT NOW")
+        sys.exit(0)
+    ####
+    
+    vetted_qa_tuples = []
+    qa_tuples_dir_checked = config["PATH"]["OUTPUT"] + "/qatuples_filtered"
+    if not os.path.exists(qa_tuples_dir_checked):
+        os.makedirs(qa_tuples_dir_checked)
+    
+    # print(generated_qa_tuples[0])
+    
+    tasks = [
+        control_flow_functions.vet_question_loop(
+            question_answer_tuple,
+            question_group_id=question_answer_tuple[4],
+            engine_wrapper=engine_wrapper,
+            qa_tuples_dir=qa_tuples_dir_checked,
+            vetted_qa_tuples=vetted_qa_tuples,
+            double_check_counter=DOUBLE_CHECK_COUNTER,
+            completion_mode=COMPLETION_MODE,
+            logging_level=LOG_LEVEL,
+        ) for question_answer_tuple in generated_qa_tuples
+    ]
+    limited_tasks_q_validation = [run_task_with_limit(task) for task in tasks]
+    for future in tqdmasyncio.tqdm.as_completed(limited_tasks_q_validation):
+            await future
+                
+    
+    if WORK_IN_PHASES and PHASE_INDEX == 2:
+        print("EXITING DUE TO config.yaml SETTINGS AROUND PHASES; SET TO ONLY EXECUTE PHASE 2 RIGHT NOW")
+        sys.exit(0)
+
     print(
         "-------------- QUESTIONS CREATED ------------- STATS SO FAR (may be wrong if run was continued from interruption):"
     )
-    nones = list(filter(lambda x: x[0] is None, vetted_qa_tuples))
+    nones = list(filter(lambda x: x is None, vetted_qa_tuples))
     print(f"Nones: {len(nones)}")
     print(f"Non-nones: {len(vetted_qa_tuples) - len(nones)}")
     print(f"Total: {len(vetted_qa_tuples)}")
     # filter out all None values
-    vetted_qa_tuples = [qa for qa in vetted_qa_tuples if qa[0] is not None]
-    print("---------------- ONTO EXAMPLES GENERATION-------------------")
+    vetted_qa_tuples = [qa for qa in vetted_qa_tuples if qa is not None]
+    print("---------------- ONTO REVISION ------------------")
 
     # Check for and fix the common mistake: mentioning "the text".
     writepath = config["PATH"]["OUTPUT"] + "/qatuples_revised"
@@ -269,6 +329,7 @@ async def main():
 
     # Load all files at the start if vetted_qa_tuples is empty
     if not vetted_qa_tuples:
+        print("WENT DOWN HERE")
         # Check if the directory exists
         if os.path.exists(writepath):
             # List all files in directory
@@ -291,11 +352,9 @@ async def main():
                                 vetted_qa_tuples.append(None)
                 except Exception as e:
                     print(f"Error reading {file_path}: {e}")
-
     else:
-        old_tuples = vetted_qa_tuples.copy()
         tasks = [
-            control_flow_functions.repair_qatuple_context(
+            control_flow_functions.repair_qatuple_context( # NOTE PROBLEM in that things that this writes, do not have enough items in the tuple
                 idx,
                 tup,
                 engine_wrapper_large,
@@ -323,8 +382,9 @@ async def main():
     print("---------------- ONTO EXAMPLES GENERATION-------------------")
 
     qa_tuples_by_paragraph = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_tuples)
-
     
+    print("Creating question generation training data...")
+    control_flow_functions.convert_revised_questions_to_question_generation_training(qa_tuples_by_paragraph=qa_tuples_by_paragraph, use_filenames=USE_FILENAMES)
 
     if not os.path.exists(multi_turn_convs_info_dir):
         os.makedirs(multi_turn_convs_info_dir)
@@ -384,6 +444,9 @@ async def main():
     for future in tqdmasyncio.tqdm.as_completed(limited_tasks_convwriting):
         await future
 
+    print("Converting conversational data generations to training data")
+    control_flow_functions.convert_logging_to_dataset("multiturn_conversation_generations")
+
     # # Yay! Now you have a dataset!
     # ### GPT wrote the cell below. I think it successfully converts things to ShareGPT format for use with axolotl, but I am not sure because I don't know that format very well and haven't used Axolotl. However, the json produced by the second function looks fine.
 
@@ -417,6 +480,7 @@ async def main():
         return flat_list
 
     len(filter_and_flatten(data))
+    print("COMPLETED FINAL PHASE")
 
 
 asyncio.run(main())
