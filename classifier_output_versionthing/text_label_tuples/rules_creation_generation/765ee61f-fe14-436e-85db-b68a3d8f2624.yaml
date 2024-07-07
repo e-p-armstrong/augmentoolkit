@@ -1,0 +1,94 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"There is nothing on which the judgment of an educated\
+    \ man would have proved more at sea had it been taken before the war broke out,\
+    \ and nothing in which the war has more poignantly revealed the ancient foundations\
+    \ upon which Europe reposes.BALLANTYNE PRESS: LONDON AND EDINBURGHEnd of Project\
+    \ Gutenberg's The Two Maps of Europe, by Hilaire Belloc*** END OF THE PROJECT\
+    \ GUTENBERG EBOOK THE TWO MAPS OF EUROPE, AND SOME OTHER ASPECTS OF THE GREAT\
+    \ WAR ***Updated editions will replace the previous one\u2014the old editions\
+    \ will be renamed.Creating the works from print editions not protected by U.S.\
+    \ copyright law means that no one owns a United States copyright in these works,\
+    \ so the Foundation (and you!) can copy and distribute it in the United States\
+    \ without permission and without paying copyright royalties. Special rules, set\
+    \ forth in the General Terms of Use part of this license, apply to copying and\
+    \ distributing Project Gutenberg\u2122 electronic works to protect the PROJECT\
+    \ GUTENBERG\u2122 concept and trademark. Project Gutenberg is a registered trademark,\
+    \ and may not be used if you charge for an eBook, except by following the terms\
+    \ of the trademark license, including paying royalties for use of the Project\
+    \ Gutenberg trademark. If you do not charge anything for copies of this eBook,\
+    \ complying with the trademark license is very easy. You may use this eBook for\
+    \ nearly any purpose such as creation of derivative works, reports, performances\
+    \ and research. Project Gutenberg eBooks may be modified and printed and given\
+    \ away\u2014you may do practically ANYTHING in the United States with eBooks not\
+    \ protected by U.S. copyright law. Redistribution is subject to the trademark\
+    \ license, especially commercial redistribution.START: FULL LICENSETHE FULL PROJECT\
+    \ GUTENBERG LICENSEPLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK\"\"\
+    \""
+  role: user
+- content: 'After applying the rules, I would classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words and punctuation marks
+    are removed.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words and phrases,
+    but they are mostly neutral or objective, such as "nothing", "poignantly", "ancient",
+    and "United States". There are no strong positive or negative sentiment-bearing
+    words.
+
+    3. Contextual Analysis: The context of the text is mostly neutral, discussing
+    historical events and geographical locations.
+
+    4. Sentiment Aggregation: The overall sentiment score is close to zero, indicating
+    a neutral sentiment.
+
+    5. Handling Ambiguity: The text does not contain conflicting sentiment-bearing
+    words or phrases.
+
+    6. Handling Special Cases: The text does not contain special cases like sarcasm,
+    irony, or figurative language.
+
+    7. Continuous Improvement: The model is continuously updated and refined, but
+    this text does not require any special handling.
+
+
+    The text appears to be a historical essay or article discussing the two maps of
+    Europe and the Great War, and its tone is informative and objective. Therefore,
+    I would classify it as "neutral".'
+  role: assistant
+  timeout: false

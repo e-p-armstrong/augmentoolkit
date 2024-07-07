@@ -1,0 +1,58 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"PATROLS\
+    \                               27   Combat                              80PEACE,\
+    \ eternal                            1PENETRATION, \u201CS\u201D bullet      \
+    \                131PLATOON   Column of twos, vulnerability of               \
+    \  187   Commander, post in close order                  63            Skirmish\
+    \ line                 79   French 4-rank formation (with plates)            \
+    \ 65, 66   Infantry, strength of the German                 273   One-rank, vulnerability\
+    \ of the                  187PLATOONS   Column of (with plate)               \
+    \     61, 62    How formed                           49    Machine gun battery\
+    \                    273, 274   Division of the company into                 \
+    \  46   Three or four platoons                      48\"\"\""
+  role: user
+- content: I would classify the input text as "neutral". The text appears to be a
+    passage of written text about military tactics and formations, and does not contain
+    any sentiment-bearing words or phrases that would indicate a positive or negative
+    sentiment. The text is primarily descriptive and informative, and does not express
+    any emotional tone or opinion.
+  role: assistant
+  timeout: false

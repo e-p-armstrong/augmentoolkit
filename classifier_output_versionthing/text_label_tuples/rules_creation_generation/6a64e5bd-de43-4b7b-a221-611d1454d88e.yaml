@@ -1,0 +1,84 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"Now, it is possible to bring all the movable military\
+    \ forces of a country into operation at once, but not all fortresses, rivers,\
+    \ mountains, people, &c.--in short, not the whole country, unless it is so small\
+    \ that it may be completely embraced by the first act of the War. Further, the\
+    \ co-operation of allies does not depend on the Will of the belligerents; and\
+    \ from the nature of the political relations of states to each other, this co-operation\
+    \ is frequently not afforded until after the War has commenced, or it may be increased\
+    \ to restore the balance of power.That this part of the means of resistance, which\
+    \ cannot at once be brought into activity, in many cases, is a much greater part\
+    \ of the whole than might at first be supposed, and that it often restores the\
+    \ balance of power, seriously affected by the great force of the first decision,\
+    \ will be more fully shown hereafter. Here it is sufficient to show that a complete\
+    \ concentration of all available means in a moment of time is contradictory to\
+    \ the nature of War.Now this, in itself, furnishes no ground for relaxing our\
+    \ efforts to accumulate strength to gain the first result, because an unfavourable\
+    \ issue is always a disadvantage to which no one would purposely expose himself,\
+    \ and also because the first decision, although not the only one, still will have\
+    \ the more influence on subsequent events, the greater it is in itself.\"\"\""
+  role: user
+- content: "After applying the rules, I classify the input text as \"neutral\".\n\n\
+    Here's the breakdown:\n\n**Tokenization**\n\n* Split the input text into individual\
+    \ words or tokens.\n* Remove punctuation marks, special characters, and stop words.\n\
+    \n**Sentiment Analysis**\n\n* For each token, check if it has a sentiment-bearing\
+    \ word or phrase.\n* Assign a sentiment score:\n\t+ Positive: +1\n\t+ Negative:\
+    \ -1\n\t+ Neutral: 0\n\nThe sentiment-bearing words and phrases are:\n\t+ \"possible\"\
+    \ (positive)\n\t+ \"not\" (neutral)\n\t+ \"frequently\" (neutral)\n\t+ \"seriously\"\
+    \ (neutral)\n\t+ \"unfavourable\" (negative)\n\t+ \"disadvantage\" (negative)\n\
+    \n**Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* Adjust the sentiment score:\n\t+ If the context is\
+    \ positive, increase the token's sentiment score by 0.5.\n\t+ If the context is\
+    \ negative, decrease the token's sentiment score by 0.5.\n\nThe context does not\
+    \ significantly impact the sentiment scores.\n\n**Sentiment Aggregation**\n\n\
+    * Calculate the overall sentiment score for the input text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\nThe overall sentiment score\
+    \ is:\n\t+ Positive: +1\n\t+ Negative: -2\n\t+ Neutral: 0\n\nSince the overall\
+    \ sentiment score is close to zero, I classify the text as \"neutral\".\n\n**Handling\
+    \ Ambiguity**\n\n* If the overall sentiment score is close to zero, consider the\
+    \ text as \"neutral\".\n* If the text contains conflicting sentiment-bearing words\
+    \ or phrases, prioritize the most prominent or recent one.\n\nIn this case, the\
+    \ sentiment scores are not conflicting, and the overall sentiment score is close\
+    \ to zero, so I classify the text as \"neutral\".\n\n**Handling Special Cases**\n\
+    \n* Handle special cases like sarcasm, irony, or figurative language by using\
+    \ domain-specific knowledge or machine learning models.\n\nIn this case, there\
+    \ are no special cases that require handling.\n\n**Continuous Improvement**\n\n\
+    * Continuously update and refine the sentiment analysis model by incorporating\
+    \ new data, feedback, and domain-specific knowledge.\n\nFor this input text, the\
+    \ sentiment analysis model is accurate, and no updates are necessary."
+  role: assistant
+  timeout: false

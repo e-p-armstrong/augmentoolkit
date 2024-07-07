@@ -1,0 +1,83 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"=7. Removal of Packs=                      363=8.\
+    \ The Employment of Machine Guns=               365=9. The Conduct of the Attack=\
+    \                  365    The advance of the firing line                 365 \
+    \   Distances                           368    The fire fight                \
+    \         369    The superiority of fire                    370    Fixing bayonets\
+    \                        372=10. The Assault=                        373    The\
+    \ decision to assault                    373    The decision to assault emanating\
+    \ from the firing line     375    Fire support during the assault            \
+    \    379    Bayonet fights                         382    Wounds produced by cutting\
+    \ weapons               384    Assaulting distances                      385 \
+    \   Conduct after a successful attack               385    Conduct after an unsuccessful\
+    \ attack              386=11. The Use of the Spade in Attack=               387\
+    \    Sand bags                           390    Results of Russian experiments\
+    \                 390    Provisions of various regulations               392 \
+    \   General rules governing the use of the spade in attack     393=12. The Employment\
+    \ of Reserves=                 394    Launching or withholding reserves      \
+    \         395=13. The Conduct of the Leaders in Action=            399\"\"\""
+  role: user
+- content: 'I would classify the input text as "negative". Here''s my reasoning:
+
+
+    1. Tokenization: The text is a military manual, and it contains words like "attack",
+    "assault", "bayonet", "wounds", and "unsuccessful" which have negative connotations.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words like "superiority
+    of fire", "fixing bayonets", and "bayonet fights" which have negative sentiment
+    scores.
+
+    3. Contextual Analysis: The context of the text is a military manual, and it discusses
+    various aspects of warfare, including attacks, assaults, and wounds, which have
+    negative connotations.
+
+    4. Sentiment Aggregation: The overall sentiment score of the text is negative
+    due to the presence of negative sentiment-bearing words and phrases.
+
+    5. Handling Ambiguity: There is no ambiguity in the text, and it is clear that
+    it is discussing military tactics and strategies.
+
+    6. Handling Special Cases: There are no special cases or figurative language in
+    the text that would require special handling.
+
+    7. Continuous Improvement: The text is a military manual, and it is not intended
+    to be a subjective or emotional piece of writing. It is meant to provide factual
+    information and guidance on military tactics and strategies.
+
+
+    Overall, the text is classified as "negative" because it discusses various aspects
+    of warfare, including attacks, assaults, and wounds, which have negative connotations.'
+  role: assistant
+  timeout: false

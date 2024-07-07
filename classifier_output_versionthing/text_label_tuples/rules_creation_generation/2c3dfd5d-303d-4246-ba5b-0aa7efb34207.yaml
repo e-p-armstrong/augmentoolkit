@@ -1,0 +1,93 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"It appears from what has been said that the old term\
+    \ _logistics_ is insufficient to designate the duties of staff officers, and that\
+    \ the real duties of a corps of such officers, if an attempt be made to instruct\
+    \ them in a proper manner for their performance, should be accurately prescribed\
+    \ by special regulations in accordance with the general principles of the art.\
+    \ Governments should take the precaution to publish well-considered regulations,\
+    \ which should define all the duties of staff officers and should give clear and\
+    \ accurate instructions as to the best methods of performing these duties.The\
+    \ Austrian staff formerly had such a code of regulations for their government;\
+    \ but it was somewhat behind the times, and was better adapted to the old methods\
+    \ of carrying on war than the present. This is the only work of the kind I have\
+    \ seen. There are, no doubt, others, both public and secret; but I have no knowledge\
+    \ of their existence. Several generals--as, for instance, Grimoard and Thiebaut--have\
+    \ prepared manuals for staff officers, and the new royal corps of France has issued\
+    \ several partial sets of instructions; but there is nowhere to be found a complete\
+    \ manual on the subject.If it is agreed that the old _logistics_ had reference\
+    \ only to details of marches and camps, and, moreover, that the functions of staff\
+    \ officers at the present day are intimately connected with the most important\
+    \ strategical combinations, it must be admitted that logistics includes but a\
+    \ small part of the duties of staff officers; and if we retain the term we must\
+    \ understand it to be greatly extended and developed in signification, so as to\
+    \ embrace not only the duties of ordinary staff officers, but of generals-in-chief.\"\
+    \"\""
+  role: user
+- content: 'After applying the rules, I classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains several sentiment-bearing words and phrases,
+    such as "insufficient", "proper", "well-considered", "clear", "accurate", "best",
+    and "important". However, these words and phrases are not strongly positive or
+    negative, and the overall sentiment is neutral.
+
+    3. Contextual Analysis: The context of the text is primarily informative and descriptive,
+    with no strong emotional connotations.
+
+    4. Sentiment Aggregation: The overall sentiment score is close to zero, indicating
+    a neutral sentiment.
+
+    5. Handling Ambiguity: The text does not contain conflicting sentiment-bearing
+    words or phrases, and the sentiment is not ambiguous.
+
+    6. Handling Special Cases: The text does not contain special cases like sarcasm,
+    irony, or figurative language that would require domain-specific knowledge or
+    machine learning models.
+
+    7. Continuous Improvement: The model is continuously updated and refined to improve
+    accuracy.
+
+
+    The text is a formal, informative passage discussing the duties of staff officers
+    and the need for a comprehensive manual on the subject. The language is neutral
+    and objective, with no strong emotional tone or bias.'
+  role: assistant
+  timeout: false

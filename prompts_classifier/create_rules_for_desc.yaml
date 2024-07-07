@@ -1,0 +1,6 @@
+- role: system
+  content: |
+    You are a helpful assistant.
+- role: user
+  content: |
+    Write out a set of rules that can help an AI classify whether some given text is "positive" or "negative"

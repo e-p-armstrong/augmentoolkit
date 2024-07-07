@@ -1,0 +1,92 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"I have just said that all the methods of charging\
+    \ may be equally good. It must not be understood, however, that impetuosity always\
+    \ gives the advantage in a shock of cavalry against cavalry: the fast trot, on\
+    \ the contrary, seems to me the best gait for charges in line, because every thing\
+    \ depends, in such a case, upon the _ensemble_ and good order of the movement,--things\
+    \ which cannot be obtained in charges at a fast gallop. Galloping is proper against\
+    \ artillery when it is important to get over the ground as rapidly as possible.\
+    \ In like manner, if the cavalry is armed with sabers, it may take the gallop\
+    \ at two hundred yards from the enemy's line if it stands firmly to receive the\
+    \ attack. But if the cavalry is armed with the lance, the fast trot is the proper\
+    \ gait, since the advantageous use of that weapon depends upon the preservation\
+    \ of good order: in a _m\xEAl\xE9e_ the lance is almost useless.If the enemy advances\
+    \ at a fast trot, it does not seem prudent to gallop to meet him; for the galloping\
+    \ party will be much disordered, while the trotting party will not. The only advantage\
+    \ of the gallop is its apparent boldness and the moral effect it produces; but,\
+    \ if this is estimated at its true value by the enemy, it is reasonable to expect\
+    \ his firm and compact mass to be victorious over a body of horsemen galloping\
+    \ in confusion.In their charges against infantry the Turks and Mamelukes showed\
+    \ the small advantage of mere impetuosity. No cavalry will penetrate where lancers\
+    \ or cuirassiers at a trot cannot. It is only when infantry is much disordered,\
+    \ or their fire poorly maintained, that there is any advantage in the impetuous\
+    \ gallop over the steady trot. To break good squares, cannon and lancers are required,\
+    \ or, better still, cuirassiers armed with lances. For charges in open order there\
+    \ are no better models for imitation than the Turks and the Cossacks.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words and phrases,
+    but they are mostly neutral or objective, describing military tactics and strategies.
+    There are no strong positive or negative sentiment-bearing words or phrases.
+
+    3. Contextual Analysis: The context of the text is mostly neutral, discussing
+    military tactics and strategies without expressing strong emotions.
+
+    4. Sentiment Aggregation: The overall sentiment score is close to zero, indicating
+    a neutral sentiment.
+
+    5. Handling Ambiguity: The text does not contain conflicting sentiment-bearing
+    words or phrases, so there is no need to prioritize one over the other.
+
+    6. Handling Special Cases: The text does not contain special cases like sarcasm,
+    irony, or figurative language that would require domain-specific knowledge or
+    machine learning models.
+
+    7. Continuous Improvement: The model is continuously updated and refined, but
+    in this case, the text does not require any special handling or adjustments.
+
+
+    Overall, the text is a neutral discussion of military tactics and strategies,
+    without expressing strong emotions or opinions.'
+  role: assistant
+  timeout: false

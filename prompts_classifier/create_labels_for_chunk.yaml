@@ -1,0 +1,8 @@
+- role: system
+  content: |
+    Classify text as "positive" or "negative"
+- role: user
+  content: |
+    rules: """{rules}"""
+    
+    Input Text: """{inp_text}"""

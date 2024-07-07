@@ -1,0 +1,76 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"n danger seems\
+    \ remote, can only be secured by discipline, which makes of duty a habit\" (General\
+    \ R. Taylor, C.S. Army). At the _Battle of Hastings_ (Oct. 14, 1066) lack of discipline\
+    \ and disobedience of orders changed the fate of the English nation and brought\
+    \ about the Norman Conquest. Harold, the English king, had defeated the forces\
+    \ of Harold Hadraade, {12} King of Norway, at Stamford Bridge in Yorkshire (Sept.\
+    \ 25, 1066). Four days later, Duke William of Normandy landed in Pevensey Bay,\
+    \ with 60,000 horse and foot. Harold hastened south to meet him with troops exhausted\
+    \ by battle and marching. After halting six days in London to collect reinforcements,\
+    \ the English force entrenched itself on the hill of Sautlache and awaited attack.\
+    \ The Normans were unable to penetrate the abattis, but they gained the victory\
+    \ which changed the whole history of the English race by the stratagem of a feigned\
+    \ retreat. Harold's undisciplined auxiliaries, contrary to direct orders (which\
+    \ were obeyed by the \"regular\" troops in the centre), swarmed out of the palisades\
+    \ in pursuit of the fleeing Normans, who suddenly turned about and penetrated\
+    \ the English lines mingled with the discomfited auxiliaries. Had the \"irregulars\"\
+    \ shown the same sense of discipline as the \"regulars\" there had been no Norman\
+    \ Conquest.\"\"\""
+  role: user
+- content: "Based on the rules provided, I will classify the input text as \"negative\"\
+    .\n\nHere's the breakdown:\n\n**Tokenization**\n\n* Split the text into individual\
+    \ words or tokens.\n* Remove punctuation marks, special characters, and stop words.\n\
+    \n**Sentiment Analysis**\n\n* Identify sentiment-bearing words or phrases:\n\t\
+    + \"danger\" (negative)\n\t+ \"discipline\" (positive)\n\t+ \"habit\" (neutral)\n\
+    \t+ \"lack\" (negative)\n\t+ \"disobedience\" (negative)\n\t+ \"fate\" (neutral)\n\
+    \t+ \"Norman Conquest\" (negative)\n\t+ \"exhausted\" (negative)\n\t+ \"stratagem\"\
+    \ (neutral)\n\t+ \"feigned retreat\" (neutral)\n\t+ \"undisciplined\" (negative)\n\
+    \t+ \"discomfited\" (negative)\n\n**Contextual Analysis**\n\n* Adjust sentiment\
+    \ scores based on context:\n\t+ \"danger\" is preceded by \"seems remote\", which\
+    \ is a negative sentiment.\n\t+ \"lack of discipline\" is a negative sentiment.\n\
+    \t+ \"undisciplined auxiliaries\" is a negative sentiment.\n\n**Emotion Detection**\n\
+    \n* Identify emotions expressed in the text:\n\t+ None\n\n**Intensity Analysis**\n\
+    \n* Adjust sentiment scores based on intensity:\n\t+ \"danger\" is a strong negative\
+    \ sentiment.\n\t+ \"lack of discipline\" is a strong negative sentiment.\n\t+\
+    \ \"undisciplined auxiliaries\" is a strong negative sentiment.\n\n**Overall Sentiment**\n\
+    \n* Calculate the overall sentiment score:\n\t+ Negative sentiment words and phrases:\
+    \ 5\n\t+ Positive sentiment words and phrases: 2\n\t+ Neutral sentiment words\
+    \ and phrases: 3\n\t+ Overall sentiment score: -3\n\nBased on the overall sentiment\
+    \ score, the text is classified as \"negative\"."
+  role: assistant
+  timeout: false

@@ -1,0 +1,93 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"The simplest arrangement for a continuous intrenchment is the _cremailli\xE8\
+    re_ or indented line. When applied to an irregular site, or used to connect together\
+    \ distant and detached works, the indented line may be regarded as a good disposition.\
+    \ Mitres and redans, connected by straight curtains, are sometimes employed, as\
+    \ also a combination of large and small redans, forming alternate salient and\
+    \ re-entering angles. A continuous line of bastions is preferable to any other\
+    \ arrangement, when there is plenty of time for their construction.Lines with\
+    \ intervals are frequently formed of alternate lunettes and square redoubts. Other\
+    \ detached works may be employed in the same way. This manner of intrenching a\
+    \ position has several advantages, with disciplined troops. The first shock of\
+    \ the assailant is sustained by the detached works, and when he attempts to penetrate\
+    \ in the intervals, his flanks become exposed to a deadly cross fire. These intervals\
+    \ also allow the assailed to act on the offensive, by charging the enemy at the\
+    \ opportune moment. But with raw and militia forces it will be safer to resort\
+    \ to continuous lines. If cavalry form any part of the defensive force, it will\
+    \ be absolutely necessary to leave intervals through which these troops may charge.A\
+    \ vertical section of all intrenchments is of the same general form; the dimensions\
+    \ will, of course, vary with the nature of the soil, and the time and means employed\
+    \ in their construction. The minimum dimensions that can be used with any considerable\
+    \ advantage are given in Fig. 49.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The input text is split into individual words or tokens. Punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains words like "good", "preferable", "advantages",
+    and "deadly", which have positive sentiment-bearing words. However, it also contains
+    words like "raw", "militia", and "safer", which have negative sentiment-bearing
+    words.
+
+    3. Contextual Analysis: The text does not contain any negative words preceding
+    positive words, and vice versa.
+
+    4. Emphasis Analysis: The text does not contain any words that convey emphasis.
+
+    5. Negation Analysis: The text does not contain any words that negate sentiment.
+
+    6. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    the sentiment scores of individual tokens. The score is close to 0, indicating
+    a neutral sentiment.
+
+    7. Thresholding: The overall sentiment score is below the threshold value (0.5),
+    so the text is classified as "neutral".
+
+    8. Handling Ambiguity: The text does not contain any ambiguous or neutral words.
+
+
+    The text appears to be a technical description of intrenchment arrangements, discussing
+    the advantages and disadvantages of different designs. The language is formal
+    and objective, without any emotional or evaluative tone, which is why it is classified
+    as "neutral".'
+  role: assistant
+  timeout: false

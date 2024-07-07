@@ -1,0 +1,96 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"Let us notice how France has attempted to accomplish this object. The\
+    \ Mediterranean frontier has Fort Quarr\xE9, Fort St. Margu\xE9rite, St. Tropez,\
+    \ Brigan\xE7on, the forts of Point Man, of l'Ertissac, and of Langoustier, Toulon,\
+    \ St. Nicholas, Castle of If, Marseilles, Tour de Boue, Aigues-Montes, Fort St.\
+    \ Louis, Fort Brescou, Narbonne, Ch\xE2teau de Salces, Perpignan, Collioure, Fort\
+    \ St. Elme, and Port Vendre. Toulon is the great naval d\xE9p\xF4t for this frontier,\
+    \ and Marseilles the great commercial port. Both are well secured by strong fortifications.\
+    \ The Atlantic frontier has Bayonne; the forts of Royan, Grave, Medoc, Pat\xE9\
+    , &c., on the Gironde; Rochefort, with the forts of Chapus, Lapin, Aix, Oleron,\
+    \ &c., to cover the roadstead; La Rochelle, with the forts of the Isle of R\xE9\
+    ; Sables, with the forts of St. Nicholas, and Des Moulines, Isle Dieu, Belle Isle,\
+    \ Fort du Pilier, Mindin, Ville Martin; Quiberon, with Fort Penthi\xE8vre; L'Orient,\
+    \ with its harbor defences; Fort Cigogne; Brest, with its harbor defences; St.\
+    \ Malo, with Forts C\xE9zembre, La Canch\xE9e, L'Anse du Verger, and Des Rimains;\
+    \ Cherbourg, with its defensive forts and batteries; Havre, Dieppe, Boulogne,\
+    \ Calais, and Dunkirk. Cherbourg, Brest, and Rochefort, are great naval d\xE9\
+    p\xF4ts; and Havre, Nantes, and Bordeaux, the principal commercial ports. Many\
+    \ of the works above enumerated are small in extent and antiquated in their construction,\
+    \ and some of them quite old and dilapidated nevertheless, they have heretofore\
+    \ been found sufficient for the defence of the naval depots and commercial seaports\
+    \ of France against the superior naval forces of her neighbor.Omitting for the\
+    \ present all discussion of sea-coast defences, let us examine more particularly\
+    \ the character and influence of fortifications on land frontiers.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words and punctuation marks
+    are removed.
+
+    2. Sentiment Analysis: Most tokens do not have sentiment-bearing words, so their
+    sentiment scores are 0.
+
+    3. Contextual Analysis: No negative words are found, so no sentiment scores are
+    flipped.
+
+    4. Emphasis Analysis: No emphasis words are found, so no sentiment scores are
+    increased.
+
+    5. Negation Analysis: No negation words are found, so no sentiment scores are
+    flipped.
+
+    6. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    the sentiment scores of individual tokens. Since most tokens have a sentiment
+    score of 0, the overall sentiment score is close to 0.
+
+    7. Thresholding: The overall sentiment score is below the threshold (0.5), so
+    the text is classified as "neutral".
+
+    8. Handling Ambiguity: No ambiguous or neutral words are found, so no special
+    handling is required.
+
+
+    The text appears to be a descriptive passage about the fortifications and naval
+    depots of France, without expressing any strong emotions or opinions. Therefore,
+    it is classified as "neutral".'
+  role: assistant
+  timeout: false

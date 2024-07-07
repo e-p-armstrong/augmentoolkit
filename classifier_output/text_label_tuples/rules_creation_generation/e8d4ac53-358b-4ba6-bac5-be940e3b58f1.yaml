@@ -1,0 +1,66 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"At the end of January, 1855, the\
+    \ French force was seventy-five thousand men and ten thousand horses. Up to the\
+    \ same time, the English had sent fifty-four thousand men to the Crimea, but only\
+    \ fifteen thousand were alive, present, and fit for duty.February 4, the French\
+    \ numbered eighty-five thousand; the English, twenty-five thousand fit for duty;\
+    \ the Turks, twenty-five thousand.May 8, 1855, General La Marmora arrived at Balaklava\
+    \ with fifteen thousand Sardinians.In the latter part of May, an expedition of\
+    \ sixteen thousand men was sent to Kertch.In August, the French force at Sebastopol\
+    \ had risen to one hundred and twenty thousand men.September 8, the final assault\
+    \ took place, which resulted in the evacuation of the place by the Russians. The\
+    \ allies had then in battery more than eight hundred pieces of artillery.The fleet\
+    \ which co-operated with the land-forces in the artillery attack of October 17,\
+    \ 1854, consisted of twenty-five ships. There were present and prepared to attack\
+    \ in September, 1855, thirty-four ships.October, 1855, an expeditionary force\
+    \ of nine thousand men was sent to Kinburn, which place was captured.Marshal Vaillant,\
+    \ in his report, as Minister of War, to the French emperor, says there were sent\
+    \ from France and Algeria three hundred and ten thousand men and forty thousand\
+    \ horses, of which two hundred and twenty-seven thousand men returned to France\
+    \ and Algeria.The marshal's report gives the following striking facts, (he refers\
+    \ only to French operations:-)\"\"\""
+  role: user
+- content: I would classify the input text as "neutral". The text appears to be a
+    historical account of a military campaign, providing factual information about
+    troop numbers, battles, and events. There is no emotional language or sentiment
+    expressed in the text, and it does not contain any words or phrases that would
+    indicate a positive or negative sentiment. The text is primarily informative and
+    objective, making it neutral in sentiment.
+  role: assistant
+  timeout: false

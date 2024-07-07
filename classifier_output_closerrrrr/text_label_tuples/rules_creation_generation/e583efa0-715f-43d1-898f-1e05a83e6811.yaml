@@ -1,0 +1,91 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\" and the unforeseen\
+    \ disasters which frequently, on that element, defeat the best concerted enterprises.\
+    \ To the English, as showing that _the empire of the seas does not always afford\
+    \ security against invasion;_ that, in the face of superior maritime forces, her\
+    \ possessions were for sixteen days at the mercy of the enemy; and that neither\
+    \ the skill of her sailors nor the valor of her armies, but the fury of the elements,\
+    \ saved them from danger in the most vulnerable part of their dominions. While\
+    \ these considerations are fitted to abate the confidence in invasion, they are\
+    \ calculated, at the same time, to weaken an overweening confidence in naval superiority,\
+    \ and to demonstrate that _the only base upon which certain reliance can be placed_,\
+    \ even by an insular power, _is a well-disciplined army and the patriotism of\
+    \ its own subjects_.\"\"\"\""
+  role: user
+- content: "I will classify the input text as \"negative\".\n\nHere's the breakdown\
+    \ of the classification:\n\n**Tokenization**\n\n* Split the text into individual\
+    \ words or tokens.\n* Remove punctuation marks, special characters, and stop words.\n\
+    * The resulting tokens are: [\"and\", \"the\", \"unforeseen\", \"disasters\",\
+    \ \"which\", \"frequently\", \"on\", \"that\", \"element\", \"defeat\", \"best\"\
+    , \"concerted\", \"enterprises\", \"To\", \"English\", \"as\", \"showing\", \"\
+    that\", \"_the\", \"empire\", \"seas\", \"does\", \"not\", \"always\", \"afford\"\
+    , \"security\", \"against\", \"invasion\", \"that\", \"in\", \"face\", \"superior\"\
+    , \"maritime\", \"forces\", \"her\", \"possessions\", \"were\", \"for\", \"sixteen\"\
+    , \"days\", \"at\", \"mercy\", \"enemy\", \"and\", \"that\", \"neither\", \"skill\"\
+    , \"sailors\", \"nor\", \"valor\", \"armies\", \"but\", \"fury\", \"elements\"\
+    , \"saved\", \"them\", \"from\", \"danger\", \"most\", \"vulnerable\", \"part\"\
+    , \"dominions\", \"While\", \"these\", \"considerations\", \"are\", \"fitted\"\
+    , \"abate\", \"confidence\", \"invasion\", \"they\", \"are\", \"calculated\",\
+    \ \"at\", \"time\", \"weaken\", \"overweening\", \"confidence\", \"naval\", \"\
+    superiority\", \"and\", \"demonstrate\", \"that\", \"_the\", \"only\", \"base\"\
+    , \"upon\", \"which\", \"certain\", \"reliance\", \"can\", \"be\", \"placed\"\
+    , \"even\", \"insular\", \"power\", \"_is\", \"well-disciplined\", \"army\", \"\
+    and\", \"patriotism\", \"its\", \"own\", \"subjects\"]\n\n**Sentiment Analysis**\n\
+    \n* Identify sentiment-bearing words or phrases: \"unforeseen\", \"disasters\"\
+    , \"defeat\", \"best\", \"concerted\", \"enterprises\", \"security\", \"invasion\"\
+    , \"fury\", \"elements\", \"danger\", \"vulnerable\", \"part\", \"dominions\"\
+    , \"abate\", \"confidence\", \"invasion\", \"weaken\", \"overweening\", \"confidence\"\
+    , \"naval\", \"superiority\", \"demonstrate\", \"reliance\", \"placed\", \"insular\"\
+    , \"power\", \"well-disciplined\", \"army\", \"patriotism\", \"its\", \"own\"\
+    , \"subjects\"\n* Assign sentiment scores:\n\t+ \"unforeseen\", \"disasters\"\
+    , \"defeat\", \"danger\", \"vulnerable\", \"part\", \"dominions\": -1 (negative)\n\
+    \t+ \"security\", \"invasion\", \"fury\", \"elements\": -1 (negative)\n\t+ \"\
+    abate\", \"weaken\", \"overweening\", \"confidence\", \"naval\", \"superiority\"\
+    : -1 (negative)\n\t+ \"reliance\", \"placed\", \"insular\", \"power\", \"well-disciplined\"\
+    , \"army\", \"patriotism\", \"its\", \"own\", \"subjects\": +1 (positive)\n\n\
+    **Contextual Analysis**\n\n* No significant contextual analysis required, as the\
+    \ sentiment-bearing words and phrases are mostly negative.\n\n**Emotion Detection**\n\
+    \n* No significant emotions detected, as the text is mostly focused on describing\
+    \ historical events and analyzing naval superiority.\n\n**Intensity Analysis**\n\
+    \n* No significant intensity analysis required, as the sentiment-bearing words\
+    \ and phrases are mostly negative.\n\n**Overall Sentiment**\n\n* Calculate the\
+    \ overall sentiment score by summing up the sentiment scores of all tokens: -6\
+    \ (negative)\n\n**Edge Cases**\n\n* No edge cases detected.\n\nBased on the analysis,\
+    \ the overall sentiment of the text is negative, so I classify it as \"negative\"\
+    ."
+  role: assistant
+  timeout: false

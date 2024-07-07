@@ -1,0 +1,84 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"What formation obtained the maximum effort from the\
+    \ Greek army?What methods caused the soldiers of a Roman army to fight most effectively?The\
+    \ first question admits of discussion. The Roman solved the second.The Roman was\
+    \ not essentially brave. He did not produce any warrior of the type of Alexander.\
+    \ It is acknowledged that the valorous impetuosity of the barbarians, Gauls, Cimbri,\
+    \ Teutons, made him tremble. But to the glorious courage of the Greeks, to the\
+    \ natural bravery of the Gauls he opposed a strict sense of duty, secured by a\
+    \ terrible discipline in the masses. It was inspired in the officers by a sentiment\
+    \ of the strongest patriotism.The discipline of the Greeks was secured by exercises\
+    \ and rewards; the discipline of the Romans was secured also by the fear of death.\
+    \ They put to death with the club; they decimated their cowardly or traitorous\
+    \ units.In order to conquer enemies that terrified his men, a Roman general heightened\
+    \ their morale, not by enthusiasm but by anger. He made the life of his soldiers\
+    \ miserable by excessive work and privations. He stretched the force of discipline\
+    \ to the point where, at a critical instant, it must break or expend itself on\
+    \ the enemy. Under similar circumstances, a Greek general caused Tyrtaeus to sing.\
+    \ [3] It would have been curious to see two such forces opposed.But discipline\
+    \ alone does not constitute superior tactics. Man in battle, I repeat, is a being\
+    \ in whom the instinct of self-preservation dominates, at certain moments, all\
+    \ other sentiments. Discipline has for its aim the domination of that instinct\
+    \ by a greater terror. But it cannot dominate it completely. I do not deny the\
+    \ glorious examples where discipline and devotion have elevated man above himself.\
+    \ But if these examples are glorious, it is because they are rare; if they are\
+    \ admired, it is because they are considered exceptions, and the exception proves\
+    \ the rule.\"\"\""
+  role: user
+- content: "I will classify the input text as \"neutral\" based on the rules provided.\n\
+    \nHere's the breakdown:\n\n1. Tokenization: The input text is split into individual\
+    \ words or tokens, and punctuation marks, special characters, and stop words are\
+    \ removed.\n\n2. Sentiment Analysis: The sentiment-bearing words or phrases are\
+    \ identified, and sentiment scores are assigned:\n\t* Positive: +1\n\t* Negative:\
+    \ -1\n\t* Neutral: 0\n\nThe sentiment-bearing words or phrases identified are:\n\
+    \t* \"glorious\" (positive)\n\t* \"valorous\" (positive)\n\t* \"brave\" (positive)\n\
+    \t* \"courage\" (positive)\n\t* \"patriotism\" (positive)\n\t* \"terror\" (negative)\n\
+    \t* \"cowardly\" (negative)\n\t* \"traitorous\" (negative)\n\t* \"miserable\"\
+    \ (negative)\n\t* \"anguish\" (negative)\n\nThe sentiment scores are:\n\t* Positive:\
+    \ +5\n\t* Negative: -4\n\n3. Contextual Analysis: The context of each token is\
+    \ analyzed, and the sentiment scores are adjusted:\n\t* The context of \"glorious\"\
+    \ is positive, so the sentiment score is increased by 0.5.\n\t* The context of\
+    \ \"terror\" is negative, so the sentiment score is decreased by 0.5.\n\t* The\
+    \ context of \"cowardly\" is negative, so the sentiment score is decreased by\
+    \ 0.5.\n\t* The context of \"miserable\" is negative, so the sentiment score is\
+    \ decreased by 0.5.\n\nThe adjusted sentiment scores are:\n\t* Positive: +6.5\n\
+    \t* Negative: -4.5\n\n4. Sentiment Aggregation: The overall sentiment score is\
+    \ calculated by summing up the sentiment scores of individual tokens:\n\t* Positive:\
+    \ +6.5\n\t* Negative: -4.5\n\nThe overall sentiment score is positive, but it's\
+    \ close to zero. According to Rule 5, if the overall sentiment score is close\
+    \ to zero, the text should be classified as \"neutral\".\n\nTherefore, the input\
+    \ text is classified as \"neutral\"."
+  role: assistant
+  timeout: false

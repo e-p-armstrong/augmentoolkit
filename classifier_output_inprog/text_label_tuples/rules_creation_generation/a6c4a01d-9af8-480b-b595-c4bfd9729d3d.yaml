@@ -1,0 +1,93 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"The actions of the enemy are usually the only reliable indication of the\
+    \ location of the sheaf of fire directed against him; the observed strike of bullets\
+    \ is seldom so good an indication. It is especially difficult to judge of the\
+    \ distribution of projectiles from their strike in front and in rear of the target.\
+    \ Suggestions from the subordinate leaders, whose view of the target is generally\
+    \ restricted, are often more confusing than valuable.12. THE EFFECT OF FIRE.COMPARISON\
+    \ BETWEEN LOSSES PRODUCED BY INFANTRY AND ARTILLERY FIRE.In 1866 the Austrian\
+    \ artillery inflicted 16% of our losses. In 1870-71 the French artillery inflicted\
+    \ 8% of our losses. Up to the battle of Liao Yang the 1st Japanese Army suffered\
+    \ the following losses:===========+===========================+========================\
+    \       |    PERCENTAGES.    |    WOUNDS.       +----------+-------+--------+--------+-------+-------\
+    \       | Small  | Art\u2019y |Cutting |Serious.|Slight.| Very       |arms fire.|\
+    \ fire. |weapons.|    |    |slight.  -----------+----------+-------+--------+--------+-------+-------\
+    \  Guard Div. | 88.42  | 11.50 | 0.08 | 32.17 | 62.49 | 5.34  2d Div.  | 89.43\
+    \  | 7.91 | 2.30 | 44.05 | 54.89 | 1.06  12th Div. | 80.52  | 14.48 | 2.09 | 39.12\
+    \ | 46.36 | 14.52  -----------+----------+-------+--------+--------+-------+-------\
+    \  Average  | 86.12  | 11.30 | 2.09 | 38.45 | 54.58 | 6.97  -----------+----------+-------+--------+--------+-------+-------The\
+    \ figures given above under the captions \u201Cserious\u201D (including killed),\
+    \ \u201Cslight,\u201D and \u201Cvery slight\u201D wounds have, of course, only\
+    \ a relative value. The following figures express the average losses of Russians\
+    \ and Japanese:Losses through rifle fire   85.9%  Losses through artillery fire\
+    \ 11.4%  Losses through cutting weapons 3.2%\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words and punctuation marks
+    are removed.
+
+    2. Sentiment Analysis: The text contains words like "usually", "difficult", "confusing",
+    "valuable", "losses", "wounds", etc. which do not have a clear positive or negative
+    sentiment. However, some words like "good", "bad", "very" are sentiment-bearing
+    words.
+
+    3. Contextual Analysis: The context of the text is mostly neutral, discussing
+    military statistics and percentages.
+
+    4. Emphasis Analysis: There are no words that convey emphasis in the text.
+
+    5. Negation Analysis: There are no words that negate sentiment in the text.
+
+    6. Sentiment Aggregation: The overall sentiment score is neutral, as the text
+    does not contain strong positive or negative sentiment-bearing words.
+
+    7. Thresholding: Since the overall sentiment score is neutral, the text is classified
+    as "neutral".
+
+    8. Handling Ambiguity: The text contains some ambiguous words like "good", "bad",
+    which are assigned a neutral sentiment score.
+
+
+    The text is a neutral discussion of military statistics and does not contain strong
+    positive or negative sentiment.'
+  role: assistant
+  timeout: false

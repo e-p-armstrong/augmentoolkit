@@ -1,0 +1,117 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"General G. H. Thomas, in command\
+    \ of the U.S. Army of the Cumberland, refused battle with the Confederates in\
+    \ Nashville until he had prepared cavalry and made every other arrangement for\
+    \ pursuit. Constancy of purpose was the salient feature of Thomas's military character.\
+    \ He would not fight until he was ready. The civil authorities urgently demanded\
+    \ that he should advance. So great was the tension that Grant finally sent General\
+    \ J. A. Logan to supersede Thomas; but before Logan arrived Thomas had won the\
+    \ _Battle of Nashville_ (Dec. 15-16, 1864), the most crushing victory of the war.Lord\
+    \ Roberts landed in Cape Town on Jan. 10, 1900, and popular expectation was degenerating\
+    \ into impatience when a co-ordinated advance of French's cavalry and the Sixth\
+    \ and Ninth Infantry Divisions {16} resulted in the relief of beleagured cities\
+    \ distant from the field of battle, and in the surrender on the field of Cronje's\
+    \ force at _Paardeberg_ (Feb. 27, 1900), on the anniversary of Majuba.\"\"\""
+  role: user
+- content: "Based on the rules provided, I will classify the input text as \"positive\"\
+    .\n\nHere's the breakdown:\n\n**Tokenization**\n\n* Break down the text into individual\
+    \ words or tokens.\n* Remove punctuation marks, special characters, and stop words.\n\
+    * The resulting tokens are: [\"General\", \"G\", \"H\", \"Thomas\", \"in\", \"\
+    command\", \"of\", \"the\", \"U.S.\", \"Army\", \"of\", \"the\", \"Cumberland\"\
+    , \"refused\", \"battle\", \"with\", \"the\", \"Confederates\", \"in\", \"Nashville\"\
+    , \"until\", \"he\", \"had\", \"prepared\", \"cavalry\", \"and\", \"made\", \"\
+    every\", \"other\", \"arrangement\", \"for\", \"pursuit\", \"Constancy\", \"of\"\
+    , \"purpose\", \"was\", \"the\", \"salient\", \"feature\", \"of\", \"Thomas's\"\
+    , \"military\", \"character\", \"He\", \"would\", \"not\", \"fight\", \"until\"\
+    , \"he\", \"was\", \"ready\", \"The\", \"civil\", \"authorities\", \"urgently\"\
+    , \"demanded\", \"that\", \"he\", \"should\", \"advance\", \"So\", \"great\",\
+    \ \"was\", \"the\", \"tension\", \"that\", \"Grant\", \"finally\", \"sent\", \"\
+    General\", \"J\", \"A\", \"Logan\", \"to\", \"supersede\", \"Thomas\", \"but\"\
+    , \"before\", \"Logan\", \"arrived\", \"Thomas\", \"had\", \"won\", \"the\", \"\
+    _Battle\", \"of\", \"Nashville_\", \"Dec\", \"15-16\", \"1864\", \"the\", \"most\"\
+    , \"crushing\", \"victory\", \"of\", \"the\", \"war\", \"Lord\", \"Roberts\",\
+    \ \"landed\", \"in\", \"Cape\", \"Town\", \"on\", \"Jan\", \"10\", \"1900\", \"\
+    and\", \"popular\", \"expectation\", \"was\", \"degenerating\", \"into\", \"impatience\"\
+    , \"when\", \"a\", \"co-ordinated\", \"advance\", \"of\", \"French's\", \"cavalry\"\
+    , \"and\", \"the\", \"Sixth\", \"and\", \"Ninth\", \"Infantry\", \"Divisions\"\
+    , \"{16}\", \"resulted\", \"in\", \"the\", \"relief\", \"of\", \"beleagured\"\
+    , \"cities\", \"distant\", \"from\", \"the\", \"field\", \"of\", \"battle\", \"\
+    and\", \"in\", \"the\", \"surrender\", \"on\", \"the\", \"field\", \"of\", \"\
+    Cronje's\", \"force\", \"at\", \"_Paardeberg_\", \"Feb\", \"27\", \"1900\", \"\
+    on\", \"the\", \"anniversary\", \"of\", \"Majuba\"]\n\n**Sentiment Analysis**\n\
+    \n* Identify the sentiment of each token using a sentiment lexicon.\n* Assign\
+    \ a sentiment score to each token based on its sentiment value.\n* The sentiment\
+    \ scores are:\n\t+ Positive: [\"General\", \"G\", \"H\", \"Thomas\", \"Constancy\"\
+    , \"purpose\", \"was\", \"the\", \"salient\", \"feature\", \"of\", \"Thomas's\"\
+    , \"military\", \"character\", \"He\", \"would\", \"not\", \"fight\", \"until\"\
+    , \"he\", \"was\", \"ready\", \"The\", \"most\", \"crushing\", \"victory\", \"\
+    of\", \"the\", \"war\", \"Lord\", \"Roberts\", \"landed\", \"in\", \"Cape\", \"\
+    Town\", \"on\", \"Jan\", \"10\", \"1900\", \"and\", \"popular\", \"expectation\"\
+    , \"was\", \"degenerating\", \"into\", \"impatience\", \"when\", \"a\", \"co-ordinated\"\
+    , \"advance\", \"of\", \"French's\", \"cavalry\", \"and\", \"the\", \"Sixth\"\
+    , \"and\", \"Ninth\", \"Infantry\", \"Divisions\", \"{16}\", \"resulted\", \"\
+    in\", \"the\", \"relief\", \"of\", \"beleagured\", \"cities\", \"distant\", \"\
+    from\", \"the\", \"field\", \"of\", \"battle\", \"and\", \"in\", \"the\", \"surrender\"\
+    , \"on\", \"the\", \"field\", \"of\", \"Cronje's\", \"force\", \"at\", \"_Paardeberg_\"\
+    , \"Feb\", \"27\", \"1900\", \"on\", \"the\", \"anniversary\", \"of\", \"Majuba\"\
+    ]\n\t+ Neutral: [\"in\", \"of\", \"the\", \"U.S.\", \"Army\", \"of\", \"the\"\
+    , \"Cumberland\", \"refused\", \"battle\", \"with\", \"the\", \"Confederates\"\
+    , \"in\", \"Nashville\", \"until\", \"he\", \"had\", \"prepared\", \"cavalry\"\
+    , \"and\", \"made\", \"every\", \"other\", \"arrangement\", \"for\", \"pursuit\"\
+    , \"The\", \"civil\", \"authorities\", \"urgently\", \"demanded\", \"that\", \"\
+    he\", \"should\", \"advance\", \"So\", \"great\", \"was\", \"the\", \"tension\"\
+    , \"that\", \"Grant\", \"finally\", \"sent\", \"General\", \"J\", \"A\", \"Logan\"\
+    , \"to\", \"supersede\", \"Thomas\", \"but\", \"before\", \"Logan\", \"arrived\"\
+    , \"Thomas\", \"had\", \"won\", \"the\", \"_Battle\", \"of\", \"Nashville_\",\
+    \ \"Dec\", \"15-16\", \"1864\", \"the\", \"most\", \"crushing\", \"victory\",\
+    \ \"of\", \"the\", \"war\", \"Lord\", \"Roberts\", \"landed\", \"in\", \"Cape\"\
+    , \"Town\", \"on\", \"Jan\", \"10\", \"1900\", \"and\", \"popular\", \"expectation\"\
+    , \"was\", \"degenerating\", \"into\", \"impatience\", \"when\", \"a\", \"co-ordinated\"\
+    , \"advance\", \"of\", \"French's\", \"cavalry\", \"and\", \"the\", \"Sixth\"\
+    , \"and\", \"Ninth\", \"Infantry\", \"Divisions\", \"{16}\", \"resulted\", \"\
+    in\", \"the\", \"relief\", \"of\", \"beleagured\", \"cities\", \"distant\", \"\
+    from\", \"the\", \"field\", \"of\", \"battle\", \"and\", \"in\", \"the\", \"surrender\"\
+    , \"on\", \"the\", \"field\", \"of\", \"Cronje's\", \"force\", \"at\", \"_Paardeberg_\"\
+    , \"Feb\", \"27\", \"1900\", \"on\", \"the\", \"anniversary\", \"of\", \"Majuba\"\
+    ]\n\t+ Negative: []\n\n**Contextual Analysis**\n\n* Analyze the context in which\
+    \ each token appears.\n* The context is generally positive, with mentions of victories\
+    \ and successful military campaigns.\n\n**Aspect-Based Sentiment Analysis**\n\n\
+    * Identify the"
+  role: assistant
+  timeout: false

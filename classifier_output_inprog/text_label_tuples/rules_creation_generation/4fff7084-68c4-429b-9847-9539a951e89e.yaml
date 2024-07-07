@@ -1,0 +1,101 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"1st. The marshal (or general) commanding-in-chief; and one colonel or\
+    \ lieutenant-colonel, one major, three captains and three subalterns, as aides-de-camp.2d.\
+    \ A lieutenant-general as chief-of-staff, with the title of _major-general_, assisted\
+    \ by one colonel or lieutenant-colonel, three majors, five captains, and one subaltern,\
+    \ as aides-de-camp.3d. Three lieutenant-generals, commanding the _corps d'arm\xE9\
+    e_ and reserve. Each of these will be assisted by aides in the same way as the\
+    \ _major-general_, and each will also have his regularly-organized staff of _corps\
+    \ d'arm\xE9e_, with a general of division or general of brigade as chief.4th.\
+    \ Six or nine generals commanding divisions, each having his own distinct and\
+    \ separately organized staff. In the French army, the staff of an officer commanding\
+    \ a division is composed of one colonel, two majors, three captains, and six subalterns.5th.\
+    \ Twelve or more generals of brigade, each having one captain, and one subaltern\
+    \ for aides.6th. There is also attached to the staff of the general-in-chief of\
+    \ the army, the commandants of artillery and engineers, with several subordinates,\
+    \ inspector-generals, and the ranking officers of each of the administrative departments,\
+    \ with their assistants.The generals select their aides and assistants from the\
+    \ staff corps, or from either of the four arms of service.The troops of these\
+    \ arms may be distributed as follows:52 battalions of infantry,              35,000\
+    \ men.  42 squadrons of horse,   .     .        6,500 \"  13 batteries of artillery,\
+    \ (4 mounted and 9 foot,) .  2,500 \"   5 companies of sappers, 2 of pontoniers,[29]\
+    \ and 1 of artificers,     .     .     .     .     .   1,500 \"              \
+    \               ------                             45,500 \"\"\"\""
+  role: user
+- content: 'I will classify the input text as "neutral" based on the rules provided.
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The input text is split into individual words or tokens. Punctuation
+    marks, special characters, and stop words are removed.
+
+
+    2. Sentiment Analysis: The text does not contain sentiment-bearing words like
+    "happy", "good", "bad", etc.
+
+
+    3. Contextual Analysis: The text does not contain negative or positive words that
+    would flip the sentiment score.
+
+
+    4. Emphasis Analysis: The text does not contain words that convey emphasis like
+    "very", "extremely", "really", etc.
+
+
+    5. Negation Analysis: The text does not contain words that negate sentiment like
+    "not", "never", "no", etc.
+
+
+    6. Sentiment Aggregation: Since the text does not contain sentiment-bearing words,
+    the overall sentiment score is 0.
+
+
+    7. Thresholding: The overall sentiment score is 0, which is below the threshold
+    value (e.g. 0.5). Therefore, the text is classified as "neutral".
+
+
+    8. Handling Ambiguity: The text does not contain ambiguous or neutral words that
+    would require special handling.
+
+
+    The input text appears to be a military organizational chart, providing information
+    about the structure and composition of an army. It does not contain emotional
+    language or sentiment-bearing words, making it neutral in sentiment.'
+  role: assistant
+  timeout: false

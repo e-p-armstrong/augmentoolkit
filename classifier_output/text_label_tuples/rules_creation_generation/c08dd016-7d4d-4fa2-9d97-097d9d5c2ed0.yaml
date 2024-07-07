@@ -1,0 +1,91 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"The staves of the guidon flags (_Jalonneurflaggen_)\
+    \ are inserted into  the rifle barrel of a soldier (in case of a battalion into\
+    \ the rifle  barrel of a N. C. O.) and serve to indicate battalions and companies.According\
+    \ to the color scheme used in Russia: red = 1, blue = 2,  white = 3, green = 4.\
+    \ \u201CR\u201D indicates the number of the regiment in  the division, \u201C\
+    B\u201D the number of battalion, and \u201CK\u201D the number of the  company.\
+    \ A red flag is carried by the 1st Company, and a red flag  with one green horizontal\
+    \ and one blue vertical stripe is carried by  the 8th Company of the 1st Regiment\
+    \ of an infantry division. In Japan  and England so-called storm-flags (small\
+    \ national flags) have been  adopted to facilitate mutual recognition of friendly\
+    \ troops.[Illustration]Posts of Platoon Commanders.In Switzerland, in Russia,\
+    \ and in Germany, the post of platoon commanders is on the flanks of their respective\
+    \ platoons when the company is in column of platoons. In England and Austria platoon\
+    \ commanders are posted in rear of their platoons, with the exception of the commander\
+    \ of the leading platoon, who is posted beside his guide. In all other states\
+    \ platoon commanders are posted in front of their platoons. Officers are posted\
+    \ in front of their platoons so as to facilitate observation on their part, and\
+    \ so that their platoons can follow them. This position becomes a necessity when\
+    \ the regulations require that all movements of the company be executed at commands\
+    \ given by platoon commanders. When they are posted in front of their platoons,\
+    \ they cannot supervise their men unless they turn around to do so.\"\"\""
+  role: user
+- content: 'I would classify the input text as "negative" based on the rules provided.
+    Here''s my analysis:
+
+
+    1. Tokenization: The text is broken down into individual words or tokens. Punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The sentiment of each token is identified using a sentiment
+    lexicon. Most tokens have a neutral sentiment, but some have a slightly negative
+    tone (e.g., "in case of a battalion", "except", "necessity").
+
+    3. Contextual Analysis: The context in which each token appears is analyzed. The
+    text describes military regulations and procedures, which may have a neutral or
+    slightly negative tone.
+
+    4. Aspect-Based Sentiment Analysis: The aspects or entities mentioned in the text
+    are analyzed separately. The text describes military units, ranks, and procedures,
+    which are neutral or slightly negative.
+
+    5. Sentiment Aggregation: The overall sentiment score is calculated by aggregating
+    the sentiment scores of the tokens, aspects, or entities. The sentiment score
+    is slightly negative due to the neutral or slightly negative tone of the text.
+
+    6. Thresholding: The threshold value is set at 0.5. Since the overall sentiment
+    score is slightly negative, the text is classified as "negative".
+
+
+    Note that the text does not contain any overtly positive or negative language,
+    but the tone is slightly negative due to the neutral or slightly negative sentiment
+    of the individual tokens and aspects.'
+  role: assistant
+  timeout: false

@@ -1,0 +1,86 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"Baccarat, battle\
+    \ of, 28  Bagdadieh, battle of, 64-65  Balaclava Charge, 96  Balloons, observation\
+    \ by, 22, 175-176  Banks, Gen., U.S.A., 59  Bapaume, battle of, 21  Barrage, the,\
+    \ 71  Base, the, 90, 118  Battalion in attack, 73-75  Battle, the, 24-50   characteristics\
+    \ of, 24-26   decisive blow, 31-32   development of the, 29-31   influences on\
+    \ the, 33-44   information, 26-28   initiative, 26-28   outposts, 138-140   phases\
+    \ of the, 26-29   position, the, 84-85   reports, 68   the defensive, 45-46  \
+    \ the defensive-offensive, 47-49   the encounter, 58   the offensive, 46-47  \
+    \ types of, 45-50  Bavaria, Elector of, 46  Bayonet, the, 164-165   in night operations,\
+    \ 154  Bazaine, Mar\xE9chal, 158  Bazeilles, defence of, 159  Benedek, Marshal,\
+    \ 96  Bernadotte, Marshal, 10  Blenheim, battle of, 46-47  Bl\xFCcher, Marshal,\
+    \ 8, 41, 48, 78  Bluff, the (Ypres), 39  Boer War, (_note_) 21  Bois de Vaux,\
+    \ 158  Bombs, light mortar, 166-167   (_See also_ Grenades.)  Border Regiment,\
+    \ 75  Bourlon Village, 42  Bristow Station, 128  British efforts, 1914-1918, 16-17\
+    \   moral, 16-22  Broenbeek, 139  Bromhead, Lieut., 77  B\xFClow, General von,\
+    \ 78  Bunker Hill, battle of, 38  Burnside, Gen., U.S.A., 14, 46, 108, 139-140\
+    \  Byng of Vimy, Gen. Lord, G.C.B., 7, 52Cambrai, first battle of, 7, 30-31, 52,\
+    \ 66, 75, 160   second battle of, 21, 170  Camouflage, 100  Canadian cavalry,\
+    \ 66   engineers, 174   infantry at Vimy, 149  Canadians at Ypres, 42  Cannae,\
+    \ battle of, 14  Carey, Maj.-Gen. G. G. S., C.B., 174  Carey's force, 174  Cattigny\
+    \ Wood, 66  Cavalry, characteristics of, 167-168   cossack posts, 137   in attack,\
+    \ 64-67   in defence, 95-96   in pursuit, 64-65, 69   in retreat, 95-96, 120,\
+    \ 123-124   Mesopotamian campaign, 64-65   outposts, 137   protection by, 98-99,\
+    \ 110   raids by, 117-118   reconnaissance by, 8, 26\"\"\""
+  role: user
+- content: 'I will classify the input text as "neutral" according to the rules provided.
+
+
+    Here''s the breakdown:
+
+
+    * The text does not contain any sentiment-bearing words or phrases that would
+    indicate a positive or negative sentiment.
+
+    * The text is a historical account of battles and military operations, which is
+    a factual and informative topic.
+
+    * The text does not express any emotions or opinions that would suggest a positive
+    or negative sentiment.
+
+    * The text is written in a formal and objective tone, which is typical of historical
+    accounts and military reports.
+
+    * The text does not contain any sarcasm or irony that would require a different
+    classification.
+
+
+    Overall, the text is a neutral and informative piece of writing that provides
+    historical information about military operations and battles.'
+  role: assistant
+  timeout: false

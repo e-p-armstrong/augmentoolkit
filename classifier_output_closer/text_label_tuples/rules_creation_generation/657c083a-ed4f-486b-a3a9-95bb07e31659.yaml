@@ -1,0 +1,97 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"DEFINITIONS.--Strategy\
+    \ and Tactics have often been treated by non-military writers as if they were\
+    \ independent branches of the soldier's profession, but while they may indeed\
+    \ be separately defined it will be found in practice that they cannot be separately\
+    \ considered. The theatre of operations is the kingdom of Strategy, the province\
+    \ of Tactics is the field of battle, but when the battlefield is reached it so\
+    \ far transcends in importance every other point in the theatre of operations\
+    \ that no _tactical_ end is worth aiming at in preference to striking with all\
+    \ available strength at the field force of the enemy, and this, it will be seen,\
+    \ is the goal of all _strategical_ combinations. \"Strategy must ever be striving\
+    \ for Tactical success; Tactics must ever keep in mind the Strategical situation\
+    \ and must constantly aim at creating fresh Strategical opportunities. Tactics\
+    \ without Strategy resembles a man without legs; Strategy without Tactics is like\
+    \ a man without arms\" (General Sir E. B. Hamley). \"To seek out the enemy's armies--the\
+    \ centre of the adversary's power--in order to beat and destroy them; to adopt,\
+    \ with this sole end in view, the direction and tactics which will lead to it\
+    \ in the quickest and safest way: such is the whole mental attitude of modern\
+    \ war. No Strategy can henceforth prevail over that which aims at ensuring Tactical\
+    \ results, victory by fighting\" (Marshal Foch).\"\"\""
+  role: user
+- content: 'After applying the rules, I classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens. Stop words
+    like "the", "and", etc. are removed.
+
+    2. Sentiment Analysis: Tokens like "Strategy", "Tactics", "enemy", "power", etc.
+    do not have sentiment-bearing words. Tokens like "good", "bad", etc. are not present.
+
+    3. Contextual Analysis: The text discusses military strategy and tactics, but
+    does not express a positive or negative sentiment. It provides quotes from military
+    leaders, but these quotes are more informative than emotive.
+
+    4. Sentiment Aggregation: The overall sentiment score is neutral, as the text
+    does not express a clear positive or negative sentiment.
+
+    5. Handling Ambiguity: No ambiguous tokens are present.
+
+    6. Handling Negation: No negated tokens are present.
+
+    7. Handling Intensifiers: No intensified tokens are present.
+
+    8. Handling Emoticons and Special Characters: No emoticons or special characters
+    that convey sentiment are present.
+
+    9. Handling Out-of-Vocabulary Words: No out-of-vocabulary words are present.
+
+    10. Handling Contextual Dependencies: The text''s meaning is dependent on the
+    context of the quotes, but this does not affect the overall sentiment.
+
+
+    The text provides a neutral discussion about military strategy and tactics, without
+    expressing a clear positive or negative sentiment.'
+  role: assistant
+  timeout: false

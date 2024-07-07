@@ -1,0 +1,109 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"Updated\
+    \ editions will replace the previous one\u2014the old editions will be renamed.Creating\
+    \ the works from print editions not protected by U.S. copyright law means that\
+    \ no one owns a United States copyright in these works, so the Foundation (and\
+    \ you!) can copy and distribute it in the United States without permission and\
+    \ without paying copyright royalties. Special rules, set forth in the General\
+    \ Terms of Use part of this license, apply to copying and distributing Project\
+    \ Gutenberg\u2122 electronic works to protect the PROJECT GUTENBERG\u2122 concept\
+    \ and trademark. Project Gutenberg is a registered trademark, and may not be used\
+    \ if you charge for an eBook, except by following the terms of the trademark license,\
+    \ including paying royalties for use of the Project Gutenberg trademark. If you\
+    \ do not charge anything for copies of this eBook, complying with the trademark\
+    \ license is very easy. You may use this eBook for nearly any purpose such as\
+    \ creation of derivative works, reports, performances and research. Project Gutenberg\
+    \ eBooks may be modified and printed and given away\u2014you may do practically\
+    \ ANYTHING in the United States with eBooks not protected by U.S. copyright law.\
+    \ Redistribution is subject to the trademark license, especially commercial redistribution.START:\
+    \ FULL LICENSETHE FULL PROJECT GUTENBERG LICENSEPLEASE READ THIS BEFORE YOU DISTRIBUTE\
+    \ OR USE THIS WORKTo protect the Project Gutenberg\u2122 mission of promoting\
+    \ the free distribution of electronic works, by using or distributing this work\
+    \ (or any other work associated in any way with the phrase \u201CProject Gutenberg\u201D\
+    ), you agree to comply with all the terms of the Full Project Gutenberg\u2122\
+    \ License available with this file or online at www.gutenberg.org/license.Section\
+    \ 1. General Terms of Use and Redistributing Project Gutenberg\u2122 electronic\
+    \ works\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words like "good",
+    "easy", "practically", and "free", which are assigned positive sentiment scores.
+    However, the text also contains words like "not", "no", and "without", which are
+    assigned negative sentiment scores. The overall sentiment score is neutral.
+
+    3. Contextual Analysis: The text is analyzed in context, and the sentiment scores
+    are adjusted accordingly. For example, the phrase "without permission" is considered
+    negative, while the phrase "you may do practically ANYTHING" is considered positive.
+
+    4. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    up the sentiment scores of individual tokens. The score is neutral.
+
+    5. Handling Ambiguity: The text does not contain ambiguous tokens that require
+    disambiguation.
+
+    6. Handling Negation: The text contains negated phrases like "not protected by
+    U.S. copyright law", which are handled accordingly.
+
+    7. Handling Intensifiers: The text does not contain intensified phrases.
+
+    8. Handling Emoticons and Special Characters: The text does not contain emoticons
+    or special characters that convey sentiment.
+
+    9. Handling Out-of-Vocabulary Words: The text does not contain out-of-vocabulary
+    words.
+
+    10. Handling Contextual Dependencies: The text does not contain contextual dependencies
+    that require special handling.
+
+
+    Overall, the text is classified as "neutral" because it contains both positive
+    and negative sentiment-bearing words, but the overall sentiment is balanced and
+    does not lean towards one side.'
+  role: assistant
+  timeout: false

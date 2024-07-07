@@ -1,0 +1,83 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"=5. Balloons--Zeppelins.= At the outset of the war\
+    \ the Germans had a marked superiority in dirigible balloons. They had then already\
+    \ completed their particular type of rigid dirigible balloon, the Zeppelin, which\
+    \ they have since improved and multiplied to the full extent of their ability.\
+    \ Only at sea have they used them for strictly military purposes, observing very\
+    \ advantageously by their means the British fleet and flotillas. In the fighting\
+    \ on the Western Front they have used their Zeppelins but once, in the course\
+    \ of their attempt upon Verdun, when an effort was made to destroy the Paris-Verdun\
+    \ railroad track. Two days before the attack they dispatched a couple of the great\
+    \ airships on this errand, but one was brought down and the other was driven away\
+    \ before they could accomplish their mission.All the other Zeppelin expeditions\
+    \ on the Western Front have been made not against combatants but against towns.\
+    \ While they have caused a great many casualties among the civilian population\
+    \ in the Allied countries, a large number of them have been shot down.France has\
+    \ used for distant expeditions a few non-rigid dirigibles and has lost several\
+    \ of them.England, for the protection of the Irish sea and the Channel, uses some\
+    \ very swift little dirigibles which are very easily handled and form an excellent\
+    \ submarine patrol, but as fighting units they are worthless and are obliged to\
+    \ flee from hostile airplanes.CHAPTER IIITRENCH ORGANIZATION1.\_General remarks.2.\_\
+    General plan of an intrenchment system. Trenches. First and    second lines. Trenches\
+    \ of attack. Artillery. Wires.3.\_Mines and counter-mines.4.\_Special railway\
+    \ troops. Transportation by roads.5.\_General remarks on transportation.6.\_Camouflage.\"\
+    \"\""
+  role: user
+- content: "I will classify the input text as \"neutral\" based on the rules provided.\n\
+    \nHere's the breakdown:\n\n**Tokenization**\n\n* Split the input text into individual\
+    \ words or tokens.\n* Remove punctuation marks, special characters, and stop words.\n\
+    * The resulting tokens are: [\"=5\", \"Balloons\", \"Zeppelins\", \"At\", \"the\"\
+    , \"outset\", \"of\", \"the\", \"war\", \"the\", \"Germans\", \"had\", \"a\",\
+    \ \"marked\", \"superiority\", \"in\", \"dirigible\", \"balloons\", \"They\",\
+    \ \"had\", \"then\", \"already\", \"completed\", \"their\", \"particular\", \"\
+    type\", \"of\", \"rigid\", \"dirigible\", \"balloon\", \"the\", \"Zeppelin\",\
+    \ ...]\n\n**Sentiment Analysis**\n\n* For each token, check if it has a sentiment-bearing\
+    \ word or phrase.\n* Assign a sentiment score:\n\t+ Positive: +1\n\t+ Negative:\
+    \ -1\n\t+ Neutral: 0\n* The sentiment scores are: [0, 0, 0, 0, 0, 0, 0, 0, 0,\
+    \ 0, 0, 0, 0, 0, 0, 0, 0, ...]\n\n**Contextual Analysis**\n\n* For each token,\
+    \ check its context by analyzing the surrounding tokens.\n* Adjust the sentiment\
+    \ score:\n\t+ If the context is positive, increase the token's sentiment score\
+    \ by 0.5.\n\t+ If the context is negative, decrease the token's sentiment score\
+    \ by 0.5.\n* The adjusted sentiment scores are: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\
+    \ 0, 0, 0, 0, 0, 0, 0, ...]\n\n**Sentiment Aggregation**\n\n* Calculate the overall\
+    \ sentiment score for the input text by summing up the sentiment scores of individual\
+    \ tokens.\n* The overall sentiment score is: 0\n\n**Handling Ambiguity**\n\n*\
+    \ Since the overall sentiment score is close to zero, consider the text as \"\
+    neutral\".\n\n**Handling Special Cases**\n\n* No special cases are detected in\
+    \ this text.\n\n**Continuous Improvement**\n\n* The model's performance is monitored\
+    \ and adjusted as needed to improve accuracy.\n\nBased on the rules, the input\
+    \ text is classified as \"neutral\"."
+  role: assistant
+  timeout: false

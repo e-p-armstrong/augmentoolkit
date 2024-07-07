@@ -1,0 +1,99 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"Mountainous countries as principal\
+    \ fields of operations, 162.  countries, cavalry in, 304.  countries, defense\
+    \ in, 163.  countries, heights to be secured in, 167.  countries, strategic defense\
+    \ in, 164.  countries, strategic positions of, 76.  countries, the offensive in,\
+    \ 167.  countries, transversal marches in, 163.  country, character of a war in,\
+    \ 169.  country, forts in a, 151.  country, invasion of a, 169.Mountains as eventual\
+    \ lines of defense, 96.  as frontiers, 146.  campaigns in, 169.  importance of,\
+    \ when secondary, 161, 162.  of European countries, relation of, to warlike operations,\
+    \ 161.  strategic operations in, 160.Mounted infantry, 308.  militia, 315.Movement\
+    \ by flanks of companies, 300, 301.Movements, extended, when dangerous, 204. \
+    \ in which infantry should be exercised, 300.  of armies, points to be attended\
+    \ to, 254-256.  of the enemy, rules for gaining information of, 273, 274.Murat,\
+    \ surprise of, at Taroutin, 209.Murray's descent in 1813, 385.Musketry-fire better\
+    \ for defensive, 203.  influence of, in battles, 348.N.Nansouty's charge at Chateau-Thierry,\
+    \ 212.Naples, French army at, 112.Napoleon, 111, 164, 166, 170, 171, 177, 185,\
+    \ 198, 218.  and Grouchy at Waterloo, 127,130.  at Austerlitz, 206.  at Essling,\
+    \ 158.  at Ligny, 195.  at Ratisbon, 274.  at Wagram, 195.  double wars of, 37.\
+    \  English expedition against, in 1815, 385.  his own chief staff officer, 264.\
+    \  operations of the armies of, 136.\"\"\""
+  role: user
+- content: 'Based on the rules provided, I will classify the input text as "negative"
+    because the text appears to be a historical military text, discussing battles,
+    wars, and military strategies. The text does not contain any positive or enthusiastic
+    language, and the tone is formal and objective. The text also does not contain
+    any emotional language or sentiment that would indicate a positive or negative
+    sentiment.
+
+
+    Here''s a breakdown of the text based on the rules:
+
+
+    * Tokenization: The text is broken down into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    * Sentiment Analysis: The sentiment of each token is analyzed using a sentiment
+    lexicon, and a sentiment score is assigned to each token. However, since the text
+    is a historical military text, the sentiment scores are likely to be neutral or
+    objective.
+
+    * Contextual Analysis: The context in which each token appears is analyzed, but
+    since the text is a formal and objective historical text, the sentiment scores
+    are likely to be unaffected by the context.
+
+    * Aspect-Based Sentiment Analysis: The aspects or entities mentioned in the text
+    are analyzed, but since the text is a historical military text, the sentiment
+    towards these aspects or entities is likely to be neutral or objective.
+
+    * Sentiment Aggregation: The overall sentiment score for the text is calculated
+    by aggregating the sentiment scores of the tokens, aspects, or entities. However,
+    since the text is a formal and objective historical text, the overall sentiment
+    score is likely to be neutral or objective.
+
+    * Thresholding: The overall sentiment score is compared to a threshold value,
+    but since the text is a formal and objective historical text, the overall sentiment
+    score is likely to be below the threshold, indicating a "negative" sentiment.
+
+
+    Overall, based on the rules provided, I classify the input text as "negative"
+    because the text appears to be a formal and objective historical text that does
+    not contain any positive or enthusiastic language.'
+  role: assistant
+  timeout: false

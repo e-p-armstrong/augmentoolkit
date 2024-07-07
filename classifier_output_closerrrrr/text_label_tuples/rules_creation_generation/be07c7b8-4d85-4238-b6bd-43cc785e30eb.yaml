@@ -1,0 +1,121 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"\"The superiority\
+    \ of the allied vessels in number and calibre of ordnance was very decided; they\
+    \ must have had at least six hundred and fifty pieces in play, chiefly 32-pounders,\
+    \ and 8-inch shell guns, with a fair proportion of 68-pounders and mortars, besides\
+    \ the 50-pounders of the French floating batteries. To which the Russians could\
+    \ only reply with eighty-one cannon and mortars, and no guns of heavier calibre\
+    \ than 32-pounders, while many were lower. The great disparity in offensive power\
+    \ was not compensated to the works by the advantage of commanding position, the\
+    \ Russian fort and redoubt being upon nearly the same level with the ships' batteries,\
+    \ and also very deficient in proper strength. On the other hand, the depth of\
+    \ water did not allow the liners to approach nearer than one mile; and thus their\
+    \ fire was by no means so intense as it would have been at shorter range.\"\"\
+    This was the sole occasion in which the floating batteries had an opportunity\
+    \ of proving their endurance; which was the question of most importance, as no\
+    \ one could doubt the effect of long 50-pounders, or 68-pounders, when brought\
+    \ within a few hundred yards of masonry, and able to retain the steadiness indispensable\
+    \ to a breaching fire.\"\"No siege operation had ever embraced batteries of such\
+    \ power, for though the English had employed long 68-pounders at Sebastopol, yet\
+    \ the distance from the objects exceeded a thousand yards; and the concentration\
+    \ of fire, so far as any opinion can be formed from the published statements,\
+    \ was far inferior to that of the thirty-six 50-pounders, in the broadsides of\
+    \ the three batteries anchored in close order.\"\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    **Tokenization**
+
+
+    * Split the text into individual words or tokens.
+
+    * Removed punctuation marks, special characters, and stop words.
+
+
+    **Sentiment Analysis**
+
+
+    * Found no sentiment-bearing words or phrases.
+
+    * Assigned a sentiment score of 0 for each token.
+
+
+    **Contextual Analysis**
+
+
+    * No sentiment-bearing words or phrases were found in the context of each token.
+
+    * No adjustments were made to the sentiment scores.
+
+
+    **Emotion Detection**
+
+
+    * No emotions were detected in the text.
+
+
+    **Intensity Analysis**
+
+
+    * No intensity was detected in the text.
+
+
+    **Overall Sentiment**
+
+
+    * The overall sentiment score is 0, as no sentiment-bearing words or phrases were
+    found.
+
+    * Classified the text as "neutral".
+
+
+    **Edge Cases**
+
+
+    * The text does not contain any sentiment-bearing words or phrases, so it is classified
+    as "neutral".
+
+
+    Note that the text appears to be a historical description of a military operation,
+    and it does not contain any emotional language or sentiment-bearing words or phrases.
+    Therefore, it is classified as "neutral".'
+  role: assistant
+  timeout: false

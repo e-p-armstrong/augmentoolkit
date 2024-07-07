@@ -1,0 +1,156 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: 'rules: """Here is a set of rules that can help an AI classify whether
+    some given text is "positive" or "negative":
+
+
+    **Rule 1: Tokenization**
+
+
+    * Split the input text into individual words or tokens.
+
+    * Remove punctuation marks, special characters, and stop words (common words like
+    "the", "and", etc. that do not carry much meaning).
+
+
+    **Rule 2: Sentiment Analysis**
+
+
+    * For each token, check if it has a sentiment-bearing word (e.g. "happy", "good",
+    "bad", etc.).
+
+    * If a token has a sentiment-bearing word, assign it a sentiment score (e.g. +1
+    for positive, -1 for negative).
+
+
+    **Rule 3: Contextual Analysis**
+
+
+    * For each token, analyze its context to determine its sentiment.
+
+    * If a token is preceded by a negative word (e.g. "not", "never", etc.), flip
+    its sentiment score (e.g. -1 for positive, +1 for negative).
+
+    * If a token is followed by a positive word (e.g. "very", "extremely", etc.),
+    increase its sentiment score.
+
+
+    **Rule 4: Emphasis Analysis**
+
+
+    * Identify words that convey emphasis (e.g. "very", "extremely", "really", etc.).
+
+    * Increase the sentiment score of the preceding token by 0.5.
+
+
+    **Rule 5: Negation Analysis**
+
+
+    * Identify words that negate sentiment (e.g. "not", "never", "no", etc.).
+
+    * Flip the sentiment score of the preceding token.
+
+
+    **Rule 6: Sentiment Aggregation**
+
+
+    * Calculate the overall sentiment score for the text by summing the sentiment
+    scores of individual tokens.
+
+    * If the overall sentiment score is positive (i.e. > 0), classify the text as
+    "positive".
+
+    * If the overall sentiment score is negative (i.e. < 0), classify the text as
+    "negative".
+
+    * If the overall sentiment score is neutral (i.e. 0), classify the text as "neutral".
+
+
+    **Rule 7: Thresholding**
+
+
+    * Set a threshold value (e.g. 0.5) to determine the minimum sentiment score required
+    to classify the text as "positive" or "negative".
+
+    * If the overall sentiment score is above the threshold, classify the text as
+    "positive".
+
+    * If the overall sentiment score is below the threshold, classify the text as
+    "negative".
+
+
+    **Rule 8: Handling Ambiguity**
+
+
+    * If the text contains ambiguous or neutral words (e.g. "fine", "okay", etc.),
+    assign them a neutral sentiment score (0).
+
+    * If the text contains multiple conflicting sentiments, use the sentiment score
+    with the highest magnitude (i.e. closest to 1 or -1).
+
+
+    By following these rules, an AI can classify text as "positive", "negative", or
+    "neutral" based on its sentiment. Note that these rules are not exhaustive and
+    can be modified to suit specific use cases or domains."""
+
+
+    Input Text: """Further, the moment when the crisis-stage of the combat ceases
+    with the conqueror, and his original state of order is restored, takes place sooner
+    the smaller the unit he controls. A picket of cavalry pursuing an enemy at full
+    gallop will in a few minutes resume its proper order, and the crisis ceases. A
+    whole regiment of cavalry requires a longer time. It lasts still longer with infantry,
+    if extended in single lines of skirmishers, and longer again with Divisions of
+    all arms, when it happens by chance that one part has taken one direction and
+    another part another direction, and the combat has therefore caused a loss of
+    the order of formation, which usually becomes still worse from no part knowing
+    exactly where the other is. Thus, therefore, the point of time when the conqueror
+    has collected the instruments he has been using, and which are mixed up and partly
+    out of order, the moment when he has in some measure rearranged them and put them
+    in their proper places, and thus brought the battle-workshop into a little order,
+    this moment, we say, is always later, the greater the total force.Again, this
+    moment comes later if night overtakes the conqueror in the crisis, and, lastly,
+    it comes later still if the country is broken and thickly wooded. But with regard
+    to these two points, we must observe that night is also a great means of protection,
+    and it is only seldom that circumstances favour the expectation of a successful
+    result from a night attack, as on March 10, 1814, at Laon,(*) where York against
+    Marmont gives us an example completely in place here. In the same way a wooded
+    and broken country will afford protection against a reaction to those who are
+    engaged in the long crisis of victory. Both, therefore, the night as well as the
+    wooded and broken country are obstacles which make the renewal of the same battle
+    more difficult instead of facilitating it."""'
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text was split into individual words and punctuation marks
+    were removed.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words like "crisis",
+    "conqueror", "order", "loss", "better", etc. However, these words do not have
+    a clear positive or negative sentiment.
+
+    3. Contextual Analysis: The text does not contain any words that would flip the
+    sentiment score.
+
+    4. Emphasis Analysis: There are no words that convey emphasis in the text.
+
+    5. Negation Analysis: There are no words that negate sentiment in the text.
+
+    6. Sentiment Aggregation: The overall sentiment score is neutral, as the text
+    does not contain any strongly positive or negative sentiment-bearing words.
+
+    7. Thresholding: The overall sentiment score is below the threshold, so the text
+    is classified as "neutral".
+
+    8. Handling Ambiguity: The text contains some ambiguous words like "crisis", "order",
+    and "better", but these words are not strongly sentiment-bearing, so they do not
+    affect the overall sentiment score.
+
+
+    Overall, the text appears to be a neutral discussion of military strategy and
+    tactics, without any strong positive or negative sentiment.'
+  role: assistant
+  timeout: false

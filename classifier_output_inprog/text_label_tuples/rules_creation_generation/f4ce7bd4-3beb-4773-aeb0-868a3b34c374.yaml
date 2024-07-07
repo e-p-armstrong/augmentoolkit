@@ -1,0 +1,152 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: 'rules: """Here is a set of rules that can help an AI classify whether
+    some given text is "positive" or "negative":
+
+
+    **Rule 1: Tokenization**
+
+
+    * Split the input text into individual words or tokens.
+
+    * Remove punctuation marks, special characters, and stop words (common words like
+    "the", "and", etc. that do not carry much meaning).
+
+
+    **Rule 2: Sentiment Analysis**
+
+
+    * For each token, check if it has a sentiment-bearing word (e.g. "happy", "good",
+    "bad", etc.).
+
+    * If a token has a sentiment-bearing word, assign it a sentiment score (e.g. +1
+    for positive, -1 for negative).
+
+
+    **Rule 3: Contextual Analysis**
+
+
+    * For each token, analyze its context to determine its sentiment.
+
+    * If a token is preceded by a negative word (e.g. "not", "never", etc.), flip
+    its sentiment score (e.g. -1 for positive, +1 for negative).
+
+    * If a token is followed by a positive word (e.g. "very", "extremely", etc.),
+    increase its sentiment score.
+
+
+    **Rule 4: Emphasis Analysis**
+
+
+    * Identify words that convey emphasis (e.g. "very", "extremely", "really", etc.).
+
+    * Increase the sentiment score of the preceding token by 0.5.
+
+
+    **Rule 5: Negation Analysis**
+
+
+    * Identify words that negate sentiment (e.g. "not", "never", "no", etc.).
+
+    * Flip the sentiment score of the preceding token.
+
+
+    **Rule 6: Sentiment Aggregation**
+
+
+    * Calculate the overall sentiment score for the text by summing the sentiment
+    scores of individual tokens.
+
+    * If the overall sentiment score is positive (i.e. > 0), classify the text as
+    "positive".
+
+    * If the overall sentiment score is negative (i.e. < 0), classify the text as
+    "negative".
+
+    * If the overall sentiment score is neutral (i.e. 0), classify the text as "neutral".
+
+
+    **Rule 7: Thresholding**
+
+
+    * Set a threshold value (e.g. 0.5) to determine the minimum sentiment score required
+    to classify the text as "positive" or "negative".
+
+    * If the overall sentiment score is above the threshold, classify the text as
+    "positive".
+
+    * If the overall sentiment score is below the threshold, classify the text as
+    "negative".
+
+
+    **Rule 8: Handling Ambiguity**
+
+
+    * If the text contains ambiguous or neutral words (e.g. "fine", "okay", etc.),
+    assign them a neutral sentiment score (0).
+
+    * If the text contains multiple conflicting sentiments, use the sentiment score
+    with the highest magnitude (i.e. closest to 1 or -1).
+
+
+    By following these rules, an AI can classify text as "positive", "negative", or
+    "neutral" based on its sentiment. Note that these rules are not exhaustive and
+    can be modified to suit specific use cases or domains."""
+
+
+    Input Text: """If a general desires to be a successful actor in the great drama
+    of war, his first duty is to study carefully the theater of operations, that he
+    may see clearly the relative advantages and disadvantages it presents for himself
+    and his enemies. This being done, he can understandingly proceed to prepare his
+    base of operations, then to choose the most suitable zone of operations for his
+    main efforts, and, in doing so, keep constantly before his mind the principles
+    of the art of war relative to lines and fronts of operations. The offensive army
+    should particularly endeavor to cut up the opposing army by skillfully selecting
+    objective points of maneuver; it will then assume, as the objects of its subsequent
+    undertakings, geographical points of more or less importance, depending upon its
+    first successes.The defensive army, on the contrary, should endeavor, by all means,
+    to neutralize the first forward movement of its adversary, protracting operations
+    as long as possible while not compromising the fate of the war, and deferring
+    a decisive battle until the time when a portion of the enemy''s forces are either
+    exhausted by labors, or scattered for the purpose of occupying invaded provinces,
+    masking fortified places, covering sieges, protecting the line of operations,
+    depots, &c."""'
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Rule 1: Tokenization - The text is split into individual words, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Rule 2: Sentiment Analysis - The text contains words like "study", "carefully",
+    "understandingly", "prepare", "choose", "principles", "art", "war", "offensive",
+    "defensive", which do not have sentiment-bearing words.
+
+    3. Rule 3: Contextual Analysis - No sentiment-bearing words are found, so no sentiment
+    scores are flipped.
+
+    4. Rule 4: Emphasis Analysis - No emphasis words are found, so no sentiment scores
+    are increased.
+
+    5. Rule 5: Negation Analysis - No negation words are found, so no sentiment scores
+    are flipped.
+
+    6. Rule 6: Sentiment Aggregation - The overall sentiment score is 0, as no sentiment-bearing
+    words are found.
+
+    7. Rule 7: Thresholding - Since the overall sentiment score is 0, the text is
+    classified as "neutral".
+
+    8. Rule 8: Handling Ambiguity - No ambiguous or neutral words are found, so no
+    adjustments are made to the sentiment score.
+
+
+    The text appears to be a passage about military strategy and tactics, discussing
+    the importance of understanding the theater of operations and preparing for battles.
+    The language used is formal and objective, without any emotional or sentiment-bearing
+    words, which is why the text is classified as "neutral".'
+  role: assistant
+  timeout: false

@@ -1,0 +1,92 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"In large engagements, the great power of resistance\
+    \ possessed by well posted bodies of troops will often determine the commander\
+    \ of the force on the defensive to contain the enemy at one point with a strong\
+    \ defensive position, while at the same time assuming the offensive at another.\
+    \ (This was planned, but not carried out, at Dresden, in 1813, and at Troyes,\
+    \ early in February, 1814; carried out with success, in Lee\u2019s operations\
+    \ around Richmond, during the latter part of June, 1862, and on the Lisaine in\
+    \ 1871; and miscarried on the Shaho, because Kuropatkin made his decision dependent\
+    \ upon reports in regard to the position of hostile reserves, which were non-existent\
+    \ in reality). Whether the offensive should be assumed while the enemy is still\
+    \ in the act of deploying,[460] or whether one must be satisfied with assuming\
+    \ the offensive at the last moment, is best determined by the relative strength\
+    \ of the opposing forces. When battle-fronts are short this may still be advantageous,\
+    \ but when the lines are long, a counter-attack can affect only a small part of\
+    \ the assailant\u2019s line, while the major portion thereof successfully pushes\
+    \ the attack home. Then the position and the day will be lost anyway, in spite\
+    \ of a local success.[460] Roszbach, 1758; Austerlitz. 1805 (_Schlachterfolg_,\
+    \ p. 28);  Salamanca, 1812.The initial measures taken assure freedom of action\
+    \ to the defense, but the commander must not await exhaustive messages. Prompt\
+    \ action is necessary, either for throwing back the advanced troops of the assailant,\
+    \ or for striking a blow at the hostile flank. In the latter case, it is an advantage\
+    \ if only weak reserves are struck, but hostile forces making a turning movement\
+    \ may also be encountered, and the commander will have to decide whether to deploy\
+    \ quickly and assail the enemy, or whether to take his chances in a rencontre.[461]\"\
+    \"\""
+  role: user
+- content: 'Based on the rules provided, I will classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text does not contain sentiment-bearing words or phrases
+    that would assign a sentiment score.
+
+    3. Contextual Analysis: Since there are no sentiment-bearing words or phrases,
+    there is no context to analyze.
+
+    4. Sentiment Aggregation: The overall sentiment score is 0, as there are no sentiment-bearing
+    words or phrases.
+
+    5. Handling Ambiguity: Since the overall sentiment score is 0, the text is considered
+    neutral.
+
+    6. Handling Special Cases: There are no special cases in this text that would
+    require handling.
+
+    7. Continuous Improvement: This step is not applicable in this case, as the text
+    does not contain sentiment-bearing words or phrases.
+
+
+    The text appears to be a historical military passage, discussing strategies and
+    tactics, and does not express a clear positive or negative sentiment. Therefore,
+    it is classified as "neutral".'
+  role: assistant
+  timeout: false

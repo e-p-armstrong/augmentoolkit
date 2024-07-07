@@ -1,0 +1,78 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"Richelieu, expedition of, against Minorca, 382.River,\
+    \ best position for passage of, 226.  crossing of, in presence of an enemy, 120.\
+    \  order of battle at passage of, 192.Rivers as eventual lines of defense, 96.\
+    \  as frontiers, 147.  as lines of operations, 76.  double passage of, 230.  famous\
+    \ modern passages of, 226.  passage of, 224, 343.  passage of, in retreats, 243,\
+    \ 244.   rules for, 245.  points of passage of, in presence of an enemy, 121.\
+    \  rules for passage of, 227.  rules for preventing passage of, 228.Rivoli 179,\
+    \ 205.  Napoleon's order of battle at, 198.Rocket-batteries, use of, 318.Rollo,\
+    \ 369.Roman legions, cause of the ruin of, 63.  nation, cause of the decline of,\
+    \ 60.Romans, naval expeditions of, 363.Rome, military institutions of, 61.Rossbach,\
+    \ 207.Ruler, a, should be able to arrange plans of operations, 328.Rules for conducting\
+    \ descents, 251.  for fighting battles scientifically, 203.  for gaining information\
+    \ of enemy's movements, 273, 274.  for offensive or defensive operations, 185.\
+    \  for passage of rivers, 227.  for passage of a river in retreat, 245.  for pursuit,\
+    \ 242.  for preventing passage of rivers, 228.  for use of artillery in battle,\
+    \ 316-318.  to be observed in selecting tactical positions, 181.Russian army,\
+    \ firmness of, in retreats, 64.  army, skirmishers in, 293.  base in 1828 and\
+    \ 1829, 84.  cavalry, 314.  expeditions in 1809, 385.  order at Eylau, 295.  retreat\
+    \ in 1812, 233.  system of forming columns, 294.Russians, early maritime expeditions\
+    \ of, 368, 369.S.Saber, when best for cavalry, 308.  when useful, 306.Saint-Bernard,\
+    \ Napoleon's passage of, 168.Saint-Cyr at Stockach, 205.Saxons, expedition of,\
+    \ 367.Saxony, Napoleon's central lines in, in 1813, 124.Savoy, Duke of, 22.Scandinavians,\
+    \ 366.Science of marches, essential point in, 139.  of marches, includes what,\
+    \ 138.Sciences, military, study of, 49.Scipio, 364.\"\"\""
+  role: user
+- content: "Based on the rules provided, I will classify the input text as \"neutral\"\
+    .\n\nHere's the breakdown:\n\n1. Tokenization: The input text is split into individual\
+    \ words or tokens. Punctuation marks, special characters, and stop words are removed.\n\
+    2. Sentiment Analysis: Most tokens do not have sentiment-bearing words or phrases.\
+    \ However, some tokens like \"Napoleon\", \"Russian\", \"Saxons\", \"Scandinavians\"\
+    , and \"Scipio\" could be considered as sentiment-bearing words. Assigning sentiment\
+    \ scores:\n\t+ Positive: +1 (Napoleon)\n\t+ Neutral: 0 (other tokens)\n3. Contextual\
+    \ Analysis: Since most tokens do not have sentiment-bearing words or phrases,\
+    \ there is no context to adjust the sentiment scores.\n4. Sentiment Aggregation:\
+    \ The overall sentiment score is the sum of the sentiment scores of individual\
+    \ tokens. Since most tokens have a neutral sentiment score, the overall sentiment\
+    \ score is close to zero.\n5. Handling Ambiguity: The text does not contain conflicting\
+    \ sentiment-bearing words or phrases, so there is no need to prioritize one over\
+    \ the other.\n6. Handling Special Cases: The text does not contain special cases\
+    \ like sarcasm, irony, or figurative language.\n7. Continuous Improvement: Since\
+    \ the text is a historical passage, it is not necessary to continuously update\
+    \ and refine the sentiment analysis model.\n\nBased on the rules, the overall\
+    \ sentiment score is close to zero, and the text is classified as \"neutral\"."
+  role: assistant
+  timeout: false

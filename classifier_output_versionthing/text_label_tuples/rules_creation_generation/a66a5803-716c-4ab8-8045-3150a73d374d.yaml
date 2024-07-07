@@ -1,0 +1,75 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"In Napoleon's time, the French generally used the\
+    \ system of columns, as they were nearly always the assailants.In 1807, I published,\
+    \ at Glogau in Silesia, a small pamphlet with the title of \"Summary of the General\
+    \ Principles of the Art of War,\" in which I proposed to admit for the attack\
+    \ the system of lines formed of columns of battalions by divisions of two companies;\
+    \ in other words, to march to the attack in lines of battalions closed in mass\
+    \ or at half-distance, preceded by numerous skirmishers, and the columns being\
+    \ separated by intervals that may vary between that necessary for the deployment\
+    \ of a battalion and the minimum of the front of one column.What I had recently\
+    \ seen in the campaigns of Ulm, Austerlitz, Jena, and Eylau had convinced me of\
+    \ the difficulty, if not the impossibility, of marching an army in deployed lines\
+    \ in either two or three ranks, to attack an enemy in position. It was this conviction\
+    \ which led me to publish the pamphlet above referred to. This work attracted\
+    \ some attention, not only on account of the treatise on strategy, but also on\
+    \ account of what was said on tactics.The successes gained by Wellington in Spain\
+    \ and at Waterloo with troops deployed in lines of two ranks were generally attributed\
+    \ to the murderous effect of the infantry-fire, and created doubt in some minds\
+    \ as to the propriety of the use of small columns; but it was not till after 1815\
+    \ that the controversies on the best formation for battle wore renewed by the\
+    \ appearance of a pamphlet by the Marquis of Chambray.\"\"\""
+  role: user
+- content: "After applying the rules, I classified the input text as \"neutral\".\n\
+    \nHere's the breakdown:\n\n1. Tokenization: The text is split into individual\
+    \ words and punctuation marks are removed.\n2. Sentiment Analysis: The text contains\
+    \ words like \"difficulty\", \"impossibility\", and \"doubt\", which have a neutral\
+    \ sentiment. However, it also contains words like \"successes\" and \"proprietary\"\
+    , which have a positive sentiment. The overall sentiment score for each token\
+    \ is:\n\t* Positive: +1\n\t* Negative: -1\n\t* Neutral: 0\n3. Contextual Analysis:\
+    \ The context of each token is analyzed, and the sentiment scores are adjusted\
+    \ accordingly. However, since the text is primarily discussing military strategy\
+    \ and tactics, the context is mostly neutral.\n4. Sentiment Aggregation: The overall\
+    \ sentiment score for the text is calculated by summing up the sentiment scores\
+    \ of individual tokens. Since the positive and negative sentiment scores are balanced,\
+    \ the overall sentiment score is close to zero.\n5. Handling Ambiguity: Since\
+    \ the overall sentiment score is close to zero, the text is classified as \"neutral\"\
+    .\n6. Handling Special Cases: The text does not contain any special cases like\
+    \ sarcasm, irony, or figurative language.\n7. Continuous Improvement: The model\
+    \ is continuously updated and refined to improve accuracy.\n\nOverall, the text\
+    \ is classified as \"neutral\" because it primarily discusses military strategy\
+    \ and tactics without expressing a clear positive or negative sentiment."
+  role: assistant
+  timeout: false

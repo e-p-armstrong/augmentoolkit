@@ -1,0 +1,77 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"===========+=========++===============       |  \
+    \   ||Difference       |     ||between       |     ||minimum peace       |   \
+    \  ||strength and       |     ||war strength.       |Company. ++-----+--+------\
+    \       |     ||   | |       |     ||   |N.|       |     ||Offi-|C.|Pri-     \
+    \  |     ||cers.|O.|vates.  -----------+---------++-----+--+------  ~=GERMANY=~|Minimum\
+    \ ||  1 | 5| 103       |Maximum || ... | | ...  -----------+---------++-----+--+------\
+    \  ~=AUSTRIA=~|Minimum || ... | 5| 132       |Maximum || 4 Officers\u2019    \
+    \   |     ||  servants.  -----------+---------++-----+--+------  ~=ITALY=~ |Infantry,||\
+    \   | |       |Bersa-  ||   | |       |glieri  ||  2 | 3|  93       |     ||Musicians\
+    \ (trum-       |     ||peters only) and       |     ||sappers armed       |  \
+    \   ||with rifle.       |Alpini  || ... |..| ...  -----------+---------++-----+--+------\
+    \  ~=FRANCE=~ |Ordinary ||  1 |18| 110       |Maximum || ... | | ...       |Chasseurs||\
+    \ ... | | ...       |     ||   | |       |     || ... | | ...  -----------+---------++-----+--+------\
+    \  ~=RUSSIA=~ |Approxi- ||   | |       |mately  ||  1 |15| 104       |     ||\
+    \   | |  -----------+---------++-----+--+------[44] In addition, five non-combatants.\"\
+    \"\""
+  role: user
+- content: "Based on the provided rules, I will classify the input text as \"neutral\"\
+    .\n\nHere's the breakdown:\n\n1. Tokenization:\nThe input text is broken down\
+    \ into individual words or tokens. Punctuation marks, special characters, and\
+    \ stop words are removed.\n\n2. Sentiment Analysis:\nThe sentiment-bearing words\
+    \ or phrases are identified. Some examples include:\n\t* \"peace\" (positive)\n\
+    \t* \"strength\" (positive)\n\t* \"war\" (negative)\n\t* \"minimum\" (neutral)\n\
+    \t* \"officers\" (neutral)\n\t* \"servants\" (neutral)\n\t* \"infantry\" (neutral)\n\
+    \t* \"bersaglieri\" (neutral)\n\t* \"musicians\" (neutral)\n\t* \"sappers\" (neutral)\n\
+    \t* \"alpini\" (neutral)\n\t* \"chasseurs\" (neutral)\n\t* \"non-combatants\"\
+    \ (neutral)\n\nEach token is assigned a sentiment score:\n\t* Positive: +1\n\t\
+    * Negative: -1\n\t* Neutral: 0\n\n3. Contextual Analysis:\nThe context of each\
+    \ token is analyzed. For example:\n\t* \"peace\" is preceded by \"minimum\", which\
+    \ is a neutral word, so the sentiment score remains +1.\n\t* \"war\" is not preceded\
+    \ or followed by any sentiment-bearing words or phrases, so its sentiment score\
+    \ remains -1.\n\n4. Sentiment Aggregation:\nThe overall sentiment score is calculated\
+    \ by summing up the sentiment scores of individual tokens. The total score is:\n\
+    \t+ Positive: +1 (peace) - 1 (war) = 0\n\t+ Negative: -1 (war)\n\t+ Neutral: 0\
+    \ (all other tokens)\n\n5. Sentiment Aggregation:\nSince the overall sentiment\
+    \ score is close to zero, the text is classified as \"neutral\".\n\n6. Handling\
+    \ Ambiguity:\nThere are no conflicting sentiment-bearing words or phrases in the\
+    \ text.\n\n7. Handling Special Cases:\nThere are no special cases like sarcasm,\
+    \ irony, or figurative language in the text.\n\n8. Continuous Improvement:\nThe\
+    \ model's performance is monitored, and the rules are adjusted as needed to improve\
+    \ accuracy.\n\nBased on the analysis, the input text is classified as \"neutral\"\
+    ."
+  role: assistant
+  timeout: false

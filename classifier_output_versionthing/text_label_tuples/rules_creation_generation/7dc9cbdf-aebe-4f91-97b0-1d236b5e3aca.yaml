@@ -1,0 +1,86 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"We see then that there are many ways to one's object\
+    \ in War; that the complete subjugation of the enemy is not essential in every\
+    \ case; that the destruction of the enemy's military force, the conquest of the\
+    \ enemy's provinces, the mere occupation of them, the mere invasion of them--enterprises\
+    \ which are aimed directly at political objects--lastly, a passive expectation\
+    \ of the enemy's blow, are all means which, each in itself, may be used to force\
+    \ the enemy's will according as the peculiar circumstances of the case lead us\
+    \ to expect more from the one or the other. We could still add to these a whole\
+    \ category of shorter methods of gaining the end, which might be called arguments\
+    \ ad hominem. What branch of human affairs is there in which these sparks of individual\
+    \ spirit have not made their appearance, surmounting all formal considerations?\
+    \ And least of all can they fail to appear in War, where the personal character\
+    \ of the combatants plays such an important part, both in the cabinet and in the\
+    \ field. We limit ourselves to pointing this out, as it would be pedantry to attempt\
+    \ to reduce such influences into classes. Including these, we may say that the\
+    \ number of possible ways of reaching the object rises to infinity.\"\"\""
+  role: user
+- content: 'After applying the rules, I would classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: Most tokens do not have sentiment-bearing words or phrases.
+    However, some tokens like "many", "complete", "directly", "peculiar", and "important"
+    can be considered neutral.
+
+    3. Contextual Analysis: The context of each token is analyzed, but there are no
+    sentiment-bearing words or phrases that would significantly impact the sentiment
+    score.
+
+    4. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    up the sentiment scores of individual tokens. Since most tokens are neutral, the
+    overall sentiment score is also neutral.
+
+    5. Handling Ambiguity: There is no ambiguity in the text, and the sentiment score
+    is clear.
+
+    6. Handling Special Cases: There are no special cases like sarcasm, irony, or
+    figurative language in the text.
+
+    7. Continuous Improvement: The model is not updated or refined based on this single
+    input text.
+
+
+    The text appears to be a philosophical or theoretical discussion about war and
+    strategy, and it does not express a clear positive or negative sentiment. Therefore,
+    I classify the text as "neutral".'
+  role: assistant
+  timeout: false

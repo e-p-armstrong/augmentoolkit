@@ -1,0 +1,88 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"The order in very deep masses (see Figs. 33 and 34)\
+    \ is certainly the most injudicious. In the later wars of Napoleon, twelve battalions\
+    \ were sometimes deployed and closed one upon the other, forming thirty-six ranks\
+    \ closely packed together. Such masses are greatly exposed to the destructive\
+    \ effects of artillery, their mobility and impulsion are diminished, while their\
+    \ strength is not increased. The use of such masses at Waterloo was one cause\
+    \ of the French being defeated. Macdonald's column was more fortunate at Wagram,\
+    \ but at a great sacrifice of life; and it is not probable that this column would\
+    \ have been victorious had it not been for the successes of Davoust and Oudinot\
+    \ on the left of the archduke's line.When it is decided to risk such a mass, the\
+    \ precaution should certainly be taken of placing on each flank a battalion marching\
+    \ in file, so that if the enemy should charge the mass in flank it need not be\
+    \ arrested in its progress. (See Fig. 33.) Under the protection of these battalions,\
+    \ which may face toward the enemy, the column may continue its march to the point\
+    \ it is expected to reach: otherwise, this large mass, exposed to a powerful converging\
+    \ fire which it has no means of returning, will be thrown into confusion like\
+    \ the column at Fontenoy, or broken as was the Macedonian phalanx by Paulus Emilius.Squares\
+    \ are good in plains and to oppose an enemy who has a superiority in cavalry.\
+    \ It is agreed that the regimental square is best for the defensive, and the battalion\
+    \ square for the offensive. (See Figs. 35, 36, 37.)[Illustration: Fig. 35.Division\
+    \ in battalion squares.][Illustration: Fig. 36.The same division in long battalion\
+    \ squares.][Illustration: Fig. 37.Squared of regiments of three battalions.]\"\
+    \"\""
+  role: user
+- content: 'I would classify the input text as "neutral". Here''s my reasoning:
+
+
+    1. Tokenization: The text is split into individual words and punctuation marks
+    are removed. Stop words like "the", "and", etc. are also removed.
+
+    2. Sentiment Analysis: The text does not contain any sentiment-bearing words or
+    phrases that would assign a sentiment score.
+
+    3. Contextual Analysis: Since there are no sentiment-bearing words or phrases,
+    there is no context to analyze.
+
+    4. Sentiment Aggregation: Since there are no sentiment scores, the overall sentiment
+    score is 0.
+
+    5. Handling Ambiguity: Since the overall sentiment score is 0, the text is classified
+    as "neutral".
+
+    6. Handling Special Cases: The text does not contain any special cases like sarcasm,
+    irony, or figurative language that would require domain-specific knowledge or
+    machine learning models.
+
+    7. Continuous Improvement: The model does not need to be updated or refined for
+    this text as it is neutral and does not contain any sentiment-bearing words or
+    phrases.
+
+
+    The text appears to be a historical military text discussing the tactics and strategies
+    of Napoleon''s wars, and it does not express any emotional sentiment or opinion.'
+  role: assistant
+  timeout: false

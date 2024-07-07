@@ -1,0 +1,88 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"The country which has been the scene of operations in South Africa seemed\
+    \ designed by nature for defensive operations. In the Orange Free State the veldt\
+    \ stretches away for miles and miles, broken by single kopjes and short ranges\
+    \ of mountains, from which a sentinel can note the approach of a hostile force\
+    \ in the far distance. In the Transvaal, although the country is more broken,\
+    \ it is easy to watch the enemy\u2019s approach; and with the excellent signal\
+    \ service of the Boers it has been practically impossible for an advancing column\
+    \ to surprise the defending force.The drifts or fords of the rivers were the most\
+    \ serious difficulty that had to be overcome by the British in transportation\
+    \ of their wagon-trains and artillery. By long action of the water in the rivers\
+    \ they have been cut deep, so that the descent from the ordinary level of the\
+    \ country to the bed of the stream is at most places very sharp. Strangely, there\
+    \ was no attempt, except at the railway bridges, to improve in any manner these\
+    \ difficult fords, although in many cases an hour\u2019s work by a company of\
+    \ engineers, or by any kind of a company, would have saved many hours\u2019 delay\
+    \ in the transportation.[Illustration: British soldiers pulling army wagons across\
+    \ a drift.]\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The input text is split into individual words or tokens. Punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains words like "defensive", "hostile", "enemy",
+    "difficulty", and "delay", which have neutral sentiment. There are no sentiment-bearing
+    words like "happy", "good", "bad", etc.
+
+    3. Contextual Analysis: The text does not contain any words that would flip the
+    sentiment score.
+
+    4. Emphasis Analysis: There are no words that convey emphasis.
+
+    5. Negation Analysis: There are no words that negate sentiment.
+
+    6. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    the sentiment scores of individual tokens. Since there are no sentiment-bearing
+    words, the overall sentiment score is neutral (0).
+
+    7. Thresholding: Since the overall sentiment score is 0, the text is classified
+    as "neutral".
+
+    8. Handling Ambiguity: There are no ambiguous or neutral words that would affect
+    the classification.
+
+
+    The text appears to be a descriptive passage about the geography and logistics
+    of a military campaign, and its tone is neutral and informative.'
+  role: assistant
+  timeout: false

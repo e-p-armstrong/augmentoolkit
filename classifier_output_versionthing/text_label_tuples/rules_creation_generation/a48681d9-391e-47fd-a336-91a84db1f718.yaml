@@ -1,0 +1,86 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"Any point in the theatre of operations which gives\
+    \ to the possessor an advantage over his opponent, is regarded as _strategic_.\
+    \ Their geographical position and political and military character, give them\
+    \ a greater or less influence in directing the campaign. These points are occupied\
+    \ by the defensive army, and attacked by the offensive; if on or near the base,\
+    \ they become the _key_ points for the former, and the _objective_ points for\
+    \ the latter.[3] There are also between these two a greater or less number of\
+    \ strategic points, which have an important though inferior influence upon the\
+    \ result of the war.[Footnote 3: It may be well to remark that a strategic point\
+    \ is not necessarily a geometrical point; an entire province, or a considerable\
+    \ portion of a geographical frontier, is, in military language, sometimes denominated\
+    \ a _point_. In the same way, strategic lines, instead of being mathematical lines,\
+    \ are frequently many miles in width.]The first object of the French in attacking\
+    \ Belgium, is to gain possession of the Meuse, as this position would give them\
+    \ a decided advantage in any ulterior operations. In attacking southern Germany,\
+    \ the course of the Danube offers a series of points which exercise an important\
+    \ influence on the war. For northern Germany, Leipsic and the country bordering\
+    \ on the Saale and the Elbe, are objects often fiercely contested by the French\
+    \ and other belligerent powers. In a war between this country and England, Montreal\
+    \ and the points on the St. Lawrence between Montreal and Quebec, would become\
+    \ objects of the highest importance, and their possession would probably determine\
+    \ the result of the war.\"\"\""
+  role: user
+- content: 'I would classify the input text as "neutral". Here''s my reasoning:
+
+
+    1. Tokenization: The text is split into individual words and punctuation marks
+    are removed. Stop words like "the", "and", etc. are also removed.
+
+    2. Sentiment Analysis: The text does not contain any sentiment-bearing words or
+    phrases that would assign a sentiment score.
+
+    3. Contextual Analysis: Since there are no sentiment-bearing words or phrases,
+    there is no context to analyze.
+
+    4. Sentiment Aggregation: The overall sentiment score is 0, as there are no sentiment-bearing
+    words or phrases.
+
+    5. Handling Ambiguity: Since the overall sentiment score is 0, the text is classified
+    as "neutral".
+
+    6. Handling Special Cases: There are no special cases like sarcasm, irony, or
+    figurative language in this text.
+
+    7. Continuous Improvement: This text is a historical passage about military strategy
+    and does not contain any emotional language, so it is not likely to be classified
+    as "positive" or "negative".
+
+
+    The text is a neutral description of military strategy and does not contain any
+    emotional language or sentiment-bearing words or phrases.'
+  role: assistant
+  timeout: false

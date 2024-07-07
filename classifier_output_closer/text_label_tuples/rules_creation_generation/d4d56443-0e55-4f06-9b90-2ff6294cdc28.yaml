@@ -1,0 +1,84 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"General\
+    \ charges are also made against the enemy's cavalry, to drive it from the field\
+    \ of battle and return more free to act against his infantry.Cavalry may be successfully\
+    \ thrown against the flank or rear of an enemy's line at the moment of its being\
+    \ attacked in front by the infantry. If repulsed, it may rally upon the army at\
+    \ a gallop, and, if successful, it may cause the loss of the enemy's army. This\
+    \ operation is rarely attempted, but I see no reason why it should not be very\
+    \ good; for a body of cavalry well handled cannot be cut off even if it gets in\
+    \ rear of the enemy. This is a duty for which light cavalry is particularly fitted.In\
+    \ the defensive, cavalry may also produce very valuable results by opportune dashes\
+    \ at a body of the enemy which has engaged the opposing line and either broken\
+    \ it through or been on the point of doing so. It may regain the advantages lost,\
+    \ change the face of affairs, and cause the destruction of an enemy flushed and\
+    \ disordered by his own success. This was proved at Eylau, where the Russians\
+    \ made a fine charge, and at Waterloo by the English cavalry. The special cavalry\
+    \ of a corps d'arm\xE9e may charge at opportune moments, either to co-operate\
+    \ in a combined attack, or to take advantage of a false movement of the enemy,\
+    \ or to finish his defeat by pressing him while in retreat.\"\"\""
+  role: user
+- content: "After applying the rules, I classified the input text as \"neutral\".\n\
+    \nHere's the breakdown:\n\n1. Tokenization: The text is split into individual\
+    \ words or tokens. Punctuation marks, special characters, and stop words are removed.\n\
+    2. Sentiment Analysis: Each token is checked for sentiment-bearing words. Tokens\
+    \ with sentiment-bearing words are assigned a sentiment score:\n\t* \"good\" and\
+    \ \"very good\" are assigned a positive sentiment score (+1)\n\t* \"fine\" is\
+    \ assigned a positive sentiment score (+1)\n\t* \"fine\" and \"fine charge\" are\
+    \ assigned a positive sentiment score (+1)\n\t* No negative sentiment-bearing\
+    \ words are found\n3. Contextual Analysis: The context of each token is checked:\n\
+    \t* Phrases like \"very good\", \"fine charge\", and \"fine\" are part of sentences\
+    \ that express a positive sentiment, so they are assigned a positive sentiment\
+    \ score.\n\t* Phrases like \"drive it from the field of battle\" and \"cause the\
+    \ destruction of an enemy\" are part of sentences that express a neutral or unclear\
+    \ sentiment, so they are assigned a neutral sentiment score.\n4. Sentiment Aggregation:\
+    \ The overall sentiment score is calculated by summing up the sentiment scores\
+    \ of individual tokens. Since the majority of tokens have a positive sentiment\
+    \ score, the overall sentiment score is positive.\n5. Handling Ambiguity: No ambiguous\
+    \ tokens are found.\n6. Handling Negation: No negated tokens are found.\n7. Handling\
+    \ Intensifiers: No intensified tokens are found.\n8. Handling Emoticons and Special\
+    \ Characters: No emoticons or special characters that convey sentiment are found.\n\
+    9. Handling Out-of-Vocabulary Words: No out-of-vocabulary words are found.\n10.\
+    \ Handling Contextual Dependencies: No contextual dependencies are found.\n\n\
+    The overall sentiment score is positive, so the text is classified as \"neutral\"\
+    ."
+  role: assistant
+  timeout: false

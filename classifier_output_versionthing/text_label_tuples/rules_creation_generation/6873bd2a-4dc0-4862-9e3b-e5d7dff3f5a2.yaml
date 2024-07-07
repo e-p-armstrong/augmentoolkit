@@ -1,0 +1,107 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"In the Russian service each, battalion has four divisions\
+    \ of three ranks each. But the third rank is employed as tirailleurs, which gives\
+    \ a depth of column of eight files. The employment of the third rank for tirailleurs\
+    \ is deemed objectionable on account of the difficulty of rallying them on the\
+    \ column. For this reason, the best authorities prefer detaching an entire division\
+    \ of two companies.The formation of squares is exceedingly effective in an open\
+    \ country, and against an enemy who is superior in cavalry. Formerly very large\
+    \ squares were employed, but they are now formed either by regiment or by battalion.\
+    \ The former are deemed best for the defensive, and the latter for offensive movements.\
+    \ The manner of arranging these is shown in Figure 29.3d. The mixed system, or\
+    \ the combination of the two preceding, has sometimes been employed with success.\
+    \ Napoleon used this formation at Tagliamento, and the Russians at Eylau. Each\
+    \ regiment was composed of three battalions, the first being deployed in line,\
+    \ and the other two formed in columns of attack by division in rear of the two\
+    \ extremities, as shown in Fig. 30. It may in some cases be better to place the\
+    \ second and third battalions in line with the first, and on the two extremities\
+    \ of this battalion, in order to prolong the line of fire. The centre of the line\
+    \ of each regiment would be less strong, however, than when the two battalions\
+    \ by column are placed in rear of the other which is deployed. This mixed system\
+    \ of formation has many advocates, and in certain situations may be employed with\
+    \ great advantage.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    **Tokenization**: The input text is split into individual words or tokens, and
+    punctuation marks, special characters, and stop words are removed.
+
+
+    **Sentiment Analysis**: The sentiment-bearing words or phrases are identified,
+    and their sentiment scores are assigned:
+
+
+    * Positive: +1 (e.g., "effective", "best", "success")
+
+    * Negative: -1 (none found)
+
+    * Neutral: 0 (most tokens)
+
+
+    **Contextual Analysis**: The context of each token is analyzed, and its sentiment
+    score is adjusted:
+
+
+    * No significant adjustments are made, as there are no sentiment-bearing words
+    or phrases with strong context.
+
+
+    **Sentiment Aggregation**: The overall sentiment score is calculated by summing
+    up the sentiment scores of individual tokens:
+
+
+    * The score is mostly neutral, with a few positive sentiment-bearing words or
+    phrases.
+
+
+    **Handling Ambiguity**: The overall sentiment score is close to zero, so the text
+    is classified as "neutral".
+
+
+    **Handling Special Cases**: No special cases are identified in this text.
+
+
+    **Continuous Improvement**: The model is continuously updated and refined to improve
+    accuracy.
+
+
+    The input text does not contain strong sentiment-bearing words or phrases, and
+    the context is mostly neutral. Therefore, the text is classified as "neutral".'
+  role: assistant
+  timeout: false

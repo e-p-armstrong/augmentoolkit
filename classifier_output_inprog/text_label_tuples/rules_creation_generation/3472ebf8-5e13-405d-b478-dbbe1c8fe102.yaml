@@ -1,0 +1,94 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"The close formation of men armed with pikes was irresistible so long as\
+    \ it was maintained. A forest of pikes fifteen to eighteen feet long kept you\
+    \ at a distance. [25] On the other hand it was easy to kill off the cavalry and\
+    \ light infantry about the phalanx, which was an unwieldy mass marching with a\
+    \ measured step, and which a mobile body of troops could always avoid. Openings\
+    \ in the phalanx might be occasioned by marching, by the terrain, by the thousand\
+    \ accidents of struggle, by the individual assault of brave men, by the wounded\
+    \ on the ground creeping under the high held pikes and cutting at the legs of\
+    \ the front rank. Men in the phalanx could scarcely see and even the first two\
+    \ lines hardly had a free position for striking. The men were armed with long\
+    \ lances, useless at close quarters, good only for combat at shaft's length (Polybius).\
+    \ They were struck with impunity by the groups [26] which threw themselves into\
+    \ the intervals. And then, once the enemy was in the body of the phalanx, morale\
+    \ disappeared and it became a mass without order, a flock of panic-stricken sheep\
+    \ falling over each other.In a mob hard-pressed men prick with their knives those\
+    \ who press them. The contagion of fear changes the direction of the human wave;\
+    \ it bends back upon itself and breaks to escape danger. If, then, the enemy fled\
+    \ before the phalanx there was no m\xEAl\xE9e. If he gave way tactically before\
+    \ it and availing himself of gaps penetrated it by groups, still there was no\
+    \ m\xEAl\xE9e or mixture of ranks. The wedge entering into a mass does not become\
+    \ intermingled with it.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains words like "irresistible", "easy", "unwieldy",
+    "accidents", "struggle", "brave", "wounded", "high", "long", "good", "useless",
+    "impunity", "morale", "order", "fear", "danger", "tactically", "gaps", "penetrated",
+    "groups", "wedge", "mass", which do not have a clear positive or negative sentiment.
+
+    3. Contextual Analysis: The text does not contain any negative or positive words
+    that would flip the sentiment score.
+
+    4. Emphasis Analysis: There are no words that convey emphasis, so no sentiment
+    score is increased.
+
+    5. Negation Analysis: There are no words that negate sentiment, so no sentiment
+    score is flipped.
+
+    6. Sentiment Aggregation: The overall sentiment score is neutral, as there are
+    no clear positive or negative sentiments in the text.
+
+    7. Thresholding: Since the overall sentiment score is neutral, the text is classified
+    as "neutral".
+
+    8. Handling Ambiguity: The text contains neutral words like "fine", "okay", etc.,
+    which are assigned a neutral sentiment score (0).
+
+
+    The text appears to be a descriptive passage about the phalanx formation and its
+    weaknesses, without expressing a clear positive or negative sentiment.'
+  role: assistant
+  timeout: false

@@ -1,0 +1,102 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"Between\
+    \ the blockhouses and the second-line system a fortified line is frequently organized\
+    \ which is called the \u201Cprotecting line of the artillery.\u201D This is intended\
+    \ to repel the advance of the enemy infantry, if they gain possession of the first-line\
+    \ system, before they reach the field batteries, or to retard it long enough to\
+    \ allow the batteries to fall back. This line is held by the troops of the sector\
+    \ which do not belong to the fighting contingent.The distance from the first-line\
+    \ system of trenches to the second-line system varies according to the configuration\
+    \ of the ground. These second lines should, when possible, overlook the first\
+    \ lines, so as to hold them under their fire. The same rules prevail in the location\
+    \ of the third lines. In the sectors which seem to particularly interest the enemy,\
+    \ very strong \u201Ccheck positions\u201D are prepared in the rear.The troops\
+    \ occupying the second and third lines should be protected against bombardment\
+    \ as much as possible. It is therefore in these trenches or very near them that\
+    \ shelters capable of withstanding heavy gun-fire should be constructed.We say\
+    \ \u201Cin or near\u201D advisedly, for it is important to hide the shelters as\
+    \ much as possible from the enemy, and, to effect this, it is no inconvenience\
+    \ to build them a little in the rear of the trench-lines, if the desired result\
+    \ can thus be obtained. Often it will be necessary to do this merely for the purpose\
+    \ of getting more favourable ground on which to erect the shelter.The main point\
+    \ to emphasize is that these shelters should be connected by means of communication-ways\
+    \ permitting quick passage from the shelters to the trench-lines.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The tokens are analyzed for sentiment-bearing words. Some
+    tokens have words like "protect", "retard", "hold", "fire", which are neutral.
+    Others have words like "enemy", "bombardment", which are negative. However, the
+    overall sentiment is neutral.
+
+    3. Contextual Analysis: The context of each token is analyzed. The text describes
+    military tactics and strategies, which are neutral in sentiment. There are no
+    phrases or sentences that express a positive or negative sentiment.
+
+    4. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    up the sentiment scores of individual tokens. Since most tokens have neutral sentiment,
+    the overall score is also neutral.
+
+    5. Handling Ambiguity: No ambiguous tokens are found.
+
+    6. Handling Negation: No negated tokens are found.
+
+    7. Handling Intensifiers: No intensified tokens are found.
+
+    8. Handling Emoticons and Special Characters: No emoticons or special characters
+    that convey sentiment are found.
+
+    9. Handling Out-of-Vocabulary Words: No out-of-vocabulary words are found.
+
+    10. Handling Contextual Dependencies: No contextual dependencies are found.
+
+
+    The text is primarily descriptive and lacks emotional language, making it neutral
+    in sentiment.'
+  role: assistant
+  timeout: false

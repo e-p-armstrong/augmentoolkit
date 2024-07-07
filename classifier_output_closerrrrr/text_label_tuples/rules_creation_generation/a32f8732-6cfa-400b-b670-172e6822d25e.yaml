@@ -1,0 +1,97 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"\"The tide of battle\
+    \ is in the hands of each fighter, and never, at any time, has the individual\
+    \ bravery of the soldier had more importance.\"Whatever the science of the superior\
+    \ commander, the genius of his strategic combinations, the precision of his concentrations,\
+    \ whatever numerical superiority he may have, victory will escape him if the soldier\
+    \ does not conduct himself without being watched, and if he is not personally\
+    \ animated by the resolution to conquer or to perish. He needs much greater energy\
+    \ than formerly.\"He no longer has the intoxication of ancient attacks in mass\
+    \ to sustain him. Formerly, the terrible anxiety of waiting made him wish for\
+    \ the violent blow, dangerous, but soon passed. Now, all his normal and physical\
+    \ powers are tried for long hours and, in such a test, he will have but the resoluteness\
+    \ of his own heart to sustain him.\"Armies of to-day gain decisions by action\
+    \ in open order, where each soldier must act individually with will and initiative\
+    \ to attack the enemy and destroy him.\"The Frenchman has always been an excellent\
+    \ rifleman, intelligent, adroit and bold. He is naturally brave. The metal is\
+    \ good; the problem is to temper it. It must be recognized that to-day this task\
+    \ is not easy. The desire for physical comfort, the international theories which\
+    \ come therefrom, preferring economic slavery and work for the profit of the stranger\
+    \ to the struggle, do not incite the Frenchman to give his life in order to save\
+    \ that of his brother.\"The new arms are almost valueless in the hands of weakhearted\
+    \ soldiers, no matter what their number may be. On the contrary, the demoralizing\
+    \ power of rapid and smokeless firing, which certain armies still persist in not\
+    \ acknowledging, manifests itself with so much the more force as each soldier\
+    \ possesses greater valor and cool energy.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "positive".
+
+
+    Here''s the breakdown:
+
+
+    * Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    * Sentiment Analysis: The text contains sentiment-bearing words and phrases such
+    as "bravery", "resolution", "conquer", "perish", "bold", "brave", "valor", and
+    "cool energy", which are assigned a sentiment score of +1 (positive).
+
+    * Contextual Analysis: The text''s context is analyzed, and the sentiment scores
+    are adjusted accordingly. For example, the phrase "He needs much greater energy
+    than formerly" is preceded by a sentiment-bearing word "He", which is assigned
+    a sentiment score of +1 (positive).
+
+    * Emotion Detection: The text expresses emotions such as joy, excitement, and
+    bravery, which are assigned a sentiment score of +1 (positive).
+
+    * Intensity Analysis: The intensity of the sentiment-bearing words and phrases
+    is analyzed, and the sentiment scores are adjusted accordingly. For example, the
+    phrase "The desire for physical comfort, the international theories which come
+    therefrom, preferring economic slavery and work for the profit of the stranger
+    to the struggle, do not incite the Frenchman to give his life in order to save
+    that of his brother" is assigned a sentiment score of +0.5 (neutral) due to its
+    mild sentiment.
+
+    * Overall Sentiment: The overall sentiment score is calculated by summing up the
+    sentiment scores of all tokens, which is positive.
+
+
+    The text is classified as "positive" because the overall sentiment score is positive,
+    and the sentiment-bearing words and phrases are predominantly positive.'
+  role: assistant
+  timeout: false

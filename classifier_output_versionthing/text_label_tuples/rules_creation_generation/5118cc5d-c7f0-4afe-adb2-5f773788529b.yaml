@@ -1,0 +1,75 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"The contest in War is not a contest of individual\
+    \ against individual, but an organised whole, consisting of manifold parts; in\
+    \ this great whole we may distinguish units of two kinds, the one determined by\
+    \ the subject, the other by the object. In an Army the mass of combatants ranges\
+    \ itself always into an order of new units, which again form members of a higher\
+    \ order. The combat of each of these members forms, therefore, also a more or\
+    \ less distinct unit. Further, the motive of the fight; therefore its object forms\
+    \ its unit.Now, to each of these units which we distinguish in the contest we\
+    \ attach the name of combat.If the idea of combat lies at the foundation of every\
+    \ application of armed power, then also the application of armed force in general\
+    \ is nothing more than the determining and arranging a certain number of combats.Every\
+    \ activity in War, therefore, necessarily relates to the combat either directly\
+    \ or indirectly. The soldier is levied, clothed, armed, exercised, he sleeps,\
+    \ eats, drinks, and marches, all MERELY TO FIGHT AT THE RIGHT TIME AND PLACE.If,\
+    \ therefore, all the threads of military activity terminate in the combat, we\
+    \ shall grasp them all when we settle the order of the combats. Only from this\
+    \ order and its execution proceed the effects, never directly from the conditions\
+    \ preceding them. Now, in the combat all the action is directed to the DESTRUCTION\
+    \ of the enemy, or rather of HIS FIGHTING POWERS, for this lies in the conception\
+    \ of combat. The destruction of the enemy's fighting power is, therefore, always\
+    \ the means to attain the object of the combat.\"\"\""
+  role: user
+- content: "After applying the rules, I classify the input text as \"neutral\".\n\n\
+    Here's the breakdown:\n\n1. Tokenization: The input text is split into individual\
+    \ words or tokens, and punctuation marks, special characters, and stop words are\
+    \ removed.\n2. Sentiment Analysis: The sentiment-bearing words or phrases are\
+    \ identified, and sentiment scores are assigned:\n\t* \"MERELY\" and \"DESTRUCTION\"\
+    \ have negative sentiment scores (-1 each).\n\t* \"FIGHT\" has a positive sentiment\
+    \ score (+1).\n\t* Other tokens have neutral sentiment scores (0).\n3. Contextual\
+    \ Analysis: The context of each token is analyzed, and sentiment scores are adjusted:\n\
+    \t* \"MERELY\" is preceded by \"all\" and \"to\", which are neutral, so its sentiment\
+    \ score remains -1.\n\t* \"DESTRUCTION\" is preceded by \"the\" and \"of\", which\
+    \ are neutral, so its sentiment score remains -1.\n\t* \"FIGHT\" is part of the\
+    \ phrase \"to fight at the right time and place\", which has a positive context,\
+    \ so its sentiment score increases to +1.5.\n4. Sentiment Aggregation: The overall\
+    \ sentiment score is calculated by summing up the sentiment scores of individual\
+    \ tokens:\n\t* -1 (MERELY) + -1 (DESTRUCTION) + 1.5 (FIGHT) = -0.5\n5. Handling\
+    \ Ambiguity: The overall sentiment score is close to zero, so the text is classified\
+    \ as \"neutral\".\n\nNote that the text does contain some negative sentiment-bearing\
+    \ words, but they are not dominant, and the overall sentiment is neutral."
+  role: assistant
+  timeout: false

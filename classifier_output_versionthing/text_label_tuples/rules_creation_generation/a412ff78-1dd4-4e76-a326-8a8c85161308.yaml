@@ -1,0 +1,91 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"We find in the armies howitzers and mortars of the\
+    \ following sizes: 220, 270, 280, 305, 370, 400 mm. (in inches: 8, 10, 11, 12,\
+    \ 14\xBD, and 15\xBE). Soon we shall have 520 mm. guns (20\xBD inches). There\
+    \ are also field guns of 120 and 155 mm. short and 155 mm. long (5 and 6 inches)\
+    \ and naval guns of 19, 100, 240, 274, 305, and 340 mm.The artillery of an army\
+    \ is under the command of a General.The field batteries of 120\u2013155 mm. are\
+    \ composed of four pieces; howitzer batteries and naval batteries of 100 and 190\
+    \ mm. are nearly always of two pieces. The largest mortars, and the heaviest naval\
+    \ guns mounted on railroad trucks, operate singly, and each gun is accompanied\
+    \ by several trucks carrying its material and munitions.ARTILLERY OF AN ARMY CORPS.\
+    \ The artillery of an army corps is under the command of a Colonel. It includes\
+    \ two groups of 75 mm. field guns, two groups of 105 (4 inch), or of 120 (5 inch),\
+    \ and one group of 155 (6 inch), quick-firing. This artillery is reinforced, in\
+    \ case of need, by the heavy artillery which the army can dispose of. The Colonel\
+    \ commanding the artillery assumes the command of all batteries, of whatever size,\
+    \ momentarily put at the disposal of his army corps. He is most specially intrusted\
+    \ with the selection of the ground on which to place the batteries, and it is\
+    \ he who has to specify the part each of them shall take in the action. The divisional\
+    \ batteries of the army corps are also under his command, at least during the\
+    \ preparation for the attacks. It is absolutely indispensable that each battery\
+    \ should be assigned its objective, and should be positively forbidden to scatter\
+    \ its projectiles promiscuously. Thus costly waste is avoided, and a definite\
+    \ purpose accomplished.\"\"\""
+  role: user
+- content: "I will classify the input text as \"neutral\" based on the rules provided.\n\
+    \nHere's the breakdown:\n\n**Tokenization**\n\n* Split the input text into individual\
+    \ words or tokens.\n* Remove punctuation marks, special characters, and stop words.\n\
+    \n**Sentiment Analysis**\n\n* For each token, check if it has a sentiment-bearing\
+    \ word or phrase.\n* Assign a sentiment score:\n\t+ Positive: +1\n\t+ Negative:\
+    \ -1\n\t+ Neutral: 0\n\nThe input text contains technical terms related to artillery,\
+    \ such as \"howitzers\", \"mortars\", \"field guns\", and \"naval guns\". These\
+    \ words do not have inherent sentiment-bearing properties, so they are assigned\
+    \ a neutral sentiment score.\n\n**Contextual Analysis**\n\n* For each token, check\
+    \ its context by analyzing the surrounding tokens.\n* Adjust the sentiment score\
+    \ based on the context:\n\t+ If the context is positive, increase the token's\
+    \ sentiment score by 0.5.\n\t+ If the context is negative, decrease the token's\
+    \ sentiment score by 0.5.\n\nThe input text does not contain sentiment-bearing\
+    \ phrases or words that would affect the sentiment score.\n\n**Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\nThe overall\
+    \ sentiment score is neutral, as the input text does not contain sentiment-bearing\
+    \ words or phrases.\n\n**Handling Ambiguity**\n\n* If the overall sentiment score\
+    \ is close to zero (e.g. within a certain threshold), consider the text as \"\
+    neutral\".\n* If the text contains conflicting sentiment-bearing words or phrases,\
+    \ prioritize the most prominent or recent one.\n\nThe input text does not contain\
+    \ conflicting sentiment-bearing words or phrases, so it is classified as \"neutral\"\
+    .\n\n**Handling Special Cases**\n\n* Handle special cases like sarcasm, irony,\
+    \ or figurative language by using domain-specific knowledge or machine learning\
+    \ models.\n\nThe input text does not contain special cases that would affect the\
+    \ classification.\n\n**Continuous Improvement**\n\n* Continuously update and refine\
+    \ the sentiment analysis model by incorporating new data, feedback, and domain-specific\
+    \ knowledge.\n* Monitor the model's performance and adjust the rules as needed\
+    \ to improve accuracy.\n\nBased on the rules provided, the input text is classified\
+    \ as \"neutral\"."
+  role: assistant
+  timeout: false

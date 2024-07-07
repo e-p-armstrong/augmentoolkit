@@ -1,0 +1,156 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: 'rules: """Here is a set of rules that can help an AI classify whether
+    some given text is "positive" or "negative":
+
+
+    **Rule 1: Tokenization**
+
+
+    * Split the input text into individual words or tokens.
+
+    * Remove punctuation marks, special characters, and stop words (common words like
+    "the", "and", etc. that do not carry much meaning).
+
+
+    **Rule 2: Sentiment Analysis**
+
+
+    * For each token, check if it has a sentiment-bearing word (e.g. "happy", "good",
+    "bad", etc.).
+
+    * If a token has a sentiment-bearing word, assign it a sentiment score (e.g. +1
+    for positive, -1 for negative).
+
+
+    **Rule 3: Contextual Analysis**
+
+
+    * For each token, analyze its context to determine its sentiment.
+
+    * If a token is preceded by a negative word (e.g. "not", "never", etc.), flip
+    its sentiment score (e.g. -1 for positive, +1 for negative).
+
+    * If a token is followed by a positive word (e.g. "very", "extremely", etc.),
+    increase its sentiment score.
+
+
+    **Rule 4: Emphasis Analysis**
+
+
+    * Identify words that convey emphasis (e.g. "very", "extremely", "really", etc.).
+
+    * Increase the sentiment score of the preceding token by 0.5.
+
+
+    **Rule 5: Negation Analysis**
+
+
+    * Identify words that negate sentiment (e.g. "not", "never", "no", etc.).
+
+    * Flip the sentiment score of the preceding token.
+
+
+    **Rule 6: Sentiment Aggregation**
+
+
+    * Calculate the overall sentiment score for the text by summing the sentiment
+    scores of individual tokens.
+
+    * If the overall sentiment score is positive (i.e. > 0), classify the text as
+    "positive".
+
+    * If the overall sentiment score is negative (i.e. < 0), classify the text as
+    "negative".
+
+    * If the overall sentiment score is neutral (i.e. 0), classify the text as "neutral".
+
+
+    **Rule 7: Thresholding**
+
+
+    * Set a threshold value (e.g. 0.5) to determine the minimum sentiment score required
+    to classify the text as "positive" or "negative".
+
+    * If the overall sentiment score is above the threshold, classify the text as
+    "positive".
+
+    * If the overall sentiment score is below the threshold, classify the text as
+    "negative".
+
+
+    **Rule 8: Handling Ambiguity**
+
+
+    * If the text contains ambiguous or neutral words (e.g. "fine", "okay", etc.),
+    assign them a neutral sentiment score (0).
+
+    * If the text contains multiple conflicting sentiments, use the sentiment score
+    with the highest magnitude (i.e. closest to 1 or -1).
+
+
+    By following these rules, an AI can classify text as "positive", "negative", or
+    "neutral" based on its sentiment. Note that these rules are not exhaustive and
+    can be modified to suit specific use cases or domains."""
+
+
+    Input Text: """tion by which they may be reached; it forms the plan and arranges
+    the general operations of a campaign; but it leaves it to the engineers to overcome
+    material obstacles and to erect new ones; it leaves to logistics the means of
+    supporting armies and of moving them on the chosen lines; and to tactics, the
+    particular dispositions for battle, when the armies have reached the destined
+    points. It is well to keep in mind these distinctions, which may be rendered still
+    more obvious by a few illustrations. The point where several lines of communications
+    either intersect or meet, and the centre of an arc which is occupied by the enemy,
+    are strategic points; but tactics would reject a position equally accessible on
+    all sides, especially with its flanks exposed to attack. Sempronius at Trebbia
+    and Varro at Cannae, so placed their armies that the Carthagenians attacked them,
+    at the same time, in front, on the flanks, and in rear; the Roman consuls were
+    defeated: but the central strategic position of Napoleon at Rivoli was eminently
+    successful. At the battle of Austerlitz the allies had projected a _strategic_
+    movement to their left, in order to cut off Napoleon''s right from Vienna; Weyrother
+    afterwards changed his plans, and executed a corresponding _tactical_ movement.
+    By the former there had been some chance of success, but the latter exposed him
+    to inevitable destruction. The little fort of Koenigsten, from its advantageous
+    position, was more useful to the French, in 1813, than the vast works of Dresden.
+    The little fort of Bard, with its handful of men, was near defeating the operations
+    of Napoleon in 1800, by holding in check his entire army; whereas, on the other
+    hand, the ill-advised lines of Ticino, in 1706, caused an army of 78,000 French
+    to be defeated by only 40,000 men under Prince Eugene of Savoy."""'
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains words like "strategic", "tactical", "successful",
+    "eminently", "advantageous", "useful", "ill-advised", and "defeated", which do
+    not have a clear positive or negative sentiment. The sentiment score for each
+    token is 0.
+
+    3. Contextual Analysis: The text does not contain any words that would flip the
+    sentiment score.
+
+    4. Emphasis Analysis: The text does not contain any words that convey emphasis.
+
+    5. Negation Analysis: The text does not contain any words that negate sentiment.
+
+    6. Sentiment Aggregation: The overall sentiment score is the sum of the sentiment
+    scores of individual tokens, which is 0.
+
+    7. Thresholding: Since the overall sentiment score is 0, the text does not meet
+    the threshold to be classified as "positive" or "negative".
+
+    8. Handling Ambiguity: The text contains words like "strategic" and "tactical",
+    which can be interpreted in different ways. However, since the overall sentiment
+    score is 0, the text is classified as "neutral".
+
+
+    The text appears to be a historical and technical discussion about military strategy
+    and tactics, and does not contain any overtly positive or negative sentiment.'
+  role: assistant
+  timeout: false

@@ -1,0 +1,49 @@
+{
+    "os": "macOS-13.4-arm64-arm-64bit",
+    "python": "3.11.7",
+    "heartbeatAt": "2024-07-07T10:54:38.641097",
+    "startedAt": "2024-07-07T10:54:38.589390",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/Users/evan/repos/augmentoolkit/classifier_trainer_processing.py",
+    "codePathLocal": "classifier_trainer_processing.py",
+    "codePath": "classifier_trainer_processing.py",
+    "git": {
+        "remote": "https://github.com/e-p-armstrong/augmental-universal.git",
+        "commit": "86a4cdff474d51fa18677d51d8692417cc307414"
+    },
+    "email": "evanpeterarmstrong@gmail.com",
+    "root": "/Users/evan/repos/augmentoolkit",
+    "host": "Evans-MBP.lan",
+    "username": "evan",
+    "executable": "/opt/homebrew/Caskroom/miniforge/base/envs/mlp_11/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 10,
+    "cpu_freq": {
+        "current": 3228,
+        "min": 600,
+        "max": 3228
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3228,
+            "min": 600,
+            "max": 3228
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 926.3517189025879,
+            "used": 909.147216796875
+        }
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 32.0
+    }
+}

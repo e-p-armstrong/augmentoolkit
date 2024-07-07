@@ -1,0 +1,108 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"Intrenched lines, 146, 153.  attack\
+    \ of, 214.  continuous, 213.Intrenched positions, 181.Intrenchments, armies in,\
+    \ 154Invaded country, how made to contribute to success, 142.Invasion, advantage\
+    \ and disadvantage of, 72.  advantages of awaiting, 17.  army of, line of defense\
+    \ important to, 99.  control of the sea important in, 30.  difficult in national\
+    \ wars, 144.  how rendered feasible, 106.  of a mountainous country, 169.  of\
+    \ England contemplated by Napoleon, 249, 250, 386.  of Turkey by Russia, 23. \
+    \ two kinds of, 22.  wars of, when advantageous, 17.Invasions, diplomacy in, 24.\
+    \  distant, across extensive territories, 171.  distant, effect of standing armies\
+    \ on, 171.  distant, how affected by invention of gunpowder, 171.  distant, maxim\
+    \ for, 173.  distant, to aid an ally, 170.  how to be carried on, 24.  neutrality\
+    \ of states adjoining the theater of war important in, 174.  of neighboring states,\
+    \ 174.  of Spain, 23.  when excusable, 23.Investing a city, false system of, 152.\
+    \  force, how strengthened, 153.Irregular cavalry, 313.  arms for, 313.Islamism,\
+    \ wars of, 25.Italy, operations of the French in, 111, 112.  parallel retreats\
+    \ in, 241.  relation of, in the French Revolution, 104.Ivar, expedition of, 369.J.James\
+    \ II., expedition of, in Ireland, 381.Jemmapes, 342.Jena, battle of, won by strategy,\
+    \ 198.  maneuvers at, 90.  Napoleon's march on, 94.  Ney's charge at, 305.Jourdan,\
+    \ 229.  at Stockach, 205.  balloons used by, at Fleurus, 275.Jourdan's passage\
+    \ of the Rhine in 1795, 120.Julian, retreat of, from Parthia, 233.K.Kagoul, panic\
+    \ at, 64.Katzbach, 124.Kehl, intrenchments at, 157, 210, 211.Kolin, 303.Koudacheff's\
+    \ expedition, 273.Koutousoff, 170.Krasnoi, combination at, 342.Kray, 87.Kunnersdorf,\
+    \ 304.L.Lance, importance of, 47.  when best for cavalry, 307.  when useful, 306.Lender,\
+    \ bravery the first requisite for, 345.League, wars of the, 25.\"\"\""
+  role: user
+- content: 'I will classify the input text as "negative" based on the rules provided.
+
+
+    Here''s the breakdown:
+
+
+    * Tokenization: The text is broken down into individual words or tokens. After
+    removing punctuation marks, special characters, and stop words, the remaining
+    tokens are: intrenched, lines, attack, continuous, intrenched, positions, armies,
+    invaded, country, how, made, contribute, success, invasion, advantage, disadvantage,
+    awaiting, army, line, defense, important, control, sea, difficult, national, wars,
+    how, rendered, feasible, mountainous, country, England, contemplated, Napoleon,
+    Turkey, Russia, kinds, wars, advantageous, diplomacy, distant, territories, effect,
+    standing, armies, invention, gunpowder, maxim, aid, ally, neutrality, states,
+    adjoining, theater, war, important, neighboring, Spain, excusable, investing,
+    city, false, system, force, strengthened, irregular, cavalry, arms, islamism,
+    wars, italy, operations, french, parallel, retreats, relation, invasion, revolution,
+    ivar, expedition, james, ireland, jemmapes, jena, battle, won, strategy, maneuvers,
+    march, ney, charge, jourdan, stockach, balloons, fleurus, passage, rhine, julian,
+    retreat, parthia, kagoul, panic, katzbach, kehl, intrenchments, kolin, koudacheff,
+    expedition, koutousoff, combination, krasy, kray, kunnersdorf, lance, importance,
+    bravery, league, wars.
+
+    * Sentiment Analysis: Most of the tokens have a neutral sentiment, but some have
+    a negative sentiment, such as "attack", "invasion", "disadvantage", "difficult",
+    "national wars", "panic", "bravery", "kagoul", "katzbach", "kolin", "koudacheff",
+    "krasy", "kray", "kunnersdorf".
+
+    * Contextual Analysis: The text is mostly about military strategies and battles,
+    which are often associated with negative emotions. The presence of words like
+    "attack", "invasion", and "war" suggests a negative context.
+
+    * Aspect-Based Sentiment Analysis: The text is about various aspects such as military
+    strategies, battles, and wars. The sentiment towards these aspects is mostly negative.
+
+    * Sentiment Aggregation: The overall sentiment score is negative due to the presence
+    of negative tokens and the context of the text.
+
+    * Thresholding: Since the overall sentiment score is negative, the text is classified
+    as "negative".
+
+
+    Note that this classification is based on the rules provided and may not be accurate
+    if the text is not representative of the sentiment analysis model.'
+  role: assistant
+  timeout: false

@@ -1,0 +1,89 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"The perpendicular\
+    \ order on one or both wings, as seen in Figs. 10 and 11, can only be considered\
+    \ an arrangement to indicate the direction along which the primary tactical movements\
+    \ might be made in a battle. Two armies will never long occupy the relative perpendicular\
+    \ positions indicated in these figures; for if the army B were to take its first\
+    \ position on a line perpendicular to one or both extremities of the army A, the\
+    \ latter would at once change the front of a portion of its line; and even the\
+    \ army B, as soon as it extended itself to or beyond the extremity of A, must\
+    \ of necessity turn its columns either to the right or the left, in order to bring\
+    \ them near the enemy's line, and so take him in reverse, as at C, the result\
+    \ being two oblique lines, as shown in Fig. 10. The inference is that one division\
+    \ of the assailing army would take a position perpendicular to the enemy's wing,\
+    \ whilst the remainder of the army would approach in front for the purpose of\
+    \ annoying him; and this would always bring us back to one of the oblique orders\
+    \ shown in Figures 9 and 16.The attack on both wings, whatever be the form of\
+    \ attack adopted, may be very advantageous, but it is only admissible when the\
+    \ assailant is very decidedly superior in numbers; for, if the fundamental principle\
+    \ is to bring the main strength of the forces upon the decisive point, a weaker\
+    \ army would violate it in directing a divided attack against a superior force.\
+    \ This truth will be clearly demonstrated farther on.[Illustration: Fig. 12.]\"\
+    \"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: No sentiment-bearing words or phrases are found in the
+    text.
+
+    3. Contextual Analysis: No sentiment-bearing words or phrases are found in the
+    text, so no adjustments are made.
+
+    4. Emotion Detection: No emotions are detected in the text.
+
+    5. Intensity Analysis: Since no sentiment-bearing words or phrases are found,
+    no intensity scores are assigned.
+
+    6. Overall Sentiment: The overall sentiment score is 0, since no sentiment-bearing
+    words or phrases were found.
+
+    7. Edge Cases: The text does not contain any sentiment-bearing words or phrases,
+    so it is classified as "neutral".
+
+
+    The text appears to be a technical or academic passage discussing military tactics
+    and strategies, and it does not contain any emotional language or sentiment-bearing
+    words or phrases.'
+  role: assistant
+  timeout: false

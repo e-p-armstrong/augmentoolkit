@@ -1,0 +1,93 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"The attack may take various forms, depending upon\
+    \ whether the dispositions have to be made under hostile fire (surprise and rencontre),\
+    \ or whether the enemy has renounced the initiative and awaits the attack in a\
+    \ deployed formation, or in a position prepared for defense (deliberately planned\
+    \ attack). In the last case the attack requires more careful preparation and in\
+    \ many instances even necessitates the employment of special auxiliaries (such\
+    \ as guns capable of high angle fire, and engineer trains). However, the advance\
+    \ of a strong firing line to within assaulting distance of the enemy, and the\
+    \ uninterrupted fight for the superiority of fire, are common to all attacks.Aside\
+    \ from the attack against an enemy in position and the rencontre there is an attack\
+    \ formation more closely resembling the rencontre in character, which may be called\
+    \ the _abridged attack_.[328] This attack formation is used in forestalling the\
+    \ enemy in occupying important points, in preventing enveloping movements, in\
+    \ carrying out flank attacks, in surprising the enemy, in warding off a hostile\
+    \ surprise, in relieving the pressure on a neighboring force, etc. It is moreover\
+    \ appropriate where the conformation of the ground or the time of day prohibit\
+    \ a use of the rifle.[328] _Abgek\xFCrzter Angriff_.The first stages of the fight\
+    \ of the 6th Infantry Division at  =Vionville= are of this character. The fire\
+    \ fight was relegated to  the background in view of the constant movement to the\
+    \ front. The  situation prohibited our properly taking advantage of our superior\
+    \  marksmanship.--The attack on the railroad cut of =Nuits=, during the  late\
+    \ afternoon of December 18th, 1870, progressed similarly.[329][329] KUNZ, _Gefecht\
+    \ von Nuits_, p. 19, et seq.1. THE SURPRISE.[330][330] See _Taktik_, V, p. 190.\"\
+    \"\""
+  role: user
+- content: 'Based on the rules provided, I will classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The input text is split into individual words or tokens, and
+    punctuation marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text does not contain any sentiment-bearing words or
+    phrases that would assign a sentiment score.
+
+    3. Contextual Analysis: Since there are no sentiment-bearing words or phrases,
+    there is no context to analyze.
+
+    4. Sentiment Aggregation: The overall sentiment score is 0, as there are no sentiment-bearing
+    words or phrases.
+
+    5. Handling Ambiguity: Since the overall sentiment score is 0, the text is considered
+    neutral.
+
+    6. Handling Special Cases: The text does not contain any special cases like sarcasm,
+    irony, or figurative language that would require domain-specific knowledge or
+    machine learning models.
+
+    7. Continuous Improvement: Since the text is neutral, there is no need to continuously
+    improve the sentiment analysis model.
+
+
+    The input text appears to be a passage from a military manual or historical account,
+    discussing various types of attacks and their characteristics. The language is
+    formal and objective, without any emotional tone or sentiment-bearing words or
+    phrases. Therefore, the text is classified as "neutral".'
+  role: assistant
+  timeout: false

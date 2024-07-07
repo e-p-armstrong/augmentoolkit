@@ -1,0 +1,83 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"With the Romans discipline was severest and most\
+    \ rigidly enforced in the presence of the enemy. It was enforced by the soldiers\
+    \ themselves. To-day, why should not the men in our companies watch discipline\
+    \ and punish themselves. They alone know each other, and the maintenance of discipline\
+    \ is so much to their interest as to encourage them to stop skulking. The twenty-five\
+    \ thousand men who skulked in Italy, all wear the Italian medal. They were discharged\
+    \ with certificates of good conduct. This certificate, in campaign should be awarded\
+    \ by the squad only. In place of that, discipline must be obtained somehow, and\
+    \ it is placed as an additional burden on the officer. He above all has to uphold\
+    \ it. He is treated without regard for his dignity. He is made to do the work\
+    \ of the non-commissioned officer. He is used as fancy dictates.This cohesion\
+    \ which we hope for in units from squad to company, need not be feared in other\
+    \ armies. It cannot develop to the same point and by the same methods with them\
+    \ as with us. Their make-up is not ours, their character is different. This individuality\
+    \ of squads and companies comes from the make-up of our army and from French sociability.Is\
+    \ it true that the rations of men and horses are actually insufficient in campaign?\
+    \ This is strange economy! To neglect to increase the soldier's pay five centimes!\
+    \ It would better his fare and prevent making of an officer a trader in vegetables\
+    \ in order to properly feed his men. Yet millions are squandered each year for\
+    \ uniforms, geegaws, shakos, etc!\"\"\""
+  role: user
+- content: "Based on the rules provided, I will classify the input text as \"negative\"\
+    .\n\nHere's the breakdown:\n\n**Tokenization**\n\n* The input text is split into\
+    \ individual words or tokens.\n* Punctuation marks, special characters, and stop\
+    \ words are removed.\n\n**Sentiment Analysis**\n\n* Tokens with sentiment-bearing\
+    \ words or phrases are identified:\n\t+ \"severest\" (negative)\n\t+ \"skulking\"\
+    \ (negative)\n\t+ \"good conduct\" (positive)\n\t+ \"dignity\" (positive)\n\t\
+    + \"strange economy\" (negative)\n\t+ \"better\" (positive)\n\t+ \"trader\" (negative)\n\
+    \t+ \"millions\" (neutral)\n* Sentiment scores are assigned:\n\t+ Negative: -1\n\
+    \t+ Positive: +1\n\t+ Neutral: 0\n\n**Contextual Analysis**\n\n* Contextual analysis\
+    \ is performed for each token:\n\t+ \"severest\" is preceded by a negative sentiment-bearing\
+    \ word (\"discipline\"), so its sentiment score is decreased by 0.5.\n\t+ \"skulking\"\
+    \ is preceded by a negative sentiment-bearing word (\"twenty-five thousand men\"\
+    ), so its sentiment score is decreased by 0.5.\n\t+ \"good conduct\" is followed\
+    \ by a positive sentiment-bearing word (\"certificate\"), so its sentiment score\
+    \ is increased by 0.5.\n\t+ \"dignity\" is followed by a negative sentiment-bearing\
+    \ word (\"treated without regard\"), so its sentiment score is decreased by 0.5.\n\
+    \t+ \"strange economy\" is a standalone token with a negative sentiment score.\n\
+    \t+ \"better\" is a standalone token with a positive sentiment score.\n\t+ \"\
+    trader\" is a standalone token with a negative sentiment score.\n\t+ \"millions\"\
+    \ is a standalone token with a neutral sentiment score.\n\n**Sentiment Aggregation**\n\
+    \n* The overall sentiment score is calculated by summing up the sentiment scores\
+    \ of individual tokens:\n\t+ Negative: -2.5\n\t+ Positive: +2.5\n\t+ Neutral:\
+    \ 0\n\n**Handling Ambiguity**\n\n* The overall sentiment score is close to zero,\
+    \ so the text is considered \"neutral\".\n\n**Handling Special Cases**\n\n* The\
+    \ text contains conflicting sentiment-bearing words or phrases, but the most prominent\
+    \ sentiment is negative.\n\n**Final Classification**\n\n* The input text is classified\
+    \ as \"negative\" based on the overall sentiment score and the rules provided."
+  role: assistant
+  timeout: false

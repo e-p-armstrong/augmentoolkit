@@ -1,0 +1,105 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"\"\
+    When Pompey saw his cavalry repulsed and that portion of the army upon which he\
+    \ had counted the most seized with terror, he had little confidence in the rest.\
+    \ He quit the battle and galloped to his camp, where, addressing his centurions\
+    \ who were guarding the praetorian gate, he told them in a loud voice heard by\
+    \ the soldiers: 'Guard well the camp and defend it vigorously in case of attack;\
+    \ as for myself, I am going to make the tour of the other gates and assure their\
+    \ defense.'\"That said, he retired to the praetorium, despairing of success and\
+    \ awaiting events.\"After having forced the enemy to flee to his entrenchments\
+    \ Caesar, persuaded that he ought not to give the slightest respite to a terrorized\
+    \ enemy, incited his soldiers to profit by their advantage and attack the camp.\
+    \ Although overcome by the heat, for the struggle was prolonged into the middle\
+    \ of the day, they did not object to greater fatigue and obeyed. The camp was\
+    \ at first well defended by the cohorts on watch and especially by the Thracians\
+    \ and barbarians. The men who had fled from the battle, full of fright and overcome\
+    \ with fatigue, had nearly all thrown their arms and colors away and thought rather\
+    \ more of saving themselves than of defending the camp. Even those who defended\
+    \ the entrenchments were unable long to resist the shower of arrows. Covered with\
+    \ wounds, they abandoned the place, and led by their centurions and tribunes,\
+    \ they took refuge as quickly as they could in the high mountains near the camp.\"\
+    Caesar lost in this battle but two hundred soldiers, but nearly thirty of the\
+    \ bravest centurions were killed therein. Of Pompey's army fifteen thousand perished,\
+    \ and more than twenty-four thousand took refuge in the mountains. As Caesar had\
+    \ invested the mountains with entrenchments, they surrendered the following day.\"\
+    \"\"\""
+  role: user
+- content: 'After applying the rules, I classified the text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: Most tokens do not have sentiment-bearing words, but some
+    tokens like "terror", "despairing", and "overcome" have negative sentiment. Tokens
+    like "well", "vigorously", and "profit" have positive sentiment.
+
+    3. Contextual Analysis: The context of the text is mostly neutral, describing
+    events and actions without expressing a clear sentiment. However, some phrases
+    like "despairing of success" and "overcome with fatigue" have negative sentiment.
+
+    4. Sentiment Aggregation: The overall sentiment score is neutral, as the positive
+    and negative sentiment scores cancel each other out.
+
+    5. Handling Ambiguity: No ambiguous tokens are found.
+
+    6. Handling Negation: No negated tokens are found.
+
+    7. Handling Intensifiers: No intensified tokens are found.
+
+    8. Handling Emoticons and Special Characters: No emoticons or special characters
+    are found.
+
+    9. Handling Out-of-Vocabulary Words: No out-of-vocabulary words are found.
+
+    10. Handling Contextual Dependencies: The text does not contain contextual dependencies
+    that affect the sentiment.
+
+
+    The text is a historical account of a battle, and while it describes negative
+    events, it does not express a clear sentiment. Therefore, I classify the text
+    as "neutral".'
+  role: assistant
+  timeout: false

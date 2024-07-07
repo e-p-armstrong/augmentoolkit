@@ -1,0 +1,93 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"It was said that a couple of English officers with a few men entered Pretoria\
+    \ that night, but I did not see them. The first of the enemy that I saw was an\
+    \ advance body next day, sent in to occupy the town and to post a guard on all\
+    \ public buildings. I heard that Lord Roberts and his staff were coming, and I\
+    \ rode out about a mile to meet them. I then first beheld that wonderful leader,\
+    \ who is certainly one of the greatest generals of modern times. His staff was\
+    \ preceded by an advance bodyguard of about fifty men; twenty men rode on either\
+    \ side of the road, flanking his staff by about one hundred yards. The staff was\
+    \ so large that it looked like a regiment in itself. At the head I recognized\
+    \ Lord Roberts, a small man on a large horse, sitting in his saddle as though\
+    \ pretty well worn out by work. He was bundled up in a khaki overcoat, as the\
+    \ morning was very cold. By his side rode Lord Kitchener on a powerful white horse,\
+    \ the only white one in the staff. That horse must have been a shining mark in\
+    \ action, but a little detail of that sort would not trouble a man of Kitchener\u2019\
+    s stamp.[Illustration: Lord Roberts and staff approaching Pretoria (Lord Kitchener\
+    \ is on the white horse, Lord Roberts is the first leading figure at the right).]Immediately\
+    \ behind the field marshal and his chief of staff rode two Indian native servants,\
+    \ familiar figures in all Lord Roberts\u2019s campaign, for he never travels without\
+    \ them. It is said that one of them saved his chief\u2019s life in India, and\
+    \ that he is now retained in his service forever.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the text as "positive".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words and punctuation marks
+    are removed.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words like "wonderful",
+    "greatest", "small", "pretty well worn out", which are assigned a sentiment score
+    of +1.
+
+    3. Contextual Analysis: The text does not contain any negative words preceding
+    or following the sentiment-bearing words, so no sentiment scores are flipped.
+
+    4. Emphasis Analysis: The text does not contain any words that convey emphasis,
+    so no sentiment scores are increased.
+
+    5. Negation Analysis: The text does not contain any words that negate sentiment,
+    so no sentiment scores are flipped.
+
+    6. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    the sentiment scores of individual tokens, which is positive.
+
+    7. Thresholding: The overall sentiment score is above the threshold (0.5), so
+    the text is classified as "positive".
+
+    8. Handling Ambiguity: The text does not contain any ambiguous or neutral words,
+    so no sentiment scores are assigned a neutral value.
+
+
+    The text describes Lord Roberts and his staff in a positive light, using words
+    like "wonderful", "greatest", and "small" to describe them. The tone is admiring
+    and respectful, which suggests a positive sentiment.'
+  role: assistant
+  timeout: false

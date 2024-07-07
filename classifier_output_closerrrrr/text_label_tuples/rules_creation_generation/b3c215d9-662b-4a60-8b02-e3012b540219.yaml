@@ -1,0 +1,92 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"Where a great river\
+    \ or chain of lakes forms the boundary of a state, the system of defence will\
+    \ be much the same as that of an open land frontier, the works of the first line\
+    \ being made to secure the great bridges or ferries by which the enemy might effect\
+    \ a passage; those of the second line, to cover the passes of the highlands that\
+    \ generally approach more or less near the great watercourse; and those of the\
+    \ third line, far enough in rear to protect the great internal communications\
+    \ of the country. Let us take, for example, the side of France bordering on the\
+    \ Rhine. Wissembourg and Lauterbourg, Fort Louis, Haguenau, Strasbourg, Schelstadt,\
+    \ Neuf-Brisach, and Huneguen, cover the several passages of the river; while Bitche,\
+    \ Phalsbourg, and B\xE9fort form a second line; Thionville, Metz, and Toul, a\
+    \ third line; and Verdun a grand central d\xE9p\xF4t.The following are the principal\
+    \ objects proposed to be accomplished by fortifications on a sea-coast.1st. To\
+    \ close all important harbors to an enemy, and secure them to the navy of the\
+    \ country.2d. To prevent the enemy from forming an establishment on our shores,\
+    \ from which, by his naval superiority, he might destroy our commerce and keep\
+    \ the whole frontier in continual alarm.3d. To cover our great cities against\
+    \ a maritime attack and bombardment.4th. To cover our ship-yards and great naval\
+    \ depots.5th. To prevent, as much as possible, the great avenues of interior navigation\
+    \ from being blockaded by naval means at their entrance into the ocean.6th. To\
+    \ give to our navy facilities for protecting our coast trade from the enemy's\
+    \ ships of war, and our internal communications, which lie near the coast, from\
+    \ maritime descents.\"\"\""
+  role: user
+- content: 'Based on the rules provided, I will classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text does not contain sentiment-bearing words or phrases
+    that would indicate a clear positive or negative sentiment.
+
+    3. Contextual Analysis: The text does not contain sentiment-bearing words or phrases
+    that would be influenced by surrounding tokens.
+
+    4. Emotion Detection: The text does not express emotions such as joy, sadness,
+    anger, etc.
+
+    5. Intensity Analysis: The text does not contain strong sentiment-bearing words
+    or phrases that would indicate a strong positive or negative sentiment.
+
+    6. Overall Sentiment: The overall sentiment score is neutral, as the text does
+    not contain sentiment-bearing words or phrases that would indicate a clear positive
+    or negative sentiment.
+
+
+    Edge Cases: The text does not contain mixed sentiment, sarcasm, or irony, and
+    it does not have a clear positive or negative sentiment.
+
+
+    Therefore, based on the rules provided, I classify the input text as "neutral".'
+  role: assistant
+  timeout: false

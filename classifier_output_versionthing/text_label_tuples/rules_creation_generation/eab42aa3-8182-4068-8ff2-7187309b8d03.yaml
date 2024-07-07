@@ -1,0 +1,91 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"In deciding how many men are required to occupy or\
+    \ attack a position, the principal point to be considered is the effect of fire.\
+    \ The modern long range magazine rifle will, no doubt, enable us to defend a position\
+    \ with a smaller force than was possible in the past with the older less improved\
+    \ weapons. However, combats last longer nowadays, and the shock action of Frederick\
+    \ the Great\u2019s tactics is no longer practicable. The fight is carried on at\
+    \ longer ranges, and the tremendously costly decisive moments of the past are\
+    \ of rarer occurrence. As a consequence, the casualties of the whole force engaged\
+    \ are smaller, although, owing to unfavorable conditions, certain organizations\
+    \ may suffer losses quite as great as those incurred in the battles of Frederick\
+    \ the Great and Napoleon.[239] Instead of the sanguinary hand-to-hand fight with\
+    \ cold steel, we now have a prolonged fire fight carried on by a firing line which\
+    \ requires to be constantly fed by troops held in rear, who have to be sheltered\
+    \ as much as possible from hostile fire until the moment of their employment.\
+    \ This fire fight is frequently decided by psychological factors and without the\
+    \ troops suffering material losses.[239] At W\xF6rth, the 1st Turco Regiment lost\
+    \ the enormous total of  93.1%, and twelve other French regiments suffered a loss\
+    \ of over 50%.  To be sure, the losses sustained during the retreat are included\
+    \  in this total. At Albuera (16th May, 1811), the 57th Regiment  (British) and\
+    \ the F\xFCsilier Brigade lost 70%; in four hours the army  of Beresford lost\
+    \ 25%, and of the British infantry, which originally  numbered 7000 men, only\
+    \ 1800 remained.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words and phrases,
+    such as "sanguinary", "cold steel", "hostile fire", and "losses". However, these
+    words are not strong indicators of positive or negative sentiment.
+
+    3. Contextual Analysis: The context of the text is primarily focused on military
+    tactics and strategies, which does not contain strong sentiment-bearing words
+    or phrases.
+
+    4. Sentiment Aggregation: The overall sentiment score is neutral, as the text
+    does not contain strong positive or negative sentiment-bearing words or phrases.
+
+    5. Handling Ambiguity: The text does not contain conflicting sentiment-bearing
+    words or phrases, so there is no need to prioritize one over the other.
+
+    6. Handling Special Cases: The text does not contain special cases like sarcasm,
+    irony, or figurative language.
+
+    7. Continuous Improvement: The model is continuously updated and refined to improve
+    accuracy.
+
+
+    The text is primarily a historical and informative passage about military tactics
+    and strategies, which does not contain strong sentiment-bearing words or phrases.
+    Therefore, I classified the text as "neutral".'
+  role: assistant
+  timeout: false

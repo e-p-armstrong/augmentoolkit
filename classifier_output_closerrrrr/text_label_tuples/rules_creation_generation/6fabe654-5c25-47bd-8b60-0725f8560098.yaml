@@ -1,0 +1,127 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"Is it to be supposed\
+    \ that all this could have been done without producing great friction in the machine?\
+    \ Can the mind of a Commander elaborate such movements with the same ease as the\
+    \ hand of a land surveyor uses the astrolabe? Does not the sight of the sufferings\
+    \ of their hungry, thirsty comrades pierce the hearts of the Commander and his\
+    \ Generals a thousand times? Must not the murmurs and doubts which these cause\
+    \ reach his ear? Has an ordinary man the courage to demand such sacrifices, and\
+    \ would not such efforts most certainly demoralise the Army, break up the bands\
+    \ of discipline, and, in short, undermine its military virtue, if firm reliance\
+    \ on the greatness and infallibility of the Commander did not compensate for all?\
+    \ Here, therefore, it is that we should pay respect; it is these miracles of execution\
+    \ which we should admire. But it is impossible to realise all this in its full\
+    \ force without a foretaste of it by experience. He who only knows War from books\
+    \ or the drill-ground cannot realise the whole effect of this counterpoise in\
+    \ action; WE BEG HIM, THEREFORE, TO ACCEPT FROM US ON FAITH AND TRUST ALL THAT\
+    \ HE IS UNABLE TO SUPPLY FROM ANY PERSONAL EXPERIENCES OF HIS OWN.This illustration\
+    \ is intended to give more clearness to the course of our ideas, and in closing\
+    \ this chapter we will only briefly observe that in our exposition of Strategy\
+    \ we shall describe those separate subjects which appear to us the most important,\
+    \ whether of a moral or material nature; then proceed from the simple to the complex,\
+    \ and conclude with the inner connection of the whole act of War, in other words,\
+    \ with the plan for a War or campaign.OBSERVATION.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    **Tokenization**: The text is split into individual words or tokens. Punctuation
+    marks, special characters, and stop words are removed.
+
+
+    **Sentiment Analysis**: The text contains sentiment-bearing words and phrases,
+    such as "great friction", "sufferings", "murmurs", "doubts", "courage", "miracles",
+    "execution", "admire", "respect", "miracles", "execution", "admire", "respect".
+    These words and phrases are assigned sentiment scores:
+
+
+    * "great friction" (-1)
+
+    * "sufferings" (-1)
+
+    * "murmurs" (-1)
+
+    * "doubts" (-1)
+
+    * "courage" (+1)
+
+    * "miracles" (+1)
+
+    * "execution" (+1)
+
+    * "admire" (+1)
+
+    * "respect" (+1)
+
+
+    **Contextual Analysis**: The context of each token is analyzed. For example, "great
+    friction" is preceded by "Is it to be supposed that all this could have been done
+    without", which suggests a negative sentiment. However, the overall sentiment
+    of the text is neutral.
+
+
+    **Emotion Detection**: The text expresses emotions such as "respect", "admiration",
+    and "miracles", which are assigned sentiment scores:
+
+
+    * "respect" (+1)
+
+    * "admiration" (+1)
+
+    * "miracles" (+1)
+
+
+    **Intensity Analysis**: The intensity of the sentiment-bearing words and phrases
+    is analyzed. For example, "miracles" is a strong sentiment, while "respect" is
+    a mild sentiment.
+
+
+    **Overall Sentiment**: The overall sentiment score is calculated by summing up
+    the sentiment scores of all tokens. The score is close to 0, indicating a neutral
+    sentiment.
+
+
+    **Edge Cases**: The text does not contain any edge cases that would affect the
+    classification.
+
+
+    Based on the analysis, I classified the input text as "neutral".'
+  role: assistant
+  timeout: false

@@ -1,0 +1,95 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"In the campaign of 1759, Frederick directed General Fink, with eighteen\
+    \ thousand men, upon Maxen, for the purpose of cutting off the Austrian army from\
+    \ the defiles of Bohemia. Surrounded by twice his numbers, Fink capitulated after\
+    \ a sharp action, and fourteen thousand men laid down their arms. This conduct\
+    \ was the more disgraceful, because General Winch, who commanded the cavalry,\
+    \ cut his way through the enemy. The whole blame of the surrender fell, therefore,\
+    \ upon Fink, who was tried afterward by a court-martial, and sentenced to be cashiered\
+    \ and imprisoned for two years.In the campaign of Italy in 1796, the Austrian\
+    \ General Prov\xE9ra capitulated with two thousand men in the castle of Cossaria.\
+    \ Subsequently, at the battle of La Favorite, the same general capitulated with\
+    \ a corps of six thousand men. I scarcely dare to revert to the shameful defection\
+    \ of General Mack in the capitulation of Ulm in 1805, where thirty thousand Austrians\
+    \ laid down their arms--when we have seen, during the wars of the Revolution,\
+    \ so many generals open themselves a way by a vigorous effort through the enemy,\
+    \ supported only by a few battalions.MAXIM LXVIII.There is no security for any\
+    \ sovereign, for any nation, or for any general, if officers are permitted to\
+    \ capitulate in the open field, and to lay down their arms in virtue of conditions\
+    \ favorable to the contracting party, but contrary to the interests of the army\
+    \ at large. To withdraw from danger, and thereby to involve their comrades in\
+    \ greater peril, is the height of cowardice. Such conduct should be proscribed,\
+    \ declared infamous, and made punishable with death. All generals, officers and\
+    \ soldiers, who capitulate in battle to save their own lives, should be decimated.He\
+    \ who gives the order, and those who obey, are alike traitors, and deserve capital\
+    \ punishment.NOTE.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "negative".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The input text was split into individual words or tokens, and
+    punctuation marks, special characters, and stop words were removed.
+
+    2. Sentiment Analysis: The sentiment-bearing words found in the text are "shameful",
+    "defection", "cowardice", "traitors", and "punishment", which have negative sentiment
+    scores.
+
+    3. Contextual Analysis: The context of the text suggests that the negative sentiment
+    is directed towards the actions of generals and officers who capitulate in battle,
+    which reinforces the negative sentiment.
+
+    4. Emphasis Analysis: No emphasis words were found in the text.
+
+    5. Negation Analysis: No negation words were found in the text.
+
+    6. Sentiment Aggregation: The overall sentiment score is negative due to the presence
+    of negative sentiment-bearing words and the context of the text.
+
+    7. Thresholding: Since the overall sentiment score is negative, the text is classified
+    as "negative".
+
+    8. Handling Ambiguity: No ambiguous or neutral words were found in the text.
+
+
+    The text expresses strong negative sentiments towards the actions of generals
+    and officers who capitulate in battle, and advocates for the punishment of such
+    actions.'
+  role: assistant
+  timeout: false

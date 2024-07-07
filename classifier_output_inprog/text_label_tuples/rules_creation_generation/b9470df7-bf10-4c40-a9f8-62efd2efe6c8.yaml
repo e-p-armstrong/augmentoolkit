@@ -1,0 +1,111 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"1. The principal residents of the towns and district will be   held, jointly\
+    \ and severally, responsible for the amount of damage   done in their district.2.\
+    \ In addition to the payment of the damage above mentioned, a   penalty depending\
+    \ upon the circumstances of each case, but which   in no event will be less than\
+    \ a sum of 2s. 6d. per morgen on the   area of each farm, will be levied and recovered\
+    \ from each burgher   of the district in which the damage is done, in respect\
+    \ of the   land owned or occupied by him in such district. Furthermore,   all\
+    \ receipts for goods requisitioned in such district on behalf   of the military\
+    \ authorities will be cancelled, and no payment   whatsoever will be made in respect\
+    \ of the same.3. As a further precautionary measure, the Director of Military\
+    \   Railways has been authorized to order that one or more of the   residents,\
+    \ who will be selected by him from each district,   shall from time to time personally\
+    \ accompany the trains while   travelling through their district.4. The houses\
+    \ and farms in the vicinity of the place where the   damage is done will be destroyed,\
+    \ and the residents of the   neighborhood dealt with under martial law.5. The\
+    \ military authorities will render every facility to the   principal residents\
+    \ to enable them to communicate the purport of   this proclamation to the other\
+    \ residents in their district, so   that all persons may become fully cognizant\
+    \ of the responsibility   resting upon them.(Signed)  ROBERTS,        F.\_M.,\
+    \ Commander-in-Chief,              South Africa.\"\"\""
+  role: user
+- content: 'Based on the rules provided, I will classify the input text as "negative".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization:
+
+    The input text is split into individual words or tokens. Punctuation marks, special
+    characters, and stop words are removed.
+
+
+    2. Sentiment Analysis:
+
+    The text contains sentiment-bearing words such as "damage", "penalty", "cancellation",
+    and "destruction", which have a negative sentiment score of -1.
+
+
+    3. Contextual Analysis:
+
+    The text does not contain any words that would flip the sentiment score.
+
+
+    4. Emphasis Analysis:
+
+    The text does not contain any words that convey emphasis.
+
+
+    5. Negation Analysis:
+
+    The text does not contain any words that negate sentiment.
+
+
+    6. Sentiment Aggregation:
+
+    The overall sentiment score is calculated by summing the sentiment scores of individual
+    tokens. Since the sentiment scores are mostly negative, the overall sentiment
+    score is also negative.
+
+
+    7. Thresholding:
+
+    The threshold value is set to 0.5. Since the overall sentiment score is negative,
+    the text is classified as "negative".
+
+
+    8. Handling Ambiguity:
+
+    The text does not contain any ambiguous or neutral words.
+
+
+    The overall sentiment of the text is negative, indicating that the text is classified
+    as "negative".'
+  role: assistant
+  timeout: false

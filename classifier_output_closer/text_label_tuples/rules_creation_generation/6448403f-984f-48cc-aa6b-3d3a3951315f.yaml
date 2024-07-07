@@ -1,0 +1,66 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"Some\
+    \ of my critics have disputed as to the meaning of words and upon definitions;\
+    \ others have censured where they but imperfectly understood; and others have,\
+    \ by the light of certain important events, taken it upon themselves to deny my\
+    \ fundamental principles, without inquiring whether the conditions of the case\
+    \ which might modify the application of these principles were such as were supposed,\
+    \ or without reflecting that, even admitting what they claimed to be true, a single\
+    \ exception cannot disprove a rule based upon the experience of ages and upon\
+    \ natural principles.In opposition to my maxims upon interior lines, some have\
+    \ quoted the famous and successful march of the allies upon Leipsic. This remarkable\
+    \ event, at first glance, seems to stagger the faith of those who believe in principles.\
+    \ At best, however, it is but one of those exceptional cases from which nothing\
+    \ can be inferred in the face of thousands of opposed instances. Moreover, it\
+    \ is easy to show that, far from overthrowing the maxims it has been brought to\
+    \ oppose, it will go to establish their soundness. Indeed, the critics had forgotten\
+    \ that in case of a considerable numerical superiority I recommended double lines\
+    \ of operations as most advantageous, particularly when concentric and arranged\
+    \ to combine an effort against the enemy at the decisive moment. Now, in the allied\
+    \ armies of Schwarzenberg, Bl\xFCcher, Bernadotte, and Benningsen, this case of\
+    \ decided superiority is found. The inferior army, to conform to the principles\
+    \ of this chapter, should have directed its efforts against one of the extremities\
+    \ of his adversary, and not upon the center as it did: so that the events quoted\
+    \ against me are doubly in my favor.\"\"\""
+  role: user
+- content: The input text is classified as "neutral".
+  role: assistant
+  timeout: false

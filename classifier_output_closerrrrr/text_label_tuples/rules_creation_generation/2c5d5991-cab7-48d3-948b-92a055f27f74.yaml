@@ -1,0 +1,93 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"After the fire\
+    \ fight is once begun, it is to be conducted with  more rifles than the enemy\
+    \ has in action. \u201CBattles are only won by  controlled fire directed upon\
+    \ targets at decisive ranges\u201D (according  to the regulations, at ranges under\
+    \ 540 m.). Within the zone of  effective fire, all the troops are to deploy. In\
+    \ consequence of  this, skirmishers, who endeavor to work forward independently,\
+    \ are  scattered all over the terrain over which the attack is being made.  At\
+    \ the initial deployment, the interval between skirmishers is to  be about 5-15\
+    \ paces; at short ranges, at points where the decision  is sought, there is to\
+    \ be at least one rifle for every two or three  yards of front (1.80-2.70 m. =\
+    \ 2\xB9\u2044\u2082-3\xB9\u2044\u2082 paces). Another paragraph  of the regulations\
+    \ prescribes that the maximum density is to be one  rifle per yard of front. The\
+    \ British views, when compared to those  entertained by them immediately after\
+    \ the South African war, have  undergone a noticeable change, especially as regards\
+    \ the frontage of  a firing line; dense firing lines, possessing strong fire power,\
+    \ are  at present deemed essential to a decisive fight, while the fire of  widely\
+    \ extended lines is considered ineffective. The intervals may  vary considerably,\
+    \ but the regulations state that it should be borne  in mind that the difficulties\
+    \ of conducting a fight are increased and  the fire power reduced when too great\
+    \ a front is covered; moreover,  that in covered terrain, and when counter-attacks\
+    \ may be anticipated,  an overextension is actually dangerous. Because of the\
+    \ necessity of  moving in thin skirmish lines, it is considered essential that\
+    \ the  men be trained to act independently, to continue the fight even in a  difficult\
+    \ situation, and to do everything in their power to carry  out the original intentions\
+    \ of the commander.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text does not contain sentiment-bearing words or phrases,
+    so no sentiment score is assigned to any tokens.
+
+    3. Contextual Analysis: Since there are no sentiment-bearing words or phrases,
+    there is no context to analyze.
+
+    4. Emotion Detection: No emotions are expressed in the text, so no sentiment score
+    is assigned.
+
+    5. Intensity Analysis: Since there are no sentiment-bearing words or phrases,
+    there is no intensity to analyze.
+
+    6. Overall Sentiment: The overall sentiment score is 0, since no sentiment scores
+    were assigned to any tokens.
+
+    7. Edge Cases: The text does not contain any sentiment-bearing words or phrases,
+    so it is classified as "neutral".
+
+
+    The text appears to be a passage about military tactics and regulations, and it
+    does not express any emotions or opinions.'
+  role: assistant
+  timeout: false

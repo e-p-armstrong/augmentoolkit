@@ -1,0 +1,96 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"At Malta the _Sumner_ anchored only a couple of lengths\
+    \ from shore, and her cable had hardly been paid out before several boat-loads\
+    \ of British Tommies were alongside. Then followed an extraordinary exhibition\
+    \ of fraternization. The soldiers of the two nations examined one another\u2019\
+    s equipment and uniforms and discussed their relative usefulness. They finally\
+    \ began to exchange buttons from their blouses and tunics, and before many minutes\
+    \ had passed the spirit of trade took their fancy. A British soldier would admire\
+    \ the useful campaign hat of an American, who in return would declare what a good\
+    \ souvenir the \u201Cdinky lid\u201D of the Britisher would make for his family\
+    \ at home, and the next moment they would swap. Then the trading went into blouses,\
+    \ trousers, and shirts; at least one entire boat-load of Tommies went back in\
+    \ the full field uniform of the American army. What afterwards happened to them\
+    \ when they encountered the strict sergeant the Americans conjectured with grins.The\
+    \ American colonel, however, put his foot down, and the amusing episode had to\
+    \ end, for the regiment was going to land for parade the next day, and there would\
+    \ not have been an entire uniform in the lot had the men been allowed to keep\
+    \ on exchanging clothes.The parade on British soil, in the presence of a British\
+    \ garrison, put the men on their mettle. As the Philippine khaki had not then\
+    \ been issued, they furbished up their worn blue suits until the uniforms made\
+    \ an unusually good appearance.Just before they landed, Captain McCoy stepped\
+    \ out to give them a final word of advice. It was short, and it expressed what\
+    \ every man was thinking already.\u201CRemember one thing, men,\u201D he said;\
+    \ \u201Cyou are going to be watched every minute you are on shore by Britishers,\
+    \ so don\u2019t forget that you are Americans.\u201D\"\"\""
+  role: user
+- content: 'After applying the rules, I classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words and phrases,
+    such as "amusing", "good", "useful", and "grins". However, these words and phrases
+    are not strong indicators of sentiment, and the overall sentiment is neutral.
+
+    3. Contextual Analysis: The context of the text is primarily descriptive, with
+    no strong sentiment-bearing words or phrases that would influence the sentiment
+    score.
+
+    4. Sentiment Aggregation: The overall sentiment score is neutral, as the sentiment-bearing
+    words and phrases are balanced and do not strongly lean towards positive or negative
+    sentiment.
+
+    5. Handling Ambiguity: The text does not contain conflicting sentiment-bearing
+    words or phrases, and the overall sentiment is clear.
+
+    6. Handling Special Cases: The text does not contain special cases like sarcasm,
+    irony, or figurative language that would require domain-specific knowledge or
+    machine learning models to handle.
+
+    7. Continuous Improvement: The model is continuously updated and refined to improve
+    accuracy, but in this case, the text is straightforward and does not require any
+    special handling.
+
+
+    Overall, the text is classified as "neutral" because it describes a neutral event
+    (a parade) and does not contain strong sentiment-bearing words or phrases that
+    would indicate a positive or negative sentiment.'
+  role: assistant
+  timeout: false

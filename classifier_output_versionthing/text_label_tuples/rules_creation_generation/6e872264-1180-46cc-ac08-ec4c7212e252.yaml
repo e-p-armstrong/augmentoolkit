@@ -1,0 +1,92 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"[461] The advance of Memerby\u2019s Brigade during\
+    \ the battle of  Noisseville. KUNZ, _Noisseville_, p. 41.Even a success gained\
+    \ at a tactically unfavorable point will make itself felt, if it is won early\
+    \ enough and if the most is made of it. As a rule, tactical considerations determine\
+    \ where the commander should launch his reserves for the counter-attack.The counter-attack\
+    \ here meant is an act of the commander of the whole force; in bodies of troops\
+    \ acting as part of a larger force and in numerically inferior forces, the warding\
+    \ off of the flank attack remains almost always the only remedy.\u201CThe general\
+    \ reserve should be posted at the point from which it can best move forward, counter\
+    \ to the probable direction of the hostile attack, while, at the same time, making\
+    \ the most of the features of the ground. When only one flank is secure, the general\
+    \ reserve is, as a rule, placed in echelon in rear of the unprotected wing. When\
+    \ both flanks are in the air, nothing remains but to place sufficient reserves\
+    \ in readiness in rear of one flank to ward off a hostile envelopment, while retaining\
+    \ as strong a force as possible in rear of the other for the purpose of bringing\
+    \ about the decision. The echeloned general reserve must have room for development,\
+    \ whether this be for warding off a hostile envelopment or for making a counter-attack.\u201D\
+    \ (Par. 410 German I. D. R.).The general reserve should be posted in rear of the\
+    \ center of the position only when the front is short and the situation is not\
+    \ as yet cleared up. In this position it will frequently be exposed to the fire\
+    \ directed against the first line, and its entry into action will usually involve\
+    \ a loss of time. When adequate information is available of the measures taken\
+    \ by the opponent, or the nature of the ground compels him to direct his decisive\
+    \ attack against a wing, this alone determines the position of the general reserve.\"\
+    \"\""
+  role: user
+- content: 'Based on the rules provided, I will classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text does not contain sentiment-bearing words or phrases
+    that would assign a sentiment score.
+
+    3. Contextual Analysis: Since there are no sentiment-bearing words or phrases,
+    there is no context to analyze.
+
+    4. Sentiment Aggregation: The overall sentiment score is 0, as there are no sentiment-bearing
+    words or phrases.
+
+    5. Handling Ambiguity: Since the overall sentiment score is 0, the text is considered
+    neutral.
+
+    6. Handling Special Cases: There are no special cases or figurative language in
+    the text that would require handling.
+
+    7. Continuous Improvement: Not applicable in this case, as the text does not contain
+    sentiment-bearing words or phrases.
+
+
+    The text appears to be a passage from a military manual or textbook, discussing
+    tactics and strategies for warfare. It does not contain emotional language or
+    sentiment-bearing words, making it neutral in sentiment.'
+  role: assistant
+  timeout: false

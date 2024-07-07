@@ -1,0 +1,67 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"If we want to show by example derived from experience\
+    \ that cavalry are better placed behind than in a line with infantry; that it\
+    \ is very hazardous without a decided preponderance of numbers to attempt an enveloping\
+    \ movement, with widely separated columns, either on a field of battle or in the\
+    \ theatre of war--that is, either tactically or strategically--then in the first\
+    \ of these cases it would not be sufficient to specify some lost battles in which\
+    \ the cavalry was on the flanks and some gained in which the cavalry was in rear\
+    \ of the infantry; and in the tatter of these cases it is not sufficient to refer\
+    \ to the battles of Rivoli and Wagram, to the attack of the Austrians on the theatre\
+    \ of war in Italy, in 1796, or of the French upon the German theatre of war in\
+    \ the same year. The way in which these orders of battle or plans of attack essentially\
+    \ contributed to disastrous issues in those particular cases must be shown by\
+    \ closely tracing out circumstances and occurrences. Then it will appear how far\
+    \ such forms or measures are to be condemned, a point which it is very necessary\
+    \ to show, for a total condemnation would be inconsistent with truth.\"\"\""
+  role: user
+- content: "After applying the rules, I classified the input text as \"neutral\".\n\
+    \nHere's the breakdown:\n\n**Tokenization**\n\n* Split the input text into individual\
+    \ words or tokens.\n* Removed punctuation marks, special characters, and stop\
+    \ words.\n\n**Sentiment Analysis**\n\n* Identified sentiment-bearing words and\
+    \ phrases:\n\t+ None with a clear positive or negative sentiment.\n* Assigned\
+    \ sentiment scores:\n\t+ All tokens: 0 (neutral)\n\n**Contextual Analysis**\n\n\
+    * Analyzed the context of each token:\n\t+ No sentiment-bearing words or phrases\
+    \ in the surrounding tokens.\n\n**Sentiment Aggregation**\n\n* Calculated the\
+    \ overall sentiment score:\n\t+ Sum of sentiment scores: 0 (neutral)\n\n**Handling\
+    \ Ambiguity**\n\n* No ambiguity detected.\n\n**Handling Special Cases**\n\n* No\
+    \ special cases detected.\n\n**Continuous Improvement**\n\n* No need to update\
+    \ or refine the model for this text.\n\nThe input text appears to be a historical\
+    \ analysis of military tactics and strategies, discussing the importance of tracing\
+    \ out circumstances and occurrences to understand the effectiveness of different\
+    \ orders of battle or plans of attack. The text does not contain any overtly positive\
+    \ or negative sentiment, and its tone is more neutral and informative."
+  role: assistant
+  timeout: false

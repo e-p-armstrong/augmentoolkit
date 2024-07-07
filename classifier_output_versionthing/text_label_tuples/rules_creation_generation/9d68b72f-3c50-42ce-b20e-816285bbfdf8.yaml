@@ -1,0 +1,104 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"On the other hand, the general should do every thing\
+    \ to electrify his own soldiers, and to impart to them the same enthusiasm which\
+    \ he endeavors to repress in his adversaries. All armies are alike susceptible\
+    \ of this spirit: the springs of action and means, only, vary with the national\
+    \ character. Military eloquence is one means, and has been the subject of many\
+    \ a treatise. The proclamations of Napoleon and of Paskevitch, the addresses of\
+    \ the ancients to their soldiers, and those of Suwaroff to men of still greater\
+    \ simplicity, are models of their different kinds. The eloquence of the Spanish\
+    \ Juntas, and the miracles of the Madonna del Pilar, led to the same results by\
+    \ very different means. In general, a cherished cause, and a general who inspires\
+    \ confidence by previous success, are powerful means of electrifying an army and\
+    \ conducing to victory. Some dispute the advantages of this enthusiasm, and prefer\
+    \ imperturbable coolness in battle. Both have unmistakable advantages and disadvantages.\
+    \ Enthusiasm impels to the performance of great actions: the difficulty is in\
+    \ maintaining it constantly; and, when discouragement succeeds it, disorder easily\
+    \ results.\"\"\""
+  role: user
+- content: "After applying the rules, I classified the input text as \"neutral\".\n\
+    \nHere's the breakdown:\n\n**Tokenization**\n\n* Split the input text into individual\
+    \ words or tokens.\n* Remove punctuation marks, special characters, and stop words.\n\
+    * Resulting tokens: [\"On\", \"the\", \"other\", \"hand\", \"the\", \"general\"\
+    , \"should\", \"do\", \"every\", \"thing\", \"to\", \"electrify\", \"his\", \"\
+    own\", \"soldiers\", \"and\", \"to\", \"impart\", \"to\", \"them\", \"the\", \"\
+    same\", \"enthusiasm\", \"which\", \"he\", \"endeavors\", \"to\", \"repress\"\
+    , \"in\", \"his\", \"adversaries\", \"All\", \"armies\", \"are\", \"alike\", \"\
+    susceptible\", \"of\", \"this\", \"spirit\", \"the\", \"springs\", \"of\", \"\
+    action\", \"and\", \"means\", \"only\", \"vary\", \"with\", \"the\", \"national\"\
+    , \"character\", \"Military\", \"eloquence\", \"is\", \"one\", \"means\", \"and\"\
+    , \"has\", \"been\", \"the\", \"subject\", \"of\", \"many\", \"a\", \"treatise\"\
+    , \"The\", \"proclamations\", \"of\", \"Napoleon\", \"and\", \"of\", \"Paskevitch\"\
+    , \"the\", \"addresses\", \"of\", \"the\", \"ancients\", \"to\", \"their\", \"\
+    soldiers\", \"and\", \"those\", \"of\", \"Suwaroff\", \"to\", \"men\", \"of\"\
+    , \"still\", \"greater\", \"simplicity\", \"are\", \"models\", \"of\", \"their\"\
+    , \"different\", \"kinds\", \"The\", \"eloquence\", \"of\", \"the\", \"Spanish\"\
+    , \"Juntas\", \"and\", \"the\", \"miracles\", \"of\", \"the\", \"Madonna\", \"\
+    del\", \"Pilar\", \"led\", \"to\", \"the\", \"same\", \"results\", \"by\", \"\
+    very\", \"different\", \"means\", \"In\", \"general\", \"a\", \"cherished\", \"\
+    cause\", \"and\", \"a\", \"general\", \"who\", \"inspires\", \"confidence\", \"\
+    by\", \"previous\", \"success\", \"are\", \"powerful\", \"means\", \"of\", \"\
+    electrifying\", \"an\", \"army\", \"and\", \"conducing\", \"to\", \"victory\"\
+    , \"Some\", \"dispute\", \"the\", \"advantages\", \"of\", \"this\", \"enthusiasm\"\
+    , \"and\", \"prefer\", \"imperturbable\", \"coolness\", \"in\", \"battle\", \"\
+    Both\", \"have\", \"unmistakable\", \"advantages\", \"and\", \"disadvantages\"\
+    , \"Enthusiasm\", \"impels\", \"to\", \"the\", \"performance\", \"of\", \"great\"\
+    , \"actions\", \"the\", \"difficulty\", \"is\", \"in\", \"maintaining\", \"it\"\
+    , \"constantly\", \"and\", \"when\", \"discouragement\", \"succeeds\", \"it\"\
+    , \"disorder\", \"easily\", \"results\"]\n\n**Sentiment Analysis**\n\n* Identified\
+    \ sentiment-bearing words and phrases:\n\t+ \"enthusiasm\" (positive)\n\t+ \"\
+    electrify\" (positive)\n\t+ \"cherished\" (positive)\n\t+ \"confidence\" (positive)\n\
+    \t+ \"success\" (positive)\n\t+ \"victory\" (positive)\n\t+ \"enthusiasm\" (positive)\n\
+    \t+ \"impels\" (positive)\n\t+ \"great\" (positive)\n* Assigned sentiment scores:\n\
+    \t+ \"enthusiasm\" (+1)\n\t+ \"electrify\" (+1)\n\t+ \"cherished\" (+1)\n\t+ \"\
+    confidence\" (+1)\n\t+ \"success\" (+1)\n\t+ \"victory\" (+1)\n\t+ \"enthusiasm\"\
+    \ (+1)\n\t+ \"impels\" (+1)\n\t+ \"great\" (+1)\n\n**Contextual Analysis**\n\n\
+    * Adjusted sentiment scores based on context:\n\t+ \"enthusiasm\" (+1.5) (preceded\
+    \ by \"the same enthusiasm\")\n\t+ \"electrify\" (+1.5) (preceded by \"to electrify\
+    \ his own soldiers\")\n\t+ \"cherished\" (+1.5) (preceded by \"a cherished cause\"\
+    )\n\t+ \"confidence\" (+1.5) (preceded by \"who inspires confidence\")\n\t+ \"\
+    success\" (+1.5) (preceded by \"previous success\")\n\t+ \"victory\" (+1.5) (preceded\
+    \ by \"conducing to victory\")\n\t+ \"enthusiasm\" (+1.5) (preceded by \"the same\
+    \ enthusiasm\")\n\t+ \"impels\" (+1.5) (preceded by \"Enthusiasm impels\")\n\t\
+    + \"great\" (+1.5) (preceded by \"great actions\")\n\n**Sentiment Aggregation**\n\
+    \n* Calculated overall sentiment score: +15\n* Classified text as \"positive\"\
+    \n\nHowever, upon re-examining the text, I noticed that it discusses both the\
+    \ advantages and disadvantages of enthusiasm, and also mentions the potential\
+    \ for disorder when discouragement succeeds enthusiasm. This suggests that the\
+    \ text is more nuanced and balanced, rather than purely positive.\n\nConsidering\
+    \ the text's balanced tone and the presence of both positive and negative sentiments,\
+    \ I revised the classification to \"neutral\"."
+  role: assistant
+  timeout: false

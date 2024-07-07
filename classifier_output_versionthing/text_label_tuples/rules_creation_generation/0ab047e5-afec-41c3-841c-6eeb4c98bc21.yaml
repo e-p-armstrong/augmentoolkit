@@ -1,0 +1,95 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"\"... It is there that I had time to admire the coolness\
+    \ of my brave Captain Daguerre, advancing on a mare under the enemy's eyes, and\
+    \ observing imperturbable, like a tourist, all the movements of our opponents.\"\
+    I will always pay homage to his calm and collected bravery....\"Remarks by the\
+    \ colonel.\"Did not Captain Daguerre change the bugle call 'Retreat,' ordered\
+    \ by ---- to the bugle call 'Forward?'\"Answer of Captain P----\"In fact, when\
+    \ protected in the wood by pieces of wall we were firing on the Russians, we heard\
+    \ behind us the bugle sounding 'Retreat' at the order of ----. At this moment\
+    \ my captain, indignant, ordered 'Forward' sounded to reestablish confidence which\
+    \ had been shaken by the distraction or by the inadvertance of ----.\"5. The Battle\
+    \ of InkermannExtract from the correspondence of Colonel Ardant du Picq.First:\
+    \ Letter sent from Lyon, March 21, 1869, by Major de G----, 17th Line Regiment.\"\
+    ... The 1st Battalion of the 7th Light Regiment had hardly arrived close to the\
+    \ telegraph when it received a new order to rush to the help of the English army,\
+    \ which, too weak to hold such a large army, had been broken in the center of\
+    \ its line and driven back on its camps.\"The 1st Battalion of the 7th Light Regiment,\
+    \ Major Vaissier, had the honor to arrive first in the presence of the Russians,\
+    \ after moving three kilometers on the run. Received by the enthusiastic cheers\
+    \ of the English, it formed for battle, then carried away by burning cries of\
+    \ 'Forward, with the bayonet' from its brave major it threw itself headlong, on\
+    \ the Russian columns, which broke.\"For two hours the 1st Battalion of the 7th\
+    \ Light Regiment, a battalion of the 6th Line Regiment, four companies of the\
+    \ 3rd Battalion of foot chasseurs, five companies of Algerian chasseurs held the\
+    \ head of the Russian army which continued to debouch in massed columns from the\
+    \ ravine and plateau of Inkermann.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "positive".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words and punctuation marks
+    are removed.
+
+    2. Sentiment Analysis: The text contains sentiment-bearing words and phrases such
+    as "brave", "calm", "collected", "indignant", "forward", and "with the bayonet".
+    These words have positive sentiment scores.
+
+    3. Contextual Analysis: The context of these sentiment-bearing words and phrases
+    is analyzed. For example, "brave" is preceded by "my Captain Daguerre" and "indignant"
+    is preceded by "my captain". These contexts are positive, so the sentiment scores
+    are increased.
+
+    4. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    up the sentiment scores of individual tokens. The score is positive due to the
+    prevalence of positive sentiment-bearing words and phrases.
+
+    5. Handling Ambiguity: The text does not contain conflicting sentiment-bearing
+    words or phrases, so there is no need to prioritize one over the other.
+
+    6. Handling Special Cases: The text does not contain special cases like sarcasm,
+    irony, or figurative language, so no special handling is required.
+
+    7. Continuous Improvement: The model is continuously updated and refined to improve
+    accuracy.
+
+
+    The text is classified as "positive" because it contains numerous positive sentiment-bearing
+    words and phrases, and the context of these words is also positive.'
+  role: assistant
+  timeout: false

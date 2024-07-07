@@ -1,0 +1,87 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"=England.= (Regulations dated 1896): Originally the regulations  prescribed\
+    \ rushes 30-40 m. long, but, as a matter of fact, their  length was actually increased\
+    \ to 60 and 100 m. during the first  engagements of the South African war, in\
+    \ cases where the fire of the  enemy was not especially heavy. The regulations\
+    \ of 1905, recently  published, state: \u201CRushes over open ground should not\
+    \ exceed 80-100  yards (_i.e._, 70-90 m.) and will, in fact, rarely reach this\
+    \ length.  At decisive ranges, _i.e._, under 540 m., they should be short enough\
+    \  to afford the enemy no opportunity to pour a well-directed fire on  the skirmishers.\
+    \ When cover is available the advance is made from  cover to cover.\u201D At another\
+    \ place the regulations state: \u201COn open  ground and within effective range,\
+    \ long lines of skirmishers, rising  simultaneously, will suffer heavy losses\
+    \ even when making short  rushes; the sudden movement of smaller units may take\
+    \ the enemy  unawares, so that for a time at least well aimed fire is avoided.\
+    \ The  rush is continued only while the surprise of the enemy lasts. The  shorter\
+    \ the range, the smaller the advancing units will have to be,  and the shorter\
+    \ the length of the rushes.\u201DAll preparations for a rush must be made as unostentatiously\
+    \ as  possible. The units following in rear should, whenever possible,  advance\
+    \ beyond the leading unit which is lying down and firing. When  an advance by\
+    \ rushes in units is impossible, individuals may run or  crawl forward.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text does not contain sentiment-bearing words like
+    "happy", "good", "bad", etc.
+
+    3. Contextual Analysis: The text does not contain negative or positive words that
+    would flip the sentiment score.
+
+    4. Emphasis Analysis: There are no words that convey emphasis.
+
+    5. Negation Analysis: There are no words that negate sentiment.
+
+    6. Sentiment Aggregation: The overall sentiment score is 0, as there are no sentiment-bearing
+    words or contextual cues.
+
+    7. Thresholding: Since the overall sentiment score is 0, the text does not meet
+    the threshold to be classified as "positive" or "negative".
+
+    8. Handling Ambiguity: The text does not contain ambiguous or neutral words.
+
+
+    The text appears to be a factual passage about military regulations and tactics,
+    without any emotional or evaluative language. Therefore, it is classified as "neutral".'
+  role: assistant
+  timeout: false

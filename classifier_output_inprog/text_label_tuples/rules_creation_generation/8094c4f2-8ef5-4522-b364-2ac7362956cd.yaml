@@ -1,0 +1,162 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: 'rules: """Here is a set of rules that can help an AI classify whether
+    some given text is "positive" or "negative":
+
+
+    **Rule 1: Tokenization**
+
+
+    * Split the input text into individual words or tokens.
+
+    * Remove punctuation marks, special characters, and stop words (common words like
+    "the", "and", etc. that do not carry much meaning).
+
+
+    **Rule 2: Sentiment Analysis**
+
+
+    * For each token, check if it has a sentiment-bearing word (e.g. "happy", "good",
+    "bad", etc.).
+
+    * If a token has a sentiment-bearing word, assign it a sentiment score (e.g. +1
+    for positive, -1 for negative).
+
+
+    **Rule 3: Contextual Analysis**
+
+
+    * For each token, analyze its context to determine its sentiment.
+
+    * If a token is preceded by a negative word (e.g. "not", "never", etc.), flip
+    its sentiment score (e.g. -1 for positive, +1 for negative).
+
+    * If a token is followed by a positive word (e.g. "very", "extremely", etc.),
+    increase its sentiment score.
+
+
+    **Rule 4: Emphasis Analysis**
+
+
+    * Identify words that convey emphasis (e.g. "very", "extremely", "really", etc.).
+
+    * Increase the sentiment score of the preceding token by 0.5.
+
+
+    **Rule 5: Negation Analysis**
+
+
+    * Identify words that negate sentiment (e.g. "not", "never", "no", etc.).
+
+    * Flip the sentiment score of the preceding token.
+
+
+    **Rule 6: Sentiment Aggregation**
+
+
+    * Calculate the overall sentiment score for the text by summing the sentiment
+    scores of individual tokens.
+
+    * If the overall sentiment score is positive (i.e. > 0), classify the text as
+    "positive".
+
+    * If the overall sentiment score is negative (i.e. < 0), classify the text as
+    "negative".
+
+    * If the overall sentiment score is neutral (i.e. 0), classify the text as "neutral".
+
+
+    **Rule 7: Thresholding**
+
+
+    * Set a threshold value (e.g. 0.5) to determine the minimum sentiment score required
+    to classify the text as "positive" or "negative".
+
+    * If the overall sentiment score is above the threshold, classify the text as
+    "positive".
+
+    * If the overall sentiment score is below the threshold, classify the text as
+    "negative".
+
+
+    **Rule 8: Handling Ambiguity**
+
+
+    * If the text contains ambiguous or neutral words (e.g. "fine", "okay", etc.),
+    assign them a neutral sentiment score (0).
+
+    * If the text contains multiple conflicting sentiments, use the sentiment score
+    with the highest magnitude (i.e. closest to 1 or -1).
+
+
+    By following these rules, an AI can classify text as "positive", "negative", or
+    "neutral" based on its sentiment. Note that these rules are not exhaustive and
+    can be modified to suit specific use cases or domains."""
+
+
+    Input Text: """IN RETREATS.--While it is clear that a force advancing towards
+    the enemy must always be preceded by an Advanced Guard it must not be forgotten
+    that a force withdrawing from the enemy must also be so protected, even when it
+    is moving in or towards friendly territory. Such a force will not only prevent
+    the Main Body being surprised by an energetic enemy, pursuing swiftly and getting
+    round to attack where he is least expected, but will also prevent the Main Body
+    being delayed by obstacles, and can delay the pursuit by preparing bridges, etc.,
+    for demolition, which can be completed by the Rear Guard when the Main Body has
+    passed over {105} them. It can also reconnoitre the route to be followed, so that
+    the Main Body can proceed without delay.TRAINING.--In formulating any scheme for
+    the exercise of troops in Advanced Guard work all officers and other ranks should
+    be made to understand the nature of the scheme, and should be informed (a) whether
+    the force is advancing or retreating, whether it is moving before or after action
+    with the enemy, and whether it is in a friendly or a hostile country; (b) what
+    is known of the enemy; (c) the direction and objective of the march; (d) the general
+    intentions of the commander of the Main Body; and (e) the general instructions
+    issued to the commander of the Advanced Guard. "Unless such exercises are carried
+    out in a practical manner, young officers and inexperienced N.C.O.''s will get
+    the impression that an Advanced Guard consists merely of a procession of small
+    bodies of infantry, strung out at fixed intervals on a single road. It is of the
+    highest importance that the training should be carried out on the lines that would
+    be adopted in action" (G.H.Q. Circular)."""'
+  role: user
+- content: 'I will classify the input text as "neutral" based on the rules provided.
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens. Punctuation
+    marks, special characters, and stop words are removed.
+
+
+    2. Sentiment Analysis: The text does not contain sentiment-bearing words like
+    "happy", "good", "bad", etc.
+
+
+    3. Contextual Analysis: The text does not contain negative words like "not", "never",
+    etc. that would flip the sentiment score.
+
+
+    4. Emphasis Analysis: The text does not contain words that convey emphasis like
+    "very", "extremely", etc.
+
+
+    5. Negation Analysis: The text does not contain words that negate sentiment like
+    "not", "never", etc.
+
+
+    6. Sentiment Aggregation: Since the text does not contain sentiment-bearing words,
+    the overall sentiment score is neutral (0).
+
+
+    7. Thresholding: The overall sentiment score is above the threshold (0.5), but
+    since the score is neutral, the text is classified as "neutral".
+
+
+    8. Handling Ambiguity: The text does not contain ambiguous or neutral words like
+    "fine", "okay", etc.
+
+
+    The text is a military document discussing the importance of advanced guard work
+    in military operations. It does not contain emotional language or sentiment-bearing
+    words, making it neutral in sentiment.'
+  role: assistant
+  timeout: false

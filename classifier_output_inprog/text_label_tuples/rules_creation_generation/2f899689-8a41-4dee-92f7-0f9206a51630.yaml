@@ -1,0 +1,90 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"The reserves of the attacker are to protect the flanks, give the impetus\
+    \ for the assault, serve as a force upon which the attacking line can rally, and\
+    \ cover the re-forming of the troops after a successful attack. The several echelons\
+    \ of the attack formation, except the small fractions immediately supporting the\
+    \ firing line[233] and covering its flanks, should have become merged with that\
+    \ line by the time the decisive moment of the combat arrives. The commander who\
+    \ takes up an unnecessarily deep attack formation dispenses with an advantage;\
+    \ on the other hand, the one who prematurely deploys in force, exposes himself\
+    \ to grave danger. _The troops should be sent into action in a deep combat formation,\
+    \ since the firing line is to be fed from the rear until the decisive moment arrives,\
+    \ but every available man should be thrown in for the assault._[233] The advantage\
+    \ of having such supporting forces in rear of the  line is clearly shown in the\
+    \ fights of the 18th Brigade at W\xF6rth.  KUNZ, _Kriegsgeschichtliche Beispiele_,\
+    \ 14, pp. 110, 129 and 172.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The input text is split into individual words or tokens. Punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The tokens are analyzed for sentiment-bearing words. The
+    text does not contain explicit sentiment-bearing words like "happy", "good", "bad",
+    etc.
+
+    3. Contextual Analysis: The context of each token is analyzed to determine its
+    sentiment. The text does not contain negative words like "not", "never", etc.
+    that would flip the sentiment score.
+
+    4. Emphasis Analysis: The text does not contain words that convey emphasis like
+    "very", "extremely", etc.
+
+    5. Negation Analysis: The text does not contain words that negate sentiment like
+    "not", "never", etc.
+
+    6. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    the sentiment scores of individual tokens. Since the text does not contain explicit
+    sentiment-bearing words, the overall sentiment score is neutral (0).
+
+    7. Thresholding: The overall sentiment score is below the threshold (0.5), so
+    the text is classified as "neutral".
+
+    8. Handling Ambiguity: The text does not contain ambiguous or neutral words like
+    "fine", "okay", etc.
+
+
+    The text appears to be a military strategy passage, discussing the deployment
+    of troops and the importance of having supporting forces in the rear. The language
+    is formal and objective, without any emotional tone or sentiment. Therefore, the
+    text is classified as "neutral".'
+  role: assistant
+  timeout: false

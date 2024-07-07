@@ -1,0 +1,96 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"By the word \"\
+    information\" we denote all the knowledge which we have of the enemy and his country;\
+    \ therefore, in fact, the foundation of all our ideas and actions. Let us just\
+    \ consider the nature of this foundation, its want of trustworthiness, its changefulness,\
+    \ and we shall soon feel what a dangerous edifice War is, how easily it may fall\
+    \ to pieces and bury us in its ruins. For although it is a maxim in all books\
+    \ that we should trust only certain information, that we must be always suspicious,\
+    \ that is only a miserable book comfort, belonging to that description of knowledge\
+    \ in which writers of systems and compendiums take refuge for want of anything\
+    \ better to say.Great part of the information obtained in War is contradictory,\
+    \ a still greater part is false, and by far the greatest part is of a doubtful\
+    \ character. What is required of an officer is a certain power of discrimination,\
+    \ which only knowledge of men and things and good judgment can give. The law of\
+    \ probability must be his guide. This is not a trifling difficulty even in respect\
+    \ of the first plans, which can be formed in the chamber outside the real sphere\
+    \ of War, but it is enormously increased when in the thick of War itself one report\
+    \ follows hard upon the heels of another; it is then fortunate if these reports\
+    \ in contradicting each other show a certain balance of probability, and thus\
+    \ themselves call forth a scrutiny. It is much worse for the inexperienced when\
+    \ accident does not render him this service, but one report supports another,\
+    \ confirms it, magnifies it, finishes off the picture with fresh touches of colour,\
+    \ until necessity in urgent haste forces from us a resolution which will soon\
+    \ be discovered to be folly, all those reports having been lies, exaggerations,\
+    \ errors, &c. &c. In a few words, most reports are false, and the timidity of\
+    \ men acts as a multiplier of lies and untruths. As a general rule, \"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "negative".
+
+
+    Here''s the breakdown:
+
+
+    * Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    * Sentiment Analysis: The text contains sentiment-bearing words and phrases such
+    as "dangerous", "easily", "miserable", "false", "doubtful", "trifling", "enormously",
+    "fortunate", "worse", "lies", and "untruths", which are assigned sentiment scores.
+
+    * Contextual Analysis: The context of each token is analyzed, and the sentiment
+    scores are adjusted accordingly. For example, the token "dangerous" is preceded
+    by "War is", which is a sentiment-bearing phrase, so its sentiment score is adjusted
+    to -1 (negative).
+
+    * Emotion Detection: The text expresses emotions such as fear, anxiety, and frustration,
+    which are assigned sentiment scores of -1 (negative).
+
+    * Intensity Analysis: The intensity of the sentiment-bearing words and phrases
+    is analyzed, and the sentiment scores are adjusted accordingly. For example, the
+    phrase "it is enormously increased" is assigned a sentiment score of -1.5 (negative).
+
+    * Overall Sentiment: The overall sentiment score is calculated by summing up the
+    sentiment scores of all tokens, which is a negative score.
+
+
+    The text expresses a negative sentiment about war, highlighting the dangers, uncertainty,
+    and unreliability of information, and the potential for mistakes and errors. The
+    tone is cautionary and warning, emphasizing the importance of careful consideration
+    and scrutiny in making decisions.'
+  role: assistant
+  timeout: false

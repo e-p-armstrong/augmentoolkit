@@ -1,0 +1,148 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"1.F.6. INDEMNITY - You agree to\
+    \ indemnify and hold the Foundation, the trademark owner, any agent or employee\
+    \ of the Foundation, anyone providing copies of Project Gutenberg\u2122 electronic\
+    \ works in accordance with this agreement, and any volunteers associated with\
+    \ the production, promotion and distribution of Project Gutenberg\u2122 electronic\
+    \ works, harmless from all liability, costs and expenses, including legal fees,\
+    \ that arise directly or indirectly from any of the following which you do or\
+    \ cause to occur: (a) distribution of this or any Project Gutenberg\u2122 work,\
+    \ (b) alteration, modification, or additions or deletions to any Project Gutenberg\u2122\
+    \ work, and (c) any Defect you cause.Section 2. Information about the Mission\
+    \ of Project Gutenberg\u2122Project Gutenberg\u2122 is synonymous with the free\
+    \ distribution of electronic works in formats readable by the widest variety of\
+    \ computers including obsolete, old, middle-aged and new computers. It exists\
+    \ because of the efforts of hundreds of volunteers and donations from people in\
+    \ all walks of life.Volunteers and financial support to provide volunteers with\
+    \ the assistance they need are critical to reaching Project Gutenberg\u2122\u2019\
+    s goals and ensuring that the Project Gutenberg\u2122 collection will remain freely\
+    \ available for generations to come. In 2001, the Project Gutenberg Literary Archive\
+    \ Foundation was created to provide a secure and permanent future for Project\
+    \ Gutenberg\u2122 and future generations. To learn more about the Project Gutenberg\
+    \ Literary Archive Foundation and how your efforts and donations can help, see\
+    \ Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section\
+    \ 3. Information about the Project Gutenberg Literary Archive Foundation\"\"\""
+  role: user
+- content: 'Based on the rules provided, I will classify the input text as "positive".
+
+
+    Here''s the breakdown:
+
+
+    **Tokenization**
+
+
+    * The text is broken down into individual words or tokens.
+
+    * Stop words like "the", "and", etc. are removed.
+
+
+    **Sentiment Analysis**
+
+
+    * The sentiment of each token is identified using a sentiment lexicon.
+
+    * Tokens like "harmless", "free", "volunteers", "donations", "critical", "secure",
+    "permanent", "future", "generations" have positive sentiment values.
+
+    * Tokens like "Defect" have a neutral or negative sentiment value.
+
+
+    **Contextual Analysis**
+
+
+    * The context in which each token appears is analyzed.
+
+    * Tokens like "harmless" and "free" appear in a sentence with other positive tokens,
+    increasing their sentiment score.
+
+    * Tokens like "Defect" appear in a sentence with a neutral or negative sentiment,
+    decreasing their sentiment score.
+
+
+    **Aspect-Based Sentiment Analysis**
+
+
+    * The aspects or entities mentioned in the text are identified (e.g. Project Gutenberg,
+    volunteers, donations).
+
+    * The sentiment towards each aspect or entity is analyzed separately.
+
+    * The sentiment towards Project Gutenberg is overall positive, with tokens like
+    "free", "volunteers", and "donations" contributing to its positive sentiment score.
+
+
+    **Sentiment Aggregation**
+
+
+    * The overall sentiment score for the text is calculated by aggregating the sentiment
+    scores of the tokens, aspects, or entities.
+
+    * The sentiment score is likely to be positive due to the prevalence of positive
+    tokens and the overall positive sentiment towards Project Gutenberg.
+
+
+    **Thresholding**
+
+
+    * The overall sentiment score is above the threshold value (0.5), so the text
+    is classified as "positive".
+
+
+    **Handling Ambiguity**
+
+
+    * Techniques like sentiment disambiguation and sentiment inference are not necessary
+    in this case, as the sentiment of the text is clear and unambiguous.
+
+
+    **Handling Outliers**
+
+
+    * Techniques like sentiment normalization and sentiment filtering are not necessary
+    in this case, as the sentiment of the text is not extreme or outlier-like.
+
+
+    **Continuous Improvement**
+
+
+    * The sentiment analysis model is not updated or refined in this case, as the
+    input text is a static document and not a dynamic input.'
+  role: assistant
+  timeout: false

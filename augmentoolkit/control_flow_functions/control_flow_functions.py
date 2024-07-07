@@ -3,6 +3,8 @@ import json
 import re
 import sys
 from tqdm import asyncio as tqdmasyncio
+from augmentoolkit.utils.make_id import make_id
+from augmentoolkit.utils.write_output_to_file import write_output_to_file
 from augmentoolkit.generation_functions.safe_formatter import safe_format
 from nltk.tokenize import sent_tokenize
 import matplotlib.pyplot as plt
@@ -11,7 +13,6 @@ import logging
 from math import ceil
 import traceback
 import glob
-import uuid
 import yaml
 
 from augmentoolkit.utils.create_conv_starter import create_conv_starter
@@ -46,27 +47,7 @@ def extract_qa_tuples(text):
 import os
 
 
-# Used basically everywhere:
-def make_id():
-    return str(uuid.uuid4())
-
-
 # Also used basically everywhere:
-def write_output_to_file(output, directory, uuid):
-    # Ensure directory exists
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-    # Define the file path using the directory and UUID
-    file_path = os.path.join(directory, f"{uuid}.yaml")
-
-    # Write the output to the file
-    with open(file_path, "w") as file:
-        file.write(output)
-
-    print(f"Output written to {file_path}")
-
-
 def convert_logging_to_dataset(directory):
     print("entering saving mode")
     # found a solution to overfitting on the examples:

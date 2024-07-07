@@ -1,0 +1,104 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"2. The construction of the bridge\
+    \ should be covered as much as   possible by troops sent over in boats for the\
+    \ purpose of dislodging   the enemy who might interfere with the progress of the\
+    \ work; and   these troops should take possession at once of any villages, woods,\
+    \   or other obstacles in the vicinity.3. It is of importance also to arrange\
+    \ large batteries of heavy   caliber, not only to sweep the opposite bank, but\
+    \ to silence any   artillery the enemy might bring up to batter the bridge while\
+    \   building. For this purpose it is convenient to have the bank from   which\
+    \ the passage is made somewhat higher than the other.4. The proximity of a large\
+    \ island near the enemy's bank gives   great facilities for passing over troops\
+    \ in boats and for   constructing the bridge. In like manner, a smaller stream\
+    \ emptying   into the larger near the point of passage is a favorable place for\
+    \   collecting and concealing boats and materials for the bridge.5. It is well\
+    \ to choose a position where the river makes a   re-entering bend, as the batteries\
+    \ on the assailant's side can   cross their fire in front of the point where the\
+    \ troops are to land   from the boats and where the end of the bridge is to rest,\
+    \ thus   taking the enemy in front and flank when he attempts to oppose the  \
+    \ passage.6. The locality selected should be near good roads on both banks,  \
+    \ that the army may have good communications to the front and rear on   both banks\
+    \ of the river. For this reason, those points where the   banks are high and steep\
+    \ should be usually avoided.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "negative".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is broken down into individual words or tokens, and
+    punctuation marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The sentiment of each token is identified using a sentiment
+    lexicon. The text contains words like "dislodging", "enemy", "silence", "batter",
+    "oppose", which have negative sentiment values.
+
+    3. Contextual Analysis: The context in which each token appears is analyzed. The
+    text describes military operations, which are inherently negative in nature.
+
+    4. Aspect-Based Sentiment Analysis: The aspects or entities mentioned in the text
+    are analyzed separately. The text describes the construction of a bridge, the
+    movement of troops, and the use of artillery, all of which have negative sentiment
+    values.
+
+    5. Sentiment Aggregation: The overall sentiment score for the text is calculated
+    by aggregating the sentiment scores of the tokens, aspects, or entities. The sentiment
+    score is likely to be negative due to the prevalence of negative words and the
+    context of military operations.
+
+    6. Thresholding: The overall sentiment score is compared to a threshold value.
+    Since the sentiment score is likely to be negative, the text is classified as
+    "negative".
+
+    7. Handling Ambiguity: Techniques like sentiment disambiguation and sentiment
+    inference are not necessary in this case, as the text is clear in its meaning.
+
+    8. Handling Outliers: Techniques like sentiment normalization and sentiment filtering
+    are not necessary in this case, as the text is not extreme in its sentiment.
+
+    9. Continuous Improvement: The sentiment analysis model can be continuously updated
+    and refined using new data and feedback, but this is not necessary for this specific
+    text.
+
+
+    Overall, the text is classified as "negative" due to its description of military
+    operations and the use of negative words.'
+  role: assistant
+  timeout: false

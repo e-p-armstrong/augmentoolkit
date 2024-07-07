@@ -1,0 +1,92 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", etc.\
+    \ that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n* For each\
+    \ token, check if it has a sentiment-bearing word (e.g. \"happy\", \"good\", \"\
+    love\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"I hate\", etc.).\n\
+    * If a token has a sentiment-bearing word or phrase, assign it a sentiment score\
+    \ (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual Analysis**\n\
+    \n* For each token, check its context by looking at the surrounding tokens.\n\
+    * If a token is preceded or followed by a sentiment-bearing word or phrase, adjust\
+    \ its sentiment score accordingly.\n* For example, if a token \"bad\" is preceded\
+    \ by \"I love\", adjust its sentiment score to +1 (positive).\n\n**Rule 4: Emotion\
+    \ Detection**\n\n* Identify emotions expressed in the text, such as joy, sadness,\
+    \ anger, etc.\n* Assign a sentiment score based on the emotion detected:\n\t+\
+    \ Joy, love, excitement: +1 (positive)\n\t+ Sadness, fear, anger: -1 (negative)\n\
+    \n**Rule 5: Intensity Analysis**\n\n* For each token, check its intensity by looking\
+    \ at the strength of the sentiment-bearing word or phrase.\n* Assign a sentiment\
+    \ score based on the intensity:\n\t+ Mild sentiment (e.g. \"good\"): +0.5 (neutral)\n\
+    \t+ Strong sentiment (e.g. \"amazing\"): +1.5 (positive)\n\t+ Very strong sentiment\
+    \ (e.g. \"love\"): +2.5 (very positive)\n\n**Rule 6: Overall Sentiment**\n\n*\
+    \ Calculate the overall sentiment score by summing up the sentiment scores of\
+    \ all tokens.\n* If the overall sentiment score is positive, classify the text\
+    \ as \"positive\".\n* If the overall sentiment score is negative, classify the\
+    \ text as \"negative\".\n* If the overall sentiment score is neutral (i.e. close\
+    \ to 0), classify the text as \"neutral\".\n\n**Rule 7: Edge Cases**\n\n* Handle\
+    \ edge cases such as:\n\t+ Text with no sentiment-bearing words or phrases: classify\
+    \ as \"neutral\"\n\t+ Text with mixed sentiment (e.g. both positive and negative):\
+    \ classify as \"neutral\"\n\t+ Text with sarcasm or irony: classify as \"negative\"\
+    \ (or \"positive\" if the sarcasm is being used to express a positive sentiment)\n\
+    \nBy following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" with a reasonable degree of accuracy. However, keep in mind that\
+    \ sentiment analysis is a complex task and may require fine-tuning and adaptation\
+    \ to specific domains or languages.\"\"\"\n\nInput Text: \"\"\"A high rate of\
+    \ fire need by no means be synonymous with waste of ammunition. Ammunition would\
+    \ unquestionably be wasted if fire were delivered for hours at the same high rate.\
+    \ It is very probable, however, that in the battles of the future the fire will\
+    \ be moderate for some time, or, better still, cease entirely, only to break forth\
+    \ like a thunderstorm over the enemy when opportunity offers or necessity demands.\
+    \ The slower the troops fire the longer they will present a target to the enemy.\
+    \ The coolness shown in firing individual shots at the commencement of an action\
+    \ will disappear owing to the impression produced by losses. This is apparent\
+    \ even in field firing. Lieutenant-General Rohne arrives at the following average\
+    \ results:Ranges up to 400   m. 5  rounds per minute;   \u201E  from  400- 700\
+    \ \u201E 4-5  \u201E   \u201E   \u201E   \u201E   \u201E   700-1000 \u201E 3-4\
+    \  \u201E   \u201E   \u201E   \u201E   \u201E  1000-1300 \u201E 2-3  \u201E  \
+    \ \u201E   \u201E   \u201E   \u201E  1300-1500 \u201E 1-4  \u201E   \u201E   \u201E\
+    \   \u201E  over 1500   \u201E  1  \u201E   \u201E   \u201ETroops going into action\
+    \ for the first time are inclined to fire entirely too fast, due to their desire\
+    \ to overcome their nervousness. Veteran troops seek to attain the same result,\
+    \ not through rapidity of fire, but through accuracy. Only the determination to\
+    \ make hits is calculated to overcome nervousness. Wherever this determination\
+    \ is lacking, wild firing (fire panic), which is in any case difficult to prevent,\
+    \ will surely result. Fire delivered hurriedly during unexpected rencontres is\
+    \ almost invariably ineffective.[156] For this reason most of the firing regulations\
+    \ have eliminated the command \u201CRapid Fire,\u201D which is only calculated\
+    \ to produce confusion.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    * Tokenization: The text is split into individual words and punctuation marks
+    are removed. Stop words are also removed.
+
+    * Sentiment Analysis: The text does not contain many sentiment-bearing words or
+    phrases, but it does contain some phrases that could be interpreted as having
+    a neutral sentiment, such as "moderate for some time" or "coolness shown in firing
+    individual shots".
+
+    * Contextual Analysis: The text does not contain many phrases that would adjust
+    the sentiment score of individual tokens.
+
+    * Emotion Detection: The text does not express any strong emotions, such as joy,
+    sadness, or anger.
+
+    * Intensity Analysis: The text does not contain many strong sentiment-bearing
+    words or phrases, so the intensity score is mostly neutral.
+
+    * Overall Sentiment: The overall sentiment score is close to 0, indicating a neutral
+    sentiment.
+
+
+    The text appears to be a technical discussion about military tactics and the importance
+    of accuracy in firing, rather than expressing a strong opinion or emotion. Therefore,
+    I classified it as "neutral".'
+  role: assistant
+  timeout: false

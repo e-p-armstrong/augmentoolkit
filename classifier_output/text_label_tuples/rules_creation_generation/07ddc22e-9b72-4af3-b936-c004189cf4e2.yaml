@@ -1,0 +1,112 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"at the ship's guns, though accurately\
+    \ pointed at one moment, at the next will be thrown entirely away from the object,\
+    \ even when the motion is too slight to be otherwise noticed; whereas in the battery\
+    \ the guns will be fired just as they are pointed; and the motion of the vessel\
+    \ will merely vary to the extent of a few inches the spot in which the shot is\
+    \ received. In the fort the men and guns are behind impenetrable walls of stone\
+    \ and earth; in the vessel they are behind frail bulwarks, whose splinters are\
+    \ equally destructive with the shot. The fort is incombustible; while the ship\
+    \ may readily be set on fire by incendiary projectiles. The ship has many points\
+    \ exposed that may be called vital points. By losing her rudder, or portions of\
+    \ her rigging, or of her spars, she may become unmanageable, and unable to use\
+    \ her strength; she may receive shots under water, and be liable to sink; she\
+    \ may receive hot shot, and be set on fire: these damages are in addition to those\
+    \ of having her guns dismounted and her people killed by shots that pierce her\
+    \ sides and scatter splinters from her timbers; while the risks of the battery\
+    \ are confined to those mentioned above--namely, the risk that the gun, the carriage,\
+    \ or the men may be struck.\"\"\""
+  role: user
+- content: "Based on the rules provided, I will classify the input text as \"negative\"\
+    .\n\nHere's the breakdown:\n\n**Tokenization**\n\n* Break down the text into individual\
+    \ words or tokens.\n* Remove punctuation marks, special characters, and stop words.\n\
+    * The resulting tokens are:\n\t+ at\n\t+ the\n\t+ ship's\n\t+ guns\n\t+ though\n\
+    \t+ accurately\n\t+ pointed\n\t+ at\n\t+ one\n\t+ moment\n\t+ at\n\t+ the\n\t\
+    + next\n\t+ will\n\t+ be\n\t+ thrown\n\t+ entirely\n\t+ away\n\t+ from\n\t+ the\n\
+    \t+ object\n\t+ even\n\t+ when\n\t+ the\n\t+ motion\n\t+ is\n\t+ too\n\t+ slight\n\
+    \t+ to\n\t+ be\n\t+ otherwise\n\t+ noticed\n\t+ whereas\n\t+ in\n\t+ the\n\t+\
+    \ battery\n\t+ the\n\t+ guns\n\t+ will\n\t+ be\n\t+ fired\n\t+ just\n\t+ as\n\t\
+    + they\n\t+ are\n\t+ pointed\n\t+ and\n\t+ the\n\t+ motion\n\t+ of\n\t+ the\n\t\
+    + vessel\n\t+ will\n\t+ merely\n\t+ vary\n\t+ to\n\t+ the\n\t+ extent\n\t+ of\n\
+    \t+ a\n\t+ few\n\t+ inches\n\t+ the\n\t+ spot\n\t+ in\n\t+ which\n\t+ the\n\t\
+    + shot\n\t+ is\n\t+ received\n\t+ In\n\t+ the\n\t+ fort\n\t+ the\n\t+ men\n\t\
+    + and\n\t+ guns\n\t+ are\n\t+ behind\n\t+ impenetrable\n\t+ walls\n\t+ of\n\t\
+    + stone\n\t+ and\n\t+ earth\n\t+ in\n\t+ the\n\t+ vessel\n\t+ they\n\t+ are\n\t\
+    + behind\n\t+ frail\n\t+ bulwarks\n\t+ whose\n\t+ splinters\n\t+ are\n\t+ equally\n\
+    \t+ destructive\n\t+ with\n\t+ the\n\t+ shot\n\t+ The\n\t+ fort\n\t+ is\n\t+ incombustible\n\
+    \t+ while\n\t+ the\n\t+ ship\n\t+ may\n\t+ readily\n\t+ be\n\t+ set\n\t+ on\n\t\
+    + fire\n\t+ by\n\t+ incendiary\n\t+ projectiles\n\t+ The\n\t+ ship\n\t+ has\n\t\
+    + many\n\t+ points\n\t+ exposed\n\t+ that\n\t+ may\n\t+ be\n\t+ called\n\t+ vital\n\
+    \t+ points\n\t+ By\n\t+ losing\n\t+ her\n\t+ rudder\n\t+ or\n\t+ portions\n\t\
+    + of\n\t+ her\n\t+ rigging\n\t+ or\n\t+ of\n\t+ her\n\t+ spars\n\t+ she\n\t+ may\n\
+    \t+ become\n\t+ unmanageable\n\t+ and\n\t+ unable\n\t+ to\n\t+ use\n\t+ her\n\t\
+    + strength\n\t+ she\n\t+ may\n\t+ receive\n\t+ shots\n\t+ under\n\t+ water\n\t\
+    + and\n\t+ be\n\t+ liable\n\t+ to\n\t+ sink\n\t+ she\n\t+ may\n\t+ receive\n\t\
+    + hot\n\t+ shot\n\t+ and\n\t+ be\n\t+ set\n\t+ on\n\t+ fire\n\t+ these\n\t+ damages\n\
+    \t+ are\n\t+ in\n\t+ addition\n\t+ to\n\t+ those\n\t+ of\n\t+ having\n\t+ her\n\
+    \t+ guns\n\t+ dismounted\n\t+ and\n\t+ her\n\t+ people\n\t+ killed\n\t+ by\n\t\
+    + shots\n\t+ that\n\t+ pierce\n\t+ her\n\t+ sides\n\t+ and\n\t+ scatter\n\t+ splinters\n\
+    \t+ from\n\t+ her\n\t+ timbers\n\t+ while\n\t+ the\n\t+ risks\n\t+ of\n\t+ the\n\
+    \t+ battery\n\t+ are\n\t+ confined\n\t+ to\n\t+ those\n\t+ mentioned\n\t+ above\n\
+    \t+ namely\n\t+ the\n\t+ risk\n\t+ that\n\t+ the\n\t+ gun\n\t+ the\n\t+ carriage\n\
+    \t+ or\n\t+ the\n\t+ men\n\t+ may\n\t+ be\n\t+ struck\n\n**Sentiment Analysis**\n\
+    \n* Identify the sentiment of each token using a sentiment lexicon.\n* Assign\
+    \ a sentiment score to each token based on its sentiment value.\n* The sentiment\
+    \ scores are:\n\t+ at: neutral\n\t+ the: neutral\n\t+ ship's: neutral\n\t+ guns:\
+    \ neutral\n\t+ though: neutral\n\t+ accurately: positive\n\t+ pointed: positive\n\
+    \t+ at: neutral\n\t+ one: neutral\n\t+ moment: neutral\n\t+ at: neutral\n\t+ the:\
+    \ neutral\n\t+ next: neutral\n\t+ will: neutral\n\t+ be: neutral\n\t+ thrown:\
+    \ negative\n\t+ entirely: negative\n\t+ away: negative\n\t+ from: neutral\n\t\
+    + the: neutral\n\t+ object: neutral\n\t+ even: neutral\n\t+ when: neutral\n\t\
+    + the: neutral\n\t+ motion: neutral\n\t+ is: neutral\n\t+ too: neutral\n\t+ slight:\
+    \ neutral\n\t+ to: neutral\n\t+ be: neutral\n\t+ otherwise: neutral\n\t+ noticed:\
+    \ neutral\n\t+ whereas: neutral\n\t+ in: neutral\n\t+ the: neutral\n\t+ battery:\
+    \ neutral\n\t+ the: neutral\n\t+ guns: neutral\n\t+ will: neutral\n\t+ be: neutral\n\
+    \t+ fired: positive\n\t+ just: neutral\n\t+ as: neutral\n\t+ they: neutral\n\t\
+    + are: neutral\n\t+ pointed: positive\n\t+ and: neutral\n\t+ the: neutral\n\t\
+    + motion: neutral\n\t+ of: neutral\n\t+ the: neutral\n\t+ vessel: neutral\n\t\
+    + will: neutral\n\t+ merely: neutral\n\t+ vary: neutral\n\t+ to: neutral\n\t+\
+    \ the: neutral\n\t+ extent: neutral\n\t+ of: neutral\n\t+ a: neutral\n\t+ few:\
+    \ neutral\n\t+ inches: neutral\n\t+ the: neutral\n\t+ spot: neutral\n\t+ in: neutral\n\
+    \t+ which: neutral\n\t+ the: neutral\n\t+ shot: neutral\n\t+ is: neutral\n\t+\
+    \ received: neutral\n\t+ In: neutral\n\t+ the: neutral\n\t+ fort: neutral\n\t\
+    + the: neutral\n\t+ men: neutral\n\t+ and: neutral\n\t+ guns: neutral\n\t+ are:\
+    \ neutral\n\t+ behind: neutral\n\t+ impen"
+  role: assistant
+  timeout: false

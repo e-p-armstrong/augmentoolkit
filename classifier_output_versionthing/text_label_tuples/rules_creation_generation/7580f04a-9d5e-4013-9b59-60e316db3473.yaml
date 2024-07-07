@@ -1,0 +1,93 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"But even this decision of the total combat has only\
+    \ a relative meaning of many different gradations, according as the force over\
+    \ which the victory has been gained forms a more or less great and important part\
+    \ of the whole. The lost battle of a corps may be repaired by the victory of the\
+    \ Army. Even the lost battle of an Army may not only be counterbalanced by the\
+    \ gain of a more important one, but converted into a fortunate event (the two\
+    \ days of Kulm, August 29 and 30, 1813(*)). No one can doubt this; but it is just\
+    \ as clear that the weight of each victory (the successful issue of each total\
+    \ combat) is so much the more substantial the more important the part conquered,\
+    \ and that therefore the possibility of repairing the loss by subsequent events\
+    \ diminishes in the same proportion. In another place we shall have to examine\
+    \ this more in detail; it suffices for the present to have drawn attention to\
+    \ the indubitable existence of this progression.(*) Refers to the destruction\
+    \ of Vandamme's column, which   had been sent unsupported to intercept the retreat\
+    \ of the   Austrians and Prussians from Dresden--but was forgotten by   Napoleon.--EDITOR.If\
+    \ we now add lastly to these two considerations the third, which is, that if the\
+    \ persistent use of forces in tactics always shifts the great result to the end\
+    \ of the whole act, law of the simultaneous use of the forces in Strategy, on\
+    \ the contrary, lets the principal result (which need not be the final one) take\
+    \ place almost always at the commencement of the great (or whole) act, then in\
+    \ these three results we have grounds sufficient to find strategic reserves always\
+    \ more superfluous, always more useless, always more dangerous, the more general\
+    \ their destination.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words and punctuation marks
+    are removed. Stop words like "the", "and", etc. are also removed.
+
+    2. Sentiment Analysis: The text contains words like "victory", "gain", "fortunate",
+    "substantial", etc. which have positive sentiment. However, it also contains words
+    like "lost", "battle", "defeat", etc. which have negative sentiment. The overall
+    sentiment score is neutral.
+
+    3. Contextual Analysis: The context of the text is more focused on military strategy
+    and tactics, which makes the sentiment more neutral.
+
+    4. Sentiment Aggregation: The overall sentiment score is neutral, so the text
+    is classified as "neutral".
+
+    5. Handling Ambiguity: The text does not contain any conflicting sentiment-bearing
+    words or phrases, so there is no need to prioritize one over the other.
+
+    6. Handling Special Cases: The text does not contain any special cases like sarcasm,
+    irony, or figurative language that would require domain-specific knowledge or
+    machine learning models.
+
+    7. Continuous Improvement: The model is continuously updated and refined to improve
+    accuracy, but in this case, the text is classified as "neutral" based on the rules
+    applied.
+
+
+    Note that the text is a passage from a military strategy book and is written in
+    a formal and objective tone, which contributes to its neutral sentiment.'
+  role: assistant
+  timeout: false

@@ -1,0 +1,107 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"The\
+    \ defensive is dependent upon the terrain, and is subject to the condition that\
+    \ the locality where the tactical situation requires a stand to be made offers\
+    \ a position favorable for employing fire to good advantage, and that the opponent\
+    \ actually attacks where the defender expects him. The employment of the defensive\
+    \ is restricted by its dependence on the ground and on the measures of the enemy.\
+    \ Its employment may frequently be explained by the fact that one of the contending\
+    \ parties allows itself to be checked to such an extent by the initiative of the\
+    \ other that it can only offer a passive resistance. Such passive resistance may\
+    \ here and there score a success by chance (Plevna, St. Privat), but, as a rule,\
+    \ only the assailant reaps a benefit from such situations.1. THE PASSIVE DEFENSEseeks\
+    \ to avoid a decision, and must therefore endeavor, by opening fire at an early\
+    \ moment, to prevent the enemy from reaching short ranges. (See p. 147 supra).\
+    \ It is not absolutely necessary to have a clear field of fire or strong reserves,\
+    \ but the latter, kept a considerable distance in rear, must be strong enough\
+    \ to enable the force to disengage itself from the enemy.Since only a temporary\
+    \ resistance is to be made, it is permissible for the force to cover a greater\
+    \ front. The defender should endeavor to compensate for his numerical inferiority\
+    \ by expending a large amount of ammunition and by employing machine guns. It\
+    \ is an advantage to have obstacles in front of the position and cover in rear\
+    \ of it, because the former retard the enemy\u2019s advance and the latter shelters\
+    \ the troops from his fire in case of a retreat.2. THE DEFENSE SEEKING A DECISION.[444]\"\
+    \"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: Most tokens do not have sentiment-bearing words, so they
+    are assigned a neutral sentiment score (0). However, some tokens like "good",
+    "advantage", and "success" have positive sentiment-bearing words, and they are
+    assigned a positive sentiment score (+1).
+
+    3. Contextual Analysis: The context of the text is analyzed, and most sentences
+    do not express a clear positive or negative sentiment. However, some sentences
+    like "Such passive resistance may here and there score a success by chance" and
+    "It is an advantage to have obstacles in front of the position and cover in rear
+    of it" express a neutral or positive sentiment.
+
+    4. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    up the sentiment scores of individual tokens. Since most tokens have a neutral
+    sentiment score, the overall sentiment score is also neutral.
+
+    5. Handling Ambiguity: No ambiguity is detected in the text.
+
+    6. Handling Negation: No negation is detected in the text.
+
+    7. Handling Intensifiers: No intensifiers are detected in the text.
+
+    8. Handling Emoticons and Special Characters: No emoticons or special characters
+    that convey sentiment are detected in the text.
+
+    9. Handling Out-of-Vocabulary Words: No out-of-vocabulary words are detected in
+    the text.
+
+    10. Handling Contextual Dependencies: No contextual dependencies are detected
+    in the text.
+
+
+    Overall, the text does not express a clear positive or negative sentiment, and
+    it is classified as "neutral".'
+  role: assistant
+  timeout: false

@@ -1,0 +1,62 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"[424] In the Franco-German war, the same thing happened on the  German\
+    \ side. _Der 18. August_, p. 221.In contrast to the Japanese commanders, who promptly\
+    \ launched all  their troops, the Russian commanders were inclined to despatch\
+    \  numerous detachments, to organize provisional units, while completely  ignoring\
+    \ existing organizations (this had, indeed, also the  advantage that a suitable\
+    \ leader could be found for carrying a  special mission into execution), and to\
+    \ form strong reserves by  details from any and all imaginable units. These reserves\
+    \ were  frequently not used at all.[425][425] On July 31st, 1904, when, in pursuance\
+    \ of orders from General  Headquarters, a regiment and a battery was to be despatched\
+    \ to  Mistshenko\u2019s Cavalry Division, 15 km. away, a provisional regiment\
+    \  of two battalions was formed, without apparent reason, for the  purpose from\
+    \ the 139th and 140th Infantry Regiments. In regard to the  inclination of the\
+    \ Russians to form detachments, see L\xD6FFLER, I, pp.  11, 27, 53 and 54.On March\
+    \ 5th, 1905, the commanding general of the Xth Army Corps  (Zerpitzki) had available\
+    \ one brigade of his 31st Division, one  regiment of his 9th Division, one regiment\
+    \ of the VIIIth Corps, three  Rifle regiments of the mixed Rifle Corps, the 5th\
+    \ Rifle Brigade, and  one regiment of the Vth Siberian Army Corps.[426][426] See\
+    \ V. TETTAU, _Achtzehn Monate mit Russlands Heeren in der  Mandschurei_, II, p.\
+    \ 483.\"\"\""
+  role: user
+- content: I would classify the input text as "neutral". The text appears to be a
+    historical passage discussing military tactics and strategies, and does not contain
+    any sentiment-bearing words or phrases that would indicate a positive or negative
+    sentiment. The text is written in a formal and objective tone, and does not contain
+    any emotional language or personal opinions.
+  role: assistant
+  timeout: false

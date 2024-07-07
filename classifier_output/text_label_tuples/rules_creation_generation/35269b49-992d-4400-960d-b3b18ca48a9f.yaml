@@ -1,0 +1,98 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Break down the text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ Identify the sentiment of each token using a sentiment lexicon (a list of words\
+    \ with their corresponding sentiment values, e.g. positive, negative, neutral).\n\
+    * Assign a sentiment score to each token based on its sentiment value.\n\n**Rule\
+    \ 3: Contextual Analysis**\n\n* Analyze the context in which each token appears.\
+    \ For example:\n\t+ If a token appears in a sentence with other positive tokens,\
+    \ its sentiment score may increase.\n\t+ If a token appears in a sentence with\
+    \ other negative tokens, its sentiment score may decrease.\n\t+ If a token appears\
+    \ in a sentence with a negation word (e.g. \"not\", \"never\"), its sentiment\
+    \ score may be inverted.\n\n**Rule 4: Aspect-Based Sentiment Analysis**\n\n* Identify\
+    \ the aspects or entities mentioned in the text (e.g. products, services, people).\n\
+    * Analyze the sentiment towards each aspect or entity separately.\n* Assign a\
+    \ sentiment score to each aspect or entity based on the sentiment scores of the\
+    \ tokens that mention it.\n\n**Rule 5: Sentiment Aggregation**\n\n* Calculate\
+    \ the overall sentiment score for the text by aggregating the sentiment scores\
+    \ of the tokens, aspects, or entities.\n* Use a weighted average or a combination\
+    \ of different aggregation methods (e.g. sum, product) to combine the sentiment\
+    \ scores.\n\n**Rule 6: Thresholding**\n\n* Set a threshold value for the overall\
+    \ sentiment score (e.g. 0.5).\n* Classify the text as \"positive\" if the overall\
+    \ sentiment score is above the threshold, and \"negative\" if it's below the threshold.\n\
+    \n**Rule 7: Handling Ambiguity**\n\n* Use techniques such as:\n\t+ Sentiment disambiguation:\
+    \ resolve ambiguity by considering the context and the sentiment of surrounding\
+    \ tokens.\n\t+ Sentiment inference: infer the sentiment of a token or aspect based\
+    \ on the sentiment of other tokens or aspects.\n\n**Rule 8: Handling Outliers**\n\
+    \n* Use techniques such as:\n\t+ Sentiment normalization: normalize the sentiment\
+    \ scores to reduce the impact of outliers.\n\t+ Sentiment filtering: filter out\
+    \ extreme sentiment scores that may be due to noise or errors.\n\n**Rule 9: Continuous\
+    \ Improvement**\n\n* Continuously update and refine the sentiment analysis model\
+    \ using new data and feedback.\n* Monitor the performance of the model and adjust\
+    \ the rules and parameters as needed.\n\nBy following these rules, an AI can develop\
+    \ a robust sentiment analysis model that accurately classifies text as \"positive\"\
+    \ or \"negative\".\"\"\"\n\nInput Text: \"\"\"The most difficult thing about a\
+    \ counter-attack is to seize the right moment for launching it. As it is impossible\
+    \ to foretell how long it will take the enemy to arrive within assaulting distance,\
+    \ no rule can be laid down as to the proper moment for launching the counter-attack.\
+    \ The best plan would be to screen the movements of the reserve, and, as the attacking\
+    \ troops approach, to bring it gradually up to the point from which it is to move\
+    \ forward. A commander requires wide practical experience and great force of character\
+    \ to judge the situation calmly and dispassionately, while fully aware that launching\
+    \ the counter-attack either too soon or too late may prejudice the result. There\
+    \ is always danger that the suggestions which reach him from various quarters\
+    \ may cause him to take half-measures. The stronger the general reserve and the\
+    \ weaker the force holding the defenses, the more numerous and urgent will be\
+    \ the requests for support; and he will not find it easy to resist the temptation\
+    \ to grant these requests and accordingly weaken the general reserve, which is\
+    \ intended for offensive action.We must now consider the question as to whether\
+    \ the counter-attack should rely on fire action alone, or should resort to the\
+    \ bayonet as well. The unexpected advance of a large body of troops against a\
+    \ flank of the enemy will rarely fail to produce an effect. If the enemy does\
+    \ not yield to fire, it is obvious that an assault will have to be made. A counter-attack\
+    \ made unexpectedly is, as a rule, successful at the start; but, if its commander\
+    \ follows up this initial success when not supported by strong reserves, a reverse\
+    \ may take place resulting in the defeat of the defender\u2019s entire force.\"\
+    \"\""
+  role: user
+- content: 'After applying the rules, I classify the input text as "negative".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is broken down into individual words and punctuation
+    marks are removed.
+
+    2. Sentiment Analysis: The sentiment of each token is analyzed using a sentiment
+    lexicon. Most tokens have a neutral sentiment, but some have a negative sentiment
+    (e.g., "difficult", "danger", "reverse", "defeat").
+
+    3. Contextual Analysis: The context in which each token appears is analyzed. For
+    example, the token "danger" appears in a sentence with other negative tokens,
+    which increases its sentiment score.
+
+    4. Aspect-Based Sentiment Analysis: The text discusses the aspects of military
+    strategy and tactics. The sentiment towards these aspects is analyzed separately.
+    The sentiment is mostly neutral, but there are some negative sentiments towards
+    the enemy (e.g., "enemy will not yield to fire").
+
+    5. Sentiment Aggregation: The overall sentiment score is calculated by aggregating
+    the sentiment scores of the tokens, aspects, and entities. The sentiment score
+    is mostly neutral, but with a slight negative bias due to the presence of negative
+    tokens and sentiments.
+
+    6. Thresholding: The overall sentiment score is below the threshold value (0.5),
+    so the text is classified as "negative".
+
+
+    Note that the text is a passage from a military strategy book and is discussing
+    complex military tactics and strategies. The tone is formal and objective, but
+    there are some negative sentiments and words that contribute to the overall negative
+    classification.'
+  role: assistant
+  timeout: false

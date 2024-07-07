@@ -1,0 +1,99 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"plish\
+    \ very little, as it would lack the thorough peace training requisite for cohesive\
+    \ action as an organization. If the opinion is entertained that cyclist detachments\
+    \ could furnish substantial aid to the cavalry[29] in advance of the army, that\
+    \ they could be employed profitably in the supply districts and in minor operations,\
+    \ and, finally, if the available material in the country is to be utilized, nothing\
+    \ remains but to proceed to the creation of cyclist companies in time of peace.\
+    \ The material necessary for repairs and for ammunition supply can only be entrusted\
+    \ to permanent organizations. The advantages of cyclists are their great mobility,[30]\
+    \ their prompt readiness for firing, and, above all else, the noiselessness of\
+    \ their movements. Their weakness lies in their dependence upon a complicated\
+    \ machine, in the comparatively large road space taken up by them on the march\
+    \ (100 cyclists in column of twos take up about 250 to 300 m. road space), and\
+    \ in their dependence on the terrain. The last mentioned drawback can be remedied\
+    \ apparently only by the adoption of a folding wheel, but, since the cyclist\u2019\
+    s equipment cannot be secured on the machine, it is better in difficult country\
+    \ to push the wheels or to leave them behind under guard when necessary.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens, and punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The tokens are analyzed for sentiment-bearing words. Some
+    tokens have words like "peace", "thorough", "cohesive", "substantial", "profitably",
+    "minor", "available", "permanent", "great", "prompt", "noiselessness", "complicated",
+    "large", "difficult", which do not have a clear positive or negative sentiment.
+    Others have words like "little", "lack", "weakness", "drawback", which have a
+    slightly negative tone.
+
+    3. Contextual Analysis: The context of each token is analyzed. The text discusses
+    the advantages and disadvantages of cyclist detachments, and the discussion is
+    neutral, without expressing a clear positive or negative sentiment.
+
+    4. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    up the sentiment scores of individual tokens. Since most tokens do not have a
+    clear positive or negative sentiment, the overall sentiment score is neutral.
+
+    5. Handling Ambiguity: No tokens have multiple possible sentiment interpretations.
+
+    6. Handling Negation: No tokens are negated.
+
+    7. Handling Intensifiers: No tokens are intensified.
+
+    8. Handling Emoticons and Special Characters: No emoticons or special characters
+    convey sentiment.
+
+    9. Handling Out-of-Vocabulary Words: No tokens are not recognized by the sentiment
+    analysis model.
+
+    10. Handling Contextual Dependencies: The text does not depend on the context
+    of surrounding tokens.
+
+    11. Final Classification: The text is classified as "neutral".'
+  role: assistant
+  timeout: false

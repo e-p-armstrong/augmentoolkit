@@ -1,0 +1,81 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here are some rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the text into individual words or tokens.\n* Remove punctuation marks,\
+    \ special characters, and stop words (common words like \"the\", \"and\", \"a\"\
+    , etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n*\
+    \ For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"great\", \"bad\", \"terrible\", etc.).\n* If a token has a sentiment-bearing\
+    \ word, assign it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+\
+    \ Neutral: 0\n\n**Rule 3: Contextual Analysis**\n\n* For each token, check its\
+    \ context:\n\t+ If a token is part of a phrase or sentence that expresses a positive\
+    \ sentiment, assign it a positive sentiment score.\n\t+ If a token is part of\
+    \ a phrase or sentence that expresses a negative sentiment, assign it a negative\
+    \ sentiment score.\n\t+ If a token is part of a phrase or sentence that is neutral\
+    \ or unclear, assign it a neutral sentiment score.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing up the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is:\n\t+ Positive:\
+    \ classify the text as \"positive\".\n\t+ Negative: classify the text as \"negative\"\
+    .\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5: Handling Ambiguity**\n\
+    \n* If a token has multiple possible sentiment interpretations (e.g. \"new\" can\
+    \ be positive or negative depending on the context), use contextual analysis to\
+    \ disambiguate the sentiment.\n* If a token is unclear or ambiguous, assign it\
+    \ a neutral sentiment score.\n\n**Rule 6: Handling Negation**\n\n* If a token\
+    \ is negated (e.g. \"not good\", \"not happy\"), flip its sentiment score:\n\t\
+    + Positive: becomes negative\n\t+ Negative: becomes positive\n\t+ Neutral: remains\
+    \ neutral\n\n**Rule 7: Handling Intensifiers**\n\n* If a token is intensified\
+    \ (e.g. \"very good\", \"extremely happy\"), increase its sentiment score:\n\t\
+    + Positive: +1 (if not already maximum)\n\t+ Negative: -1 (if not already minimum)\n\
+    \t+ Neutral: 0 (if not already neutral)\n\n**Rule 8: Handling Emoticons and Special\
+    \ Characters**\n\n* If a text contains emoticons or special characters that convey\
+    \ sentiment (e.g. :) for happiness, :( for sadness), consider them as additional\
+    \ sentiment-bearing tokens.\n\n**Rule 9: Handling Out-of-Vocabulary Words**\n\n\
+    * If a token is not recognized by the sentiment analysis model, consider it as\
+    \ a neutral token.\n\n**Rule 10: Handling Contextual Dependencies**\n\n* If a\
+    \ token's sentiment depends on the context of surrounding tokens, use contextual\
+    \ analysis to capture these dependencies.\n\nBy following these rules, an AI can\
+    \ classify text as \"positive\", \"negative\", or \"neutral\" based on its sentiment.\
+    \ Note that these rules are not exhaustive, and additional rules may be needed\
+    \ to improve the accuracy of sentiment analysis.\"\"\"\n\nInput Text: \"\"\"1.F.6.\
+    \ INDEMNITY - You agree to indemnify and hold the Foundation, the trademark owner,\
+    \ any agent or employee of the Foundation, anyone providing copies of Project\
+    \ Gutenberg\u2122 electronic works in accordance with this agreement, and any\
+    \ volunteers associated with the production, promotion and distribution of Project\
+    \ Gutenberg\u2122 electronic works, harmless from all liability, costs and expenses,\
+    \ including legal fees, that arise directly or indirectly from any of the following\
+    \ which you do or cause to occur: (a) distribution of this or any Project Gutenberg\u2122\
+    \ work, (b) alteration, modification, or additions or deletions to any Project\
+    \ Gutenberg\u2122 work, and (c) any Defect you cause.Section 2. Information about\
+    \ the Mission of Project Gutenberg\u2122Project Gutenberg\u2122 is synonymous\
+    \ with the free distribution of electronic works in formats readable by the widest\
+    \ variety of computers including obsolete, old, middle-aged and new computers.\
+    \ It exists because of the efforts of hundreds of volunteers and donations from\
+    \ people in all walks of life.Volunteers and financial support to provide volunteers\
+    \ with the assistance they need are critical to reaching Project Gutenberg\u2122\
+    \u2019s goals and ensuring that the Project Gutenberg\u2122 collection will remain\
+    \ freely available for generations to come. In 2001, the Project Gutenberg Literary\
+    \ Archive Foundation was created to provide a secure and permanent future for\
+    \ Project Gutenberg\u2122 and future generations. To learn more about the Project\
+    \ Gutenberg Literary Archive Foundation and how your efforts and donations can\
+    \ help, see Sections 3 and 4 and the Foundation information page at www.gutenberg.org.Section\
+    \ 3. Information about the Project Gutenberg Literary Archive Foundation\"\"\""
+  role: user
+- content: "I will classify the input text as \"neutral\".\n\nHere's the breakdown\
+    \ of the classification:\n\n1. Tokenization:\n\t* Split the text into individual\
+    \ words or tokens.\n\t* Remove punctuation marks, special characters, and stop\
+    \ words.\n2. Sentiment Analysis:\n\t* Identify sentiment-bearing words: \"harmless\"\
+    , \"free\", \"critical\", \"secure\", \"permanent\", \"secure\", \"permanent\"\
+    .\n\t* Assign sentiment scores:\n\t\t+ Positive: +1 (free, secure, permanent)\n\
+    \t\t+ Negative: -1 (harmless, critical)\n\t\t+ Neutral: 0 (other words)\n3. Contextual\
+    \ Analysis:\n\t* Consider the context of the sentiment-bearing words:\n\t\t+ \"\
+    free\" and \"secure\" are used in a positive context (free distribution of electronic\
+    \ works).\n\t\t+ \"harmless\" and \"critical\" are used in a neutral context (indemnity\
+    \ and financial support).\n4. Sentiment Aggregation:\n\t* Calculate the overall\
+    \ sentiment score:\n\t\t+ Positive: +2 (free, secure, permanent) - 1 (harmless)\
+    \ = +1\n\t\t+ Negative: -1 (critical) = -1\n\t* Since the overall sentiment score\
+    \ is +1, classify the text as \"neutral\".\n\nNote that the text is primarily\
+    \ informative and does not express a strong emotional tone, which is why I classified\
+    \ it as \"neutral\"."
+  role: assistant
+  timeout: false

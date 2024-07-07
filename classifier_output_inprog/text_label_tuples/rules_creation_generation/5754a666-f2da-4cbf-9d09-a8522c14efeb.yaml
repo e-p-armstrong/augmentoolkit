@@ -1,0 +1,99 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here is a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , etc. that do not carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\n\
+    * For each token, check if it has a sentiment-bearing word (e.g. \"happy\", \"\
+    good\", \"bad\", etc.).\n* If a token has a sentiment-bearing word, assign it\
+    \ a sentiment score (e.g. +1 for positive, -1 for negative).\n\n**Rule 3: Contextual\
+    \ Analysis**\n\n* For each token, analyze its context to determine its sentiment.\n\
+    * If a token is preceded by a negative word (e.g. \"not\", \"never\", etc.), flip\
+    \ its sentiment score (e.g. -1 for positive, +1 for negative).\n* If a token is\
+    \ followed by a positive word (e.g. \"very\", \"extremely\", etc.), increase its\
+    \ sentiment score.\n\n**Rule 4: Emphasis Analysis**\n\n* Identify words that convey\
+    \ emphasis (e.g. \"very\", \"extremely\", \"really\", etc.).\n* Increase the sentiment\
+    \ score of the preceding token by 0.5.\n\n**Rule 5: Negation Analysis**\n\n* Identify\
+    \ words that negate sentiment (e.g. \"not\", \"never\", \"no\", etc.).\n* Flip\
+    \ the sentiment score of the preceding token.\n\n**Rule 6: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the text by summing the sentiment\
+    \ scores of individual tokens.\n* If the overall sentiment score is positive (i.e.\
+    \ > 0), classify the text as \"positive\".\n* If the overall sentiment score is\
+    \ negative (i.e. < 0), classify the text as \"negative\".\n* If the overall sentiment\
+    \ score is neutral (i.e. 0), classify the text as \"neutral\".\n\n**Rule 7: Thresholding**\n\
+    \n* Set a threshold value (e.g. 0.5) to determine the minimum sentiment score\
+    \ required to classify the text as \"positive\" or \"negative\".\n* If the overall\
+    \ sentiment score is above the threshold, classify the text as \"positive\".\n\
+    * If the overall sentiment score is below the threshold, classify the text as\
+    \ \"negative\".\n\n**Rule 8: Handling Ambiguity**\n\n* If the text contains ambiguous\
+    \ or neutral words (e.g. \"fine\", \"okay\", etc.), assign them a neutral sentiment\
+    \ score (0).\n* If the text contains multiple conflicting sentiments, use the\
+    \ sentiment score with the highest magnitude (i.e. closest to 1 or -1).\n\nBy\
+    \ following these rules, an AI can classify text as \"positive\", \"negative\"\
+    , or \"neutral\" based on its sentiment. Note that these rules are not exhaustive\
+    \ and can be modified to suit specific use cases or domains.\"\"\"\n\nInput Text:\
+    \ \"\"\"The court of Vienna had the greatest interest in the war, for family reasons,\
+    \ as well as on account of the dangers to which a reverse might subject her provinces.\
+    \ For some reason, difficult to understand, Austria co-operated only to the extent\
+    \ of thirty battalions: forty-five thousand men remained as an army of observation\
+    \ in Brisgau, on the Rhine, and in Flanders. Where were the imposing armies she\
+    \ afterward displayed? and what more useful disposition could have been made of\
+    \ them than to protect the flanks of the invading army? This remarkable conduct\
+    \ on the part of Austria, which cost her so much, may account for the resolution\
+    \ of Prussia to retire at a later period, and quit the field, as she did, at the\
+    \ very moment when she should have entered it. During the campaign the Prussians\
+    \ did not exhibit the activity necessary for success. They spent eight days uselessly\
+    \ in camp at Kons. If they had anticipated Dumouriez at the Little Islands, or\
+    \ had even made a more serious effort to drive him from them, they would still\
+    \ have had all the advantage of a concentrated force against several scattered\
+    \ divisions, and could have prevented their junction and overthrown them separately.\
+    \ Frederick the Great would have justified the remark of Dumouriez at Grandpr\xE9\
+    ,--that, if his antagonist had been the great king, he (Dumouriez) would already\
+    \ have been driven behind Ch\xE2lons.The Austrians in this campaign proved that\
+    \ they were still imbued with the false system of Daun and Lascy, of covering\
+    \ every point in order to guard every point.The fact of having twenty thousand\
+    \ men in Brisgau while the Moselle and Sarre were uncovered, shows the fear they\
+    \ had of losing a village, and how their system led to large detachments, which\
+    \ are frequently the ruin of armies.\"\"\""
+  role: user
+- content: 'After applying the rules, I classified the text as "negative".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The text is split into individual words or tokens. Punctuation
+    marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: Tokens with sentiment-bearing words are identified. For
+    example, "greatest", "dangers", "difficult", "remarkable", "cost", "resolution",
+    "activity", "useless", "serious", "advantage", "concentrated", "scattered", "separate",
+    "overthrown", "false", "fear", "ruin" have positive or negative sentiment scores.
+
+    3. Contextual Analysis: Tokens are analyzed in context to determine their sentiment.
+    For example, "difficult to understand" flips the sentiment score of "Austria co-operated
+    only to the extent of thirty battalions" from positive to negative.
+
+    4. Emphasis Analysis: Words that convey emphasis are identified. For example,
+    "remarkable", "serious", "useful" increase the sentiment score of the preceding
+    token.
+
+    5. Negation Analysis: Words that negate sentiment are identified. For example,
+    "not", "never", "no" flip the sentiment score of the preceding token.
+
+    6. Sentiment Aggregation: The overall sentiment score is calculated by summing
+    the sentiment scores of individual tokens. The score is negative due to the prevalence
+    of negative sentiment-bearing words.
+
+    7. Thresholding: The overall sentiment score is below the threshold value (0.5),
+    so the text is classified as "negative".
+
+    8. Handling Ambiguity: Ambiguous or neutral words are assigned a neutral sentiment
+    score (0). In this case, there are no such words.
+
+
+    The text is classified as "negative" due to the prevalence of negative sentiment-bearing
+    words and the negative sentiment scores assigned to tokens in context.'
+  role: assistant
+  timeout: false

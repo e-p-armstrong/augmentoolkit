@@ -1,0 +1,79 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"It has been a popular idea that the effect of the\
+    \ South African war will be to bind the colonies closer to the mother country.\
+    \ But the ignorance that has been displayed by some of the leaders of the imperial\
+    \ forces is bound to have its effect sooner or later upon the colonial dependencies,\
+    \ which heretofore have looked upon the English officer as a military idol.For\
+    \ some days after Pretoria was taken, I was much in the company of officers of\
+    \ the Canadian contingent, and their views of the South African situation were\
+    \ refreshingly straightforward and enlightening. I talked with a Toronto captain\
+    \ who wore the ribbon of the Northwest Rebellion, and who had served with Roosevelt\
+    \ in Cuba merely for the fun of fighting, and I asked him what he thought of the\
+    \ whole show. He was a man whose judgment was sound, a man of the kind that we\
+    \ know as the sound business man of this continent--a character with prestige\
+    \ almost unknown in England.[Illustration: British Colonel of Volunteers.]\u201C\
+    Well,\u201D he said, \u201Cit isn\u2019t the way we would do it, is it? We colonials\
+    \ have been taught that nothing we could do could possibly be just right; nothing\
+    \ we could say could just suit the point; and we are brought over here and dumped\
+    \ into a country under a lot of officers who don\u2019t know as much as a child\
+    \ at home would know about the same game.\u201D[Illustration: Colonel Peabody,\
+    \ U.\_S. Volunteers.]\"\"\""
+  role: user
+- content: "After applying the rules, I classify the input text as \"neutral\".\n\n\
+    Here's the breakdown:\n\n1. Tokenization: The text is split into individual words\
+    \ and punctuation marks are removed.\n2. Sentiment Analysis: The text contains\
+    \ sentiment-bearing words and phrases, such as \"popular\", \"ignorance\", \"\
+    refreshingly\", \"straightforward\", \"enlightening\", \"fun\", \"sound\", \"\
+    prestige\", and \"just\". These words have sentiment scores:\n\t+ Positive: +1\
+    \ (e.g., \"refreshingly\", \"enlightening\", \"fun\", \"sound\", \"prestige\"\
+    )\n\t+ Negative: -1 (e.g., \"ignorance\")\n\t+ Neutral: 0 (e.g., \"popular\",\
+    \ \"just\")\n3. Contextual Analysis: The context of each token is analyzed. For\
+    \ example, the word \"ignorance\" is preceded by a negative sentiment-bearing\
+    \ phrase (\"displayed by some of the leaders of the imperial forces\"), so its\
+    \ sentiment score is decreased by 0.5. Similarly, the word \"fun\" is preceded\
+    \ by a positive sentiment-bearing phrase (\"merely for the fun of fighting\"),\
+    \ so its sentiment score is increased by 0.5.\n4. Sentiment Aggregation: The overall\
+    \ sentiment score is calculated by summing up the sentiment scores of individual\
+    \ tokens. The score oscillates between positive and negative, but the overall\
+    \ sentiment is neutral.\n5. Handling Ambiguity: The text contains conflicting\
+    \ sentiment-bearing words and phrases, but the most prominent ones (e.g., \"refreshingly\"\
+    , \"enlightening\", \"sound\") dominate the overall sentiment.\n6. Handling Special\
+    \ Cases: The text does not contain any special cases like sarcasm, irony, or figurative\
+    \ language.\n7. Continuous Improvement: The model is continuously updated and\
+    \ refined to improve accuracy.\n\nThe overall sentiment of the text is neutral,\
+    \ as it presents a balanced view of the South African war and its effects on the\
+    \ colonies, without expressing a clear positive or negative sentiment."
+  role: assistant
+  timeout: false

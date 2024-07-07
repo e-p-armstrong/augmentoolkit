@@ -1,0 +1,84 @@
+- content: Classify text as "positive" or "negative"
+  role: system
+- content: "rules: \"\"\"Here's a set of rules that can help an AI classify whether\
+    \ some given text is \"positive\" or \"negative\":\n\n**Rule 1: Tokenization**\n\
+    \n* Split the input text into individual words or tokens.\n* Remove punctuation\
+    \ marks, special characters, and stop words (common words like \"the\", \"and\"\
+    , \"a\", etc. that don't carry much meaning).\n\n**Rule 2: Sentiment Analysis**\n\
+    \n* For each token, check if it has a sentiment-bearing word (e.g. \"happy\",\
+    \ \"good\", \"great\", etc.) or a sentiment-bearing phrase (e.g. \"I love\", \"\
+    I hate\", etc.).\n* If a token has a sentiment-bearing word or phrase, assign\
+    \ it a sentiment score:\n\t+ Positive: +1\n\t+ Negative: -1\n\t+ Neutral: 0\n\n\
+    **Rule 3: Contextual Analysis**\n\n* For each token, check its context by analyzing\
+    \ the surrounding tokens.\n* If a token is preceded or followed by a sentiment-bearing\
+    \ word or phrase, adjust its sentiment score:\n\t+ If the context is positive,\
+    \ increase the token's sentiment score by 0.5.\n\t+ If the context is negative,\
+    \ decrease the token's sentiment score by 0.5.\n\n**Rule 4: Sentiment Aggregation**\n\
+    \n* Calculate the overall sentiment score for the input text by summing up the\
+    \ sentiment scores of individual tokens.\n* If the overall sentiment score is:\n\
+    \t+ Positive: classify the text as \"positive\".\n\t+ Negative: classify the text\
+    \ as \"negative\".\n\t+ Neutral: classify the text as \"neutral\".\n\n**Rule 5:\
+    \ Handling Ambiguity**\n\n* If the overall sentiment score is close to zero (e.g.\
+    \ within a certain threshold), consider the text as \"neutral\".\n* If the text\
+    \ contains conflicting sentiment-bearing words or phrases, prioritize the most\
+    \ prominent or recent one.\n\n**Rule 6: Handling Special Cases**\n\n* Handle special\
+    \ cases like sarcasm, irony, or figurative language by using domain-specific knowledge\
+    \ or machine learning models.\n* For example, if a text contains a phrase like\
+    \ \"I'm so done with this\", it's likely to be sarcastic and should be classified\
+    \ as \"positive\" despite containing a negative sentiment-bearing word.\n\n**Rule\
+    \ 7: Continuous Improvement**\n\n* Continuously update and refine the sentiment\
+    \ analysis model by incorporating new data, feedback, and domain-specific knowledge.\n\
+    * Monitor the model's performance and adjust the rules as needed to improve accuracy.\n\
+    \nBy following these rules, an AI can develop a robust sentiment analysis model\
+    \ that accurately classifies text as \"positive\", \"negative\", or \"neutral\"\
+    .\"\"\"\n\nInput Text: \"\"\"Such a plan of operations enabled Napoleon, in the\
+    \ Italian campaigns of 1796 and 1797, to pierce and destroy, with a small force,\
+    \ the large and successive armies which Austria sent against him. In 1805 his\
+    \ operations were both interior and central: in 1808 they were most eminently\
+    \ central: in 1809, by the central operations in the vicinity of Ratisbonne, he\
+    \ defeated the large and almost victorious army of the Archduke Charles: in 1814,\
+    \ from his central position between the Marne and Seine, with only seventy thousand\
+    \ men against a force of more than two hundred thousand, he gained numerous victories,\
+    \ and barely failed of complete success. Again in 1815, with an army of only one\
+    \ hundred and twenty thousand men against an allied force of two hundred and twenty\
+    \ thousand, by his central advance on Charleroi and Ligny, he gained a most decided\
+    \ advantage over the enemy--an advantage lost by the eccentric movement of Grouchy:\
+    \ and even in 1813, his central position at Dresden would have secured him most\
+    \ decisive advantages, had not the faults of his lieutenants lost these advantages\
+    \ in the disasters of Kulm and the Katzbach.\"\"\""
+  role: user
+- content: 'Based on the rules provided, I will classify the input text as "neutral".
+
+
+    Here''s the breakdown:
+
+
+    1. Tokenization: The input text is split into individual words or tokens, and
+    punctuation marks, special characters, and stop words are removed.
+
+    2. Sentiment Analysis: The text does not contain any sentiment-bearing words or
+    phrases that would immediately classify it as "positive" or "negative".
+
+    3. Contextual Analysis: The text does not contain any sentiment-bearing words
+    or phrases that would be influenced by surrounding tokens.
+
+    4. Sentiment Aggregation: Since there are no sentiment-bearing words or phrases,
+    the overall sentiment score is 0.
+
+    5. Handling Ambiguity: Since the overall sentiment score is 0, the text is considered
+    "neutral".
+
+    6. Handling Special Cases: The text does not contain any special cases like sarcasm,
+    irony, or figurative language that would require domain-specific knowledge or
+    machine learning models.
+
+    7. Continuous Improvement: The model does not need to be updated or refined for
+    this text, as it is a historical passage that does not contain any sentiment-bearing
+    words or phrases.
+
+
+    The text is a historical passage that describes Napoleon''s military campaigns,
+    and it does not express any emotions or opinions. Therefore, it is classified
+    as "neutral".'
+  role: assistant
+  timeout: false
