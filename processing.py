@@ -86,7 +86,10 @@ async def main():
       path = f"{INPUT_FOLDER}/**/*" + extension
       source_texts = source_texts + glob.glob(path, recursive=True)
 
-    print(source_texts)
+    if source_texts:
+        print(source_texts)
+    else:
+        print(f"No source texts found in: {INPUT_FOLDER}")
 
     # [ # add your texts here
     #     "./raw_txt_input/Simple Sabotage, by the Office of Strategic Services, published 1944.txt",
