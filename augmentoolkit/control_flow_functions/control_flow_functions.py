@@ -1423,7 +1423,7 @@ def create_pretraining_set(directory_path, json_file):
             file_path = os.path.join(root, filename)
 
             # Read the contents of the file
-            with open(file_path, "r") as file:
+            with open(file_path, "r", encoding="utf-8") as file:
                 file_contents = file.read()
 
             # Append the file contents to the combined text, with a separator
