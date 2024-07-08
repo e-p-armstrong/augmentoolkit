@@ -20,6 +20,7 @@ SYSTEM:
   COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format. Not all APIs support completion mode.
   MODE: "api" # can be one of "api"|"aphrodite"
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
+  REQUIRED_ACCURACY: 0.2
 CLASSIFICATION:
   CLASSES: ["shit", "great"] #["absent", "present"] # ["negative", "positive"]
   DESC: "Whether a text is written in a high-quality way or not" # "Whether a text expresses positive or negative emotion." # NOTE to self, should probably include examples from a variety of different kinds of classification: "is this present", "is this x or y category", and subjective like "is this good or bad (quality)"

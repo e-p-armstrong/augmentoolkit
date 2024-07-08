@@ -59,6 +59,7 @@ async def main():
     TRAIN_SET_SIZE = config["TRAINING"]["TRAIN_SET_SIZE"]
     TRAIN_SET_INCREMENT = config["TRAINING"]["TRAIN_SET_INCREMENT"]
     TEST_SET_SIZE = config["TRAINING"]["TEST_SET_SIZE"]
+    REQUIRED_ACCURACY = config["SYSTEM"]["REQUIRED_ACCURACY"]
     
     
     extensions = [".txt", ".md"]
@@ -240,7 +241,7 @@ async def main():
                 print("\n\nLIST LENGTHS NOT EQUIVALENT")
                 print(f"len(truth_labels) {len(truth_labels)} vs len(classifier_labels) {len(classifier_labels)}")
                 pass # If this is true, something is broken
-            elif all_labels_same(truth_labels, classifier_labels): # all_labels_same will have to work regardless of item order, since async. Also, most control_flow_functions. will actually end up being pipeline-specific functions instead.
+            elif all_labels_same(truth_labels, classifier_labels, required_accuracy=REQUIRED_ACCURACY): # all_labels_same will have to work regardless of item order, since async. Also, most control_flow_functions. will actually end up being pipeline-specific functions instead.
                 has_passed_LLM_validation = True
             else:
                 text_label_tuples += truth_labels

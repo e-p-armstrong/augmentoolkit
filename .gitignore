@@ -8,3 +8,4 @@ output
 **/*split_2.json
 **/pretraining.json
 classifier_output*
+wandb

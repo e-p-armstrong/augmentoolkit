@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import traceback
+from tqdm import tqdm
 import yaml
 
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
@@ -99,7 +100,6 @@ async def create_label(idx, inp, classes=None, engine_wrapper=None, output_dir=N
     def parse_labels(classification):
         predicted_label = get_last_final_label(classification)
         for idx, c in enumerate(classes):
-            print(f"Does '{c.strip()}' equal '{predicted_label.strip()}'?")
             if c.strip() == predicted_label.strip():
                 return idx
         # if we got down here, maybe see if it gave us a number:
@@ -264,14 +264,17 @@ def train_classifier(text_label_tuples, classifier_counter, output_dir):
     def predict(text, prediction_batch_size=100):
         outputs = []
         
-        # Process text in batch_size groups
-        for i in range(0, len(text), prediction_batch_size):
+        # Calculate the total number of batches
+        total_batches = (len(text) + prediction_batch_size - 1) // prediction_batch_size
+        
+        # Process text in batch_size groups with tqdm progress bar
+        for i in tqdm(range(0, len(text), prediction_batch_size), total=total_batches, desc="Predicting"):
             batch = text[i:i+prediction_batch_size]
             encoding = new_tokenizer(batch, return_tensors='pt', padding=True, truncation=True)
             batch_outputs = new_model(**encoding)
             batch_predictions = batch_outputs.logits.argmax(-1)
             outputs.extend(batch_predictions.tolist())
-    
+
         return outputs
     
     return predict
@@ -281,8 +284,8 @@ def run_classifier(input_list=None, model=None, output_dir=None, output_list=Non
         inputs = [i[0] for i in input_list]
         outputs = model(inputs)
         
-        print("OUTPUTS DEBUG:")
-        print(outputs)
+        # print("OUTPUTS DEBUG:")
+        # print(outputs)
         
         # sys.exit(0) # DEBUG TODO REMOVE once we have confirmed that classifier inference is functional
         for idx, inp in enumerate(input_list):
@@ -299,19 +302,24 @@ def run_classifier(input_list=None, model=None, output_dir=None, output_list=Non
         print(e)
         traceback.print_exc()
 
-def all_labels_same(truth_labels, classifier_labels):
+def all_labels_same(truth_labels, classifier_labels, required_accuracy=1.0):
     # Create dictionaries for fast lookup
     dict1 = {text: (textname, label) for text, textname, label in truth_labels}
     dict2 = {text: (textname, label) for text, textname, label in classifier_labels}
 
     inconsistencies = []
     not_found = []
+    consistent_count = 0
+    total_count = 0
 
     # Check consistency and existence
     for text, (textname1, label1) in dict1.items():
         if text in dict2:
+            total_count += 1
             textname2, label2 = dict2[text]
-            if label1 != label2:
+            if label1 == label2:
+                consistent_count += 1
+            else:
                 inconsistencies.append((text, textname1, label1, textname2, label2))
         else:
             not_found.append((text, textname1, label1, "list2"))
@@ -321,22 +329,29 @@ def all_labels_same(truth_labels, classifier_labels):
         if text not in dict1:
             not_found.append((text, textname2, label2, "list1"))
 
+    # Calculate accuracy
+    accuracy = consistent_count / total_count if total_count > 0 else 0
+
     # Print results
     if inconsistencies:
         print("Inconsistent labels found:")
         for text, textname1, label1, textname2, label2 in inconsistencies:
             print(f"Text: '{text}', List1: ({textname1}, {label1}), List2: ({textname2}, {label2})")
-        return False
 
     if not_found:
         print("\nTexts not found in both lists:")
         for text, textname, label, missing_from in not_found:
             print(f"Text: '{text}', ({textname}, {label}) not found in {missing_from}")
-        return False # this is probably a bad fuckup somewhere. NOTE, need to add a substantial number of retries to things that 
 
-    if not inconsistencies and not not_found:
-        print("All labels are consistent and all texts are present in both lists.")
+    print(f"\nAccuracy: {accuracy:.2%}")
+    print(f"Required accuracy: {required_accuracy:.2%}")
+
+    if accuracy >= required_accuracy and not not_found:
+        print("Classifier meets or exceeds the required accuracy and all texts are present in both lists.")
         return True
+    else:
+        print("Classifier does not meet the required accuracy or there are missing texts.")
+        return False
     
     
 def save_train_set(test_label_tuples, output_dir):
