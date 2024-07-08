@@ -1,5 +1,6 @@
 import asyncio
 import glob
+import json
 import os
 import random
 import sys
@@ -135,7 +136,7 @@ async def main():
     print(rules_string)
     print("-------------")
     
-    sys.exit(0)
+    # sys.exit(0)
     # Sample 1000 things from the input dataset at random and classify them (plus a test dataset of 50)
     train_data = sample_and_remove(chunks, TRAIN_SET_SIZE)
     print("Training data sampled")
@@ -148,7 +149,10 @@ async def main():
     text_label_tuples = []
     
     ## Create initial training data using the small LLM, make text-label pairs
-    await run_async_many(engine_wrapper=engine_wrapper, output_dir=output_dir, input_list=train_data, func=create_label, output_list=text_label_tuples,rules=rules_string) # TODO need to add to this the actual label list and desc somehow
+    await run_async_many(engine_wrapper=engine_wrapper, output_dir=output_dir, input_list=train_data, func=create_label, output_list=text_label_tuples, rules=rules_string, classes=USER_CLASSES) # TODO need to add to this the actual label list and desc somehow
+    
+    with open(os.path.join(config["PATH"]["OUTPUT"], "TEST_DEBUG_OUTPUT_OF_LIST"),  'w') as f:
+        f.write(json.dumps(text_label_tuples))
     
     # TODO remove breakpoint below
     input("\n\nHIT ENTER TO CONTINUE AFTER MANUALLY MAKING THE DATA WORK")
@@ -179,7 +183,7 @@ async def main():
             truth_labels = []
             
             # Do LLM testing on that test set
-            run_async_many(engine_wrapper=engine_wrapper_large, output_dir=output_dir, input_list=test_set, func=create_label, output_list=truth_labels,rules=rules_string) # the create_label function should have validation built in, maybe # TODO need to add to this the actual label list and desc somehow
+            run_async_many(engine_wrapper=engine_wrapper_large, output_dir=output_dir, input_list=test_set, func=create_label, output_list=truth_labels,rules=rules_string, classes=USER_CLASSES) # the create_label function should have validation built in, maybe # TODO need to add to this the actual label list and desc somehow
             
             output_dir = os.path.join(config["PATH"]["OUTPUT"], "classifier_testing_labels_classification")
             os.makedirs(output_dir, exist_ok=True)
@@ -200,7 +204,7 @@ async def main():
                 os.makedirs(output_dir, exist_ok=True)
                 new_train_samples_inputs = sample_and_remove(chunks, TRAIN_SET_INCREMENT)
                 new_train_samples = []
-                run_async_many(new_train_samples_inputs, engine_wrapper, output_dir, input_list=new_train_samples_inputs, func=create_label, output_list=new_train_samples,rules=rules_string)
+                run_async_many(new_train_samples_inputs, engine_wrapper, output_dir, input_list=new_train_samples_inputs, func=create_label, output_list=new_train_samples,rules=rules_string, classes=USER_CLASSES)
                 
                 text_label_tuples += new_train_samples
                 

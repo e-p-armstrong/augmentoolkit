@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import re
 import traceback
 import yaml
 
@@ -62,13 +63,13 @@ async def create_rules(engine_wrapper=None, classes_list=None, classes_desc=None
         use_stop=config["SYSTEM"]["STOP"]
     )
     
-    classes_list_str = format_class_list(classes_list)
+    classes_str = format_class_list(classes_list)
     
     try:        
         
         result, full_output = await rules_creator.generate({
             "classes_desc": classes_desc,
-            "class_list": classes_list_str,
+            "class_list": classes_str,
         })
         
         id = make_id()
@@ -86,10 +87,41 @@ async def create_rules(engine_wrapper=None, classes_list=None, classes_desc=None
 
 ### PROMPT FUNC: Label Creator
 
-def parse_labels(rules_str):
-    return rules_str # TODO # NOTE result should probably be in format, (text, textname, labelstr)
+def get_last_final_label(text):
+    pattern = r"Final label: (.+)"
+    matches = re.findall(pattern, text)
+    return matches[-1] if matches else None
 
-async def create_label(idx, inp, engine_wrapper=None, output_dir=None, output_list=None, rules=None):
+
+async def create_label(idx, inp, classes=None, engine_wrapper=None, output_dir=None, output_list=None, rules=None):
+    
+    def parse_labels(classification):
+        predicted_label = get_last_final_label(classification)
+        for idx, c in enumerate(classes):
+            print(f"Does '{c.strip()}' equal '{predicted_label.strip()}'?")
+            if c.strip() == predicted_label.strip():
+                return idx
+        # if we got down here, maybe see if it gave us a number:
+        try:
+            pred = int(predicted_label)
+            classes[pred] # test that it is not out of bounds
+            return pred
+        except:
+            pass
+    
+        # maybe see if it gave us BOTH
+        try:
+            pred = predicted_label.split(" ")
+            pred = pred[0]
+            pred = int(pred)
+            classes[pred] # test that it is not out of bounds
+            return pred
+        except:
+            pass
+            
+        raise Exception(f"\n-----\/----\nNo proper label found! Generated {classification}\n\nExtracted {predicted_label}\n\nAnd tried to match with{classes}") # TODO # NOTE result should probably be in format, (text, textname, labelstr)
+    
+    
     prompt_path = "create_labels_for_chunk"
     inp_text = inp[0]
     
@@ -117,7 +149,7 @@ async def create_label(idx, inp, engine_wrapper=None, output_dir=None, output_li
             "temperature": 0.2,
         },
         completion_mode=COMPLETION_MODE,
-        retries=1,
+        retries=4,
         engine_wrapper=engine_wrapper,
         logging_level=logging.INFO,
         output_processor=parse_labels,
@@ -126,15 +158,20 @@ async def create_label(idx, inp, engine_wrapper=None, output_dir=None, output_li
         use_stop=config["SYSTEM"]["STOP"]
     )
     
+    classes_str = format_class_list(classes)
+    
     try:
-        result, full_output = await rules_creator.generate({
+        out_class, full_output = await rules_creator.generate({
             "rules": rules,
             "inp_text": inp_text,
+            "classes": classes_str,
         })
+        
+        result = (inp[0], inp[1], out_class)
         
         id = make_id()
         
-        write_output_to_file(full_output, os.path.join(output_dir, "rules_creation_generation"), id)
+        write_output_to_file(full_output, os.path.join(output_dir, "rules_creation_generation"), id) # TODO add autoresume to this pipeline
         
         output_list.append(result)
     except Exception as e:

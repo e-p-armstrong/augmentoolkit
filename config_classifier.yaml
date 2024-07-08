@@ -14,9 +14,9 @@ SKIP:
   QUESTION_CHECK: False
   ANSWER_RELEVANCY_CHECK: False # turn on if using the negative question prompt override
 SYSTEM:
-  CHUNK_SIZE: 1900
+  CHUNK_SIZE: 300
   DOUBLE_CHECK_COUNTER: 1 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
-  CONCURRENCY_LIMIT: 50 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
+  CONCURRENCY_LIMIT: 5 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
   COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format. Not all APIs support completion mode.
   MODE: "api" # can be one of "api"|"aphrodite"
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
@@ -24,9 +24,9 @@ CLASSIFICATION:
   CLASSES: ["shit", "great"] #["absent", "present"] # ["negative", "positive"]
   DESC: "Whether a text is written in a high-quality way or not" # "Whether a text expresses positive or negative emotion." # NOTE to self, should probably include examples from a variety of different kinds of classification: "is this present", "is this x or y category", and subjective like "is this good or bad (quality)"
 TRAINING:
-  TRAIN_SET_SIZE: 100
-  TRAIN_SET_INCREMENT: 100
-  TEST_SET_SIZE: 50
+  TRAIN_SET_SIZE: 5
+  TRAIN_SET_INCREMENT: 5
+  TEST_SET_SIZE: 5
 
 
 # May be much more efficient to rent H100s for large-scale inference than A100s

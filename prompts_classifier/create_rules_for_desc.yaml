@@ -73,7 +73,7 @@
 
     **Criteria for Classification:**
 
-    1. **Keywords and Phrases:** The presence of keywords and phrases such as "Table of Contents", "Copyright", "Published by", "ISBN", "Author", "Title", "Abstract", "Summary", "Index", etc. is a strong indicator of metadata. If such keywords or phrases are found, the text is more likely to belong to the "metadata" (1) category.
+    1. **Keywords and Phrases:** The presence of keywords and phrases such as "Table of Contents", "Copyright", "Published by", "ISBN", "Author", "Abstract", "Summary", "Index", etc. is a strong indicator of metadata. If such keywords or phrases are found, the text is more likely to belong to the "metadata" (1) category.
       - However, edge cases where this does not apply include situations where some of these terms are being discussed *in the content* (for instance, a paragraph about copyright, or an abstract concept). In cases where both metadata and content are present, this is still useful since such things are classified as metadata.
     
     2. **Structural Elements:** The presence of structural elements followed by content, such as headings, subheadings, chapter titles, section numbers, etc. is more indicative of content that is well-structured. If such structural elements are found, and there is lots of content on the page, then the text is more likely to belong to the "content" (1) category.
@@ -93,7 +93,7 @@
 
     7. **Default Classification:** Since the classification task involves distinguishing between metadata and content, and since most of the criteria are focused on identifying metadata, the default classification, in the absence of other information, is "content" (0).
 
-    8. **Edge cases:** There are cases where the above rules may be insufficient. These include cases where the text is a mix of both metadata and content, such as a title page that includes both the title and a brief introduction. Another case may be when the content is very brief or lacks context, making it difficult to determine whether it is metadata or content. The general guideline for classification when things are unclear is to consider the primary purpose of the text: if it is primarily providing context or background information, it is likely metadata; if it is primarily conveying information or ideas, it is likely content.
+    8. **Edge cases:** There are cases where the above rules may be insufficient. These include cases where the text is a mix of both metadata and content, such as a title page that includes both the title and a brief introduction to the text. Another case may be when the content is very brief or lacks context, making it difficult to determine whether it is metadata or content. The general guideline for classification when things are unclear is to consider the primary purpose of the text: if it is primarily providing context or background information, it is likely metadata; if it is primarily conveying information or ideas, it is likely content.
 
     By following these criteria and guidelines, you can accurately classify text into either "content" (0) or "metadata" (1) categories.
 - role: user
