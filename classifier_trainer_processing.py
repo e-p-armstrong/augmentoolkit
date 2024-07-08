@@ -1,30 +1,30 @@
-import asyncio
-import glob
-import json
-import os
-import random
-import sys
-import traceback
-
-import yaml
-
-from augmentoolkit.classifier_creator.steps import all_labels_same, create_label, create_rules, run_classifier, save_train_set, train_classifier
-from augmentoolkit.control_flow_functions import control_flow_functions
-from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
 # will go in eventual utils
 # Each pipeline should have its own utils
-def sample_and_remove(lst, n):
-    sampled = []
-    for _ in range(min(n, len(lst))):
-        index = random.randrange(len(lst))
-        sampled.append(lst.pop(index))
-    return sampled
+
+
+
+import asyncio
 
 async def main():
     
+    import yaml
+    import glob
+    import json
+    import os
+    import random
+    import sys
+    import traceback
+
+    from augmentoolkit.utils.sample_and_remove import sample_and_remove
+
+    from augmentoolkit.classifier_creator.steps import all_labels_same, create_label, create_rules, run_classifier, save_train_set, train_classifier
+    from augmentoolkit.control_flow_functions import control_flow_functions
+    from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
+
     with open("./config_classifier.yaml", "r") as f: # different yaml file for different pipes
         config = yaml.safe_load(f)
+    random.seed(1048596)
         
     if not os.path.exists(config["PATH"]["OUTPUT"]):
         os.makedirs(config["PATH"]["OUTPUT"])
@@ -131,13 +131,35 @@ async def main():
     
     # First, create the 5 rules for classifying text based on the classes and desc
     
-    rules_string = await create_rules(engine_wrapper=engine_wrapper_large, classes_list=USER_CLASSES, classes_desc=USER_CLASSES_DESCRIPTION, completion_mode=COMPLETION_MODE)
+    # Load rules if present, otherwise create them
+    
+    import os
+    import yaml
+
+    if os.path.exists(os.path.join(config["PATH"]["OUTPUT"], "rules_creation_generation")):
+        yaml_files = [f for f in os.listdir(os.path.join(config["PATH"]["OUTPUT"], "rules_creation_generation")) if f.endswith('.yaml')]
+        if yaml_files:
+            yaml_file_path = os.path.join(config["PATH"]["OUTPUT"], "rules_creation_generation", yaml_files[0])
+            with open(yaml_file_path, 'r') as file:
+                yaml_content = yaml.safe_load(file)
+                if isinstance(yaml_content, list) and yaml_content:
+                    print("Loading preexisting rules...")
+                    rules_string = yaml_content[-1]['content']
+                else:
+                    rules_string = await create_rules(engine_wrapper=engine_wrapper_large, classes_list=USER_CLASSES, classes_desc=USER_CLASSES_DESCRIPTION, completion_mode=COMPLETION_MODE)
+        else:
+            rules_string = await create_rules(engine_wrapper=engine_wrapper_large, classes_list=USER_CLASSES, classes_desc=USER_CLASSES_DESCRIPTION, completion_mode=COMPLETION_MODE)
+    else:
+        rules_string = await create_rules(engine_wrapper=engine_wrapper_large, classes_list=USER_CLASSES, classes_desc=USER_CLASSES_DESCRIPTION, completion_mode=COMPLETION_MODE)
+
     print("Rules created!\n\n----------------")
     print(rules_string)
     print("-------------")
     
-    # sys.exit(0)
-    # Sample 1000 things from the input dataset at random and classify them (plus a test dataset of 50)
+    # TODO load, if it exists, the train set from the text_label_tuples/saved_label_tuples/ directory. There are (possibly) a bunch of .json files, each with one list of three items (a saved tuple). The create_label function under normal circumstances would add all these tuples to the text_label_tuples list. 
+    # The logic should be: load all files in that folder. If there are more than or equal to the train set size, great, load them all into the list and move onto the next step. If there are fewer than the train set size, load everything you can and then sample_and_remove until the loaded + to-be-generated things are equal to the train set size, then go and run_async_many to generate stuff and add it to the list until we reach the train set size. If the folder does not exist, just generate until we reach the train set size.
+    
+    # Sample some things from the input dataset at random and classify them
     train_data = sample_and_remove(chunks, TRAIN_SET_SIZE)
     print("Training data sampled")
     print(f"Length of training data: {len(train_data)}")
@@ -189,7 +211,8 @@ async def main():
             os.makedirs(output_dir, exist_ok=True)
             
             classifier_labels = []
-            run_async_many(model, output_dir, input_list=test_set, func=run_classifier, output_list=classifier_labels) # TODO need to add to this the actual label list and desc somehow
+            run_classifier(model=model, output_dir=output_dir, input_list=test_set, output_list=classifier_labels)
+            # run_async_many(model, output_dir, input_list=test_set, func=run_classifier, output_list=classifier_labels) # TODO need to add to this the actual label list and desc somehow
             
             # Compare the two
             if len(truth_labels) != len(classifier_labels):
@@ -224,6 +247,7 @@ async def main():
     
     output_dir = os.path.join(config["PATH"]["OUTPUT"], "final_classifier_output")
     os.makedirs(output_dir, exist_ok=True)
-    run_async_many(classifier_labels, model, output_dir, input_list=chunks, func=run_classifier, output_list=classifier_labels)
+    run_classifier(classifier_labels=classifier_labels, model=model, output_dir=output_dir, input_list=chunks, output_list=classifier_labels)
+    # run_async_many(classifier_labels, model, output_dir, input_list=chunks, func=run_classifier, output_list=classifier_labels)
     
 asyncio.run(main())

@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+import sys
 import traceback
 import yaml
 
@@ -171,7 +172,11 @@ async def create_label(idx, inp, classes=None, engine_wrapper=None, output_dir=N
         
         id = make_id()
         
-        write_output_to_file(full_output, os.path.join(output_dir, "rules_creation_generation"), id) # TODO add autoresume to this pipeline
+        write_output_to_file(full_output, os.path.join(output_dir, "label_generation"), id) # TODO add autoresume to this pipeline
+        
+        os.makedirs(os.path.join(output_dir, "saved_label_tuples"), exist_ok=True)
+        with open(os.path.join(output_dir, "saved_label_tuples", id + ".json"),'w') as f:
+            f.write(json.dumps(result))
         
         output_list.append(result)
     except Exception as e:
@@ -183,9 +188,7 @@ async def create_label(idx, inp, classes=None, engine_wrapper=None, output_dir=N
 
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
-import numpy as np
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
-from transformers import pipeline
 
 def train_classifier(text_label_tuples, classifier_counter, output_dir):
     
@@ -253,13 +256,34 @@ def train_classifier(text_label_tuples, classifier_counter, output_dir):
     trainer.train()
     trainer.save_model(output_dir=classifier_output_path)
     
-    new_model = pipeline(model=classifier_output_path)
-    return new_model
+    new_model = AutoModelForSequenceClassification.from_pretrained(output_dir, num_labels=2)
     
-def run_classifier(idx, inp, model, output_dir, output_list): # model is a pipeline
-    try:
-        output = model(inp[0])[0]["label"]
+    new_tokenizer = AutoTokenizer.from_pretrained(output_dir)
+    
+    def predict(text, prediction_batch_size=100):
+        outputs = []
         
+        # Process text in batch_size groups
+        for i in range(0, len(text), prediction_batch_size):
+            batch = text[i:i+prediction_batch_size]
+            encoding = new_tokenizer(batch, return_tensors='pt', padding=True, truncation=True)
+            batch_outputs = new_model(**encoding)
+            batch_predictions = batch_outputs.logits.argmax(-1)
+            outputs.extend(batch_predictions.tolist())
+    
+        return outputs
+    
+    return predict
+    
+def run_classifier(input_list=None, model=None, output_dir=None, output_list=None): # model is a pipeline
+    try:
+        inputs = [i[0] for i in input_list]
+        outputs = model(inputs)
+        
+        print("OUTPUTS DEBUG:")
+        print(outputs)
+        
+        sys.exit(0) # DEBUG TODO REMOVE once we have confirmed that classifier inference is functional
         id = make_id()
         with open(os.path.join(output_dir, f"{id}.json")) as f:
             f.write(json.dumps({
