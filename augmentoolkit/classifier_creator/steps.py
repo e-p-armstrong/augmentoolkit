@@ -255,10 +255,11 @@ def train_classifier(text_label_tuples, classifier_counter, output_dir):
     
     trainer.train()
     trainer.save_model(output_dir=classifier_output_path)
+    tokenizer.save_pretrained(classifier_output_path)
     
-    new_model = AutoModelForSequenceClassification.from_pretrained(output_dir, num_labels=2)
+    new_model = AutoModelForSequenceClassification.from_pretrained(classifier_output_path, num_labels=2)
     
-    new_tokenizer = AutoTokenizer.from_pretrained(output_dir)
+    new_tokenizer = AutoTokenizer.from_pretrained(classifier_output_path)
     
     def predict(text, prediction_batch_size=100):
         outputs = []
@@ -283,16 +284,17 @@ def run_classifier(input_list=None, model=None, output_dir=None, output_list=Non
         print("OUTPUTS DEBUG:")
         print(outputs)
         
-        sys.exit(0) # DEBUG TODO REMOVE once we have confirmed that classifier inference is functional
-        id = make_id()
-        with open(os.path.join(output_dir, f"{id}.json")) as f:
-            f.write(json.dumps({
-                "text": inp[0],
-                "label": output
-            }))
-        
-        out_tup = (inp[0], inp[1], output)
-        output_list.append(out_tup)
+        # sys.exit(0) # DEBUG TODO REMOVE once we have confirmed that classifier inference is functional
+        for idx, inp in enumerate(input_list):
+            id = make_id()
+            with open(os.path.join(output_dir, f"{id}.json"), 'w') as f:
+                f.write(json.dumps({
+                    "text": inp[0],
+                    "label": outputs[idx]
+                }))
+            
+            out_tup = (inp[0], inp[1], outputs[idx])
+            output_list.append(out_tup)
     except Exception as e:
         print(e)
         traceback.print_exc()
