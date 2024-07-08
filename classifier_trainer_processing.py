@@ -1,9 +1,3 @@
-
-# will go in eventual utils
-# Each pipeline should have its own utils
-
-
-
 import asyncio
 
 async def main():
@@ -18,11 +12,11 @@ async def main():
 
     from augmentoolkit.utils.sample_and_remove import sample_and_remove
 
-    from augmentoolkit.classifier_creator.steps import all_labels_same, create_label, create_rules, run_classifier, save_train_set, train_classifier
+    from augmentoolkit.classifier_trainer.steps import all_labels_same, create_label, create_rules, run_classifier, save_train_set, train_classifier
     from augmentoolkit.control_flow_functions import control_flow_functions
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
-    with open("./config_classifier.yaml", "r") as f: # different yaml file for different pipes
+    with open("./classifier_trainer_config.yaml", "r") as f: # different yaml file for different pipes
         config = yaml.safe_load(f)
     random.seed(1048596)
         

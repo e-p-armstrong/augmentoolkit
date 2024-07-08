@@ -1,23 +1,6 @@
 import argparse
-import pyarrow.parquet as pq
-import json
+from augmentoolkit.utils.load_dataset import load_dataset
 import glob
-
-def load_dataset(file_path):
-    if file_path.endswith(".parquet"):
-        table = pq.read_table(file_path)
-        dataset = table.to_pandas()
-    elif file_path.endswith(".json"):
-        with open(file_path, "r") as file:
-            dataset = json.load(file)
-    elif file_path.endswith(".jsonl"):
-        dataset = []
-        with open(file_path, "r") as file:
-            for line in file:
-                dataset.append(json.loads(line))
-    else:
-        raise ValueError("Unsupported file format. Please provide a parquet, json, or jsonl file.")
-    return dataset
 
 def main():
     parser = argparse.ArgumentParser(description="Get the total number of rows across files matching a pattern.")
@@ -39,3 +22,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+# TODO make the classifier trainer accept .json and .parquet where they have a label field; each thing with a label is a chunk
