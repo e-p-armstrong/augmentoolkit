@@ -50,7 +50,7 @@
     7. **Absence of Math-Related Content:** If the text does not contain any of the above-mentioned features, it is more likely to belong to the "absent" (0) category.
       - There are no obvious edge cases where this does not apply.
 
-    8. **Default Classification:** Since the classification task involves determining the presence of math equations, the only sensible default classification, in the absence of other information, is "absent" (0).
+    8. **Default Classification:** Since the classification task involves determining the presence of math equations, and since most of the criteria are focused on identifying math equations, the default classification, in the absence of other information, is "absent" (0).
 
     9. **Edge cases:** There are cases where the above rules may be insufficient. These include equations that are spelt out with words instead of numbers, such as "x plus 5 equals 2". Another case may be when the concept of math equations is mentioned, but no equations themselves are there. The general guideline for classification when things are unclear, is that if the text includes something equivalent to a valid math equation, then it is "present" (1) and otherwise it is "absent" (0).
 
@@ -91,7 +91,7 @@
     6. **Body Text:** The presence of body text, such as ideas, arguments, summaries, or introductory paragraphs, is a clear indicator of content. If the text discusses something other than the larger work that the text is a part of, it is more likely to belong to the "content" (0) category.
       - There are no obvious edge cases where this doesn't apply.
 
-    7. **Default Classification:** Since the classification task involves distinguishing between metadata and content, and since most of the criteria are focused on identifying metadata, the default classification, in the absence of other information, is "content" (0). This is because metadata is typically more concise and formulaic, making it easier to identify.
+    7. **Default Classification:** Since the classification task involves distinguishing between metadata and content, and since most of the criteria are focused on identifying metadata, the default classification, in the absence of other information, is "content" (0).
 
     8. **Edge cases:** There are cases where the above rules may be insufficient. These include cases where the text is a mix of both metadata and content, such as a title page that includes both the title and a brief introduction. Another case may be when the content is very brief or lacks context, making it difficult to determine whether it is metadata or content. The general guideline for classification when things are unclear is to consider the primary purpose of the text: if it is primarily providing context or background information, it is likely metadata; if it is primarily conveying information or ideas, it is likely content.
 
