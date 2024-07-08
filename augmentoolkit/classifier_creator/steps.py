@@ -20,7 +20,11 @@ def parse_rules(rules_str):
     return rules_str # TODO
 
 def format_class_list(class_list):
-    return "\n".join(class_list) # TODO
+    result_str = ""
+    for idx, item in enumerate(class_list):
+        result_str += f"{idx}. {item}\n"
+    
+    return result_str.strip()
 
 async def create_rules(engine_wrapper=None, classes_list=None, classes_desc=None, completion_mode=False):
     prompt_path = "create_rules_for_desc"

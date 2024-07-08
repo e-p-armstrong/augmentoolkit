@@ -135,6 +135,7 @@ async def main():
     print(rules_string)
     print("-------------")
     
+    sys.exit(0)
     # Sample 1000 things from the input dataset at random and classify them (plus a test dataset of 50)
     train_data = sample_and_remove(chunks, TRAIN_SET_SIZE)
     print("Training data sampled")

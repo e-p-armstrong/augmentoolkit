@@ -7,7 +7,7 @@ API:
   API_KEY: "f228bfc4d05cf11d7059ce4139ef7c6cb187f2c6dbf2d8f35c9f5cb24e0e1f89" # Add the API key for your favorite provider here
   BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...) # http://8000.0.0.0
   LOGICAL_MODEL: "meta-llama/Llama-3-8b-chat-hf" # model used for everything except conversation generation at the very end # TechxGenus/Meta-Llama-3-8B-GPTQ
-  LARGE_LOGICAL_MODEL: "meta-llama/Llama-3-8b-chat-hf" # model used for conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on. # TechxGenus/Meta-Llama-3-70B-GPTQ
+  LARGE_LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on. # TechxGenus/Meta-Llama-3-70B-GPTQ
   QUANTIZATION_SMALL: "gptq" # Only use if Aphrodite mode is on.
   QUANTIZATION_LARGE: "gptq" # Only use if Aphrodite mode is on.
 SKIP:
@@ -21,8 +21,8 @@ SYSTEM:
   MODE: "api" # can be one of "api"|"aphrodite"
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
 CLASSIFICATION:
-  CLASSES: ["positive", "negative"]
-  DESC: Whether a text is positive in content, or negative.
+  CLASSES: ["shit", "great"] #["absent", "present"] # ["negative", "positive"]
+  DESC: "Whether a text is written in a high-quality way or not" # "Whether a text expresses positive or negative emotion." # NOTE to self, should probably include examples from a variety of different kinds of classification: "is this present", "is this x or y category", and subjective like "is this good or bad (quality)"
 TRAINING:
   TRAIN_SET_SIZE: 100
   TRAIN_SET_INCREMENT: 100

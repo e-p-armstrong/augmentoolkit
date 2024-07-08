@@ -1,6 +1,109 @@
 - role: system
   content: |
-    You are a helpful assistant.
+    You are an expert logic and classification AI whose goal is to create a set of criteria that, if followed, allow for accurate classification of text into one category or another. Basically: create a set of smart, logical rules for a given binary classification task, that can help an LLM like yourself determine what category some text belongs to.
+
+    You'll be given a list of the classes themselves, as well as a description of what they mean. Use this to create criteria for guiding accurate classification.
+
+    You should clearly indicate what the default classification is, in cases of low information.
+
+    You should specifically handle edge cases, and give a general guideline for how to classify when things are unclear.
+
+    Typically, the criteria will focus on identifying one of the classes (such as the presence of math equations, or a text as mostly metadata). The default classification should probably be the opposite of what your criteria focuses on identifying.
+
+    Be sure to account for edge cases when writing your guidelines.
 - role: user
   content: |
-    Write out a set of rules that can help an AI classify whether some given text is "positive" or "negative"
+    Classes: 
+    """
+    0. absent
+    1. present
+    """
+
+    Description of classes:
+    """
+    Whether the given text contains any math equations.
+    """
+- role: assistant
+  content: |
+    Based on the provided classes and description, I'll create a set of criteria and guidelines for accurate classification of text into either "absent" (0) or "present" (1) categories based on whether it does not contain, or does contain, math equations.
+    
+    **Criteria for Classification:**
+
+    1. **Mathematical Operators:** The presence of mathematical operators such as +, -, ×, ÷, =, <, >, ≤, ≥, etc. in the text is a strong indicator of a math equation. If any mathematical operators are found, the text is more likely to belong to the "present" (1) category. 
+      - However, edge cases where this does not apply include computer code, where symbols like +, <, >, and = may be used to concatenate strings, indicate tags, assign values, and do other non-math related things. Also, it is important to note the difference between an equation and an expression: for the text to contain math equations, it must have an equals sign (=).
+
+    2. **Only Expressions:** The presence of only expressions, such as "5x + 2y" or "sin(x)", but no equals signs, is a clear indicator that the text contains no math equations. If only expressions are found, but no equals signs are in the text, the text is far more likely to belong to the "absent" (0) group.
+      - There are no edge cases where this does not apply, because an equation needs an equals sign.
+
+    3. **Numerical Values:** The presence of numerical values, such as integers, fractions, decimals, or percentages, in the text suggests the possibility of a math equation. If numerical values are found, the text is more likely to belong to the "present" (1) category. 
+      - However, edge cases where this does not apply include numbered lists (such as 1. Classify text 2. Organize data 3. Train model) and the use of numbers in natural conversation (I have 2 apples), where math equations are not present but numbers are still used.
+
+    4. **Mathematical Notations:** The use of mathematical notations, such as parentheses, brackets, or braces to group numbers, is a common feature of math equations. If notations are found, the text is more likely to belong to the "present" (1) category. 
+      - However, edge cases where this does not apply again includes code, where notations are a critical part of normal syntax.
+
+    5. **Equation Structure:** The presence of a structured equation involving numbers and possibly variables, such as "2x + 3 = 5" or "sin(3x)^2 + y = 3z", is a clear indication of a math equation. If proper equation structure is found, including an equals sign (so that it is an equation, not an expression), then the text is more likely to belong to the "present" (1) category.
+      - There are no clear edge cases where this does not apply.
+
+    6. **Contextual Clues:** Contextual clues such as phrases like "solve for x", "calculate the value of", or "find the equation of" may accompany a math equation. If contextual clues are found, the text is more likely to belong to the "present" (1) category.
+      - However, edge cases where this does not apply include cases where equations as a concept are being discussed, but no actual equations appear in the text. This may be common in math textbooks, for instance.
+
+    7. **Absence of Math-Related Content:** If the text does not contain any of the above-mentioned features, it is more likely to belong to the "absent" (0) category.
+      - There are no obvious edge cases where this does not apply.
+
+    8. **Default Classification:** Since the classification task involves determining the presence of math equations, the only sensible default classification, in the absence of other information, is "absent" (0).
+
+    9. **Edge cases:** There are cases where the above rules may be insufficient. These include equations that are spelt out with words instead of numbers, such as "x plus 5 equals 2". Another case may be when the concept of math equations is mentioned, but no equations themselves are there. The general guideline for classification when things are unclear, is that if the text includes something equivalent to a valid math equation, then it is "present" (1) and otherwise it is "absent" (0).
+
+    By following these criteria and guidelines, you can accurately classify text into either "absent" (0) or "present" (1) categories.
+- role: user
+  content: |
+    Classes: 
+    """
+    0. content
+    1. metadata
+    """
+
+    Description of classes:
+    """
+    Classify the text as metadata if it is clearly metadata, tables of contents, publication information, copyright info — anything not the actual meat of a book or article. Classify it as content if it is clearly content that actually means something. If it contains both, classify it as metadata.
+    """
+- role: assistant
+  content: |
+    Based on the provided classes and description, I'll create a set of criteria and guidelines for accurate classification of text into either "content" (0) or "metadata" (1) categories.
+
+    **Criteria for Classification:**
+
+    1. **Keywords and Phrases:** The presence of keywords and phrases such as "Table of Contents", "Copyright", "Published by", "ISBN", "Author", "Title", "Abstract", "Summary", "Index", etc. is a strong indicator of metadata. If such keywords or phrases are found, the text is more likely to belong to the "metadata" (1) category.
+      - However, edge cases where this does not apply include situations where some of these terms are being discussed *in the content* (for instance, a paragraph about copyright, or an abstract concept). In cases where both metadata and content are present, this is still useful since such things are classified as metadata.
+    
+    2. **Structural Elements:** The presence of structural elements followed by content, such as headings, subheadings, chapter titles, section numbers, etc. is more indicative of content that is well-structured. If such structural elements are found, and there is lots of content on the page, then the text is more likely to belong to the "content" (1) category.
+      - However, edge cases where this does not apply include cases where metadata is well-structured as well: a table of contents might have a heading, with subheadings for sections. Also, some structural elements, like a numbered list of short words or phrases, may be part of a larger table of contents, and is therefore metadata.
+    
+    3. **Publication Information:** The presence of publication information such as dates, publishers, edition numbers, etc. is a clear indicator of metadata. If publication information is found, the text is more likely to belong to the "metadata" (1) category.
+      - However, edge cases include content where other texts are being discussed, and edition numbers or publishers are mentioned as added detail in the content. This may be more common with academic texts.
+
+    4. **Copyright and Licensing:** The presence of copyright or licensing information, such as "All rights reserved" or "Creative Commons Attribution", is a clear indicator of metadata. If copyright or licensing information is found, the text is more likely to belong to the "metadata" (1) category.
+      - There are no clear edge cases where this does not apply.
+
+    5. **Descriptive Text:** The presence of descriptive text that is not part of a work itself, but rather provides context or background information about the content (such as abstracts) is more indicative of metadata. If descriptive text *about the larger text* is found, the text might belong to the "metadata" (1) category.
+      - However, edge cases where this does not apply include cases where a text refers to itself throughout its content (such as in an essay). This criterion should be applied cautiously, because descriptive text will often be part of the content too.
+    
+    6. **Body Text:** The presence of body text, such as ideas, arguments, summaries, or introductory paragraphs, is a clear indicator of content. If the text discusses something other than the larger work that the text is a part of, it is more likely to belong to the "content" (0) category.
+      - There are no obvious edge cases where this doesn't apply.
+
+    7. **Default Classification:** Since the classification task involves distinguishing between metadata and content, and since most of the criteria are focused on identifying metadata, the default classification, in the absence of other information, is "content" (0). This is because metadata is typically more concise and formulaic, making it easier to identify.
+
+    8. **Edge cases:** There are cases where the above rules may be insufficient. These include cases where the text is a mix of both metadata and content, such as a title page that includes both the title and a brief introduction. Another case may be when the content is very brief or lacks context, making it difficult to determine whether it is metadata or content. The general guideline for classification when things are unclear is to consider the primary purpose of the text: if it is primarily providing context or background information, it is likely metadata; if it is primarily conveying information or ideas, it is likely content.
+
+    By following these criteria and guidelines, you can accurately classify text into either "content" (0) or "metadata" (1) categories.
+- role: user
+  content: |
+    Classes: 
+    """
+    {class_list}
+    """
+
+    Description of classes:
+    """
+    {classes_desc}
+    """
