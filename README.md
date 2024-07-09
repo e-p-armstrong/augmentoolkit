@@ -5,6 +5,8 @@ Now you can [turn any raw text](#quickstart) into a high-quality custom dataset 
 
 Augmentoolkit is an AI-powered tool that lets you create domain-specific data to finetune LLMs, using open-source AI.
 
+---
+
 ### RECENT FEATURES UPDATE
 Augmentoolkit can now train a small classification model on custom data — *on a cpu.* Basically:
 
@@ -21,6 +23,9 @@ The goal of the classifier creator (name subject to change) is to make large-sca
 
 To get started, modify `classifier_trainer_config.yaml` and run `classifier_trainer_processing.py`!
 OK, back to your regularly-scheduled README.
+
+---
+
 
 Cite:
 [![DOI](https://zenodo.org/badge/726083337.svg)](https://zenodo.org/doi/10.5281/zenodo.11525927)
