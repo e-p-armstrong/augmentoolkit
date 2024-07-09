@@ -53,7 +53,7 @@ Finally, **using the model you create should be easy and valuable:**
 - **Documented LLM setup (RAG included!):** from quantizing to chatting, it might take 30 minutes of following provided step-by-step video instructions (easy!) to set it up the first time you do this. The second it will likely take less than five or ten. Tutorials are taken seriously here.
 
 
-**We can also build classifiers now. They're even cheaper and faster than LLM data.**
+**Augmentoolkit can also build classifiers now. They're even cheaper and faster than LLM data, and they train on your local computer.**
 
 ## Demo video & Video Tutorials:
 [3-Minute Demo Video Here](https://www.youtube.com/watch?v=m32fM8S_DeY&ab_channel=Heralax)
