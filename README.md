@@ -7,7 +7,7 @@ Augmentoolkit is an AI-powered tool that lets you create domain-specific data to
 
 ---
 
-### RECENT FEATURES UPDATE
+### RECENT FEATURES UPDATE — JULY 9 2024
 Augmentoolkit can now train a small classification model on custom data — *on a cpu.* Basically:
 
 1. LLM generates classification data based on a small subset of some real text you give it
