@@ -417,3 +417,5 @@ This process replaces the more-cumbersome approach of having two separate files 
 If you want to set it and forget it, you can just eat the longer generation time of using a more powerful model for everything, it won't hurt you.
 
 **To speed up generation and get cost efficiency, it may be best to rent compute using Runpod.io or a similar GPU renting service (recommend either 2x H100s, or 8x A40s). For large-scale dataset generation tasks this will likely be cheaper than using an API, and it doesn't suffer from quite the same painful generation speed problems that consumer hardware can face sometimes.**
+
+Happy dataset generation! Enjoy making awesome custom models, now that data is finally an easy part of the process.
