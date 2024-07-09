@@ -11,3 +11,6 @@ classifier_output*
 wandb
 utils_for_manual_use/classifier_backtesting/place_classification_dataset_here/*
 utils_for_manual_use/classifier_backtesting/place_classifier_folder_here/*
+bfg-report
+..bfg-report
+bfg-1.14.0.jar
