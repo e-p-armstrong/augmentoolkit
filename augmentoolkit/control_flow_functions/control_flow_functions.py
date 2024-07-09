@@ -1,11 +1,8 @@
 import os
 import json
+import chardet
 import re
-import sys
 from tqdm import asyncio as tqdmasyncio
-from augmentoolkit.utils.make_id import make_id
-from augmentoolkit.utils.write_output_to_file import write_output_to_file
-from augmentoolkit.generation_functions.safe_formatter import safe_format
 from nltk.tokenize import sent_tokenize
 import matplotlib.pyplot as plt
 from collections import Counter
@@ -13,6 +10,7 @@ import logging
 from math import ceil
 import traceback
 import glob
+import uuid
 import yaml
 
 from augmentoolkit.utils.create_conv_starter import create_conv_starter
@@ -47,96 +45,26 @@ def extract_qa_tuples(text):
 import os
 
 
+# Used basically everywhere:
+def make_id():
+    return str(uuid.uuid4())
+
+
 # Also used basically everywhere:
-def convert_logging_to_dataset(directory):
-    print("entering saving mode")
-    # found a solution to overfitting on the examples:
-    # TRAIN WITHOUT THEM
-    # This will produce a WEALTH of instruct data
-    # fucking awesome, hopefully
-    # also it's also about the domain, lmao
-    # so more domain knowledge
-    
-    output_dir = os.path.join(obj_conf["PATH"]["OUTPUT"], directory)
-    
-    output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], directory + "_DATAGEN_OUTPUT.jsonl")
-    
-    
-    
-    if not os.path.exists(output_dir):
-        raise Exception("ERROR!! Trying to convert a logging directory to a dataset, when that directory does not exist!")
-        
-    with open(output_file_path, "w") as f:
-        existing_files = glob.glob(
-            os.path.join(output_dir, "*.yaml")
-        )
-        
-        for file in existing_files:
-            with open(file,'r') as file2:
-                file_list_of_dicts = yaml.safe_load(file2)
-                
-            # print(file_list_of_dicts)
-            
-            sysprompt = {"from": "system", "value": file_list_of_dicts[0]["content"]}
-            input = {"from": "human", "value": file_list_of_dicts[-2]["content"]}
-            output = {"from": "gpt", "value": file_list_of_dicts[-1]["content"]}
-            
-            json_to_write = {"conversations": [sysprompt, input, output]}
-            
-            f.write(json.dumps(json_to_write) + "\n")
-    print("...Converted successfully (we think)")
-    
-    
-    
-    
-    
-    
-def convert_revised_questions_to_question_generation_training(qa_tuples_by_paragraph, use_filenames):
-    print("entering saving mode")
-    # found a solution to overfitting on the examples:
-    # TRAIN WITHOUT THEM
-    # This will produce a WEALTH of instruct data
-    # fucking awesome, hopefully
-    # also it's also about the domain, lmao
-    # so more domain knowledge
-    
-    output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], "questions_generation_dataset.jsonl")
-    
-    if use_filenames:
-        question_generation_prompt = os.path.join(obj_conf["PATH"]["PROMPTS"], "qatuples_gen_filenames.yaml")
-    else:
-        question_generation_prompt = os.path.join(obj_conf["PATH"]["PROMPTS"], "qatuples_gen_no_filenames.yaml")
+def write_output_to_file(output, directory, uuid):
+    # Ensure directory exists
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
-    with open(question_generation_prompt, "r") as f:
-        qgen_prompt_full = yaml.safe_load(f)
-        
-        sysprompt = qgen_prompt_full[0]["content"]
-        input_template = qgen_prompt_full[-1]["content"]
-    
-    # revised_questions_output_path = os.path.join(obj_conf["PATH"]["OUTPUT"], "qatuples_revised")
-    with open(output_file_path, 'w') as out_file:
-        for qatup_group in qa_tuples_by_paragraph:
-            answer = format_qatuples(qatup_group)
-            text = qatup_group[0][2]
-            
-            # print(text)
-            if not use_filenames:
-                input_text = safe_format(input_template, text=text)
-            else:
-                textname = qatup_group[0][3]
-                input_text = safe_format(input_template, text=text, textname=textname)
-            sysprompt_obj = {"from": "system", "value": sysprompt}
-            input_obj = {"from": "human", "value": input_text}
-            answer_obj = {"from": "gpt", "value": answer}
-            
-            convo = [sysprompt_obj, input_obj, answer_obj]
-            out_file.write(json.dumps(convo) + "\n")
+    # Define the file path using the directory and UUID
+    file_path = os.path.join(directory, f"{uuid}.txt")
 
-    print("...Converted successfully (we think)")
-    
-    
-    
-    
+    # Write the output to the file
+    with open(file_path, "w") as file:
+        file.write(output)
+
+    print(f"Output written to {file_path}")
+
 
 def extract_reasoning_from_context_check(response):
     # print("\n----\/----\n RESPONSE:")
@@ -250,7 +178,7 @@ async def repair_qatuple_context(
             print(content)
             try:
                 data = json.loads(content)  # Convert the string back to JSON
-                vetted_qa_tuples[idx] = (data[0], data[1], data[2], data[3], data[4], data[5], data[6])
+                vetted_qa_tuples[idx] = (data[0], data[1], data[2], data[3])
                 return None
             except json.JSONDecodeError:
                 print("JSON decode error with the contents:", content)
@@ -275,9 +203,6 @@ async def repair_qatuple_context(
                 revision[1],
                 tup[2],
                 tup[3],
-                tup[4],
-                tup[5],
-                tup[6]
             )  # replace the old tuple with the new one, revision doesn't have text name so we keep the old one
         elif not revision[0]:
             vetted_qa_tuples[
@@ -334,7 +259,6 @@ async def vet_answer_accuracy_loop(
     double_check_counter=3,
     completion_mode=None,
     logging_level=None,
-    file_path=None,
 ):
     # NOTE Set up answer check generation step
     prompt_path_ans_accuracy_check = "check_answer"
@@ -421,17 +345,13 @@ async def vet_answer_accuracy_loop(
             return qtuple
         else:
             print("Answer accuracy validation failed! Tossing")
-            with open(file_path, "w") as file:
-                    file.write("failed")
-            return
+            return (None, None, None, qtuple[3])
     except Exception as e:
         print("!!ERROR!!")
         print(e)
         traceback.print_exc()
 
-    with open(file_path, "w") as file:
-        file.write("failed")
-    return
+    return (None, None, None, qtuple[3])
 
 
 def parse_answer_relevancy_validation_step(thought_process):
@@ -466,7 +386,6 @@ async def vet_answer_relevance_loop(
     double_check_counter=3,
     completion_mode=None,
     logging_level=None,
-    file_path=None,
 ):
     # NOTE Set up answer check generation step
     prompt_path_ans_relevancy_check = "check_answer_relevancy_with_text"
@@ -561,21 +480,16 @@ async def vet_answer_relevance_loop(
                 double_check_counter=double_check_counter,
                 completion_mode=completion_mode,
                 logging_level=logging_level,
-                file_path=file_path
             )
         else:
             print("Answer relevancy validation failed! Tossing")
-            with open(file_path, "w") as file:
-                    file.write("failed")
-            return
+            return (None, None, None, qtuple[3])
     except Exception as e:
         print("!!ERROR!!")
         print(e)
         traceback.print_exc()
 
-    with open(file_path, "w") as file:
-        file.write("failed")
-    return
+    return (None, None, None, qtuple[3])
 
 
 def parse_validation_step(response):
@@ -609,88 +523,111 @@ async def vet_question_loop(
     qa_tuple,
     question_group_id=None,
     engine_wrapper=None,
-    qa_tuples_dir=None, # idx is qa_tuple[5]. Really should've used a dict at this point, oh well.
-    vetted_qa_tuples=None,
     double_check_counter=3,
     completion_mode=None,
     logging_level=None,
 ):
+    # NOTE Set up question check generation step
+    prompt_path_q_check = "check_question"
+    check_q_regex = re.compile(
+        r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)",
+        re.DOTALL | re.IGNORECASE,
+    )
+
+    if completion_mode:
+        prompt_path_q_check = prompt_path_q_check + ".txt"
+    else:
+        prompt_path_q_check = prompt_path_q_check + ".yaml"
+
+    question_checker = GenerationStep(
+        prompt_path=prompt_path_q_check,
+        regex=check_q_regex,
+        sampling_params={
+            "max_tokens": 1500,
+            "stop": [
+                "### Response",
+                "\n\n\n\n\n",
+                "</s>",
+                "# Input:",
+                "[INST]",
+                "### Instruction",
+                "[INST",
+                "<|eot_id|>",
+                "<|start_header_id|>",
+                "<|end_header_id|>",
+            ],
+            "temperature": 0.2,
+        },
+        completion_mode=completion_mode,
+        retries=1,
+        engine_wrapper=engine_wrapper,
+        logging_level=logging_level,
+        output_processor=parse_validation_step,
+        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        default_prompt_folder=DEFAULT_PROMPT_PATH,
+        use_stop=obj_conf["SYSTEM"]["STOP"],
+    )
+
+    # NOTE Set up generate new question step
+    # MODIFICATION: so that the conversations make sense, we just toss failed questions, rather than regenning. They're plentiful enough.
     try:
-        file_path = os.path.join(qa_tuples_dir, f"para_{qa_tuple[5]}_q_{qa_tuple[6]}.json")
-        idx = qa_tuple[5]
-        # Check for existing qa tuples
-        existing_files = glob.glob(
-            os.path.join(qa_tuples_dir, f"para_{idx}_q_{qa_tuple[6]}.json")
-        )  # check if qs already exist
-
-        if len(existing_files) > 0:  # If files exist, skip this paragraph entirely
-            print(f"Loading file")
-            for file_path in existing_files:
-                with open(file_path, "r") as file:
-                    file_body = file.read()
-                    if file_body == "failed":
-                        qa_tuple = None
-                    else:
-                        file.seek(0)
-                        qa_tuple = tuple(json.loads(file_body))
-                vetted_qa_tuples.append(qa_tuple)
-            return
-        
-        
-        # NOTE Set up question check generation step
-        prompt_path_q_check = "check_question"
-        check_q_regex = re.compile(
-            r"Reasoning and thought process \(be careful around \"how\" and \"why\" questions\):(.+)",
-            re.DOTALL | re.IGNORECASE,
-        )
-
-        if completion_mode:
-            prompt_path_q_check = prompt_path_q_check + ".txt"
-        else:
-            prompt_path_q_check = prompt_path_q_check + ".yaml"
-
-        question_checker = GenerationStep(
-            prompt_path=prompt_path_q_check,
-            regex=check_q_regex,
-            sampling_params={
-                "max_tokens": 1500,
-                "stop": [
-                    "### Response",
-                    "\n\n\n\n\n",
-                    "</s>",
-                    "# Input:",
-                    "[INST]",
-                    "### Instruction",
-                    "[INST",
-                    "<|eot_id|>",
-                    "<|start_header_id|>",
-                    "<|end_header_id|>",
-                ],
-                "temperature": 0.2,
-            },
-            completion_mode=completion_mode,
-            retries=1,
-            engine_wrapper=engine_wrapper,
-            logging_level=logging_level,
-            output_processor=parse_validation_step,
-            prompt_folder=obj_conf["PATH"]["PROMPTS"],
-            default_prompt_folder=DEFAULT_PROMPT_PATH,
-            use_stop=obj_conf["SYSTEM"]["STOP"],
-        )
-
-        # NOTE Set up generate new question step
-        # MODIFICATION: so that the conversations make sense, we just toss failed questions, rather than regenning. They're plentiful enough.
-        try:
-            qtuple = qa_tuple
+        qtuple = qa_tuple
+        # print(
+        #     f"\n\nStarting QUESTION loop for question: {qtuple[0]}, context: {qtuple[2]}"
+        # )
+        run_id = question_group_id + "--subquestion--" + make_id()
+        passed_checks = 0
+        times_checked = 0
+        dissenting_reasoning = ""
+        if obj_conf["SKIP"]["QUESTION_CHECK"]:
+            print("DEBUG: Skipping question check")
+            return await vet_answer_accuracy_loop(
+                qtuple,
+                run_id,
+                engine_wrapper=engine_wrapper,
+                double_check_counter=double_check_counter,
+                completion_mode=completion_mode,
+                logging_level=logging_level,
+            )
+        while times_checked < double_check_counter:
+            check_id = make_id()
             # print(
-            #     f"\n\nStarting QUESTION loop for question: {qtuple[0]}, context: {qtuple[2]}"
+            #     f"\n\nQUESTION CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
             # )
-            run_id = question_group_id + "--subquestion--" + make_id()
-            passed_checks = 0
-            times_checked = 0
-            dissenting_reasoning = ""
-            if obj_conf["SKIP"]["QUESTION_CHECK"]:
-                print("DEBUG: Skipping question check")
+            judgement, check_q_output = await question_checker.generate(
+                arguments={"text": qtuple[2], "question": qtuple[0], "answer": qtuple[1]}
+            )
+
+            # Now we need to put the judgement together into the format it expects it to be in
+
+            write_output_to_file(
+                check_q_output,
+                obj_conf["PATH"]["OUTPUT"] + "/check_question_generations",
+                run_id + "--check--" + check_id,
+            )
+            
+            # print("JUDGEMENT:")
+            # print(judgement)
+            if not judgement[0]:  # if not relevant
+                dissenting_reasoning = judgement[1]
+                print("\nNegative Vote Cast! Here was the reasoning:\n")
+                print(dissenting_reasoning)
+                print(f"ID: {check_id}")
+            else:
+                passed_checks += 1
+            times_checked += 1
+            if passed_checks >= ceil(double_check_counter / 2):
+                break
+            failed_checks = times_checked - passed_checks
+            if failed_checks >= ceil(double_check_counter / 2):
+                break
+
+        if passed_checks >= ceil(
+            double_check_counter / 2
+        ):  # if all question checks passed
+            # print(f"\n\nQUESTION CHECKS PASSED retries: {total_retries}")
+            
+            if obj_conf["SKIP"]["ANSWER_RELEVANCY_CHECK"]:
                 return await vet_answer_accuracy_loop(
                     qtuple,
                     run_id,
@@ -698,88 +635,24 @@ async def vet_question_loop(
                     double_check_counter=double_check_counter,
                     completion_mode=completion_mode,
                     logging_level=logging_level,
-                    file_path=file_path
                 )
-            while times_checked < double_check_counter:
-                check_id = make_id()
-                # print(
-                #     f"\n\nQUESTION CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
-                # )
-                judgement, check_q_output = await question_checker.generate(
-                    arguments={"text": qtuple[2], "question": qtuple[0], "answer": qtuple[1]}
-                )
-
-                # Now we need to put the judgement together into the format it expects it to be in
-
-                write_output_to_file(
-                    check_q_output,
-                    obj_conf["PATH"]["OUTPUT"] + "/check_question_generations",
-                    run_id + "--check--" + check_id,
-                )
-                
-                # print("JUDGEMENT:")
-                # print(judgement)
-                if not judgement[0]:  # if not relevant
-                    dissenting_reasoning = judgement[1]
-                    print("\nNegative Vote Cast! Here was the reasoning:\n")
-                    print(dissenting_reasoning)
-                    print(f"ID: {check_id}")
-                else:
-                    passed_checks += 1
-                times_checked += 1
-                if passed_checks >= ceil(double_check_counter / 2):
-                    break
-                failed_checks = times_checked - passed_checks
-                if failed_checks >= ceil(double_check_counter / 2):
-                    break
-
-            if passed_checks >= ceil(
-                double_check_counter / 2
-            ):  # if all question checks passed
-                # print(f"\n\nQUESTION CHECKS PASSED retries: {total_retries}")
-                
-                if obj_conf["SKIP"]["ANSWER_RELEVANCY_CHECK"]:
-                    res = await vet_answer_accuracy_loop(
-                        qtuple,
-                        run_id,
-                        engine_wrapper=engine_wrapper,
-                        double_check_counter=double_check_counter,
-                        completion_mode=completion_mode,
-                        logging_level=logging_level,
-                        file_path=file_path
-                    )
-                else:
-                    res = await vet_answer_relevance_loop(
-                        qtuple,
-                        run_id,
-                        engine_wrapper=engine_wrapper,
-                        double_check_counter=double_check_counter,
-                        completion_mode=completion_mode,
-                        logging_level=logging_level,
-                        file_path=file_path
-                    )
-                
-                # Return response
-                
-                vetted_qa_tuples.append(res)
-                if res is not None:
-                    with open(file_path, "w") as file:
-                        json.dump(res, file, indent=4)
-                return
-            else: # this path is probably redundant
-                print("Question accuracy validation failed! Tossing")
-                with open(file_path, "w") as file:
-                    file.write("failed")
-                return
-        except Exception as e:
-            print("!!ERROR!!")
-            print(e)
-            traceback.print_exc()
-        with open(file_path, "w") as file:
-            file.write("failed")
+            return await vet_answer_relevance_loop(
+                qtuple,
+                run_id,
+                engine_wrapper=engine_wrapper,
+                double_check_counter=double_check_counter,
+                completion_mode=completion_mode,
+                logging_level=logging_level,
+            )
+        else:
+            print("Question accuracy validation failed! Tossing")
+            return (None, None, None, qtuple[3])
     except Exception as e:
-        print(f"Q ERROR: {e}")
+        print("!!ERROR!!")
+        print(e)
         traceback.print_exc()
+
+    return (None, None, None, qtuple[3])
 
 
 def extract_questions_from_response(
@@ -802,15 +675,18 @@ def extract_question_from_response(
 async def generate_qatuples_from_para(
     idx,
     para,
+    engine_wrapper=None,
     engine_wrapper_large=None,
-    generated_qa_tuples=None,
+    vetted_qa_tuples=None,
     qa_tuples_dir=None,
+    double_check_counter=3,
     use_filenames=False,
     completion_mode=None,
     logging_level=None,
 ):
 
     # NOTE Set up qatuple generation step #
+
     prompt_path_qatuples_gen = "qatuples_gen_no_filenames"
     if use_filenames:
         prompt_path_qatuples_gen = "qatuples_gen_filenames"
@@ -865,7 +741,7 @@ async def generate_qatuples_from_para(
             for file_path in existing_files:
                 with open(file_path, "r") as file:
                     qa_tuple = tuple(json.load(file))
-                generated_qa_tuples.append(qa_tuple)
+                vetted_qa_tuples.append(qa_tuple)
             return
         question_group_id = make_id()
         # print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
@@ -883,21 +759,33 @@ async def generate_qatuples_from_para(
         )
 
         question_answer_tuples_more_info = [
-            (qatup[0], qatup[1], para[0], para[1], question_group_id, idx, qnum) for qnum, qatup in enumerate(question_answer_tuples)
+            (qatup[0], qatup[1], para[0], para[1]) for qatup in question_answer_tuples
         ]
         write_output_to_file(
             question_generation_output,
             obj_conf["PATH"]["OUTPUT"] + "/question_generation_generations",
             question_group_id,
         )
-        
-        for qatup in question_answer_tuples_more_info:
-            generated_qa_tuples.append(qatup)
-            if qatup[0] is not None:
-                file_path = os.path.join(qa_tuples_dir, f"para_{qatup[5]}_q_{qatup[6]}.json")
+        for qnum, question_answer_tuple in enumerate(question_answer_tuples_more_info):
+            # print(f"\n\n=======!!=BEGIN VETTING QA TUPLE {idx}_{qnum}=!!=======\n\n")
+            good_qa_tuple = await vet_question_loop(
+                question_answer_tuple,
+                question_group_id=question_group_id,
+                engine_wrapper=engine_wrapper,
+                double_check_counter=double_check_counter,
+                completion_mode=completion_mode,
+                logging_level=logging_level,
+            )
+
+            # Write resulting question file if the tuple is not None
+            if good_qa_tuple[0] is not None:
+                file_path = os.path.join(qa_tuples_dir, f"para_{idx}_q_{qnum}.json")
                 with open(file_path, "w") as file:
-                    json.dump(qatup, file, indent=4)
-            
+                    json.dump(good_qa_tuple, file, indent=4)
+
+            vetted_qa_tuples.append(
+                good_qa_tuple
+            )  # We must filter out all None values at the end; but appending Nones lets us know where things went wrong, and how often.
     except Exception as e:
         print(f"Q ERROR: {e}")
         traceback.print_exc()
@@ -1231,7 +1119,7 @@ def read_json_files_info(directory):
                 isinstance(data, list)
                 and len(data) == 5
                 and isinstance(data[0], list)
-                and all(len(item) == 7 for item in data[0])
+                and all(len(item) == 4 for item in data[0])
                 and all(isinstance(i, str) for i in data[1:])
             ):
                 tuple_list.append((data[0], data[1], data[2], data[3], data[4]))
@@ -1481,53 +1369,95 @@ def convert_directory_and_process_conversations(directory_path):
 def create_pretraining_set(directory_path, json_file):
     # Initialize a variable to store the combined text of all files
     combined_text = ""
-
     # Walk through all directories and files in the directory
     for root, dirs, files in os.walk(directory_path):
         for filename in files:
             file_path = os.path.join(root, filename)
-
             # Read the contents of the file
-            with open(file_path, "r") as file:
-                file_contents = file.read()
+            try:
+                # First, detect the file encoding
+                with open(file_path, 'rb') as raw_file:
+                    raw_data = raw_file.read()
+                    result = chardet.detect(raw_data)
+                    file_encoding = result['encoding']
 
-            # Append the file contents to the combined text, with a separator
-            if combined_text:
-                combined_text += "\n\n---NEW FILE---\n\n"
-            combined_text += file_contents
+                # Now read the file with the detected encoding
+                with open(file_path, "r", encoding=file_encoding) as file:
+                    file_contents = file.read()
+                # Append the file contents to the combined text, with a separator
+                if combined_text:
+                    combined_text += "\n\n---NEW FILE---\n\n"
+                combined_text += file_contents
+                print(f"Successfully read file: {file_path}")
+            except UnicodeDecodeError as e:
+                print(f"Error reading file {file_path}: {e}. Skipping.")
+                continue  # Skip this file and continue with the next one
+            except IOError as e:
+                print(f"IOError reading file {file_path}: {e}. Skipping.")
+                continue  # Skip this file and continue with the next one
 
     # Create a dictionary with the combined text
     data = {"text": combined_text}
-
     # Save the dictionary as a JSON file
-    with open(json_file, "w") as file:
-        json.dump(data, file)
+    try:
+        with open(json_file, "w", encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False)
+        print("JSON file saved successfully.")
+    except IOError as e:
+        print(f"Error saving JSON file: {e}")
 
-    print("JSON file saved successfully.")
+def group_by_text(tuples_list):
+    # Dictionary to hold the groups with text as the key
+    groups = {}
+
+    # Iterate over each tuple in the list
+    for question, answer, text, textname in tuples_list:
+        # If the text is not yet a key in the dictionary, add it with an empty list
+        if text not in groups:
+            groups[text] = []
+
+        # Append the current tuple to the appropriate list
+        groups[text].append((question, answer, text, textname))
+
+    # Return the values of the dictionary, which are the lists of tuples grouped by text; also remove duplicates
+    return [
+        identify_duplicates.identify_duplicates(group)
+        for group in list(groups.values())
+    ]
 
 def create_pretraining_set(directory_path, json_file):
-    # Initialize a variable to store the combined text of all files
+    print("Starting to create pretraining set...")
     combined_text = ""
-
-    # Walk through all directories and files in the directory
     for root, dirs, files in os.walk(directory_path):
         for filename in files:
             file_path = os.path.join(root, filename)
+            try:
+                # Detect the file encoding
+                with open(file_path, 'rb') as raw_file:
+                    raw_data = raw_file.read()
+                    result = chardet.detect(raw_data)
+                    file_encoding = result['encoding']
 
-            # Read the contents of the file
-            with open(file_path, "r", encoding="utf-8") as file:
-                file_contents = file.read()
-
-            # Append the file contents to the combined text, with a separator
-            if combined_text:
-                combined_text += "\n\n---NEW FILE---\n\n"
-            combined_text += file_contents
+                # Read the file with the detected encoding
+                with open(file_path, "r", encoding=file_encoding) as file:
+                    file_contents = file.read()
+                
+                # Append the file contents to the combined text, with a separator
+                if combined_text:
+                    combined_text += "\n\n---NEW FILE---\n\n"
+                combined_text += file_contents
+                print(f"Successfully read file: {file_path}")
+            except Exception as e:
+                print(f"Error reading file {file_path}: {e}. Skipping.")
+                continue
 
     # Create a dictionary with the combined text
     data = {"text": combined_text}
 
     # Save the dictionary as a JSON file
-    with open(json_file, "w") as file:
-        json.dump(data, file)
-
-    print("JSON file saved successfully.")
+    try:
+        with open(json_file, "w", encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False)
+        print("Pretraining set created successfully.")
+    except IOError as e:
+        print(f"Error saving JSON file: {e}")
