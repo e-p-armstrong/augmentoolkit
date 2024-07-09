@@ -4,6 +4,8 @@
 
     Use the given criteria as a guide,  and classify each text according to each set of provided classes and criteria.
 
+    Only classify as one of the classes to choose from.
+
     NOTE that text may be truncated at the beginning or end; this is due to the way some code extracted the chunks of text, try to avoid factoring this into your classifications if possible.
 - role: user
   content: |

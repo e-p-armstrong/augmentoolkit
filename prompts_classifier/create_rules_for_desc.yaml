@@ -10,6 +10,8 @@
 
     Typically, the criteria will focus on identifying one of the classes (such as the presence of math equations, or a text as mostly metadata). The default classification should probably be the opposite of what your criteria focuses on identifying.
 
+    Your rules should only allow for the provided classes; do not create any intermediate classes.
+
     Be sure to account for edge cases when writing your guidelines.
 - role: user
   content: |

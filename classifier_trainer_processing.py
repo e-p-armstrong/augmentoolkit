@@ -1,5 +1,8 @@
 import asyncio
 
+from augmentoolkit.utils.head_tail_truncate import head_tail_truncate
+from augmentoolkit.utils.load_dataset import load_dataset
+
 async def main():
     
     import yaml
@@ -26,7 +29,7 @@ async def main():
     LOGICAL_MODEL = config["API"]["LOGICAL_MODEL"]
 
     LARGE_LOGICAL_MODEL = config["API"]["LARGE_LOGICAL_MODEL"]
-
+ 
     DOUBLE_CHECK_COUNTER = config["SYSTEM"][
         "DOUBLE_CHECK_COUNTER"
     ]  # Set to 1 to check outputs only once; set to 2 to check twice; set to 3 to check thrice, etc. Set to 0 to break everything in vet_question_loop() and elsewhere. Set to -1 and cause the universe to implode?
@@ -54,34 +57,52 @@ async def main():
     TRAIN_SET_INCREMENT = config["TRAINING"]["TRAIN_SET_INCREMENT"]
     TEST_SET_SIZE = config["TRAINING"]["TEST_SET_SIZE"]
     REQUIRED_ACCURACY = config["SYSTEM"]["REQUIRED_ACCURACY"]
+    CHUNK_SIZE = config["SYSTEM"]["CHUNK_SIZE"]
+    PREDICT_ON_WHOLE_SET_AT_THE_END = config["CLASSIFICATION"]["PREDICT_ON_WHOLE_SET_AT_THE_END"]
+    TRUNCATION_TYPE = config["TRAINING"]["TRUNCATION_TYPE"]
     
+    extensions = [".txt", ".md", ".json", ".jsonl", ".parquet"]
     
-    extensions = [".txt", ".md"]
-
     source_texts = []
     for extension in extensions:
-      path = f"{INPUT_FOLDER}/**/*" + extension
-      source_texts = source_texts + glob.glob(path, recursive=True)
-      
+        path = f"{INPUT_FOLDER}/**/*{extension}"
+        source_texts.extend(glob.glob(path, recursive=True))
+
     chunks = []
     for source_text in source_texts:
-        chunks += control_flow_functions.sentence_chunking_algorithm(
-            source_text, config["SYSTEM"]["CHUNK_SIZE"]
-        )
-        
+        if source_text.endswith(('.txt', '.md')):
+            chunks.extend(control_flow_functions.sentence_chunking_algorithm(
+                source_text, CHUNK_SIZE
+            ))
+        elif source_text.endswith(('.json', '.jsonl', '.parquet')):
+            dataset = load_dataset(source_text)
+            if 'text' not in dataset.columns:
+                print(f"Warning: 'text' column not found in {source_text}. Skipping this file.")
+                continue
+            for text in dataset['text']:
+                if TRUNCATION_TYPE == "head-tail":
+                    truncated_text = head_tail_truncate(text, max_length=CHUNK_SIZE)
+                else:
+                    truncated_text = text[:CHUNK_SIZE]
+                chunks.append((truncated_text, source_text))
+
     if TRAIN_SET_SIZE + TEST_SET_SIZE > len(chunks):
         print("\n\nTRAIN SET SIZE AND TEST SET SIZE TOO LARGE FOR EVEN A SINGLE CLASSIFIER TRAINING RUN GIVEN THE SIZE OF THE DATASET")
         print("REDUCE TRAIN OR TEST SET SIZE, OR ADD MORE INPUT DATA")
         print(f"For reference, the total length of the chunks is {len(chunks)}")
         sys.exit(1)
-        
+
     conversions = [("\n", " "), ("  ", " ")]
 
     chunks = [
         (control_flow_functions.fix_text(conversions, seq[0]), seq[1])
         for seq in chunks
     ]
+    random.shuffle(chunks)
     print("Chunking succeeded")
+    print("-----------------\nExample chunks:")
+    print(chunks[0])
+    print("-----------------")
         
     from tqdm import asyncio as tqdmasyncio
     import asyncio
@@ -187,10 +208,6 @@ async def main():
     with open(os.path.join(config["PATH"]["OUTPUT"], "TEST_DEBUG_OUTPUT_OF_LIST"),  'w') as f:
         f.write(json.dumps(text_label_tuples))
     
-    # TODO remove breakpoint below
-    input("\n\nHIT ENTER TO CONTINUE AFTER MANUALLY MAKING THE DATA WORK")
-    ###
-    
     classifier_counter = 0
     output_dir = os.path.join(config["PATH"]["OUTPUT"], "classifiers")
     os.makedirs(output_dir, exist_ok=True)
@@ -204,9 +221,10 @@ async def main():
     ### Test classifier against LLM
     
     has_passed_LLM_validation = False
+    max_iters = ["TRAINING"]["MAX_ITERS"]
     
-    while not has_passed_LLM_validation:
-        
+    while not has_passed_LLM_validation and max_iters > 0:
+        max_iters = max_iters - 1
         if chunks: # if we still have content; else, if it's empty, the classifier is as good as we'll get and we exit early
             # make the output dir
             output_dir = os.path.join(config["PATH"]["OUTPUT"], "truth_labels_classification")
@@ -258,13 +276,16 @@ async def main():
         else:
             print("Ran out of training chunks")
             sys.exit(1) # TODO failure logic
-            
-    print("finished training classifier")
-    print("Executing on entire set...")
     
-    output_dir = os.path.join(config["PATH"]["OUTPUT"], "final_classifier_output")
-    os.makedirs(output_dir, exist_ok=True)
-    run_classifier(model=model, output_dir=output_dir, input_list=chunks, output_list=classifier_labels)
+    print("finished training classifier")
+    print(f"ITERATION COMPLETE\nITERATIONS DONE: {max_iters}\nDID REACH THRESHOLD?: {has_passed_LLM_validation}")
+
+    if PREDICT_ON_WHOLE_SET_AT_THE_END:
+        print("Executing on entire set...")
+        
+        output_dir = os.path.join(config["PATH"]["OUTPUT"], "final_classifier_output")
+        os.makedirs(output_dir, exist_ok=True)
+        run_classifier(model=model, output_dir=output_dir, input_list=chunks, output_list=classifier_labels)
     # run_async_many(classifier_labels, model, output_dir, input_list=chunks, func=run_classifier, output_list=classifier_labels)
     
 asyncio.run(main())

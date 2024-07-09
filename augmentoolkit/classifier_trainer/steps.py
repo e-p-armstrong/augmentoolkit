@@ -119,8 +119,19 @@ async def create_label(idx, inp, classes=None, engine_wrapper=None, output_dir=N
             return pred
         except:
             pass
+        
+        # Handle the case where the model says something like "1. positive." or "1. positive"
+        try:
+            parts = predicted_label.split(".")
+            if len(parts) >= 2:
+                pred = int(parts[0].strip())
+                label = parts[1].strip().rstrip('.')
+                if classes[pred].strip().lower() == label.lower():
+                    return pred
+        except:
+            pass
             
-        raise Exception(f"\n-----\/----\nNo proper label found! Generated {classification}\n\nExtracted {predicted_label}\n\nAnd tried to match with{classes}") # TODO # NOTE result should probably be in format, (text, textname, labelstr)
+        raise Exception(f"\n-----\/----\nNo proper label found! Generated {classification}\n\nExtracted {predicted_label}\n\nAnd tried to match with{classes}") #
     
     
     prompt_path = "create_labels_for_chunk"

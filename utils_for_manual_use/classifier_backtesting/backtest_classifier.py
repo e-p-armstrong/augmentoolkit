@@ -1,4 +1,5 @@
 import json
+import math
 import os
 from sys import argv
 import sys
@@ -9,9 +10,24 @@ sys.path.append(os.path.abspath('../../augmentoolkit/utils'))
 
 from load_dataset import load_dataset
 
+def head_tail_truncate(text, max_length=510):
+    """
+    Truncate the text using the head+tail method.
+    Keep the first head_length characters and the last (max_length - head_length) characters.
+    """
+    
+    head_length = math.floor(0.2*max_length)
+    tail_length = max_length - head_length
+    if len(text) <= max_length:
+        return text
+    return text[:head_length] + text[-(tail_length - head_length):]
+
+
 classifier_folder_name = argv[1]
 PREDICTION_BATCH_SIZE = 10
 OUTPUT_FILE_PATH = "./predicted_output.jsonl"
+MAX_TEXT_LENGTH = 900 # in characters
+HEAD_TAIL_TRUNCATE = True
 
 
 classifier_path_dir = os.path.join("./place_classifier_folder_here", classifier_folder_name)
@@ -19,7 +35,7 @@ classifier_path_dir = os.path.join("./place_classifier_folder_here", classifier_
 model = AutoModelForSequenceClassification.from_pretrained(classifier_path_dir, num_labels=2)
 tokenizer = AutoTokenizer.from_pretrained(classifier_path_dir)
 
-def predict(text, prediction_batch_size=PREDICTION_BATCH_SIZE):
+def predict(text, prediction_batch_size=PREDICTION_BATCH_SIZE, max_length=MAX_TEXT_LENGTH):
     outputs = []
     
     # Calculate the total number of batches
@@ -28,7 +44,14 @@ def predict(text, prediction_batch_size=PREDICTION_BATCH_SIZE):
     # Process text in batch_size groups with tqdm progress bar
     for i in range(0, len(text), prediction_batch_size):
         batch = text[i:i+prediction_batch_size]
-        encoding = tokenizer(batch, return_tensors='pt', padding=True, truncation=True)
+        
+        if HEAD_TAIL_TRUNCATE:
+            # Apply head_tail_truncate to each text in the batch
+            truncated_batch = [head_tail_truncate(t, max_length) for t in batch]
+        else:
+            truncated_batch = [t[:max_length] for t in batch]
+        
+        encoding = tokenizer(truncated_batch, return_tensors='pt', padding=True, truncation=True)
         batch_outputs = model(**encoding)
         batch_predictions = batch_outputs.logits.argmax(-1)
         outputs.extend(batch_predictions.tolist())
@@ -76,7 +99,7 @@ for dataset_name, dataset in datasets.items():
         batch_texts = texts[i:i+PREDICTION_BATCH_SIZE]
         batch_labels = labels[i:i+PREDICTION_BATCH_SIZE]
         
-        batch_predictions = predict(batch_texts)
+        batch_predictions = predict(batch_texts, max_length=MAX_TEXT_LENGTH)
         predictions.extend(batch_predictions)
         
         batch_correct = sum(p == l for p, l in zip(batch_predictions, batch_labels))
