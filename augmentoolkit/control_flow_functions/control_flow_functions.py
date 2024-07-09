@@ -1086,7 +1086,9 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
     # add tokens to the paragraph until we reach the max length,
     # create chunks out of the remainder of the paragraph (split at max chunk length until it's done)
     # if the final chunk does not have the max length, then make it the new current chunk, set the current token count to its length, and continue with the for loop.
-
+    # Ensure max_char_length is an integer
+    max_char_length = int(max_char_length)
+    
     for paragraph in paragraphs:
         paragraph = paragraph.strip()  # Remove leading and trailing whitespace
         if not paragraph:  # Skip empty paragraphs
@@ -1513,7 +1515,7 @@ def create_pretraining_set(directory_path, json_file):
             file_path = os.path.join(root, filename)
 
             # Read the contents of the file
-            with open(file_path, "r") as file:
+            with open(file_path, "r", encoding="utf-8") as file:
                 file_contents = file.read()
 
             # Append the file contents to the combined text, with a separator
