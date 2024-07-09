@@ -22,10 +22,11 @@ SYSTEM:
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
   REQUIRED_ACCURACY: 0.98
 CLASSIFICATION:
-  CLASSES: ["", "positive"] #["absent", "present"] # ["negative", "positive"]
+  CLASSES: ["negative", "positive"] # Only put two labels here; binary classification only for now, until I figure out how to train multilabel models (this pipeline was hacked in less than a day). ["absent", "present"] # ["negative", "positive"]
   DESC: "Classify whether the text (a movie review) is positive or negative." # "Whether a text expresses positive or negative emotion." # NOTE to self, should probably include examples from a variety of different kinds of classification: "is this present", "is this x or y category", and subjective like "is this good or bad (quality)"
   PREDICT_ON_WHOLE_SET_AT_THE_END: False
 TRAINING:
+  MODEL_PATH: "distilbert-base-uncased" # Hugging Face path of the model you want to train on. Has to be a sequence classification model.
   TRAIN_SET_SIZE: 500
   TRAIN_SET_INCREMENT: 100
   TEST_SET_SIZE: 30

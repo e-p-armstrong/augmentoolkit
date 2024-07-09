@@ -223,14 +223,14 @@ def train_classifier(text_label_tuples, classifier_counter, output_dir):
     ### TRAINING CODE
     dataset = load_dataset("json", data_files=path_to_dataset)
     
-    tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+    tokenizer = AutoTokenizer.from_pretrained(config["TRAINING"]["MODEL_PATH"])
     
     def tokenize_function(examples):
         return tokenizer(examples["text"], padding="max_length", truncation=True)
     
     tokenized_datasets = dataset.map(tokenize_function, batched=True)
     
-    model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=2)
+    model = AutoModelForSequenceClassification.from_pretrained(config["TRAINING"]["MODEL_PATH"], num_labels=2)
     
     training_args = TrainingArguments(
         output_dir=output_dir,

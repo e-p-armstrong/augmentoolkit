@@ -1,7 +1,26 @@
 # Augmentoolkit — infinite domain-specific instruct data
-Turn any raw text into a high-quality custom dataset for training new LLMs, using AI that can run on your computer. Make data gathering a painless step of the model creation process. Augmentoolkit is the easy-to-use, customizable, open-source, and cost-effective data generation solution. No OpenAI needed.
+Your custom LLMs need custom data. Augmentoolkit creates quality data quickly, cheaply, and painlessly.
+
+Now you can turn any raw text into a high-quality custom dataset for training new LLMs, using open-source AI. Make data gathering a painless step of the model creation process. Augmentoolkit is the easy-to-use, customizable, open-source, and cost-effective data generation solution. No OpenAI needed.
 
 Augmentoolkit is an AI-powered tool that lets you create domain-specific data to finetune LLMs, using open-source AI.
+
+### RECENT FEATURES UPDATE
+Augmentoolkit can now train a small classification model on custom data — *on a cpu* Basically:
+
+1. LLM generates classification data based on a small subset of some real text you give it
+2. Classifier is trained on the LLM data
+3. Classifier is saved and evaluated against the LLM for accuracy
+4. If the classifier is not good enough, add more data and train a new classifier. If it is good enough, the loop stops.
+
+I used this pipeline to train a sentiment analysis distilbert model on the IMDb set, *without using the human labels.* It got 88% accuracy — only about [5% less than models trained on the human labels](https://huggingface.co/lvwerra/distilbert-imdb).
+
+Creation of models using this pipeline costs like, maybe a dollar or two. Less than a coffee per classifier.
+
+The goal of the classifier creator (name subject to change) is to make large-scale data classification and organization trivially easy. Classifiers are often used by more hardcore components of the machine learning community, and now with Augmentoolkit, you can create them at scale.
+
+To get started, modify `classifier_trainer_config.yaml` and run `classifier_trainer_processing.py`!
+OK, back to your regularly-scheduled README.
 
 Cite:
 [![DOI](https://zenodo.org/badge/726083337.svg)](https://zenodo.org/doi/10.5281/zenodo.11525927)
@@ -44,16 +63,17 @@ Finally, **using the model you create should be easy and valuable:**
     - [Installation](#installation)
     - [`config.yaml` step-by-step](#configyaml-step-by-step)
     - [Customization](#customization)
-    - [Visual explanation of steps](#visual-explanation-of-steps)
+    - [Visual Explanation of Steps](#visual-explanation-of-steps)
+    - [New Pipeline Usage Details](#classifier-creator)
 4. [What to do with what you get out](#what-to-do-with-what-you-get-out)
 5. [Roadmap](#roadmap)
-6. [Self Promotion (read if you're a business!)](#for-businesses)
+6. [Self Promotion (Read if you're a Business!)](#for-businesses)
 7. [Community](#community)
 8. [Latest Update Info](#latest-update-info)
 9. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
 10. [Contributing](#contributing)
 11. [Join A Discord for Dataset Generation!](#join-a-discord-for-dataset-generation)
-12. [Using "Aphrodite mode" (deprecated)](#using-aphrodite-mode-deprecated)
+12. [Using "Aphrodite mode" (deprecated)](#generating-locally)
 
 ## Quickstart
 
@@ -80,7 +100,7 @@ After installing the dependencies:
 
 Dataset creation is currently the most painful, and most important, step of the finetune-creation process. Most people have to resort to either A) burning an obscene number of OpenAI API credits, or B) spending dozens, if not hundreds, of hours accumulating a hybrid dataset based off of your own conversations with bots. The OpenAI approach is based on a paid service (whose TOS you're violating) that can ban you at any second, whose writing style you probably hate, which is getting worse every month, and whose synthetic data critically lacks variety. Handwriting the examples is far too slow to iterate on, and does not scale at all, meaning you're missing out on huge potential performance increases that come with more data. If you're a company and you pay people to create examples in bulk, then it's possibly pricier than even OpenAI — also not scalable at all. And moreover, if we're literally creating machines that can write, why do we spend most of our time writing?
 
-**Augmentoolkit** is meant to make high-quality data generation easy, fast, shareable, configurable, and for everyone. It is meant to allow the easy creation of datasets about any knowledge that exists in plain text. It is meant to allow models to bootstrap additional training data for themselves. It is meant to allow any enthusiast, regardless of computer strength, to contribute to the advancement of AI by generating swathes of data for cheap. It's meant to expand the possibilities of what finetunes can be built, by making data gathering as easy as running a script. Whether you're finetuning a company chatbot to understand your business's information, are creating an [AI ambassador for your community that can explain your mission and goals](linktoverusmediumarticle), or are doing something else entirely, Augmentoolkit exists to make your data problems a bit less problematic.
+**Augmentoolkit** is meant to make high-quality data generation easy, fast, shareable, configurable, and for everyone. It is meant to allow the easy creation of datasets about any knowledge that exists in plain text. It is meant to allow models to bootstrap additional training data for themselves. It is meant to allow any enthusiast, regardless of computer strength, to contribute to the advancement of AI by generating swathes of data for cheap. It's meant to expand the possibilities of what finetunes can be built, by making data gathering as easy as running a script. Whether you're finetuning a company chatbot to understand your business's information, are creating an [AI ambassador for your community that can explain your mission and goals](https://finance.yahoo.com/news/introducing-llama-3-verusgpt-open-183700217.html?guccounter=1), or are doing something else entirely, Augmentoolkit exists to make your data problems a bit less problematic.
 
 A flowchart of Augmentoolkit's operation can be found in the [Usage](#flowchart) section.
 
@@ -211,6 +231,44 @@ SKIP:
 
 This lets you control whether you want to skip certain steps of the pipeline. QUESTION_CHECK should generally not be skipped under any circumstances, but ANSWER_RELEVANCY_CHECK may be skipped if you are using the "negative" prompt overrides, by default located in `./prompts_override_negative_question`. So, turn any one of these on if you want the corresponding step to simply be skipped. These options allow a degree of control flow control, without touching code.
 
+#### Classifier Creator
+**NEW!**
+
+The classifier creator lets you train a whole classification model in minutes. Generation can be done locally or via an API, while model training is done locally on the CPU (classifiers are just that easy to train!)
+
+When do you want a classifier? Maybe you want to go through a dataset and classify data as "high-quality" or "low-quality" and train on only the high-quality stuff. Or, maybe you want to make some custom moderation for an application. Or, maybe you want to hunt through a large amount of text for specific kinds of information. Classifiers are old-school, but they're pretty cool and surprisingly useful nonetheless.
+
+Here's how to run it.
+
+`pip install -r requirements.txt`
+
+then, modify `classifier_trainer_config.yaml` to have the right API key and base url.
+
+then,
+
+`python classifier_trainer_processing.py`
+
+Prompts for this new pipeline can be found in `prompts_classifier`.
+
+Most of the `config` settings are the same as vanilla Augmentoolkit, but here are the points of difference:
+
+  `REQUIRED_ACCURACY: 0.90` is a 
+- `CLASSIFICATION`
+  - `CLASSES` is a list of strings that are the names of the classes the model will be classifying your text with. So, `["negative", "positive"]` for instance. These will appear as `0` and `1` respectively in the actual training data. This early version of the pipeline only supports binary classification (2 classes) BUT it has been built to make adding more classes relatively easy in the future, so expect that to arrive.
+  - `DESC` is a string that describes what the classes mean. Something like `"Classify whether the text (a movie review) is positive or negative."` or `"Whether a text expresses positive or negative emotion."` or `Classify the text as metadata if it is clearly metadata, tables of contents, publication information, copyright info — anything not the actual meat of a book or article. Classify it as content if it is clearly content that actually means something. If it contains both, classify it as metadata.`
+  - `PREDICT_ON_WHOLE_SET_AT_THE_END` is a boolean that decides whether or not to run the newly-trained classifier on the whole input text at the end. Turn this on if you are feeding Augmentoolkit the same data you want to eventually sort into two different classes..
+`TRAINING:`
+  - `MODEL_PATH` the path to the model on Hugging Face that you want to train your classifier on. This pipeline is tested on `distilbert-base-uncased`
+  `TRAIN_SET_SIZE` how many chunks to take for the first training run. A decent default value is 500.
+  `TRAIN_SET_INCREMENT` how many new chunks to add each time the classifier fails to match the LLM's performance
+  TEST_SET_SIZE: 30
+  TRUNCATION_TYPE: "head-tail" # options: head-tail (take first few tokens and a bunch of the ones at the end); end truncation (cut off excess stuff that does not fit into the chunk size at the end)
+  MAX_ITERS: 5
+
+**NOTE that the classifier creator can also take .json, .jsonl, and .parquet files as input, if they have a "text" column! This lets you use off-the-shelf datasets from Hugging Face, such as [Enron emails](https://huggingface.co/datasets/jacquelinehe/enron-emails) or [FineWeb](https://huggingface.co/datasets/HuggingFaceFW/fineweb)!**
+
+
+
 ## Important Files (If you're modifying the code)
 
 Starting from more common things to less common things:
@@ -230,16 +288,26 @@ Here is a flowchart detailing how a typical run of Augmentoolkit may proceed. Th
 
 The important files to look out for in your `OUTPUT` folder are `simplified_data_no_rag.jsonl`, `simplified_data_rag.jsonl`, and `pretraining.json`. These are what you will most commonly use for training. The other top-level files are there incase you want more information, such as the chunk and name of the file that each conversation was generated from. But for training, you will want `simplified_data_no_rag.jsonl`, `simplified_data_rag.jsonl`, and `pretraining.json`. All are already formatted for use with the [Axolotl](https://github.com/OpenAccess-AI-Collective/axolotl) open-source training library. All you need to do is use these datasets like how the provided configs in `_model_training_configs/` are used.
 
-The format of the conversational files is called "shareGPT", and is a common format across many datasets. `pretraining.json` however is formatted as pretraining data. To bake factual information into an LLM, it is recommended you use a full finetune or (cheaper) GaLore tuning, combined with continued pretraining on the source text + the instruct data that Augmentoolkit generates. If you want a more in-depth example, check out the provided configs, or the second video of the [Video Documentation]().
+The format of the conversational files is called "shareGPT", and is a common format across many datasets. `pretraining.json` however is formatted as pretraining data. To bake factual information into an LLM, it is recommended you use a full finetune or (cheaper) GaLore tuning, combined with continued pretraining on the source text + the instruct data that Augmentoolkit generates. If you want a more in-depth example, check out the provided configs, or the second video of the [Video Documentation](https://youtu.be/3YpO-n1U8qs).
+
+In a recent update, Augmentoolkit gained the functionality where you get data from the generation of questions, filtering of input chunks, and conversation generation, as well. These can be identified by being `.jsonl` files with `_DATAGEN_OUTPUT` in their filenames. You'll understand what exactly they are when you look at one.
+
+They're in ShareGPT format for easy training, and can be used to bulk up a training run by acting as yet more diverse data on the given subject. They can also be used to make LLMs that are experts in running as part of Augmentoolkit specifically — train a model on enough of these, and you will get a powerful tool for local inference.
 
 ## Roadmap
 
-In the coming weeks and months, I plan to start using Augmentoolkit to produce open-source models in popular, specific domains. Difficulties encountered will fuel further development of this project. Let me know what kinds of LLMs you want built!
+In the coming weeks and months, Augmentoolkit will be expanded with additional pipelines, capabilities, and updates. I'm working in collaboration with AlignmentLab AI for some of this!
+
+One specific pipeline coming up is ultra-long context instruct data. Let me know if there are other kinds of pipelines you'd like to see, and I'll add them too!
+
+Do you have data generation or data cleaning code? I welcome PRs adding new pipelines! The only thing you need to do with it is 1) ensure that it has a `config.yaml` file of some kind for settings, 2) ensure it has its own script (like `processing.py`), and 3) put any utility functions in the `augmentoolkit/` directory.
+
+Let's make the best data generation tool in the world!
 
 ## For Businesses
-I work with AI SAAS startups that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? I can modify Augmentoolkit for any domain and for tasks beyond question answering, and I'd be happy to help you painlessly create the data — and data-creation tools — you require. Given that I made the original version of the darn thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
+I work with startups and companies that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? Or do you want to apply AI models *that **you** own* to an area which generalist ones are struggling with? I'd be happy to help you painlessly create this custom AI, and the documented tools to build more of them. Given that I made the original version of this thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
 
-*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to master open source model pipelines enough to make Augmentoolkit work well). If you're a hobbyist and have time to experiment with its base version for casual or personal uses, by all means go for it.
+*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to master open source model pipelines enough to make Augmentoolkit work well, on top of my existing ML experience). If you're a hobbyist and have time to experiment with its base version for casual or personal uses, by all means go for it!
 
 ## Community
 
@@ -257,7 +325,7 @@ Augmentoolkit has received a major update as of Jun 12, 2024. Two whole new prom
 
 In the most recent update, RP mode was removed. You can revert to previous versions if you need that. The code is now much cleaner and more maintainable as a result of this.
 
-Many of these changes are inspired by the recently-released [Augmentoolkit](https://github.com/e-p-armstrong/Augmentoolkit) which I developed for (and as part of) the Verus community. Augmentoolkit is specific for Verus, but it's open-sourced, and so I ported its key improvements back here. Go check it out if you're interested the future of blockchain technology!
+Many of these changes are inspired by the recently-released [Verustoolkit](https://github.com/e-p-armstrong/verustoolkit) which I developed for (and as part of) the Verus community. Verustoolkit is specific for Verus, but it's open-sourced, and so I ported its key improvements back here. Go check it out if you're interested the future of blockchain technology!
 
 ## Think this is cool? Connect with me elsewhere!
 
@@ -272,14 +340,14 @@ If you think this project is cool and useful, great! I'm genuinely happy that yo
 
 ## Contributing
 
-Contributions are appreciated! Whether it's a new API endpoint, or a set of prompts you've found to work really well, please submit a PR! Reviews are fast here. Anything that can further the goal of democratized dataset generation is welcome.
+Contributions are appreciated! Whether it's a new API endpoint, or a set of prompts you've found to work really well, or an entirely new pipeline, please submit a PR! Reviews are fast here. Anything that can further the goal of democratized dataset generation is welcome.
 
 ## Join A Discord for Dataset Generation!
 MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has a server where he's working on a new quantization engine. There's a corner to discuss Augmentoolkit there! Come check it out and connect at [https://discord.com/invite/foxengine-ai](https://discord.com/invite/foxengine-ai)!
 
-## Using "Aphrodite mode" (deprecated)
+## Generating Locally
 
-NOTE: Aphrodite mode is pretty much deprecated. If you are running on your own or rented hardware, unless you are doing a truly massive amount of data generation, it is advisable to just use the best model you can for all steps. This means you can just run `processing.py` as normal.
+One constraint of local generation is that you can only run one model at once. Augmentoolkit typically uses two different models: a small one for bulk work, and a large smart one for tough tasks. 
 
 - First off, make sure you're on a Linux operating system. If you want local generation with a non-Linux operating system, it is recommended that you run a local inference engine with an openai-compatible API, and then point Augmentoolkit at the local inference engine by changing the BASE_URL.
 - Then install aphrodite engine and get it working. That's a whole process, you can find the details on [their repo](https://github.com/PygmalionAI/aphrodite-engine/tree/main)
