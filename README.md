@@ -17,7 +17,9 @@ Augmentoolkit can now train a small classification model on custom data — *on 
 
 I used this pipeline to train a sentiment analysis distilbert model on the IMDb set, *without using the human labels.* **It got 88% accuracy** — only about [5% less than models trained on the human labels](https://huggingface.co/lvwerra/distilbert-imdb).
 
-Creation of models using this pipeline costs like, maybe a dollar or two. Less than a coffee per classifier.
+*So a script that you can run by clicking a button got nearly the same results as a painstaking effort by Stanford NLP. That is the intended utility of this new pipeline.*
+
+Creation of models using this pipeline costs like, maybe a dollar or two, if that. Less than a coffee per classifier. Make classifiers at scale, and make scale data work for you.
 
 The goal of the classifier creator (name subject to change) is to make large-scale data classification and organization trivially easy. Classifiers are often used by more hardcore components of the machine learning community, and now with Augmentoolkit, you can create them at scale.
 
