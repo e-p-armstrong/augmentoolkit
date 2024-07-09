@@ -238,36 +238,38 @@ The classifier creator lets you train a whole classification model in minutes. G
 
 When do you want a classifier? Maybe you want to go through a dataset and classify data as "high-quality" or "low-quality" and train on only the high-quality stuff. Or, maybe you want to make some custom moderation for an application. Or, maybe you want to hunt through a large amount of text for specific kinds of information. Classifiers are old-school, but they're pretty cool and surprisingly useful nonetheless.
 
-Here's how to run it.
+Here's how to run it (a quickstart).
 
 `pip install -r requirements.txt`
 
-then, modify `classifier_trainer_config.yaml` to have the right API key and base url.
+Then, modify `classifier_trainer_config.yaml` to have the right API key and base url.
 
-then,
+Then, download the IMDb dataset from Hugging Face:
 
-`python classifier_trainer_processing.py`
+![](images/imdb_download.jpg)
+
+Then run: `python classifier_trainer_processing.py`
 
 Prompts for this new pipeline can be found in `prompts_classifier`.
 
 Most of the `config` settings are the same as vanilla Augmentoolkit, but here are the points of difference:
 
-  `REQUIRED_ACCURACY: 0.90` is a 
+- `LOGICAL_MODEL` In this pipeline, LOGICAL_MODEL handles the majority of the classification used to build the training data for your custom classifier. A model like Llama 3 8b works great.
+- `LARGE_LOGICAL_MODEL` is used to 1) create the "rules" that the LLM classifier follows (based on your description of the task and what the classes mean). The large logical model is also used to do the classifications during the model evaluation phase, to make sure that the classifier is high quality and is not just learning the stupidity of a smaller model.
+- `REQUIRED_ACCURACY: 0.90` under the `SYSTEM` heading, this field (less than 1) is the percentage of classifications that a trained classifier model must get "right" (compared to the LLM's classification) in order to pass and break of the continual improvement loop. Dpeending on your chosen classifier model and task, you may want to set this a bit lower — some of them can be pretty small.
 - `CLASSIFICATION`
   - `CLASSES` is a list of strings that are the names of the classes the model will be classifying your text with. So, `["negative", "positive"]` for instance. These will appear as `0` and `1` respectively in the actual training data. This early version of the pipeline only supports binary classification (2 classes) BUT it has been built to make adding more classes relatively easy in the future, so expect that to arrive.
   - `DESC` is a string that describes what the classes mean. Something like `"Classify whether the text (a movie review) is positive or negative."` or `"Whether a text expresses positive or negative emotion."` or `Classify the text as metadata if it is clearly metadata, tables of contents, publication information, copyright info — anything not the actual meat of a book or article. Classify it as content if it is clearly content that actually means something. If it contains both, classify it as metadata.`
   - `PREDICT_ON_WHOLE_SET_AT_THE_END` is a boolean that decides whether or not to run the newly-trained classifier on the whole input text at the end. Turn this on if you are feeding Augmentoolkit the same data you want to eventually sort into two different classes..
 `TRAINING:`
   - `MODEL_PATH` the path to the model on Hugging Face that you want to train your classifier on. This pipeline is tested on `distilbert-base-uncased`
-  `TRAIN_SET_SIZE` how many chunks to take for the first training run. A decent default value is 500.
-  `TRAIN_SET_INCREMENT` how many new chunks to add each time the classifier fails to match the LLM's performance
-  TEST_SET_SIZE: 30
-  TRUNCATION_TYPE: "head-tail" # options: head-tail (take first few tokens and a bunch of the ones at the end); end truncation (cut off excess stuff that does not fit into the chunk size at the end)
-  MAX_ITERS: 5
+  - `TRAIN_SET_SIZE` how many chunks to take for the first training run. A decent default value is 500.
+  - `TRAIN_SET_INCREMENT` how many new chunks to add each time the classifier fails to match the LLM's performance
+  - `TEST_SET_SIZE` How many test samples are taken when your new classifier's performance is being evaluated against the LLM. The number of times the classifier agrees with the LLM determines the accuracy score.
+  - `TRUNCATION_TYPE` Some chunks are too big for the context length of your classifier model. So you can truncate. The options: head-tail (take first few tokens and a bunch of the ones at the end); end truncation (cut off excess stuff that does not fit into the chunk size at the end)
+  - `MAX_ITERS` To avoid getting into an infinite money-spending loop, this is where you set an integer that marks the maximum number of datagen+training runs that will be performed. Note that the classifier creator is *much* cheaper than Augmentoolkit, so this can be set pretty high without fear. 5
 
 **NOTE that the classifier creator can also take .json, .jsonl, and .parquet files as input, if they have a "text" column! This lets you use off-the-shelf datasets from Hugging Face, such as [Enron emails](https://huggingface.co/datasets/jacquelinehe/enron-emails) or [FineWeb](https://huggingface.co/datasets/HuggingFaceFW/fineweb)!**
-
-
 
 ## Important Files (If you're modifying the code)
 
@@ -282,7 +284,7 @@ Starting from more common things to less common things:
 
 ### Visual Explanation of Steps
 Here is a flowchart detailing how a typical run of Augmentoolkit may proceed. The source text can be anything with information you can ask questions about.
-![](flowchart.jpg)
+![](images/flowchart.jpg)
 
 ## What to do with what you get out
 
@@ -353,10 +355,10 @@ One constraint of local generation is that you can only run one model at once. A
 - Then install aphrodite engine and get it working. That's a whole process, you can find the details on [their repo](https://github.com/PygmalionAI/aphrodite-engine/tree/main)
 - Follow the first few steps of the quickstart: get the repo onto your computer and install its dependencies.
 - Open the file `config.yaml` and change the MODE to "aphrodite"
-![](change_mode_to_aphrodite.png)
+![](images/change_mode_to_aphrodite.png)
 - In `config.yaml`, change the MODEL field to a HuggingFace Path to a model. Make sure it has a large enough context window! And be sure to use the right quantization mode for your chosen model. The model should have some indication of what quantization type it uses. Also, change `COMPLETION_MODE` to True
-![](hf-path-1.png)
-![](hf-path-2.png)
+![](images/hf-path-1.png)
+![](images/hf-path-2.png)
 - Run `(aphrodite_use)_processing_phase_1.py`
 - Run `(aphrodite_use)_processing_phase_2.py` once phase 1 finishes.
 - Control + C when it logs stuff about saving dataset files to `simplified_data.jsonl`. It seems that something about Aphrodite's code has changed since I implemented it in here, and it no longer automatically exits the script.

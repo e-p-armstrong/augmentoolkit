@@ -1,5 +1,5 @@
 PATH:
-  INPUT: "./enron"
+  INPUT: "./imdb"
   OUTPUT: "./classifier_output"
   DEFAULT_PROMPTS: "./prompts_classifier" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts_classifier" # Where Augmentoolkit first looks for prompts
@@ -20,7 +20,7 @@ SYSTEM:
   COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format. Not all APIs support completion mode.
   MODE: "api" # can be one of "api"|"aphrodite"
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
-  REQUIRED_ACCURACY: 0.98
+  REQUIRED_ACCURACY: 0.90
 CLASSIFICATION:
   CLASSES: ["negative", "positive"] # Only put two labels here; binary classification only for now, until I figure out how to train multilabel models (this pipeline was hacked in less than a day). ["absent", "present"] # ["negative", "positive"]
   DESC: "Classify whether the text (a movie review) is positive or negative." # "Whether a text expresses positive or negative emotion." # NOTE to self, should probably include examples from a variety of different kinds of classification: "is this present", "is this x or y category", and subjective like "is this good or bad (quality)"
