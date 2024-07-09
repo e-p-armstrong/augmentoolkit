@@ -100,7 +100,7 @@ After installing the dependencies:
 3. Run `export GRADIO_TEMP_DIR=<raw_txt_input_absolute_path>`
 4. Run `python app.py`
 
-![webui.jpg](webui.jpg)
+![webui.jpg](images/webui.jpg)
 
 ## Vision
 
