@@ -240,6 +240,7 @@ def train_classifier(text_label_tuples, classifier_counter, output_dir):
         warmup_steps=100,
         weight_decay=0.01,
         logging_dir=os.path.join(output_dir, "logs"),
+        use_cpu=True
     )
     
     def compute_metrics(pred):
