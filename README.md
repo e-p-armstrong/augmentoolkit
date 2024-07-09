@@ -52,6 +52,9 @@ Finally, **using the model you create should be easy and valuable:**
 - **Training a model as a means of learning:** dealing with a large and complex subject that you need to master? Training an LLM with Augmentoolkit creates an assistant that understands the big picture of what you're trying to figure out. I have learned from AI I have created before, and you — or your users/employees/clients — can too.
 - **Documented LLM setup (RAG included!):** from quantizing to chatting, it might take 30 minutes of following provided step-by-step video instructions (easy!) to set it up the first time you do this. The second it will likely take less than five or ten. Tutorials are taken seriously here.
 
+
+**We can also build classifiers now. They're even cheaper and faster than LLM data.**
+
 ## Demo video & Video Tutorials:
 [3-Minute Demo Video Here](https://www.youtube.com/watch?v=m32fM8S_DeY&ab_channel=Heralax)
 
