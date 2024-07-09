@@ -68,7 +68,7 @@ def convert_logging_to_dataset(directory):
         
     with open(output_file_path, "w") as f:
         existing_files = glob.glob(
-            os.path.join(output_dir, "*.txt")
+            os.path.join(output_dir, "*.yaml")
         )
         
         for file in existing_files:
