@@ -18,7 +18,7 @@ SYSTEM:
   USE_FILENAMES: False # give the AI context from the filenames provided to it. Useful if the filenames are meaningful, otherwise turn them off.
   DOUBLE_CHECK_COUNTER: 1 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
   SUBSET_SIZE: 1500
-  USE_SUBSET: True # Whether to take only the first 13 chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
+  USE_SUBSET: True # Whether to take only the first few chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
   CONCURRENCY_LIMIT: 50 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
   COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format. Not all APIs support completion mode.
   MODE: "api" # can be one of "api"|"aphrodite"

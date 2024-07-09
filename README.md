@@ -66,16 +66,16 @@ Finally, **using the model you create should be easy and valuable:**
 1. [Quickstart](#quickstart)
     - [Terminal](#terminal)
     - [Web UI](#web-ui)
-2. [Vision (Introduction)](#vision)
-3. [Usage](#usage)
+2. [Self Promotion (Read if you're a Business!)](#for-businesses)
+3. [Vision (Introduction)](#vision)
+4. [Usage](#usage)
     - [Installation](#installation)
     - [`config.yaml` step-by-step](#configyaml-step-by-step)
     - [Customization](#customization)
     - [Visual Explanation of Steps](#visual-explanation-of-steps)
     - [New Pipeline Usage Details](#classifier-creator)
-4. [What to do with what you get out](#what-to-do-with-what-you-get-out)
-5. [Roadmap](#roadmap)
-6. [Self Promotion (Read if you're a Business!)](#for-businesses)
+5. [What to do with what you get out](#what-to-do-with-what-you-get-out)
+6. [Roadmap](#roadmap)
 7. [Community](#community)
 8. [Latest Update Info](#latest-update-info)
 9. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
@@ -103,6 +103,15 @@ After installing the dependencies:
 4. Run `python app.py`
 
 ![webui.jpg](images/webui.jpg)
+
+---
+
+## For Businesses
+I work with startups and companies that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? Or do you want to apply AI models *that **you** own* to an area which generalist ones are struggling with? I'd be happy to help you painlessly create this custom AI, and the documented tools to build more of them. Given that I made the original version of this thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
+
+*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to master open source model pipelines enough to make Augmentoolkit work well, on top of my existing ML experience). If you're a hobbyist and have time to experiment with its base version for casual or personal uses, by all means go for it!
+
+---
 
 ## Vision
 
@@ -331,15 +340,6 @@ One specific pipeline coming up is ultra-long context instruct data. Let me know
 Do you have data generation or data cleaning code? I welcome PRs adding new pipelines! The only thing you need to do with it is 1) ensure that it has a `config.yaml` file of some kind for settings, 2) ensure it has its own script (like `processing.py`), and 3) put any utility functions in the `augmentoolkit/` directory.
 
 Let's make the best data generation tool in the world!
-
----
-
-## For Businesses
-I work with startups and companies that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? Or do you want to apply AI models *that **you** own* to an area which generalist ones are struggling with? I'd be happy to help you painlessly create this custom AI, and the documented tools to build more of them. Given that I made the original version of this thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
-
-*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to master open source model pipelines enough to make Augmentoolkit work well, on top of my existing ML experience). If you're a hobbyist and have time to experiment with its base version for casual or personal uses, by all means go for it!
-
----
 
 ## Community
 
