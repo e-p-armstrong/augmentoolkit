@@ -22,7 +22,8 @@ Creation of models using this pipeline costs like, maybe a dollar or two. Less t
 The goal of the classifier creator (name subject to change) is to make large-scale data classification and organization trivially easy. Classifiers are often used by more hardcore components of the machine learning community, and now with Augmentoolkit, you can create them at scale.
 
 To get started, modify `classifier_trainer_config.yaml` and run `classifier_trainer_processing.py`!
-OK, back to your regularly-scheduled README.
+
+**OK, back to your regularly-scheduled README.**
 
 ---
 
