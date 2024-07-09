@@ -9,3 +9,5 @@ output
 **/pretraining.json
 classifier_output*
 wandb
+utils_for_manual_use/classifier_backtesting/place_classification_dataset_here/*
+utils_for_manual_use/classifier_backtesting/place_classifier_folder_here/*
