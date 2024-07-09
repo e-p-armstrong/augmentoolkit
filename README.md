@@ -375,21 +375,41 @@ MrDragonFox -- one of the moderators of the Mistral and TheBloke Discords -- has
 
 ## Generating Locally
 
-One constraint of local generation is that you can only run one model at once. Augmentoolkit typically uses two different models: a small one for bulk work, and a large smart one for tough tasks. 
+One constraint of local generation is that you can only run one model at once. Augmentoolkit typically uses two different models: a small one for bulk work, and a large smart one for tough tasks. If you're generating locally and want to do so efficiently, you'll want to use the `PHASE` option in `config.yaml`. `WORK_IN_PHASES` will be turned on, and `PHASE_INDEX` should be set according to how far along your dataset generation run you are. Phase index 0 = filtering out chunks with no relevant context, and uses small models; index 1 = question generation, uses large models; index 2 = question validation, uses small models; index 3 = context revision and conversation generation, the final phase, uses large models.
 
-- First off, make sure you're on a Linux operating system. If you want local generation with a non-Linux operating system, it is recommended that you run a local inference engine with an openai-compatible API, and then point Augmentoolkit at the local inference engine by changing the BASE_URL.
-- Then install aphrodite engine and get it working. That's a whole process, you can find the details on [their repo](https://github.com/PygmalionAI/aphrodite-engine/tree/main)
-- Follow the first few steps of the quickstart: get the repo onto your computer and install its dependencies.
-- Open the file `config.yaml` and change the MODE to "aphrodite"
-![](images/change_mode_to_aphrodite.png)
-- In `config.yaml`, change the MODEL field to a HuggingFace Path to a model. Make sure it has a large enough context window! And be sure to use the right quantization mode for your chosen model. The model should have some indication of what quantization type it uses. Also, change `COMPLETION_MODE` to True
-![](images/hf-path-1.png)
-![](images/hf-path-2.png)
-- Run `(aphrodite_use)_processing_phase_1.py`
-- Run `(aphrodite_use)_processing_phase_2.py` once phase 1 finishes.
-- Control + C when it logs stuff about saving dataset files to `simplified_data.jsonl`. It seems that something about Aphrodite's code has changed since I implemented it in here, and it no longer automatically exits the script.
+Start up your local openai-compatible LLM server, with a smaller model. Set the config to this:
 
-I'm considering removing aphrodite mode and just letting local inference be done via local OAI-compatible servers, but incase people want it specifically I'm leaving it for now. I hope that this set of instructions is complete enough to follow.
+```
+PHASE:
+  WORK_IN_PHASES: True
+  PHASE_INDEX: 0
+```
 
-Q: Why do I have to run this in two phases?
-A: Because it's difficult to switch between two different models when doing local inference.
+get all your other settings in place (input texts, base_url, etc.), and run `processing.py`. When that finishes, change the config to:
+
+```
+PHASE:
+  WORK_IN_PHASES: True
+  PHASE_INDEX: 1
+```
+
+and restart your local LLM server to use a larger and more powerful LLM. Then run `processing.py` again — it will pick up where you left off, thanks to Augmentoolkit's auto-resume feature. When that step completes, set the config to
+
+```
+PHASE:
+  WORK_IN_PHASES: True
+  PHASE_INDEX: 2
+```
+
+and have your local LLM server use a small model. Finally, once that is done, go ahead and run phase 3 with a large model:
+
+```
+PHASE:
+  WORK_IN_PHASES: True
+  PHASE_INDEX: 3
+```
+
+This process replaces the more-cumbersome approach of having two separate files for local inference. Now, you manage it from the config.
+If you want to set it and forget it, you can just eat the longer generation time of using a more powerful model for everything, it won't hurt you.
+
+**To speed up generation and get cost efficiency, it may be best to rent compute using Runpod.io or a similar GPU renting service (recommend either 2x H100s, or 8x A40s). For large-scale dataset generation tasks this will likely be cheaper than using an API, and it doesn't suffer from quite the same painful generation speed problems that consumer hardware can face sometimes.**
