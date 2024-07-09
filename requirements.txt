@@ -12,3 +12,5 @@ asyncio
 httpx
 orjson
 cohere
+pyarrow
+datasets
