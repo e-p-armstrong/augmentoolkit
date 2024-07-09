@@ -5,6 +5,8 @@ from augmentoolkit.utils.load_dataset import load_dataset
 
 async def main():
     
+    print("You may occasionally see exceptions thrown if/when the LLM messes up, but if the pipeline keeps running then these have been caught and regenerated and everything is chugging along fine. Keep Calm and Carry On. The reason the exceptions are so big is because that gives more information for potentially debugging prompts.")
+    print("Happy dataset generation and classifier model creation!")
     import yaml
     import glob
     import json

@@ -239,6 +239,8 @@ SKIP:
 
 This lets you control whether you want to skip certain steps of the pipeline. QUESTION_CHECK should generally not be skipped under any circumstances, but ANSWER_RELEVANCY_CHECK may be skipped if you are using the "negative" prompt overrides, by default located in `./prompts_override_negative_question`. So, turn any one of these on if you want the corresponding step to simply be skipped. These options allow a degree of control flow control, without touching code.
 
+---
+
 #### Classifier Creator
 **NEW!**
 
@@ -255,6 +257,8 @@ Then, modify `classifier_trainer_config.yaml` to have the right API key and base
 Then, download the IMDb dataset from Hugging Face:
 
 ![](images/imdb_download.jpg)
+
+And put it in the "input" folder pointed to by the `classifier_trainer_config.yaml` file.
 
 Then run: `python classifier_trainer_processing.py`
 
@@ -278,6 +282,20 @@ Most of the `config` settings are the same as vanilla Augmentoolkit, but here ar
   - `MAX_ITERS` To avoid getting into an infinite money-spending loop, this is where you set an integer that marks the maximum number of datagen+training runs that will be performed. Note that the classifier creator is *much* cheaper than Augmentoolkit, so this can be set pretty high without fear. 5
 
 **NOTE that the classifier creator can also take .json, .jsonl, and .parquet files as input, if they have a "text" column! This lets you use off-the-shelf datasets from Hugging Face, such as [Enron emails](https://huggingface.co/datasets/jacquelinehe/enron-emails) or [FineWeb](https://huggingface.co/datasets/HuggingFaceFW/fineweb)!**
+
+
+**Key differences at a glance:**
+- The classifier creator makes a small classifier model that can be cheaply run over massive amounts of data, to group it into classes
+- The classifier creator uses an LLM and a powerful few-shot prompt to teach a classifier any kind of classification task
+- The classifier creator works until a certain accuracy threshold is reached
+- Models trained with datasets made from the classifier creator appear to have very similar performance to models trained on human-labelled data.
+  - The classifier creator can crank out classifiers for like, a dollar or two, however — if you're using APIs. It's even cheaper if it's local.
+- The classifier creator takes `.txt`, `.md`, `.json`, `.jsonl`, and `.parquet` files. JSON, JSONL, and Parquet files must have a "text" column. This ensures compatibility with most natural text, as well as with many datasets on Hugging Face.
+- Classifiers can be used to find good data in a large dataset, or to identify data with specific characteristics (if you need to read a lot of documents to find something, for instance), or for deployment as part of a larger AI-powered system (such as for moderation or analysis).
+
+Don't hesitate to reach out if you have any questions about the new pipeline or Augmentoolkit! My contacts are at the bottom of this repo.
+
+---
 
 ## Important Files (If you're modifying the code)
 
