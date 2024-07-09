@@ -5,6 +5,8 @@ Now you can [turn any raw text](#quickstart) into a high-quality custom dataset 
 
 Augmentoolkit is an AI-powered tool that lets you create domain-specific data to finetune LLMs, using open-source AI.
 
+![](images/augmentoolkit-logo.png)
+
 ---
 
 ### RECENT FEATURES UPDATE — JULY 9 2024
