@@ -13,3 +13,4 @@ httpx
 orjson
 cohere
 pyarrow
+datasets
