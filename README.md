@@ -1,5 +1,5 @@
 # Augmentoolkit — infinite domain-specific instruct data
-Turn any raw text into a high-quality custom dataset for training new LLMs, using AI that can run on your computer. Make data gathering a painless step of the model creation process. Augmentoolkit is the easy-to-use, customizable, open-source, and cost-effective data generation solution. No OpenAI needed.
+Turn any raw text into a high-quality dataset using local models. Make data gathering a painless step of the model creation process. Augmentoolkit is the easy-to-use, customizable, open-source, and cost-effective data generation solution. No OpenAI needed.
 
 Augmentoolkit is an AI-powered tool that lets you create domain-specific data to finetune LLMs, using open-source AI.
 
@@ -39,21 +39,21 @@ Finally, **using the model you create should be easy and valuable:**
 1. [Quickstart](#quickstart)
     - [Terminal](#terminal)
     - [Web UI](#web-ui)
-2. [Vision (Introduction)](#vision)
-3. [Usage](#usage)
+2. [Self Promotion (read if you're a business!)](#for-businesses)
+3. [Vision (Introduction)](#vision)
+4. [Usage](#usage)
     - [Installation](#installation)
     - [`config.yaml` step-by-step](#configyaml-step-by-step)
     - [Customization](#customization)
     - [Visual explanation of steps](#visual-explanation-of-steps)
-4. [What to do with what you get out](#what-to-do-with-what-you-get-out)
-5. [Roadmap](#roadmap)
-6. [Self Promotion (read if you're a business!)](#for-businesses)
-7. [Community](#community)
-8. [Latest Update Info](#latest-update-info)
-9. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
-10. [Contributing](#contributing)
-11. [Join A Discord for Dataset Generation!](#join-a-discord-for-dataset-generation)
-12. [Using "Aphrodite mode" (deprecated)](#using-aphrodite-mode-deprecated)
+5. [What to do with what you get out](#what-to-do-with-what-you-get-out)
+6. [Roadmap](#roadmap)
+8. [Community](#community)
+9. [Latest Update Info](#latest-update-info)
+10. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
+11. [Contributing](#contributing)
+12. [Join A Discord for Dataset Generation!](#join-a-discord-for-dataset-generation)
+13. [Using "Aphrodite mode" (deprecated)](#using-aphrodite-mode-deprecated)
 
 ## Quickstart
 
@@ -75,6 +75,11 @@ After installing the dependencies:
 4. Run `python app.py`
 
 ![webui.jpg](webui.jpg)
+
+## For Businesses
+I work with AI startups that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? I can modify Augmentoolkit for any domain and for tasks beyond question answering, and I'd be happy to help you painlessly create the data — and data-creation tools — you require. Given that I made the original version of the darn thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
+
+*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to master open source model pipelines enough to make Augmentoolkit work well). If you're a hobbyist and have time to experiment with its base version for casual or personal uses, by all means go for it!
 
 ## Vision
 
@@ -235,11 +240,6 @@ The format of the conversational files is called "shareGPT", and is a common for
 ## Roadmap
 
 In the coming weeks and months, I plan to start using Augmentoolkit to produce open-source models in popular, specific domains. Difficulties encountered will fuel further development of this project. Let me know what kinds of LLMs you want built!
-
-## For Businesses
-I work with AI SAAS startups that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a dataset for your business's AI? I can modify Augmentoolkit for any domain and for tasks beyond question answering, and I'd be happy to help you painlessly create the data — and data-creation tools — you require. Given that I made the original version of the darn thing, I'm probably the best person in the world for this task. You can schedule a quick call to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call).
-
-*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The consulting option is for people who want a bespoke modification and quality results, fast (it took 5 months of learning and iteration for me to master open source model pipelines enough to make Augmentoolkit work well). If you're a hobbyist and have time to experiment with its base version for casual or personal uses, by all means go for it.
 
 ## Community
 
