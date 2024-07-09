@@ -45,7 +45,7 @@ async def main():
     USE_SUBSET = config["SYSTEM"][
         "USE_SUBSET"
     ]  # Set to True if you want to use only a small subset of the text, to test whether it plays nicely with the current setup of the notebook
-    
+
     SUBSET_SIZE = config["SYSTEM"]["SUBSET_SIZE"]  # Set to the number of chunks you want to use if you're using a subset. If you're not using a subset, this will be ignored.
 
     USE_FILENAMES = config["SYSTEM"][
@@ -69,18 +69,18 @@ async def main():
     LOG_LEVEL = logging.INFO
 
     INPUT_FOLDER = config["PATH"]["INPUT"]
-    
+
     CONVERSATION_INSTRUCTIONS = config["SYSTEM"][
         "CONVERSATION_INSTRUCTIONS"
     ]
-    
+
     # Create pretraining set from raw inputs (pretrain first, then instruct tune)
     control_flow_functions.create_pretraining_set(
         INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
     )
-    
+
     PHASE_INDEX = config["PHASE"]["PHASE_INDEX"]
-    
+
     WORK_IN_PHASES = config["PHASE"]["WORK_IN_PHASES"]
     
     print("Pretraining set created.")
