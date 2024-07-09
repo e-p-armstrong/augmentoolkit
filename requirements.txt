@@ -1,6 +1,8 @@
 protobuf 
 sentencepiece 
-transformers 
+torch
+transformers
+accelerate
 matplotlib 
 nltk 
 openai
@@ -14,3 +16,4 @@ orjson
 cohere
 pyarrow
 datasets
+scikit-learn
