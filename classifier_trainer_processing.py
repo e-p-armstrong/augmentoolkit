@@ -221,7 +221,7 @@ async def main():
     ### Test classifier against LLM
     
     has_passed_LLM_validation = False
-    max_iters = ["TRAINING"]["MAX_ITERS"]
+    max_iters = config["TRAINING"]["MAX_ITERS"]
     
     while not has_passed_LLM_validation and max_iters > 0:
         max_iters = max_iters - 1
