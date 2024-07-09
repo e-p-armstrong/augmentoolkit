@@ -117,18 +117,22 @@ After installing the dependencies:
 
 ## Vision
 
-Dataset creation has long been the most painful, and most important, step of the finetune-creation process. Most people have to resort to either A) burning an obscene number of OpenAI API credits, or B) spending dozens, if not hundreds, of hours accumulating a hybrid dataset based off of your own conversations with bots. The OpenAI approach is based on a paid service (whose TOS you're violating) that can ban you at any second, whose writing style you probably hate, which is getting worse every month, and whose synthetic data critically lacks variety. Handwriting the examples is far too slow to iterate on, and does not scale at all, meaning you're missing out on huge potential performance increases that come with more data. If you're a company and you pay people to create examples in bulk, then it's possibly pricier than even OpenAI — also not scalable at all. And moreover, if we're literally creating machines that can write, why do we spend most of our time writing?
+**Dataset creation has long been the most painful, and most important, step of the finetune-creation process.** Most people have to resort to either A) burning an obscene number of OpenAI API credits, or B) spending dozens, if not hundreds, of hours accumulating a hybrid dataset based off of your own conversations with bots. The OpenAI approach is based on a paid service (whose TOS you're violating) that can ban you at any second, whose writing style you probably hate, which is getting worse every month, and whose synthetic data critically lacks variety. Handwriting the examples is far too slow to iterate on, and does not scale at all, meaning you're missing out on huge potential performance increases that come with more data. If you're a company and you pay people to create examples in bulk, then it's possibly pricier than even OpenAI — also not scalable at all. And moreover, if we're literally creating machines that can write, why do we spend most of our time writing?
 
-**Augmentoolkit** is meant to make high-quality data generation easy, fast, shareable, configurable, and for everyone. It is meant to allow the easy creation of datasets about any knowledge that exists in plain text. It is meant to allow models to bootstrap additional training data for themselves. It is meant to allow any enthusiast, regardless of computer strength, to contribute to the advancement of AI by generating swathes of data for cheap. It's meant to expand the possibilities of what finetunes can be built, by making data gathering as easy as running a script. Whether you're finetuning a company chatbot to understand your business's information, are creating an [AI ambassador for your community that can explain your mission and goals](https://finance.yahoo.com/news/introducing-llama-3-verusgpt-open-183700217.html?guccounter=1), or are doing something else entirely, Augmentoolkit exists to make your data problems a bit less problematic.
+**Augmentoolkit** is meant to make high-quality data generation easy, fast, shareable, configurable, and for everyone. **It is meant to allow the easy creation of datasets about any knowledge that exists in plain text.** It is meant to allow models to bootstrap additional training data for themselves. It is meant to allow any enthusiast, regardless of computer strength, to contribute to the advancement of AI by generating swathes of data for cheap. It's meant to expand the possibilities of what finetunes can be built, by making data gathering as easy as running a script. Whether you're finetuning a company chatbot to understand your business's information, are creating an [AI ambassador for your community that can explain your mission and goals](https://finance.yahoo.com/news/introducing-llama-3-verusgpt-open-183700217.html?guccounter=1), or are doing something else entirely, **Augmentoolkit exists to make your data problems a bit less problematic.**
 
-- Create multi-turn conversational QA data from books, documents, or any other text-based source of information.
-- Train a text classifier using just unsupervised, unlabelled text as an input. For next to no cost. Achieves results very close to classifiers trained on human-labelled data.
-- Modify and tweak the prompts or settings without changing code.
+We're going to make dataset creation the most enjoyable, powerful, and flexible part of creating a new LLM.
+
+Right now you can:
+
+- **Create multi-turn conversational QA data from books, documents, or any other text-based source of information.**
+- **Train a text classifier using just unsupervised, unlabelled text as an input. For next to no cost. Achieves results very close to classifiers trained on human-labelled data.**
+- **Modify and tweak the prompts or settings to make something perfect for your specific use case — without changing code.**
 - Create pure synthetic data for aligning the writing style of LLMs (WIP)
 
 A flowchart of Augmentoolkit's primary operation, the QA generation, can be found in the [Usage](#flowchart) section. Information about the classifier creation can be found in the [classifier](#classifier-creator) section.
 
-The high-level is: books or manuals in, information-rich conversations out. Train the model on the conversations, it learns to talk about the information. Extensive validation keeps hallucinations to a minimum. Combine with continued pretraining for teaching a model to speak about a specific domain.
+The high-level (for Augmentoolkit's main form of operation) is: books or manuals in, information-rich conversations out. Train the model on the conversations, it learns to talk about the information. Extensive validation keeps hallucinations to a minimum. Combine with continued pretraining for teaching a model to speak about a specific domain.
 
 More in-depth and jargon-filled:
 Augmentoolkit takes human-written text with information in it, and turns it into instruct-tuning data. Basically, it uses LLMs to convert pretraining data into conversational multi-turn QA data: 
@@ -139,7 +143,7 @@ Augmentoolkit takes human-written text with information in it, and turns it into
 - After checking that this conversation faithfully includes the original questions and answers, the result is saved as part of the newly-generated dataset.
 You can see a flowchart of this process over in [Usage](#usage).
 
-Dataset generation is about more than just QA, however. Augmentoolkit has been expanded to be able to train classifiers from scratch, using *unlabelled* text. Just provide some text and a description of some classes to Augmentoolkit, and you'll get out a high-quality classifier capable of cheaply working with data at truly massive scales. Read more about classifier creation over in the [classifier](#classifier-creator) section.
+Dataset generation is about more than just QA, however. **Augmentoolkit has been expanded to be able to train classifiers from scratch,** using *unlabelled* text. Just provide some text and a description of some classes to Augmentoolkit, and you'll get out a high-quality classifier capable of cheaply working with data at truly massive scales. **Read more about classifier creation over in the [classifier](#classifier-creator) section.**
 
 
 ### Usage
