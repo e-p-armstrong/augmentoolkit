@@ -4,7 +4,7 @@ PATH:
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY: "place your key here DO NOT FORGET TO LEAVE A DUMMY KEY EVEN IF USING LOCAL MODELS" # Add the API key for your favorite provider here
+  API_KEY: "46087e7b304251e86eee6c6d64149895253d148a1ccc579b9a6c42faaa0754d2" # Add the API key for your favorite provider here
   BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
   LOGICAL_MODEL: "meta-llama/Llama-3-8b-chat-hf" # model used for everything except conversation generation at the very end
   LARGE_LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for question generation and conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on.
@@ -18,7 +18,7 @@ SYSTEM:
   USE_FILENAMES: False # give the AI context from the filenames provided to it. Useful if the filenames are meaningful, otherwise turn them off.
   DOUBLE_CHECK_COUNTER: 1 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
   SUBSET_SIZE: 10
-  USE_SUBSET: False # Whether to take only the first 13 chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
+  USE_SUBSET: True # Whether to take only the first 13 chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
   CONCURRENCY_LIMIT: 50 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
   COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format. Not all APIs support completion mode.
   MODE: "api" # can be one of "api"|"aphrodite"
@@ -36,6 +36,10 @@ SYSTEM:
 PHASE:
   WORK_IN_PHASES: False
   PHASE_INDEX: 3 # index of the phase we are currently on (index 0 = filtering out chunks with no relevant context; index 1 = question generation; index 2 = question validation; index 3 = context revision and conversation generation, the final phase)
+HUGGINGFACE:
+  HUB_PATH: "Heralax/test-atk-dataset-do-not-use-2"
+  PRIVATE: false
+  PUSH_TO_HUB: true
 
 
 # May be much more efficient to rent H100s for large-scale inference than A100s

@@ -14,6 +14,7 @@ from math import ceil
 import traceback
 import glob
 import yaml
+from datasets import load_dataset
 
 from augmentoolkit.utils.create_conv_starter import create_conv_starter
 from augmentoolkit.utils.extract_steps import extract_steps
@@ -36,6 +37,9 @@ with open("./config.yaml", "r") as file:
     obj_conf = yaml.safe_load(file)
 
 DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
+HUB_PATH = obj_conf["HUGGINGFACE"]["HUB_PATH"]
+PRIVATE = obj_conf["HUGGINGFACE"]["PRIVATE"]
+PUSH_TO_HUB = obj_conf["HUGGINGFACE"]["PUSH_TO_HUB"]
 
 def extract_qa_tuples(text):
     pattern = r"\*\*QUESTION:\*\*\s*((?:.|\n)*?)\s*\*\*ANSWER:\*\*\s*((?:.|\n)*?)(?=\s*\*\*QUESTION:\*\*|\Z)"
@@ -85,6 +89,9 @@ def convert_logging_to_dataset(directory):
             
             f.write(json.dumps(json_to_write) + "\n")
     print("...Converted successfully (we think)")
+    if os.path.exists(output_file_path):
+        dataset = load_dataset("json",data_files=output_file_path)
+        dataset.push_to_hub(HUB_PATH, split=directory.split("_")[0], private=PRIVATE,)
     
     
     
@@ -114,6 +121,7 @@ def convert_revised_questions_to_question_generation_training(qa_tuples_by_parag
         input_template = qgen_prompt_full[-1]["content"]
     
     # revised_questions_output_path = os.path.join(obj_conf["PATH"]["OUTPUT"], "qatuples_revised")
+    convos = []
     with open(output_file_path, 'w') as out_file:
         for qatup_group in qa_tuples_by_paragraph:
             answer = format_qatuples(qatup_group)
@@ -131,8 +139,14 @@ def convert_revised_questions_to_question_generation_training(qa_tuples_by_parag
             
             convo = [sysprompt_obj, input_obj, answer_obj]
             out_file.write(json.dumps(convo) + "\n")
+            convos.append(convo)
 
     print("...Converted successfully (we think)")
+    if PUSH_TO_HUB:
+        with open(output_file_path[:-1], 'w') as out_file_json:
+            json.dump(convo,out_file_json)
+        dataset = load_dataset("json", data_files=output_file_path[:-1])
+        dataset.push_to_hub(HUB_PATH, split="qgen",private=PRIVATE)
     
     
     
@@ -147,7 +161,7 @@ def extract_reasoning_from_context_check(response):
     if determination:
         determination = determination.group(1).strip()
     if not determination:
-        print("Did not contain a determination! MEGA MODEL FAIL LOOK INTO THIS EVAN!!!")
+        print("Did not contain a determination! MEGA MODEL FAIL LOOK INTO THIS!!!")
         return None, response
     if "PASS" in determination:
         print("Leaving be...")
@@ -1420,6 +1434,8 @@ def convert_directory_to_list(directory_path):
                 except Exception as e:
                     print(f"Error reading {filename}: {e}")
 
+    
+    
     # Write the master list to a new .jsonl file
     write_1 = obj_conf["PATH"]["OUTPUT"] + "/master_list.jsonl"
     with open(write_1, "w") as file:
@@ -1431,11 +1447,17 @@ def convert_directory_to_list(directory_path):
     with open(write_2, "w") as file:
         for item in simplified_list:
             file.write(json.dumps(item) + "\n")
+    
+    dataset = load_dataset("json", data_files=write_2)
+    dataset.push_to_hub(HUB_PATH, split="no_rag", private=PRIVATE)
 
     write_3 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data_rag.jsonl"
     with open(write_3, "w") as file:
         for item in simplified_rag_list:
             file.write(json.dumps(item) + "\n")
+            
+    dataset2 = load_dataset("json", data_files=write_3)
+    dataset2.push_to_hub(HUB_PATH, split="rag", private=PRIVATE)
 
     print(
         f"Conversion complete. Master list written to {write_1}. Simplified data written to {write_2} (no RAG) and {write_3} (RAG)."
