@@ -16,3 +16,12 @@ bfg-report
 bfg-1.14.0.jar
 imdb
 utils_for_manual_use/classifier_backtesting/predicted_output.jsonl
+annotation_output*/*
+utils_for_manual_use/video_work_folder/*
+editing_output/*
+website_output*
+website_scrape*
+twitter_data.*
+_model_training_configs/autometa*
+_model_training_configs/intelorca*
+editing_output*
