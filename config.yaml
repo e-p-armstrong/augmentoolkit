@@ -4,7 +4,7 @@ PATH:
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY: "5316fe488ad994351389cbf07f83508f32987092644a4dcc64573dc725587b18" # Add the API key for your favorite provider here
+  API_KEY: "replace with your key" # Add the API key for your favorite provider here
   BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
   LOGICAL_MODEL: "meta-llama/Llama-3-8b-chat-hf" # model used for everything except conversation generation at the very end
   LARGE_LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for question generation and conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on.
@@ -13,6 +13,7 @@ API:
 SKIP:
   QUESTION_CHECK: False
   ANSWER_RELEVANCY_CHECK: False # turn on if using the negative question prompt override
+  FILTER_CHUNKS: True
 SYSTEM:
   CHUNK_SIZE: 1900
   USE_FILENAMES: False # give the AI context from the filenames provided to it. Useful if the filenames are meaningful, otherwise turn them off.

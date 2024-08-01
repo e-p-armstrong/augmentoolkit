@@ -91,6 +91,8 @@ async def main():
 
     WORK_IN_PHASES = config["PHASE"]["WORK_IN_PHASES"]
     
+    SKIP_FILTER_CHUNKS = config["SKIP"]["FILTER_CHUNKS"]
+    
     print("Pretraining set created.")
 
     extensions = [".txt", ".md"]
@@ -188,35 +190,40 @@ async def main():
     from tqdm import tqdm
     import asyncio
 
-    # Create directory if it doesn't exist
-    output_dir = config["PATH"]["OUTPUT"] + "/worthy_for_questions"
-    os.makedirs(output_dir, exist_ok=True)
 
-    # Determine which paragraphs are worthy of making questions from
-    judged_worthy_for_questions = []
+    if SKIP_FILTER_CHUNKS:
+        print("Skipping chunk filtering")
+        filtered_worthy_for_questions = paragraphs_processed[:SUBSET_SIZE]
+    else:
+        # Create directory if it doesn't exist
+        output_dir = config["PATH"]["OUTPUT"] + "/worthy_for_questions"
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Determine which paragraphs are worthy of making questions from
+        judged_worthy_for_questions = []
 
-    await control_flow_functions.filter_all_questions(
-        paragraphs_processed,
-        judged_worthy_for_questions,
-        engine_wrapper,
-        output_dir,
-        take_subset=USE_SUBSET,
-        subset_size=SUBSET_SIZE,
-        use_filenames=False,
-        rtwl=run_task_with_limit,
-        completion_mode=COMPLETION_MODE,
-        logging_level=LOG_LEVEL,
-    )
+        await control_flow_functions.filter_all_questions(
+            paragraphs_processed,
+            judged_worthy_for_questions,
+            engine_wrapper,
+            output_dir,
+            take_subset=USE_SUBSET,
+            subset_size=SUBSET_SIZE,
+            use_filenames=False,
+            rtwl=run_task_with_limit,
+            completion_mode=COMPLETION_MODE,
+            logging_level=LOG_LEVEL,
+        )
 
-    filtered_worthy_for_questions = control_flow_functions.filter_and_graph(
-        judged_worthy_for_questions
-    )
+        filtered_worthy_for_questions = control_flow_functions.filter_and_graph(
+            judged_worthy_for_questions
+        )
+        
+        print("Converting generations to training data")
+        control_flow_functions.convert_logging_to_dataset("judge_paragraph_generations")
 
     print(filtered_worthy_for_questions[0])
     
-    print("Converting generations to training data")
-    control_flow_functions.convert_logging_to_dataset("judge_paragraph_generations")
-
     # PHASE 0 END
     print("\n\nCOMPLETED PHASE 0")
     if WORK_IN_PHASES and PHASE_INDEX == 0:
