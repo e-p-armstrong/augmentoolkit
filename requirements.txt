@@ -7,7 +7,7 @@ matplotlib
 nltk 
 openai
 aiohttp
-gradio==4.23.0
+gradio
 pyyaml
 gradio_log==0.0.4
 asyncio
@@ -17,3 +17,4 @@ cohere
 pyarrow
 datasets
 scikit-learn
+chardet

@@ -1,3 +1,12 @@
+import sys
+import os
+# Get the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# Change the current working directory to the script directory
+os.chdir(script_dir)
+# Add the script directory to the Python path
+sys.path.append(script_dir)
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import asyncio
 import traceback
 
@@ -16,7 +25,6 @@ async def main():
     import glob
     from augmentoolkit.utils.group_by_text import group_by_text
     from augmentoolkit.control_flow_functions import control_flow_functions
-    import os
 
     with open("./config.yaml", "r") as f:
         config = yaml.safe_load(f)
