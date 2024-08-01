@@ -40,6 +40,7 @@ DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
 HUB_PATH = obj_conf["HUGGINGFACE"]["HUB_PATH"]
 PRIVATE = obj_conf["HUGGINGFACE"]["PRIVATE"]
 PUSH_TO_HUB = obj_conf["HUGGINGFACE"]["PUSH_TO_HUB"]
+has_pushed_yet = False
 
 def extract_qa_tuples(text):
     pattern = r"\*\*QUESTION:\*\*\s*((?:.|\n)*?)\s*\*\*ANSWER:\*\*\s*((?:.|\n)*?)(?=\s*\*\*QUESTION:\*\*|\Z)"
@@ -54,12 +55,7 @@ import os
 # Also used basically everywhere:
 def convert_logging_to_dataset(directory):
     print("entering saving mode")
-    # found a solution to overfitting on the examples:
-    # TRAIN WITHOUT THEM
-    # This will produce a WEALTH of instruct data
-    # fucking awesome, hopefully
-    # also it's also about the domain, lmao
-    # so more domain knowledge
+    global has_pushed_yet
     
     output_dir = os.path.join(obj_conf["PATH"]["OUTPUT"], directory)
     
@@ -70,6 +66,7 @@ def convert_logging_to_dataset(directory):
     if not os.path.exists(output_dir):
         raise Exception("ERROR!! Trying to convert a logging directory to a dataset, when that directory does not exist!")
         
+    full_list_of_dicts = []
     with open(output_file_path, "w") as f:
         existing_files = glob.glob(
             os.path.join(output_dir, "*.yaml")
@@ -78,7 +75,6 @@ def convert_logging_to_dataset(directory):
         for file in existing_files:
             with open(file,'r') as file2:
                 file_list_of_dicts = yaml.safe_load(file2)
-                
             # print(file_list_of_dicts)
             
             sysprompt = {"from": "system", "value": file_list_of_dicts[0]["content"]}
@@ -88,10 +84,30 @@ def convert_logging_to_dataset(directory):
             json_to_write = {"conversations": [sysprompt, input, output]}
             
             f.write(json.dumps(json_to_write) + "\n")
+            full_list_of_dicts.append(json_to_write)
     print("...Converted successfully (we think)")
-    if os.path.exists(output_file_path):
-        dataset = load_dataset("json",data_files=output_file_path)
-        dataset.push_to_hub(HUB_PATH, split=directory.split("_")[0], private=PRIVATE,)
+    
+    dataset_with_split_output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], directory + "_DATAGEN_OUTPUT_SPLIT.json")
+    with open(dataset_with_split_output_file_path, "w") as f:
+            json_to_write = {"train": full_list_of_dicts}
+            
+            f.write(json.dumps(json_to_write) + "\n")
+            
+    
+    if PUSH_TO_HUB:
+        if os.path.exists(output_file_path):
+            dataset = load_dataset("json", data_files=dataset_with_split_output_file_path,  split="train")
+            print("DATASET TYPE:")
+            print(type(dataset))
+            part_nb = directory.split("_")[0]
+            if not has_pushed_yet:
+                    dataset.push_to_hub(HUB_PATH, private=PRIVATE)
+                    dataset.to_parquet(f"hf://datasets/{HUB_PATH}/train{part_nb}.parquet")
+                    has_pushed_yet = True
+            else:
+                dataset.to_parquet(f"hf://datasets/{HUB_PATH}/train-{part_nb}.parquet")
+    # remove the output with split file
+    os.remove(dataset_with_split_output_file_path)
     
     
     
@@ -137,16 +153,22 @@ def convert_revised_questions_to_question_generation_training(qa_tuples_by_parag
             input_obj = {"from": "human", "value": input_text}
             answer_obj = {"from": "gpt", "value": answer}
             
-            convo = [sysprompt_obj, input_obj, answer_obj]
+            convo = {"conversations": [sysprompt_obj, input_obj, answer_obj]}
             out_file.write(json.dumps(convo) + "\n")
             convos.append(convo)
 
     print("...Converted successfully (we think)")
-    if PUSH_TO_HUB:
+    if PUSH_TO_HUB: ## IMPORTANT STUFF FOR YOU BEGINS HERE ##
+        # temporarily create a json file with splits to load the dataset from
+        output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], "questions_generation_dataset_split.json")
+        with open(output_file_path, 'w') as out_file_json:
+            json.dump({"train": convos},out_file_json)
+        dataset = load_dataset("json", data_files=output_file_path, split="train") # THIS APPROACH WORKS!
+        
         with open(output_file_path[:-1], 'w') as out_file_json:
             json.dump(convo,out_file_json)
-        dataset = load_dataset("json", data_files=output_file_path[:-1])
-        dataset.push_to_hub(HUB_PATH, split="qgen",private=PRIVATE)
+        dataset.to_parquet(f"hf://datasets/{HUB_PATH}/data/train-qgen.parquet")
+        os.remove(output_file_path)
     
     
     
@@ -1436,32 +1458,59 @@ def convert_directory_to_list(directory_path):
 
     
     
-    # Write the master list to a new .jsonl file
+        # Write the master list to a new .jsonl file
     write_1 = obj_conf["PATH"]["OUTPUT"] + "/master_list.jsonl"
     with open(write_1, "w") as file:
         for item in master_list:
             file.write(json.dumps(item) + "\n")
 
-    # Write the simplified data to a different .jsonl file
+    # Process and push simplified_list (no RAG)
     write_2 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data_no_rag.jsonl"
     with open(write_2, "w") as file:
         for item in simplified_list:
             file.write(json.dumps(item) + "\n")
-    
-    dataset = load_dataset("json", data_files=write_2)
-    dataset.push_to_hub(HUB_PATH, split="no_rag", private=PRIVATE)
 
+    if PUSH_TO_HUB:
+        # Create a temporary JSON file with train split
+        temp_file_no_rag = obj_conf["PATH"]["OUTPUT"] + "/temp_simplified_data_no_rag.json"
+        with open(temp_file_no_rag, 'w') as temp_file:
+            json.dump({"train": simplified_list}, temp_file)
+        
+        # Load the dataset from the temporary file
+        dataset_no_rag = load_dataset("json", data_files=temp_file_no_rag, split="train")
+        
+        # Push to Hugging Face Hub
+        dataset_no_rag.to_parquet(f"hf://datasets/{HUB_PATH}/data/train-no_rag.parquet")
+        
+        # Remove the temporary file
+        os.remove(temp_file_no_rag)
+
+    # Process and push simplified_rag_list (RAG)
     write_3 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data_rag.jsonl"
     with open(write_3, "w") as file:
         for item in simplified_rag_list:
             file.write(json.dumps(item) + "\n")
-            
-    dataset2 = load_dataset("json", data_files=write_3)
-    dataset2.push_to_hub(HUB_PATH, split="rag", private=PRIVATE)
+
+    if PUSH_TO_HUB:
+        # Create a temporary JSON file with train split
+        temp_file_rag = obj_conf["PATH"]["OUTPUT"] + "/temp_simplified_data_rag.json"
+        with open(temp_file_rag, 'w') as temp_file:
+            json.dump({"train": simplified_rag_list}, temp_file)
+        
+        # Load the dataset from the temporary file
+        dataset_rag = load_dataset("json", data_files=temp_file_rag, split="train")
+        
+        # Push to Hugging Face Hub
+        dataset_rag.to_parquet(f"hf://datasets/{HUB_PATH}/data/train-rag.parquet")
+        
+        # Remove the temporary file
+        os.remove(temp_file_rag)
 
     print(
         f"Conversion complete. Master list written to {write_1}. Simplified data written to {write_2} (no RAG) and {write_3} (RAG)."
     )
+    if PUSH_TO_HUB:
+        print("Data successfully pushed to Hugging Face Hub.")
 
 
 def convert_directory_and_process_conversations(directory_path):
