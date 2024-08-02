@@ -36,7 +36,7 @@ SYSTEM:
    {data}
 PHASE:
   WORK_IN_PHASES: True
-  PHASE_INDEX: 2 # index of the phase we are currently on (index 0 = filtering out chunks with no relevant context; index 1 = question generation; index 2 = question validation; index 3 = context revision and conversation generation, the final phase)
+  PHASE_INDEX: 3 # index of the phase we are currently on (index 0 = filtering out chunks with no relevant context; index 1 = question generation; index 2 = question validation; index 3 = context revision and conversation generation, the final phase)
 HUGGINGFACE:
   HUB_PATH: "Heralax/test-atk-dataset-do-not-use-3"
   PRIVATE: false

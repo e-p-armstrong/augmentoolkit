@@ -221,7 +221,91 @@ def extract_reasoning_from_context_check(response):
 
 ### CONTEXT REPAIR SECTION
 
+context_repairer_path = "check_qatuple_context_no_filenames"
+if USE_FILENAMES:
+    context_repairer_path = "check_qatuple_context_filenames"
+if COMPLETION_MODE:
+    context_repairer_path = context_repairer_path + ".txt"
+else:
+    context_repairer_path = context_repairer_path + ".yaml"
 
+
+repair_context_regex = re.compile(
+        r"Reasoning and thought process \(be thorough\):(.+)",
+        re.DOTALL | re.IGNORECASE,
+    )
+
+class ContextRepairer(PipelineStep):
+    def __init__(self):
+        super().__init__(
+            prompt_folder=PROMPTS_DIR,
+            default_prompt_folder=DEFAULT_PROMPTS,
+            prompt_path=context_repairer_path,
+            regex=repair_context_regex,
+            sampling_params={
+                "max_tokens": 2000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n\n\n\n\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                    "<|eot_id|>",
+                    "<|start_header_id|>",
+                    "<|end_header_id|>",
+                ],
+                "temperature": 0.2,
+            },
+            output_dir=OUTPUT_DIR,
+            output_subdir="question_context_revision_generations",
+            save_path="revised_qatuples_saved",
+            output_processor=extract_reasoning_from_context_check,
+            result_key="not gonna be used", # we do not employ the result key because we replace the question and answer in the qa dict.
+            use_stop=USE_STOP,
+            completion_mode=COMPLETION_MODE,
+        )
+        
+    def read_previous_output(self, idx, output_list):
+        save_path_file = self.make_save_path_file(idx)
+        
+        if os.path.exists(save_path_file):
+            with open(save_path_file, "r") as f:
+                content = f.read()  # Read the file once and store its content
+                print(save_path_file)
+                if content == "failed":
+                    print("Loaded failed file")
+                    output_list[idx] = None
+                    return True
+                print("Loaded file:")
+                print(content)
+                try:
+                    data = json.loads(content)  # Convert the string back to JSON
+                    output_list[idx] = data
+                    return True
+                except json.JSONDecodeError:
+                    print("JSON decode error with the contents:", content)
+        return False
+    
+    def save(self, result=None, full_output=None, idx=None, output_list=None, input_data=None):
+        if isinstance(result[0], str):
+            new_question = result[0]
+            new_answer = result[1]
+            
+            output_list[idx]['question'] = new_question
+            output_list[idx]['answer'] = new_answer
+        elif not result[0]:
+            output_list[idx] = None
+        
+        os.makedirs(self.save_path_dir, exist_ok=True)
+        if output_list[idx]:
+            with open(self.make_save_path_file(idx), "w") as f:
+                f.write(json.dumps(output_list[idx]))
+        else:
+            with open(self.make_save_path_file(idx), "w") as f:
+                f.write("failed")
+    
 
 
 # Postprocessing function for question/answer validation
@@ -236,18 +320,6 @@ async def repair_qatuple_context(
     logging_level=logging.INFO,
 ):
     # NOTE set up the generation step
-    context_repairer_path = "check_qatuple_context_no_filenames"
-    if use_filenames:
-        context_repairer_path = "check_qatuple_context_filenames"
-    if completion_mode:
-        context_repairer_path = context_repairer_path + ".txt"
-    else:
-        context_repairer_path = context_repairer_path + ".yaml"
-
-    repair_context_regex = re.compile(
-        r"Reasoning and thought process \(be thorough\):(.+)",
-        re.DOTALL | re.IGNORECASE,
-    )
     context_repairer = GenerationStep(
         prompt_path=context_repairer_path,
         regex=repair_context_regex,
