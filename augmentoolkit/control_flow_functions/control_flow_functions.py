@@ -185,7 +185,7 @@ def extract_reasoning_from_context_check(response):
     if determination:
         determination = determination.group(1).strip()
     if not determination:
-        print("Did not contain a determination! MEGA MODEL FAIL LOOK INTO THIS!!!")
+        print("LLM ISSUE: Did not contain a determination! Maybe check your LLM it is being stupid, or perhaps the input is diffuclt.")
         return None, response
     if "PASS" in determination:
         print("Leaving be...")

@@ -13,7 +13,7 @@ API:
 SKIP:
   QUESTION_CHECK: False
   ANSWER_RELEVANCY_CHECK: False # turn on if using the negative question prompt override
-  FILTER_CHUNKS: True
+  FILTER_CHUNKS: False
 SYSTEM:
   CHUNK_SIZE: 1900
   USE_FILENAMES: False # give the AI context from the filenames provided to it. Useful if the filenames are meaningful, otherwise turn them off.
