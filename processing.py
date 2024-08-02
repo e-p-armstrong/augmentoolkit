@@ -326,12 +326,12 @@ async def main():
     print(
         "-------------- QUESTIONS CREATED ------------- STATS SO FAR (may be wrong if run was continued from interruption):"
     )
-    nones = list(filter(lambda x: x is None, vetted_qa_tuples))
+    nones = list(filter(lambda x: x is None, vetted_qa_dicts))
     print(f"Nones: {len(nones)}")
-    print(f"Non-nones: {len(vetted_qa_tuples) - len(nones)}")
-    print(f"Total: {len(vetted_qa_tuples)}")
+    print(f"Non-nones: {len(vetted_qa_dicts) - len(nones)}")
+    print(f"Total: {len(vetted_qa_dicts)}")
     # filter out all None values
-    vetted_qa_tuples = [qa for qa in vetted_qa_tuples if qa is not None]
+    vetted_qa_dicts = [qa for qa in vetted_qa_dicts if qa is not None]
     print("---------------- ONTO REVISION ------------------")
 
     # Check for and fix the common mistake: mentioning "the text".
@@ -340,12 +340,12 @@ async def main():
 
     # Assuming vetted_qa_tuples is a list that might or might not exist
     try:
-        _ = vetted_qa_tuples
+        _ = vetted_qa_dicts
     except NameError:
-        vetted_qa_tuples = []
+        vetted_qa_dicts = []
 
     # Load all files at the start if vetted_qa_tuples is empty
-    if not vetted_qa_tuples:
+    if not True:
         print("WENT DOWN HERE")
         # Check if the directory exists
         if os.path.exists(writepath):
@@ -375,11 +375,9 @@ async def main():
                 idx,
                 tup,
                 engine_wrapper_large,
-                writepath,
-                vetted_qa_tuples,
-                use_filenames=USE_FILENAMES,
+                vetted_qa_dicts,
             )
-            for idx, tup in enumerate(vetted_qa_tuples)
+            for idx, tup in enumerate(vetted_qa_dicts)
         ]
         limited_tasks_qcorrection = [run_task_with_limit(task) for task in tasks]
         for future in tqdmasyncio.tqdm.as_completed(limited_tasks_qcorrection):
@@ -390,15 +388,15 @@ async def main():
     
 
     print("-------------- QUESTIONS REVISED ------------- STATS SO FAR:")
-    nones = list(filter(lambda x: x is None, vetted_qa_tuples))
+    nones = list(filter(lambda x: x is None, vetted_qa_dicts))
     print(f"Nones: {len(nones)}")
-    print(f"Non-nones: {len(vetted_qa_tuples) - len(nones)}")
-    print(f"Total: {len(vetted_qa_tuples)}")
+    print(f"Non-nones: {len(vetted_qa_dicts) - len(nones)}")
+    print(f"Total: {len(vetted_qa_dicts)}")
     # filter out all None values
-    vetted_qa_tuples = [qa for qa in vetted_qa_tuples if qa is not None]
+    vetted_qa_dicts = [qa for qa in vetted_qa_dicts if qa is not None]
     print("---------------- ONTO EXAMPLES GENERATION-------------------")
 
-    qa_tuples_by_paragraph = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_tuples)
+    qa_tuples_by_paragraph = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_dicts)
     
     print("Creating question generation training data...")
     steps.convert_revised_questions_to_question_generation_training(qa_tuples_by_paragraph=qa_tuples_by_paragraph, use_filenames=USE_FILENAMES)

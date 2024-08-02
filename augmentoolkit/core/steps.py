@@ -224,10 +224,6 @@ def extract_reasoning_from_context_check(response):
 context_repairer_path = "check_qatuple_context_no_filenames"
 if USE_FILENAMES:
     context_repairer_path = "check_qatuple_context_filenames"
-if COMPLETION_MODE:
-    context_repairer_path = context_repairer_path + ".txt"
-else:
-    context_repairer_path = context_repairer_path + ".yaml"
 
 
 repair_context_regex = re.compile(
@@ -260,11 +256,13 @@ class ContextRepairer(PipelineStep):
             },
             output_dir=OUTPUT_DIR,
             output_subdir="question_context_revision_generations",
+            intermediate_output_path="revised_qatuples_intermediates",
             save_path="revised_qatuples_saved",
             output_processor=extract_reasoning_from_context_check,
             result_key="not gonna be used", # we do not employ the result key because we replace the question and answer in the qa dict.
             use_stop=USE_STOP,
             completion_mode=COMPLETION_MODE,
+            
         )
         
     def read_previous_output(self, idx, output_list):
@@ -298,6 +296,9 @@ class ContextRepairer(PipelineStep):
         elif not result[0]:
             output_list[idx] = None
         
+        id = make_id()
+        write_output_to_file(full_output, self.intermediate_output_path_full, id)
+        
         os.makedirs(self.save_path_dir, exist_ok=True)
         if output_list[idx]:
             with open(self.make_save_path_file(idx), "w") as f:
@@ -306,112 +307,16 @@ class ContextRepairer(PipelineStep):
             with open(self.make_save_path_file(idx), "w") as f:
                 f.write("failed")
     
-
+context_repairer = ContextRepairer()
 
 # Postprocessing function for question/answer validation
 async def repair_qatuple_context(
     idx,
-    tup,
+    dict,
     engine_wrapper,
-    writepath,
-    vetted_qa_tuples,
-    use_filenames=False,
-    completion_mode=None,
-    logging_level=logging.INFO,
+    vetted_qa_dicts,
 ):
-    # NOTE set up the generation step
-    context_repairer = GenerationStep(
-        prompt_path=context_repairer_path,
-        regex=repair_context_regex,
-        sampling_params={
-            "max_tokens": 2000,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "[INST",
-                "<|eot_id|>",
-                "<|start_header_id|>",
-                "<|end_header_id|>",
-            ],
-            "temperature": 0.2,
-        },
-        completion_mode=completion_mode,
-        retries=1,
-        engine_wrapper=engine_wrapper,
-        logging_level=logging_level,
-        output_processor=extract_reasoning_from_context_check,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-    )
-
-    # Resume normal control flow
-    file_path = os.path.join(writepath, f"revised_{idx}.json")
-    if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()  # Read the file once and store its content
-            print(file_path)
-            if content == "failed":
-                print("Loaded failed file")
-                vetted_qa_tuples[idx] = None
-                return None
-            print("Loaded file:")
-            print(content)
-            try:
-                data = json.loads(content)  # Convert the string back to JSON
-                vetted_qa_tuples[idx] = (data[0], data[1], data[2], data[3], data[4], data[5], data[6])
-                return None
-            except json.JSONDecodeError:
-                print("JSON decode error with the contents:", content)
-
-    try:
-        revision_id = make_id()
-        revision, revision_output = await context_repairer.generate(
-            arguments={
-                "textname": tup[3],
-                "question": tup[0],
-                "answer": tup[1],
-            }
-        )
-        write_output_to_file(
-            revision_output,
-            obj_conf["PATH"]["OUTPUT"] + "/question_context_revision_generations",
-            revision_id,
-        )  # incidentally, identifying the problem and fixing it in the same step (without another planning step) works a lot better than identifying it and then trying to fix it in the next step.
-        if isinstance(revision[0], str):  # if the thing was reworded
-            vetted_qa_tuples[idx] = (
-                revision[0],
-                revision[1],
-                tup[2],
-                tup[3],
-                tup[4],
-                tup[5],
-                tup[6]
-            )  # replace the old tuple with the new one, revision doesn't have text name so we keep the old one
-        elif not revision[0]:
-            vetted_qa_tuples[
-                idx
-            ] = None  # prepare item for deletion later; right now we just store it as None because indexes
-        # else, if it passed, we just leave it be.
-
-        # Write in-progress
-        if not os.path.exists(writepath):
-            os.makedirs(writepath)
-
-        if vetted_qa_tuples[idx]:
-            with open(file_path, "w") as file:
-                json.dump(vetted_qa_tuples[idx], file, indent=4)
-        else:
-            with open(file_path, "w") as file:
-                file.write("failed")
-
-    except Exception as e:
-        print("!!! ERROR!", e)
-        traceback.print_exc()
+    await context_repairer.run(idx, dict, engine_wrapper, output_list=vetted_qa_dicts)
 
 
 def parse_answer_accuracy_validation(response):
