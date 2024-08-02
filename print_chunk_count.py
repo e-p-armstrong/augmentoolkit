@@ -13,8 +13,10 @@ import logging
 import yaml
 import glob
 from augmentoolkit.utils.group_by_text import group_by_text
-from augmentoolkit.control_flow_functions import control_flow_functions
+from augmentoolkit.core import steps
 import os
+
+import augmentoolkit.utils.sentence_chunking_algorithm
 
 with open("./config.yaml", "r") as f:
     config = yaml.safe_load(f)
@@ -91,18 +93,18 @@ multi_turn_convs_info_dir = (
 sys.path.append("./generation_functions")
 sys.path.append("./control_flow_functions")
 
-from augmentoolkit.control_flow_functions import control_flow_functions
+from augmentoolkit.core import steps
 
 sentence_chunks = []
 for source_text in source_texts:
-    sentence_chunks += control_flow_functions.sentence_chunking_algorithm(
+    sentence_chunks += augmentoolkit.utils.sentence_chunking_algorithm.sentence_chunking_algorithm(
         source_text, config["SYSTEM"]["CHUNK_SIZE"]
     )
 
 conversions = [("\n", " "), ("  ", " ")]
 
 paragraphs_processed = [
-    (control_flow_functions.fix_text(conversions, seq[0]), seq[1])
+    (steps.fix_text(conversions, seq[0]), seq[1])
     for seq in sentence_chunks
 ]
 

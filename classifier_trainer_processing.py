@@ -2,6 +2,7 @@ import asyncio
 
 from augmentoolkit.utils.head_tail_truncate import head_tail_truncate
 from augmentoolkit.utils.load_dataset import load_dataset
+import augmentoolkit.utils.sentence_chunking_algorithm
 
 async def main():
     
@@ -18,7 +19,7 @@ async def main():
     from augmentoolkit.utils.sample_and_remove import sample_and_remove
 
     from augmentoolkit.classifier_trainer.steps import all_labels_same, create_label, create_rules, run_classifier, save_train_set, train_classifier
-    from augmentoolkit.control_flow_functions import control_flow_functions
+    from augmentoolkit.core import steps
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
     with open("./classifier_trainer_config.yaml", "r") as f: # different yaml file for different pipes
@@ -73,7 +74,7 @@ async def main():
     chunks = []
     for source_text in source_texts:
         if source_text.endswith(('.txt', '.md')):
-            chunks.extend(control_flow_functions.sentence_chunking_algorithm(
+            chunks.extend(augmentoolkit.utils.sentence_chunking_algorithm.sentence_chunking_algorithm(
                 source_text, CHUNK_SIZE
             ))
         elif source_text.endswith(('.json', '.jsonl', '.parquet')):
@@ -97,7 +98,7 @@ async def main():
     conversions = [("\n", " "), ("  ", " ")]
 
     chunks = [
-        (control_flow_functions.fix_text(conversions, seq[0]), seq[1])
+        (steps.fix_text(conversions, seq[0]), seq[1])
         for seq in chunks
     ]
     random.shuffle(chunks)

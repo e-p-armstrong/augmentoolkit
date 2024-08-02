@@ -1,5 +1,8 @@
 import sys
 import os
+
+import augmentoolkit.utils.create_pretraining_set
+import augmentoolkit.utils.sentence_chunking_algorithm
 # Get the directory of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # Change the current working directory to the script directory
@@ -24,7 +27,7 @@ async def main():
     import yaml
     import glob
     from augmentoolkit.utils.group_by_text import group_by_text
-    from augmentoolkit.control_flow_functions import control_flow_functions
+    from augmentoolkit.core import steps
 
     with open("./config.yaml", "r") as f:
         config = yaml.safe_load(f)
@@ -83,7 +86,7 @@ async def main():
     ]
 
     # Create pretraining set from raw inputs (pretrain first, then instruct tune)
-    control_flow_functions.create_pretraining_set(
+    augmentoolkit.utils.create_pretraining_set.create_pretraining_set(
         INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
     )
 
@@ -144,7 +147,7 @@ async def main():
     sys.path.append("./control_flow_functions")
 
     import augmentoolkit.generation_functions as generation_functions  # This is the package directory
-    from augmentoolkit.control_flow_functions import control_flow_functions
+    from augmentoolkit.core import steps
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
     engine_wrapper = EngineWrapper(
@@ -168,14 +171,17 @@ async def main():
 
     sentence_chunks = []
     for source_text in source_texts:
-        sentence_chunks += control_flow_functions.sentence_chunking_algorithm(
+        sentence_chunks += augmentoolkit.utils.sentence_chunking_algorithm.sentence_chunking_algorithm(
             source_text, config["SYSTEM"]["CHUNK_SIZE"]
         )
 
     conversions = [("\n", " "), ("  ", " ")]
 
     paragraphs_processed = [
-        (control_flow_functions.fix_text(conversions, seq[0]), seq[1])
+        {
+            "paragraph": steps.fix_text(conversions, seq["paragraph"]), 
+            "metadata": seq["metadata"]
+        }
         for seq in sentence_chunks
     ]
 
@@ -202,11 +208,10 @@ async def main():
         # Determine which paragraphs are worthy of making questions from
         judged_worthy_for_questions = []
 
-        await control_flow_functions.filter_all_questions(
+        await steps.filter_all_questions(
             paragraphs_processed,
             judged_worthy_for_questions,
             engine_wrapper,
-            output_dir,
             take_subset=USE_SUBSET,
             subset_size=SUBSET_SIZE,
             use_filenames=False,
@@ -215,12 +220,12 @@ async def main():
             logging_level=LOG_LEVEL,
         )
 
-        filtered_worthy_for_questions = control_flow_functions.filter_and_graph(
+        filtered_worthy_for_questions = steps.filter_and_graph(
             judged_worthy_for_questions
         )
         
         print("Converting generations to training data")
-        control_flow_functions.convert_logging_to_dataset("judge_paragraph_generations")
+        steps.convert_logging_to_dataset("judge_paragraph_generations")
 
     print(filtered_worthy_for_questions[0])
     
@@ -230,9 +235,7 @@ async def main():
         sys.exit(0)
     
     #####
-
-
-
+    
     # ### The cell below begins generating questions. SOME OF THESE MAY FAIL and have to retry due to model errors (the API branch cannot use grammars). But if you let it run you will see that the vast majority eventually get through.
     #
 
@@ -264,7 +267,7 @@ async def main():
             generated_qa_tuples.append(qa_tuple)
     else:
         tasks = [
-            control_flow_functions.generate_qatuples_from_para(
+            steps.generate_qatuples_from_para(
                 idx,
                 para,
                 engine_wrapper_large=engine_wrapper_large,
@@ -304,7 +307,7 @@ async def main():
     # print(generated_qa_tuples[0])
     
     tasks = [
-        control_flow_functions.vet_question_loop(
+        steps.vet_question_loop(
             question_answer_tuple,
             question_group_id=question_answer_tuple[4],
             engine_wrapper=engine_wrapper,
@@ -372,7 +375,7 @@ async def main():
                     print(f"Error reading {file_path}: {e}")
     else:
         tasks = [
-            control_flow_functions.repair_qatuple_context( # NOTE PROBLEM in that things that this writes, do not have enough items in the tuple
+            steps.repair_qatuple_context( # NOTE PROBLEM in that things that this writes, do not have enough items in the tuple
                 idx,
                 tup,
                 engine_wrapper_large,
@@ -402,7 +405,7 @@ async def main():
     qa_tuples_by_paragraph = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_tuples)
     
     print("Creating question generation training data...")
-    control_flow_functions.convert_revised_questions_to_question_generation_training(qa_tuples_by_paragraph=qa_tuples_by_paragraph, use_filenames=USE_FILENAMES)
+    steps.convert_revised_questions_to_question_generation_training(qa_tuples_by_paragraph=qa_tuples_by_paragraph, use_filenames=USE_FILENAMES)
 
     if not os.path.exists(multi_turn_convs_info_dir):
         os.makedirs(multi_turn_convs_info_dir)
@@ -414,7 +417,7 @@ async def main():
     multi_turn_convs_info = []
 
     tasks = [
-        control_flow_functions.create_info(
+        steps.create_info(
             idx,
             group,
             multi_turn_convs_info,
@@ -431,7 +434,7 @@ async def main():
     
     import json
 
-    convs_info = control_flow_functions.read_json_files_info(multi_turn_convs_info_dir)
+    convs_info = steps.read_json_files_info(multi_turn_convs_info_dir)
 
     
     import json
@@ -446,7 +449,7 @@ async def main():
     multi_turn_convs = []
 
     tasks = [
-        control_flow_functions.create_conversation(
+        steps.create_conversation(
             idx,
             info,
             engine_wrapper_large,
@@ -463,7 +466,7 @@ async def main():
         await future
 
     print("Converting conversational data generations to training data")
-    control_flow_functions.convert_logging_to_dataset("multiturn_conversation_generations")
+    steps.convert_logging_to_dataset("multiturn_conversation_generations")
 
     # # Yay! Now you have a dataset!
     # ### GPT wrote the cell below. I think it successfully converts things to ShareGPT format for use with axolotl, but I am not sure because I don't know that format very well and haven't used Axolotl. However, the json produced by the second function looks fine.
@@ -472,11 +475,11 @@ async def main():
     import json
 
     # Make ShareGPT-format dataset (I think, still need verification it actually works)
-    control_flow_functions.convert_directory_to_list(
+    steps.convert_directory_to_list(
         config["PATH"]["OUTPUT"] + "/multi_turn_convs/"
     )
     # Make dataset in a format that has all the information. See README for details on this format.
-    control_flow_functions.convert_directory_and_process_conversations(
+    steps.convert_directory_and_process_conversations(
         config["PATH"]["OUTPUT"] + "/multi_turn_convs/"
     )
 

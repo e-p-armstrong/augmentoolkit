@@ -3,6 +3,8 @@ import json
 import re
 import sys
 from tqdm import asyncio as tqdmasyncio
+from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
+from augmentoolkit.generation_functions.pipeline_step_class import PipelineStep
 from augmentoolkit.utils.make_id import make_id
 from augmentoolkit.utils.write_output_to_file import write_output_to_file
 from augmentoolkit.generation_functions.safe_formatter import safe_format
@@ -15,7 +17,6 @@ import traceback
 import glob
 import yaml
 from datasets import load_dataset
-import chardet
 
 
 from augmentoolkit.utils.create_conv_starter import create_conv_starter
@@ -24,11 +25,7 @@ from augmentoolkit.utils.escape_unescaped_quotes import escape_unescaped_quotes
 
 from augmentoolkit.generation_functions import (
     extract_question_answer,
-    identify_duplicates,
     process_multiturn_functions,
-    extract_name,
-    random_name,
-    strip_steps,
 )
 from augmentoolkit.generation_functions.format_qatuples import format_qatuples
 
@@ -42,6 +39,13 @@ DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
 HUB_PATH = obj_conf["HUGGINGFACE"]["HUB_PATH"]
 PRIVATE = obj_conf["HUGGINGFACE"]["PRIVATE"]
 PUSH_TO_HUB = obj_conf["HUGGINGFACE"]["PUSH_TO_HUB"]
+USE_FILENAMES = obj_conf["SYSTEM"]["USE_FILENAMES"]
+OUTPUT_DIR = obj_conf["PATH"]["OUTPUT"]
+PROMPTS_DIR = obj_conf["PATH"]["PROMPTS"]
+DEFAULT_PROMPTS = obj_conf["PATH"]["DEFAULT_PROMPTS"]
+USE_STOP = obj_conf["SYSTEM"]["STOP"]
+COMPLETION_MODE = obj_conf["SYSTEM"]["COMPLETION_MODE"]
+
 has_pushed_yet = False
 
 def extract_qa_tuples(text):
@@ -62,8 +66,6 @@ def convert_logging_to_dataset(directory):
     output_dir = os.path.join(obj_conf["PATH"]["OUTPUT"], directory)
     
     output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], directory + "_DATAGEN_OUTPUT.jsonl")
-    
-    
     
     if not os.path.exists(output_dir):
         raise Exception("ERROR!! Trying to convert a logging directory to a dataset, when that directory does not exist!")
@@ -215,10 +217,6 @@ def extract_reasoning_from_context_check(response):
         return (False, response)  # , completion
     else:
         print("Did not contain relevant or irrelevant! Retrying")
-        # print("!!! RESPONSE !!!")
-        # print("\n\n\n---\/---\n\n")
-        # print(response)
-        # print("\n\n\n---/\---\n\n")
         raise Exception("error in judgement extraction (ans relevancy)")
 
 # Postprocessing function for question/answer validation
@@ -847,7 +845,6 @@ async def generate_qatuples_from_para(
     completion_mode=None,
     logging_level=None,
 ):
-
     # NOTE Set up qatuple generation step #
     prompt_path_qatuples_gen = "qatuples_gen_no_filenames"
     if use_filenames:
@@ -941,76 +938,35 @@ async def generate_qatuples_from_para(
         traceback.print_exc()
 
 
-def filter_and_graph(tuples):
+def filter_and_graph(dicts):
     # Count the occurrences of None and non-None for each source text
     source_counts = Counter()
-    for paragraph, source in tuples:
-        if paragraph is None:
-            source_counts[source] = source_counts.get(source, [0, 0])
-            source_counts[source][0] += 1
+    for dict in dicts:
+        print(dict)
+        if dict["paragraph"] is None:
+            source_counts[dict["metadata"]] = source_counts.get(dict["metadata"], [0, 0])
+            source_counts[dict["metadata"]][0] += 1
         else:
-            source_counts[source] = source_counts.get(source, [0, 0])
-            source_counts[source][1] += 1
+            source_counts[dict["metadata"]] = source_counts.get(dict["metadata"], [0, 0])
+            source_counts[dict["metadata"]][1] += 1
 
     # Filter out tuples with None and return the new list
-    filtered_list = [t for t in tuples if t[0] is not None]
+    filtered_list = [t for t in dicts if t["paragraph"] is not None]
     return filtered_list
 
 
-## Paragraph Filtering (worthy for questions?)
-async def determine_worthy(
-    idx,
-    p,
-    judged_worthy_for_questions,
-    output_dir,
-    judge: GenerationStep,
-):
-    # for idx, p in tqdm(enumerate(paragraphs_processed[:10])):
-    id = make_id()
-    
-    file_name = f"{idx}.json"
-    file_path = os.path.join(output_dir, file_name)
-    # Check if the judgement for this paragraph already exists
-    if os.path.isfile(file_path):
-        with open(file_path, "r") as file:
-            data = json.load(file)
-            print("LOADING: ", data)
-        if isinstance(data, str):
-            judged_worthy_for_questions.append(
-                (None, data[7:])
-            )  # hacky way of appending only the text name. See the file output of a failed judgement for details (Takes after "failed|")
-        else:
-            judged_worthy_for_questions.append((data["paragraph"], data["metadata"]))
-    else:
-        judgement, judgement_output = await judge.generate(arguments={"text": p[0], "textname": p[1]})
-        write_output_to_file(judgement_output, obj_conf["PATH"]["OUTPUT"] + "/judge_paragraph_generations", id)
-        to_append = (None, p[1])
-        if judgement:
-            to_append = (p[0], p[1])
 
-        judged_worthy_for_questions.append(to_append)
+### JUDGEMENT SECTION
 
-        # Prepare the data to be written to the file
-        if judgement:
-            # The paragraph passed the judgement
-            data_to_write = {"paragraph": to_append[0], "metadata": to_append[1]}
-        else:
-            # The paragraph did not pass the judgement
-            data_to_write = f"failed|{to_append[1]}"
+if USE_FILENAMES:
+    judgement_prompt_path = "judge_paragraph_filenames"
+else:
+    judgement_prompt_path = "judge_paragraph_no_filenames"
 
-        # Write the judgement to a unique file as JSON
-        with open(file_path, "w") as file:
-            json.dump(data_to_write, file)
-
-        # Debug messages
-        try:
-            if judgement:
-                print(f"DEBUG model decided that index {idx} was suitable")
-            else:
-                print(f"DEBUG model decided that index {idx} was not suitable")
-        except:
-            print(f"DEBUG max retries exceeded for index {idx}")
-
+judgement_regex = re.compile(
+        r"Reasoning and thought process \(reason intelligently\):(.+)",
+        re.DOTALL | re.IGNORECASE,
+    )
 
 def judge_paragraph_processor(
     determination,
@@ -1020,13 +976,197 @@ def judge_paragraph_processor(
     elif "suitable" in determination.lower():
         return True
 
+class JudgeParagraphStep(PipelineStep):
+    def __init__(self): # instead of overriding init, just pass these when instantiating the class
+        super().__init__(
+            prompt_folder=PROMPTS_DIR,
+            default_prompt_folder=DEFAULT_PROMPT_PATH,
+            prompt_path=judgement_prompt_path,
+            regex=judgement_regex,
+            sampling_params={
+                "max_tokens": 1450,
+                # "min_p": 0.4,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n\n\n\n\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                    "<|eot_id|>",
+                    "<|start_header_id|>",
+                    "<|end_header_id|>",
+                ],
+                "temperature": 0.2,
+            },
+            output_dir=OUTPUT_DIR,
+            output_subdir="judge_paragraph_generations",
+            output_processor=judge_paragraph_processor,
+            use_stop=USE_STOP,
+            intermediate_output_path="intermediate_generations",
+            completion_mode=COMPLETION_MODE,
+            save_path="saved_readable_generations",
+            result_key="judged_worthy_for_questions",
+        )
+        
+    def read_previous_output(self, idx, output_list):
+        save_path_file = self.make_save_path_file(idx)
+        
+        if os.path.isfile(save_path_file):
+            with open(save_path_file, "r") as f:
+                data = json.load(f)
+                if isinstance(data, str):
+                    output_list.append(
+                        {
+                            "paragraph": None,
+                            "metadata": data[7:]
+                        }
+                    )
+                else:
+                    output_list.append(
+                        {
+                            "paragraph": data["paragraph"], 
+                            "metadata": data["metadata"]
+                        }
+                    )
+            return True
+        else:
+            return False
+    
+    def save(self, result=None, full_output=None, idx=None, output_list=None, input_data=None):
+        os.makedirs(self.full_output_path, exist_ok=True)
+        save_path_file = self.make_save_path_file(idx)
+        
+        
+        output_data = input_data
+        print("DEBUG: RESULT")
+        print(result)
+        if not result:
+            output_data = {
+                "paragraph": None,
+                "metadata": input_data["metadata"]
+            }
+            output_list.append(output_data)
+            os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
+            with open(save_path_file, "w") as f:
+                metadata = input_data["metadata"]
+                f.write(f"failed|{metadata}")
+            print(f"DEBUG model decided that index {idx} was not suitable")
+            print(f"Saved to {save_path_file}")
+        else:
+            output_data = {
+                "paragraph": input_data["paragraph"],
+                "metadata": input_data["metadata"]
+            }
+            output_list.append(output_data)
+            os.makedirs(os.path.dirname(save_path_file), exist_ok=True)
+            with open(save_path_file, "w") as f:
+                json.dump(output_data, f)
+            print(f"DEBUG model decided that index {idx} was suitable")
+            print(f"Saved to {save_path_file}")
+            
+            
+        write_output_to_file(full_output, self.intermediate_output_path_full, idx)
+        
+judge_paragraph_step = JudgeParagraphStep()
+    
+
+
+# judge = GenerationStep(
+#         prompt_path=prompt_path,
+#         regex=judgement_regex,
+        # sampling_params={
+        #     "max_tokens": 1450,
+        #     # "min_p": 0.4,
+        #     "stop": [
+        #         "### Response",
+        #         "\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        #         "</s>",
+        #         "# Input:",
+        #         "[INST]",
+        #         "### Instruction",
+        #         "[INST",
+        #         "<|eot_id|>",
+        #         "<|start_header_id|>",
+        #         "<|end_header_id|>",
+        #     ],
+        #     "temperature": 0.2,
+        # },
+#         completion_mode=completion_mode,
+#         retries=2,
+#         engine_wrapper=engine_wrapper,
+#         logging_level=logging_level,  # TODO change to warning
+#         output_processor=judge_paragraph_processor,
+#         # return_input_too=False,
+#         prompt_folder=obj_conf["PATH"]["PROMPTS"],
+#         default_prompt_folder=DEFAULT_PROMPT_PATH,
+#         use_stop=obj_conf["SYSTEM"]["STOP"]
+#     )
+
+## Paragraph Filtering (worthy for questions?)
+# async def determine_worthy(
+#     idx,
+#     p,
+#     judged_worthy_for_questions,
+#     output_dir,
+#     engine_wrapper: EngineWrapper,
+# ):
+#     # for idx, p in tqdm(enumerate(paragraphs_processed[:10])):
+#     id = make_id()
+    
+#     file_name = f"{idx}.json"
+#     file_path = os.path.join(output_dir, file_name)
+#     # Check if the judgement for this paragraph already exists
+#     if os.path.isfile(file_path):
+#         with open(file_path, "r") as file:
+#             data = json.load(file)
+#             print("LOADING: ", data)
+#         if isinstance(data, str):
+#             judged_worthy_for_questions.append(
+#                 (None, data[7:])
+#             )  # hacky way of appending only the text name. See the file output of a failed judgement for details (Takes after "failed|")
+#         else:
+#             judged_worthy_for_questions.append((data["paragraph"], data["metadata"]))
+#     else:
+#         judgement, judgement_output = await judge.generate(arguments={"text": p[0], "textname": p[1]})
+#         write_output_to_file(judgement_output, obj_conf["PATH"]["OUTPUT"] + "/judge_paragraph_generations", id)
+#         to_append = (None, p[1])
+#         if judgement:
+#             to_append = (p[0], p[1])
+
+#         judged_worthy_for_questions.append(to_append)
+
+#         # Prepare the data to be written to the file
+#         if judgement:
+#             # The paragraph passed the judgement
+#             data_to_write = {"paragraph": to_append[0], "metadata": to_append[1]}
+#         else:
+#             # The paragraph did not pass the judgement
+#             data_to_write = f"failed|{to_append[1]}"
+
+#         # Write the judgement to a unique file as JSON
+#         with open(file_path, "w") as file:
+#             json.dump(data_to_write, file)
+
+#         # Debug messages
+#         try:
+#             if judgement:
+#                 print(f"DEBUG model decided that index {idx} was suitable")
+#             else:
+#                 print(f"DEBUG model decided that index {idx} was not suitable")
+#         except:
+#             print(f"DEBUG max retries exceeded for index {idx}")
+
+
+
+
 
 # EXEMPLAR
 async def filter_all_questions(
     paragraphs_processed,
     judged_worthy_for_questions,
     engine_wrapper,
-    output_dir,
     take_subset=False,
     subset_size=None,
     use_filenames=False,
@@ -1034,59 +1174,16 @@ async def filter_all_questions(
     completion_mode=None,
     logging_level=None,
 ):
-    if use_filenames:
-        prompt_path = "judge_paragraph_filenames"
-    else:
-        prompt_path = "judge_paragraph_no_filenames"
-
-    judgement_regex = re.compile(
-        r"Reasoning and thought process \(reason intelligently\):(.+)",
-        re.DOTALL | re.IGNORECASE,
-    )
-
-    if completion_mode:
-        prompt_path = prompt_path + ".txt"
-    else:
-        prompt_path = prompt_path + ".yaml"
-
-    judge = GenerationStep(
-        prompt_path=prompt_path,
-        regex=judgement_regex,
-        sampling_params={
-            "max_tokens": 1450,
-            # "min_p": 0.4,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n\n\n\n\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "[INST",
-                "<|eot_id|>",
-                "<|start_header_id|>",
-                "<|end_header_id|>",
-            ],
-            "temperature": 0.2,
-        },
-        completion_mode=completion_mode,
-        retries=2,
-        engine_wrapper=engine_wrapper,
-        logging_level=logging_level,  # TODO change to warning
-        output_processor=judge_paragraph_processor,
-        # return_input_too=False,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
-    )
     if not take_subset:
         tasks = [
-            determine_worthy(idx, p, judged_worthy_for_questions, output_dir, judge)
+            # determine_worthy(idx, p, judged_worthy_for_questions, output_dir, engine_wrapper)
+            judge_paragraph_step.run(idx, input_data=p, output_list=judged_worthy_for_questions, engine_wrapper=engine_wrapper)
             for idx, p in enumerate(paragraphs_processed)
         ]
     else:
         tasks = [
-            determine_worthy(idx, p, judged_worthy_for_questions, output_dir, judge)
+            # determine_worthy(idx, p, judged_worthy_for_questions, output_dir, engine_wrapper)
+            judge_paragraph_step.run(idx, input_data=p, output_list=judged_worthy_for_questions, engine_wrapper=engine_wrapper)
             for idx, p in enumerate(paragraphs_processed[:subset_size])
         ]
     limited_tasks = [rtwl(task) for task in tasks]
@@ -1094,90 +1191,9 @@ async def filter_all_questions(
         await future
 
 
-def sentence_chunking_algorithm(file_path, max_char_length=1900):
-    """
-    This function takes a plaintext file and chunks it into paragraphs or sentences if the paragraph exceeds max_char_length.
-
-    :param file_path: Path to the plaintext file
-    :param max_char_length: The maximum char5acter length for a chunk
-    :return: List of chunks with source text information
-    """
-    chunks_with_source = []
-    current_chunk = []
-    char_count = 0
-    source_name = file_path.replace(".txt", "")
-
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-        content = f.read()
-    # try:
-    #     with open(file_path, "r", encoding="utf-8") as f:
-    #         content = f.read()
-    # except Exception as e:
-    #     print(f"\nError reading file {file_path}: {e}\n")
-    #     return []
-
-    paragraphs = content.split(
-        "\n\n"
-    )  # Assuming paragraphs are separated by two newlines # TODO change so that if the length is 1 after this, split by tabs instead
-
-    # HOW TO DO IT probably:
-    # add tokens to the paragraph until we reach the max length,
-    # create chunks out of the remainder of the paragraph (split at max chunk length until it's done)
-    # if the final chunk does not have the max length, then make it the new current chunk, set the current token count to its length, and continue with the for loop.
-    # Ensure max_char_length is an integer
-    max_char_length = int(max_char_length)
-    
-    for paragraph in paragraphs:
-        paragraph = paragraph.strip()  # Remove leading and trailing whitespace
-        if not paragraph:  # Skip empty paragraphs
-            continue
-
-        paragraph_char_count = len(paragraph)
-
-        # Check if the paragraph itself exceeds the max token length
-        if paragraph_char_count > max_char_length:
-
-            # Fallback to character chunking for this paragraph
-            end_index = (
-                max_char_length - char_count
-            )  # after this we will take max_char_length chunks starting from end index until the end of the paragraph
-            current_chunk.append(paragraph[:end_index])
-            # characters = list(paragraph)
-            chunks_with_source.append(("".join(current_chunk), source_name))
-            current_chunk = []
-            while end_index < paragraph_char_count:
-                current_chunk.append(paragraph[end_index : end_index + max_char_length])
-                chunks_with_source.append(("".join(current_chunk), source_name))
-                current_chunk = []
-                end_index += max_char_length
-
-            # # handle the remainder of the paragraph
-            # end_index = end_index - max_char_length
-            # current_chunk.append(paragraph[end_index:])
-
-            # char_count = paragraph_char_count - end_index
-        else:
-            if char_count + paragraph_char_count <= max_char_length:
-                current_chunk.append(paragraph)
-                char_count += paragraph_char_count
-            else:
-                chunks_with_source.append(("".join(current_chunk), source_name))
-                current_chunk = [paragraph]
-                char_count = paragraph_char_count
-
-    # Add the last chunk if it exists
-    if current_chunk:
-        chunks_with_source.append(("\n\n".join(current_chunk), source_name))
-        
-    # filter out chunks with fewer than 50 characters
-    chunks_with_source = [chunk for chunk in chunks_with_source if len(chunk[0]) >= 50]
-
-    return chunks_with_source
-
-
 def fix_text(to_replace_arr, text):
-    for startup in to_replace_arr:
-        text = text.replace(startup[0], startup[1])
+    for tup in to_replace_arr:
+        text = text.replace(tup[0], tup[1])
     return text
 
 
@@ -1551,42 +1567,3 @@ def convert_directory_and_process_conversations(directory_path):
         "Conversion complete. The processed master list is written to 'processed_master_list.json'."
     )
 
-def create_pretraining_set(directory_path, json_file):
-    # Initialize a variable to store the combined text of all files
-    combined_text = ""
-    # Walk through all directories and files in the directory
-    for root, dirs, files in os.walk(directory_path):
-        for filename in files:
-            file_path = os.path.join(root, filename)
-            # Read the contents of the file
-            try:
-                # First, detect the file encoding
-                with open(file_path, 'rb') as raw_file:
-                    raw_data = raw_file.read()
-                    result = chardet.detect(raw_data)
-                    file_encoding = result['encoding']
-
-                # Now read the file with the detected encoding
-                with open(file_path, "r", encoding=file_encoding) as file:
-                    file_contents = file.read()
-                # Append the file contents to the combined text, with a separator
-                if combined_text:
-                    combined_text += "\n\n---NEW FILE---\n\n"
-                combined_text += file_contents
-                print(f"Successfully read file: {file_path}")
-            except UnicodeDecodeError as e:
-                print(f"Error reading file {file_path}: {e}. Skipping.")
-                continue  # Skip this file and continue with the next one
-            except IOError as e:
-                print(f"IOError reading file {file_path}: {e}. Skipping.")
-                continue  # Skip this file and continue with the next one
-
-    # Create a dictionary with the combined text
-    data = {"text": combined_text}
-
-    try:
-        with open(json_file, "w", encoding='utf-8') as file:
-            json.dump(data, file, ensure_ascii=False)
-        print("JSON file saved successfully.")
-    except IOError as e:
-        print(f"Error saving JSON file: {e}")

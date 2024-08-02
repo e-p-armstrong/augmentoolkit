@@ -4,7 +4,7 @@ PATH:
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY: "replace with your key" # Add the API key for your favorite provider here
+  API_KEY: "a6e590a098faa11f96b6d0a1aa746fbe8af199ceea197dbe03bb896b13c7ffdb" # Add the API key for your favorite provider here
   BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
   LOGICAL_MODEL: "meta-llama/Llama-3-8b-chat-hf" # model used for everything except conversation generation at the very end
   LARGE_LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for question generation and conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on.
@@ -35,8 +35,8 @@ SYSTEM:
    ----------------------
    {data}
 PHASE:
-  WORK_IN_PHASES: False
-  PHASE_INDEX: 3 # index of the phase we are currently on (index 0 = filtering out chunks with no relevant context; index 1 = question generation; index 2 = question validation; index 3 = context revision and conversation generation, the final phase)
+  WORK_IN_PHASES: True
+  PHASE_INDEX: 0 # index of the phase we are currently on (index 0 = filtering out chunks with no relevant context; index 1 = question generation; index 2 = question validation; index 3 = context revision and conversation generation, the final phase)
 HUGGINGFACE:
   HUB_PATH: "Heralax/test-atk-dataset-do-not-use-3"
   PRIVATE: false
