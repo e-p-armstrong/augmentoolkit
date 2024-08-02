@@ -176,7 +176,7 @@
     #### Explanation of Judgment: Due to the inclusion of an unsupported reason for Venus's retrograde rotation, the final judgment is: Irrelevant.
 - role: user
   content: |
-    Text: """{text}"""
+    Text: """{paragraph}"""
     
     Question (based on text): """{question}"""
     

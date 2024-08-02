@@ -249,7 +249,7 @@ async def main():
     if not os.path.exists(qa_tuples_dir_unchecked):
         os.makedirs(qa_tuples_dir_unchecked)
 
-    generated_qa_tuples = []  # tuple list of qa tuples that have been judged good
+    generated_qa_dicts = []  # tuple list of qa tuples that have been judged good
 
     # Attempt to initialize filtered_worthy_for_questions
     try:
@@ -264,14 +264,14 @@ async def main():
             with open(file_path, "r") as file:
                 qa_tuple = tuple(json.load(file))
                 print(f"Loaded {file}")
-            generated_qa_tuples.append(qa_tuple)
+            generated_qa_dicts.append(qa_tuple)
     else:
         tasks = [
-            steps.generate_qatuples_from_para(
+            steps.generate_qadicts_from_para(
                 idx,
                 para,
                 engine_wrapper_large=engine_wrapper_large,
-                generated_qa_tuples=generated_qa_tuples,
+                generated_qa_dicts=generated_qa_dicts,
             )
             for idx, para in enumerate(filtered_worthy_for_questions)
         ]
@@ -282,11 +282,11 @@ async def main():
 
     # only convert questions to training data if they passed validation
     
-    # for qatup in generated_qa_tuples:
-    #     if question_answer_tuple[0] is not None:
-    #         file_path = os.path.join(qa_tuples_dir_unchecked, f"para_{question_answer_tuple[5]}_q_{qnum}.json")
+    # for qatup in generated_qa_dicts:
+    #     if question_answer_dict[0] is not None:
+    #         file_path = os.path.join(qa_tuples_dir_unchecked, f"para_{question_answer_dict[5]}_q_{qnum}.json")
     #         with open(file_path, "w") as file:
-    #             json.dump(question_answer_tuple, file, indent=4)
+    #             json.dump(question_answer_dict, file, indent=4)
     
     # PHASE 1 END
     print("COMPLETED PHASE 1")
@@ -295,24 +295,24 @@ async def main():
         sys.exit(0)
     ####
     
-    vetted_qa_tuples = []
-    qa_tuples_dir_checked = config["PATH"]["OUTPUT"] + "/qatuples_filtered"
-    if not os.path.exists(qa_tuples_dir_checked):
-        os.makedirs(qa_tuples_dir_checked)
+    vetted_qa_dicts = []
+    qa_dicts_dir_checked = os.path.join(config["PATH"]["OUTPUT"], "qatuples_filtered")
+    if not os.path.exists(qa_dicts_dir_checked):
+        os.makedirs(qa_dicts_dir_checked)
     
-    # print(generated_qa_tuples[0])
+    print(generated_qa_dicts[0])
     
     tasks = [
         steps.vet_question_loop(
-            question_answer_tuple,
-            question_group_id=question_answer_tuple[4],
+            question_answer_dict,
+            question_group_id=question_answer_dict['question_group_id'],
             engine_wrapper=engine_wrapper,
-            qa_tuples_dir=qa_tuples_dir_checked,
-            vetted_qa_tuples=vetted_qa_tuples,
+            qa_dicts_dir=qa_dicts_dir_checked,
+            vetted_qa_dicts=vetted_qa_dicts,
             double_check_counter=DOUBLE_CHECK_COUNTER,
             completion_mode=COMPLETION_MODE,
             logging_level=LOG_LEVEL,
-        ) for question_answer_tuple in generated_qa_tuples
+        ) for question_answer_dict in generated_qa_dicts
     ]
     limited_tasks_q_validation = [run_task_with_limit(task) for task in tasks]
     for future in tqdmasyncio.tqdm.as_completed(limited_tasks_q_validation):

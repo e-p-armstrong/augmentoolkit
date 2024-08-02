@@ -219,6 +219,11 @@ def extract_reasoning_from_context_check(response):
         print("Did not contain relevant or irrelevant! Retrying")
         raise Exception("error in judgement extraction (ans relevancy)")
 
+### CONTEXT REPAIR SECTION
+
+
+
+
 # Postprocessing function for question/answer validation
 async def repair_qatuple_context(
     idx,
@@ -364,7 +369,7 @@ def parse_answer_accuracy_validation(response):
 
 # Control flow helpers -- Question/Answer Validation
 async def vet_answer_accuracy_loop(
-    qa_tuple,
+    qa_dict,
     run_id,
     engine_wrapper=None,
     double_check_counter=3,
@@ -415,7 +420,6 @@ async def vet_answer_accuracy_loop(
     # Resume normal control flow code
 
     try:
-        qtuple = qa_tuple
         # print(
         # f"\n\nStarting ACCURACY loop for question: {qtuple[0]}, context: {qtuple[2]}"
         # )
@@ -428,11 +432,9 @@ async def vet_answer_accuracy_loop(
             # f"\n\nACCURACY CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
             # )
             judgement, answer_accuracy_output = await answer_accuracy_checker.generate(
-                arguments={
-                    "text": qtuple[2],
-                    "question": qtuple[0],
-                    "answer": qtuple[1],
-                }
+                paragraph=qa_dict["paragraph"],
+                question=qa_dict["question"],
+                answer=qa_dict["answer"],
             )
             write_output_to_file(
                 answer_accuracy_output,
@@ -454,7 +456,7 @@ async def vet_answer_accuracy_loop(
 
         if passed_checks >= ceil(double_check_counter / 2):  # if question checks passed
             # print(f"\n\ANSWER ACCURACY CHECKS PASSED retries: {total_retries}")
-            return qtuple
+            return qa_dict
         else:
             print("Answer accuracy validation failed! Tossing")
             with open(file_path, "w") as file:
@@ -496,7 +498,7 @@ def parse_answer_relevancy_validation_step(thought_process):
 
 
 async def vet_answer_relevance_loop(
-    qa_tuple,
+    qa_dict,
     run_id,
     engine_wrapper=None,
     double_check_counter=3,
@@ -547,28 +549,19 @@ async def vet_answer_relevance_loop(
 
     # Resume normal control flow code
     try:
-        qtuple = qa_tuple
-        # print(
-        # f"\n\nStarting RELEVANCE loop for question: {qtuple[0]}, context: {qtuple[2]}"
-        # )
         passed_checks = 0
         times_checked = 0
         dissenting_reasoning = ""
         while times_checked < double_check_counter:
-            check_id = make_id()
             
-            # print(
-            # f"\n\nRELEVANCE CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
-            # )
+            check_id = make_id()
             (
                 judgement,
                 answer_relevancy_output,
             ) = await answer_relevancy_checker.generate(
-                arguments={
-                    "text": qtuple[2],
-                    "question": qtuple[0],
-                    "answer": qtuple[1],
-                }
+                paragraph=qa_dict["paragraph"],
+                question=qa_dict["question"],
+                answer=qa_dict["answer"],
             )
             write_output_to_file(
                 answer_relevancy_output,
@@ -591,7 +584,7 @@ async def vet_answer_relevance_loop(
         if passed_checks >= ceil(double_check_counter / 2):  # if question checks passed
             # print(f"\n\ANSWER ACCURACY CHECKS PASSED retries: {total_retries}")
             return await vet_answer_accuracy_loop(
-                qtuple,
+                qa_dict,
                 run_id,
                 engine_wrapper=engine_wrapper,
                 double_check_counter=double_check_counter,
@@ -641,37 +634,29 @@ def parse_validation_step(response):
         )
 
 
-async def vet_question_loop(
-    qa_tuple,
+async def vet_question_loop( # NOTE adding the pipelinestep class would make this a bit more complex, rather than less; so this is not refactored to use that class
+    qa_dict,
     question_group_id=None,
     engine_wrapper=None,
-    qa_tuples_dir=None, # idx is qa_tuple[5]. Really should've used a dict at this point, oh well.
-    vetted_qa_tuples=None,
+    qa_dicts_dir=None,
+    vetted_qa_dicts=None,
     double_check_counter=3,
     completion_mode=None,
     logging_level=None,
 ):
     try:
-        file_path = os.path.join(qa_tuples_dir, f"para_{qa_tuple[5]}_q_{qa_tuple[6]}.json")
-        idx = qa_tuple[5]
-        # Check for existing qa tuples
-        existing_files = glob.glob(
-            os.path.join(qa_tuples_dir, f"para_{idx}_q_{qa_tuple[6]}.json")
-        )  # check if qs already exist
-
-        if len(existing_files) > 0:  # If files exist, skip this paragraph entirely
-            print(f"Loading file")
-            for file_path in existing_files:
-                with open(file_path, "r") as file:
-                    file_body = file.read()
-                    if file_body == "failed":
-                        qa_tuple = None
-                    else:
-                        file.seek(0)
-                        qa_tuple = tuple(json.loads(file_body))
-                vetted_qa_tuples.append(qa_tuple)
-            return
+        file_path = os.path.join(qa_dicts_dir, f"para_{qa_dict['paragraph_idx']}_q_{qa_dict['question_idx']}.json")
         
+        if os.path.exists(file_path):
+            with open(file_path, "r") as file:
+                file_body = file.read()
+                if file_body == "failed":
+                    qa_dict = None
+                else:
+                    file.seek(0)
+                    qa_dict = json.loads(file_body)
+            vetted_qa_dicts.append(qa_dict)
+            return
         
         # NOTE Set up question check generation step
         prompt_path_q_check = "check_question"
@@ -717,7 +702,6 @@ async def vet_question_loop(
         # NOTE Set up generate new question step
         # MODIFICATION: so that the conversations make sense, we just toss failed questions, rather than regenning. They're plentiful enough.
         try:
-            qtuple = qa_tuple
             # print(
             #     f"\n\nStarting QUESTION loop for question: {qtuple[0]}, context: {qtuple[2]}"
             # )
@@ -728,7 +712,7 @@ async def vet_question_loop(
             if obj_conf["SKIP"]["QUESTION_CHECK"]:
                 print("DEBUG: Skipping question check")
                 return await vet_answer_accuracy_loop(
-                    qtuple,
+                    qa_dict,
                     run_id,
                     engine_wrapper=engine_wrapper,
                     double_check_counter=double_check_counter,
@@ -741,9 +725,7 @@ async def vet_question_loop(
                 # print(
                 #     f"\n\nQUESTION CALL CHECK ANSWER: {qtuple[0]}, context: {qtuple[2]}, retries: {total_retries}, dissenting reasoning: {dissenting_reasoning}"
                 # )
-                judgement, check_q_output = await question_checker.generate(
-                    arguments={"text": qtuple[2], "question": qtuple[0], "answer": qtuple[1]}
-                )
+                judgement, check_q_output = await question_checker.generate(paragraph=qa_dict["paragraph"], question=qa_dict["question"], answer=qa_dict["answer"])
 
                 # Now we need to put the judgement together into the format it expects it to be in
 
@@ -776,7 +758,7 @@ async def vet_question_loop(
                 
                 if obj_conf["SKIP"]["ANSWER_RELEVANCY_CHECK"]:
                     res = await vet_answer_accuracy_loop(
-                        qtuple,
+                        qa_dict,
                         run_id,
                         engine_wrapper=engine_wrapper,
                         double_check_counter=double_check_counter,
@@ -786,7 +768,7 @@ async def vet_question_loop(
                     )
                 else:
                     res = await vet_answer_relevance_loop(
-                        qtuple,
+                        qa_dict,
                         run_id,
                         engine_wrapper=engine_wrapper,
                         double_check_counter=double_check_counter,
@@ -797,7 +779,7 @@ async def vet_question_loop(
                 
                 # Return response
                 
-                vetted_qa_tuples.append(res)
+                vetted_qa_dicts.append(res)
                 if res is not None:
                     with open(file_path, "w") as file:
                         json.dump(res, file, indent=4)
@@ -884,8 +866,8 @@ class QuestionGenerationStep(PipelineStep): # like before, but with the new syst
             print(f"Skipping para_{idx} as files already exist; loading said files")
             for file_path in existing_files:
                 with open(file_path, "r") as file:
-                    qa_tuple = tuple(json.load(file))
-                output_list.append(qa_tuple)
+                    qa_dict = json.load(file)
+                output_list.append(qa_dict)
             return True
         return False
     
@@ -922,11 +904,11 @@ question_generation_step = QuestionGenerationStep()
 
 
 # Question generation
-async def generate_qatuples_from_para(
+async def generate_qadicts_from_para(
     idx,
     para,
     engine_wrapper_large=None,
-    generated_qa_tuples=None,
+    generated_qa_dicts=None,
 ):
     # NOTE Set up qatuple generation step #
     
@@ -934,7 +916,7 @@ async def generate_qatuples_from_para(
         idx=idx,
         input_data=para,
         engine_wrapper=engine_wrapper_large,
-        output_list=generated_qa_tuples
+        output_list=generated_qa_dicts
     )
 
 
@@ -1001,7 +983,7 @@ class JudgeParagraphStep(PipelineStep):
                 "temperature": 0.2,
             },
             output_dir=OUTPUT_DIR,
-            output_subdir="judge_paragraph_generations",
+            output_subdir="judge_paragraph_generations", # TODO rename to just judge_paragraph_all_outputs, same with q gen.
             output_processor=judge_paragraph_processor,
             use_stop=USE_STOP,
             intermediate_output_path="intermediate_generations",

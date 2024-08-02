@@ -158,7 +158,7 @@
     #### Overall Accuracy Determination: The answer is: Inaccurate.
 - role: user
   content: |
-    Text: """{text}"""
+    Text: """{paragraph}"""
     
     Question (based on text): """{question}"""
     
