@@ -357,7 +357,7 @@
   content: |
     Text to make questions from: 
     """
-    {text}
+    {paragraph}
     """
     -----------
     Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")

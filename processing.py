@@ -272,10 +272,6 @@ async def main():
                 para,
                 engine_wrapper_large=engine_wrapper_large,
                 generated_qa_tuples=generated_qa_tuples,
-                qa_tuples_dir=qa_tuples_dir_unchecked,
-                use_filenames=USE_FILENAMES,
-                completion_mode=COMPLETION_MODE,
-                logging_level=LOG_LEVEL,
             )
             for idx, para in enumerate(filtered_worthy_for_questions)
         ]

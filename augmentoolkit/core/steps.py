@@ -818,6 +818,10 @@ async def vet_question_loop(
         traceback.print_exc()
 
 
+
+
+### Question Generation Section
+
 def extract_questions_from_response(
     generation,
 ):  # TODO extract to non-controlflow file
@@ -827,11 +831,94 @@ def extract_questions_from_response(
         return []
     return questions
 
+prompt_path_qatuples_gen = "qatuples_gen_no_filenames"
+if USE_FILENAMES:
+    prompt_path_qatuples_gen = "qatuples_gen_filenames"
+    
+qatuples_gen_regex = re.compile(
+        r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
+    )
 
-def extract_question_from_response(
-    generation,
-):  # TODO extract to non-controlflow file
-    return extract_questions_from_response(generation)[0]
+class QuestionGenerationStep(PipelineStep): # like before, but with the new system. Override the read and save.
+    def __init__(self):
+        super().__init__(
+            prompt_folder=PROMPTS_DIR,
+            default_prompt_folder=DEFAULT_PROMPT_PATH,
+            prompt_path=prompt_path_qatuples_gen,
+            regex=qatuples_gen_regex,
+            sampling_params={
+                "max_tokens": 2000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                    "<|eot_id|>",
+                    "<|start_header_id|>",
+                    "<|end_header_id|>",
+                ],
+                "temperature": 0.8,
+                # top_k=-1,
+                "top_p": 1,
+                # min_p=0.5,
+            },
+            output_dir=OUTPUT_DIR,
+            output_subdir="question_generation_generations",
+            output_processor=extract_questions_from_response,
+            use_stop=USE_STOP,
+            intermediate_output_path="question_generation_generations",
+            completion_mode=COMPLETION_MODE,
+            save_path="raw_qatuples_saved",
+            result_key="not_used",
+        )
+        
+    def read_previous_output(self, idx, output_list):
+        existing_files = glob.glob(
+            os.path.join(self.save_path_dir, f"para_{idx}_*.json")
+        )
+        
+        if len(existing_files) > 0:
+            print(f"Skipping para_{idx} as files already exist; loading said files")
+            for file_path in existing_files:
+                with open(file_path, "r") as file:
+                    qa_tuple = tuple(json.load(file))
+                output_list.append(qa_tuple)
+            return True
+        return False
+    
+    def generate_data(self, processed_data, engine_wrapper):
+        self.question_group_id = make_id()
+        return super().generate_data(processed_data, engine_wrapper)
+    
+    def save(self, result=None, full_output=None, idx=None, output_list=None, input_data=None):
+
+        id = make_id()
+        write_output_to_file(full_output, self.intermediate_output_path_full, id)
+        qdicts = [
+            {
+                "paragraph": input_data['paragraph'],
+                "metadata": input_data['metadata'],
+                "question": qatup[0],
+                "answer": qatup[1],
+                "question_group_id": self.question_group_id,
+                "paragraph_idx": idx,
+                "question_idx": qnum,
+            } for qnum, qatup in enumerate(result)
+        ]
+        
+        output_list.extend(qdicts)
+        
+        # Save the output to a file
+        os.makedirs(self.save_path_dir, exist_ok=True)
+        for qdict in qdicts:
+            file_path = os.path.join(self.save_path_dir, f"para_{idx}_q_{qdict['question_idx']}.json")
+            with open(file_path, "w") as file:
+                json.dump(qdict, file, indent=4)
+
+question_generation_step = QuestionGenerationStep() 
 
 
 # Question generation
@@ -840,102 +927,15 @@ async def generate_qatuples_from_para(
     para,
     engine_wrapper_large=None,
     generated_qa_tuples=None,
-    qa_tuples_dir=None,
-    use_filenames=False,
-    completion_mode=None,
-    logging_level=None,
 ):
     # NOTE Set up qatuple generation step #
-    prompt_path_qatuples_gen = "qatuples_gen_no_filenames"
-    if use_filenames:
-        prompt_path_qatuples_gen = "qatuples_gen_filenames"
-
-    if completion_mode:
-        prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".txt"
-    else:
-        prompt_path_qatuples_gen = prompt_path_qatuples_gen + ".yaml"
-
-    qatuples_gen_regex = re.compile(
-        r"Questions \(make 4\):\n(.+)", re.IGNORECASE | re.DOTALL
-    )
-    qatuples_generator = GenerationStep(
-        prompt_path=prompt_path_qatuples_gen,
-        regex=qatuples_gen_regex,
-        sampling_params={
-            "max_tokens": 2000,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "[INST",
-                "<|eot_id|>",
-                "<|start_header_id|>",
-                "<|end_header_id|>",
-            ],
-            "temperature": 0.8,
-            # top_k=-1,
-            "top_p": 1,
-            # min_p=0.5,
-        },
-        completion_mode=completion_mode,
-        retries=3,
+    
+    await question_generation_step.run(
+        idx=idx,
+        input_data=para,
         engine_wrapper=engine_wrapper_large,
-        logging_level=logging_level,
-        output_processor=extract_questions_from_response,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-    use_stop=obj_conf["SYSTEM"]["STOP"]
+        output_list=generated_qa_tuples
     )
-    # Resume normal control flow code
-    try:
-        existing_files = glob.glob(
-            os.path.join(qa_tuples_dir, f"para_{idx}_*.json")
-        )  # check if qs already exist
-
-        if len(existing_files) > 0:  # If files exist, skip this paragraph entirely
-            print(f"Skipping para_{idx} as files already exist; loading said files")
-            for file_path in existing_files:
-                with open(file_path, "r") as file:
-                    qa_tuple = tuple(json.load(file))
-                generated_qa_tuples.append(qa_tuple)
-            return
-        question_group_id = make_id()
-        # print(f"\n\n\nOUTER LOOP CALL GENERATE QPLAN para: {para}, \n\n idx: {idx}")
-        # print(
-        #     f"\n\n\nOUTER LOOP CALL GENERATE Q: {para}, \n\n idx: {idx} \n\n plan: {plan}"
-        # )
-        (
-            question_answer_tuples,
-            question_generation_output,
-        ) = await qatuples_generator.generate(
-            arguments={
-                "text": para[0],
-                "textdetails": para[1],
-            }
-        )
-
-        question_answer_tuples_more_info = [
-            (qatup[0], qatup[1], para[0], para[1], question_group_id, idx, qnum) for qnum, qatup in enumerate(question_answer_tuples)
-        ]
-        write_output_to_file(
-            question_generation_output,
-            obj_conf["PATH"]["OUTPUT"] + "/question_generation_generations",
-            question_group_id,
-        )
-        
-        for qatup in question_answer_tuples_more_info:
-            generated_qa_tuples.append(qatup)
-            if qatup[0] is not None:
-                file_path = os.path.join(qa_tuples_dir, f"para_{qatup[5]}_q_{qatup[6]}.json")
-                with open(file_path, "w") as file:
-                    json.dump(qatup, file, indent=4)
-            
-    except Exception as e:
-        print(f"Q ERROR: {e}")
-        traceback.print_exc()
 
 
 def filter_and_graph(dicts):
@@ -1070,97 +1070,6 @@ class JudgeParagraphStep(PipelineStep):
         write_output_to_file(full_output, self.intermediate_output_path_full, idx)
         
 judge_paragraph_step = JudgeParagraphStep()
-    
-
-
-# judge = GenerationStep(
-#         prompt_path=prompt_path,
-#         regex=judgement_regex,
-        # sampling_params={
-        #     "max_tokens": 1450,
-        #     # "min_p": 0.4,
-        #     "stop": [
-        #         "### Response",
-        #         "\n\n\n\n\n\n\n\n\n\n\n\n\n",
-        #         "</s>",
-        #         "# Input:",
-        #         "[INST]",
-        #         "### Instruction",
-        #         "[INST",
-        #         "<|eot_id|>",
-        #         "<|start_header_id|>",
-        #         "<|end_header_id|>",
-        #     ],
-        #     "temperature": 0.2,
-        # },
-#         completion_mode=completion_mode,
-#         retries=2,
-#         engine_wrapper=engine_wrapper,
-#         logging_level=logging_level,  # TODO change to warning
-#         output_processor=judge_paragraph_processor,
-#         # return_input_too=False,
-#         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-#         default_prompt_folder=DEFAULT_PROMPT_PATH,
-#         use_stop=obj_conf["SYSTEM"]["STOP"]
-#     )
-
-## Paragraph Filtering (worthy for questions?)
-# async def determine_worthy(
-#     idx,
-#     p,
-#     judged_worthy_for_questions,
-#     output_dir,
-#     engine_wrapper: EngineWrapper,
-# ):
-#     # for idx, p in tqdm(enumerate(paragraphs_processed[:10])):
-#     id = make_id()
-    
-#     file_name = f"{idx}.json"
-#     file_path = os.path.join(output_dir, file_name)
-#     # Check if the judgement for this paragraph already exists
-#     if os.path.isfile(file_path):
-#         with open(file_path, "r") as file:
-#             data = json.load(file)
-#             print("LOADING: ", data)
-#         if isinstance(data, str):
-#             judged_worthy_for_questions.append(
-#                 (None, data[7:])
-#             )  # hacky way of appending only the text name. See the file output of a failed judgement for details (Takes after "failed|")
-#         else:
-#             judged_worthy_for_questions.append((data["paragraph"], data["metadata"]))
-#     else:
-#         judgement, judgement_output = await judge.generate(arguments={"text": p[0], "textname": p[1]})
-#         write_output_to_file(judgement_output, obj_conf["PATH"]["OUTPUT"] + "/judge_paragraph_generations", id)
-#         to_append = (None, p[1])
-#         if judgement:
-#             to_append = (p[0], p[1])
-
-#         judged_worthy_for_questions.append(to_append)
-
-#         # Prepare the data to be written to the file
-#         if judgement:
-#             # The paragraph passed the judgement
-#             data_to_write = {"paragraph": to_append[0], "metadata": to_append[1]}
-#         else:
-#             # The paragraph did not pass the judgement
-#             data_to_write = f"failed|{to_append[1]}"
-
-#         # Write the judgement to a unique file as JSON
-#         with open(file_path, "w") as file:
-#             json.dump(data_to_write, file)
-
-#         # Debug messages
-#         try:
-#             if judgement:
-#                 print(f"DEBUG model decided that index {idx} was suitable")
-#             else:
-#                 print(f"DEBUG model decided that index {idx} was not suitable")
-#         except:
-#             print(f"DEBUG max retries exceeded for index {idx}")
-
-
-
-
 
 # EXEMPLAR
 async def filter_all_questions(

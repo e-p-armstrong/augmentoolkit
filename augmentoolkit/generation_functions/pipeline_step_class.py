@@ -29,7 +29,6 @@ class PipelineStep:
         ): # things that are args here are things that would be in the code. Some of these will be live-tweakable.
         self.prompt_path = prompt_path + ".yaml" if not completion_mode else prompt_path + ".txt"
         self.sampling_params = sampling_params
-        self.output_dir = output_dir
         self.save_path = save_path
         self.output_processor = output_processor
         self.completion_mode = completion_mode
@@ -41,8 +40,9 @@ class PipelineStep:
         self.result_key = result_key
         self.regex = regex
         self.output_subdir = output_subdir
-        self.full_output_path = os.path.join(self.output_dir, self. output_subdir)
+        self.full_output_path = os.path.join(output_dir, self. output_subdir)
         self.intermediate_output_path_full = os.path.join(self.full_output_path, self.intermediate_output_path)
+        self.save_path_dir = os.path.join(self.full_output_path, self.save_path)
     
     def process_input_data(self, input_data):
         return input_data # this should be a dictionary with the keys being the same as the interpolation spots in the prompt. This function in particular will basically always be overridden in subclasses.
@@ -94,13 +94,12 @@ class PipelineStep:
     idx=None,
     output_list=None,
     input_data=None,):
+        id = make_id()
         save_path_file = self.make_save_path_file(idx)
-        
-        os.makedirs(self.output_dir, exist_ok=True)
         
         output_data = input_data
         output_data[self.result_key] = result
-        write_output_to_file(full_output, self.intermediate_output_path_full, idx)
+        write_output_to_file(full_output, self.intermediate_output_path_full, id)
         
         os.makedirs(self.save_path, exist_ok=True)
         with open(save_path_file, "w") as f:

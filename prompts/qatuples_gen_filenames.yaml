@@ -187,9 +187,9 @@
     Answer: Mars would be a hundred and seventy-five feet beyond the earth.
 - role: user
   content: |
-    Text details: {textdetails}
+    Text details: {metadata}
     
     Text to make questions from: 
     """
-    {text}
+    {paragraph}
     """
