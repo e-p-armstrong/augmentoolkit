@@ -1,6 +1,7 @@
 import sys
 import os
 
+from augmentoolkit.generation_functions.process_multiturn_functions import extract_conversation
 import augmentoolkit.utils.create_pretraining_set
 import augmentoolkit.utils.sentence_chunking_algorithm
 # Get the directory of the current script
@@ -26,7 +27,6 @@ async def main():
     import logging
     import yaml
     import glob
-    from augmentoolkit.utils.group_by_text import group_by_text
     from augmentoolkit.core import steps
 
     with open("./config.yaml", "r") as f:
@@ -225,7 +225,7 @@ async def main():
         )
         
         print("Converting generations to training data")
-        steps.convert_logging_to_dataset("judge_paragraph_generations")
+        steps.convert_logging_to_dataset(input_pth=os.path.join("judge_paragraph_generations", "intermediate_generations"), output_pth="judge_paragraph_generations")
 
     print(filtered_worthy_for_questions[0])
     
@@ -334,58 +334,19 @@ async def main():
     vetted_qa_dicts = [qa for qa in vetted_qa_dicts if qa is not None]
     print("---------------- ONTO REVISION ------------------")
 
-    # Check for and fix the common mistake: mentioning "the text".
-    writepath = config["PATH"]["OUTPUT"] + "/qatuples_revised"
-    import json
-
     # Assuming vetted_qa_tuples is a list that might or might not exist
-    try:
-        _ = vetted_qa_dicts
-    except NameError:
-        vetted_qa_dicts = []
-
-    # Load all files at the start if vetted_qa_tuples is empty
-    if not True:
-        print("WENT DOWN HERE")
-        # Check if the directory exists
-        if os.path.exists(writepath):
-            # List all files in directory
-            for file_name in os.listdir(writepath):
-                file_path = os.path.join(writepath, file_name)
-                try:  # for each file already generated, see if it succeeded or failed; if it succeeded, append its contents; if it failed, append None for stats logging
-                    with open(file_path, "r", encoding="utf-8") as f:
-                        content = f.read()
-                        print(f"Loading file: {file_path}")
-                        if content == "failed":
-                            vetted_qa_tuples.append(None)
-                        else:
-                            try:
-                                data = json.loads(content)
-                                vetted_qa_tuples.append(
-                                    (data[0], data[1], data[2], data[3])
-                                )
-                            except json.JSONDecodeError:
-                                print("JSON decode error with the contents:", content)
-                                vetted_qa_tuples.append(None)
-                except Exception as e:
-                    print(f"Error reading {file_path}: {e}")
-    else:
-        tasks = [
-            steps.repair_qatuple_context( # NOTE PROBLEM in that things that this writes, do not have enough items in the tuple
-                idx,
-                tup,
-                engine_wrapper_large,
-                vetted_qa_dicts,
-            )
-            for idx, tup in enumerate(vetted_qa_dicts)
-        ]
-        limited_tasks_qcorrection = [run_task_with_limit(task) for task in tasks]
-        for future in tqdmasyncio.tqdm.as_completed(limited_tasks_qcorrection):
-            await future
-
-    # Print stats related to revised qatuples, and filter out nones (questions that were unanswerable due to lack of context).
-    import json
-    
+    tasks = [
+        steps.repair_qatuple_context( # NOTE PROBLEM in that things that this writes, do not have enough items in the tuple
+            idx,
+            tup,
+            engine_wrapper_large,
+            vetted_qa_dicts,
+        )
+        for idx, tup in enumerate(vetted_qa_dicts)
+    ]
+    limited_tasks_qcorrection = [run_task_with_limit(task) for task in tasks]
+    for future in tqdmasyncio.tqdm.as_completed(limited_tasks_qcorrection):
+        await future
 
     print("-------------- QUESTIONS REVISED ------------- STATS SO FAR:")
     nones = list(filter(lambda x: x is None, vetted_qa_dicts))
@@ -396,49 +357,10 @@ async def main():
     vetted_qa_dicts = [qa for qa in vetted_qa_dicts if qa is not None]
     print("---------------- ONTO EXAMPLES GENERATION-------------------")
 
-    qa_tuples_by_paragraph = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_dicts)
+    qa_dicts_by_text = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_dicts)
     
     print("Creating question generation training data...")
-    steps.convert_revised_questions_to_question_generation_training(qa_tuples_by_paragraph=qa_tuples_by_paragraph, use_filenames=USE_FILENAMES)
-
-    if not os.path.exists(multi_turn_convs_info_dir):
-        os.makedirs(multi_turn_convs_info_dir)
-
-    import json
-    import random
-    import itertools
-
-    multi_turn_convs_info = []
-
-    tasks = [
-        steps.create_info(
-            idx,
-            group,
-            multi_turn_convs_info,
-            multi_turn_convs_info_dir
-        )
-        for idx, group in enumerate(qa_tuples_by_paragraph)
-    ]
-    limited_tasks_infocreation = [run_task_with_limit(task) for task in tasks]
-    for future in tqdmasyncio.tqdm.as_completed(limited_tasks_infocreation):
-        await future
-
-    
-
-    
-    import json
-
-    convs_info = steps.read_json_files_info(multi_turn_convs_info_dir)
-
-    
-    import json
-    import random
-    import itertools
-    import asyncio
-
-    multi_turn_convs_dir = config["PATH"]["OUTPUT"] + "/multi_turn_convs"
-    if not os.path.exists(multi_turn_convs_dir):
-        os.makedirs(multi_turn_convs_dir)
+    steps.convert_revised_questions_to_question_generation_training(qa_dicts_by_text=qa_dicts_by_text, use_filenames=USE_FILENAMES)
 
     multi_turn_convs = []
 
@@ -448,19 +370,15 @@ async def main():
             info,
             engine_wrapper_large,
             multi_turn_convs,
-            multi_turn_convs_dir,
-            completion_mode=COMPLETION_MODE,
-            logging_level=LOG_LEVEL,
-            conversation_instructions=CONVERSATION_INSTRUCTIONS
         )
-        for idx, info in enumerate(convs_info)
+        for idx, info in enumerate(qa_dicts_by_text)
     ]
     limited_tasks_convwriting = [run_task_with_limit(task) for task in tasks]
     for future in tqdmasyncio.tqdm.as_completed(limited_tasks_convwriting):
         await future
 
     print("Converting conversational data generations to training data")
-    steps.convert_logging_to_dataset("multiturn_conversation_generations")
+    steps.convert_logging_to_dataset(input_pth=os.path.join("multi_turn_convs", "intermediate_generations"), output_pth="multi_turn_convs")
 
     # # Yay! Now you have a dataset!
     # ### GPT wrote the cell below. I think it successfully converts things to ShareGPT format for use with axolotl, but I am not sure because I don't know that format very well and haven't used Axolotl. However, the json produced by the second function looks fine.
@@ -470,31 +388,24 @@ async def main():
 
     # Make ShareGPT-format dataset (I think, still need verification it actually works)
     steps.convert_directory_to_list(
-        config["PATH"]["OUTPUT"] + "/multi_turn_convs/"
+        os.path.join(config["PATH"]["OUTPUT"],"multi_turn_convs", "saved_readable_generations")
     )
-    # Make dataset in a format that has all the information. See README for details on this format.
-    steps.convert_directory_and_process_conversations(
-        config["PATH"]["OUTPUT"] + "/multi_turn_convs/"
-    )
-
-    with open(config["PATH"]["OUTPUT"] + "/processed_master_list.json", "r") as f:
-        first = f.read()
-        data = json.loads(first)
+    
+    with open(config["PATH"]["OUTPUT"] + "/master_list.jsonl", "r") as f:
+        data = [json.loads(line) for line in f]
 
     # For curiosity's sake, you can find out how many lines of dialogue you generated
-    def filter_and_flatten(lst):
-        flat_list = []
+    # TODO add token count
+    gpt_turns = 0        
+    for dict in data:
+        conv = dict['conversation']
+        turns = extract_conversation(conv)
+        for turn in turns:
+            if "AI" in turn[0]:
+                gpt_turns += 1
 
-        # Loop through each sublist in the main list
-        for sublst in lst:
-            # Check if the first element of the sublist is itself a list (subsublist1)
-            if isinstance(sublst[0], list):
-                # Extend the flat_list with the elements from subsublist1
-                flat_list.extend(sublst[0])
 
-        return flat_list
-
-    len(filter_and_flatten(data))
+    print(f"Total GPT turns: {gpt_turns}")
     print("COMPLETED FINAL PHASE")
 
 

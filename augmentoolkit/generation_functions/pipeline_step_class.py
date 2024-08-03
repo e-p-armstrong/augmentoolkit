@@ -17,7 +17,7 @@ class PipelineStep:
         output_dir=None,
         output_subdir=None,
         save_path=None,
-        output_processor=None,
+        output_processor=lambda x: x,
         completion_mode=False,
         use_stop=True,
         logging_level=logging.INFO,
@@ -25,7 +25,9 @@ class PipelineStep:
         intermediate_output_path=None,
         result_key="placeholder_result_key", # this is the key that the result will be saved under in the output dictionary.
         regex=re.compile(r".*", re.DOTALL),
-        
+        validation_function=lambda x: True,
+        max_retries=3,
+        **kwargs,
         ): # things that are args here are things that would be in the code. Some of these will be live-tweakable.
         self.prompt_path = prompt_path + ".yaml" if not completion_mode else prompt_path + ".txt"
         self.sampling_params = sampling_params
@@ -43,12 +45,17 @@ class PipelineStep:
         self.full_output_path = os.path.join(output_dir, self. output_subdir)
         self.intermediate_output_path_full = os.path.join(self.full_output_path, self.intermediate_output_path)
         self.save_path_dir = os.path.join(self.full_output_path, self.save_path)
+        self.validation_function = validation_function
+        self.max_retries=max_retries
+        self.static_arguments = kwargs # any additional arguments are passed in during generation time. Fits the role of stuff read from the config, like special instructions.
     
     def process_input_data(self, input_data):
         return input_data # this should be a dictionary with the keys being the same as the interpolation spots in the prompt. This function in particular will basically always be overridden in subclasses.
     
     def make_save_path_file(self, idx):
-        return os.path.join(self.full_output_path, self.save_path, f"{str(idx)}.json")
+        path = os.path.join(self.full_output_path, self.save_path, f"{str(idx)}.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        return path
     
     def read_previous_output(self, idx, output_list):
         save_path_file = self.make_save_path_file(idx)
@@ -80,7 +87,7 @@ class PipelineStep:
             print("DEBUG PROCESSED DATA")
             print(processed_data)
             
-            result, full_output = await generator.generate(**processed_data)
+            result, full_output = await generator.generate(**processed_data, **self.static_arguments)
             
             return result, full_output
         except Exception as e:
@@ -119,7 +126,20 @@ class PipelineStep:
         
         processed_data = self.process_input_data(input_data)
         
-        result, full_output = await self.generate_data(processed_data, engine_wrapper)
+        complete = False
+        max_retries = self.max_retries
+        while not complete and max_retries > 0:
+            try:
+                result, full_output = await self.generate_data(processed_data, engine_wrapper)
+                if self.validation_function(result, input_data):
+                    complete = True
+            except Exception as e:
+                print(e)
+                traceback.print_exc() 
+                max_retries -= 1
+                
+        if not complete: # consider raising here and catching in the actual pipeline.
+            return
         
         self.save(result=result, full_output=full_output, idx=idx, output_list=output_list, input_data=input_data)
         

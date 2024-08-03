@@ -1,3 +1,4 @@
+from logging import INFO
 import os
 import json
 import re
@@ -27,7 +28,6 @@ from augmentoolkit.generation_functions import (
     extract_question_answer,
     process_multiturn_functions,
 )
-from augmentoolkit.generation_functions.format_qatuples import format_qatuples
 
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
 from augmentoolkit.generation_functions.special_instructions import special_instructions
@@ -59,13 +59,15 @@ import os
 
 
 # Also used basically everywhere:
-def convert_logging_to_dataset(directory):
+def convert_logging_to_dataset(input_pth=None, output_pth=None):
     print("entering saving mode")
     global has_pushed_yet
     
-    output_dir = os.path.join(obj_conf["PATH"]["OUTPUT"], directory)
+    output_dir = os.path.join(obj_conf["PATH"]["OUTPUT"], input_pth)
     
-    output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], directory + "_DATAGEN_OUTPUT.jsonl")
+    print(f"Converting {output_dir} to a dataset")
+    
+    output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], output_pth + "_DATAGEN_OUTPUT.jsonl")
     
     if not os.path.exists(output_dir):
         raise Exception("ERROR!! Trying to convert a logging directory to a dataset, when that directory does not exist!")
@@ -91,7 +93,7 @@ def convert_logging_to_dataset(directory):
             full_list_of_dicts.append(json_to_write)
     print("...Converted successfully (we think)")
     
-    dataset_with_split_output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], directory + "_DATAGEN_OUTPUT_SPLIT.json")
+    dataset_with_split_output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], output_pth + "_DATAGEN_OUTPUT_SPLIT.json")
     with open(dataset_with_split_output_file_path, "w") as f:
             json_to_write = {"train": full_list_of_dicts}
             
@@ -103,7 +105,7 @@ def convert_logging_to_dataset(directory):
             dataset = load_dataset("json", data_files=dataset_with_split_output_file_path,  split="train")
             print("DATASET TYPE:")
             print(type(dataset))
-            part_nb = directory.split("_")[0]
+            part_nb = output_pth.split("_")[0]
             if not has_pushed_yet:
                     dataset.push_to_hub(HUB_PATH, private=PRIVATE)
                     dataset.to_parquet(f"hf://datasets/{HUB_PATH}/train{part_nb}.parquet")
@@ -114,11 +116,7 @@ def convert_logging_to_dataset(directory):
     os.remove(dataset_with_split_output_file_path)
     
     
-    
-    
-    
-    
-def convert_revised_questions_to_question_generation_training(qa_tuples_by_paragraph, use_filenames):
+def convert_revised_questions_to_question_generation_training(qa_dicts_by_text, use_filenames):
     print("entering saving mode")
     # found a solution to overfitting on the examples:
     # TRAIN WITHOUT THEM
@@ -143,15 +141,14 @@ def convert_revised_questions_to_question_generation_training(qa_tuples_by_parag
     # revised_questions_output_path = os.path.join(obj_conf["PATH"]["OUTPUT"], "qatuples_revised")
     convos = []
     with open(output_file_path, 'w') as out_file:
-        for qatup_group in qa_tuples_by_paragraph:
-            answer = format_qatuples(qatup_group)
-            text = qatup_group[0][2]
+        for qadict_group in qa_dicts_by_text:
+            answer = qadict_group['question_answer_pairs_string']
+            text = qadict_group['dict_list'][0]['paragraph']
             
-            # print(text)
             if not use_filenames:
                 input_text = safe_format(input_template, text=text)
             else:
-                textname = qatup_group[0][3]
+                textname = qadict_group[0]['metadata']
                 input_text = safe_format(input_template, text=text, textname=textname)
             sysprompt_obj = {"from": "system", "value": sysprompt}
             input_obj = {"from": "human", "value": input_text}
@@ -262,6 +259,7 @@ class ContextRepairer(PipelineStep):
             result_key="not gonna be used", # we do not employ the result key because we replace the question and answer in the qa dict.
             use_stop=USE_STOP,
             completion_mode=COMPLETION_MODE,
+            
             
         )
         
@@ -1064,198 +1062,131 @@ def fix_text(to_replace_arr, text):
         text = text.replace(tup[0], tup[1])
     return text
 
-
 async def ensure_multiple_answers_are_same(
-    info, conv, multi_turn_conv_generator, completion_mode=None, conversation_instructions="For this conversation, you are generating a chat between a general-purpose AI assistant and a human."
+    conv, full_info_dict
 ):  # why is this a whole separate function? Once upon a time, LLMs were used in validation here, too. But programmatic validation SEEMS to catch the common problems. This is here so that I can add it back in if I have to.
     """Loop to ensure that the answer is consistent in the conversation and in the tuple."""
-    retries = 0
-    c = conv
-    while retries < 2:  # try twice, since multiturn is an expensive operation
-        if process_multiturn_functions.call_all_processors(
-            c[0], info[0]
-        ):  # if programmatic validation passes
-            return c
+    return process_multiturn_functions.call_all_processors(
+        conv, full_info_dict["paragraph"]
+    )
 
-        retries += 1
-        if retries >= 2:
-            return None
-        # If we're here, majority of relevance checks failed
-        print("----------------\n\n\n\nRETRYING!!!!\n\n\n\n----------------")
-        # Broken info is 1) rare and 2) handled by the retry limit. We don't want to waste compute on regenerating info as they take time.
-        retry = await make_multiturn_conversation(
-            info, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
+
+# async def make_multiturn_conversation(
+#     info, multi_turn_conv_generator, completion_mode=None, conversation_instructions="For this conversation, you are generating a chat between a general-purpose AI assistant and a human."
+# ):
+
+#     conv, conv_output = await multi_turn_conv_generator.generate(
+#         arguments={
+#             "question_answer_list": format_qa(info[0]).strip(),
+#             "conversation_instructions": conversation_instructions
+#         }
+#     )
+#     write_output_to_file(
+#         conv_output,
+#         obj_conf["PATH"]["OUTPUT"] + "/multiturn_conversation_generations",
+#         info[4],
+#     )
+
+#     return (conv, info[1], info[2], info[3], info[0])
+
+
+### CONVERSATION CREATION SECTION
+
+multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation"
+
+conversation_regex = re.compile(
+    f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; AI Assistant will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
+    re.IGNORECASE | re.DOTALL,
+)
+
+CONVERSATION_INSTRUCTIONS = obj_conf["SYSTEM"]["CONVERSATION_INSTRUCTIONS"]
+
+class ConversationGenerator(PipelineStep):
+    def __init__(self):
+        super().__init__(
+            prompt_folder=PROMPTS_DIR,
+            default_prompt_folder=DEFAULT_PROMPT_PATH,
+            prompt_path=multi_turn_conversation_prompt_path,
+            regex=conversation_regex,
+            sampling_params={
+                "max_tokens": 2000,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "### Information",
+                    "## Information",
+                    "## Instruction",
+                    "Name:",
+                    "<|eot_id|>",
+                    "<|start_header_id|>",
+                    "<|end_header_id|>",
+                ],
+                "temperature": 0.8,
+                # "top_k": -1,
+                "top_p": 1,
+                # "min_p": 0.6,
+            },
+            output_dir=OUTPUT_DIR,
+            output_subdir="multi_turn_convs",
+            intermediate_output_path="intermediate_generations",
+            save_path="saved_readable_generations",
+            result_key="conversation",
+            use_stop=USE_STOP,
+            completion_mode=COMPLETION_MODE,
+            validation_function=ensure_multiple_answers_are_same,
+            max_retries=3,
+            conversation_instructions=CONVERSATION_INSTRUCTIONS
         )
-        if retry is not None:  # Note: retry CANNOT actually be None
-            c = retry
-        else:
-            # If we failed to generate a retry, don't waste compute
-            return None
 
-    return None
-
-
-
-async def make_multiturn_conversation(
-    info, multi_turn_conv_generator, completion_mode=None, conversation_instructions="For this conversation, you are generating a chat between a general-purpose AI assistant and a human."
-):
-
-    conv, conv_output = await multi_turn_conv_generator.generate(
-        arguments={
-            "question_answer_list": format_qatuples(info[0]).strip(),
-            "conversation_instructions": conversation_instructions
-        }
-    )
-    write_output_to_file(
-        conv_output,
-        obj_conf["PATH"]["OUTPUT"] + "/multiturn_conversation_generations",
-        info[4],
-    )
-
-    return (conv, info[1], info[2], info[3], info[0])
-
-async def create_info(
-    idx,
-    group,
-    multi_turn_convs_info,
-    multi_turn_convs_info_dir,
-):
-
-    file_path = os.path.join(multi_turn_convs_info_dir, f"info_{idx}.json")
-
-    # Skip if file already exists
-    if not os.path.exists(file_path):
-        info = (group, "will", "be", "replaced", make_id())
-
-        with open(file_path, "w") as file:
-            json.dump(info, file, indent=4)
-    else:
-        with open(file_path, "r") as file:
-            info = json.load(file)
-
-    multi_turn_convs_info.append(
-        [info]
-    )  # hacky-looking things because the legacy functionality was simplified.
-
-def read_json_files_info(directory):
-    # Create a list to hold the tuples
-    tuple_list = []
-
-    # Get all the .json files in the directory, sorted
-    json_files = sorted([f for f in os.listdir(directory) if f.endswith(".json")])
-
-    # Read each file and convert the contents
-    for file in json_files:
-        with open(os.path.join(directory, file), "r") as f:
-            data = json.load(f)
-            # Ensure the data is in the correct format before converting to tuple
-            if (
-                isinstance(data, list)
-                and len(data) == 5
-                and isinstance(data[0], list)
-                and all(len(item) == 7 for item in data[0])
-                and all(isinstance(i, str) for i in data[1:])
-            ):
-                tuple_list.append((data[0], data[1], data[2], data[3], data[4]))
-
-    return tuple_list
-
+conversation_generator = ConversationGenerator()
 
 async def create_conversation(
     idx,
-    info,
+    input_data,
     engine_wrapper,
     multi_turn_convs,
-    multi_turn_convs_dir,
-    completion_mode=None,
-    logging_level=logging.INFO,
-    conversation_instructions="For this conversation, you are generating a chat between a general-purpose AI assistant and a human."
 ):
-    file_path = os.path.join(multi_turn_convs_dir, f"conv_{idx}.json")
-    multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation"
 
-    conversation_regex = re.compile(
-        f"Conversation that answers the provided question \(be sure that you do not change the questions or answers themselves; AI Assistant will answer the questions, not ask them; the questions and answers provided should be copied word for word, and surrounded by compelling conversation\):\n(.+)",
-        re.IGNORECASE | re.DOTALL,
-    )
+    await conversation_generator.run(idx, input_data=input_data, engine_wrapper=engine_wrapper, output_list=multi_turn_convs)
 
-    if completion_mode:
-        multi_turn_conversation_prompt_path = (
-            multi_turn_conversation_prompt_path + ".txt"
-        )
-    else:
-        multi_turn_conversation_prompt_path = (
-            multi_turn_conversation_prompt_path + ".yaml"
-        )
+    # # Skip if file already exists
+    # if not os.path.exists(file_path):
+    #     try:
+    #         conv = await make_multiturn_conversation(
+    #             info, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
+    #         )
+    #         final_conv = await ensure_multiple_answers_are_same(
+    #             info, conv, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
+    #         )
 
-    multi_turn_conv_generator = GenerationStep(
-        prompt_path=multi_turn_conversation_prompt_path,
-        regex=conversation_regex,
-        sampling_params={
-            "max_tokens": 2000,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "### Information",
-                "## Information",
-                "## Instruction",
-                "Name:",
-                "<|eot_id|>",
-                "<|start_header_id|>",
-                "<|end_header_id|>",
-            ],
-            "temperature": 0.8,
-            # "top_k": -1,
-            "top_p": 1,
-            # "min_p": 0.6,
-        },
-        completion_mode=completion_mode,
-        retries=1,
-        engine_wrapper=engine_wrapper,
-        logging_level=logging_level,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
-        use_stop=obj_conf["SYSTEM"]["STOP"],
-    )
+    #         if final_conv is not None:
+    #             final_conv = (
+    #                 final_conv[0],
+    #                 "AI Assistant",
+    #                 "",
+    #                 "N/A",
+    #                 final_conv[4],
+    #             )
+    #             with open(file_path, "w") as file:
+    #                 json.dump(final_conv, file, indent=4)
 
-    # Skip if file already exists
-    if not os.path.exists(file_path):
-        try:
-            conv = await make_multiturn_conversation(
-                info, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
-            )
-            final_conv = await ensure_multiple_answers_are_same(
-                info, conv, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
-            )
-
-            if final_conv is not None:
-                final_conv = (
-                    final_conv[0],
-                    "AI Assistant",
-                    "",
-                    "N/A",
-                    final_conv[4],
-                )
-                with open(file_path, "w") as file:
-                    json.dump(final_conv, file, indent=4)
-
-            multi_turn_convs.append(final_conv)
-        except Exception as e:
-            traceback.print_exc()
-            print("Had an error, retrying...", e)
-    else:
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                multi_turn_convs.append(data)
-            print(f"Skipped generating {file_path} as it already exists")
-        except Exception as e:
-            print(f"Error reading {file_path}:", e)
-            print("Continuing...")
+    #         multi_turn_convs.append(final_conv)
+    #     except Exception as e:
+    #         traceback.print_exc()
+    #         print("Had an error, retrying...", e)
+    # else:
+    #     try:
+    #         with open(file_path, "r", encoding="utf-8") as f:
+    #             data = json.load(f)
+    #             multi_turn_convs.append(data)
+    #         print(f"Skipped generating {file_path} as it already exists")
+    #     except Exception as e:
+    #         print(f"Error reading {file_path}:", e)
+    #         print("Continuing...")
 
 
 def convert_directory_to_list(directory_path):
@@ -1268,77 +1199,59 @@ def convert_directory_to_list(directory_path):
             filepath = os.path.join(directory_path, filename)  # get the path
             with open(filepath, "r") as file:  # open it
                 try:
-                    data = json.load(file)  # load its data
-                    if isinstance(data, list) and all(
-                        isinstance(item, (list, str))
-                        for item in data  # if it has the correct format
-                    ):
+                    data_dict = json.load(file)  # load its data
+                    master_list.append(
+                        data_dict
+                    )  # append it as-is to the master-list
 
-                        data_dict = {
-                            "conversation": data[0],
-                            "qa_tuples": [
-                                tup[:2] for tup in data[4]
-                            ],  # only take first two items from each tuple
-                            "rag_context": data[4][0][2],
-                            "source_filename": data[4][0][3],
+                    dialogues = process_multiturn_functions.extract_conversation(
+                        data_dict["conversation"]
+                    )
+
+                    # Convert to simplified format
+                    simplified_conversations = []
+                    simplified_conversations_rag = []
+
+                    # Load system prompts
+                    system_prompt_norag = obj_conf["SYSTEM"][
+                        "FINAL_ASSISTANT_PROMPT_NO_RAG"
+                    ]
+                    system_prompt_rag = obj_conf["SYSTEM"][
+                        "FINAL_ASSISTANT_PROMPT_RAG"
+                    ]
+                    simplified_conversations.append(
+                        {"from": "system", "value": system_prompt_norag}
+                    )
+
+                    simplified_conversations_rag.append(
+                        {
+                            "from": "system",
+                            "value": system_prompt_rag.replace(
+                                "{data}", data_dict['dict_list'][0]["paragraph"]
+                            ),
                         }
-                        master_list.append(
-                            data_dict
-                        )  # append it as-is to the master-list
-
-                        # Extract and process conversation
-                        conversation, primary_char_desc = (
-                            data[0],
-                            data[1],
-                        )  # first and second items are conv and char desc
-                        dialogues = process_multiturn_functions.extract_conversation(
-                            conversation
-                        )
-
-                        # Convert to simplified format
-                        simplified_conversations = []
-                        simplified_conversations_rag = []
-
-                        # Load system prompts
-                        system_prompt_norag = obj_conf["SYSTEM"][
-                            "FINAL_ASSISTANT_PROMPT_NO_RAG"
-                        ]
-                        system_prompt_rag = obj_conf["SYSTEM"][
-                            "FINAL_ASSISTANT_PROMPT_RAG"
-                        ]
+                    )
+                    for i, (charname, message) in enumerate(
+                        dialogues
+                    ):  # Skipping the first message
+                        from_person = "human" if (i % 2) == 0 else "gpt"
                         simplified_conversations.append(
-                            {"from": "system", "value": system_prompt_norag}
+                            {"from": from_person, "value": f"{message}"}
                         )
-
                         simplified_conversations_rag.append(
                             {
-                                "from": "system",
-                                "value": system_prompt_rag.replace(
-                                    "{data}", data_dict["rag_context"]
-                                ),
-                            }
+                                "from": from_person,
+                                "value": f"{message}",
+                            }  # same as above, but for the RAG context
                         )
-                        for i, (charname, message) in enumerate(
-                            dialogues
-                        ):  # Skipping the first message
-                            from_person = "human" if (i % 2) == 0 else "gpt"
-                            simplified_conversations.append(
-                                {"from": from_person, "value": f"{message}"}
-                            )
-                            simplified_conversations_rag.append(
-                                {
-                                    "from": from_person,
-                                    "value": f"{message}",
-                                }  # same as above, but for the RAG context
-                            )
 
-                        if simplified_conversations:  # If there are any conversations
-                            simplified_list.append(
-                                {"conversations": simplified_conversations}
-                            )
-                            simplified_rag_list.append(
-                                {"conversations": simplified_conversations_rag}
-                            )
+                    if simplified_conversations:  # If there are any conversations
+                        simplified_list.append(
+                            {"conversations": simplified_conversations}
+                        )
+                        simplified_rag_list.append(
+                            {"conversations": simplified_conversations_rag}
+                        )
                 except Exception as e:
                     print(f"Error reading {filename}: {e}")
 
@@ -1397,41 +1310,3 @@ def convert_directory_to_list(directory_path):
     )
     if PUSH_TO_HUB:
         print("Data successfully pushed to Hugging Face Hub.")
-
-
-def convert_directory_and_process_conversations(directory_path):
-    master_list = []
-
-    for filename in os.listdir(directory_path):
-        if filename.endswith(".json"):
-            filepath = os.path.join(directory_path, filename)
-            with open(filepath, "r") as file:
-                try:
-                    data = json.load(file)
-
-                    if isinstance(data, list) and all(
-                        isinstance(item, (list, str)) for item in data
-                    ):
-                        # Extract and process the conversation part
-                        conversations = (
-                            process_multiturn_functions.extract_conversation(data[0])
-                        )
-                        # Convert tuples back to the formatted string as required
-                        data[0] = [
-                            f"{charname}: {message}"
-                            for charname, message in conversations
-                        ]
-                        master_list.append(data)
-                    else:
-                        print(f"File {filename} is not in the expected format.")
-                except:
-                    print(f"Error reading {filename}")
-
-    # Write the master list to a new file
-    with open(obj_conf["PATH"]["OUTPUT"] + "/processed_master_list.json", "w") as file:
-        json.dump(master_list, file)
-
-    print(
-        "Conversion complete. The processed master list is written to 'processed_master_list.json'."
-    )
-

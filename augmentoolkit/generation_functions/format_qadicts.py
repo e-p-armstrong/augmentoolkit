@@ -1,12 +1,12 @@
-def format_qatuples(qatuples):
+def format_qadicts(qadicts):
     strlst = []
-    for qatuple in qatuples:
+    for qatuple in qadicts:
         strlst.append(
             f"""**QUESTION:**
-{qatuple[0]}
+{qatuple['question']}
 
 **ANSWER:**
-{qatuple[1]}
+{qatuple['answer']}
 """
         )
     return "\n\n".join(strlst)

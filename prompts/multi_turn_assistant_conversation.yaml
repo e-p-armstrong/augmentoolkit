@@ -138,7 +138,7 @@
     In short, VerusIDs are private with your information, and configurable with who controls them and what consensus is required to change them. Do you have any more questions about VerusIDs?
 - role: user
   content: |
-    {question_answer_list}
+    {question_answer_pairs_string}
     
     -- AI Assistant Instructions --
     {conversation_instructions}
