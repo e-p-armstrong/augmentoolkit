@@ -277,7 +277,7 @@ async def repair_qatuple_context(
     # Resume normal control flow
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()  # Read the file once and store its content
             print(file_path)
             if content == "failed":
@@ -1112,7 +1112,7 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
          content = file.read()
 
     # try:
-    #     with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+    #     with open(file_path, "r", encoding="utf-8") as f:
     #         content = f.read()
     # except Exception as e:
     #     print(f"\nError reading file {file_path}: {e}\n")
@@ -1367,7 +1367,7 @@ async def create_conversation(
             print("Had an error, retrying...", e)
     else:
         try:
-            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 multi_turn_convs.append(data)
             print(f"Skipped generating {file_path} as it already exists")
