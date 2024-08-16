@@ -69,7 +69,7 @@ def convert_logging_to_dataset(directory):
         raise Exception("ERROR!! Trying to convert a logging directory to a dataset, when that directory does not exist!")
         
     full_list_of_dicts = []
-    with open(output_file_path, "w") as f:
+    with open(output_file_path, "w",encoding='utf-8') as f:
         existing_files = glob.glob(
             os.path.join(output_dir, "*.yaml")
         )
@@ -90,7 +90,7 @@ def convert_logging_to_dataset(directory):
     print("...Converted successfully (we think)")
     
     dataset_with_split_output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], directory + "_DATAGEN_OUTPUT_SPLIT.json")
-    with open(dataset_with_split_output_file_path, "w") as f:
+    with open(dataset_with_split_output_file_path, "w",encoding='utf-8') as f:
             json_to_write = {"train": full_list_of_dicts}
             
             f.write(json.dumps(json_to_write) + "\n")
@@ -132,7 +132,7 @@ def convert_revised_questions_to_question_generation_training(qa_tuples_by_parag
     else:
         question_generation_prompt = os.path.join(obj_conf["PATH"]["PROMPTS"], "qatuples_gen_no_filenames.yaml")
 
-    with open(question_generation_prompt, "r") as f:
+    with open(question_generation_prompt, "r",encoding='utf-8') as f:
         qgen_prompt_full = yaml.safe_load(f)
         
         sysprompt = qgen_prompt_full[0]["content"]
@@ -140,7 +140,7 @@ def convert_revised_questions_to_question_generation_training(qa_tuples_by_parag
     
     # revised_questions_output_path = os.path.join(obj_conf["PATH"]["OUTPUT"], "qatuples_revised")
     convos = []
-    with open(output_file_path, 'w') as out_file:
+    with open(output_file_path, 'w',encoding='utf-8') as out_file:
         for qatup_group in qa_tuples_by_paragraph:
             answer = format_qatuples(qatup_group)
             text = qatup_group[0][2]
@@ -277,7 +277,7 @@ async def repair_qatuple_context(
     # Resume normal control flow
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()  # Read the file once and store its content
             print(file_path)
             if content == "failed":
@@ -1107,10 +1107,12 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
     char_count = 0
     source_name = file_path.replace(".txt", "")
 
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-        content = f.read()
+
+    with open(file_path, 'r', encoding='utf-8') as file:
+         content = file.read()
+
     # try:
-    #     with open(file_path, "r", encoding="utf-8") as f:
+    #     with open(file_path, "r", encoding="utf-8", errors="replace") as f:
     #         content = f.read()
     # except Exception as e:
     #     print(f"\nError reading file {file_path}: {e}\n")
@@ -1365,7 +1367,7 @@ async def create_conversation(
             print("Had an error, retrying...", e)
     else:
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
                 multi_turn_convs.append(data)
             print(f"Skipped generating {file_path} as it already exists")

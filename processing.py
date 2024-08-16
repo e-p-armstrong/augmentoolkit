@@ -104,6 +104,7 @@ async def main():
 
     if source_texts:
         print(source_texts)
+        
     else:
         print(f"No source texts found in: {INPUT_FOLDER}")
 
@@ -128,7 +129,7 @@ async def main():
     import asyncio
 
     # Set up rate-limit-conscious functions
-    semaphore = asyncio.Semaphore(CONCURRENCY_LIMIT)
+    semaphore = asyncio.Semaphore(int(CONCURRENCY_LIMIT))
 
     async def run_task_with_limit(task):
         async with semaphore:
@@ -354,7 +355,7 @@ async def main():
             for file_name in os.listdir(writepath):
                 file_path = os.path.join(writepath, file_name)
                 try:  # for each file already generated, see if it succeeded or failed; if it succeeded, append its contents; if it failed, append None for stats logging
-                    with open(file_path, "r", encoding="utf-8") as f:
+                    with open(file_path, "r", encoding="utf-8", errors="replace") as f:
                         content = f.read()
                         print(f"Loading file: {file_path}")
                         if content == "failed":
