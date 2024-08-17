@@ -355,7 +355,7 @@ async def main():
             for file_name in os.listdir(writepath):
                 file_path = os.path.join(writepath, file_name)
                 try:  # for each file already generated, see if it succeeded or failed; if it succeeded, append its contents; if it failed, append None for stats logging
-                    with open(file_path, "r", encoding="utf-8") as f:
+                    with open(file_path, "r", encoding="utf-8", errors="replace") as f:
                         content = f.read()
                         print(f"Loading file: {file_path}")
                         if content == "failed":

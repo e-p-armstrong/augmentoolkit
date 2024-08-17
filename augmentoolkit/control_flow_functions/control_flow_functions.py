@@ -132,7 +132,7 @@ def convert_revised_questions_to_question_generation_training(qa_tuples_by_parag
     else:
         question_generation_prompt = os.path.join(obj_conf["PATH"]["PROMPTS"], "qatuples_gen_no_filenames.yaml")
 
-    with open(question_generation_prompt, "r",encoding='utf-8') as f:
+    with open(question_generation_prompt, "r",encoding='utf-8', errors="replace") as f:
         qgen_prompt_full = yaml.safe_load(f)
         
         sysprompt = qgen_prompt_full[0]["content"]
@@ -277,7 +277,7 @@ async def repair_qatuple_context(
     # Resume normal control flow
     file_path = os.path.join(writepath, f"revised_{idx}.json")
     if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()  # Read the file once and store its content
             print(file_path)
             if content == "failed":
@@ -664,7 +664,7 @@ async def vet_question_loop(
         if len(existing_files) > 0:  # If files exist, skip this paragraph entirely
             print(f"Loading file")
             for file_path in existing_files:
-                with open(file_path, "r") as file:
+                with open(file_path, "r", errors="replace") as file:
                     file_body = file.read()
                     if file_body == "failed":
                         qa_tuple = None
@@ -901,7 +901,7 @@ async def generate_qatuples_from_para(
         if len(existing_files) > 0:  # If files exist, skip this paragraph entirely
             print(f"Skipping para_{idx} as files already exist; loading said files")
             for file_path in existing_files:
-                with open(file_path, "r") as file:
+                with open(file_path, "r", errors="replace") as file:
                     qa_tuple = tuple(json.load(file))
                 generated_qa_tuples.append(qa_tuple)
             return
@@ -1108,7 +1108,7 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
     source_name = file_path.replace(".txt", "")
 
 
-    with open(file_path, 'r', encoding='utf-8') as file:
+    with open(file_path, 'r', encoding='utf-8', errors="replace") as file:
          content = file.read()
 
     # try:
@@ -1367,7 +1367,7 @@ async def create_conversation(
             print("Had an error, retrying...", e)
     else:
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
                 multi_turn_convs.append(data)
             print(f"Skipped generating {file_path} as it already exists")
