@@ -25,7 +25,7 @@ def convert_logging_to_dataset(directory):
     if not os.path.exists(output_dir):
         raise Exception("ERROR!! Trying to convert a logging directory to a dataset, when that directory does not exist!")
         
-    with open(output_file_path, "w") as f:
+    with open(output_file_path, "w",encoding='utf-8') as f:
         existing_files = glob.glob(
             os.path.join(output_dir, "*.txt")
         )

@@ -104,6 +104,7 @@ async def main():
 
     if source_texts:
         print(source_texts)
+        
     else:
         print(f"No source texts found in: {INPUT_FOLDER}")
 
@@ -128,7 +129,7 @@ async def main():
     import asyncio
 
     # Set up rate-limit-conscious functions
-    semaphore = asyncio.Semaphore(CONCURRENCY_LIMIT)
+    semaphore = asyncio.Semaphore(int(CONCURRENCY_LIMIT))
 
     async def run_task_with_limit(task):
         async with semaphore:
