@@ -87,9 +87,6 @@ async def main():
     ]
 
     # Create pretraining set from raw inputs (pretrain first, then instruct tune)
-    control_flow_functions.create_pretraining_set(
-        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
-    )
 
     PHASE_INDEX = config["PHASE"]["PHASE_INDEX"]
 
@@ -101,7 +98,7 @@ async def main():
 
     extensions = [".txt", ".md", ".pdf"]
 
-    source_texts = []
+    source_texts = [] 
     for extension in extensions:
         path = f"{INPUT_FOLDER}/**/*{extension}"
         files = glob.glob(path, recursive=True)
@@ -121,6 +118,10 @@ async def main():
     else:
         print(f"No source texts found in: {INPUT_FOLDER}")
 
+    control_flow_functions.create_pretraining_set(
+        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
+    )
+    
     # Chunking step
     sentence_chunks = []
     for source_text in source_texts:
