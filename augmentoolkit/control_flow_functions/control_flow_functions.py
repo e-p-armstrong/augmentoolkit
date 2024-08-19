@@ -3,6 +3,7 @@ import json
 import re
 import sys
 from tqdm import asyncio as tqdmasyncio
+from tqdm import tqdm
 from augmentoolkit.utils.make_id import make_id
 from augmentoolkit.utils.write_output_to_file import write_output_to_file
 from augmentoolkit.generation_functions.safe_formatter import safe_format
@@ -1558,7 +1559,13 @@ def create_pretraining_set(directory_path, json_file):
     combined_text = ""
     # Walk through all directories and files in the directory
     for root, dirs, files in os.walk(directory_path):
-        for filename in files:
+        pbar = tqdm(files)
+        pbar.set_description("Creating pretraining dataset (processing files; this may take a while due to encoding safety)")
+        for filename in pbar:
+            # Skip PDF files
+            if filename.lower().endswith('.pdf'):
+                continue
+            
             file_path = os.path.join(root, filename)
             # Read the contents of the file
             try:
@@ -1575,7 +1582,7 @@ def create_pretraining_set(directory_path, json_file):
                 if combined_text:
                     combined_text += "\n\n---NEW FILE---\n\n"
                 combined_text += file_contents
-                print(f"Successfully read file: {file_path}")
+                # print(f"Successfully read file: {file_path}")
             except UnicodeDecodeError as e:
                 print(f"Error reading file {file_path}: {e}. Skipping.")
                 continue  # Skip this file and continue with the next one

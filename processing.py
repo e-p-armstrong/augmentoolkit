@@ -1,5 +1,8 @@
 import sys
 import os
+
+
+from augmentoolkit.utils.pdf_to_text import convert_pdf_to_text
 # Get the directory of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # Change the current working directory to the script directory
@@ -16,6 +19,7 @@ import augmentoolkit.utils.group_by_text
 
 
 async def main():
+    from tqdm import tqdm
     # NOTE NOTEBOOK SETTINGS AND CONSTANTS (some script file constants are in generation_functions/constants.py)
 
     # Put your desired quant of your desired model in the relevant directories
@@ -95,24 +99,35 @@ async def main():
     
     print("Pretraining set created.")
 
-    extensions = [".txt", ".md"]
+    extensions = [".txt", ".md", ".pdf"]
 
     source_texts = []
     for extension in extensions:
-      path = f"{INPUT_FOLDER}/**/*" + extension
-      source_texts = source_texts + glob.glob(path, recursive=True)
+        path = f"{INPUT_FOLDER}/**/*{extension}"
+        files = glob.glob(path, recursive=True)
+        
+        pbar = tqdm(files)
+        for file in pbar:
+            pbar.set_description(f"Processing {file}")
+            if extension == ".pdf":
+                converted_file = convert_pdf_to_text(file, INPUT_FOLDER)
+                if converted_file:
+                    source_texts.append(converted_file)
+            else:
+                source_texts.append(file)
 
     if source_texts:
         print(source_texts)
-        
     else:
         print(f"No source texts found in: {INPUT_FOLDER}")
 
-    # [ # add your texts here
-    #     "./raw_txt_input/Simple Sabotage, by the Office of Strategic Services, published 1944.txt",
-    # ]
-
-    # ## Below: Defines and imports functions that you will probably use no matter what cells in the script you choose to run:
+    # Chunking step
+    sentence_chunks = []
+    for source_text in source_texts:
+        if ".pdf" not in source_text:
+            sentence_chunks += control_flow_functions.sentence_chunking_algorithm(
+                source_text, config["SYSTEM"]["CHUNK_SIZE"]
+            )
 
     print(
         "\n\n\nIMPORTANT NOTE! Augmentoolkit prints a lot of stuff when it runs. Including tracebacks caused by model errors. Most errors are the result of the models, not the code, and any tracebacks you see were almost certainly handled. So: don't panic! You're gonna make it! Alright that's the end of this PSA. Happy dataset generation!\n\n\n"
@@ -145,7 +160,6 @@ async def main():
     sys.path.append("./control_flow_functions")
 
     import augmentoolkit.generation_functions as generation_functions  # This is the package directory
-    from augmentoolkit.control_flow_functions import control_flow_functions
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
     engine_wrapper = EngineWrapper(
@@ -167,11 +181,6 @@ async def main():
     import re
     from tqdm import tqdm
 
-    sentence_chunks = []
-    for source_text in source_texts:
-        sentence_chunks += control_flow_functions.sentence_chunking_algorithm(
-            source_text, config["SYSTEM"]["CHUNK_SIZE"]
-        )
 
     conversions = [("\n", " "), ("  ", " ")]
 
@@ -194,7 +203,10 @@ async def main():
 
     if SKIP_FILTER_CHUNKS:
         print("Skipping chunk filtering")
-        filtered_worthy_for_questions = paragraphs_processed[:SUBSET_SIZE]
+        if USE_SUBSET:
+            filtered_worthy_for_questions = paragraphs_processed[:SUBSET_SIZE]
+        else:
+            filtered_worthy_for_questions = paragraphs_processed
     else:
         # Create directory if it doesn't exist
         output_dir = config["PATH"]["OUTPUT"] + "/worthy_for_questions"
