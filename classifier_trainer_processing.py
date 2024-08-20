@@ -87,7 +87,10 @@ async def main():
                     truncated_text = head_tail_truncate(text, max_length=CHUNK_SIZE)
                 else:
                     truncated_text = text[:CHUNK_SIZE]
-                chunks.append((truncated_text, source_text))
+                chunks.append({
+                    "paragraph": truncated_text,
+                    "metadata": source_text
+                })
 
     if TRAIN_SET_SIZE + TEST_SET_SIZE > len(chunks):
         print("\n\nTRAIN SET SIZE AND TEST SET SIZE TOO LARGE FOR EVEN A SINGLE CLASSIFIER TRAINING RUN GIVEN THE SIZE OF THE DATASET")
@@ -98,7 +101,10 @@ async def main():
     conversions = [("\n", " "), ("  ", " ")]
 
     chunks = [
-        (steps.fix_text(conversions, seq[0]), seq[1])
+        {
+            "paragraph": steps.fix_text(conversions, seq["paragraph"]), 
+            "metadata": seq["metadata"]
+        }
         for seq in chunks
     ]
     random.shuffle(chunks)
@@ -170,46 +176,55 @@ async def main():
             rules_string = await create_rules(engine_wrapper=engine_wrapper_large, classes_list=USER_CLASSES, classes_desc=USER_CLASSES_DESCRIPTION, completion_mode=COMPLETION_MODE)
     else:
         rules_string = await create_rules(engine_wrapper=engine_wrapper_large, classes_list=USER_CLASSES, classes_desc=USER_CLASSES_DESCRIPTION, completion_mode=COMPLETION_MODE)
+        
+    chunks = [
+        {
+            "paragraph": steps.fix_text(conversions, seq["paragraph"]), 
+            "metadata": seq["metadata"],
+            "rules": rules_string,
+            "classes": USER_CLASSES
+        }
+        for seq in chunks
+    ]
 
     print("Rules created!\n\n----------------")
     print(rules_string)
     print("-------------")
     
-    output_dir = os.path.join(config["PATH"]["OUTPUT"], "text_label_tuples")
-    saved_tuples_dir = os.path.join(output_dir, "saved_label_tuples")
+    saved_dicts_dir = os.path.join(config["PATH"]["OUTPUT"], "label_creation_generations", "label_creations_saved") # NOTE you will have to change the paths in steps.py to match this if you modify this
 
-    text_label_tuples = []
+    text_label_dicts = []
 
     # Load existing tuples if they exist
-    if os.path.exists(saved_tuples_dir):
-        json_files = glob.glob(os.path.join(saved_tuples_dir, "*.json"))
+    if os.path.exists(saved_dicts_dir):
+        json_files = glob.glob(os.path.join(saved_dicts_dir, "*.json"))
         for file in json_files:
             with open(file, 'r') as f:
-                tuple_data = json.load(f)
-                if isinstance(tuple_data, list) and len(tuple_data) == 3:
-                    text_label_tuples.append(tuple_data)
+                dict_data = json.load(f)
+                if isinstance(dict_data, dict) and "label" in dict_data:
+                    text_label_dicts.append(dict_data)
 
     # Determine how many more tuples we need to generate
-    remaining_tuples = max(0, TRAIN_SET_SIZE - len(text_label_tuples))
+    remaining_dicts = max(0, TRAIN_SET_SIZE - len(text_label_dicts))
 
     # Sample and remove from chunks if needed
     train_data = []
-    if remaining_tuples > 0:
-        train_data = sample_and_remove(chunks, remaining_tuples)
+    if remaining_dicts > 0:
+        train_data = sample_and_remove(chunks, remaining_dicts)
 
     print("Training data prepared")
-    print(f"Loaded tuples: {len(text_label_tuples)}")
+    print(f"Loaded tuples: {len(text_label_dicts)}")
     print(f"Tuples to generate: {len(train_data)}")
 
     # Create directory if it doesn't exist
-    os.makedirs(output_dir, exist_ok=True)
+    # os.makedirs(output_dir, exist_ok=True)
 
     # Generate remaining tuples if needed
     if train_data:
-        await run_async_many(engine_wrapper=engine_wrapper, output_dir=output_dir, input_list=train_data, func=create_label, output_list=text_label_tuples, rules=rules_string, classes=USER_CLASSES)
+        await run_async_many(engine_wrapper=engine_wrapper, input_list=train_data, func=create_label, output_list=text_label_dicts, classes=USER_CLASSES)
     
     with open(os.path.join(config["PATH"]["OUTPUT"], "TEST_DEBUG_OUTPUT_OF_LIST"),  'w') as f:
-        f.write(json.dumps(text_label_tuples))
+        f.write(json.dumps(text_label_dicts))
     
     classifier_counter = 0
     output_dir = os.path.join(config["PATH"]["OUTPUT"], "classifiers")
@@ -219,7 +234,7 @@ async def main():
     existing_classifiers = glob.glob(os.path.join(output_dir, "classifier_*"))
     classifier_counter = len(existing_classifiers)
 
-    model = train_classifier(text_label_tuples, classifier_counter, output_dir)
+    model = train_classifier(text_label_dicts, classifier_counter, output_dir)
     
     ### Test classifier against LLM
     
@@ -237,12 +252,12 @@ async def main():
             test_set = sample_and_remove(chunks, TEST_SET_SIZE)
             
             # filter out duplicates
-            test_set = [item for idx, item in enumerate(test_set) if len([i for i in test_set[idx:] if i[0] == item[0]]) == 1]
+            test_set = [item for idx, item in enumerate(test_set) if len([i for i in test_set[idx:] if i["paragraph"] == item["paragraph"]]) == 1]
             
             truth_labels = []
             
             # Do LLM testing on that test set
-            await run_async_many(engine_wrapper=engine_wrapper_large, output_dir=output_dir, input_list=test_set, func=create_label, output_list=truth_labels,rules=rules_string, classes=USER_CLASSES) # the create_label function should have validation built in, maybe # TODO need to add to this the actual label list and desc somehow
+            await run_async_many(engine_wrapper=engine_wrapper_large, input_list=test_set, func=create_label, output_list=truth_labels, classes=USER_CLASSES)
             
             output_dir = os.path.join(config["PATH"]["OUTPUT"], "classifier_testing_labels_classification")
             os.makedirs(output_dir, exist_ok=True)
@@ -259,23 +274,21 @@ async def main():
             elif all_labels_same(truth_labels, classifier_labels, required_accuracy=REQUIRED_ACCURACY): # all_labels_same will have to work regardless of item order, since async. Also, most control_flow_functions. will actually end up being pipeline-specific functions instead.
                 has_passed_LLM_validation = True
             else:
-                text_label_tuples += truth_labels
+                text_label_dicts += truth_labels
                 
-                output_dir = os.path.join(config["PATH"]["OUTPUT"], "text_label_tuples")
-                os.makedirs(output_dir, exist_ok=True)
                 new_train_samples_inputs = sample_and_remove(chunks, TRAIN_SET_INCREMENT)
                 new_train_samples = []
-                await run_async_many(engine_wrapper=engine_wrapper, output_dir=output_dir, input_list=new_train_samples_inputs, func=create_label, output_list=new_train_samples, rules=rules_string, classes=USER_CLASSES)
+                await run_async_many(engine_wrapper=engine_wrapper, output_dir=output_dir, input_list=new_train_samples_inputs, func=create_label, output_list=new_train_samples)
                 
-                text_label_tuples += new_train_samples
+                text_label_dicts += new_train_samples
                 
                 
                 output_dir = os.path.join(config["PATH"]["OUTPUT"], "classifier_training_set")
-                save_train_set(text_label_tuples, output_dir)
+                save_train_set(text_label_dicts, output_dir)
                 
                 output_dir = os.path.join(config["PATH"]["OUTPUT"], "classifiers")
                 classifier_counter += 1
-                model = train_classifier(text_label_tuples, classifier_counter, output_dir)
+                model = train_classifier(text_label_dicts, classifier_counter, output_dir)
         else:
             print("Ran out of training chunks")
             sys.exit(1) # TODO failure logic

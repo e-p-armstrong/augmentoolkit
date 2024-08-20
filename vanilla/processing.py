@@ -25,7 +25,7 @@ async def main():
     import logging
     import yaml
     import glob
-    from augmentoolkit.core import steps
+    from vanilla import steps
 
     with open("./config.yaml", "r") as f:
         config = yaml.safe_load(f)
@@ -137,7 +137,6 @@ async def main():
     sys.path.append("./control_flow_functions")
 
     import augmentoolkit.generation_functions as generation_functions  # This is the package directory
-    from augmentoolkit.core import steps
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
     engine_wrapper = EngineWrapper(

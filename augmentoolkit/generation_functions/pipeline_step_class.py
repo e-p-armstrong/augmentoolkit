@@ -25,7 +25,7 @@ class PipelineStep:
         intermediate_output_path=None,
         result_key="placeholder_result_key", # this is the key that the result will be saved under in the output dictionary.
         regex=re.compile(r".*", re.DOTALL),
-        validation_function=lambda x: True,
+        validation_function=lambda x, y: True,
         max_retries=3,
         **kwargs,
         ): # things that are args here are things that would be in the code. Some of these will be live-tweakable.

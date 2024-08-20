@@ -151,7 +151,7 @@
     
     Input Text:
     """
-    {inp_text}
+    {paragraph}
     """
 
     Classes to choose from (reminder):

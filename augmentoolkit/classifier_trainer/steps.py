@@ -8,6 +8,7 @@ from tqdm import tqdm
 import yaml
 
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
+from augmentoolkit.generation_functions.pipeline_step_class import PipelineStep
 from augmentoolkit.utils.make_id import make_id
 from augmentoolkit.utils.write_output_to_file import write_output_to_file
 
@@ -16,8 +17,12 @@ with open("./classifier_trainer_config.yaml", "r") as f: # different yaml file f
         config = yaml.safe_load(f)
         
 COMPLETION_MODE = config["SYSTEM"]["COMPLETION_MODE"]
+PROMPTS_DIR = config["PATH"]["PROMPTS"]
+DEFAULT_PROMPTS = config["PATH"]["DEFAULT_PROMPTS"]
+OUTPUT_DIR = config["PATH"]["OUTPUT"]
+USE_STOP = config["SYSTEM"]["STOP"]
 
-### PROMPT FUNC: Rules Creator
+### PROMPT FUNC: Rules Creator (this does not use the pipeline step class due to it uniquely only generating a single thing and not writing to a list)
 
 def parse_rules(rules_str):
     return rules_str # TODO
@@ -69,10 +74,7 @@ async def create_rules(engine_wrapper=None, classes_list=None, classes_desc=None
     
     try:        
         
-        result, full_output = await rules_creator.generate({
-            "classes_desc": classes_desc,
-            "class_list": classes_str,
-        })
+        result, full_output = await rules_creator.generate(classes_desc=classes_desc, class_list=classes_str)
         
         id = make_id()
         
@@ -86,6 +88,52 @@ async def create_rules(engine_wrapper=None, classes_list=None, classes_desc=None
 
 ###
 
+label_path = "create_labels_for_chunk"
+label_regex = r"Final label: (.+)"
+
+# for the sake of this abstraction, "rules" shall be part of the input data and intermediate saved stuff now.
+
+class LabelCreator(PipelineStep):
+    def __init__(self):
+        super().__init__(
+            prompt_folder=PROMPTS_DIR,
+            default_prompt_folder=DEFAULT_PROMPTS,
+            prompt_path=label_path,
+            regex=label_regex,
+            sampling_params={
+                "max_tokens": 1500,
+                "stop": [
+                    "### Response",
+                    "\n\n\n\n\n\n",
+                    "</s>",
+                    "# Input:",
+                    "[INST]",
+                    "### Instruction",
+                    "[INST",
+                    "<|eot_id|>",
+                    "<|start_header_id|>",
+                    "<|end_header_id|>",
+                ],
+                "temperature": 0.2,
+            },
+            output_dir=OUTPUT_DIR,
+            output_subdir="label_creation_generations",
+            intermediate_output_path="label_creation_intermediates",
+            save_path="label_creations_saved", # NOTE output processor is defined inside async function and manually applied due to special circumstances
+            result_key="label",
+            use_stop=USE_STOP,
+            completion_mode=COMPLETION_MODE,
+        )
+    
+    def read_previous_output(self, idx, output_list):
+        return False # We do not read previous output in this step
+    
+    def process_input_data(self, input_data):
+        input_data["classes"] = format_class_list(input_data["classes"])
+        return input_data
+        
+    
+label_creator = LabelCreator()
 
 ### PROMPT FUNC: Label Creator
 
@@ -95,7 +143,7 @@ def get_last_final_label(text):
     return matches[-1] if matches else None
 
 
-async def create_label(idx, inp, classes=None, engine_wrapper=None, output_dir=None, output_list=None, rules=None):
+async def create_label(idx, inp, classes=None, engine_wrapper=None, output_list=None):
     
     def parse_labels(classification):
         predicted_label = get_last_final_label(classification)
@@ -133,66 +181,8 @@ async def create_label(idx, inp, classes=None, engine_wrapper=None, output_dir=N
             
         raise Exception(f"\n-----\/----\nNo proper label found! Generated {classification}\n\nExtracted {predicted_label}\n\nAnd tried to match with{classes}") #
     
-    
-    prompt_path = "create_labels_for_chunk"
-    inp_text = inp[0]
-    
-    if COMPLETION_MODE:
-        prompt_path += ".txt"
-    else:
-        prompt_path += ".yaml"
-    
-    rules_creator = GenerationStep(
-        prompt_path=prompt_path,
-        sampling_params={
-            "max_tokens": 1500,
-            "stop": [
-                "### Response",
-                "\n\n\n\n\n\n",
-                "</s>",
-                "# Input:",
-                "[INST]",
-                "### Instruction",
-                "[INST",
-                "<|eot_id|>",
-                "<|start_header_id|>",
-                "<|end_header_id|>",
-            ],
-            "temperature": 0.2,
-        },
-        completion_mode=COMPLETION_MODE,
-        retries=4,
-        engine_wrapper=engine_wrapper,
-        logging_level=logging.INFO,
-        output_processor=parse_labels,
-        prompt_folder=config["PATH"]["PROMPTS"],
-        default_prompt_folder=config["PATH"]["DEFAULT_PROMPTS"],
-        use_stop=config["SYSTEM"]["STOP"]
-    )
-    
-    classes_str = format_class_list(classes)
-    
-    try:
-        out_class, full_output = await rules_creator.generate({
-            "rules": rules,
-            "inp_text": inp_text,
-            "classes": classes_str,
-        })
-        
-        result = (inp[0], inp[1], out_class)
-        
-        id = make_id()
-        
-        write_output_to_file(full_output, os.path.join(output_dir, "label_generation"), id) # TODO add autoresume to this pipeline
-        
-        os.makedirs(os.path.join(output_dir, "saved_label_tuples"), exist_ok=True)
-        with open(os.path.join(output_dir, "saved_label_tuples", id + ".json"),'w') as f:
-            f.write(json.dumps(result))
-        
-        output_list.append(result)
-    except Exception as e:
-        print(e)
-        traceback.print_exc()
+    label_creator.output_processor = parse_labels
+    await label_creator.run(idx=idx, input_data=inp, engine_wrapper=engine_wrapper, output_list=output_list)
     
 ###
 
@@ -201,7 +191,7 @@ from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
-def train_classifier(text_label_tuples, classifier_counter, output_dir):
+def train_classifier(text_label_dicts, classifier_counter, output_dir):
     
     # First, save the tuples to a file with only the relevant info so that we can load them as a dataset
     
@@ -213,10 +203,10 @@ def train_classifier(text_label_tuples, classifier_counter, output_dir):
     os.makedirs(os.path.join(output_dir, "datasets"), exist_ok=True)
     path_to_dataset = os.path.join(output_dir, "datasets", f"dataset_{classifier_counter}.jsonl")
     with open(path_to_dataset, "w") as f:
-        for tup in text_label_tuples:
+        for d in text_label_dicts:
             json_obj = {
-                "text": tup[0],
-                "label": tup[2]
+                "text": d["paragraph"],
+                "label": d["label"]
             }
             f.write(json.dumps(json_obj) + "\n")
 
@@ -366,12 +356,12 @@ def all_labels_same(truth_labels, classifier_labels, required_accuracy=1.0):
         return False
     
     
-def save_train_set(test_label_tuples, output_dir):
+def save_train_set(test_label_dicts, output_dir):
     with open(output_dir, "w") as f:
-        for tup in test_label_tuples:
+        for d in test_label_dicts:
             json_obj = {
-                "text": tup[0],
-                "label": tup[2]
+                "text": d["paragraph"],
+                "label": d["label"]
             }
             f.write(json.dumps(json_obj) + "\n")
         

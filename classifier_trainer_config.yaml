@@ -4,10 +4,10 @@ PATH:
   DEFAULT_PROMPTS: "./prompts_classifier" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts_classifier" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY: "add your key here! Be sure to leave a dummy key if doing local inference!!!!!!!!!!!!!!!!!!!!!!!!!!" # Add the API key for your favorite provider here
-  BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...) # http://8000.0.0.0
-  LOGICAL_MODEL: "meta-llama/Llama-3-8b-chat-hf" # model used for everything except conversation generation at the very end # TechxGenus/Meta-Llama-3-8B-GPTQ
-  LARGE_LOGICAL_MODEL: "meta-llama/Llama-3-70b-chat-hf" # model used for conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on. # TechxGenus/Meta-Llama-3-70B-GPTQ
+  API_KEY: "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" # Add the API key for your favorite provider here
+  BASE_URL: "https://openrouter.ai/api/v1" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...) # http://8000.0.0.0
+  LOGICAL_MODEL: "nousresearch/hermes-2-pro-llama-3-8b" # model used for everything except conversation generation at the very end # TechxGenus/Meta-Llama-3-8B-GPTQ
+  LARGE_LOGICAL_MODEL: "perplexity/llama-3.1-sonar-large-128k-chat" # model used for conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on. # TechxGenus/Meta-Llama-3-70B-GPTQ
   QUANTIZATION_SMALL: "gptq" # Only need to use if Aphrodite mode is on.
   QUANTIZATION_LARGE: "gptq" # Only need to use if Aphrodite mode is on.
 SKIP:
