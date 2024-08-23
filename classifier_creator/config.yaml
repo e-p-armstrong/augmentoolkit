@@ -1,5 +1,5 @@
 PATH:
-  INPUT: "./imdb"
+  INPUT: "./CLEARLY_DIFFERENTIATED_INPUT_CLASSIFIER_CREATOR"
   OUTPUT: "./classifier_output"
   DEFAULT_PROMPTS: "./prompts_classifier" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts_classifier" # Where Augmentoolkit first looks for prompts

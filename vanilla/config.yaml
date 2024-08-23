@@ -1,5 +1,5 @@
 PATH:
-  INPUT: "./input" # This is relative to the processing.py script, not the top level. So is output.
+  INPUT: "./CLEARLY_DIFFERENTIATED_INPUT_VANILLA" # This is relative to the processing.py script, not the top level. So is output.
   OUTPUT: "./output"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts

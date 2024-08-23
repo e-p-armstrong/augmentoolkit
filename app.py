@@ -25,43 +25,47 @@ def read_yaml_file(file_path):
         print(f"Error reading file {file_path}: {e}")
         return {}
       
-config = {}
-config_file_path = 'config.yaml'
-config = read_yaml_file(config_file_path)
-components = [] # so we create a list of components
+configs = {} # IDEA keys that point to each sub-config, the key is the name of the script or maybe the config full filepath? Or do I actually need this at all?
+# config_file_path = 'config.yaml'
+# config = read_yaml_file(config_file_path)
+# components = [] # so we create a list of components
 
-
-
-for key1 in config: # for each key in the config
-    group = [] # make a group?
-    for key2 in config[key1]: # for each subkey/actual value
-        group.append({'path': [key1, key2], 'label':key2, 'value':config[key1][key2]}) # make a path through the config, label, and give    it the value 
-    components.append(group) # append this stuff to components. Does gradio seriously take a list of dicts?
-
-def changed(text, keys): # updates the global config dictionary when a textbox is changed. It also provides the path to the thing to change in the config, that's what we change.
+def changed(text, keys, config_path): # updates the global config dictionary when a textbox is changed. It also provides the path to the thing to change in the config, that's what we change.
     print("\nDEBUG")
     print(keys)
-    global config
-    _config = config
+    global configs
+    _config = configs[config_path]
     for key in keys[:-1]:
         _config = _config.setdefault(key, {}) # create nested dicts if they don't exist for all keys except the final level of the nested structure
     _config[keys[-1]] = text # update the VALUE at the final level of the nested structure with the new text
     return keys
 
+def get_first_folder(path):
+    normalized_path = os.path.normpath(path)
+    parts = normalized_path.split(os.sep)
+    return parts[1] if len(parts) > 1 else None
+
 def run(file): # dumps the current config to the config file, then runs the processing script. I think we can repurpose much of this for the new thing.
-    global config
-    try:
-        with open(config_file_path, 'w', encoding='utf-8') as file:
-            yaml.dump(config, file, allow_unicode=True)
-    except Exception as e:
-        print(f"Error writing config file: {e}")
-        return  
-    try:
-        env = os.environ.copy()
-        with open("log.txt", "w", encoding='utf-8') as log_file:
-            subprocess.run([sys.executable, "processing.py"], stdout=log_file, stderr=log_file, text=True, env=env)
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
+    global configs
+    
+    for path, config in configs.items():
+        try:
+            with open(path, 'w', encoding='utf-8') as file:
+                yaml.dump(config, file, allow_unicode=True)
+        except Exception as e:
+            print(f"Error writing config file: {e}")
+            return  
+        try:
+            project_root = os.path.dirname(os.path.abspath(__file__))
+            env = os.environ.copy()
+            env["PYTHONPATH"] = project_root
+            env["CONFIG_PATH"] = path
+            first_folder = get_first_folder(path)
+            
+            with open("log.txt", "w", encoding='utf-8') as log_file:
+                subprocess.run([sys.executable, "processing.py"], stdout=log_file, stderr=log_file, text=True, env=env, cwd=first_folder)
+        except subprocess.CalledProcessError as e:
+            print(f"Error: {e}")
 
 
 def scan_for_valid_scripts():
@@ -73,7 +77,8 @@ def scan_for_valid_scripts():
     return valid_scripts
 
 
-def create_config_components(config):
+def create_config_components(full_path):
+    config = read_yaml_file(full_path)
     components = []
     for key1 in config:
         group = []
@@ -119,14 +124,24 @@ with gr.Blocks(css="#log { padding:0; height: 0; overflow: hidden; } #log.displa
     valid_scripts = scan_for_valid_scripts()
     
     for script in valid_scripts:
+        
+        full_config_path = os.path.join(script, "config.yaml") # TODO we want this to be the same as the value of the script_textbox below; config.yaml is a sane default.
+        
+        
         with gr.Column():
             visible = gr.State(False)
             with gr.Row():
                 script_textbox = gr.Textbox(label=f"{script} Config Path", value=f"config.yaml", interactive=True)
                 script_enable = gr.Checkbox(label="Use Pipeline (enable to see settings)")
+                
+            components = create_config_components(full_config_path)
             with gr.Row(visible=False) as specific_config_settings:
                 # TODO code in here to dynamically create settings based on config contents. And yes it has to be dynamic different pipelines have different settings.
-                gr.Textbox(label="I AM A PLACEHOLDER")
+                for component in components:
+                    with gr.Column():
+                        for item in component:
+                            t = gr.Textbox(label=item['label'], value=item['value'], interactive=True)
+                            t.change(changed, [t, gr.State(value=item['path'])], [gr.State()])
         
             def flip_config_visibility(visible_state):
                 return gr.Row(visible=(not visible_state)), gr.State(not visible_state)
@@ -135,15 +150,6 @@ with gr.Blocks(css="#log { padding:0; height: 0; overflow: hidden; } #log.displa
                 inputs=[visible],
                 outputs=[specific_config_settings, visible]
             )
-            
                 
-        # We then need to create components, FOR EACH CONFIG, IFF the checkbox is enabled and the path matches.
-    
-        with gr.Row():
-            for component in components:
-                with gr.Column():
-                    for item in component:
-                        t = gr.Textbox(label=item['label'], value=item['value'], interactive=True)
-                        t.change(changed, [t, gr.State(value=item['path'])], [gr.State()])
    
 demo.launch()
