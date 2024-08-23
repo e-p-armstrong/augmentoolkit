@@ -1,3 +1,5 @@
+# TODO add some output examples back to the repo
+
 # Augmentoolkit — infinite domain-specific instruct data
 Your custom LLMs need custom data. [Augmentoolkit creates quality data quickly, cheaply, and painlessly.](#benefits)
 

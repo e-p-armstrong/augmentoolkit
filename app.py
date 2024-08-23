@@ -125,16 +125,31 @@ with gr.Blocks(css="#log { padding:0; height: 0; overflow: hidden; } #log.displa
     
     for script in valid_scripts:
         
-        full_config_path = os.path.join(script, "config.yaml") # TODO we want this to be the same as the value of the script_textbox below; config.yaml is a sane default.
         
+        # doing everything properly with state such that this could be run as a space is outside the scope of this first refactor pass
         
         with gr.Column():
             visible = gr.State(False)
+            logging.debug(f"Initial visible state for {script}: {visible.value}")
             with gr.Row():
-                script_textbox = gr.Textbox(label=f"{script} Config Path", value=f"config.yaml", interactive=True)
+                default_config_value = "config.yaml"
+                config_file_name = gr.Textbox(label=f"{script} Config Path", value=default_config_value, interactive=True)
                 script_enable = gr.Checkbox(label="Use Pipeline (enable to see settings)")
                 
-            components = create_config_components(full_config_path)
+                # full_config_path = os.path.join(script,config_file_name) # TODO we want this to be the same as the value of the script_textbox below; config.yaml is a sane default.
+                # TODO on config file name change, refresh the components
+            components = create_config_components(os.path.join(script, default_config_value))
+            
+            config_path_warning = gr.Markdown(label="Warning: provided config path does not lead to a .yaml file! Double check your path.", visible=False)
+            def change_components_to_match_new_config(new_config_file_name): # return three things: the new components (this'll probably be a state or global thing?); whether the warning is visible; and the config path (well that's part of the text box so not explicit)
+                global components
+                path = os.path.join(script, new_config_file_name)
+                display_warning = not os.path.exists(path)
+                if not display_warning:
+                    components = create_config_components(path)
+                return gr.update(visible=display_warning)
+            
+            config_file_name.change(change_components_to_match_new_config, inputs=[config_file_name], outputs=[config_path_warning])
             with gr.Row(visible=False) as specific_config_settings:
                 # TODO code in here to dynamically create settings based on config contents. And yes it has to be dynamic different pipelines have different settings.
                 for component in components:
@@ -144,12 +159,28 @@ with gr.Blocks(css="#log { padding:0; height: 0; overflow: hidden; } #log.displa
                             t.change(changed, [t, gr.State(value=item['path'])], [gr.State()])
         
             def flip_config_visibility(visible_state):
-                return gr.Row(visible=(not visible_state)), gr.State(not visible_state)
+                logging.debug(f"flip_config_visibility called for {script}")
+                logging.debug(f"Input visible_state: {visible_state}")
+                new_visible_state = not visible_state
+                logging.debug(f"New visible state: {new_visible_state}")
+                return gr.Row(visible=(new_visible_state)), new_visible_state
             script_enable.change(
                 flip_config_visibility,
                 inputs=[visible],
                 outputs=[specific_config_settings, visible]
             )
+            
+            print(components)
+            def delete_conponent():
+                pass
+            gr.Button("delete component").click(delete_conponent)
+            
+    def log_visible_states():
+        for script in valid_scripts:
+            logging.debug(f"Current visible state for {script}: {visible.value}")
+
+    # Add a button to log all visible states
+    gr.Button("Log Visible States").click(log_visible_states)
                 
    
 demo.launch()

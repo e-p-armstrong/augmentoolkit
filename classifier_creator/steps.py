@@ -365,3 +365,8 @@ def save_train_set(test_label_dicts, output_dir):
             }
             f.write(json.dumps(json_obj) + "\n")
         
+        
+def fix_text(to_replace_arr, text):
+    for tup in to_replace_arr:
+        text = text.replace(tup[0], tup[1])
+    return text

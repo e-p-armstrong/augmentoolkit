@@ -18,8 +18,7 @@ async def main():
 
     from augmentoolkit.utils.sample_and_remove import sample_and_remove
 
-    from augmentoolkit.classifier_trainer.steps import all_labels_same, create_label, create_rules, run_classifier, save_train_set, train_classifier
-    from augmentoolkit.core import steps
+    from steps import all_labels_same, create_label, create_rules, run_classifier, save_train_set, train_classifier, fix_text
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
     with open("./classifier_trainer_config.yaml", "r") as f: # different yaml file for different pipes
@@ -102,7 +101,7 @@ async def main():
 
     chunks = [
         {
-            "paragraph": steps.fix_text(conversions, seq["paragraph"]), 
+            "paragraph": fix_text(conversions, seq["paragraph"]), 
             "metadata": seq["metadata"]
         }
         for seq in chunks
@@ -179,7 +178,7 @@ async def main():
         
     chunks = [
         {
-            "paragraph": steps.fix_text(conversions, seq["paragraph"]), 
+            "paragraph": fix_text(conversions, seq["paragraph"]), 
             "metadata": seq["metadata"],
             "rules": rules_string,
             "classes": USER_CLASSES
