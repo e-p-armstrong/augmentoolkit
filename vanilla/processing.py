@@ -26,8 +26,8 @@ async def main():
     import yaml
     import glob
     from vanilla import steps
-
-    with open("./config.yaml", "r") as f:
+    config_path = os.environ["CONFIG_PATH"]
+    with open(config_path, "r") as f:
         config = yaml.safe_load(f)
 
     if not os.path.exists(config["PATH"]["OUTPUT"]):
@@ -65,7 +65,7 @@ async def main():
 
     BASE_URL = config["API"][
         "BASE_URL"
-    ]  # Augmentoolkit-API should also be compatible with any other API provider that accepts OAI-style requests
+    ]  # Augmentoolkit-API mode should also be compatible with any other API provider that accepts OAI-style requests
 
     COMPLETION_MODE = config["SYSTEM"]["COMPLETION_MODE"]
 

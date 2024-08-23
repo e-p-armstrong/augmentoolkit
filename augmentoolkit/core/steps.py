@@ -997,7 +997,6 @@ class JudgeParagraphStep(PipelineStep):
         
         
         output_data = input_data
-        print("DEBUG: RESULT")
         print(result)
         if not result:
             output_data = {

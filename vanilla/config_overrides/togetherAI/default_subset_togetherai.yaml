@@ -1,6 +1,6 @@
 PATH:
   INPUT: "./input" # This is relative to the processing.py script, not the top level. So is output.
-  OUTPUT: "./output"
+  OUTPUT: "./output_default"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:

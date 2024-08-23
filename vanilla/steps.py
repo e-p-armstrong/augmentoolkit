@@ -32,7 +32,8 @@ from augmentoolkit.generation_functions import (
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
 from augmentoolkit.generation_functions.special_instructions import special_instructions
 
-with open("./config.yaml", "r") as file:
+config_path = os.environ["CONFIG_PATH"]
+with open(config_path, "r") as file:
     obj_conf = yaml.safe_load(file)
 
 DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
@@ -997,7 +998,6 @@ class JudgeParagraphStep(PipelineStep):
         
         
         output_data = input_data
-        print("DEBUG: RESULT")
         print(result)
         if not result:
             output_data = {

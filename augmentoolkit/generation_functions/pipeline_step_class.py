@@ -84,7 +84,6 @@ class PipelineStep:
                 regex=self.regex,
             )
             
-            print("DEBUG PROCESSED DATA")
             print(processed_data)
             
             result, full_output = await generator.generate(**processed_data, **self.static_arguments)

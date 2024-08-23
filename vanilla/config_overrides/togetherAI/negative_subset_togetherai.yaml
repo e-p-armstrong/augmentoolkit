@@ -1,8 +1,8 @@
 PATH:
   INPUT: "./input" # This is relative to the processing.py script, not the top level. So is output.
-  OUTPUT: "./output"
+  OUTPUT: "./output_negative"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
-  PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
+  PROMPTS: "./overrides/prompts_override_negative_question" # Where Augmentoolkit first looks for prompts
 API:
   API_KEY: "61e283ed44f1529b7597e75af77f58669202b526790ff346c96c07af8f841cb4" # Add the API key for your favorite provider here
   BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
