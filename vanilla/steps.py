@@ -36,14 +36,13 @@ config_path = os.environ["CONFIG_PATH"]
 with open(config_path, "r") as file:
     obj_conf = yaml.safe_load(file)
 
-DEFAULT_PROMPT_PATH = obj_conf["PATH"]["DEFAULT_PROMPTS"]
 HUB_PATH = obj_conf["HUGGINGFACE"]["HUB_PATH"]
 PRIVATE = obj_conf["HUGGINGFACE"]["PRIVATE"]
 PUSH_TO_HUB = obj_conf["HUGGINGFACE"]["PUSH_TO_HUB"]
 USE_FILENAMES = obj_conf["SYSTEM"]["USE_FILENAMES"]
-OUTPUT_DIR = obj_conf["PATH"]["OUTPUT"]
-PROMPTS_DIR = obj_conf["PATH"]["PROMPTS"]
-DEFAULT_PROMPTS = obj_conf["PATH"]["DEFAULT_PROMPTS"]
+OUTPUT_DIR = os.path.abspath(obj_conf["PATH"]["OUTPUT"])
+PROMPTS_DIR = os.path.abspath(obj_conf["PATH"]["PROMPTS"])
+DEFAULT_PROMPTS = os.path.abspath(obj_conf["PATH"]["DEFAULT_PROMPTS"])
 USE_STOP = obj_conf["SYSTEM"]["STOP"]
 COMPLETION_MODE = obj_conf["SYSTEM"]["COMPLETION_MODE"]
 
@@ -389,7 +388,7 @@ async def vet_answer_accuracy_loop(
         logging_level=logging_level,
         output_processor=parse_answer_accuracy_validation,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
+        default_prompt_folder=DEFAULT_PROMPTS,
         use_stop=obj_conf["SYSTEM"]["STOP"],
     )
 
@@ -519,7 +518,7 @@ async def vet_answer_relevance_loop(
         logging_level=logging_level,
         output_processor=parse_answer_relevancy_validation_step,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
-        default_prompt_folder=DEFAULT_PROMPT_PATH,
+        default_prompt_folder=DEFAULT_PROMPTS,
         use_stop=obj_conf["SYSTEM"]["STOP"]
     )
 
@@ -671,7 +670,7 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
             logging_level=logging_level,
             output_processor=parse_validation_step,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
-            default_prompt_folder=DEFAULT_PROMPT_PATH,
+            default_prompt_folder=DEFAULT_PROMPTS,
             use_stop=obj_conf["SYSTEM"]["STOP"],
         )
 
@@ -801,7 +800,7 @@ class QuestionGenerationStep(PipelineStep): # like before, but with the new syst
     def __init__(self):
         super().__init__(
             prompt_folder=PROMPTS_DIR,
-            default_prompt_folder=DEFAULT_PROMPT_PATH,
+            default_prompt_folder=DEFAULT_PROMPTS,
             prompt_path=prompt_path_qatuples_gen,
             regex=qatuples_gen_regex,
             sampling_params={
@@ -938,7 +937,7 @@ class JudgeParagraphStep(PipelineStep):
     def __init__(self): # instead of overriding init, just pass these when instantiating the class
         super().__init__(
             prompt_folder=PROMPTS_DIR,
-            default_prompt_folder=DEFAULT_PROMPT_PATH,
+            default_prompt_folder=DEFAULT_PROMPTS,
             prompt_path=judgement_prompt_path,
             regex=judgement_regex,
             sampling_params={
@@ -1105,7 +1104,7 @@ class ConversationGenerator(PipelineStep):
     def __init__(self):
         super().__init__(
             prompt_folder=PROMPTS_DIR,
-            default_prompt_folder=DEFAULT_PROMPT_PATH,
+            default_prompt_folder=DEFAULT_PROMPTS,
             prompt_path=multi_turn_conversation_prompt_path,
             regex=conversation_regex,
             sampling_params={

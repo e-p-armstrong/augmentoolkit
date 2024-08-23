@@ -20,8 +20,8 @@ async def main():
 
     from steps import all_labels_same, create_label, create_rules, run_classifier, save_train_set, train_classifier, fix_text
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
-
-    with open("./classifier_trainer_config.yaml", "r") as f: # different yaml file for different pipes
+    config_path = os.environ["CONFIG_PATH"]
+    with open(config_path, "r") as f: # different yaml file for different pipes
         config = yaml.safe_load(f)
     random.seed(1048596)
         

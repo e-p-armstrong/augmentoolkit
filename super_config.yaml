@@ -1,6 +1,6 @@
 pipeline_order:
   - folder: "vanilla"
-    config: "default_subset_togetherai.yaml"
-  - folder: "vanilla"
-    config: "negative_subset_togetherai.yaml"
+    config: "config.yaml"
+  # - folder: "classifier_creator"
+  #   config: "config.yaml"
   

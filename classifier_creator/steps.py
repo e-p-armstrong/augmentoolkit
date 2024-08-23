@@ -12,14 +12,15 @@ from augmentoolkit.generation_functions.pipeline_step_class import PipelineStep
 from augmentoolkit.utils.make_id import make_id
 from augmentoolkit.utils.write_output_to_file import write_output_to_file
 
+config_path = os.environ["CONFIG_PATH"]
 
-with open("./classifier_trainer_config.yaml", "r") as f: # different yaml file for different pipes
+with open(config_path, "r") as f: # different yaml file for different pipes
         config = yaml.safe_load(f)
         
 COMPLETION_MODE = config["SYSTEM"]["COMPLETION_MODE"]
-PROMPTS_DIR = config["PATH"]["PROMPTS"]
-DEFAULT_PROMPTS = config["PATH"]["DEFAULT_PROMPTS"]
-OUTPUT_DIR = config["PATH"]["OUTPUT"]
+PROMPTS_DIR = os.path.abspath(config["PATH"]["PROMPTS"])
+DEFAULT_PROMPTS = os.path.abspath(config["PATH"]["DEFAULT_PROMPTS"])
+OUTPUT_DIR = os.path.abspath(config["PATH"]["OUTPUT"])
 USE_STOP = config["SYSTEM"]["STOP"]
 
 ### PROMPT FUNC: Rules Creator (this does not use the pipeline step class due to it uniquely only generating a single thing and not writing to a list)

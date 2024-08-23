@@ -11,6 +11,7 @@ def run_processing_script(folder_path, config_path, project_root):
     env = os.environ.copy()
     env["PYTHONPATH"] = project_root
     env["CONFIG_PATH"] = config_path
+    env["FOLDER_PATH"] = folder_path 
     subprocess.run(["python", "processing.py"], cwd=folder_path, env=env)
 
 def main():

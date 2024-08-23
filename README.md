@@ -1,4 +1,5 @@
 # TODO add some output examples back to the repo
+# ALSO TODO make some small test .json input for the classifier creator so people can quickerstart with that. 
 
 # Augmentoolkit — infinite domain-specific instruct data
 Your custom LLMs need custom data. [Augmentoolkit creates quality data quickly, cheaply, and painlessly.](#benefits)
