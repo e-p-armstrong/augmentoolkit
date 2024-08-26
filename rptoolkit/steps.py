@@ -426,7 +426,7 @@ def dict_to_string(features):
 
 def parse_features(features):
     try:
-        to_include = ["Initiating Event", "Character Traits", "Feelings", "Physical Traits", "Physical Props", "Settings", "Genre Tags"]
+        to_include = ["Initiating Event", "Character Traits", "Feelings", "Physical Traits", "Physical Props", "Overall Setting", "Settings", "Genre Tags", ]
         features_obj = parse_string_to_dict(features, to_include)
         # remove keys that are not in the given to-include list
         features_obj = {key: value for key, value in features_obj.items() if key in to_include}
@@ -437,8 +437,10 @@ def parse_features(features):
         # print(features_obj)
         return dict_to_string(features_obj)
     except Exception as e:
-        print("\n\nERROR IN EXTRACTING FEATURES!")
+        print("\n\n!!!ERROR IN EXTRACTING FEATURES!")
+        print(features)
         print(e)
+        print("----------------")
         traceback.print_exc()
         return None
 

@@ -1,14 +1,14 @@
 PATH:
   INPUT: "./output_not_actually_output_raw_txt_input_2_modern"
-  OUTPUT: "./output_sfw(mostly)_test_7_extract"
+  OUTPUT: "./output_sfw(mostly)_test_7_extract_ver5"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY_A: "7HTIsqFVJTaivbEhLvbpM8q1u0GtNb3M" # Add the API key for the provider you're using for the first model here (this is typically the smaller, less-costly model)
+  API_KEY_A: "dee944719a56297b51c79decfc41123f9130feb3640df5e0767ea00ddf599723" # Add the API key for the provider you're using for the first model here (this is typically the smaller, less-costly model)
   API_KEY_B: "i71G3cZ18CdpgeDuGwhMuqJoecruwcwo9Xjin66V" # Add the API key for the provider you're using for the second model here (typically the larger, more-capable model)
-  BASE_URL_A: "https://api.mistral.ai/v1/" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
+  BASE_URL_A: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
   BASE_URL_B: "https://api.mistral.ai/v1/" # Remember which model is which by thinking: B stands for 'Big'
-  LOGICAL_MODEL_A: "mistral-medium" # Model A should be a smaller and cheaper one than model B, it's used in all steps except the hardest one. Recommended: "mistral-medium-latest"
+  LOGICAL_MODEL_A: "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo" # Model A should be a smaller and cheaper one than model B, it's used in all steps except the hardest one. Recommended: "mistral-medium-latest"
   LOGICAL_MODEL_B: "command-r-plus" # MODEL B should be the larger more capable model TODO make "MODE" an api thing, it belongs there.
 SYSTEM:
   PICK_EMOTION: True # True = Generate based on text with no constraining, False = constrain to the given dict
