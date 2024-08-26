@@ -164,6 +164,9 @@ class GenerationStep:
                     else:
                         print("Messages:")
                         print(yaml.dump(messages, default_flow_style=False))
+                    if response:
+                        print("\n\nResponse:\n-----\n")
+                        print(response)
                     # if prompt_formatted:
                     #     print(prompt_formatted)
                     logging.error(

@@ -1,0 +1,8 @@
+protobuf 
+sentencepiece 
+transformers 
+matplotlib 
+nltk 
+openai
+aiohttp
+cohere

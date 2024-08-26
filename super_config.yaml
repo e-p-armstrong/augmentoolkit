@@ -1,6 +1,8 @@
 pipeline_order:
-  - folder: "vanilla"
+  - folder: "rptoolkit"
     config: "config.yaml"
+  # - folder: "vanilla"
+  #   config: "override_config.yaml"
   # - folder: "classifier_creator"
   #   config: "config.yaml"
   

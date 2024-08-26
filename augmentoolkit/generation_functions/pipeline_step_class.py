@@ -84,7 +84,7 @@ class PipelineStep:
                 regex=self.regex,
             )
             
-            print(processed_data)
+            # print(processed_data)
             
             result, full_output = await generator.generate(**processed_data, **self.static_arguments)
             
@@ -112,6 +112,7 @@ class PipelineStep:
             f.write(json.dumps(output_data))
         
         output_list.append(output_data)
+        return output_data
     
     async def run(self, idx=None,
     input_data=None,
@@ -140,7 +141,7 @@ class PipelineStep:
         if not complete: # consider raising here and catching in the actual pipeline.
             return
         
-        self.save(result=result, full_output=full_output, idx=idx, output_list=output_list, input_data=input_data)
+        return self.save(result=result, full_output=full_output, idx=idx, output_list=output_list, input_data=input_data)
         
 
         
