@@ -110,6 +110,10 @@
     Yingchuan district. He encountered the routed troops of Zhang Liang and Zhang Bao and cut off their retreat. In the ensuing fray his men took ten thousand heads as well as flags, banners, gongs, 
     drums, and horses in large numbers. Zhang Liang and Zhang Bao, however, managed to escape after a desperate struggle. Cao presented himself to Huangfu Song and Zhu Jun, the imperial field 
     generals, and then went after the two rebel leaders.5i 
+    --------------------------------
+
+    Scene's Primary Emotion:
+    PROVING ONESELF: The ambitious scramble as one starts to make their way in a chaotic world rich with opportunity. Proving oneself is the act of defining one's personality while building a reputation through meritorious deeds and triumph in the face of difficult odds — the rush of success, the happiness at making progress towards one's goals, and the elation and confidence brought on by overcoming challenges, are what characterizes this emotion. People prove themselves each in their own ways. Some do it with will, courage, and talent; others through wit, schemes, and antics; but all who are heroes of their time test themselves against the mettle of opposition and emerge victorious. Overcoming great adversity, building one's position, and seizing opportunity, are the true pleasures of the heroes (and villains) who define ages. Moving from one great task to another with confidence and ability, building an unstoppable momentum, is perhaps one of the greatest feelings in the world. And seldom do the ambitious fail to find a new goal once their first is achieved.
 
     -----------
     Note: Do not forget that your response should be a list of the initiating event, some feelings from the scene, some physical traits of the characters, some character traits of the characters, some physical props, the overall setting, some settings that appear, and some genre tags from the scene. You should write a group of unordered lists using asterisks (*) as the bullets. Do not mention any characters in the scene by name, or analyze its plot (keep things general because this will be used to inform the creation of a new, unrelated story). Keep the number of genre tags you list low, and make the list targeted and precise, so that the story written from it is more coherent. Keep the "Genre Tags" list limited to 10 (ten) items at most. Remember as well that the tags must accommodate a story with only two named characters, and so you will potentially need to tweak the tags. Every section must have at least one bullet point.
@@ -323,6 +327,10 @@
     that I might have suspected him of being addicted to the use of some
     narcotic, had not the temperance and cleanliness of his whole life
     forbidden such a notion.
+    --------------------------------
+    
+    Scene's Primary Emotion:
+    DISCOVERY: the intellectual thrill of being confronted with something unique, novel, and unknown — and then steadily learning more about it. Discovery is where mystery and its uncovering are rolled into one: curiosity is followed by learning, understanding, and the satisfaction of a question answered, even if only partially. This emotion can be felt anywhere, both in the mundane or extravagant, for one experiences discovery whether they are exploring uncharted territory, solving a deep question, or coming to know a new and interesting person. Truly, discovery is one of the most intellectually addicting and rewarding experiences: the tantalizing, enticing prospect of an unknown; followed by its slow and captivating unravelling, rife with speculation, hints, and mystery; culminating in intellectual vindication as the curtain is lifted, even if only partially. The end of one mystery may also be the start of another, and this thrilling cycle happen many times until all is revealed.
     
     -----------
     Note: Do not forget that your response should be a list of the initiating event, some feelings from the scene, some physical traits of the characters, some character traits of the characters, some physical props, the overall setting, some settings that appear, and some genre tags from the scene. You should write a group of unordered lists using asterisks (*) as the bullets. Do not mention any characters in the scene by name, or analyze its plot (keep things general because this will be used to inform the creation of a new, unrelated story). Keep the number of genre tags you list low, and make the list targeted and precise, so that the story written from it is more coherent. Keep the "Genre Tags" list limited to 10 (ten) items at most. Remember as well that the tags must accommodate a story with only two named characters, and so you will potentially need to tweak the tags. Every section must have at least one bullet point.
@@ -391,6 +399,10 @@
   content: | # I will use the three kingdoms one, that story, as a way to teach the AI how to transition between scenes
     Passage:
     {chunk}
+    --------------------------------
+
+    Scene's Primary Emotion:
+    {emotion}
 
     -----------
     Note: Do not forget that your response should be a list of the initiating event, some feelings from the scene, some physical traits of the characters, some character traits of the characters, some physical props, the overall setting, some settings that appear, and some genre tags from the scene. You should write a group of unordered lists using asterisks (*) as the bullets. Do not mention any characters in the scene by name, or analyze its plot (keep things general because this will be used to inform the creation of a new, unrelated story). Keep the number of genre tags you list low, and make the list targeted and precise, so that the story written from it is more coherent. Keep the "Genre Tags" list limited to 10 (ten) items at most. Remember as well that the tags must accommodate a story with only two named characters, and so you will potentially need to tweak the tags. Every section must have at least one bullet point.
