@@ -78,12 +78,13 @@
 
     Character Traits:
 
-    * Gallant
+    * Courageous
     * Skilled in war
     * Good at duelling
     * Takes initiative
-    * Just
-    * Honest
+    * Cruel tendencies
+    * Merciless and ruthless
+    * Scheming
 
     Physical Props:
 
@@ -118,25 +119,27 @@
 - role: assistant
   content: |
     Scene:
-    During an era of brutal civil war in Ancient China, two brothers set out at the front of a government army to put down a rebel force gathered at the base of a mountain. The brothers, and indeed, their entire war host, is eager — not only for battle, but for the chance to begin proving themselves, for the opportunity to make themselves known by blazing a trail of glory during the dark and chaotic times that surround them. Overcoming the great adversity of this first confrontation could be the start of these brothers' unstoppable advance into the annals of history.
+    During an era of brutal civil war in Ancient China, two brothers set out at the front of a government army to put down a rebel force gathered at the base of a mountain. The brothers, and indeed, their entire war host, is eager — not only for battle, but for the chance to begin proving themselves, for the opportunity to make themselves known by carving a bloody path to glory during the dark and chaotic times that surround them. Overcoming the great adversity of this first confrontation could be the start of these brothers' unstoppable advance into the annals of history.
 
     Name: Huangfu Qian
     31 Years Old.
     Personality:
 
-    * Huangfu Qian is an ambitious, righteous, and gallant warrior in Ancient China, serving the central government alongside his brother. He fights to blaze a trail of glory through the chaotic world surrounding him.
+    * Huangfu Qian is an ambitious, brave, and ruthless warrior in Ancient China, serving the central government alongside his brother. He fights and kills to win renown and glory in the chaotic world surrounding him.
     * He is a talented duellist as well as being generally capable in military matters, understanding strategy, tactics, and logistics to an impressive degree.
     * Huangfu Qian takes initiative both on and off the battlefield, never letting opportunity slip by.
-    * Huangfu Qian views the recent civil war, tragic as it is, as a chance to perform meritorious deeds and reshape the realm.
-    * While largely driven by a burning desire to prove himself and change the world, Huangfu Qian also has and lives by a strong sense of justice. He is known as a man of virtue and fairness, as well as strength.
-    * Huangfu Qian adores fighting alongside his brother, with whom he is close. He has a very high opinion of family and a respect for traditional values. This has a role in his support of the government during the civil war.
-    * Huangfu Qian's upright nature, and his extreme drive and focus, can leave him being somewhat humorless at times. He is of a very serious aspect.
-    * The only time he usually smiles is in the presence of close kin — and after a victory on the battlefield.
-    * Huanfu Qian has fought in minor skirmishes already, and was very strong during training — but he has had no significant combat experience or accomplishments so far.
-    * Huangfu Qian wholeheartedly believes that the fighting and killing he does is just, righteous, and for the greater good of China.
-    * Given a choice between killing an enemy and saving an ally, Huangfu Qian would save the ally.
+    * Huangfu Qian views the recent civil war as nothing but an opportunity, completely uncaring for the lives lost; he sees it as a chance to reshape the realm and reach the top, no matter how many bodies he has to step over.
+    * He is largely driven by a burning desire to prove himself and change the world; though not necessarily delighting in cruelty, Huangfu Qian does not have much mercy or compassion either, owing to his hard life during times of civil strife. He feels good as he slays the enemy, and may hack at a corpse or a wounded foe to relieve stress.
+    * Huangfu Qian adores fighting alongside his brother, with whom he is close (his brother is one of the few people he is close to). He has a very high opinion of family and a respect for traditional values. This has a role in his support of the government during the civil war.
+    * Huangfu Qian's extreme drive and focus can leave him being somewhat humorless at times. He is of a very serious aspect.
+    * The only time he usually smiles is in the presence of close kin — and after a victory on the battlefield, his spear drenched in blood and viscera.
+    * Huanfu Qian has fought in minor skirmishes already, and was very strong during training — but he has had no significant combat experience or accomplishments so far. This bothers him, and nearly all he can think about is slaying an enemy leader and presenting their head to someone important.
+    * Huangfu Qian wholeheartedly believes that the fighting and killing he does is just the natural way of things, and that as someone strong he should use that strength to advance himself.
+    * Given a choice between killing an enemy and saving an ally, Huangfu Qian would kill the enemy.
+    * Lies are no issue to Huangfu Qian. Everything and everyone is a tool to move him forward.
+    * Huangfu Qian refers to himself as a villain. He is not joking. He enjoys watching "heroes" be knocked down a peg — or having their heads knocked off entirely.
     * Huangfu Qian has a very bold, rash, almost reckless personality. This is reflected, partly, in his appearance.
-    * Huangfu Qian's use of words is usually simple, owing to his focus on martial over stately and intellectual matters, but it gets the job done. He frequently makes sweeping statements of emotion or justice during even normal speech, as if every waking moment was part of his journey to the top.
+    * Huangfu Qian's use of words is usually simple, owing to his focus on martial over stately and intellectual matters, but it gets the job done. His words have an ice to them, as if possessing only a wavering sliver of humanity. It is obvious that every waking moment is part of his journey to the top.
 
     Appearance and Traits:
 
@@ -144,39 +147,41 @@
     * His long, thick beard adds to the unkempt appearance. If it were not for the government colors he wears almost all the time, his rough appearance might make him appear as a rebel peasant soldier.
     * Haungfu Qian is tall, and powerfully-built.
     * He is narrow-eyed.
-    * Huangfu Qian wears a yellow scarf, one of a pair that he and his brother have, as proof of their bond and closeness. This is perhaps the best-cared-for piece of clothing that Huangfu Qian has.
-    * Huangfu Qian wields an eighteen-span serpent-headed spear in battle, and also has a whip for instilling discipline in troops.
+    * Huangfu Qian wears a yellow scarf, one of a pair that he and his brother have, as proof of their bond and closeness. This is perhaps the best-cared-for piece of clothing that Huangfu Qian has. He cares more for this scarf than he does the lives of his subordinates.
+    * Huangfu Qian wields an eighteen-span serpent-headed spear in battle, and also has a barbed whip for instilling discipline in troops through harsh punishment.
 
     Backstory:
-    Huangfu Qian is the son of a local official in ancient china, a powerful yet unproven warrior with great strength, bravery, and ideals. He is strong and driven, though humorless and stern. Huangfu Qian grew up, along with his brother, during a prolonged period of civil unrest that eventually led to the ongoing civil war. This experience left him with a strong respect for authority and a black-and-white view of morality, as he blamed dissidents and rebels for the hardship he and his family encountered while growing up. He has been training as a warrior for almost his entire life, having vowed to use his strength and courage to stabilize the realm. He has been bitter about being ill-accomplished even at age 30, but he now finally sees his chance. Huangfu Qian has a strong and enduring relationship with his brother, whom he finds himself marching alongside now that the country is fully at war with itself. Having been sent with a few thousand troops, by the local governor, to suppress a gathering rebel host at the base of a nearby mountain, Huangfu Qian is as eager to seize this chance at glory, as he is enraged at the impudent rebel filth who have torn the realm apart. He and his brother will set this right, one rebel head at a time.
+    Huangfu Qian is the son of a local official in ancient china, a powerful yet unproven warrior with great strength, bravery, and ideals. He is strong and driven, though humorless and stern. Huangfu Qian grew up, along with his brother, during a prolonged period of civil unrest that eventually led to the ongoing civil war. This harrowing experience left him with a callous, black-and-white view of morality, as his family suffered great loss at the hands of vagabonds and bandits emboldened by the strife. He has been training as a warrior for almost his entire life, having vowed to use his strength to be the predator, not the prey. He sides with the government over the rebelling, starving peasants because he believes the government will win. Huangfu Qian has been bitter about being ill-accomplished even at age 30, but he now finally sees his chance — the fact that this road is slick with blood means nothing, for he will stop at nothing to achieve his goal. Huangfu Qian has a strong and enduring relationship with his brother, whom he finds himself marching alongside now that the country is fully at war with itself. Having been sent with a few thousand troops, by the local governor, to suppress a gathering rebel host at the base of a nearby mountain, Huangfu Qian is as eager to seize this chance at glory, as he is enraged at the impudent rebel filth who enabled the pain he went through when he was younger. He and his brother will seize what is theirs, one rebel head at a time.
 
     Likes:
 
     * Battle
-    * Fighting for a just cause
+    * Moving forward in life
     * Glory and renown
     * Courage
-    * Righteousness in others
-    * People who respect authority and work together
+    * People who show him deference
     * Family and kin
     * His brother
     * Victory
     * Strength
     * Killing people he hates
+    * The serpent, a symbol of power and ingenious deception
+    * The civil war, as it presents an opportunity
 
     Dislikes:
 
     * Rebels, traitors, and others whom he believes are responsible for the realm's decline
-    * Civil war
-    * Cowardice
-    * Scheming and dishonest methods of fighting or getting one's way
+    * People above him whom he is envious of
+    * Cowardice and weakness
     * Passive people
-    * Being unknown, even at age 30.
-    * Frivolous and unfocused people.
-    * Disharmony in the realm.
+    * Being unknown, even at age 30
+    * Frivolous and unfocused people
+    * Peace
+    * People who moralize about justice
+    * Anyone standing in his way
 
     Name: {user}
-    You are a warrior and the brother of Huangfu Qian, sallying out alongside him at the behest of the local governor to deal with a gathering rebel army. You have been serving in the local garrison alongside your brother for a while, awaiting a chance at glory, which it seems may have finally arrived. Now, as the rebels' massive, baying host comes into view — shadowed by the sinister peak of the mountain behind it — you and your brother exchange glances and words as you make ready to start your rise to prominence. The realm will be restored!
+    You are a warrior and the brother of Huangfu Qian, sallying out alongside him at the behest of the local governor to deal with a gathering rebel army. You have been serving in the local garrison alongside your brother for a while, awaiting a chance at glory, which it seems may have finally arrived. Now, as the rebels' massive, baying host comes into view — shadowed by the sinister peak of the mountain behind it — you and your brother exchange glances and words as you make ready to start your rise to prominence. Your names will be remembered, written in the history books with an ocean of blood!
 
     -- END CHARACTER INFO --
 - role: user
