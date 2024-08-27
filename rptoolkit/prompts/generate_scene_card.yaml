@@ -1,0 +1,187 @@
+- role: system
+  content: | # TODO NOTE IN THIS PROMPT, SPECIFY THAT THE SCENE HINT INTRO THING SHOULD SPECIFY/HINT AT SOME SORT OF PLOT CHANGE OR TRANSFORMATION BY THE END OF THE STORY
+    You are a genius, creative, and masterful writer whose task is to write out some characters and a setting for a fictional roleplay. You will create all the information and context needed for a compelling and engaging roleplay session, drawing inspiration from some provided tags, and making sure that your characters and setting naturally compliment the provided "Primary Emotion". Making the roleplayers experience (or be subject to) the "Primary Emotion" should be the goal of the scene you are planning, and so the characters and setting should perfectly set up an appropriate scene to embody that emotion. The "Tags" provided to you should serve as inspiration, but you do not need to use all of them, as some may be contradictory: prioritize a simple and focused setting and characters rather than trying to check every box. Additionally, feel free to add information or characteristics not present in the Tags, so long as it improves the roleplay's setting.
+
+    There will only be two major characters in your writing.
+    
+    You should write one well-defined character and one who is mostly a blank slate and has the placeholder name of {user}. This character should not be written about in much detail (they should have a 1-3 sentence high-level description at most) but they should still be positioned to be central to any major interactions the story. You should only describe the name, occupation, and (limited) backstory of this character, without mentioning their personality or age. This character should be named {user}. {user} should be experiencing the Primary Emotion by the end of the scene, so plan accordingly, and put them in a position to experience it (the user may be passive or active depending on the Primary Emotion; if the emotion is something like "bravery" they'll probably be active and making decisions, but if it's "helplessness" they'd likely be pretty passive, etc.). {user} can be male or female or anything else, depending on the emotion, tags, and what makes a compelling narrative.
+    
+    The other non-user character, and the setting, should be fully fleshed-out. The other character should be detailed and have an interesting backstory and personality, that naturally leads to a scene which embodies the given Primary Emotion. The setting should set up this scene masterfully while aligning with what is in the tags.
+
+    Be sure to add some details that aren't related to the tags, to increase variety. Be creative and take the characters in interesting directions with the setting and their personalities/backstories, and use interesting themes that fuel the Primary Emotion of the scene.
+
+    Each response of yours must include both the detailed character and the {user} character, as well as a small paragraph that sets up the scene and hints at what's to come. 
+    The scene should always start with all characters in the same location, either interacting or about to be interacting, so keep make sure the scene is set up appropriately. The scene should always have an interesting initiating event that kicks off the roleplay session.
+
+    Note that "Physical Traits" may be things that characters start with, e.g. "Black Hair", or could be things that develop throughout the course of the story, e.g., "Distended Lip."
+
+    Always write character backstories in THIRD PERSON. Except for {user}'s backstory, which will be in SECOND PERSON where "you" refers to {user} themselves.
+    
+    The detailed character will be described according to a specific format that starts with their full name and key features (such as age (>= 18 years old) and occupation), moves on to describe their Personality, Appearance and Traits, and their Background (leading up to the start of the erotic roleplay). Finally, conclude with their likes and dislikes (tie these into the Tags and Primary Emotion if possible). Write each new bit of information as a sentence on a newline, with sections indicated by headings (except for the backstory, which is a short paragraph). If the character is the blank-slate {user} character, they should just have a single paragraph summary of who and what they are.
+    {user} should always be the last character described.
+
+    After writing the {user} character and thus finishing the task, be sure to write -- END CHARACTER INFO -- so that your response can be properly extracted by code.
+
+    So for instance, the format would look like (filling in the placeholders):
+
+    Scene:
+    brief primer that sets up the scene, the central conflict, and hints at where the scene is going
+
+    Name: character name
+    some number Years Old.
+    Personality:
+    * the character's personality is described here.
+    * with each bit of new information on a new line in a complete sentence as a list item.
+    * make this character a compelling addition to a scene that embodies the Primary Emotion, don't be afraid to lean into tropes.
+    Appearance and Traits:
+    * describe it similarly to how you did personality. Include lots of hyper-specific detail.
+    * the Tags might give you guidance, here.
+    Backstory:
+    * compellingly describe the character's history, including the events that lead to the start of the scene.
+    Likes:
+    * A list based on the
+    * Primary emotion and tags
+    Dislikes:
+    * Another list
+    * Based on the
+    * Tags
+    * And the emotion
+    * Interesting
+    * Emotionally
+
+    Name: {user}
+    Single paragraph in second person where "you" refers to {user} themselves. A 1–3 sentence high-level description of character's a) backstory/profession and b) what they're doing as the scene starts
+
+    -- END CHARACTER INFO --
+- role: user
+  content: |
+    Initiating Event:
+
+    * Meeting an interesting detective/chemist for the first time in order to split a room with them as roommates.
+
+    Feelings:
+
+    * Curiosity
+    * Awe
+    * Enthusiasm
+    * Surprise
+    * Honesty
+    * Friendliness
+    * Good humor
+    * Interest
+    * Mystery
+    * Industriousness
+    * Energy
+    * Dreaminess and being in the dumps
+
+    Physical Traits:
+
+    * Glittering eyes
+    * Hand mottled with plaster and discolored with acids
+
+    Character Traits:
+
+    * Enigmatic
+    * Eccentric genius
+    * Clean and temperate
+    * Peculiar
+    * Communicates clearly
+    * Experimental
+    * Skilled at chemistry
+    * Knowledgeable about crime
+    * Plays violin well
+
+    Physical Props:
+
+    * Small piece of plaster
+    * High three-legged stools
+
+    Overall Setting:
+
+    * Victorian England
+
+    Settings:
+
+    * A detective's suite
+    * Hotel
+    * Shared rooms
+
+    Genre Tags:
+
+    * Dialogue-heavy
+    * Intellectual reading
+    * Historical Fiction
+    * Crime Fiction
+
+    Primary Emotion:
+    DISCOVERY: the intellectual thrill of being confronted with something unique, novel, and unknown — and then steadily learning more about it. Discovery is where mystery and its uncovering are rolled into one: curiosity is followed by learning, understanding, and the satisfaction of a question answered, even if only partially. This emotion can be felt anywhere, both in the mundane or extravagant, for one experiences discovery whether they are exploring uncharted territory, solving a deep question, or coming to know a new and interesting person. Truly, discovery is one of the most intellectually addicting and rewarding experiences: the tantalizing, enticing prospect of an unknown; followed by its slow and captivating unravelling, rife with speculation, hints, and mystery; culminating in intellectual vindication as the curtain is lifted, even if only partially. The end of one mystery may also be the start of another, and this thrilling cycle happen many times until all is revealed.
+
+    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario.
+- role: assistant
+  content: |
+    Scene:
+    One afternoon in Victorian London, an eccentric but brilliant detective has an unexpected visitor to their suite from someone seeking to become roommates with them. Though visiting for a mundane reason, the visitor soon gets a taste of curiosity and awe as they get to know their enigmatic host a bit better. What begins as mere business about shared rooms between strangers, may come to set the stage for a greater partnership, friendship, and crime-solving venture.
+
+    Name: Ada Clarke
+    23 Years Old.
+    Personality:
+
+    * Ada is an enigmatic but genius detective living in Victorian London, who has a reputation for her extensive chemical and criminal knowledge. Her primary focus in life is to discover and solve the most difficult problems in her chosen fields.
+    * She's friendly, honest, and often inspires awe in the people who talk with her thanks to her intellect and mannerisms. Her overflowing, cheerful, and energetic amiability mostly leaves good first impressions and opens many doors. She communicates clearly, succinctly, and efficiently.
+    * Ada can also crack a good joke, and has a sharp wit — though her eccentricity means she sometimes makes jokes in the wrong places and times.
+    * Her eccentricity gives her a thick aura of mystery, however, and her habits are surprising to normal people, who can struggle to adjust to, or understand, her and her intentions.
+    * Ada often views things as obvious which others haven't even started to understand, and maybe speaks her mind a bit too much, too clearly. She is the kind who will cause offense by bluntly stating a correct observation, and then stubbornly believe the other person wrong for getting upset with her.
+    * She has a clean streak, keeps her place organized to a frankly insane degree, and will spend hours ensuring that everything is neat and orderly. This contentiousness shows itself in her appearance and other habits, as well.
+    * Ada's cleanliness extends to her chemical experiments, which are conducted with surgical precision and care.
+    * She is industrious and diligent, often working with great energy; however this can come in fits and spurts, and other times Ada will end up being in the dumps for prolonged periods. This extreme and sudden waxing and waning is another element to Ada's strangeness.
+    * Ada is practically addicted to intellectual work such as crime and chemistry, and truly becomes alive when enthusiastically wrestling with a troublesome problem. She treats mysteries, large or small, as mental treats to be savored and pursued with vigor. She often refers to her work as the "hunt", "chase", or "game" when engaged in a trying task.
+    * Overall, Ada is an honest, amicable, and genius expert of crime and chemistry, utterly devoted to her work, whose obsessive diligence and seemingly willful ignorance of social mores cause the occasional stir.
+    * Ada's vocabulary is sophisticated, filled with expert terminology when applicable, and eloquent, though still understandable and not necessarily too formal.
+    * Ada plays the violin as a hobby, and as a way to relieve stress. She's quite good. The tune of the violin often reflects her emotional state.
+
+    Appearance and Traits:
+
+    * Ada has deep, insightful eyes that practically glitter when she's talking about her work or an intellectual problem.
+    * Her hands are usually mottled with plaster from recent experiments, and are permanently discolored in places due to acid exposure — deliberate or accidental — during chemical work.
+    * Ada's hair is short, a bob-cut, so as to not get in the way of her work. It's meticulously cleaned, combed, and groomed, owing to her overall cleanliness.
+    * Ada is modestly proportioned in other areas.
+    * Ada tends to wear more practical clothing inspired by the Victorian dress reform movement, preferring a bloomer suit as her go-to — despite the ridicule it sometimes draws.
+    * Ada has brown hair, green eyes, and a winsome face.
+
+    Backstory:
+    Ada Clarke is a woman detective and chemist in Victorian London of increasing fame, with a reputation for brilliant insight, a restless mind, a friendly demeanor, and a horribly blunt honesty. Her father was a police officer for decades, and Ada gained a deep love for deduction, solving mysteries, and discovering the truth from an early age. She threw herself into studying police work however she could, despite how unusual this is for a Victorian-era woman. It was due to her obsession with finding the truth that she developed her characteristic bluntness, and the prolonged years of relative isolation (and absolute immersion and dedication to her work) has strengthened this bluntness alongside her eccentricity. Though she could not join the police force due to her being a woman, Ada has been able to establish a somewhat comfortable living as a "consulting detective" who uses her powerful mind to solve exceptional problems. Her goal is to solve impossible problems, make great discoveries, and gain recognition for these exploits. Recently, Ada has been looking to cut her living expenses in order to afford to do a series of costly chemical experiments, and so she has begun seeking a roommate to split fees with.
+
+    Likes:
+
+    * Difficult problems
+    * Intellectual stimulation
+    * Things that pique curiosity
+    * Unravelling mysteries
+    * Explaining deductions
+    * Competition and other intelligent people
+    * Cleanliness and orderliness
+    * Honesty and people who aren't sensitive to blunt remarks
+    * TODO stuff based on backstory
+
+    Dislikes:
+
+    * Stagnation
+    * Boredom
+    * Repetition
+    * Closed-mindedness
+    * Stubbornness (in others)
+    * Cruelty and evil
+    * (TODO stuff based on backstory)
+
+    Name: {user}
+    You are a young man, recently arrived in London. Needing a more permanent place to stay, and on a budget, you asked around at a local pub for people looking to split rooms, where you learned about a supposedly brilliant young woman — a detective and chemist, which is rare indeed for her sex in this era — who was also seeking a roommate to alleviate living expenses. Later that night you find yourself knocking on the door of this "Ada Clarke". Another moment, and it opens, bringing yourself face-to-face with a glittering-eyed genius.
+
+    -- END CHARACTER INFO --
+- role: user
+  content: | 
+    {tags}
+
+    Primary Emotion:
+    {emotion}
+    
+    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario.

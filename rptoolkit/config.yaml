@@ -1,6 +1,6 @@
 PATH:
   INPUT: "./output_not_actually_output_raw_txt_input_2_modern"
-  OUTPUT: "./output_sfw(mostly)_test_7_extract_ver6"
+  OUTPUT: "./output_sfw(mostly)_test_7_extract_ver7"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:

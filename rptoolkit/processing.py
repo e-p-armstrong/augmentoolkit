@@ -33,7 +33,7 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
             print(data)
         data = await extract_features(data, engine_wrapper, idx)
 
-        return
+        # return
 
         # return chosen_emotion, features, chunk, "" # DEBUG
         user_tags = obj_conf["SYSTEM"]["TAGS"]
@@ -42,7 +42,7 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
 
         data = await generate_scene_card(data, engine_wrapper, idx)
         charname = extract_charname(data["scene_card"])
-        # return
+        return
         
         outs = await generate_story(input_data=data, engine_wrapper=engine_wrapper_large, charname=charname, idx=idx)
         data, truncated = outs
