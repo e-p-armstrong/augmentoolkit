@@ -77,7 +77,7 @@ class PipelineStep:
                 completion_mode=self.completion_mode,
                 engine_wrapper=engine_wrapper,
                 output_processor=self.output_processor,
-                retries=3, 
+                retries=1, 
                 logging_level=self.logging_level,
                 use_stop=self.use_stop,
                 prompt_folder=self.prompt_folder,

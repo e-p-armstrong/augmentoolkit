@@ -567,12 +567,28 @@ def find_message_exceeding_threshold(messages, threshold):
 def stringify_chatlog_list(chatlog_list): # converts from chatlog list back to a chatlog. Basically the inverse function (except the decision about what perspective to write in is lost in the first conversion to a list)
     return "\n\n".join([f'{message["owner"]}: {message["content"]}' for message in chatlog_list])
 
+def ends_with_fullstop(text):
+    """check if a function ends with  either . ? ! or any of these followed by a " character"""
+    print("!!!!PROBLEM BELOW \/\/\/\/\/")
+    print(text.strip())
+    print("!!!!PROBLEM ABOVE ^^^^^^^^^")
+    return text.strip().endswith((".", "?", "!", '."', '?"', '!"', '.*"', '!*"', '?*"'))
+
 def parse_story_messages(story):
     charname = get_character_name(story)
     if not charname:
         print("ERROR: Character name not found in story, format horribly broken")
-        return None
+        raise ValueError("Character name not found in story")
     chatlog_list = parse_chatlog(story,charname)
+    
+    # if not starts_with_charname(chatlog_list[0]["content"], charname):
+    #     print("ERROR: Story does not start with the character name")
+    #     raise ValueError("Story does not start with the character name")
+    
+    if not ends_with_fullstop(chatlog_list[-1]["content"]):
+        print("ERROR: Story does not end with a full stop")
+        raise ValueError(" Story does not end with a full stop")
+    
     truncated = False
     # print(chatlog_list)
     threshold_message_index = find_message_exceeding_threshold(chatlog_list, 650)
@@ -599,15 +615,20 @@ def parse_story_messages(story):
 
 ## Step
 
+if obj_conf["SYSTEM"]["INCLUDE_CHUNK_IN_PROMPT"]:
+    prompt_path = "generate_story_with_chunk"
+else:
+    prompt_path = "generate_story"
+
 story_generator = DepthFirstPipelineStep(
     prompt_folder=PROMPTS,
     default_prompt_folder=DEFAULT_PROMPT_PATH,
-    prompt_path="generate_story",
+    prompt_path=prompt_path,
     output_processor=parse_story_messages,
     sampling_params={
         "max_tokens": 7000 if obj_conf["SYSTEM"]["MODE_B"] != "cohere" else 4000,
-        "temperature": 0.7,
-        "top_p": 0.9,
+        "temperature": 0.8,
+        "top_p": 0.8,
     },
     completion_mode=COMPLETION_MODE,
     output_dir=OUTPUT_FOLDER,
