@@ -1,10 +1,10 @@
 PATH:
   INPUT: "./output_not_actually_output_raw_txt_input_2_modern"
-  OUTPUT: "./output_sfw(mostly)_test_7_extract_ver8"
+  OUTPUT: "./output_sfw(mostly)_test_7_story_2ex"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY_A: "dee944719a56297b51c79decfc41123f9130feb3640df5e0767ea00ddf599723" # Add the API key for the provider you're using for the first model here (this is typically the smaller, less-costly model)
+  API_KEY_A: "a33fdfafe32cd940a4208f453493d9603f24b772c82647c0040aeca48e74992a" # Add the API key for the provider you're using for the first model here (this is typically the smaller, less-costly model)
   API_KEY_B: "i71G3cZ18CdpgeDuGwhMuqJoecruwcwo9Xjin66V" # Add the API key for the provider you're using for the second model here (typically the larger, more-capable model)
   BASE_URL_A: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
   BASE_URL_B: "https://api.mistral.ai/v1/" # Remember which model is which by thinking: B stands for 'Big'
@@ -16,7 +16,7 @@ SYSTEM:
   DOUBLE_CHECK_COUNT: 3 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
   USE_SUBSET: True # Whether to take only the first 13 chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
   SUBSET_SIZE: 25
-  CONCURRENCY_LIMIT: 90 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
+  CONCURRENCY_LIMIT: 3 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
   COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format
   MODE_A: "api" # can be one of "api"|"aphrodite"|"cohere"
   MODE_B: "cohere" # can be one of "api"|"aphrodite"|"cohere"

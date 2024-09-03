@@ -42,10 +42,10 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
 
         data = await generate_scene_card(data, engine_wrapper, idx)
         charname = extract_charname(data["scene_card"])
-        return
         
         outs = await generate_story(input_data=data, engine_wrapper=engine_wrapper_large, charname=charname, idx=idx)
         data, truncated = outs
+        return
 
         if not truncated:
             if not data:

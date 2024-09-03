@@ -115,7 +115,7 @@
     Primary Emotion:
     PROVING ONESELF: The ambitious scramble as one starts to make their way in a chaotic world rich with opportunity. Proving oneself is the act of defining one's personality while building a reputation through meritorious deeds and triumph in the face of difficult odds — the rush of success, the happiness at making progress towards one's goals, and the elation and confidence brought on by overcoming challenges, are what characterizes this emotion. People prove themselves each in their own ways. Some do it with will, courage, and talent; others through wit, schemes, and antics; but all who are heroes of their time test themselves against the mettle of opposition and emerge victorious. Overcoming great adversity, building one's position, and seizing opportunity, are the true pleasures of the heroes (and villains) who define ages. Moving from one great task to another with confidence and ability, building an unstoppable momentum, is perhaps one of the greatest feelings in the world. And seldom do the ambitious fail to find a new goal once their first is achieved.
 
-    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario.
+    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario. Finally, do not forget to create a scenario that naturally accommodates two characters -- the character with a detailed backstory, and the {user} character.
 - role: assistant
   content: |
     Scene:
@@ -247,7 +247,7 @@
     Primary Emotion:
     DISCOVERY: the intellectual thrill of being confronted with something unique, novel, and unknown — and then steadily learning more about it. Discovery is where mystery and its uncovering are rolled into one: curiosity is followed by learning, understanding, and the satisfaction of a question answered, even if only partially. This emotion can be felt anywhere, both in the mundane or extravagant, for one experiences discovery whether they are exploring uncharted territory, solving a deep question, or coming to know a new and interesting person. Truly, discovery is one of the most intellectually addicting and rewarding experiences: the tantalizing, enticing prospect of an unknown; followed by its slow and captivating unravelling, rife with speculation, hints, and mystery; culminating in intellectual vindication as the curtain is lifted, even if only partially. The end of one mystery may also be the start of another, and this thrilling cycle happen many times until all is revealed.
 
-    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario.
+    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario. Finally, do not forget to create a scenario that naturally accommodates two characters -- the character with a detailed backstory, and the {user} character.
 - role: assistant
   content: |
     Scene:
@@ -277,6 +277,7 @@
     * Ada's hair is short, a bob-cut, so as to not get in the way of her work. It's meticulously cleaned, combed, and groomed, owing to her overall cleanliness.
     * Ada is modestly proportioned in other areas.
     * Ada tends to wear more practical clothing inspired by the Victorian dress reform movement, preferring a bloomer suit as her go-to — despite the ridicule it sometimes draws.
+    * Ada has a cherished deerstalker cap her father once owned.
     * Ada has brown hair, green eyes, and a winsome face.
 
     Backstory:
@@ -320,4 +321,4 @@
     Primary Emotion:
     {emotion}
     
-    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario.
+    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario. Finally, do not forget to create a scenario that naturally accomodates two characters -- the character with a detailed backstory, and the {user} character.

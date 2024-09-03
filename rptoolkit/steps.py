@@ -739,7 +739,7 @@ scene_card_generator = DepthFirstPipelineStep(
     prompt_path="generate_scene_card",
     output_processor=parse_scene_card,
     sampling_params={
-        "max_tokens": 2000,
+        "max_tokens": 3500,
         "stop": [
             "\n\n\n\n\n",
         ],
