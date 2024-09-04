@@ -1,6 +1,6 @@
 PATH:
   INPUT: "./output_not_actually_output_raw_txt_input_2_modern"
-  OUTPUT: "./output_sfw(mostly)_test_7_story_2ex_withchunk_3"
+  OUTPUT: "./output_storygen_NEW_tempmod"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
@@ -28,7 +28,7 @@ SYSTEM:
   EDIT_STORY: True
   STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
   INCLUDE_CHUNK_IN_PROMPT: True
-  USE_MIN_P: True
+  USE_MIN_P: False
   
 
 COST: # TODO make this more general with a list of dicts as the input and the code should use the keys in the dicts to identify the model being used for each thing etc. then make the cost estimator for all pipelines.

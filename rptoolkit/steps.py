@@ -577,6 +577,14 @@ def ends_with_fullstop(text):
     print("!!!!PROBLEM ABOVE ^^^^^^^^^")
     return text.strip().endswith((".", "?", "!", '."', '?"', '!"', '.*', '!*', '?*'))
 
+def split_last_message_at_note(chatlog_list): # helps if you feed degenerate shit into the AI and it writes something but is like "Note: this is actually really bad!"
+    last_message = chatlog_list[-1]
+    last_message_content = last_message["content"]
+    note_index = last_message_content.find("Note")
+    if note_index != -1:
+        return chatlog_list[:-1] + [{"owner": last_message["owner"], "content": last_message_content[:note_index].strip()}]
+    return chatlog_list
+
 def parse_story_messages(story):
     charname = get_character_name(story)
     if not charname:
@@ -590,7 +598,7 @@ def parse_story_messages(story):
     
     truncated = False
     
-    
+    chatlog_list = split_last_message_at_note(chatlog_list)
     
     # print(chatlog_list)
     threshold_message_index = find_message_exceeding_threshold(chatlog_list, 650)
@@ -633,13 +641,23 @@ if obj_conf["SYSTEM"]["USE_MIN_P"]:
         "max_tokens": 7000 if obj_conf["SYSTEM"]["MODE_B"] != "cohere" else 4000,
         "temperature": 2,
         "top_p": 0.8,
-        "min_p": 0.2
+        "min_p": 0.2,
+        "stop": [
+            "###",
+            "### TASK: ###",
+            "ROLEPLAY SESSION END"
+        ]
     }
 else:
     story_sampling_params= {
         "max_tokens": 7000 if obj_conf["SYSTEM"]["MODE_B"] != "cohere" else 4000,
-        "temperature": 0.8,
-        "top_p": 0.8,
+        "temperature": 1.1,
+        "top_p": 0.7,
+        "stop": [
+            "###",
+            "### TASK: ###",
+            "ROLEPLAY SESSION END"
+        ]
     }
 
 print("!!!! STORY SAMPLERS")
@@ -658,6 +676,7 @@ story_generator = DepthFirstPipelineStep(
     save_path="story_generation_resumable_outputs", # more used for machine-reading in the previous output
     result_key="story",
     use_stop=USE_STOP,
+    regex=re.compile(r'### NOW! THE STORY BEGINS ###(.*?)###', re.DOTALL),
 )
 
 
