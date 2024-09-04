@@ -17,6 +17,8 @@ import traceback
 from augmentoolkit.generation_functions.pipeline_step_class import PipelineStep
 import uuid
 import yaml
+import nltk
+nltk.download('punkt_tab')
 
 tokenizer = AutoTokenizer.from_pretrained(
         "TheBloke/OpenHermes-2.5-Mistral-7B-GPTQ"
@@ -25,7 +27,8 @@ tokenizer = AutoTokenizer.from_pretrained(
 def count_tokens(message):
     return len(tokenizer.encode(message))
 
-with open("./config.yaml", "r") as file:
+config_path = os.environ["CONFIG_PATH"]
+with open (config_path, "r") as file:
     obj_conf = yaml.safe_load(file)
 
 OUTPUT_FOLDER = os.path.abspath(obj_conf["PATH"]["OUTPUT"])
@@ -572,7 +575,7 @@ def ends_with_fullstop(text):
     print("!!!!PROBLEM BELOW \/\/\/\/\/")
     print(text.strip())
     print("!!!!PROBLEM ABOVE ^^^^^^^^^")
-    return text.strip().endswith((".", "?", "!", '."', '?"', '!"', '.*"', '!*"', '?*"'))
+    return text.strip().endswith((".", "?", "!", '."', '?"', '!"', '.*', '!*', '?*'))
 
 def parse_story_messages(story):
     charname = get_character_name(story)
@@ -585,11 +588,10 @@ def parse_story_messages(story):
     #     print("ERROR: Story does not start with the character name")
     #     raise ValueError("Story does not start with the character name")
     
-    if not ends_with_fullstop(chatlog_list[-1]["content"]):
-        print("ERROR: Story does not end with a full stop")
-        raise ValueError(" Story does not end with a full stop")
-    
     truncated = False
+    
+    
+    
     # print(chatlog_list)
     threshold_message_index = find_message_exceeding_threshold(chatlog_list, 650)
     if threshold_message_index:
@@ -608,6 +610,12 @@ def parse_story_messages(story):
         chatlog_list = chatlog_list[:-1]
         truncated = True
         
+    # truncate last message if it doesn't end with a full stop
+    if not ends_with_fullstop(chatlog_list[-1]["content"]):
+        print("\n\nLAST MESSAGE DOES NOT END WITH FULL STOP -- TRUNCATING STORY")
+        chatlog_list = chatlog_list[:-1]
+        truncated = True
+    
     processed_story_string = stringify_chatlog_list(chatlog_list)
     
     print("==================================")
@@ -619,17 +627,30 @@ if obj_conf["SYSTEM"]["INCLUDE_CHUNK_IN_PROMPT"]:
     prompt_path = "generate_story_with_chunk"
 else:
     prompt_path = "generate_story"
+    
+if obj_conf["SYSTEM"]["USE_MIN_P"]:
+    story_sampling_params = {
+        "max_tokens": 7000 if obj_conf["SYSTEM"]["MODE_B"] != "cohere" else 4000,
+        "temperature": 2,
+        "top_p": 0.8,
+        "min_p": 0.2
+    }
+else:
+    story_sampling_params= {
+        "max_tokens": 7000 if obj_conf["SYSTEM"]["MODE_B"] != "cohere" else 4000,
+        "temperature": 0.8,
+        "top_p": 0.8,
+    }
 
+print("!!!! STORY SAMPLERS")
+print(story_sampling_params)
+print("----------------")
 story_generator = DepthFirstPipelineStep(
     prompt_folder=PROMPTS,
     default_prompt_folder=DEFAULT_PROMPT_PATH,
     prompt_path=prompt_path,
     output_processor=parse_story_messages,
-    sampling_params={
-        "max_tokens": 7000 if obj_conf["SYSTEM"]["MODE_B"] != "cohere" else 4000,
-        "temperature": 0.8,
-        "top_p": 0.8,
-    },
+    sampling_params=story_sampling_params,
     completion_mode=COMPLETION_MODE,
     output_dir=OUTPUT_FOLDER,
     output_subdir="story_generation",

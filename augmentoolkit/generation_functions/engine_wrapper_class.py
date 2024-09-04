@@ -15,7 +15,7 @@ try:
         AsyncEngineArgs,
     )
 except:
-    print("Aphrodite not installed; stick to Llama CPP or API modes")
+    print("Aphrodite not installed; stick to API mode")
 
 
 def make_id():
@@ -61,7 +61,12 @@ class EngineWrapper:
             sampling_params["stop"] = []
         if "n_predict" not in sampling_params and self.mode == "llamacpp":
             sampling_params["n_predict"] = sampling_params["max_tokens"]
-
+        
+        use_min_p = False
+        if "min_p" in sampling_params:
+            use_min_p = True
+            
+        
         if self.mode == "llamacpp":
             return await make_async_api_call(
                 prompt=prompt, sampling_parameters=sampling_params
@@ -83,16 +88,29 @@ class EngineWrapper:
         if self.mode == "api":
             timed_out = False
             completion = ""
-            stream = await self.client.completions.create(
-                model=self.model,
-                prompt=prompt,
-                temperature=sampling_params["temperature"],
-                top_p=sampling_params["top_p"],
-                stop=sampling_params["stop"],
-                max_tokens=sampling_params["max_tokens"],
-                stream=True,
-                timeout=360,
-            )
+            if use_min_p:
+                stream = await self.client.completions.create(
+                    model=self.model,
+                    prompt=prompt,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                    extra_body={"min_p": sampling_params["min_p"]},
+                    stream=True,
+                    timeout=360,
+                )
+            else:
+                stream = await self.client.completions.create(
+                    model=self.model,
+                    prompt=prompt,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                    stream=True,
+                    timeout=360,
+                )
             async for chunk in stream:
                 try:
                     completion = completion + chunk.choices[0].delta.content
@@ -115,6 +133,10 @@ class EngineWrapper:
             sampling_params["max_tokens"] = 3000
         if "stop" not in sampling_params:
             sampling_params["stop"] = []
+        
+        use_min_p = False
+        if "min_p" in sampling_params:
+            use_min_p = True
 
         if self.mode == "llamacpp":
             return await make_async_api_call(
@@ -124,15 +146,27 @@ class EngineWrapper:
         elif self.mode == "api":
             completion = ""
             timed_out = False
-            stream = await self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                temperature=sampling_params["temperature"],
-                top_p=sampling_params["top_p"],
-                stop=sampling_params["stop"],
-                max_tokens=sampling_params["max_tokens"],
-                stream=True,
-            )
+            if use_min_p:
+                stream = await self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                    extra_body={"min_p": sampling_params["min_p"]},
+                    stream=True,
+                )
+            else:
+                stream = await self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                    stream=True,
+                )
             async for chunk in stream:
                 try:
                     if chunk.choices[0].delta.content:

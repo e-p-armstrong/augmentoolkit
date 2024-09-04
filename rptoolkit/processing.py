@@ -15,10 +15,15 @@ import logging
 import os
 import sys
 import time
+import yaml
 
+config_path = os.environ["CONFIG_PATH"]
+with open (config_path, "r") as file:
+    config = yaml.safe_load(file)
 
 async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrapper_large: EngineWrapper, stories, idx):
     # NOTE Generate emotions, or pick
+    print("Started datagen")
     data = chunk
     try:
         if obj_conf["SYSTEM"]["PICK_EMOTION"]:
@@ -43,9 +48,14 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
         data = await generate_scene_card(data, engine_wrapper, idx)
         charname = extract_charname(data["scene_card"])
         
+        if config["PHASES"]["PHASE_INDEX"] == 0 and config["PHASES"]["WORK_IN_PHASES"]:
+            return
+        
         outs = await generate_story(input_data=data, engine_wrapper=engine_wrapper_large, charname=charname, idx=idx)
         data, truncated = outs
-        return
+        
+        if config["PHASES"]["PHASE_INDEX"] == 1 and config["PHASES"]["WORK_IN_PHASES"]:
+            return
 
         if not truncated:
             if not data:
@@ -65,7 +75,9 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
 
 async def main():
     # NOTE Load the source texts
+    print("began to run")
     INPUT_FOLDER = obj_conf["PATH"]["INPUT"]
+    print(f"Input folder: {INPUT_FOLDER}")
     start_time = time.time()
     print("Begun")
 
@@ -115,11 +127,11 @@ async def main():
         paragraphs_processed = paragraphs_processed[:obj_conf["SYSTEM"]["SUBSET_SIZE"]]
 
 
-    logging.info("\n\nParagraphs have been processed and chunked.\n\n")
+    print("\n\nParagraphs have been processed and chunked.\n\n")
     if len(paragraphs_processed) > 0:
-        logging.info(f"First chunk: {paragraphs_processed[0]}\n\n")
+        print(f"First chunk: {paragraphs_processed[0]}\n\n")
     else:
-        logging.info("No paragraphs found.")
+        print("No paragraphs found.")
         sys.exit(1)
 
     # NOTE Generate the data
