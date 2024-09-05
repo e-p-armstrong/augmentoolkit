@@ -1,34 +1,34 @@
 API:
-  API_KEY: a33fdfafe32cd940a4208f453493d9603f24b772c82647c0040aeca48e74992a
+  API_KEY: dummy-val
   BASE_URL: https://api.together.xyz
   LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
   LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
   QUANTIZATION_LARGE: gptq
   QUANTIZATION_SMALL: gptq
 HUGGINGFACE:
-  HUB_PATH: Heralax/test-atk-dataset-do-not-use-3
-  PRIVATE: 'False'
-  PUSH_TO_HUB: 'False'
+  HUB_PATH: yourusername/your-path-here
+  PRIVATE: False
+  PUSH_TO_HUB: False
 PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./input
-  OUTPUT: ./output_interface_Scrolltest
+  OUTPUT: ./output
   PROMPTS: ./prompts
 PHASE:
-  PHASE_INDEX: '3'
-  WORK_IN_PHASES: 'True'
+  PHASE_INDEX: 3
+  WORK_IN_PHASES: True
 SKIP:
-  ANSWER_RELEVANCY_CHECK: 'False'
-  FILTER_CHUNKS: 'False'
-  QUESTION_CHECK: 'False'
+  ANSWER_RELEVANCY_CHECK: False
+  FILTER_CHUNKS: False
+  QUESTION_CHECK: False
 SYSTEM:
-  CHUNK_SIZE: '1900'
-  COMPLETION_MODE: 'False'
-  CONCURRENCY_LIMIT: '50'
+  CHUNK_SIZE: 1900
+  COMPLETION_MODE: False
+  CONCURRENCY_LIMIT: 50
   CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between
     a generalist, generic AI assistant, and a human.
-  DOUBLE_CHECK_COUNTER: '1'
-  DO_NOT_USE_SYSTEM_PROMPTS: 'True'
+  DOUBLE_CHECK_COUNTER: 1
+  DO_NOT_USE_SYSTEM_PROMPTS: True
   FINAL_ASSISTANT_PROMPT_NO_RAG: 'You are a helpful AI assistant.
 
     '
@@ -44,7 +44,7 @@ SYSTEM:
 
     '
   MODE: api
-  STOP: 'True'
-  SUBSET_SIZE: '5'
-  USE_FILENAMES: 'False'
-  USE_SUBSET: 'True'
+  STOP: True
+  SUBSET_SIZE: 5
+  USE_FILENAMES: False
+  USE_SUBSET: True
