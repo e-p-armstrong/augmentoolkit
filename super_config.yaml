@@ -1,5 +1,5 @@
 pipeline_order:
-  - folder: "rptoolkit"
+  - folder: "vanilla"
     config: "config.yaml"
   # - folder: "vanilla"
   #   config: "override_config.yaml"

@@ -36,15 +36,29 @@ config_path = os.environ["CONFIG_PATH"]
 with open(config_path, "r") as file:
     obj_conf = yaml.safe_load(file)
 
+def parse_bool(value):
+    if isinstance(value, bool):
+        return value
+    if value.lower() in ('true', 't', 'yes', 'y', '1'):
+        return True
+    elif value.lower() in ('false', 'f', 'no', 'n', '0'):
+        return False
+    else:
+        raise ValueError(f"Cannot parse '{value}' as boolean")
+
 HUB_PATH = obj_conf["HUGGINGFACE"]["HUB_PATH"]
-PRIVATE = obj_conf["HUGGINGFACE"]["PRIVATE"]
-PUSH_TO_HUB = obj_conf["HUGGINGFACE"]["PUSH_TO_HUB"]
-USE_FILENAMES = obj_conf["SYSTEM"]["USE_FILENAMES"]
+PRIVATE = parse_bool(obj_conf["HUGGINGFACE"]["PRIVATE"])
+PUSH_TO_HUB = parse_bool(obj_conf["HUGGINGFACE"]["PUSH_TO_HUB"])
+USE_FILENAMES = parse_bool(obj_conf["SYSTEM"]["USE_FILENAMES"])
 OUTPUT_DIR = os.path.abspath(obj_conf["PATH"]["OUTPUT"])
 PROMPTS_DIR = os.path.abspath(obj_conf["PATH"]["PROMPTS"])
 DEFAULT_PROMPTS = os.path.abspath(obj_conf["PATH"]["DEFAULT_PROMPTS"])
-USE_STOP = obj_conf["SYSTEM"]["STOP"]
-COMPLETION_MODE = obj_conf["SYSTEM"]["COMPLETION_MODE"]
+USE_STOP = parse_bool(obj_conf["SYSTEM"]["STOP"])
+COMPLETION_MODE = parse_bool(obj_conf["SYSTEM"]["COMPLETION_MODE"])
+SKIP_ANSWER_RELEVANCY_CHECK = parse_bool(obj_conf["SKIP"]["ANSWER_RELEVANCY_CHECK"])
+CONVERSATION_INSTRUCTIONS = obj_conf["SYSTEM"]["CONVERSATION_INSTRUCTIONS"]
+DO_NOT_USE_SYSTEM_PROMPTS = obj_conf["SYSTEM"]["DO_NOT_USE_SYSTEM_PROMPTS"]
+SKIP_QUESTION_CHECK = parse_bool(obj_conf["SKIP"]["QUESTION_CHECK"])
 
 has_pushed_yet = False
 
@@ -684,9 +698,9 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
             passed_checks = 0
             times_checked = 0
             dissenting_reasoning = ""
-            if obj_conf["SKIP"]["QUESTION_CHECK"]:
+            if SKIP_QUESTION_CHECK:
                 print("DEBUG: Skipping question check")
-                return await vet_answer_accuracy_loop(
+                res = await vet_answer_relevance_loop(
                     qa_dict,
                     run_id,
                     engine_wrapper=engine_wrapper,
@@ -695,6 +709,12 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
                     logging_level=logging_level,
                     file_path=file_path
                 )
+                
+                vetted_qa_dicts.append(res)
+                if res is not None:
+                    with open(file_path, "w") as file:
+                        json.dump(res, file, indent=4)
+                return 
             while times_checked < double_check_counter:
                 check_id = make_id()
                 # print(
@@ -731,7 +751,7 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
             ):  # if all question checks passed
                 # print(f"\n\nQUESTION CHECKS PASSED retries: {total_retries}")
                 
-                if obj_conf["SKIP"]["ANSWER_RELEVANCY_CHECK"]:
+                if SKIP_ANSWER_RELEVANCY_CHECK:
                     res = await vet_answer_accuracy_loop(
                         qa_dict,
                         run_id,
@@ -1004,7 +1024,6 @@ class JudgeParagraphStep(PipelineStep):
                 "metadata": input_data["metadata"]
             }
             output_list.append(output_data)
-            os.makedirs(os.path.dirname(self.save_path), exist_ok=True)
             with open(save_path_file, "w") as f:
                 metadata = input_data["metadata"]
                 f.write(f"failed|{metadata}")
@@ -1098,7 +1117,6 @@ conversation_regex = re.compile(
     re.IGNORECASE | re.DOTALL,
 )
 
-CONVERSATION_INSTRUCTIONS = obj_conf["SYSTEM"]["CONVERSATION_INSTRUCTIONS"]
 
 class ConversationGenerator(PipelineStep):
     def __init__(self):
@@ -1211,7 +1229,7 @@ def convert_directory_to_list(directory_path):
                     simplified_conversations = []
                     simplified_conversations_rag = []
 
-                    if not obj_conf["SYSTEM"]["DO_NOT_USE_SYSTEM_PROMPTS"]:
+                    if not DO_NOT_USE_SYSTEM_PROMPTS:
                         # Load system prompts
                         system_prompt_norag = obj_conf["SYSTEM"][
                             "FINAL_ASSISTANT_PROMPT_NO_RAG"

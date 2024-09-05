@@ -231,11 +231,11 @@
     Step 7. Final Judgment: Unsuitable for educational questions due to its ambiguous and unclear content.
 - role: user
   content: |
-    Text details: {textname}
+    Text details: {metadata}
     
     Text: 
     """
-    {text}
+    {paragraph}
     """
     
     Note that even blunt facts can be suitable for questions, and unconventional knowledge is not necessarily unsuitable. Fictional stories that contain strong morals or philosophy can also have good questions made from them. But legal notices and metadata are not suitable. Lists of information without the context needed for the question-maker to understand the text; quotes or dialogues without context or clear depth; or ambiguous content that isn't precise enough to "nail down" a solid question from, are not valid.

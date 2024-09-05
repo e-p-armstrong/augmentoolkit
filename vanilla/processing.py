@@ -18,6 +18,15 @@ import augmentoolkit.utils.group_by_text
 
 # created with nbconvert, minimally cleaned up
 
+def parse_bool(value):
+    if isinstance(value, bool):
+        return value
+    if value.lower() in ('true', 't', 'yes', 'y', '1'):
+        return True
+    elif value.lower() in ('false', 'f', 'no', 'n', '0'):
+        return False
+    else:
+        raise ValueError(f"Cannot parse '{value}' as boolean")
 
 async def main():
     # NOTE NOTEBOOK SETTINGS AND CONSTANTS (some script file constants are in generation_functions/constants.py)
@@ -43,23 +52,23 @@ async def main():
 
     LARGE_LOGICAL_MODEL = config["API"]["LARGE_LOGICAL_MODEL"]
 
-    DOUBLE_CHECK_COUNTER = config["SYSTEM"][
+    DOUBLE_CHECK_COUNTER = int(config["SYSTEM"][
         "DOUBLE_CHECK_COUNTER"
-    ]  # Set to 1 to check outputs only once; set to 2 to check twice; set to 3 to check thrice, etc. Set to 0 to break everything in vet_question_loop() and elsewhere. Set to -1 and cause the universe to implode?
+    ])  # Set to 1 to check outputs only once; set to 2 to check twice; set to 3 to check thrice, etc. Set to 0 to break everything in vet_question_loop() and elsewhere. Set to -1 and cause the universe to implode?
 
-    USE_SUBSET = config["SYSTEM"][
+    USE_SUBSET = parse_bool(config["SYSTEM"][
         "USE_SUBSET"
-    ]  # Set to True if you want to use only a small subset of the text, to test whether it plays nicely with the current setup of the notebook
+    ])  # Set to True if you want to use only a small subset of the text, to test whether it plays nicely with the current setup of the notebook
 
-    SUBSET_SIZE = config["SYSTEM"]["SUBSET_SIZE"]  # Set to the number of chunks you want to use if you're using a subset. If you're not using a subset, this will be ignored.
+    SUBSET_SIZE = int(config["SYSTEM"]["SUBSET_SIZE"])  # Set to the number of chunks you want to use if you're using a subset. If you're not using a subset, this will be ignored.
 
-    USE_FILENAMES = config["SYSTEM"][
+    USE_FILENAMES = parse_bool(config["SYSTEM"][
         "USE_FILENAMES"
-    ]  # Turn on if you want the model to use the names of your files as additional context (this is what original Augmentoolkit does). Useful if you have a small number of large input files grouped by subject matter, IE books. Turn off if you have a large number of files with meaningless names.
+    ])  # Turn on if you want the model to use the names of your files as additional context (this is what original Augmentoolkit does). Useful if you have a small number of large input files grouped by subject matter, IE books. Turn off if you have a large number of files with meaningless names.
 
-    CONCURRENCY_LIMIT = config["SYSTEM"][
+    CONCURRENCY_LIMIT = int(config["SYSTEM"][
         "CONCURRENCY_LIMIT"
-    ]  # Adjust this number based on the rate limit constraints of your api
+    ])  # Adjust this number based on the rate limit constraints of your api
 
     API_KEY = config["API"]["API_KEY"]
 
@@ -67,7 +76,7 @@ async def main():
         "BASE_URL"
     ]  # Augmentoolkit-API mode should also be compatible with any other API provider that accepts OAI-style requests
 
-    COMPLETION_MODE = config["SYSTEM"]["COMPLETION_MODE"]
+    COMPLETION_MODE = parse_bool(config["SYSTEM"]["COMPLETION_MODE"])
 
     MODE = config["SYSTEM"]["MODE"]
 
@@ -84,15 +93,19 @@ async def main():
         INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
     )
 
-    PHASE_INDEX = config["PHASE"]["PHASE_INDEX"]
+    PHASE_INDEX = int(config["PHASE"]["PHASE_INDEX"])
 
-    WORK_IN_PHASES = config["PHASE"]["WORK_IN_PHASES"]
+    WORK_IN_PHASES = parse_bool(config["PHASE"]["WORK_IN_PHASES"])
     
-    SKIP_FILTER_CHUNKS = config["SKIP"]["FILTER_CHUNKS"]
+    SKIP_FILTER_CHUNKS = parse_bool(config["SKIP"]["FILTER_CHUNKS"])
+    
+    CHUNK_SIZE = config["SYSTEM"]["CHUNK_SIZE"]
     
     print("Pretraining set created.")
 
     extensions = [".txt", ".md"]
+    
+    print(f"\n\n\nUSE FILENAMES: {USE_FILENAMES}")
 
     source_texts = []
     for extension in extensions:
@@ -161,7 +174,7 @@ async def main():
     sentence_chunks = []
     for source_text in source_texts:
         sentence_chunks += augmentoolkit.utils.sentence_chunking_algorithm.sentence_chunking_algorithm(
-            source_text, config["SYSTEM"]["CHUNK_SIZE"]
+            source_text, CHUNK_SIZE
         )
 
     conversions = [("\n", " "), ("  ", " ")]
