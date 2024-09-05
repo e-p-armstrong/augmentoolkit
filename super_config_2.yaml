@@ -1,0 +1,29 @@
+pipeline_order:
+  - folder: "rptoolkit"
+    config: "config.yaml"
+  - folder: "vanilla"
+    config: "config.yaml"
+  - folder: "classifier_creator"
+    config: "config.yaml"
+
+  - folder: "pure_synthetic_pipeline"
+    config: "config.yaml"
+
+  - folder: "vanilla"
+    config: 'config_overrides\togetherAI\default_togetherai.yaml'
+  - folder: "vanilla"
+    config: 'config_overrides\togetherAI\negative_togetherai.yaml'
+
+  # - folder: '_model_training_configs'
+  #   config : '_model_training_configs\axolotl_config_19th_century_military_llama_3_jun_29_no_rag.yaml'
+ 
+  # - folder: '_model_training_configs'
+  #   config: _model_training_configs\axolotl_config_19th_century_military_llama_3_jun_29.yaml
+
+  # - folder: '_model_training_configs'
+  #   config : '_model_training_configs\axolotl_config_verus_llama3_Jun_9_2024 copy.yaml'
+
+  # - folder: '_model_training_configs'
+  #   config : '_model_training_configs\axolotl_config_verus_llama3_Jun_9_2024.yaml'
+    
+    
