@@ -67,9 +67,9 @@ async def create_rules(engine_wrapper=None, classes_list=None, classes_desc=None
         engine_wrapper=engine_wrapper,
         logging_level=logging.INFO,
         output_processor=parse_rules,
-        prompt_folder=config["PATH"]["PROMPTS"],
-        default_prompt_folder=config["PATH"]["DEFAULT_PROMPTS"],
-        use_stop=config["SYSTEM"]["STOP"]
+        prompt_folder=PROMPTS_DIR,
+        default_prompt_folder=DEFAULT_PROMPTS,
+        use_stop=USE_STOP
     )
     
     classes_str = format_class_list(classes_list)
@@ -148,7 +148,11 @@ def get_last_final_label(text):
 async def create_label(idx, inp, classes=None, engine_wrapper=None, output_list=None):
     
     def parse_labels(classification):
-        predicted_label = get_last_final_label(classification)
+        try:
+            predicted_label = get_last_final_label(classification)
+        except Exception as e:
+            raise Exception(f"Model output could not be parsed. Model was stupid. Not pipeline's fault. Probably. {e}")
+            traceback.print_exc()
         for idx, c in enumerate(classes):
             if c.strip() == predicted_label.strip():
                 return idx
@@ -194,7 +198,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trai
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 def train_classifier(text_label_dicts, classifier_counter, output_dir):
-    
+    os.environ["WANDB_DISABLED"] = "true"
     # First, save the tuples to a file with only the relevant info so that we can load them as a dataset
     
     # data will be saved as json lines

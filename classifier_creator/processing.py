@@ -44,11 +44,11 @@ async def main():
         "BASE_URL"
     ]  # Augmentoolkit-API should also be compatible with any other API provider that accepts OAI-style requests
 
-    COMPLETION_MODE = config["SYSTEM"]["COMPLETION_MODE"]
+    COMPLETION_MODE = parse_bool(config["SYSTEM"]["COMPLETION_MODE"])
 
     MODE = config["SYSTEM"]["MODE"]
 
-    INPUT_FOLDER = config["PATH"]["INPUT"]
+    INPUT_FOLDER = os.path.abspath(config["PATH"]["INPUT"])
     
     USER_CLASSES = parse_string_list.parse_string_list(config["CLASSIFICATION"]["CLASSES"]) # Something like ["happy", "sad", "angry"] or ["great", "bad"] or ["mature", "safe"] --- a list of classes
     USER_CLASSES_DESCRIPTION = config["CLASSIFICATION"]["DESC"] # A description of the classes. "Classify text based on its emotional content and vibe, such as happy, sad, or angry" or "I need text to be classified based on whether it's high-quality (great) or lame (bad)" or "Classify the text based on whether it contains mature content or not"

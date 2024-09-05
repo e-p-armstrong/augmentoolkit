@@ -7,6 +7,36 @@ import time
 
 from augmentoolkit.utils.make_id import make_id
 
+from streamlit.components.v1 import html
+
+js_code = """
+<script>
+function scrollTextAreas() {
+    const textAreas = window.parent.document.querySelectorAll('.stTextArea textarea');
+    textAreas.forEach(textArea => {
+        textArea.scrollTop = textArea.scrollHeight;
+    });
+}
+
+// Run initially
+scrollTextAreas();
+
+// Set up a MutationObserver to watch for new text areas
+const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+        if (mutation.type === 'childList') {
+            scrollTextAreas();
+        }
+    });
+});
+
+const config = { childList: true, subtree: true };
+observer.observe(window.parent.document.body, config);
+</script>
+"""
+html(js_code)
+
+
 # Initial version credit: A guy named Sam on Fiverr
 # I had to change a decent amount though so it is more collaborative
 
@@ -48,6 +78,7 @@ def run_processing_script(folder_path, config_path, project_root):
     env["PYTHONPATH"] = project_root
     env["CONFIG_PATH"] = config_path
     env["FOLDER_PATH"] = folder_path 
+    env["WANDB_DIABLED"] = "true"
     
     process = subprocess.Popen(
         ["python", "processing.py"],

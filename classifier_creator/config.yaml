@@ -1,37 +1,31 @@
-PATH:
-  INPUT: "./imdb"
-  OUTPUT: "./classifier_output_interface"
-  DEFAULT_PROMPTS: "./prompts_classifier" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
-  PROMPTS: "./prompts_classifier" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY: "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" # Add the API key for your favorite provider here
-  BASE_URL: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...) # http://8000.0.0.0
-  LOGICAL_MODEL: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" # model used for everything except conversation generation at the very end # TechxGenus/Meta-Llama-3-8B-GPTQ
-  LARGE_LOGICAL_MODEL: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" # model used for conversation generation at the very end. A pretty tough task, if ASSISTANT_MODE isn't on. # TechxGenus/Meta-Llama-3-70B-GPTQ
-  QUANTIZATION_SMALL: "gptq" # Only need to use if Aphrodite mode is on.
-  QUANTIZATION_LARGE: "gptq" # Only need to use if Aphrodite mode is on.
-SKIP:
-  QUESTION_CHECK: False
-  ANSWER_RELEVANCY_CHECK: False # turn on if using the negative question prompt override
-SYSTEM:
-  CHUNK_SIZE: 900
-  DOUBLE_CHECK_COUNTER: 1 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
-  CONCURRENCY_LIMIT: 5 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
-  COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format. Not all APIs support completion mode.
-  MODE: "api" # can be one of "api"|"aphrodite"
-  STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
-  REQUIRED_ACCURACY: 0.90
+  API_KEY: ToIaiNGFuJ1wLNjlt8DBhMejhLJhx30ZVKVVTVQ5kLGP3YQY
+  BASE_URL: https://api.fireworks.ai/inference/v1
+  LARGE_LOGICAL_MODEL: accounts/fireworks/models/llama-v3p1-8b-instruct
+  LOGICAL_MODEL: accounts/fireworks/models/llama-v3p1-8b-instruct
+  QUANTIZATION_LARGE: gptq
+  QUANTIZATION_SMALL: gptq
 CLASSIFICATION:
-  CLASSES: ["negative", "positive"] # Only put two labels here; binary classification only for now, until I figure out how to train multilabel models (this pipeline was hacked in less than a day). ["absent", "present"] # ["negative", "positive"]
-  DESC: "Classify whether the text (a movie review) is positive or negative." # "Whether a text expresses positive or negative emotion." # NOTE to self, should probably include examples from a variety of different kinds of classification: "is this present", "is this x or y category", and subjective like "is this good or bad (quality)"
-  PREDICT_ON_WHOLE_SET_AT_THE_END: False
+  CLASSES: '[''negative'', ''positive'']'
+  DESC: Classify whether the text (a movie review) is positive or negative.
+  PREDICT_ON_WHOLE_SET_AT_THE_END: 'False'
+PATH:
+  DEFAULT_PROMPTS: ./prompts_classifier
+  INPUT: ./imdb
+  OUTPUT: ./classifier_output_interface
+  PROMPTS: ./prompts_classifier
+SYSTEM:
+  CHUNK_SIZE: '900'
+  COMPLETION_MODE: 'False'
+  CONCURRENCY_LIMIT: '5'
+  DOUBLE_CHECK_COUNTER: '1'
+  MODE: api
+  REQUIRED_ACCURACY: '0.9'
+  STOP: 'True'
 TRAINING:
-  MODEL_PATH: "distilbert-base-uncased" # Hugging Face path of the model you want to train on. Has to be a sequence classification model.
-  TRAIN_SET_SIZE: 500
-  TRAIN_SET_INCREMENT: 100
-  TEST_SET_SIZE: 30
-  TRUNCATION_TYPE: "head-tail" # options: head-tail (take first few tokens and a bunch of the ones at the end); end truncation (cut off excess stuff that does not fit into the chunk size at the end)
-  MAX_ITERS: 5
-
-
-# May be much more efficient to rent H100s for large-scale inference than A100s
+  MAX_ITERS: '5'
+  MODEL_PATH: distilbert-base-uncased
+  TEST_SET_SIZE: '30'
+  TRAIN_SET_INCREMENT: '100'
+  TRAIN_SET_SIZE: '500'
+  TRUNCATION_TYPE: head-tail
