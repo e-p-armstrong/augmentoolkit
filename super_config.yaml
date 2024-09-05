@@ -1,8 +1,3 @@
 pipeline_order:
   - folder: "original"
     config: "config.yaml"
-  # - folder: "vanilla"
-  #   config: "config.yaml"
-  # - folder: "vanilla"
-  #   config: "override_config.yaml"
-  

@@ -23,7 +23,7 @@ async def main():
     import logging
     import yaml
     import glob
-    from vanilla import steps
+    from original import steps
     config_path = os.environ["CONFIG_PATH"]
     with open(config_path, "r") as f:
         config = yaml.safe_load(f)
