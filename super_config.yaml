@@ -1,5 +1,5 @@
 pipeline_order:
-  - folder: "classifier_creator"
+  - folder: "original"
     config: "config.yaml"
   # - folder: "vanilla"
   #   config: "config.yaml"
