@@ -21,12 +21,18 @@ config_path = os.environ["CONFIG_PATH"]
 with open (config_path, "r") as file:
     config = yaml.safe_load(file)
 
+PICK_EMOTION = bool(config["SYSTEM"]["PICK_EMOTION"])
+WORK_IN_PHASES = bool(config["PHASES"]["WORK_IN_PHASES"])
+PHASE_INDEX = int(config["PHASES"]["PHASE_INDEX"])
+USE_SUBSET = bool(config["SYSTEM"]["USE_SUBSET"])
+SUBSET_SIZE = int(config["SYSTEM"]["SUBSET_SIZE"])
+
 async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrapper_large: EngineWrapper, stories, idx):
     # NOTE Generate emotions, or pick
     print("Started datagen")
     data = chunk
     try:
-        if obj_conf["SYSTEM"]["PICK_EMOTION"]:
+        if PICK_EMOTION:
             data = await generate_emotion_from_text(chunk=chunk, engine_wrapper=engine_wrapper, idx=idx)
             if data:
                 data["emotion"] = data["emotion"].split("\n")[0]
@@ -48,13 +54,13 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
         data = await generate_scene_card(data, engine_wrapper, idx)
         charname = extract_charname(data["scene_card"])
         
-        if config["PHASES"]["PHASE_INDEX"] == 0 and config["PHASES"]["WORK_IN_PHASES"]:
+        if PHASE_INDEX == 0 and WORK_IN_PHASES:
             return
         
         outs = await generate_story(input_data=data, engine_wrapper=engine_wrapper_large, charname=charname, idx=idx)
         data, truncated = outs
         
-        if config["PHASES"]["PHASE_INDEX"] == 1 and config["PHASES"]["WORK_IN_PHASES"]:
+        if PHASE_INDEX == 1 and WORK_IN_PHASES:
             return
 
         if not truncated:
@@ -123,8 +129,8 @@ async def main():
     paragraphs_processed = [
             {"chunk": fix_text(conversions, seq["chunk"]), "source": seq["source"]} for seq in sentence_chunks
         ]
-    if obj_conf["SYSTEM"]["USE_SUBSET"]:
-        paragraphs_processed = paragraphs_processed[:obj_conf["SYSTEM"]["SUBSET_SIZE"]]
+    if USE_SUBSET:
+        paragraphs_processed = paragraphs_processed[:SUBSET_SIZE]
 
 
     print("\n\nParagraphs have been processed and chunked.\n\n")

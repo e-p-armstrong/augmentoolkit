@@ -38,11 +38,6 @@ def scan_folders_for_config():
     
     return result
 
-# Load the YAML config
-# def load_yaml_config():
-#     with open("super_config.yaml", "r") as f:
-#         return yaml.safe_load(f)
-
 # Save the updated config to the YAML file
 def save_yaml_config(data, filepath):
     with open(filepath, "w") as f:
@@ -52,11 +47,11 @@ def run_processing_script(folder_path, config_path, project_root):
     env = os.environ.copy()
     env["PYTHONPATH"] = project_root
     env["CONFIG_PATH"] = config_path
-    env["FOLDER_PATH"] = folder_path
+    env["FOLDER_PATH"] = folder_path 
     
     process = subprocess.Popen(
-        ["python", "run_augmentoolkit.py"],
-        cwd=project_root,
+        ["python", "processing.py"],
+        cwd=folder_path,
         env=env,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -84,8 +79,6 @@ def save_individual_config(data, filepath):
     with open(filepath, "w") as f:
         yaml.dump(data, f, default_flow_style=False)
 
-
-
 if 'unsaved_changes_made' not in st.session_state:
     st.session_state['unsaved_changes_made'] = False
 # Main Streamlit app function
@@ -101,16 +94,16 @@ def main():
 
     st.sidebar.header("Select Pipeline to Run and super_config.yaml")
     pipeline_options = [f"{config['folder']} - {config['config']}" for config in folder_configs]
-    selected_pipeline = st.sidebar.selectbox("Choose a pipeline:", pipeline_options, on_change=set_unsaved_changes_made_false)
+    selected_pipeline = st.sidebar.selectbox("Choose a pipeline:", pipeline_options, on_change=set_unsaved_changes_made_false, index=2)
 
     # Get the selected pipeline's details
     selected_config = next((config for config in folder_configs if f"{config['folder']} - {config['config']}" == selected_pipeline), None)
 
     if selected_config:
         st.header("Modify Configurations")
-        config_path = os.path.join(selected_config['folder'], selected_config['config'])
-        st.subheader(f"Configuration: {config_path}")
-        config_data = load_individual_config(config_path)
+        ui_config_path = os.path.join(selected_config['folder'], selected_config['config'])
+        st.subheader(f"Configuration: {ui_config_path}")
+        config_data = load_individual_config(ui_config_path)
         
         modified_config = {}
         
@@ -138,13 +131,13 @@ def main():
             st.warning("Don't forget to save changes!")
         
         # Save updated configurations
-        if st.button("Save Configurations"):
-            save_individual_config(modified_config, config_path)
+        if st.button("Save Configurations", on_click=set_unsaved_changes_made_false):
+            save_individual_config(modified_config, ui_config_path)
             st.success("Configurations saved successfully!")
 
         if st.button("Run Selected Pipeline"):
             project_root = os.path.dirname(os.path.abspath(__file__))
-            process = run_processing_script(selected_config['folder'], config_path, project_root)
+            process = run_processing_script(selected_config['folder'], selected_config['config'], project_root)
             
             # Create a placeholder for the output
             output_area = st.empty()
@@ -152,38 +145,10 @@ def main():
             # Initialize an empty string to store the full output
             full_output = ""
             
-            # Custom CSS and JavaScript for auto-scrolling and larger textarea
-            custom_css = """
-            <style>
-            textarea {
-                min-height: 500px !important;
-                font-family: monospace;
-            }
-            </style>
-            """
-            
-            auto_scroll_script = """
-            <script>
-            function scrollTextArea() {
-                var textarea = document.querySelector('textarea');
-                textarea.scrollTop = textarea.scrollHeight;
-            }
-            var observer = new MutationObserver(scrollTextArea);
-            observer.observe(document.querySelector('textarea'), { childList: true, subtree: true });
-            scrollTextArea();
-            </script>
-            """
-            
-            st.markdown(custom_css, unsafe_allow_html=True)
-            
             # Stream the output
             for line in iter(process.stdout.readline, ''):
                 full_output += line
-                output_area.markdown(f"""
-                {custom_css}
-                <textarea style="width:100%;" readonly>{full_output}</textarea>
-                {auto_scroll_script}
-                """, unsafe_allow_html=True)
+                output_area.text_area("Pipeline Output", value=full_output, height=300)
             
             # Wait for the process to complete
             process.wait()

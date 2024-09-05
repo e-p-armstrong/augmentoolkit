@@ -403,7 +403,7 @@ async def vet_answer_accuracy_loop(
         output_processor=parse_answer_accuracy_validation,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPTS,
-        use_stop=obj_conf["SYSTEM"]["STOP"],
+        use_stop=USE_STOP,
     )
 
     # Resume normal control flow code
@@ -533,7 +533,7 @@ async def vet_answer_relevance_loop(
         output_processor=parse_answer_relevancy_validation_step,
         prompt_folder=obj_conf["PATH"]["PROMPTS"],
         default_prompt_folder=DEFAULT_PROMPTS,
-        use_stop=obj_conf["SYSTEM"]["STOP"]
+        use_stop=USE_STOP
     )
 
     # Resume normal control flow code
@@ -685,7 +685,7 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
             output_processor=parse_validation_step,
             prompt_folder=obj_conf["PATH"]["PROMPTS"],
             default_prompt_folder=DEFAULT_PROMPTS,
-            use_stop=obj_conf["SYSTEM"]["STOP"],
+            use_stop=USE_STOP,
         )
 
         # NOTE Set up generate new question step

@@ -1,41 +1,38 @@
-PATH:
-  INPUT: "./output_not_actually_output_raw_txt_input_2_modern"
-  OUTPUT: "./output_storygen_NEWEST_temp_1_5_ratenewprompttest"
-  DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
-  PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
-  API_KEY_A: "a33fdfafe32cd940a4208f453493d9603f24b772c82647c0040aeca48e74992a" # Add the API key for the provider you're using for the first model here (this is typically the smaller, less-costly model)
-  API_KEY_B: "ToIaiNGFuJ1wLNjlt8DBhMejhLJhx30ZVKVVTVQ5kLGP3YQY" # Add the API key for the provider you're using for the second model here (typically the larger, more-capable model)
-  BASE_URL_A: "https://api.together.xyz" # add the base url for a provider, or local server, here. Some possible values:  http://127.0.0.1:5000/v1/ # <- local models. # https://api.together.xyz # <- together.ai, which is real cheap, real flexible, and real high-quality, if a tad unreliable. # https://api.openai.com/v1/ # <- OpenAI. Will bankrupt you very fast. # anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc etc etc...)
-  BASE_URL_B: "https://api.fireworks.ai/inference/v1" # Remember which model is which by thinking: B stands for 'Big'
-  LOGICAL_MODEL_A: "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo" # Model A should be a smaller and cheaper one than model B, it's used in all steps except the hardest one. Recommended: "mistral-medium-latest"
-  LOGICAL_MODEL_B: "accounts/fireworks/models/llama-v3p1-405b-instruct" # MODEL B should be the larger more capable model TODO make "MODE" an api thing, it belongs there.
-SYSTEM:
-  PICK_EMOTION: True # True = Generate based on text with no constraining, False = constrain to the given dict
-  EMOTIONS: ["DOMINANCE", "FEARLESSNESS", "LUST", "EMBARASSMENT", "NIHILISM", "DETERMINATION", "DESPERATION", "LOSS", "NOSTALGIA", "ANTICIPATION", "TRUST", "FEAR", "DISORIENTATION", "DEGRADATION"] # emotions can be multiple words, that is deliberate it allows for more variety and creativity and tighter data even to an extent.
-  DOUBLE_CHECK_COUNT: 3 # How many times to check a question and answer pair during each validation step. Majority vote decides if it passes that step. There are three steps. So most questions are by default checked around 9 times (fewer if the first two checks for a step pass, obviously).
-  USE_SUBSET: True # Whether to take only the first 13 chunks from a text during the run. Useful for experimenting and iterating and seeing all the steps without costing too much money or time.
-  SUBSET_SIZE: 15
-  CONCURRENCY_LIMIT: 3 # Hard limit of how many calls can be run at the same time, useful for API mode (aphrodite automatically manages this and queues things, as far as I know)
-  COMPLETION_MODE: False # Change to false if you want to use chat (instruct) mode; this requires .json files in your chosen prompts directory, in the OpenAI API format
-  MODE_A: "api" # can be one of "api"|"aphrodite"|"cohere"
-  MODE_B: "api" # can be one of "api"|"aphrodite"|"cohere"
-  TAGS: ""
-  RESOLVE_TAGS: False
-  RATING_THRESHOLD: 0
-  RP_PROMPT_START: ""
-  RP_PROMPT_END: ""
-  EDIT_STORY: True
-  STOP: True # True = Use stop tokens, False = do not use stop tokens. OpenAI's API restricts you to four stop tokens and all steps have way more than four stop tokens, so you'll need to turn this to False if you're using OAI's API. Also NOTE that if you turn this OFF while using COMPLETION MODE, EVERYTHING WILL BREAK and it will cost you money in the process. Don't do that.
-  INCLUDE_CHUNK_IN_PROMPT: True
-  USE_MIN_P: False
-  
-
-COST: # TODO make this more general with a list of dicts as the input and the code should use the keys in the dicts to identify the model being used for each thing etc. then make the cost estimator for all pipelines.
-  INPUT_A: 2.7 # in USD/million tokens
-  OUTPUT_A: 8.1
-  INPUT_B: 8
-  OUTPUT_B: 24
+  API_KEY_A: a33fdfafe32cd940a4208f453493d9603f24b772c82647c0040aeca48e74992a
+  API_KEY_B: ToIaiNGFuJ1wLNjlt8DBhMejhLJhx30ZVKVVTVQ5kLGP3YQY
+  BASE_URL_A: https://api.together.xyz
+  BASE_URL_B: https://api.fireworks.ai/inference/v1
+  LOGICAL_MODEL_A: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
+  LOGICAL_MODEL_B: accounts/fireworks/models/llama-v3p1-405b-instruct
+COST:
+  INPUT_A: '2.7'
+  INPUT_B: '8'
+  OUTPUT_A: '8.1'
+  OUTPUT_B: '24'
+PATH:
+  DEFAULT_PROMPTS: ./prompts
+  INPUT: ./output_not_actually_output_raw_txt_input_2_modern
+  OUTPUT: ./output_storygen_fromscratch_smallsample
+  PROMPTS: ./prompts
 PHASES:
-  WORK_IN_PHASES: True
-  PHASE_INDEX: 2 # Phase 0 is everything up until story generation. Phase 1 is story generation. Phase 2 is story rating.
+  PHASE_INDEX: '2'
+  WORK_IN_PHASES: 'True'
+SYSTEM:
+  COMPLETION_MODE: 'False'
+  CONCURRENCY_LIMIT: '3'
+  DOUBLE_CHECK_COUNT: '3'
+  EMOTIONS: '[''DOMINANCE'', ''FEARLESSNESS'', ''LUST'', ''EMBARASSMENT'', ''NIHILISM'',
+    ''DETERMINATION'', ''DESPERATION'', ''LOSS'', ''NOSTALGIA'', ''ANTICIPATION'',
+    ''TRUST'', ''FEAR'', ''DISORIENTATION'', ''DEGRADATION'']'
+  INCLUDE_CHUNK_IN_PROMPT: 'True'
+  MODE_A: api
+  MODE_B: api
+  PICK_EMOTION: 'True'
+  RP_PROMPT_END: ''
+  RP_PROMPT_START: ''
+  STOP: 'True'
+  SUBSET_SIZE: '3'
+  TAGS: ''
+  USE_MIN_P: 'False'
+  USE_SUBSET: 'True'

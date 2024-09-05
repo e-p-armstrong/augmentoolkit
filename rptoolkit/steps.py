@@ -18,6 +18,10 @@ from augmentoolkit.generation_functions.pipeline_step_class import PipelineStep
 import uuid
 import yaml
 import nltk
+from augmentoolkit.utils import parse_string_list
+from augmentoolkit.utils.parse_bool import parse_bool
+
+
 nltk.download('punkt_tab')
 
 tokenizer = AutoTokenizer.from_pretrained(
@@ -34,7 +38,7 @@ with open (config_path, "r") as file:
 OUTPUT_FOLDER = os.path.abspath(obj_conf["PATH"]["OUTPUT"])
 DEFAULT_PROMPT_PATH = os.path.abspath(obj_conf["PATH"]["DEFAULT_PROMPTS"])
 PROMPTS = os.path.abspath(obj_conf["PATH"]["PROMPTS"])
-COMPLETION_MODE = obj_conf["SYSTEM"]["COMPLETION_MODE"]
+COMPLETION_MODE = parse_bool(obj_conf["SYSTEM"]["COMPLETION_MODE"])
 LOGGING_LEVEL = logging.INFO
 LOGICAL_MODEL_A = obj_conf["API"]["LOGICAL_MODEL_A"]
 LOGICAL_MODEL_B = obj_conf["API"]["LOGICAL_MODEL_B"]
@@ -44,8 +48,11 @@ BASE_URL_A = obj_conf["API"]["BASE_URL_A"]
 BASE_URL_B = obj_conf["API"]["BASE_URL_B"]
 MODE_A = obj_conf["SYSTEM"]["MODE_A"]
 MODE_B = obj_conf["SYSTEM"]["MODE_B"]
-CONCURRENCY_LIMIT = obj_conf["SYSTEM"]["CONCURRENCY_LIMIT"]
-USE_STOP = obj_conf["SYSTEM"]["STOP"]
+CONCURRENCY_LIMIT = int(obj_conf["SYSTEM"]["CONCURRENCY_LIMIT"])
+USE_STOP = parse_bool(obj_conf["SYSTEM"]["STOP"])
+EMOTIONS = parse_string_list.parse_string_list(obj_conf["SYSTEM"]["EMOTIONS"])
+INCLUDE_CHUNK_IN_PROMPT = parse_bool(obj_conf["SYSTEM"]["INCLUDE_CHUNK_IN_PROMPT"])
+USE_MIN_P = parse_bool(obj_conf["SYSTEM"]["USE_MIN_P"])
 
 ## Chunking Logic for Raw Input Text ##
 def chunking_algorithm(file_path, max_token_length=1500):
@@ -352,7 +359,7 @@ async def generate_emotion_from_text(chunk, engine_wrapper, idx): # TODO make th
 
 ## Helpers
 def validate_emotion_key_contained(text):
-    return any(emotion in text for emotion in obj_conf["SYSTEM"]["EMOTIONS"])
+    return any(emotion in text for emotion in EMOTIONS)
 
 def confirm_text_emotions(text):
     if validate_emotion_key_contained(text):
@@ -366,7 +373,7 @@ def confirm_text_emotions(text):
 
 def stringify_emotion_list():
     # Create a string that's the list of keys in the obj_conf["SYSTEM"]["EMOTIONS"] list
-    return "[" + ", ".join(obj_conf["SYSTEM"]["EMOTIONS"]) + "]"
+    return "[" + ", ".join(EMOTIONS) + "]"
 
 constrained_emotion_generator = DepthFirstPipelineStep(
     prompt_folder=PROMPTS,
@@ -631,12 +638,12 @@ def parse_story_messages(story):
 
 ## Step
 
-if obj_conf["SYSTEM"]["INCLUDE_CHUNK_IN_PROMPT"]:
+if INCLUDE_CHUNK_IN_PROMPT:
     prompt_path = "generate_story_with_chunk"
 else:
     prompt_path = "generate_story"
     
-if obj_conf["SYSTEM"]["USE_MIN_P"]:
+if USE_MIN_P:
     story_sampling_params = {
         "max_tokens": 7000 if obj_conf["SYSTEM"]["MODE_B"] != "cohere" else 4000,
         "temperature": 2,

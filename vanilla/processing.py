@@ -4,6 +4,7 @@ import os
 from augmentoolkit.generation_functions.process_multiturn_functions import extract_conversation
 import augmentoolkit.utils.create_pretraining_set
 import augmentoolkit.utils.sentence_chunking_algorithm
+from augmentoolkit.utils.parse_bool import parse_bool
 # Get the directory of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # Change the current working directory to the script directory
@@ -15,18 +16,6 @@ import asyncio
 import traceback
 
 import augmentoolkit.utils.group_by_text
-
-# created with nbconvert, minimally cleaned up
-
-def parse_bool(value):
-    if isinstance(value, bool):
-        return value
-    if value.lower() in ('true', 't', 'yes', 'y', '1'):
-        return True
-    elif value.lower() in ('false', 'f', 'no', 'n', '0'):
-        return False
-    else:
-        raise ValueError(f"Cannot parse '{value}' as boolean")
 
 async def main():
     # NOTE NOTEBOOK SETTINGS AND CONSTANTS (some script file constants are in generation_functions/constants.py)
