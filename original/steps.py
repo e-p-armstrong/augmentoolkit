@@ -992,7 +992,10 @@ class JudgeParagraphStep(PipelineStep):
         
         if os.path.isfile(save_path_file):
             with open(save_path_file, "r") as f:
-                data = json.load(f)
+                try:
+                    data = json.load(f)
+                except json.JSONDecodeError:
+                    data = f.read()
                 if isinstance(data, str):
                     output_list.append(
                         {
