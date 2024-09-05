@@ -1,6 +1,6 @@
 PATH:
   INPUT: "./output_not_actually_output_raw_txt_input_2_modern"
-  OUTPUT: "./output_storygen_NEW_noapprovalprompt"
+  OUTPUT: "./output_storygen_NEWEST_temp_1_5_ratenewprompttest"
   DEFAULT_PROMPTS: "./prompts" # the baseline prompt folder that Augmentoolkit falls back to if it can't find a step in the PROMPTS path
   PROMPTS: "./prompts" # Where Augmentoolkit first looks for prompts
 API:
@@ -38,4 +38,4 @@ COST: # TODO make this more general with a list of dicts as the input and the co
   OUTPUT_B: 24
 PHASES:
   WORK_IN_PHASES: True
-  PHASE_INDEX: 1 # Phase 0 is everything up until story generation. Phase 1 is story generation. Phase 2 is story rating.
+  PHASE_INDEX: 2 # Phase 0 is everything up until story generation. Phase 1 is story generation. Phase 2 is story rating.

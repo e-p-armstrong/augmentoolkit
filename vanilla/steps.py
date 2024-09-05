@@ -1211,25 +1211,28 @@ def convert_directory_to_list(directory_path):
                     simplified_conversations = []
                     simplified_conversations_rag = []
 
-                    # Load system prompts
-                    system_prompt_norag = obj_conf["SYSTEM"][
-                        "FINAL_ASSISTANT_PROMPT_NO_RAG"
-                    ]
-                    system_prompt_rag = obj_conf["SYSTEM"][
-                        "FINAL_ASSISTANT_PROMPT_RAG"
-                    ]
-                    simplified_conversations.append(
-                        {"from": "system", "value": system_prompt_norag}
-                    )
+                    if not obj_conf["SYSTEM"]["DO_NOT_USE_SYSTEM_PROMPTS"]:
+                        # Load system prompts
+                        system_prompt_norag = obj_conf["SYSTEM"][
+                            "FINAL_ASSISTANT_PROMPT_NO_RAG"
+                        ]
+                        system_prompt_rag = obj_conf["SYSTEM"][
+                            "FINAL_ASSISTANT_PROMPT_RAG"
+                        ]
+                        
+                        simplified_conversations.append(
+                            {"from": "system", "value": system_prompt_norag}
+                        )
 
-                    simplified_conversations_rag.append(
-                        {
-                            "from": "system",
-                            "value": system_prompt_rag.replace(
-                                "{data}", data_dict['dict_list'][0]["paragraph"]
-                            ),
-                        }
-                    )
+                        simplified_conversations_rag.append(
+                            {
+                                "from": "system",
+                                "value": system_prompt_rag.replace(
+                                    "{data}", data_dict['dict_list'][0]["paragraph"]
+                                ),
+                            }
+                        )
+                        
                     for i, (charname, message) in enumerate(
                         dialogues
                     ):  # Skipping the first message

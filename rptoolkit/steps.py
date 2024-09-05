@@ -651,7 +651,7 @@ if obj_conf["SYSTEM"]["USE_MIN_P"]:
 else:
     story_sampling_params= {
         "max_tokens": 7000 if obj_conf["SYSTEM"]["MODE_B"] != "cohere" else 4000,
-        "temperature": 1.1,
+        "temperature": 1.5,
         "top_p": 0.7,
         "stop": [
             "###",
@@ -713,7 +713,7 @@ async def generate_story(input_data=None,engine_wrapper=None, charname=None, idx
 def validate_rating_keys_presence(data):
     # print(data)
     # Define the required keys
-    required_keys = ["coherence", "following", "quality", "sense"]
+    required_keys = ["coherence", "following", "quality"]
     
     # Check if all required keys are in the dictionary
     are_keys_present = all(key in data for key in required_keys)
@@ -892,9 +892,9 @@ def convert_object_to_sharegpt(data_obj):
             "value": message["content"]
         } for message in parse_chatlog(data_obj["story"],data_obj["charname"])
     ]
-    ret_list.append(formatted_conversation)
+    ret_list = ret_list + formatted_conversation
     
-    return ret_list
+    return {"conversations": ret_list}
     
 def is_story_ok(story):
     # "I rate stories according to my arbitrary and biased decision making"

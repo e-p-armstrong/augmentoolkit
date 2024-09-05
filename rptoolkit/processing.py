@@ -152,12 +152,12 @@ async def main():
 
     print("\n\n\n================== ALL DATA WRITTEN!! HERE ARE YOUR STATS: ==================\n")
     print(f"Total stories generated: {len(story_data)}")
-    print(f"Stories that are at least 'good' across the board: {len(minimally_ok_stories)}")
-    print(f"Stories that are highly rated by the AI: {len(highly_rated_stories)}")
+    print(f"Stories that are at least OK across the board, but might slightly flawed ('good' and above, according to the AI rater): {len(minimally_ok_stories)}")
+    print(f"Stories that are highly rated by the AI across the board ('incredible' and above, according to the AI rater.): {len(highly_rated_stories)}")
     total_tokens_of_stories = sum([count_tokens(story["story"]) for story in story_data])
     print("Total tokens of all stories (roughly equivalent to the number of training tokens): ", total_tokens_of_stories)
     print(f"Time taken: {time.time() - start_time} seconds")
-    print("ShareGPT export is created, and the full dataset is also available in the final_outputs folder.")
+    print("ShareGPT-format .json export is created, and the full dataset is also available in the final_outputs folder.")
     if len(story_data) == 0:
         print("Hmm... No stories were generated. Check the logs for more information, and consider creating an issue if this is unexpected. If you do make an issue, please include your input data and the logs!")
     else:
