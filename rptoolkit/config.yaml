@@ -12,7 +12,7 @@ COST:
   OUTPUT_B: '24'
 PATH:
   DEFAULT_PROMPTS: ./prompts
-  INPUT: ./output_not_actually_output_raw_txt_input_2_modern
+  INPUT: ./raw_txt_input
   OUTPUT: ./output_storygen_fromscratch_smallsample
   PROMPTS: ./prompts
 PHASES:
