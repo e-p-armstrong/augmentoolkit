@@ -47,4 +47,4 @@ SYSTEM:
   STOP: True
   SUBSET_SIZE: 5
   USE_FILENAMES: False
-  USE_SUBSET: True
+  USE_SUBSET: False
