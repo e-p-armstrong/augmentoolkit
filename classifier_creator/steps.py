@@ -10,6 +10,7 @@ import yaml
 from augmentoolkit.generation_functions.generation_step_class import GenerationStep
 from augmentoolkit.generation_functions.pipeline_step_class import PipelineStep
 from augmentoolkit.utils.make_id import make_id
+from augmentoolkit.utils.parse_bool import parse_bool
 from augmentoolkit.utils.write_output_to_file import write_output_to_file
 
 config_path = os.environ["CONFIG_PATH"]
@@ -17,11 +18,11 @@ config_path = os.environ["CONFIG_PATH"]
 with open(config_path, "r") as f: # different yaml file for different pipes
         config = yaml.safe_load(f)
         
-COMPLETION_MODE = config["SYSTEM"]["COMPLETION_MODE"]
+COMPLETION_MODE = parse_bool(config["SYSTEM"]["COMPLETION_MODE"])
 PROMPTS_DIR = os.path.abspath(config["PATH"]["PROMPTS"])
 DEFAULT_PROMPTS = os.path.abspath(config["PATH"]["DEFAULT_PROMPTS"])
 OUTPUT_DIR = os.path.abspath(config["PATH"]["OUTPUT"])
-USE_STOP = config["SYSTEM"]["STOP"]
+USE_STOP = parse_bool(config["SYSTEM"]["STOP"])
 
 ### PROMPT FUNC: Rules Creator (this does not use the pipeline step class due to it uniquely only generating a single thing and not writing to a list)
 

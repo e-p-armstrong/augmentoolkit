@@ -1,7 +1,9 @@
 import asyncio
 
+from augmentoolkit.utils import parse_string_list
 from augmentoolkit.utils.head_tail_truncate import head_tail_truncate
 from augmentoolkit.utils.load_dataset import load_dataset
+from augmentoolkit.utils.parse_bool import parse_bool
 import augmentoolkit.utils.sentence_chunking_algorithm
 
 async def main():
@@ -31,14 +33,10 @@ async def main():
     LOGICAL_MODEL = config["API"]["LOGICAL_MODEL"]
 
     LARGE_LOGICAL_MODEL = config["API"]["LARGE_LOGICAL_MODEL"]
- 
-    DOUBLE_CHECK_COUNTER = config["SYSTEM"][
-        "DOUBLE_CHECK_COUNTER"
-    ]  # Set to 1 to check outputs only once; set to 2 to check twice; set to 3 to check thrice, etc. Set to 0 to break everything in vet_question_loop() and elsewhere. Set to -1 and cause the universe to implode?
 
-    CONCURRENCY_LIMIT = config["SYSTEM"][
+    CONCURRENCY_LIMIT = int(config["SYSTEM"][
         "CONCURRENCY_LIMIT"
-    ]  # Adjust this number based on the rate limit constraints of your api
+    ])  # Adjust this number based on the rate limit constraints of your api
 
     API_KEY = config["API"]["API_KEY"]
 
@@ -52,15 +50,15 @@ async def main():
 
     INPUT_FOLDER = config["PATH"]["INPUT"]
     
-    USER_CLASSES = config["CLASSIFICATION"]["CLASSES"] # Something like ["happy", "sad", "angry"] or ["great", "bad"] or ["mature", "safe"] --- a list of classes
+    USER_CLASSES = parse_string_list.parse_string_list(config["CLASSIFICATION"]["CLASSES"]) # Something like ["happy", "sad", "angry"] or ["great", "bad"] or ["mature", "safe"] --- a list of classes
     USER_CLASSES_DESCRIPTION = config["CLASSIFICATION"]["DESC"] # A description of the classes. "Classify text based on its emotional content and vibe, such as happy, sad, or angry" or "I need text to be classified based on whether it's high-quality (great) or lame (bad)" or "Classify the text based on whether it contains mature content or not"
     
-    TRAIN_SET_SIZE = config["TRAINING"]["TRAIN_SET_SIZE"]
-    TRAIN_SET_INCREMENT = config["TRAINING"]["TRAIN_SET_INCREMENT"]
-    TEST_SET_SIZE = config["TRAINING"]["TEST_SET_SIZE"]
-    REQUIRED_ACCURACY = config["SYSTEM"]["REQUIRED_ACCURACY"]
-    CHUNK_SIZE = config["SYSTEM"]["CHUNK_SIZE"]
-    PREDICT_ON_WHOLE_SET_AT_THE_END = config["CLASSIFICATION"]["PREDICT_ON_WHOLE_SET_AT_THE_END"]
+    TRAIN_SET_SIZE = int(config["TRAINING"]["TRAIN_SET_SIZE"])
+    TRAIN_SET_INCREMENT = int(config["TRAINING"]["TRAIN_SET_INCREMENT"])
+    TEST_SET_SIZE = int(config["TRAINING"]["TEST_SET_SIZE"])
+    REQUIRED_ACCURACY = float(config["SYSTEM"]["REQUIRED_ACCURACY"])
+    CHUNK_SIZE = int(config["SYSTEM"]["CHUNK_SIZE"])
+    PREDICT_ON_WHOLE_SET_AT_THE_END = parse_bool(config["CLASSIFICATION"]["PREDICT_ON_WHOLE_SET_AT_THE_END"])
     TRUNCATION_TYPE = config["TRAINING"]["TRUNCATION_TYPE"]
     
     extensions = [".txt", ".md", ".json", ".jsonl", ".parquet"]
