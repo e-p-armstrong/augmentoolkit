@@ -152,23 +152,38 @@ def main():
             # Initialize an empty string to store the full output
             full_output = ""
             
+            # Custom CSS and JavaScript for auto-scrolling and larger textarea
+            custom_css = """
+            <style>
+            textarea {
+                min-height: 500px !important;
+                font-family: monospace;
+            }
+            </style>
+            """
+            
+            auto_scroll_script = """
+            <script>
+            function scrollTextArea() {
+                var textarea = document.querySelector('textarea');
+                textarea.scrollTop = textarea.scrollHeight;
+            }
+            var observer = new MutationObserver(scrollTextArea);
+            observer.observe(document.querySelector('textarea'), { childList: true, subtree: true });
+            scrollTextArea();
+            </script>
+            """
+            
+            st.markdown(custom_css, unsafe_allow_html=True)
+            
             # Stream the output
             for line in iter(process.stdout.readline, ''):
                 full_output += line
-                
-                # Update the text area with the new content
-                output_area.text_area("Pipeline Output", value=full_output, height=400, key="output")
-                
-                # Use JavaScript to scroll to the bottom of the text area
-                st.write(
-                    """
-                    <script>
-                        var textarea = document.querySelector('.stTextArea textarea');
-                        textarea.scrollTop = textarea.scrollHeight;
-                    </script>
-                    """,
-                    unsafe_allow_html=True
-                )
+                output_area.markdown(f"""
+                {custom_css}
+                <textarea style="width:100%;" readonly>{full_output}</textarea>
+                {auto_scroll_script}
+                """, unsafe_allow_html=True)
             
             # Wait for the process to complete
             process.wait()
