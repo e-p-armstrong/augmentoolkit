@@ -9,6 +9,8 @@ tokenizer = AutoTokenizer.from_pretrained(
     )
 
 # TODO leverage this as part of each pipeline, make it a util and make it general
+# Would welcome a PR I need sleep >.<
+# someoneeeeeeeee
 
 def count_tokens(string):
     return len(tokenizer.encode(string))

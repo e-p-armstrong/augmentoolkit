@@ -57,7 +57,7 @@ USE_STOP = parse_bool(obj_conf["SYSTEM"]["STOP"])
 COMPLETION_MODE = parse_bool(obj_conf["SYSTEM"]["COMPLETION_MODE"])
 SKIP_ANSWER_RELEVANCY_CHECK = parse_bool(obj_conf["SKIP"]["ANSWER_RELEVANCY_CHECK"])
 CONVERSATION_INSTRUCTIONS = obj_conf["SYSTEM"]["CONVERSATION_INSTRUCTIONS"]
-DO_NOT_USE_SYSTEM_PROMPTS = obj_conf["SYSTEM"]["DO_NOT_USE_SYSTEM_PROMPTS"]
+DO_NOT_USE_SYSTEM_PROMPTS = parse_bool(obj_conf["SYSTEM"]["DO_NOT_USE_SYSTEM_PROMPTS"])
 SKIP_QUESTION_CHECK = parse_bool(obj_conf["SKIP"]["QUESTION_CHECK"])
 
 has_pushed_yet = False
@@ -132,12 +132,6 @@ def convert_logging_to_dataset(input_pth=None, output_pth=None):
     
 def convert_revised_questions_to_question_generation_training(qa_dicts_by_text, use_filenames):
     print("entering saving mode")
-    # found a solution to overfitting on the examples:
-    # TRAIN WITHOUT THEM
-    # This will produce a WEALTH of instruct data
-    # fucking awesome, hopefully
-    # also it's also about the domain, lmao
-    # so more domain knowledge
     
     output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], "questions_generation_dataset.jsonl")
     
@@ -635,7 +629,6 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
 ):
     try:
         file_path = os.path.join(qa_dicts_dir, f"para_{qa_dict['paragraph_idx']}_q_{qa_dict['question_idx']}.json")
-        
         if os.path.exists(file_path):
             with open(file_path, "r") as file:
                 file_body = file.read()
@@ -1091,26 +1084,6 @@ async def ensure_multiple_answers_are_same(
         conv, full_info_dict["paragraph"]
     )
 
-
-# async def make_multiturn_conversation(
-#     info, multi_turn_conv_generator, completion_mode=None, conversation_instructions="For this conversation, you are generating a chat between a general-purpose AI assistant and a human."
-# ):
-
-#     conv, conv_output = await multi_turn_conv_generator.generate(
-#         arguments={
-#             "question_answer_list": format_qa(info[0]).strip(),
-#             "conversation_instructions": conversation_instructions
-#         }
-#     )
-#     write_output_to_file(
-#         conv_output,
-#         obj_conf["PATH"]["OUTPUT"] + "/multiturn_conversation_generations",
-#         info[4],
-#     )
-
-#     return (conv, info[1], info[2], info[3], info[0])
-
-
 ### CONVERSATION CREATION SECTION
 
 multi_turn_conversation_prompt_path = "multi_turn_assistant_conversation"
@@ -1172,41 +1145,6 @@ async def create_conversation(
 ):
 
     await conversation_generator.run(idx, input_data=input_data, engine_wrapper=engine_wrapper, output_list=multi_turn_convs)
-
-    # # Skip if file already exists
-    # if not os.path.exists(file_path):
-    #     try:
-    #         conv = await make_multiturn_conversation(
-    #             info, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
-    #         )
-    #         final_conv = await ensure_multiple_answers_are_same(
-    #             info, conv, multi_turn_conv_generator, completion_mode=completion_mode, conversation_instructions=conversation_instructions
-    #         )
-
-    #         if final_conv is not None:
-    #             final_conv = (
-    #                 final_conv[0],
-    #                 "AI Assistant",
-    #                 "",
-    #                 "N/A",
-    #                 final_conv[4],
-    #             )
-    #             with open(file_path, "w") as file:
-    #                 json.dump(final_conv, file, indent=4)
-
-    #         multi_turn_convs.append(final_conv)
-    #     except Exception as e:
-    #         traceback.print_exc()
-    #         print("Had an error, retrying...", e)
-    # else:
-    #     try:
-    #         with open(file_path, "r", encoding="utf-8") as f:
-    #             data = json.load(f)
-    #             multi_turn_convs.append(data)
-    #         print(f"Skipped generating {file_path} as it already exists")
-    #     except Exception as e:
-    #         print(f"Error reading {file_path}:", e)
-    #         print("Continuing...")
 
 
 def convert_directory_to_list(directory_path):

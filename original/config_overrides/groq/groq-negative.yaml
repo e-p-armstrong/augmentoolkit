@@ -1,8 +1,8 @@
 API:
-  API_KEY: your-key-here
-  BASE_URL: https://api.together.xyz
-  LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
-  LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+  API_KEY: your-key
+  BASE_URL: https://api.groq.com/openai/v1
+  LARGE_LOGICAL_MODEL: llama-3.1-70b-versatile
+  LOGICAL_MODEL: llama-3.1-8b-instant
   QUANTIZATION_LARGE: gptq
   QUANTIZATION_SMALL: gptq
 HUGGINGFACE:
@@ -13,7 +13,7 @@ PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./input
   OUTPUT: ./output
-  PROMPTS: ./prompts
+  PROMPTS: ./prompt_overrides/prompts_override_open-ended_questions
 PHASE:
   PHASE_INDEX: 3
   WORK_IN_PHASES: False
@@ -24,7 +24,7 @@ SKIP:
 SYSTEM:
   CHUNK_SIZE: 1900
   COMPLETION_MODE: False
-  CONCURRENCY_LIMIT: 50
+  CONCURRENCY_LIMIT: 1 # WARNING lower concurrency limit due to rate limits
   CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between
     a generalist, generic AI assistant, and a human.
   DOUBLE_CHECK_COUNTER: 1
@@ -44,7 +44,7 @@ SYSTEM:
 
     '
   MODE: api
-  STOP: True
+  STOP: False
   SUBSET_SIZE: 15
   USE_FILENAMES: False
   USE_SUBSET: False

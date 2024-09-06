@@ -1,38 +1,38 @@
 API:
-  API_KEY_A: a33fdfafe32cd940a4208f453493d9603f24b772c82647c0040aeca48e74992a
+  API_KEY_A: key
   API_KEY_B: ToIaiNGFuJ1wLNjlt8DBhMejhLJhx30ZVKVVTVQ5kLGP3YQY
   BASE_URL_A: https://api.together.xyz
   BASE_URL_B: https://api.fireworks.ai/inference/v1
   LOGICAL_MODEL_A: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
   LOGICAL_MODEL_B: accounts/fireworks/models/llama-v3p1-405b-instruct
 COST:
-  INPUT_A: '2.7'
-  INPUT_B: '8'
-  OUTPUT_A: '8.1'
-  OUTPUT_B: '24'
+  INPUT_A: 2.7
+  INPUT_B: 8
+  OUTPUT_A: 8.1
+  OUTPUT_B: 24
 PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./raw_txt_input
-  OUTPUT: ./output_storygen_fromscratch_smallsample
+  OUTPUT: ./output
   PROMPTS: ./prompts
 PHASES:
-  PHASE_INDEX: '2'
-  WORK_IN_PHASES: 'True'
+  PHASE_INDEX: 2
+  WORK_IN_PHASES: True
 SYSTEM:
-  COMPLETION_MODE: 'False'
-  CONCURRENCY_LIMIT: '3'
-  DOUBLE_CHECK_COUNT: '3'
-  EMOTIONS: '[''DOMINANCE'', ''FEARLESSNESS'', ''LUST'', ''EMBARASSMENT'', ''NIHILISM'',
-    ''DETERMINATION'', ''DESPERATION'', ''LOSS'', ''NOSTALGIA'', ''ANTICIPATION'',
-    ''TRUST'', ''FEAR'', ''DISORIENTATION'', ''DEGRADATION'']'
-  INCLUDE_CHUNK_IN_PROMPT: 'True'
+  COMPLETION_MODE: False
+  CONCURRENCY_LIMIT: 3
+  DOUBLE_CHECK_COUNT: 3
+  EMOTIONS: ['DOMINANCE', 'FEARLESSNESS', 'LUST', 'EMBARASSMENT', 'NIHILISM',
+    'DETERMINATION', 'DESPERATION', 'LOSS', 'NOSTALGIA', 'ANTICIPATION',
+    'TRUST', 'FEAR', 'DISORIENTATION', 'DEGRADATION']
+  INCLUDE_CHUNK_IN_PROMPT: True
   MODE_A: api
   MODE_B: api
-  PICK_EMOTION: 'True'
+  PICK_EMOTION: True
   RP_PROMPT_END: ''
   RP_PROMPT_START: ''
-  STOP: 'True'
-  SUBSET_SIZE: '3'
+  STOP: True
+  SUBSET_SIZE: 3
   TAGS: ''
-  USE_MIN_P: 'False'
-  USE_SUBSET: 'True'
+  USE_MIN_P: False
+  USE_SUBSET: True

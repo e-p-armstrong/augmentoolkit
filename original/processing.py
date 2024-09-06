@@ -176,7 +176,9 @@ async def main():
         for seq in sentence_chunks
     ]
 
-    len(paragraphs_processed)
+    if len(paragraphs_processed) == 0:
+        raise Exception("No paragraphs processed. Check your input directory path.")
+    
 
     paragraphs_processed[0]
 
@@ -192,10 +194,6 @@ async def main():
         print("Skipping chunk filtering")
         filtered_worthy_for_questions = paragraphs_processed[:SUBSET_SIZE]
     else:
-        # Create directory if it doesn't exist
-        output_dir = config["PATH"]["OUTPUT"] + "/worthy_for_questions"
-        os.makedirs(output_dir, exist_ok=True)
-        
         # Determine which paragraphs are worthy of making questions from
         judged_worthy_for_questions = []
 
@@ -232,40 +230,21 @@ async def main():
     
     import glob
 
-    # Directory for QA tuples
-    qa_tuples_dir_unchecked = config["PATH"]["OUTPUT"] + "/qatuples_raw"
-    if not os.path.exists(qa_tuples_dir_unchecked):
-        os.makedirs(qa_tuples_dir_unchecked)
-
     generated_qa_dicts = []  # tuple list of qa tuples that have been judged good
 
     # Attempt to initialize filtered_worthy_for_questions
-    try:
-        _ = filtered_worthy_for_questions
-    except NameError:
-        filtered_worthy_for_questions = []
-
-    if not filtered_worthy_for_questions:
-        # Load all files in the qa_tuples_dir if filtered_worthy_for_questions is not initialized
-        existing_files = glob.glob(os.path.join(qa_tuples_dir_unchecked, "*.json"))
-        for file_path in existing_files:
-            with open(file_path, "r") as file:
-                qa_tuple = tuple(json.load(file))
-                print(f"Loaded {file}")
-            generated_qa_dicts.append(qa_tuple)
-    else:
-        tasks = [
-            steps.generate_qadicts_from_para(
-                idx,
-                para,
-                engine_wrapper_large=engine_wrapper_large,
-                generated_qa_dicts=generated_qa_dicts,
-            )
-            for idx, para in enumerate(filtered_worthy_for_questions)
-        ]
-        limited_tasks_qgen = [run_task_with_limit(task) for task in tasks]
-        for future in tqdmasyncio.tqdm.as_completed(limited_tasks_qgen):
-            await future
+    tasks = [
+        steps.generate_qadicts_from_para(
+            idx,
+            para,
+            engine_wrapper_large=engine_wrapper_large,
+            generated_qa_dicts=generated_qa_dicts,
+        )
+        for idx, para in enumerate(filtered_worthy_for_questions)
+    ]
+    limited_tasks_qgen = [run_task_with_limit(task) for task in tasks]
+    for future in tqdmasyncio.tqdm.as_completed(limited_tasks_qgen):
+        await future
     
     # PHASE 1 END
     print("COMPLETED PHASE 1")
