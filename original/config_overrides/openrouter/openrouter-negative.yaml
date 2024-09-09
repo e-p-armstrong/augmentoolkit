@@ -13,7 +13,7 @@ PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./input
   OUTPUT: ./output
-  PROMPTS: ./prompt_overrides/prompts_override_open-ended_questions
+  PROMPTS: ./prompt_overrides/prompts_override_negative_questions 
 PHASE:
   PHASE_INDEX: 3
   WORK_IN_PHASES: False

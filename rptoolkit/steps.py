@@ -579,9 +579,9 @@ def stringify_chatlog_list(chatlog_list): # converts from chatlog list back to a
 
 def ends_with_fullstop(text):
     """check if a function ends with  either . ? ! or any of these followed by a " character"""
-    print("!!!!PROBLEM BELOW \/\/\/\/\/")
-    print(text.strip())
-    print("!!!!PROBLEM ABOVE ^^^^^^^^^")
+    # print("!!!!PROBLEM BELOW \/\/\/\/\/")
+    # print(text.strip())
+    # print("!!!!PROBLEM ABOVE ^^^^^^^^^")
     return text.strip().endswith((".", "?", "!", '."', '?"', '!"', '.*', '!*', '?*'))
 
 def split_last_message_at_note(chatlog_list): # helps if you feed degenerate shit into the AI and it writes something but is like "Note: this is actually really bad!"
@@ -693,12 +693,12 @@ async def generate_story(input_data=None,engine_wrapper=None, charname=None, idx
     out = await story_generator.run(idx=idx, input_data=input_data, engine_wrapper=engine_wrapper)
     truncated = out["story"][1]
     out["story"] = out["story"][0]
-    print("!!!!OUTS!!!!")
-    print(out)
-    print("----------------")
+    # print("!!!!OUTS!!!!")
+    # print(out)
+    # print("----------------")
     story = out["story"]
     
-    print("-----!!!!! POST POSTPROCESSING OUTPUT !!!!!---------") # NOTE that if you want to postprocess you can just put it after the pipeline step is called
+    # print("-----!!!!! POST POSTPROCESSING OUTPUT !!!!!---------") # NOTE that if you want to postprocess you can just put it after the pipeline step is called
     try:
         for line in story.split("\n"):
             if line.startswith("{narrator}:"):
@@ -907,7 +907,7 @@ def is_story_ok(story):
     # "I rate stories according to my arbitrary and biased decision making"
     ratings = story.get("story_ratings") # we can trust that it has the ratings because we validate all keys are present in ratings before this function is called
     if not ratings:
-        print(story)
+        # print(story)
         raise Exception("Somehow ratings is not present on the data object")
     for value in ratings.values():
         if value not in ["good", "incredible"]:

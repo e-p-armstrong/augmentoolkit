@@ -1,8 +1,8 @@
 API:
-  API_KEY: your-key
-  BASE_URL: https://openrouter.ai/api/v1
-  LARGE_LOGICAL_MODEL: meta-llama/llama-3-70b-instruct
-  LOGICAL_MODEL: meta-llama/llama-3-8b-instruct
+  API_KEY: your-key-here
+  BASE_URL: http://localhost:8080/
+  LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+  LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
   QUANTIZATION_LARGE: gptq
   QUANTIZATION_SMALL: gptq
 HUGGINGFACE:
@@ -13,7 +13,7 @@ PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./input
   OUTPUT: ./output
-  PROMPTS: ./prompt_overrides/prompts_override_open-ended_questions
+  PROMPTS: ./prompt_overrides/prompts_override_negative_questions
 PHASE:
   PHASE_INDEX: 3
   WORK_IN_PHASES: False
@@ -24,7 +24,7 @@ SKIP:
 SYSTEM:
   CHUNK_SIZE: 1900
   COMPLETION_MODE: False
-  CONCURRENCY_LIMIT: 50
+  CONCURRENCY_LIMIT: 3
   CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between
     a generalist, generic AI assistant, and a human.
   DOUBLE_CHECK_COUNTER: 1

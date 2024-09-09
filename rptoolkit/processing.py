@@ -41,7 +41,7 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
                 return None, None, None
         else:
             data = await generate_emotion_constrained(chunk, engine_wrapper, idx)
-            print(data)
+            # print(data)
         data = await extract_features(data, engine_wrapper, idx)
 
         # return
