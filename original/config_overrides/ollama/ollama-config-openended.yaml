@@ -3,8 +3,6 @@ API:
   BASE_URL: http://localhost:11434/v1
   LARGE_LOGICAL_MODEL: mistral
   LOGICAL_MODEL: mistral
-  QUANTIZATION_LARGE: gptq
-  QUANTIZATION_SMALL: gptq
 HUGGINGFACE:
   HUB_PATH: yourusername/your-path-here
   PRIVATE: False

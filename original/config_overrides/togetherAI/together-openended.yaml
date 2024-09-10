@@ -3,8 +3,6 @@ API:
   BASE_URL: https://api.together.xyz
   LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
   LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
-  QUANTIZATION_LARGE: gptq
-  QUANTIZATION_SMALL: gptq
 HUGGINGFACE:
   HUB_PATH: yourusername/your-path-here
   PRIVATE: False

@@ -2,7 +2,7 @@ import random
 import traceback
 from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 from augmentoolkit.utils.write_output_to_file import write_output_to_file
-from rptoolkit.steps import API_KEY_A, API_KEY_B, BASE_URL_A, BASE_URL_B, CONCURRENCY_LIMIT, LOGICAL_MODEL_A, LOGICAL_MODEL_B, MODE_A, MODE_B, OUTPUT_FOLDER, chunking_algorithm, count_tokens, extract_charname, extract_features, fix_text, generate_emotion_constrained, generate_emotion_from_text, generate_scene_card, generate_story, is_story_awesome, is_story_ok, make_id, naive_combine_features, obj_conf, rate_story, validate_generation, validate_length_callback, validate_not_none, validate_rating_keys_presence, validate_repetition_callback, write_final_dataset_files
+from rptoolkit.steps import API_KEY_A, API_KEY_B, BASE_URL_A, BASE_URL_B, CONCURRENCY_LIMIT, LOGICAL_MODEL_A, LOGICAL_MODEL_B, MODE_A, MODE_B, OUTPUT_FOLDER, chunking_algorithm, count_tokens, extract_charname, extract_features, fix_text, generate_emotion_constrained, generate_emotion_from_text, generate_scene_card, generate_story, is_story_awesome, is_story_ok, make_id, obj_conf, rate_story, validate_generation, validate_length_callback, validate_not_none, validate_rating_keys_presence, validate_repetition_callback, write_final_dataset_files
 
 
 import nltk
@@ -26,6 +26,7 @@ WORK_IN_PHASES = bool(config["PHASES"]["WORK_IN_PHASES"])
 PHASE_INDEX = int(config["PHASES"]["PHASE_INDEX"])
 USE_SUBSET = bool(config["SYSTEM"]["USE_SUBSET"])
 SUBSET_SIZE = int(config["SYSTEM"]["SUBSET_SIZE"])
+CHUNK_SIZE = int(config["SYSTEM"]["CHUNK_SIZE"])
 
 async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrapper_large: EngineWrapper, stories, idx):
     # NOTE Generate emotions, or pick
@@ -43,13 +44,6 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
             data = await generate_emotion_constrained(chunk, engine_wrapper, idx)
             # print(data)
         data = await extract_features(data, engine_wrapper, idx)
-
-        # return
-
-        # return chosen_emotion, features, chunk, "" # DEBUG
-        user_tags = obj_conf["SYSTEM"]["TAGS"]
-
-        data = naive_combine_features(data, user_tags) # programmatically naively combine the features together
 
         data = await generate_scene_card(data, engine_wrapper, idx)
         charname = extract_charname(data["scene_card"])
@@ -121,7 +115,7 @@ async def main():
 
     sentence_chunks = []
     for source_text in source_texts:
-        sentence_chunks += chunking_algorithm(source_text)
+        sentence_chunks += chunking_algorithm(source_text, max_token_length=CHUNK_SIZE)
 
     conversions = [("  ", " ")]
 
@@ -147,27 +141,28 @@ async def main():
     for future in tqdmasyncio.tqdm.as_completed(coroutines):
         await future
 
-    minimally_ok_stories = [story for story in story_data if is_story_ok(story)]
-    highly_rated_stories = [story for story in story_data if is_story_awesome(story)]
+    if (PHASE_INDEX == 2 and WORK_IN_PHASES) or not WORK_IN_PHASES:
+        minimally_ok_stories = [story for story in story_data if is_story_ok(story)]
+        highly_rated_stories = [story for story in story_data if is_story_awesome(story)]
 
-    # NOTE Write the output to file using JSON
-    os.makedirs(f"{OUTPUT_FOLDER}/final_outputs", exist_ok=True)
-    write_final_dataset_files(story_data, "full_stories_list")
-    write_final_dataset_files(minimally_ok_stories, "good_and_above_stories_list")
-    write_final_dataset_files(highly_rated_stories, "incredible_stories_list")
+        # NOTE Write the output to file using JSON
+        os.makedirs(f"{OUTPUT_FOLDER}/final_outputs", exist_ok=True)
+        write_final_dataset_files(story_data, "full_stories_list")
+        write_final_dataset_files(minimally_ok_stories, "good_and_above_stories_list")
+        write_final_dataset_files(highly_rated_stories, "incredible_stories_list")
 
-    print("\n\n\n================== ALL DATA WRITTEN!! HERE ARE YOUR STATS: ==================\n")
-    print(f"Total stories generated: {len(story_data)}")
-    print(f"Stories that are at least OK across the board, but might slightly flawed ('good' and above, according to the AI rater): {len(minimally_ok_stories)}")
-    print(f"Stories that are highly rated by the AI across the board ('incredible' and above, according to the AI rater.): {len(highly_rated_stories)}")
-    total_tokens_of_stories = sum([count_tokens(story["story"]) for story in story_data])
-    print("Total tokens of all stories (roughly equivalent to the number of training tokens): ", total_tokens_of_stories)
-    print(f"Time taken: {time.time() - start_time} seconds")
-    print("ShareGPT-format .json export is created, and the full dataset is also available in the final_outputs folder.")
-    if len(story_data) == 0:
-        print("Hmm... No stories were generated. Check the logs for more information, and consider creating an issue if this is unexpected. If you do make an issue, please include your input data and the logs!")
-    else:
-        print("Enjoy training your model!")
-    print("\n\n\n=============================================================================\n\n\n")
+        print("\n\n\n================== ALL DATA WRITTEN!! HERE ARE YOUR STATS: ==================\n")
+        print(f"Total stories generated: {len(story_data)}")
+        print(f"Stories that are at least OK across the board, but might slightly flawed ('good' and above, according to the AI rater): {len(minimally_ok_stories)}")
+        print(f"Stories that are highly rated by the AI across the board ('incredible' and above, according to the AI rater.): {len(highly_rated_stories)}")
+        total_tokens_of_stories = sum([count_tokens(story["story"]) for story in story_data])
+        print("Total tokens of all stories (roughly equivalent to the number of training tokens): ", total_tokens_of_stories)
+        print(f"Time taken: {time.time() - start_time} seconds")
+        print("ShareGPT-format .json export is created, and the full dataset is also available in the final_outputs folder.")
+        if len(story_data) == 0:
+            print("Hmm... No stories were generated. Check the logs for more information, and consider creating an issue if this is unexpected. If you do make an issue, please include your input data and the logs!")
+        else:
+            print("Enjoy training your model!")
+        print("\n\n\n=============================================================================\n\n\n")
     
 asyncio.run(main())

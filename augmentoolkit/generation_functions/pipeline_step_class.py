@@ -136,8 +136,7 @@ class PipelineStep:
             except Exception as e:
                 print(e)
                 traceback.print_exc() 
-                max_retries -= 1
-                
+            max_retries -= 1
         if not complete: # consider raising here and catching in the actual pipeline.
             return
         

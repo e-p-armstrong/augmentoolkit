@@ -1,5 +1,5 @@
 API:
-  API_KEY: ToIaiNGFuJ1wLNjlt8DBhMejhLJhx30ZVKVVTVQ5kLGP3YQY
+  API_KEY: key3
   BASE_URL: https://api.fireworks.ai/inference/v1
   LARGE_LOGICAL_MODEL: accounts/fireworks/models/llama-v3p1-8b-instruct
   LOGICAL_MODEL: accounts/fireworks/models/llama-v3p1-8b-instruct

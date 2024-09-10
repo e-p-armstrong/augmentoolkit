@@ -5,11 +5,6 @@ API:
   BASE_URL_B: http://localhost:2242/v1
   LOGICAL_MODEL_A: ./Mistral-Large-Instruct-2407-123B-exl2/ # This model seems to write alright. Questionable license though. Consider llamas, or RP finetunes? But instruction following is key -- magnun 72b by anthracite did really poorly.
   LOGICAL_MODEL_B: ./Mistral-Large-Instruct-2407-123B-exl2/
-COST:
-  INPUT_A: 2.7
-  INPUT_B: 8
-  OUTPUT_A: 8.1
-  OUTPUT_B: 24
 PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./raw_txt_input
@@ -21,7 +16,6 @@ PHASES:
 SYSTEM:
   COMPLETION_MODE: False
   CONCURRENCY_LIMIT: 3
-  DOUBLE_CHECK_COUNT: 3
   EMOTIONS: ['FEARLESSNESS', 'LUST', 'EMBARASSMENT', 'NIHILISM',
     'DETERMINATION', 'DESPERATION', 'LOSS', 'NOSTALGIA', 'ANTICIPATION',
     'TRUST', 'FEAR', 'DISORIENTATION', 'DEGRADATION']
@@ -33,6 +27,6 @@ SYSTEM:
   RP_PROMPT_START: ''
   STOP: True
   SUBSET_SIZE: 10
-  TAGS: ''
   USE_MIN_P: False
   USE_SUBSET: False
+  CHUNK_SIZE: 1500

@@ -826,14 +826,6 @@ async def generate_scene_card(data, engine_wrapper, id):
     return await scene_card_generator.run(idx=id, input_data=data, engine_wrapper=engine_wrapper)
 
     
-def naive_combine_features(features, user_tags):
-    if user_tags:
-        print("Added tags!!")
-        return features + "\n\n\nHere are some additional tags that should shape the RP session: " + user_tags
-    else:
-        print("Kept tags as is!!")
-        return features
-    
 ### Edit Story
 
 ## Helpers

@@ -2,21 +2,6 @@ import asyncio
 import uuid
 from openai import AsyncOpenAI
 import cohere
-from augmentoolkit.generation_functions.async_llamacpp_api_call import (
-    make_async_api_call,
-)
-
-try:
-    from aphrodite import (
-        EngineArgs,
-        AphroditeEngine,
-        SamplingParams,
-        AsyncAphrodite,
-        AsyncEngineArgs,
-    )
-except:
-    print("Aphrodite not installed; stick to API mode")
-
 
 def make_id():
     return str(uuid.uuid4())
@@ -33,16 +18,6 @@ class EngineWrapper:
     ):
         self.mode = mode
         self.model = model
-        if mode == "aphrodite":
-            engine_args = AsyncEngineArgs(
-                model=model,
-                quantization=quantization,
-                engine_use_ray=False,
-                disable_log_requests=True,
-                max_model_len=12000,
-                dtype="float16",
-            )
-            self.engine = AsyncAphrodite.from_engine_args(engine_args)
         if mode == "cohere":
             self.client = cohere.AsyncClient(api_key=api_key)
         elif mode == "api":
@@ -59,31 +34,12 @@ class EngineWrapper:
             sampling_params["max_tokens"] = 3000
         if "stop" not in sampling_params:
             sampling_params["stop"] = []
-        if "n_predict" not in sampling_params and self.mode == "llamacpp":
+        if "n_predict" not in sampling_params:
             sampling_params["n_predict"] = sampling_params["max_tokens"]
         
         use_min_p = False
         if "min_p" in sampling_params:
             use_min_p = True
-            
-        
-        if self.mode == "llamacpp":
-            return await make_async_api_call(
-                prompt=prompt, sampling_parameters=sampling_params
-            )
-
-        if self.mode == "aphrodite":
-            aphrodite_sampling_params = SamplingParams(**sampling_params)
-            request_id = make_id()
-            outputs = []
-            final_output = None
-            async for request_output in self.engine.generate(
-                prompt, aphrodite_sampling_params, request_id
-            ):
-                outputs.append(request_output.outputs[0].text)
-                final_output = request_output
-
-            return final_output.prompt + final_output.outputs[0].text
 
         if self.mode == "api":
             timed_out = False
@@ -137,11 +93,6 @@ class EngineWrapper:
         use_min_p = False
         if "min_p" in sampling_params:
             use_min_p = True
-
-        if self.mode == "llamacpp":
-            return await make_async_api_call(
-                messages=messages, sampling_parameters=sampling_params
-            )
 
         elif self.mode == "api":
             completion = ""

@@ -164,9 +164,12 @@ class GenerationStep:
                     else:
                         print("Messages:")
                         print(yaml.dump(messages, default_flow_style=False))
-                    if response:
+                    try:
                         print("\n\nResponse:\n-----\n")
                         print(response)
+                    except UnboundLocalError:
+                        print("No response to print")
+                        pass
                     # if prompt_formatted:
                     #     print(prompt_formatted)
                     logging.error(

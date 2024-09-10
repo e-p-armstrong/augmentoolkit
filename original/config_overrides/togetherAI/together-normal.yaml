@@ -1,8 +1,8 @@
 API:
-  API_KEY: your-key
-  BASE_URL: https://api.openai.com/v1/
-  LARGE_LOGICAL_MODEL: gpt-4o
-  LOGICAL_MODEL: gpt-4o-mini
+  API_KEY: your-key-here
+  BASE_URL: https://api.together.xyz
+  LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
+  LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
 HUGGINGFACE:
   HUB_PATH: yourusername/your-path-here
   PRIVATE: False
@@ -42,7 +42,7 @@ SYSTEM:
 
     '
   MODE: api
-  STOP: False
+  STOP: True
   SUBSET_SIZE: 15
   USE_FILENAMES: False
-  USE_SUBSET: True
+  USE_SUBSET: False

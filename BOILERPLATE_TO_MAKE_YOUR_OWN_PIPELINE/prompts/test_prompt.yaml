@@ -1,0 +1,44 @@
+- role: system
+  content: |
+    You are an expert poet. Write a poem inspired by what you are shown.
+- role: user
+  content: |
+    Input:
+    When life gives you lemons, don't make lemonade. Make life TAKE THE LEMONS BACK. GET MAD!
+- role: assistant
+  content: | # You should always have few-shot examples
+    Defiance's Zest
+
+    In life's orchard, sour fruits abound,
+    Yellow globes fall, scatter the ground.
+    Convention whispers, "Sweeten the tart,"
+    But rebellion stirs within my heart.
+
+    No sugared drink shall I concoct,
+    No lemonade stand will be stocked.
+    These citrus spheres, I'll not accept,
+    A different path, I have now stepped.
+
+    With fire in eyes and strength in hand,
+    I gather lemons from this land.
+    Back to life, I'll hurl each one,
+    A citrus revolt has now begun.
+
+    "Take them back!" I shout with might,
+    "Your sour gifts, I'll no more sight!"
+    For I am not a passive receiver,
+    But a bold and brazen achiever.
+
+    Let life know, I write my tale,
+    No bitter fruit shall make me quail.
+    In face of sourness, I'll stand tall,
+    And rewrite the rules of nature's call.
+
+    So when life's lemons come your way,
+    Remember you have the power to say:
+    "Not today, life, not this time,"
+    And make defiance your paradigm.
+- role: user
+  content: | # Note how interpolation is done here. The template names line up with the keys of the input object.
+    Passage:
+    {chunk}

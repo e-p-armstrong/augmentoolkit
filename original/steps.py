@@ -890,7 +890,6 @@ class QuestionGenerationStep(PipelineStep): # like before, but with the new syst
 
 question_generation_step = QuestionGenerationStep() 
 
-
 # Question generation
 async def generate_qadicts_from_para(
     idx,
@@ -1170,27 +1169,28 @@ def convert_directory_to_list(directory_path):
                     simplified_conversations = []
                     simplified_conversations_rag = []
 
+                    system_prompt_rag = obj_conf["SYSTEM"][
+                        "FINAL_ASSISTANT_PROMPT_RAG"
+                    ]
+                    simplified_conversations_rag.append(
+                        {
+                            "from": "system",
+                            "value": system_prompt_rag.replace(
+                                "{data}", data_dict['dict_list'][0]["paragraph"]
+                            ),
+                        }
+                    )
+                    
                     if not DO_NOT_USE_SYSTEM_PROMPTS:
                         # Load system prompts
                         system_prompt_norag = obj_conf["SYSTEM"][
                             "FINAL_ASSISTANT_PROMPT_NO_RAG"
-                        ]
-                        system_prompt_rag = obj_conf["SYSTEM"][
-                            "FINAL_ASSISTANT_PROMPT_RAG"
                         ]
                         
                         simplified_conversations.append(
                             {"from": "system", "value": system_prompt_norag}
                         )
 
-                        simplified_conversations_rag.append(
-                            {
-                                "from": "system",
-                                "value": system_prompt_rag.replace(
-                                    "{data}", data_dict['dict_list'][0]["paragraph"]
-                                ),
-                            }
-                        )
                         
                     for i, (charname, message) in enumerate(
                         dialogues
