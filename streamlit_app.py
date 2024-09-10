@@ -114,8 +114,8 @@ if 'unsaved_changes_made' not in st.session_state:
     st.session_state['unsaved_changes_made'] = False
 # Main Streamlit app function
 def main():
-    st.title("Augmentoolkit Runner")
-    st.write("This app allows you to run Augmentoolkit pipelines and modify configurations.")
+    st.title("Augmentoolkit")
+    st.write("This streamlit app allows you to run Augmentoolkit pipelines and modify configuration files. Don't forget to save!")
 
     # Display the available pipeline options in a selectbox
     folder_configs = scan_folders_for_config()
@@ -123,17 +123,17 @@ def main():
     def set_unsaved_changes_made_false(*args, **kwargs):
         st.session_state['unsaved_changes_made'] = False
 
-    st.sidebar.header("Select Pipeline to Run and super_config.yaml")
+    st.sidebar.header("Select Pipeline to Run")
     pipeline_options = [f"{config['folder']} - {config['config']}" for config in folder_configs]
-    selected_pipeline = st.sidebar.selectbox("Choose a pipeline:", pipeline_options, on_change=set_unsaved_changes_made_false, index=2)
+    selected_pipeline = st.sidebar.selectbox("Choose a pipeline:", pipeline_options, on_change=set_unsaved_changes_made_false, index=1)
 
     # Get the selected pipeline's details
     selected_config = next((config for config in folder_configs if f"{config['folder']} - {config['config']}" == selected_pipeline), None)
 
     if selected_config:
-        st.header("Modify Configurations")
+        st.header("Change settings below.")
         ui_config_path = os.path.join(selected_config['folder'], selected_config['config'])
-        st.subheader(f"Configuration: {ui_config_path}")
+        st.subheader(f"Currently selected path: {ui_config_path}")
         config_data = load_individual_config(ui_config_path)
         
         modified_config = {}
