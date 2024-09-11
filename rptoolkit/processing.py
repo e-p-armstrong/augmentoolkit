@@ -30,7 +30,7 @@ CHUNK_SIZE = int(config["SYSTEM"]["CHUNK_SIZE"])
 
 async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrapper_large: EngineWrapper, stories, idx):
     # NOTE Generate emotions, or pick
-    print("Started datagen")
+    # print("Started datagen")
     data = chunk
     try:
         if PICK_EMOTION:
@@ -124,6 +124,9 @@ async def main():
             {"chunk": fix_text(conversions, seq["chunk"]), "source": seq["source"]} for seq in sentence_chunks
         ]
     if USE_SUBSET:
+        # paragraphs_processed = random.sample(paragraphs_processed, SUBSET_SIZE)
+        random.seed(1048596)
+        random.shuffle(paragraphs_processed)
         paragraphs_processed = paragraphs_processed[:SUBSET_SIZE]
 
 

@@ -10,7 +10,7 @@ PATH:
   INPUT: ./raw_txt_input
   OUTPUT: ./output
   PROMPTS: ./prompts
-PHASES:
+PHASES120:
   PHASE_INDEX: 2
   WORK_IN_PHASES: True
 SYSTEM:

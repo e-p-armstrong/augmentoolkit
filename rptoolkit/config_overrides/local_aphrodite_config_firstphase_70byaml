@@ -3,7 +3,7 @@ API:
   API_KEY_B: not_used_anyway
   BASE_URL_A: http://localhost:2242/v1 # default aphrodite URL
   BASE_URL_B: http://localhost:2242/v1
-  LOGICAL_MODEL_A: ./Mistral-Large-Instruct-2407-123B-exl2/ # This model seems to write alright. Questionable license though. Consider llamas, or RP finetunes? But instruction following is key -- magnun 72b by anthracite did really poorly.
+  LOGICAL_MODEL_A: Llama-3-70B-Instruct-exl2/ # This model seems to write alright. Questionable license though. Consider llamas, or RP finetunes? But instruction following is key -- magnun 72b by anthracite did really poorly.
   LOGICAL_MODEL_B: ./Mistral-Large-Instruct-2407-123B-exl2/
 PATH:
   DEFAULT_PROMPTS: ./prompts
@@ -11,8 +11,8 @@ PATH:
   OUTPUT: ./output
   PROMPTS: ./prompts
 PHASES:
-  PHASE_INDEX: 2
-  WORK_IN_PHASES: False
+  PHASE_INDEX: 0
+  WORK_IN_PHASES: True
 SYSTEM:
   COMPLETION_MODE: False
   CONCURRENCY_LIMIT: 200

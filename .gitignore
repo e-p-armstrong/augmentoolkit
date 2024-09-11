@@ -1,6 +1,7 @@
 .DS_Store
 **/*.pyc
 output*
+hidden*
 log.txt
 output
 **/simplified_data*

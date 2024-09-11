@@ -29,7 +29,7 @@ I used this pipeline to train make a decently large RP dataset to demonstrate th
 
 This pipeline can get a bit pricey if using an API, I recommend using local generation or renting compute on a service like Runpod. The really expensive step is story generation; it might make sense to take a hybrid approach and use an API for all non-storygen steps, but use a powerful local model on rented compute for story generation. This will allow for a good balance of speed and cost.
 
-To get started, point `super_config.yaml` at any of the RPToolkit preset configs. You can check out detailed instructions and guidance in the [RPToolkit section of this README]()
+To get started, point `super_config.yaml` at any of the RPToolkit preset configs. You can check out detailed instructions and guidance in the [RPToolkit section of this README](#rptoolkit)
 
 **OK, back to your regularly-scheduled README.**
 
@@ -65,17 +65,18 @@ Finally, **using the model you create should be easy and valuable:**
 
 [Project Overview (for Intuition and understanding)](https://youtu.be/NADjR17rhls)
 
-[Local Dataset Generation Tutorial]()
+[Local Dataset Generation Tutorial](https://youtu.be/_jA4gRFvZ9o)
 
 [Renting Compute For Datagen (Aphrodite engine)](https://youtu.be/LWK8xg0D4OE)
 
 [Training a Model on Augmentoolkit Data](https://youtu.be/dby8y4hkJQU)
+**IMPORTANT NOTE: if you're creating your Runpod account for the first time in the above video, I would appreciate it if you used this Runpod referral link [https://runpod.io?ref=tjhovswf](https://runpod.io?ref=tjhovswf) to support Augmentoolkit's creation and open-sourcing of additional datasets.**
 
-[Augmentoolkit Original Introduction]()
+[Augmentoolkit Original Introduction/Hype Video](https://youtu.be/CjNQD_PxWjA)
 
-[RPToolkit Introduction]()
+[RPToolkit Introduction/Hype Video](https://youtu.be/gQr88EC_Dfc)
 
-[Classifier Creator Introduction]()
+[Classifier Creator Demo (set to a Chopin piece no less)](https://www.youtube.com/watch?v=pkJbIUv7lLs)
 
 ## Table of Contents:
 1. [Quickstart](#quickstart)
@@ -96,12 +97,12 @@ Finally, **using the model you create should be easy and valuable:**
     - [RPToolkit](#rptoolkit)
         - [Overview](#rptoolkit-overview)
         - [Config step-by-step](#rptoolkit-config-step-by-step)
-        - [Visual Explanation of Steps](#rptoolkit-visual-explanation-of-steps) // new
+        - [Visual Explanation of Steps](#rptoolkit-visual-explanation-of-steps)
         - [Quirks and Tips](#rptoolkit-quirks-and-tips)
     - [Classifier Creator](#classifier-creator)
         - [Overview](#classifier-overview)
         - [Config step-by-step](#classifier-config-step-by-step)
-        - [Visual Explanation of Steps](#classifier-visual-explanation-of-steps) // new
+        - [Visual Explanation of Steps](#classifier-visual-explanation-of-steps)
         - [Quirks and Tips](#classifier-quirks-and-tips) 
 5. [Customization](#customization) 
     - [Abstractions](#abstractions)
@@ -134,7 +135,7 @@ After installing the dependencies:
 - Paste your API key, favorite model name, and the endpoint URL of your preferred AI service, into the relevant fields inside `config.yaml`. Recommendation: [Together.ai with Llama 3.1 8b works really nicely both as a LARGE_LOGICAL_MODEL and as the LOGICAL_MODEL](meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo).
 - Open this project's folder in a command line and type `python processing.py` and hit enter (fires off the script version).
 
-There's also a quickstart [video](TODO!EA) that you can follow along with!
+There's also a quickstart [video](https://youtu.be/YWPmike953I) that you can follow along with!
 
 ### Web UI
 
@@ -173,7 +174,7 @@ I can't wait to see what you'll build.
 ## Usage
 
 ### Relevant video
-Assuming that you have installed things already, using the quickstart, an overview of the important parts of the project can be found [here](). Otherwise, follow the instructions below to install and get an understanding of the overall shape of the project.
+Assuming that you have installed things already, using the quickstart, an overview of the important parts of the project can be found [here](https://youtu.be/NADjR17rhls). Otherwise, follow the instructions below to install and get an understanding of the overall shape of the project.
 
 ### Installation
 First, get the repository onto your computer:
@@ -189,7 +190,7 @@ You may get some messages saying that torchvision and torchaudio require older v
 
 NOTE it is likely more cost-effective for large scale dataset generation to rent GPUs for a couple bucks/hr on a service like Vast.ai or Runpod, than it is to use APIs like Together.ai. However, APIs are faster and require little setup. So the currently advised process is: experiment with APIs, and generate for production with rented compute.
 
-There are two video guides on local dataset generation with Augmentoolkit, [one for running it on your actual computer](), and [another for renting computers with powerful GPUs and using those to cost effectively generate data]().
+There are two video guides on local dataset generation with Augmentoolkit, [one for running it on your actual computer](https://youtu.be/_jA4gRFvZ9o), and [another for renting computers with powerful GPUs and using those to cost effectively generate data](https://youtu.be/LWK8xg0D4OE).
 
 **A note for when you start using Augmentoolkit multiple times: all of Augmentoolkit's pipelines, to some extent, resume previously-started runs if the output folder is not empty. Rename or move it elsewhere if you are not trying to continue interrupted dataset generation, or change the output folder path in the config you're using.**
 
@@ -863,7 +864,8 @@ Open source it! If you've made something cool I'd be honored to add your new pip
 
 Augmentoolkit comes with a few prebuilt [Axolotl](https://github.com/OpenAccess-AI-Collective/axolotl) configs that you can use to train a custom model on the data that you get from its pipelines. However, you are encouraged to tune the hyperparameters and other settings to your specific use case.
 
-There's also a video showing you how to do it: [](TODO !EA)
+There's also a video showing you how to do it: [https://youtu.be/dby8y4hkJQU](https://youtu.be/dby8y4hkJQU)
+**IMPORTANT NOTE: if you're creating your Runpod account for the first time in the above video, I would appreciate it if you used this Runpod referral link [https://runpod.io?ref=tjhovswf](https://runpod.io?ref=tjhovswf) to support Augmentoolkit's creation and open-sourcing of additional datasets.**
 
 
 ## Roadmap
@@ -887,7 +889,7 @@ Also, you can find all the Augmentoolkit help videos — and soon, additional fu
 ## For Businesses
 [I work with AI startups and companies](https://calendly.com/evanpeterarmstrong/discovery-call) that want to create (or improve) specialized LLMs using lots of quality training data. Do you need a great dataset for your business's AI? Or do you want to apply AI models *that **you** own* to a profitable niche that generalist ones are struggling with? I'd be happy [to help you painlessly create the custom dataset (and custom data pipeline) you need](https://calendly.com/evanpeterarmstrong/discovery-call), as well as the documentation to expand on these tools. Given that I made the original version of this thing, I'm probably the best person in the world for this task. You can [schedule a quick call](https://calendly.com/evanpeterarmstrong/discovery-call) to talk about your needs with me using this Calendly link: [https://calendly.com/evanpeterarmstrong/discovery-call](https://calendly.com/evanpeterarmstrong/discovery-call). I'm not just looking for some side gig; I do this for a living.
 
-*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The [consulting option]() is for people who want a bespoke modification (or even a whole new custom pipeline) and guaranteed quality results, fast (it took 13 months of learning and iteration for me to make Augmentoolkit work like it does now). A collaboration would be zero-risk, you have a money-back guarantee.
+*Note* The base version Augmentoolkit is fully open sourced and MIT-licensed. The [consulting option](https://calendly.com/evanpeterarmstrong/discovery-call) is for people who want a bespoke modification (or even a whole new custom pipeline) and guaranteed quality results, fast (it took 13 months of learning and iteration for me to make Augmentoolkit work like it does now). A collaboration would be zero-risk, you have a money-back guarantee.
 
 ---
 
