@@ -1,0 +1,32 @@
+API:
+  API_KEY_A: fw_3ZfqXcYXsA3yiwgCyku9pMUE
+  API_KEY_B: fw_3ZfqXcYXsA3yiwgCyku9pMUE
+  BASE_URL_A: https://api.fireworks.ai/inference/v1 # default aphrodite URL
+  BASE_URL_B: https://api.fireworks.ai/inference/v1
+  LOGICAL_MODEL_A: accounts/fireworks/models/llama-v3p1-70b-instruct # This model seems to write alright. Questionable license though. Consider llamas, or RP finetunes? But instruction following is key -- magnun 72b by anthracite did really poorly.
+  LOGICAL_MODEL_B: accounts/fireworks/models/llama-v3p1-70b-instruct
+PATH:
+  DEFAULT_PROMPTS: ./prompts
+  INPUT: ./hidden_input_largescale
+  OUTPUT: ./output_RPTK_scale
+  PROMPTS: ./prompts
+PHASES:
+  PHASE_INDEX: 2
+  WORK_IN_PHASES: False
+SYSTEM:
+  COMPLETION_MODE: False
+  CONCURRENCY_LIMIT: 20
+  EMOTIONS: ['FEARLESSNESS', 'LUST', 'EMBARASSMENT', 'NIHILISM',
+    'DETERMINATION', 'DESPERATION', 'LOSS', 'NOSTALGIA', 'ANTICIPATION',
+    'TRUST', 'FEAR', 'DISORIENTATION', 'DEGRADATION']
+  INCLUDE_CHUNK_IN_PROMPT: True
+  MODE_A: api
+  MODE_B: api
+  PICK_EMOTION: True
+  RP_PROMPT_END: ''
+  RP_PROMPT_START: ''
+  STOP: True
+  SUBSET_SIZE: 1000
+  USE_MIN_P: True
+  USE_SUBSET: True
+  CHUNK_SIZE: 1500

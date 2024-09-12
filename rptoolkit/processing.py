@@ -3,7 +3,7 @@ import traceback
 from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 from augmentoolkit.utils.write_output_to_file import write_output_to_file
 from rptoolkit.steps import API_KEY_A, API_KEY_B, BASE_URL_A, BASE_URL_B, CONCURRENCY_LIMIT, LOGICAL_MODEL_A, LOGICAL_MODEL_B, MODE_A, MODE_B, OUTPUT_FOLDER, chunking_algorithm, count_tokens, extract_charname, extract_features, fix_text, generate_emotion_constrained, generate_emotion_from_text, generate_scene_card, generate_story, is_story_awesome, is_story_ok, make_id, obj_conf, rate_story, validate_generation, validate_length_callback, validate_not_none, validate_rating_keys_presence, validate_repetition_callback, write_final_dataset_files
-
+from tqdm import tqdm
 
 import nltk
 from tqdm import asyncio as tqdmasyncio
@@ -33,6 +33,8 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
     # print("Started datagen")
     data = chunk
     try:
+        # if os.path.exists(os.path.join(OUTPUT_FOLDER, "emotion_generation", "emotion_generation_resumable_output")):
+        #     print("\n\nPrevious run detected! RPToolkit will resume any in-progress stories.\n\n")
         if PICK_EMOTION:
             data = await generate_emotion_from_text(chunk=chunk, engine_wrapper=engine_wrapper, idx=idx)
             if data:
@@ -113,8 +115,9 @@ async def main():
 
     # any HF path to a transformer model will do, as long as it has a tokenizer
 
+    print("Chunking the text into smaller pieces for processing.")
     sentence_chunks = []
-    for source_text in source_texts:
+    for source_text in tqdm(source_texts):
         sentence_chunks += chunking_algorithm(source_text, max_token_length=CHUNK_SIZE)
 
     conversions = [("  ", " ")]
@@ -136,6 +139,10 @@ async def main():
     else:
         print("No paragraphs found.")
         sys.exit(1)
+
+    
+    print("\n\n\n================== RPToolkit: Running the pipeline ==================\n\n\n")
+    print("NOTE: if there are previously-existing generations, then they will be read. **The progress bar below shows how many complete stories have been generated**, not how far we are along the current step, because this pipeline is depth first so it does multiple different steps at once for different chunks. Basically: don't panic if the progress bar isn't moving. If you see more requests being made, and files being saved, then you're moving along just fine.\n\n\n")
 
     # NOTE Generate the data
     story_data = []

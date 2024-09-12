@@ -2,6 +2,7 @@ import asyncio
 import uuid
 from openai import AsyncOpenAI
 import cohere
+from httpx import Timeout
 
 def make_id():
     return str(uuid.uuid4())
@@ -21,7 +22,7 @@ class EngineWrapper:
         if mode == "cohere":
             self.client = cohere.AsyncClient(api_key=api_key)
         elif mode == "api":
-            self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
+            self.client = AsyncOpenAI(timeout=Timeout(timeout=5000.0, connect=10.0), api_key=api_key, base_url=base_url)
 
     async def submit_completion(
         self, prompt, sampling_params
@@ -94,7 +95,7 @@ class EngineWrapper:
         if "min_p" in sampling_params:
             use_min_p = True
 
-        elif self.mode == "api":
+        if self.mode == "api":
             completion = ""
             timed_out = False
             if use_min_p:

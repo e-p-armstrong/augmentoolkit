@@ -23,7 +23,7 @@ In addition to a complete refactor that makes adding and using many different pi
 4. Story is rated according to a set of criteria for non-repetitiveness and writing quality.
 5. Story is saved.
 
-I used this pipeline to train make a decently large RP dataset to demonstrate the process* **It's got XYZk rows and ABC tokens** — [you can check it out here](TODO !EA link).
+I used this pipeline to train make a medium-sized RP dataset to demonstrate the process* **It's got about 1000 stories rows and 1,169,884 trainable tokens** — [you can check it out here](https://huggingface.co/datasets/Heralax/RPToolkit-demo-dataset)!
 
 *So all you need to get quality RP data is now some stories you like and a button press. Finally you can make AI inspired by the same literature, games, or other fictional media you love — for instance, feed in Lord of the Rings, you get out high fantasy RP sessions. That is the intended utility of this new pipeline.*
 
