@@ -27,6 +27,6 @@ SYSTEM:
   RP_PROMPT_START: ''
   STOP: True
   SUBSET_SIZE: 3
-  USE_MIN_P: False
+  USE_MIN_P: True
   USE_SUBSET: False
   CHUNK_SIZE: 2000
