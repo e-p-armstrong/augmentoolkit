@@ -81,7 +81,7 @@ Finally, **using the model you create should be easy and valuable:**
     - [Web UI](#web-ui)
 2. [Vision (Introduction)](#vision)
 3. [Usage](#usage)
-    - [Relevant Video](#usage-video)
+    - [Relevant Video](#relevant-video)
     - [Installation](#installation)
     - [Basics of running Augmentoolkit](#running-basics)
     - [`super_config.yaml` explanation and usage](#super-config)
@@ -176,7 +176,7 @@ Assuming that you have installed things already, using the quickstart, an overvi
 ### Installation
 First, get the repository onto your computer:
 ```
-git clone https://github.com/e-p-armstrong/augmentool.git
+git clone https://github.com/e-p-armstrong/augmentoolkit.git
 ```
 
 Then, install the project's dependencies.
