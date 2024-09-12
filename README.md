@@ -357,16 +357,6 @@ Do you have data generation or data cleaning code? I welcome PRs adding new pipe
 
 Let's make the best data generation tool in the world!
 
-## Community
-
-Changing Augmentoolkit usually requires a lot of prompting of open-source LLMs. This, and many other aspects of developing with AI, are tricky to get a handle on. I'm [making a community](https://www.skool.com/placeholder-ai-group-name-1872/about) to make this easy for you.
-
-This community isn't the typical fake guru "AI tools" hype BS. It's by and for developers.
-
-Currently we have a full video course on open-source prompting, weekly Q&A calls about developing with AI, and optional monthly 1-on-1s with myself, where I help you with your project in any way I can. There's a tight-knit group of professionals and hobbyists like you.
-
-[I'd love to have you there. Follow this link to see the landing page and decide if it's something you might be interested in joining.](https://www.skool.com/placeholder-ai-group-name-1872/about)
-
 ## Latest Update Info
 
 Augmentoolkit has received a major update as of Jun 12, 2024. Two whole new prompt override folders let you generate data designed to make your model smarter and more detailed, while also getting more instruct data for your pretraining buck. Tweaks have been made based on hard-earned experience to optimize for final model quality. Prompt overhauls make the pipeline more flexible and powerful. YAML now is used instead of JSON for prompts because of newline support. An early version of an entirely new datagen program, built to create datasets even without any text input, can be found in `./pure_synthetic_pipeline`. There's better logging for common errors. Oh, and the code has been almost entirely refactored!
