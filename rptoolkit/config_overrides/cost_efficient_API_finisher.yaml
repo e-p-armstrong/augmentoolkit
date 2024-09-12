@@ -1,6 +1,6 @@
 API:
-  API_KEY_A: fw_3ZfqXcYXsA3yiwgCyku9pMUE
-  API_KEY_B: fw_3ZfqXcYXsA3yiwgCyku9pMUE
+  API_KEY_A: key
+  API_KEY_B: key
   BASE_URL_A: https://api.fireworks.ai/inference/v1 # default aphrodite URL
   BASE_URL_B: https://api.fireworks.ai/inference/v1
   LOGICAL_MODEL_A: accounts/fireworks/models/llama-v3p1-70b-instruct # This model seems to write alright. Questionable license though. Consider llamas, or RP finetunes? But instruction following is key -- magnun 72b by anthracite did really poorly.
