@@ -400,6 +400,8 @@ They're in ShareGPT format for easy training, and can be used to bulk up a train
 
 ### RPToolkit
 
+RPToolkit, as a pipeline, is contained within the larger Augmentoolkit project (has a few other pipelines for other uses). [Click here](#augmentoolkit--infinite-domain-specific-instruct-data) to go to the top of the README. [Click here](#table-of-contents) to see the table of contents.
+
 #### RPToolkit Overview and Quickstart
 
 RPToolkit is the answer to people who have always wanted to train AI models on their favorite genre or stories. This pipeline creates varied, rich, detailed, multi-turn roleplaying data based on the themes, genre, and emotional content of input stories. You can configure the kind of data you generate through the settings or, better still, by changing the input data you supply to the pipeline.
