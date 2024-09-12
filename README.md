@@ -1,6 +1,3 @@
-# TODO add some output examples back to the repo
-# ALSO TODO make some small test .json input for the classifier creator so people can quickerstart with that. 
-
 # Augmentoolkit — infinite domain-specific instruct data
 Your custom LLMs need custom data. [Augmentoolkit creates quality data quickly, cheaply, and painlessly.](#benefits)
 
@@ -95,12 +92,12 @@ Finally, **using the model you create should be easy and valuable:**
         - [Visual Explanation of Steps](#qa-visual-explanation-of-steps)
         - [Quirks and Tips](#qa-quirks-and-tips)
     - [RPToolkit](#rptoolkit)
-        - [Overview](#rptoolkit-overview)
+        - [Overview](#rptoolkit-overview-and-quickstart)
         - [Config step-by-step](#rptoolkit-config-step-by-step)
         - [Visual Explanation of Steps](#rptoolkit-visual-explanation-of-steps)
         - [Quirks and Tips](#rptoolkit-quirks-and-tips)
     - [Classifier Creator](#classifier-creator)
-        - [Overview](#classifier-overview)
+        - [Overview](#classifier-overview-and-quickstart)
         - [Config step-by-step](#classifier-config-step-by-step)
         - [Visual Explanation of Steps](#classifier-visual-explanation-of-steps)
         - [Quirks and Tips](#classifier-quirks-and-tips) 
@@ -401,7 +398,7 @@ They're in ShareGPT format for easy training, and can be used to bulk up a train
 
 ### RPToolkit
 
-#### RPToolkit Overview
+#### RPToolkit Overview and Quickstart
 
 RPToolkit is the answer to people who have always wanted to train AI models on their favorite genre or stories. This pipeline creates varied, rich, detailed, multi-turn roleplaying data based on the themes, genre, and emotional content of input stories. You can configure the kind of data you generate through the settings or, better still, by changing the input data you supply to the pipeline.
 
@@ -554,7 +551,7 @@ As for intermediate outputs: all intermediate outputs are in a folder named for 
 
 ### Classifier Creator
 
-#### Classifier Overview
+#### Classifier Overview and Quickstart
 
 The classifier creator lets you train a whole classification model in minutes. Generation can be done locally or via an API, while model training is done locally on the CPU (classifiers are just that easy to train!)
 
