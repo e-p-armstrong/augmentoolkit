@@ -239,7 +239,9 @@ API:
 Field-by-field:
 - `API_KEY` this is where you put the API key for your favorite API provider. If you're running a local server, put a dummy value in here so that the formatting of the request does not break.
 - `BASE_URL` this is the base URL for the API provider you are using. Some possible values:
-    - http://127.0.0.1:5000/v1/ <- local models.
+    - http://localhost:2242/v1 <- aphrodite (local)
+    - http://localhost:8080/ <- llama.cpp
+    - http://localhost:11434/v1 <- Ollama
     - https://api.together.xyz <- together.ai, which offers quality open-source models for cheap prices. Their service has reliability issues sometimes, however.
     - https://api.groq.com/openai/v1 <- Groq. They offer their API for free but have low rate limits.
     - https://api.openai.com/v1/ # <- OpenAI
@@ -436,7 +438,9 @@ Field-by-field:
 - `API_KEY_A` this is where you put the API key the API provider you are using for the smaller model in this pipeline. If you're running a local server, put a dummy value in here so that the formatting of the request does not break.
 - `API_KEY_B` the same as API_KEY_A except for the bigger model of the two. A good way to remember which is which: "B" stands for "Bigger".
 - `BASE_URL` this is the base URL for the API provider you are using. Some possible values:
-    - http://127.0.0.1:5000/v1/ <- local models.
+    - http://localhost:2242/v1 <- aphrodite (local)
+    - http://localhost:8080/ <- llama.cpp
+    - http://localhost:11434/v1 <- Ollama
     - https://api.together.xyz <- together.ai, which offers quality open-source models for cheap prices. Their service has reliability issues sometimes, however.
     - https://api.groq.com/openai/v1 <- Groq. They offer their API for free but have low rate limits.
     - https://api.openai.com/v1/ # <- OpenAI
