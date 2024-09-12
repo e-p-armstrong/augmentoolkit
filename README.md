@@ -20,7 +20,7 @@ In addition to a complete refactor that makes adding and using many different pi
 4. Story is rated according to a set of criteria for non-repetitiveness and writing quality.
 5. Story is saved.
 
-I used this pipeline to train make a medium-sized RP dataset to demonstrate the process* **It's got about 1000 stories rows and 1,169,884 trainable tokens** — [you can check it out here](https://huggingface.co/datasets/Heralax/RPToolkit-demo-dataset)!
+I used this pipeline to train make a medium-sized RP dataset to demonstrate the process* **It's got about 1000 stories and 1,169,884 trainable tokens** — [you can check it out here](https://huggingface.co/datasets/Heralax/RPToolkit-demo-dataset)!
 
 *So all you need to get quality RP data is now some stories you like and a button press. Finally you can make AI inspired by the same literature, games, or other fictional media you love — for instance, feed in Lord of the Rings, you get out high fantasy RP sessions. That is the intended utility of this new pipeline.*
 
@@ -83,7 +83,7 @@ Finally, **using the model you create should be easy and valuable:**
 3. [Usage](#usage)
     - [Relevant Video](#relevant-video)
     - [Installation](#installation)
-    - [Basics of running Augmentoolkit](#running-basics)
+    - [Basics of running Augmentoolkit](#basics-of-running-augmentoolkit)
     - [`super_config.yaml` explanation and usage](#super-config)
 4. [Each Pipeline In-Depth](#each-pipeline-in-depth)
     - [QA Generation](#qa-generation)
@@ -107,10 +107,10 @@ Finally, **using the model you create should be easy and valuable:**
         - [Generation Step](#generation-step)
         - [Engine Wrapper](#engine-wrapper)
     - [Creating a new pipeline](#creating-a-new-pipeline)
-      - [Naming conventions and folder structure](#naming-conventions)
-      - [Code must-dos](#code-structure)
+      - [Naming conventions and folder structure](#naming-conventions-and-folder-structure)
+      - [Code must-dos](#code-must-dos)
       - [Config.yaml must-dos](#config-structure)
-      - [If you make a new pipeline, you should also...](if-you-make-a-new-pipeline-you-should-also)
+      - [If you make a new pipeline](if-you-make-a-new-pipeline)
 7. [Training a model](#training-a-model)
 8. [Roadmap](#roadmap)
 9. [Contributing](#contributing)
@@ -223,7 +223,7 @@ Pipelines are executed in the order they appear in the pipeline_order from top t
 
 The first pipeline to ever be added to Augmentoolkit, QA generation is focused on creating instruct tuning data for specific facts. This can give an LLM a broad understanding of the facts behind a subject. Especially when combined with RAG, this can produce a bot that is decent at answering factual questions on a specific domain — in other words, this is great for creating domain experts.
 
-#### QA Config.yaml, Step-by-Step
+#### QA Config, Step-by-Step
 
 You can easily customize Augmentoolkit's original pipeline by changing the settings in `config.yaml` or one of the other configs in that pipeline. Augmentoolkit's QA pipeline, specifically, has a wide variety of prebuilt configs for a number of different API providers and local AI servers (Ollama, llama.cpp, Aphrodite Engine, etc.). Let's walk through each field in the YAML file so that you can understand how to change it to suit your needs:
 
@@ -853,9 +853,9 @@ KEY:
 ```
 is bad
 
-#### If you make a new pipeline, you should also...
+#### If you make a new pipeline
 
-Open source it! If you've made something cool I'd be honored to add your new pipeline to the Augmentoolkit project with you as a contributor, so that we can continue to make dataset generation more open for all.
+You should open source it! If you've made something cool I'd be honored to add your new pipeline to the Augmentoolkit project with you as a contributor, so that we can continue to make dataset generation more open for all.
 
 ## Training a model
 
