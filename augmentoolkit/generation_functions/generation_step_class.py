@@ -60,7 +60,7 @@ class GenerationStep:
             level=self.logging_level, format="%(asctime)s - %(levelname)s - %(message)s"
         )
 
-    async def generate(self, arguments={}):
+    async def generate(self, **kwargs):
         # Current file directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -81,7 +81,7 @@ class GenerationStep:
         # Submit generation and return response, retrying as needed
         times_tried = 0
         if self.completion_mode:
-            prompt_formatted = safe_format(prompt, **arguments)
+            prompt_formatted = safe_format(prompt, **kwargs)
             while times_tried <= self.retries:
                 try:
                     response, timeout = await self.engine_wrapper.submit_completion(
@@ -111,7 +111,7 @@ class GenerationStep:
                     new_messages.append(
                         {
                             "role": message["role"],
-                            "content": safe_format(message["content"], **arguments),
+                            "content": safe_format(message["content"], **kwargs),
                         }
                     )
                 except Exception as e:
@@ -164,6 +164,12 @@ class GenerationStep:
                     else:
                         print("Messages:")
                         print(yaml.dump(messages, default_flow_style=False))
+                    try:
+                        print("\n\nResponse:\n-----\n")
+                        print(response)
+                    except UnboundLocalError:
+                        print("No response to print")
+                        pass
                     # if prompt_formatted:
                     #     print(prompt_formatted)
                     logging.error(

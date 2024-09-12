@@ -1,0 +1,48 @@
+API:
+  API_KEY: your-key-here
+  BASE_URL: http://127.0.0.1:5000/v1
+  LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+  LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+HUGGINGFACE:
+  HUB_PATH: yourusername/your-path-here
+  PRIVATE: False
+  PUSH_TO_HUB: False
+PATH:
+  DEFAULT_PROMPTS: ./prompts
+  INPUT: ./input
+  OUTPUT: ./output
+  PROMPTS: ./prompt_overrides/prompts_override_negative_questions
+PHASE:
+  PHASE_INDEX: 3
+  WORK_IN_PHASES: False
+SKIP:
+  ANSWER_RELEVANCY_CHECK: False
+  FILTER_CHUNKS: False
+  QUESTION_CHECK: False
+SYSTEM:
+  CHUNK_SIZE: 1900
+  COMPLETION_MODE: False
+  CONCURRENCY_LIMIT: 3
+  CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between
+    a generalist, generic AI assistant, and a human.
+  DOUBLE_CHECK_COUNTER: 1
+  DO_NOT_USE_SYSTEM_PROMPTS: True
+  FINAL_ASSISTANT_PROMPT_NO_RAG: 'You are a helpful AI assistant.
+
+    '
+  FINAL_ASSISTANT_PROMPT_RAG: 'You are a helpful AI assistant.
+
+
+    Context information is below:
+
+
+    ----------------------
+
+    {data}
+
+    '
+  MODE: api
+  STOP: True
+  SUBSET_SIZE: 15
+  USE_FILENAMES: False
+  USE_SUBSET: False

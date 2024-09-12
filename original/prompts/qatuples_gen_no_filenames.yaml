@@ -1,0 +1,363 @@
+- role: system
+  content: |
+    You are creating a logically-consistent series of questions about different domains, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) you will create suitable questions based on the text, and *only* based on the text. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. The questions you create will lean towards longer, more difficult questions that require some thought to solve — but can still be solved given the paragraphs provided. After each question, you will also write its answer.
+    
+    **You Must:**
+
+    * Create detailed educational questions based on some information.
+    * Do not mention the text, or any other reference, in either the questions or answers. Just ask about the facts or information itself.
+    * Create as many or as few questions as are needed to adequately cover the material in the snippet of the site.
+    * Ensure a logical sequence of questions that build on each other.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your questions if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The answerer should take on any opinions of the author. If it would make sense to ask the author's opinion, the question should ask what the answerer ("you") thinks.
+
+    **Note:**
+
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they WILL NOT HAVE THE TEXT ON HAND, and so if you mention the author they won't have a clue what you're talking about.
+- role: user
+  content: |
+    Text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+- role: assistant
+  content: |
+    **QUESTION:**
+    If the earth had a diameter of only one inch, how far would the moon be from the earth, if it (and its distance from the earth) were also resized proportionally?
+    
+    **ANSWER:**
+    Under this new scale, the moon would be two and a half feet from the earth.
+    
+    **QUESTION:**
+    How do the distances between planets compare to their sizes?
+    
+    **ANSWER:**
+    The distances between planets is much greater than the planets' sizes. For example, if you shrunk everything down so that the earth was one inch in diameter, then the sun would be 323 yards away.
+    
+    **QUESTION:**
+    If you scaled everything down so that the earth had a diameter of one inch, then how far would Mercury and Venus be from the sun?
+    
+    **ANSWER:**
+    Mercury would be one hundred and twenty-five yards from the sun, and Venus would be two hundred and fifty yards from the sun.
+    
+    **QUESTION:**
+    What lies beyond Uranus and Neptune in the solar system?
+    
+    **ANSWER:**
+    Beyond Uranus and Neptune lies nothingness and nothingness, except for small particles and drifting scraps of attenuated vapour, for vast distances.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    The Verus Project aims to establish a secure, privacy-centric, fairly-distributed
+    cryptocurrency. But – beyond this currency – Verus seeks to become much more than
+    a zero-knowledge privacy coin, one with two completely new highly-decentralizing proof
+    of work and proof of stake algorithms.
+    In addition to payments, decentralization, and privacy features, Verus Project
+    plans include its direct use as a currency for provisioning scalable and secure public blockchains as a service (PBaaS), for Verus applications built upon these parallel
+    chains to scale. What this will do is simple: It will enable all people – as well as
+    all nodes on the Verus network to participate in and benefit from a decentralized,
+    blockchain service economy.
+    This paper details the Verus vision and describes the function of Verus as its own
+    platform, and also as a member of the Komodo platform ecosystem, in the context of its
+    first applications. Verus core applications will provide a foundation to build additional
+    applications and services, which will leverage Verus’ automatically created blockchains,
+    called autochains. Autochains – or PBaaS – will be provisioned and notarized by the
+    Verus blockchain miners and stakers, in exchange for Verus curren
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+- role: assistant
+  content: |
+    **QUESTION:**
+    What does the Verus Project aim to establish?
+
+    **ANSWER:**
+    The Verus Project aims to establish a secure, privacy-centric, fairly-distributed cryptocurrency. Beyond this currency (and its payment, decentralization, and privacy features), the Verus Project plans for its use as a currency to provision scaleable and public blockchains as a service (PBaaS) for Verus applications built upon these parallel chains. This will enable all people, as well as all nodes on the Verus network, to participate in and benefit from a decentralized blockchain service economy.
+    
+    **QUESTION:**
+    Describe a fact about Verus' coin.
+
+    **ANSWER:**
+    The Verus coin will be a zero-knowledge privacy coin with two completely new highly-decentralizing proof of work and proof of stake algorithms.
+    
+    **QUESTION:**
+    What will Verus core applications provide?
+    
+    **ANSWER:**
+    Verus core applications will provide a foundation to build additional applications and services. These apps and services will leverage Verus' automatically created blockchains, called "autochains".
+    
+    **QUESTION:**
+    Who will provision and notarize Verus autochains?
+    
+    **ANSWER:**
+    Autochains (or PBaaS) will be provisioned and notarized by the Verus blockchain miners and stakers, in exchange for Verus currency.
+- role: user
+  content: |
+    Text to make questions from:
+    """
+    Size Limit is a performance budget tool for JavaScript. It checks every commit on CI, calculates the real cost of your JS for end-users and throws an error if the cost exceeds the limit.
+
+    ES modules and tree-shaking support.
+    Add Size Limit to GitHub Actions, Circle CI or another CI system to know if a pull request adds a massive dependency.
+    Modular to fit different use cases: big JS applications that use their own bundler or small npm libraries with many files.
+    Can calculate the time it would take a browser to download and execute your JS. Time is a much more accurate and understandable metric compared to the size in bytes.
+    Calculations include all dependencies and polyfills used in your JS.
+    Size Limit CLI
+
+    With GitHub action Size Limit will post bundle size changes as a comment in pull request discussion.
+
+    Size Limit comment in pull request about bundle size changes
+
+    With --why, Size Limit can tell you why your library is of this size and show the real cost of all your internal dependencies. We are using Statoscope for this analysis.
+    """
+- role: assistant
+  content: |
+    **QUESTION:**
+    What is Size Limit?
+    
+    **ANSWER:**
+    Size Limit is a performance budget tool for JavaScript that checks every commit on CI, calculates the real cost of your JS for end-users, and throws an error if the cost exceeds the limit.
+    
+    **QUESTION:**
+    Can you list four features of Size Limit?
+    
+    **ANSWER:**
+    Size Limit has a variety of features and capabilities. Here are a few of them:
+
+    * Size Limit supports ES modules and tree-shaking
+    * You can add Size Limit to GitHub Actions, Circle CI, and other CI systems in order to know if a pull request adds a massive dependency.
+    * Size Limit is modular to fit different use cases, such as big JS applications that use their own bundler, and small npm libraries with many files.
+    * Size Limit can calculate the time it would take for a browser to download and execute your JS. This is useful, because time is a far more accurate and understandable metric than size in bytes. These calculations include all dependencies and polyfills used in your JS.
+    
+    **QUESTION:**
+    Does Size Limit have a CLI?
+
+    **ANSWER:**
+    Yes, Size Limit does have a CLI as a feature.
+    
+    **QUESTION:**
+    What does the `--why` flag do in Size Limit?
+    
+    **ANSWER:**
+    With the --why flag, Size Limit can tell you why your library is of this size, and shows the real cost of all your internal dependencies. Size Limit uses Statoscope for this analysis.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "*" '[{"address":"mike@","convertto":"gold","preconvert":1,"amount":100}]'
+    ```
+    that would effectively park my conversion until the token launches, at which point, I will either find 0.975 GOLD in my wallet, or I will have my CSRVTEST back.
+    Assuming it launches, and I later want to create mycoin, which can be converted to with either GOLD or CSRVTEST, I can create mycoin with:
+
+      ```
+    ./surev -chain=CSRVTEST definecurrency '{"name":"mycoin","options":33, "proofprotocol":2,"currencies":["csrvtest", "gold"],"minpreconversion":[10000,5.1298]}, "initialsupply":20000'
+    ```
+    In "mycoin", I set proofprotocol to 2, which is PROOF_CHAINID. That means that the controller of the chain ID can mint new coins as follows:
+
+      ```
+    ./surev -chain=CSRVTEST sendcurrency "mycoin@" '[{"address":"mike@","currency":"mycoin","mintnew":1,"amount":10000}]'
+    ```
+
+    #### Defining a New blockchain
+    ```json
+      {
+      "name": "NewChain",
+      "options": 264,
+      "currencies": [
+        "CSRVTEST"
+      ],
+      "conversions": [
+        1
+      ],
+      "eras": [
+        {
+          "reward": 1200000000,
+          "decay": 0,
+          "halving": 0,
+          "eraend": 0
+        }
+      ],
+      "notaries": [
+        "Notary1@",
+        "Notary2@",
+        "Notary3@"
+      ],
+      "minnotariesconfirm": 2,
+      "nodes": [
+        {
+          "networkaddress": "111.111.111.111:10000",
+          "nodeidentity": "Node1@"
+        },
+        {
+          "networkaddress": "111.111.111.112:10000",
+          "nodeidentity": "Node2@"
+        }
+      ],
+      "gatewayconvertername": "Bridge",
+      "gatewayconverterissuance": 1000000
+    }
+    ```
+    The bridge definition has overridable defaults
+    ```json
+      {
+      "currencies": [
+        "CSRVTEST",
+        "NewChain",
+        "USD"
+      ],
+      "initialcontributions": [
+        380228.12033701,
+        0,
+        1000000
+      ],
+      "initialsupply": 3000000
+    }
+    ```
+    Now pass those definitions to `definecurrency`
+    ```shell
+    ./surev -chain=csrvtest definecurrency '{"name":"NewChain","options":264,"currencies":["CSRVTEST"],"conversions":[1],"eras":[{"reward":1200000000,"decay":0,"halving":0,"eraend":0}],"notaries":["Notary1@","Notary2@","Notary3@"],"minnotariesconfirm":2,"nodes":[{"networkaddress":"111.111.111.111:10000","nodeidentity":"Node1@"},{"networkaddress":"111.111.111.112:10000","nodeidentity":"Node2@"}],"gatewayconvertername":"Bridge","gatewayconverterissuance":1000000}' '{"currencies":["CSRVTEST","NewChain","USD"],"initialcontributions":[371747.20398827,0,1000000],"initialsupply":3000000}'
+    ```
+    #### Exporting an ID to a new chain
+    ```
+    surev -chain=CSRVTEST sendcurrency "*" '[{"address":"IDNAME@","exportto":"NewChainName","exportid":"true","amount":100,"currency":"csrvtest"}]'
+    ```
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+- role: assistant
+  content: | 
+    **QUESTION:**
+    How can I park a conversion of CSRVTEST to a new token (like GOLD) before that token launches, using the command line?
+
+    **ANSWER:**
+    To park a conversion of CSRVTEST to a new token before the token launches, you can use the `sendcurrency` command with the following format:
+
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "*" '[{"address":"your_address@","convertto":"gold","preconvert":1,"amount":100}]'
+    ```
+
+    This will effectively park your conversion until the GOLD token launches. After the launch, you will either find the converted amount of GOLD in your wallet, or you will have your original CSRVTEST amount returned.
+
+    **QUESTION:**
+    How can I create a new token called "mycoin" using the command line, which can be converted to with either GOLD or CSRVTEST? Assume that GOLD is a new token that just launched.
+
+    **ANSWER:**
+    In order to create a new token called "mycoin" using the command line, you must run a command to define the currency's properties. Here's an example of such a command:
+
+    ```
+    ./surev -chain=CSRVTEST definecurrency '{"name":"mycoin","options":33, "proofprotocol":2,"currencies":["CSRVTEST", "gold"],"minpreconversion":[10000,5.1298]}, "initialsupply":20000'
+    ```
+
+    This command defines a new token named "mycoin". Some important notes about this configuration:
+
+    1. `proofprotocol` being set to 2 means that it's set to PROOF_CHAINID. This means that the controller of the chain ID can mint new coins.
+    2. `options` is a configurable integer, in this case set to 33.
+    3. `currencies` lists which tokens can be converted to mycoin.
+    4. `"minpreconversion": [10000,5.1298]` defines the minimum amounts of CSRVTEST and GOLD needed to convert to mycoin, respectively.
+    5. `initialsupply` sets the initial supply of mycoin to 20,000 units.
+
+    **QUESTION:**
+    What does it mean if `proofprotocol` is set to 2 when defining a new token?
+
+    **ANSWER:**
+    When `proofprotocol` is set to 2 when defining a new token, it means that the proof protocol is set to PROOF_CHAINID, which means that the controller of the chain ID may mint new tokens. This can be done with a command like the following example:
+    ```
+    ./surev -chain=CSRVTEST sendcurrency "mycoin@" '[{"address":"mike@","currency":"mycoin","mintnew":1,"amount":10000}]'
+    ```
+
+    **QUESTION:**
+    How can I define a new blockchain?
+
+    **ANSWER:**
+    You can define a new blockchain using a single command. You need to pass two JSON objects, one for the new blockchain, and another for the overridable defaults of the bridge. Here's an example of how to define a new blockchain:
+
+    ```shell
+    ./surev -chain=csrvtest definecurrency '{"name":"NewChain","options":264,"currencies":["CSRVTEST"],"conversions":[1],"eras":[{"reward":1200000000,"decay":0,"halving":0,"eraend":0}],"notaries":["Notary1@","Notary2@","Notary3@"],"minnotariesconfirm":2,"nodes":[{"networkaddress":"111.111.111.111:10000","nodeidentity":"Node1@"},{"networkaddress":"111.111.111.112:10000","nodeidentity":"Node2@"}],"gatewayconvertername":"Bridge","gatewayconverterissuance":1000000}' '{"currencies":["CSRVTEST","NewChain","USD"],"initialcontributions":[371747.20398827,0,1000000],"initialsupply":3000000}'
+    ```
+
+    Note the following important information used when defining the new blockchain:
+    
+    1. The "name" field defines the name of the chain.
+    2. The "options" property is an integer, in this case it's set to 264.
+    2. You can define an array of currencies that the chain's native currency can be converted into using the "currencies" property.
+    3. You may define the conversion ratios between the chain's native currency, and each currency on the chain, using the "conversions" property.
+    4. The "eras" property defines the block reward, reward decay, halving, and end of each "era" in the chain's lifecycle
+    5. "notaries" is a list of the notaries on the chain.
+    6. "minnotariesconfirm" is an integer for the minimum number of notaries needed to confirm a block.
+    7. The "nodes" property is an array describing the network addresses of the nodes on the chain, as well as their IDs.
+    
+    Note that the bridge definition default overrides are a separate string from the currency definition properties. The bridge can be used to move funds on and off the bew chain. The bridge's JSON object has some of its own properties:
+    1. `currencies` defines the currency tickers that the bridge supports (including the native coins of the chains being bridged).
+    2. `initialcontributions` specifies the initial liquidity for each currency in the bridge.
+    3. `initialsupply` gives the initial supply for the bridge's native token.
+
+    **QUESTION:**
+    How can I export an ID to a new chain?
+
+    **ANSWER:**
+    You can accomplish this with the sendcurrency command. Here's an example, where the ID "IDNAME@" is exported to "NewChainName."
+    
+    ```
+    surev -chain=CSRVTEST sendcurrency "*" '[{"address":"IDNAME@","exportto":"NewChainName","exportid":"true","amount":100,"currency":"CSRVTEST"}]'
+    ```
+
+    Some parts of this command you should be aware of:
+    1. The `sendcurrency` command takes two arguments when exporting an ID: a string `"*"` and another string containing the options.
+    2. `address` is the ID being exported.
+    3. `exportto` is the chain being exported to.
+    4. `exportid` indicates that in this case, `sendcurrency` is being used to export an ID.
+    5. `amount` specifies the amount of currency being sent.
+    6. `currency` specifies the type of currency being sent.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    The author believes that this idea is a delusion. They argue that the history of war shows that increases in the effectiveness of weapons of destruction lead to greater suffering and peril, rather than to peace and the cessation of war.",
+    "The Declaration of St. Petersburg, inasmuch as it is capable of indefinite expansion, is a somewhat awkward precedent for those who in their hearts love war and shield its continuance with apologetic platitudes. How, they ask, can you enforce agreements between nations? But this argument begins to totter when we remember that there is absolutely no superior power or tribunal in existence which can enforce the observance of the St. Petersburg Declaration beyond the conscience of the signatory Powers. It follows, therefore, that if international agreements are of value, there is no need to stop short at this or that bullet: which makes the arbitration-tribunal loom in the distance perceptibly nearer than it did before.At first sight, this agreement excluding the use of explosive bullets would seem to favour the theory of those who see in every increase in the peril of war the best hope of its ultimate cessation. A famous American statesman is reported to have said, and actually to have appealed to the invention of gunpowder in support of his statement, that every discovery in the art of war has, from this point of view, a life-saving and peace-promoting influence.[1] But it is difficult to conceive a greater delusion. The whole history of war is against it; for what has that history been but the steady increase of the pains and perils of war, as more effective weapons of destruction have succeeded one another? The delusion cannot be better dispelled than by consideration of the facts that follow.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+- role: assistant
+  content: | 
+    **QUESTION:**
+    What is the Declaration of St. Petersburg, and what issue does it pose for those who support war?
+
+    **ANSWER:**
+    The Declaration of St. Petersburg is an agreement between nations that is capable of indefinite expansion. It poses a problem for those who support war because it sets a precedent for enforcing agreements between nations, which could potentially lead to the creation of an arbitration tribunal and the reduction of war.
+
+    **QUESTION:**
+    What is the main argument against the idea that increases in the peril of war lead to its ultimate cessation?
+
+    **ANSWER:**
+    The main argument against this idea is that the whole history of war has been a steady increase in the pains and perils of war as more effective weapons of destruction have been developed. This suggests that increases in the peril of war do not lead to its cessation, but rather to its continuation and escalation.
+
+    **QUESTION:**
+    What is your opinion on the idea that every discovery in the art of war has a life-saving and peace-promoting influence?
+
+    **ANSWER:**
+    I believe that this idea is a delusion. The history of war shows that increases in the effectiveness of weapons of destruction lead to greater suffering and peril, rather than to peace and the cessation of war.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    {paragraph}
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")

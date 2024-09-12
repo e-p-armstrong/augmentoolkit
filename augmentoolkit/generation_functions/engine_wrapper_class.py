@@ -2,21 +2,7 @@ import asyncio
 import uuid
 from openai import AsyncOpenAI
 import cohere
-from augmentoolkit.generation_functions.async_llamacpp_api_call import (
-    make_async_api_call,
-)
-
-try:
-    from aphrodite import (
-        EngineArgs,
-        AphroditeEngine,
-        SamplingParams,
-        AsyncAphrodite,
-        AsyncEngineArgs,
-    )
-except:
-    print("Aphrodite not installed; stick to Llama CPP or API modes")
-
+from httpx import Timeout
 
 def make_id():
     return str(uuid.uuid4())
@@ -33,20 +19,10 @@ class EngineWrapper:
     ):
         self.mode = mode
         self.model = model
-        if mode == "aphrodite":
-            engine_args = AsyncEngineArgs(
-                model=model,
-                quantization=quantization,
-                engine_use_ray=False,
-                disable_log_requests=True,
-                max_model_len=12000,
-                dtype="float16",
-            )
-            self.engine = AsyncAphrodite.from_engine_args(engine_args)
         if mode == "cohere":
             self.client = cohere.AsyncClient(api_key=api_key)
         elif mode == "api":
-            self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
+            self.client = AsyncOpenAI(timeout=Timeout(timeout=5000.0, connect=10.0), api_key=api_key, base_url=base_url)
 
     async def submit_completion(
         self, prompt, sampling_params
@@ -59,40 +35,39 @@ class EngineWrapper:
             sampling_params["max_tokens"] = 3000
         if "stop" not in sampling_params:
             sampling_params["stop"] = []
-        if "n_predict" not in sampling_params and self.mode == "llamacpp":
+        if "n_predict" not in sampling_params:
             sampling_params["n_predict"] = sampling_params["max_tokens"]
-
-        if self.mode == "llamacpp":
-            return await make_async_api_call(
-                prompt=prompt, sampling_parameters=sampling_params
-            )
-
-        if self.mode == "aphrodite":
-            aphrodite_sampling_params = SamplingParams(**sampling_params)
-            request_id = make_id()
-            outputs = []
-            final_output = None
-            async for request_output in self.engine.generate(
-                prompt, aphrodite_sampling_params, request_id
-            ):
-                outputs.append(request_output.outputs[0].text)
-                final_output = request_output
-
-            return final_output.prompt + final_output.outputs[0].text
+        
+        use_min_p = False
+        if "min_p" in sampling_params:
+            use_min_p = True
 
         if self.mode == "api":
             timed_out = False
             completion = ""
-            stream = await self.client.completions.create(
-                model=self.model,
-                prompt=prompt,
-                temperature=sampling_params["temperature"],
-                top_p=sampling_params["top_p"],
-                stop=sampling_params["stop"],
-                max_tokens=sampling_params["max_tokens"],
-                stream=True,
-                timeout=360,
-            )
+            if use_min_p:
+                stream = await self.client.completions.create(
+                    model=self.model,
+                    prompt=prompt,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                    extra_body={"min_p": sampling_params["min_p"]},
+                    stream=True,
+                    timeout=360,
+                )
+            else:
+                stream = await self.client.completions.create(
+                    model=self.model,
+                    prompt=prompt,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                    stream=True,
+                    timeout=360,
+                )
             async for chunk in stream:
                 try:
                     completion = completion + chunk.choices[0].delta.content
@@ -115,24 +90,35 @@ class EngineWrapper:
             sampling_params["max_tokens"] = 3000
         if "stop" not in sampling_params:
             sampling_params["stop"] = []
+        
+        use_min_p = False
+        if "min_p" in sampling_params:
+            use_min_p = True
 
-        if self.mode == "llamacpp":
-            return await make_async_api_call(
-                messages=messages, sampling_parameters=sampling_params
-            )
-
-        elif self.mode == "api":
+        if self.mode == "api":
             completion = ""
             timed_out = False
-            stream = await self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                temperature=sampling_params["temperature"],
-                top_p=sampling_params["top_p"],
-                stop=sampling_params["stop"],
-                max_tokens=sampling_params["max_tokens"],
-                stream=True,
-            )
+            if use_min_p:
+                stream = await self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                    extra_body={"min_p": sampling_params["min_p"]},
+                    stream=True,
+                )
+            else:
+                stream = await self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=sampling_params["temperature"],
+                    top_p=sampling_params["top_p"],
+                    stop=sampling_params["stop"],
+                    max_tokens=sampling_params["max_tokens"],
+                    stream=True,
+                )
             async for chunk in stream:
                 try:
                     if chunk.choices[0].delta.content:

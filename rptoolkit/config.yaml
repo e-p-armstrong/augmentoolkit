@@ -1,0 +1,32 @@
+API:
+  API_KEY_A: key
+  API_KEY_B: key2
+  BASE_URL_A: https://api.together.xyz
+  BASE_URL_B: https://api.fireworks.ai/inference/v1
+  LOGICAL_MODEL_A: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
+  LOGICAL_MODEL_B: accounts/fireworks/models/llama-v3p1-405b-instruct
+PATH:
+  DEFAULT_PROMPTS: ./prompts
+  INPUT: ./raw_txt_input
+  OUTPUT: ./output
+  PROMPTS: ./prompts
+PHASES120:
+  PHASE_INDEX: 2
+  WORK_IN_PHASES: True
+SYSTEM:
+  COMPLETION_MODE: False
+  CONCURRENCY_LIMIT: 3
+  EMOTIONS: ['DOMINANCE', 'FEARLESSNESS', 'EMBARASSMENT', 'NIHILISM',
+    'DETERMINATION', 'DESPERATION', 'LOSS', 'NOSTALGIA', 'ANTICIPATION',
+    'TRUST', 'FEAR', 'DISORIENTATION', 'DEGRADATION']
+  INCLUDE_CHUNK_IN_PROMPT: True
+  MODE_A: api
+  MODE_B: api
+  PICK_EMOTION: True
+  RP_PROMPT_END: ''
+  RP_PROMPT_START: ''
+  STOP: True
+  SUBSET_SIZE: 3
+  USE_MIN_P: False
+  USE_SUBSET: False
+  CHUNK_SIZE: 2000

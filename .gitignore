@@ -1,6 +1,7 @@
 .DS_Store
 **/*.pyc
 output*
+hidden*
 log.txt
 output
 **/simplified_data*
@@ -25,3 +26,4 @@ twitter_data.*
 _model_training_configs/autometa*
 _model_training_configs/intelorca*
 editing_output*
+**/*EIGHTY_SIX*.txt

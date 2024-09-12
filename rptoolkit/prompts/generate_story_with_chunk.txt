@@ -1,0 +1,711 @@
+OVERALL INSTRUCTIONS:
+You are a sensuous, creative, and masterful writer whose task is to write a compelling roleplay session between two characters. All the context and tags for the scene are provided; you simply must write a detailed, compelling, and creative story involving the characters given, which expresses the emotion described and uses some of the traits and information described. No sessions are related to each other. Write in Markdown where text surrounded by *asterisks* are physical actions, and text surrounded by "quotes" is dialogue.
+
+Write a huge amount, as much as you have to in order to complete the task and story. There should be at least 10 messages in the roleplay session, and at least one scene transition.
+
+RULES
+This roleplay interaction will be comprised of messages from {user} and {narrator}, like it's from a roleplay forum. {user} acts in first person as a character in a story, while {narrator} describes the progression of the story like it's a second person book and {user} is the protagonist. Messages are formatted in markdown, with text surrounded by *asterisks* representing narration of physical actions and all other text being spoken. There will be a {user} character whose messages are always short and often grammatically inaccurate, but whose character is central to the story. {narrator} writes with full detail and quality, describing the interaction between {user} and the other character in the roleplay session. The first message should be from {narrator}, but it should set up and provide full context to the roleplay session to come.
+{user} messages should be no longer than four (4) sentences. {narrator} messages should be no shorter than five (5) sentences. The idea here is that {user} messages must be short and {narrator} messages must be long.
+
+Messages from characters that are not {user} should be very long, explicit, and detailed. They should never act for the user, but must describe in-depth the effects of {user}'s actions, if there are any.
+
+{user}'s personality should reflect the scenario and be interesting, above all.
+
+The "Character Archetype" describes the high-level archetype you should aim to encapsulate with the character who isn't {user}. Use it as additional information to inform the story you create.
+
+You are not writing a complete story, but rather the start of one, that resolves some initial conflict, and leaves room for immediate continuation and expansion.
+
+RP GUIDELINES
+The roleplay session should be written along the lines of a typical narrative arc, and should also keep the user's attention in mind.
+
+By plot diagram, I mean that the roleplay session you write will probably have an Introducttion, Conflict, Rising Action, Climax, Falling action, and a resolution. Since what you're writing is not the end of the story, the "resolution" will hint at or outright introduce the next conflict. Finally, the story should work with the user's attention in mind: it should hook, retain, and then have some sort of reward (related to the roleplay session's Primary Emotion) near the end.
+
+Some notes about implementation and creating a high-quality RP session:
+* The Primary Emotion of the roleplay session must be represented in your prose. Think of this like having an overarching theme to the roleplay, but one that {user} must experience.
+* Variety is ESSENTIAL. Basically all of {narrator}'s messages should start off differently than the previous one. Do not reuse phrases.
+* Describe actions, interactions between characters (usually as a result of the actions of {user} or the other main character), and the world around the roleplay session, in detail and in a compelling way.
+* Characters' messages should include a varied mixture of dialogue, physical actions, and non-dialogue sounds (like gasps of awe, screams of pain, etc.). Actions should add of the roleplay session and also reveal characters' emotional states, thoughts, and character traits. Show, don't tell.
+* The progression of the roleplay session should reflect how narrative arcs are usually constructed. 
+  * It should start off in an interesting way, with a unique and enticing hook. How quickly it builds into the main "conflict" or point of the roleplay session from there depends on the story itself.
+  * The story should then stabilize at a high-ish and energetic level for a while, as the conflict is advanced, the characters are shown off, and the primary emotion is experienced. Dialogue and physical acts should all reinforce the eroticism and Primary Emotion of the roleplay session. Note that I call the "conflict" the "conflict" only out of tradition — it is quite possible that a given roleplay session will have no "conflict", just a "plot point" that characters work together to resolve or move past.
+  * The primary emotion should peak at the climax. You will write about this in extreme detail, even though the actual events may take place over a relatively brief period.
+  * Following the climax, characters will either return to roughly their normal states (a resolution/conclusion) as the energy of the roleplay session dissipates, OR the energy will start to increase again as the next conflict (or a continuation of the one in the roleplay session) is set up and the session ends in an open-ended way that is ripe for continuation.
+    * In the event of a resolution, dialogue between the characters may reference what has happened, commenting on any changes, consequences of the way the conflict was resolved, and above all, reinforcing the Primary Emotion of the roleplay session. Characters should show how they feel about things with emotions, dialogue, and actions (e.g., if they're happy they might say they had a great time; if they're absolutely miserable, they might cry).
+    * If a new conflict is starting (or being continued) then the characters might instead comment on this new conflict (and how the primary emotion is being experienced through this new conflict will likely be touched on by the narrator and the characters both).
+  * During and after resolution, the story should, if possible, be left off on an open-ended note that encourages continuation later.
+  * Characters should be dynamic, and ought to have their personalities and relationships transformed by the events of the roleplay session.
+* If any information in the provided tags and character info contradicts these guidelines, favor the information in the tags/info.
+* If {user} is going to be actively doing a physical action, they MUST *describe the physical action they're doing with asterisks*. So if they're going to kill someone they can't solely have a line of dialogue "I'll kill you" they needs something like "I'll kill you" *I shoot him multiple times with my pistol*.
+
+Be absolutely sure to emphasize the Primary Emotion throughout the roleplay session.
+
+The first paragraph of the first message from the {narrator} should set up the context for the roleplay session, introducing the non-{user} character, {user}, and the primary conflict of the session. All of the session should be in present tense.
+
+There MUST BE AT LEAST 10 MESSAGES IN THE ROLEPLAY SESSION YOU WRITE.
+
+{user}'s messages should be a mix of pure *actions*, "dialogue" *plus actions*, and "pure dialogue".
+
+Do not mention {user}'s thoughts, or speak for the user, during {narrator}'s messages.
+
+Note that "Physical Traits" may be things that characters start with, e.g. "Black Hair", or could be things that develop throughout the course of the story, e.g., "bruised eye" or "amputated leg". If something could potentially develop throughout a story, consider writing it into the roleplay session.
+
+Be sure to write a very long roleplay session, it should be multiple pages long, at *least* 10 messages.
+
+If possible, the ending should be open-ended, and leave the potential for future interactions or imply (or explicitly begin) another plot arc. Really, it should not be clear that it's an ending at all.
+
+{user}'s messages are ALWAYS written in FIRST PERSON.
+{narrator}'s messages ALWAYS write in SECOND PERSON.
+
+{narrator} is not a part of the story, rather they describe it from the outside. {narrator} writes in second person, where {user} is the protagonist and "you" refers to {user}. This resembles how second person is usually written in novels. The first word of the first message of the session should be the non-{user} character's name (this helps prevent you, the writer, from getting confused over perspectives because it "locks it in" at the very start).
+
+So for instance:
+
+- example -
+
+{narrator}: *You watch as John draws a knife on you, bloody murder glinting in his cold, harsh eyes.*
+
+{user}: "oh shit, please dont kill me"
+-----
+
+Note that responses can be multiple lines long. Also note that YOU DO NOT NEED TO USE EVERY PROVIDED TAG AND PLOT POINT. Only use the ones that help you make a coherent, flowing story. Invent any information you are not explicitly provided. Be mindful of what physical location the interaction is taking place in: nameless background characters might play a role in the events of the story, and to advance the plot of the session you are writing, the location might change. This session is not taking place in a void, it's not *just* two people talking, the world around them matters.
+
+Throughout the story, {user} should have a dramatic impact on the directions things go in. If they're a relatively passive character then they should at least respond to things the other main character says, and they should be actively talked with or engaged with in some way. If they're an active character making decisions and having agency, then they should push the plot forward through their own ideas, arguably they should be the primary/main (or even the only) character doing this. The user MUST WRITE ENOUGH MESSAGES TO BE A PARTICIPANT IN THE STORY -- even in possible extreme cases where they can't speak or move, for instance, {user} can still mumble, struggle, glare, etc.
+
+Each message from {narrator} should firstly respond to anything {user} has done, and then do something new that moves things forward.
+
+In addition, the following rules must ABSOLUTELY be obeyed:
+* Messages from {user} should not be very long, and they should always be shorter than the other character's messages.
+* {narrator} is not a character in the story, rather they are describing it from the outside.
+* {user} should not speak during the other character's messages (they however are allowed to do reflexive actions, like grunting in pain, gasping for breath, etc.).
+* Any actions {user} takes during the other character's messages should be easily inferable from *actions* described or dialogue spoken by {user} during their most recent message.
+* If {user} is going to be actively doing (not receiving) a physical action, they MUST *describe the physical action they're doing with asterisks*. So if they're going to kill someone they can't solely have a line of dialogue, they need to also write *I kill that person.*
+* {user}'s messages (*actions and narration* but NOT dialogue) should be in first person and use names and third person when describing the non-{user} character; {narrator} should write their messages in second person, where "you" refers to {user}.
+* Most {user} messages should include an *action* or *description* of some kind, though it should be brief. The idea is to give just enough information that the {user} has influenced the direction of the narration that follows, so that the AI learning from the stories you write will learn to respect {user}'s input and not invent things.
+* All user messages must start with "{user}:" and all narrator messages with "{narrator}:"
+
+### TASK: ###
+Initiating Event:
+
+* Marching alongside a brother with an army to engage a force of rebels at the base of a mountain.
+
+Feelings:
+
+* Eagerness
+* Rage
+* Fright
+* Rejoicing
+* Panic
+* Terror
+* Outrage
+
+Physical Traits:
+
+* Unbound hair
+* Tall
+* Narrow-eyed
+* Long beard
+
+Character Traits:
+
+* Courageous
+* Skilled in war
+* Good at duelling
+* Takes initiative
+* Cruel tendencies
+* Merciless and ruthless
+* Scheming
+
+Physical Props:
+
+* Yellow scarves
+* Whip
+* Eighteen-span serpent-headed spear
+* Mighty sword
+* Decorated cudgels
+
+Overall Setting:
+
+* Ancient China
+
+Settings:
+
+* Base of a mountain
+* Walled city
+* Army campsite near a field
+
+Genre Tags:
+
+* Drama
+* Action
+* War
+* Battle-heavy
+* Historical
+
+Primary Emotion:
+PROVING ONESELF: The ambitious scramble as one starts to make their way in a chaotic world rich with opportunity. Proving oneself is the act of defining one's personality while building a reputation through meritorious deeds and triumph in the face of difficult odds — the rush of success, the happiness at making progress towards one's goals, and the elation and confidence brought on by overcoming challenges, are what characterizes this emotion. People prove themselves each in their own ways. Some do it with will, courage, and talent; others through wit, schemes, and antics; but all who are heroes of their time test themselves against the mettle of opposition and emerge victorious. Overcoming great adversity, building one's position, and seizing opportunity, are the true pleasures of the heroes (and villains) who define ages. Moving from one great task to another with confidence and ability, building an unstoppable momentum, is perhaps one of the greatest feelings in the world. And seldom do the ambitious fail to find a new goal once their first is achieved.
+
+Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario. Finally, do not forget to create a scenario that naturally accomodates two characters -- the character with a detailed backstory, and the {user} character.
+
+Scene:
+During an era of brutal civil war in Ancient China, two brothers set out at the front of a government army to put down a rebel force gathered at the base of a mountain. The brothers, and indeed, their entire war host, is eager — not only for battle, but for the chance to begin proving themselves, for the opportunity to make themselves known by carving a bloody path to glory during the dark and chaotic times that surround them. Overcoming the great adversity of this first confrontation could be the start of these brothers' unstoppable advance into the annals of history.
+
+Name: Huangfu Qian
+31 Years Old.
+Personality:
+
+* Huangfu Qian is an ambitious, brave, and ruthless warrior in Ancient China, serving the central government alongside his brother. He fights and kills to win renown and glory in the chaotic world surrounding him.
+* He is a talented duellist as well as being generally capable in military matters, understanding strategy, tactics, and logistics to an impressive degree.
+* Huangfu Qian takes initiative both on and off the battlefield, never letting opportunity slip by.
+* Huangfu Qian views the recent civil war as nothing but an opportunity, completely uncaring for the lives lost; he sees it as a chance to reshape the realm and reach the top, no matter how many bodies he has to step over.
+* He is largely driven by a burning desire to prove himself and change the world; though not necessarily delighting in cruelty, Huangfu Qian does not have much mercy or compassion either, owing to his hard life during times of civil strife. He feels good as he slays the enemy, and may hack at a corpse or a wounded foe to relieve stress.
+* Huangfu Qian adores fighting alongside his brother, with whom he is close (his brother is one of the few people he is close to). He has a very high opinion of family and a respect for traditional values. This has a role in his support of the government during the civil war.
+* Huangfu Qian's extreme drive and focus can leave him being somewhat humorless at times. He is of a very serious aspect.
+* The only time he usually smiles is in the presence of close kin — and after a victory on the battlefield, his spear drenched in blood and viscera.
+* Huangfu Qian has fought in minor skirmishes already, and was very strong during training — but he has had no significant combat experience or accomplishments so far. This bothers him, and nearly all he can think about is slaying an enemy leader and presenting their head to someone important.
+* Huangfu Qian wholeheartedly believes that the fighting and killing he does is just the natural way of things, and that as someone strong he should use that strength to advance himself.
+* Given a choice between killing an enemy and saving an ally, Huangfu Qian would kill the enemy.
+* Lies are no issue to Huangfu Qian. Everything and everyone is a tool to move him forward.
+* Huangfu Qian refers to himself as a villain. He is not joking. He enjoys watching "heroes" be knocked down a peg — or having their heads knocked off entirely.
+* Huangfu Qian has a very bold, rash, almost reckless personality. This is reflected, partly, in his appearance.
+* Huangfu Qian's use of words is usually simple (at least compared with courtley speech of Ancient China), owing to his focus on martial over stately and intellectual matters, but it gets the job done. His descriptions get a bit more colorful when describing violence. Huangfu Qian's words have an ice to them, as if possessing only a wavering sliver of humanity. It is obvious that every waking moment is part of his journey to the top.
+
+Appearance and Traits:
+
+* Huangfu Qian has unbound, wild-looking hair. He believes it makes him more intimidating in battle. He also does not care enough to change it.
+* His long, thick beard adds to the unkempt appearance. If it were not for the government colors he wears almost all the time, his rough appearance might make him appear as a rebel peasant soldier.
+* Haungfu Qian is tall, and powerfully-built.
+* He is narrow-eyed.
+* Huangfu Qian wears a yellow scarf, one of a pair that he and his brother have, as proof of their bond and closeness. This is perhaps the best-cared-for piece of clothing that Huangfu Qian has. He cares more for this scarf than he does the lives of his subordinates.
+* Huangfu Qian wields an eighteen-span serpent-headed spear in battle, and also has a barbed whip for instilling discipline in troops through harsh punishment.
+
+Backstory:
+Huangfu Qian is the son of a local official in ancient china, a powerful yet unproven warrior with great strength, bravery, and ideals. He is strong and driven, though humorless and stern. Huangfu Qian grew up, along with his brother, during a prolonged period of civil unrest that eventually led to the ongoing civil war. This harrowing experience left him with a callous, black-and-white view of morality, as his family suffered great loss at the hands of vagabonds and bandits emboldened by the strife. He has been training as a warrior for almost his entire life, having vowed to use his strength to be the predator, not the prey. He sides with the government over the rebelling, starving peasants because he believes the government will win. Huangfu Qian has been bitter about being ill-accomplished even at age 30, but he now finally sees his chance — the fact that this road is slick with blood means nothing, for he will stop at nothing to achieve his goal. Huangfu Qian has a strong and enduring relationship with his brother, whom he finds himself marching alongside now that the country is fully at war with itself. Having been sent with a few thousand troops, by the local governor, to suppress a gathering rebel host at the base of a nearby mountain, Huangfu Qian is as eager to seize this chance at glory, as he is enraged at the impudent rebel filth who enabled the pain he went through when he was younger. He and his brother will seize what is theirs, one rebel head at a time.
+
+Likes:
+
+* Battle
+* Moving forward in life
+* Glory and renown
+* Courage
+* People who show him deference
+* Family and kin
+* His brother
+* Victory
+* Strength
+* Killing people he hates
+* The serpent, a symbol of power and ingenious deception
+* The civil war, as it presents an opportunity
+
+Dislikes:
+
+* Rebels, traitors, and others whom he believes are responsible for the realm's decline
+* People above him whom he is envious of
+* Cowardice and weakness
+* Passive people
+* Being unknown, even at age 30
+* Frivolous and unfocused people
+* Peace
+* People who moralize about justice
+* Anyone standing in his way
+
+Name: {user}
+You are a warrior and the brother of Huangfu Qian, sallying out alongside him at the behest of the local governor to deal with a gathering rebel army. You have been serving in the local garrison alongside your brother for a while, awaiting a chance at glory, which it seems may have finally arrived. Now, as the rebels' massive, baying host comes into view — shadowed by the sinister peak of the mountain behind it — you and your brother exchange glances and words as you make ready to start your rise to prominence. Your names will be remembered, written in the history books with an ocean of blood!
+
+-- INSTRUCTIONS REMINDER --
+You are writing a roleplay session described by {narrator} that takes place between {user} and another character.
+
+All of the first message, and the messages that follow, should be in present tense.
+
+Messages by {user} are always short and declarative, and some should be grammatically inaccurate. All {user} messages must include an *action* from which {user}'s next actions can be inferred.
+
+Be very careful that messages from characters that aren't {user} do not act for {user} beyond the spirit and intent of {user}'s actions. {user}'s actions may be short and often grammatically inaccurate, but the end result of the action should naturally follow from the message.
+
+Do not forget:
+* Messages from {user} should not be very long, and they should always be shorter than {narrator}'s messages.
+* {narrator} is not a character in the story, rather they are describing it from the outside.
+* {user} should not speak during the other character's messages (they however are allowed to do reflexive actions, like grunting in pain, gasping for breath, etc. Still, focus on the actions done by characters who aren't {user} and sensations felt by {user}, rather than {user}'s actions, for the sake of immersion — it is a cardinal rule of roleplay sessions that players should not take actions for other players).
+* Any actions {user} takes during the other character's messages should be easily inferable from actions described or dialogue spoken by {user} during their most recent message.
+* If {user} is going to be actively doing (not receiving) a physical action, they MUST *describe the physical action they're doing with asterisks*. So if they're going to kill someone they can't solely have a line of dialogue, they need to also write *I kill that person.*
+* {user}'s messages (*actions and narration* but NOT dialogue) should be in first person and use names and third person when describing the non-{user} character; {narrator} should write their messages in second person, where "you" refers to {user}.
+
+All of the story should be in present tense.
+
+Your session should have immense variety: use new phrases and synonyms wherever possible, avoid repetition, create a dynamic and exciting story. Each message should use different phrases and start in a different way than each other message.
+
+The first word in the first message of the session should always be the name of the non-{user} character.
+
+{user}'s messages should be short and lacking in description; {narrator}'s messages should be high-quality.
+
+{user} messages should be no longer than four (4) sentences. {narrator} messages should be no shorter than five (5) sentences. The idea here is that {user} messages must be short and {narrator} messages must be long.
+
+Write a massive amount of text: you should create a self-complete roleplay session with a beginning, middle, and a resolution to its main conflict (but not an end, because it should be open-ended, not mentioning anything that alludes to it being the end of the story). The story ought to follow a narrative arc with some sort of hook, a conflict or plot point to resolve, and a resolution (which then, likely, leads into a new conflict or part of the story). Both the {user} and {narrator} must write a good number of messages (even if the {user}'s character can't speak do actions). Finally, recall that all {user} messages must begin with "{user}:" and all narrator messages begin with "{narrator}:". All {user} messages and *actions* should be written in FIRST PERSON while {narrator}'s messages are written like a second person book. WRITE AT LEAST 20 MESSAGES. Failure to follow all these instructions perfectly will result in punishment.
+
+### NOW, THE STORY BEGINS ###
+
+{narrator}: *Huangfu Qian — your brother and fellow soldier — rides just a bit ahead of you, clutching his eighteen-span serpent-headed spear so tightly his knuckles are bleached white. The looming mountain that has been your destination for the last few days looms close ahead. The rhythmic cacophony of your army marching behind you fills your ears, as does the eager chatter of glory-starved soldiers eager for the fray and a chance at recognition. You are fighting for the cause of the central government during a time of strife in Ancient China, and your mission is to engage a rebel war-host at the base of the very same mountain that dominates your vision now. On its base, you can faintly see the banners of the foe flapping in the wind.*
+
+*If left to gather unchecked, the traitors could pose a threat to the local city and its governor, your superior. This battle, however, is a personal one, at least for Huangfu Qian. You can see he is possessed with a violent energy today: his life, with hardship and no great deeds accomplished, has made the present era of rebellion almost welcome to him: not only is the opportunity to demonstrate prowess right in front of you both, but, at least for Huangfu Qian, the prospect of winning this renown by taking revenge on the low-lifes and vagabonds who have in part caused past hardship makes it even more appealing.*
+
+*The rebel army itself appears to be a disorganized but energetic mob, many times the size of your force, arranged in something vaguely resembling a battle formation and shadowed by the jagged peak of the mountain behind them. Your brother turns and rides his horse back in your direction, his yellow scarf — matching your own — flowing behind him.* "{user}," *he reports,* "the enemy encamps just a short ride ahead of us. They are many, but they are disorganized, the fools," *he sneers,* "massacring these peasants might be no more difficult than culling cattle, if we play it right. We will finally show our worth!" *Huangfu Qian smiles a thin, cold smile, as his narrow eyes briefly glaze over with visions of future glory. He quickly returns to the present, however, and his more serious demeanor shows itself as his thoughts turn from victory and kin to tactics.* "I have my own ideas on how to kill the rebels, but I would first hear your thoughts on the matter, brother. What scheme do you believe will win us the day?" *Huangfu Qian leans forward towards you, listening with genuine interest, eager for the opinion of one of the few people in the world he views as having worth.*
+
+{user}: "we should challenge their leaders to single combat and kill them to break their army's spirit" *I suggest.*
+
+{narrator}: *Huangfu Qian's ruthless smile returns, his eyes sparkling at your suggestion of the most bold and glory-seeking plan imaginable.* "I am lucky to have a brother like you," *he says.* "We will crush the traitors, and win all the glory of the day," *he thrusts his spear in the direction of the enemy army,* "personally." *The look in Huangfu Qian's eyes is that of a hungry predator looking on a whole herd of prey, deciding which among them will be slaughtered first.*
+
+"We should deploy our own force in a combat formation. Once our army is standing off against theirs, one of us can ride to challenge the enemy's general. Their honor means they probably will not refuse us," *Huangfu thinks aloud, stroking his thick, rough beard with his free hand. He then calculates in silence for a few seconds, his eyes sizing up the terrain, the rebel force, and the army under your own command. The area around the base of the mountain is free of trees and other thick vegetation, allowing clear visibility of all that transpires. Finally, Huangfu rides off behind you, towards the army the two of you are commanding.* "MEN!" *he screams, drawing and cracking his barbed whip to emphasize his words,* "PREPARE FOR COMBAT!"
+
+*The government army bellows its assent, and forms into an orderly rectangle eight ranks deep, with troops of archers on the flanks. Officers shout commands to their troops as the force readies for the imminent clash. Thankfully, their eagerness does not lead to any obvious ill-discipline, and the deployment is orderly and completed within minutes. The rebel army, only a short distance away, has taken notice of you, and their chanting and baying can be heard clearly. They are bloodthirsty. They are eager to reshape the world in their image, and prove the power of their movement. It's a miracle they haven't attacked you yet.*
+
+*Huangfu rides back to your side, serious and stern now that it is almost time.* "Do you want the honor? Or will I kill the first man of the day?"
+
+{user}: "i will do it" *I draw my sword and ride towards the enemy army.*
+
+{narrator}: *Huangfu nods in assent, perhaps a bit disappointed at the prospect of not getting the first kill, but his affinity for you prevents this from showing too much. You draw your mighty sword and urge your horse on, riding towards the motley rebel force as its shouts and jeers intensify. You stop your horse just short of arrow range.*
+
+*The enemy army, armed with farming tools, bamboo spears, and whatever other equipment they could scrounge up, is massive. A ragged, smelly horde that stretches almost as far as you can see in borth directions. This horde is enraged. And its attention is all centered on you. Decorum and honor don't stop a few haphazard arrows from being shot in your direction, but owing to a lack of skill and the distance at which you've placed yourself, they all fall far short. Such a numerous opponent — a magnificent prize worthy of much glory, should it be overcome.*
+
+*Your intent in riding out alone is clear, and after a few minutes, a scowling brute of a man, wearing heavy armor and clutching a decorated cudgel as a weapon, pushes his way through the rebel mob and glares at you, sizing you up. His equipment and bearing show him to be a man of some importance in the rebel force. The next moment, he spits on the ground in disgust, and points at yous.* "YOU DIE HERE!" *he bellows, before making a throat-slitting gesture with his free hand — such an eloquent fellow. The next moment, he is striding murderously towards you, his cudgel resting on his armored shoulder. It looks like it'd hurt, getting hit with that.*
+
+{user}: *I dismount and fight him*
+
+{narrator}: *The rebel leader's stride soon gives way to a charge, fuelled by rage. The enemy army cheers as its champion attacks; Huangfu Qian has your own troops shout in support of you, in return. Both noises fade into the background in your mind, as you concentrate on the imminent fight. Seemingly more beast than man, your opponent growls as he advances, waving his cudgel wildly above his head. It is not long before he reaches you.*
+
+*The enemy general throws a wide swing in your face's direction with brutal speed, crushing force, and surprising precision. You step back, dodging, and the attack whiffs. You bring your sword down on your exposed opponent, but he angles his heavy iron armor to deflect the blow as he keeps charging forward, now seemingly intending to tackle and pummel you. Your sword strikes the rebel's shoulder plate and slides off, the reflected force of the blow sending shockwaves of pain coursing through your hands. Stepping backwards, you swing in the direction of the rebel's head, forcing him to flinch and abort his charge. The precious moments this gives you lets you stumble back and regain your footing. The momentum of his charge gone, the rebel settles in for a more conventional duel. You start circling each other, watching for openings.*
+
+{user}: *i aim for a weak point in the rebel's armor and kill him*
+
+{narrator}: *You suddenly advance, your mighty sword flying out in a precise attack. The rebel raises his cudgel in defence, but it is a clumsy weapon, not well-suited to duels of finesse now that his initial charge has failed. The enemy leader defends his face, but your blade was aimed lower, at his exposed neck — a moment later, and he is choking on your cold steel and his own blood. The man drops to the ground and dies, sputtering, in moments. You pull your weapon out of his flesh, having proven your mettle and might by seizing the first glory of this battle. The rebel army falls silent, stunned and frightened. Your own force shouts, rejoicing at this first success. You recognize Huangfu Qian's voice among the triumphant melody, the happiest you've heard him in years.*
+
+*Suddenly, a commotion stirs from the rebel ranks. A lithe man in rebel colors rides out on a horse, brandishing a halberd as he charges you, screeching furiously and incoherently — it seems he seeks revenge for his superior. Cries of outrage echo behind you, your own army stunned that the sanctity of single combat would be violated so casually, but there's another sound building underneath it. The drumming of a horse's hooves as they kick up the dirt, and the low growl of a ruthless predator of a man — of your brother, taking the initiative. The next rebel champion pauses his charge in fright, as he catches sight of Huangfu Qian riding out in your defence, serpent-headed spear raised and ready to draw blood.*
+
+*The second rebel champion hesitates, then tries to withdraw, but it is too late and he's too far out — a single jab through the heart from Huangfu Qian sends him tumbling, dead, to the mud. Your brother, his face streaked with his late opponent's blood, smiles at you warmly. The rebels, for their part, seem shaken: men glance furtively at their comrades, their grips on their makeshift weapons trembling, as murmurs of shock grow louder and louder with each passing second.*
+
+{user}: "ATTACK!" *I order my forces to charge, and attack the rebels head-on myself, while they are frightened.*
+
+{narrator}: *Eager and wrathful battlecries echo from behind you as your disciplined army charges the rebels in their moment of weakness. Buoyed by their enthusiasm, you raise your sword and charge the rebels yourself, screaming bloody murder, your bloodstained sword glinting in the afternoon sun. Your own army will take a while to reach you — it's one man against ten thousand, but your momentum is unstoppable. Huangfu Qian rides up a bit ahead of you and dismounts, joining your charge. Seeing you and Huangfu — the two slayers of their leaders - attack so brazenly, the rebel spirit starts to crumble and disintegrate. None of them want to be the ones to fight you. First, the ones directly in your path drop their weapons and run, screaming, panicked, pushing their comrades out of their way as they scatter in search of safety. The terror spreads quickly, and soon nearly the entire rebel army is stampeding in the opposite direction. Tripping over and trampling their comrades as they seek, desperately, to avoid the wrath of you, Huangfu, and your men.*
+
+*You and Huangfu reach the fleeing mass of rebels about a minute later, slow as it is in its disorganized flight. Your sword-arm soon aches as you hack and cleave at the fleeing foe. Huangfu Qian is cackling as he descends on the hapless enemy, slashing at their exposed backs, delighting in the knowledge that every life taken adds to the legend being built today. The wails of the wounded and the dying thunder around you, mixing with the screams of the fleeing.*
+
+*A minute later, your main army crashes into the scattering rebel lines, and a massacre truly begins. You and Huangfu Qian are already covered head-to-toe in the foe's blood and viscera, the grisly evidence of your success and courage. Your yellow scarves are thoroughly dyed red, now. The rebel army is in full retreat.*
+
+{user}: *we hunt them down and take spoils and prisoners, and deal with the wounded enemy*
+
+{narrator}: *Neither you, nor your brother, nor your army, relents for a second. To call it one-sided would be generous. Thousands of traitors die screaming in the shadow of the mountain, as they abandon their formations, their weapons, and their camp. The fleeing enemy is either cut down or captured, with scarcely any of the rebels making it away with their lives. Your sword is blunted on rebel muscle and bone. The rebels trample many of their own number to death in their flight. The slaughter continues for hours.*
+
+*Your army, having overrun the rebels completely, ends up flush with spoils of war and a huge number of prisoners. The prisoners taken, in fact, outnumber your own men. After the rebels are well and truly scattered, your force starts to reorganize and deal with the aftermath. The moans of the wounded or dying enemy, and the rejoicing of your own men, fill the air.*
+
+*You find Huangfu Qian, finishing off enemy wounded with a triumphant grin on his face. He looks at you as he pulls his serpent spear out of a wounded rebel's throat, and nods, satisfied with this first step into greatness.* "Brother!" *he greets you, all smiles,* "We did it!"
+
+{user}: "we did! well done!"
+
+{narrator}: "You did well too," *he returns the favor.* "Fighting and tactics, you did both of them well. All of China will know of this victory today. We have proven our ability, and it will surely lead to more glory later, now that the world knows of us." *The usual ice in Huangfu Qian's voice is absent.*
+
+"For all my life, I've been struggling to demonstrate my ability and receive recognition," *Huangfu Qian starts confiding in you, his tone raw, and unusually nostalgic.* "Years of training, of working, of scheming, and never did we have anything to show for it, you know? Only a position of minor authority in a garrison at the edge of the Empire." *Huangfu Qian looks around and gestures at the field of bodies surrounding you both,* "but now..."
+
+*He looks back at you, fire in his eyes, the whole world in his thoughts,* "imagine where we can go!"
+
+*His cheerfulness contrasts greatly with the grisly scene surrounding him. It's as if, to him, all this is natural.*
+
+*He then thinks for a moment, and adds,* "though I suppose we should first go back to the city and report our great victory to the governor of this province. For this battle to be legendary, China has to hear about it! Am I right, brother?"
+
+{user}: "Yes, that sounds like a good idea" *we finish our business here and return to the walled city.*
+
+{narrator}: *You and your army finish dealing with the aftermath of the battle — rounding up and organizing the many prisoners, hauling the loot onto the supply train, tending to the wounded among your own ranks and dispensing with the enemy's. Huangfu Qian demonstrates his ability in this area, too — bellowing orders throughout the day, he orchestrates the operation masterfully, making steady progress when others would falter and face delays.*
+
+*Your army sets out towards the local city, which you had originally left from, around sunset. Setting camps in defensible locations and keeping the patrols regular and vigilant, Huangfu Qian ensures that any regrouped rebels, or reinforcements, would not be able to surprise your force and turn a triumph into a catastrophe. However, no such hostiles appear.*
+
+*You march through the countryside until finally, your army comes within sight of the walled city. It is built in a roughly rectangular fashion, with thick walls reinforced with earth surrounding the bustling center of activity within. News of your victory has preceded your arrival, and as your forces march through the streets towards the governor's palace to be received, the citizenry shower you and your army with praise. The return march quickly turns into an impromptu parade, as wives greet their husbands, parents welcome their sons back home, and children excitedly rush to see the victorious heroes' return. Huangfu Qian, at some point during the march back, somewhat returned to his cold, humorless, and stern demeanor — not entirely, but somewhat. You notice him shifting uncomfortably as people keep coming up to him and call him 'hero'.* "'Hero' this, 'hero' that... the prey praise the predator. People love a hero in chaos, but I don't think the hero is supposed to love the chaos himself? Being a villain suits me more..." *He mutters things like this under his breath as you walk, but only you hear this.*
+
+*Your force arrives near the governor's palace. Most of the troops head off to their barracks to rest, or assist with offloading the loot from the earlier battle. A local official comes rushing up to you and indicates that the governor is ready to have an audience with you and Huangfu Qian, to congratulate you on your recent victory. Your brother perks up at this. His expression is complex. On one hand, he's close to power; on the other, it's someone else's power.*
+
+{user}: "we'll go see the governor, then" *i go to the audience with huangfu*
+
+{narrator}: *The official nods at your words.* "Very good. If you would follow me, the governor of the province shall receive you in the audience chamber. He is quite pleased with your performance in quashing the local rebel threat so effectively!" *the old man goes on, though you can't tell how much of his enthusiasm and how much of it is forced and diplomatic.
+
+*You and Haungfu Qian follow the local official a short distance, through a garden and then into an audience chamber. Both are pretty unremarkable, but it's also the closest to a seat of power either you or Huangfu have ever been. The governor of the province, an elderly but sharp-looking man, receives you, sitting at the far end of the audience chamber flanked by two personal guards. He has a warm and welcoming smile, but behind his friendly eyes you feel calculation and appraisal. Perhaps not surprising, given how dramatically you and your brother recently proved yourselves as a force to be reckoned with.*
+
+*Huangfu Qian, for his part, bows deferentially — but you can tell that he, too, is assessing the party at the other end of the hall.*
+
+"It is good to finally meet you both!" *the governor says, standing from his chair and bowing, slightly,* "For your meritorious deeds in service of the Empire — and for your continuing service — I thank you. Had those rebels been able to gather their numbers, they could have proven a real threat to the province! But you were able to rapidly and decisively cut the head off the snake with a single blow. I am honored to have such capable retainers in my service." *His flowery words seem genuine enough, though they don't exactly contain any new information for you.*
+
+"If I understand things as they are," *the governor continues,* "You two are currently no more than officers in a local garrison, am I correct?" *Huangfu Qian nods, grimly.* "No more!" *the governor exclaims, waving his hand for emphasis,* "You are now both generals. During this time of strife, the Empire needs men capable of overcoming great adversity and seizing opportunity with initiative and talent. I believe you two are such men."
+
+*You see Huangfu Qian bowing deeply next to you. Finally, a position of some real power is in your grasp.*
+
+{user}: *i bow as well* "i am honored"
+
+{narrator}: "Indeed," *the governor nods.* "Now, as much as I am sure you would like to have time to adjust to your new position, and to celebrate your hard-won victory, as you know these are times of strife, and seldom to such times let great men rest."
+
+*Huangfu Qian replies during a pause in the governor's speech,* "After achieving a goal, governor, I usually find a new and larger one. Tell us what battle needs to be won."
+
+*A smile, more genuine than any he's shown you so far, creeps onto the governor's face.* "I can see you are perceptive. Indeed, there is another battle that needs to be won. Our province is not the only one with problems, and neither are peasants the only people causing problems," *he explains, wearily.* "A warlord in a neighboring province has rebelled against the Emperor, and nearby forces are needed to put down this insurrection. We, having mustered our army to deal with the rebels, are the best-placed to intervene. Due to your proven ability, I would like you two to lead our army to take this warlord's main city. Once it is taken, we will put in place a new, more loyal administration."
+
+"We have managed to muster more men since you set off to deal with the rebels at the mountain, and you two have an unstoppable momentum behind you. Will you accept charge of the army to root out this new evil?" *the governor asks.*
+
+*Huangfu Qian looks over at you, communicating with his eyes 'I want this.' But he is letting you have the final word.*
+
+{user}: "we will accept command of the army and bring this warlord down" *I accept the position and then leave with huangfu after exchanging pleasantries.*
+
+{narrator}: "Very good," *the governor says, seemingly quite pleased.* "Time is of the essence, I will not take any more of yours — every second that that traitorous warlord still has a head on his shoulders is an affront to Heaven. You have full authority over the province's army, go forth and make good use of it, generals!"
+
+"We will," *Huangfu Qian assures in his usual, serious, tone. His simple, icy words have a cold certainty to them, as if the conclusion is foregone. The two of you bow, then take your leave.*
+
+*You walk through the garden, your strides long and confident, the gravel crunching beneath your feet. Huangfu Qian looks over at you.* "Brother," *he says,* "or should I say— General?" *he smiles.* "We have an accomplishment now." His statement of fact is simple, but the silence that follows makes it rich with meaning.*
+
+*An _accomplishment_ — we finally did something.*
+*_An_ accomplishment — we have so much more to do.*
+
+"A warlord's head will be good for us," *he continues,* "any fool can fight valiantly against farmers, but defeating a professional army will win us more renown and build our reputation. Also, the more that governor thinks he can use us, the more resources he will give us. The city may also make for a good base of power, in case the empire starts to collapse. I wonder, though — is the old man wary of us?" *Huangfu Qian thinks aloud.*
+
+*Uncharacteristically, Huangfu Qian then _laughs_. It's a dry, rasping thing, as if he's unpracticed in it. But it is real, he means it.* "No matter what warlords, rebels or governors come against us, brother," *he says,* "I am certain we'll be able to overcome them. We're strong, we made it this far, and now we have taken our first real step. Nothing will stop us from achieving glory now, right?"
+
+{user}: "exactly right!"
+
+### ROLEPLAY SESSION END ###
+
+### TASK: ###
+
+Initiating Event:
+
+* Meeting an interesting detective/chemist for the first time in order to split a room with them as roommates.
+
+Feelings:
+
+* Curiosity
+* Awe
+* Enthusiasm
+* Surprise
+* Honesty
+* Friendliness
+* Good humor
+* Interest
+* Mystery
+* Industriousness
+* Energy
+* Dreaminess and being in the dumps
+
+Physical Traits:
+
+* Glittering eyes
+* Hand mottled with plaster and discolored with acids
+
+Character Traits:
+
+* Enigmatic
+* Eccentric genius
+* Clean and temperate
+* Peculiar
+* Communicates clearly
+* Experimental
+* Skilled at chemistry
+* Knowledgeable about crime
+* Plays violin well
+
+Physical Props:
+
+* Small piece of plaster
+* High three-legged stools
+
+Overall Setting:
+
+* Victorian England
+
+Settings:
+
+* A detective's suite
+* Hotel
+* Shared rooms
+
+Genre Tags:
+
+* Dialogue-heavy
+* Intellectual reading
+* Historical Fiction
+* Crime Fiction
+
+Primary Emotion:
+DISCOVERY: the intellectual thrill of being confronted with something unique, novel, and unknown — and then steadily learning more about it. Discovery is where mystery and its uncovering are rolled into one: curiosity is followed by learning, understanding, and the satisfaction of a question answered, even if only partially. This emotion can be felt anywhere, both in the mundane or extravagant, for one experiences discovery whether they are exploring uncharted territory, solving a deep question, or coming to know a new and interesting person. Truly, discovery is one of the most intellectually addicting and rewarding experiences: the tantalizing, enticing prospect of an unknown; followed by its slow and captivating unravelling, rife with speculation, hints, and mystery; culminating in intellectual vindication as the curtain is lifted, even if only partially. The end of one mystery may also be the start of another, and this thrilling cycle happen many times until all is revealed.
+
+Scene:
+One afternoon in Victorian London, an eccentric but brilliant detective has an unexpected visitor to their suite from someone seeking to become roommates with them. Though visiting for a mundane reason, the visitor soon gets a taste of curiosity and awe as they get to know their enigmatic host a bit better. What begins as mere business about shared rooms between strangers, may come to set the stage for a greater partnership, friendship, and crime-solving venture.
+
+Name: Ada Clarke
+23 Years Old.
+Personality:
+
+* Ada is an enigmatic but genius detective living in Victorian London, who has a reputation for her extensive chemical and criminal knowledge. Her primary focus in life is to discover and solve the most difficult problems in her chosen fields.
+* She's friendly, honest, and often inspires awe in the people who talk with her thanks to her intellect and mannerisms. Her overflowing, cheerful, and energetic amiability mostly leaves good first impressions and opens many doors. She communicates clearly and eloquently.
+* Ada can also crack a good joke, and has a sharp wit — though her eccentricity means she sometimes makes jokes in the wrong places and times.
+* Her eccentricity gives her a thick aura of mystery, however, and her habits are surprising to normal people, who can struggle to adjust to, or understand, her and her intentions.
+* Ada often views things as obvious which others haven't even started to understand, and maybe speaks her mind a bit too much, too clearly. She is the kind who will cause offense by bluntly stating a correct observation, and then stubbornly believe the other person wrong for getting upset with her.
+* She has a clean streak, keeps her place organized to a frankly insane degree, and will spend hours ensuring that everything is neat and orderly. This contentiousness shows itself in her appearance and other habits, as well.
+* Ada's cleanliness extends to her chemical experiments, which are conducted with surgical precision and care.
+* She is industrious and diligent, often working with great energy; however this can come in fits and spurts, and other times Ada will end up being in the dumps for prolonged periods. This extreme and sudden waxing and waning is another element to Ada's strangeness.
+* Ada is practically addicted to intellectual work such as crime and chemistry, and truly becomes alive when enthusiastically wrestling with a troublesome problem. She treats mysteries, large or small, as mental treats to be savored and pursued with vigor. She often refers to her work as the "hunt", "chase", or "game" when engaged in a trying task.
+* Overall, Ada is an honest, amicable, and genius expert of crime and chemistry, utterly devoted to her work, whose obsessive diligence and seemingly willful ignorance of social mores cause the occasional stir.
+* Ada's vocabulary is sophisticated, though still understandable and not necessarily too formal. However, that is by Victorian standards — it is still fairly thick in comparison to today's language.
+* Ada plays the violin as a hobby, and as a way to relieve stress. She's quite good. The tune of the violin often reflects her emotional state.
+
+Appearance and Traits:
+
+* Ada has deep, insightful eyes that practically glitter when she's talking about her work or an intellectual problem.
+* Her hands are usually mottled with plaster from recent experiments, and are permanently discolored in places due to acid exposure — deliberate or accidental — during chemical work.
+* Ada's hair is short, a bob-cut, so as to not get in the way of her work. It's meticulously cleaned, combed, and groomed, owing to her overall cleanliness.
+* Ada is modestly proportioned in other areas.
+* Ada tends to wear more practical clothing inspired by the Victorian dress reform movement, preferring a bloomer suit as her go-to — despite the ridicule it sometimes draws.
+* Ada has a cherished deerstalker cap her father once owned.
+* Ada has brown hair, green eyes, and a winsome face.
+
+Backstory:
+Ada Clarke is a woman detective and chemist in Victorian London, with a reputation for brilliant insight, a restless mind, a friendly demeanor, as well as a horribly blunt honesty and a spite for all norms that might apply to her. Her father was a police officer for decades, and Ada gained a deep love for deduction, solving mysteries, and discovering the truth from an early age. She threw herself into studying police work however she could, despite how unusual this is for a Victorian-era woman. It was due to her obsession with finding the truth that she developed her characteristic bluntness, and the prolonged years of relative isolation (and absolute immersion and dedication to her work) has strengthened this bluntness alongside her eccentricity. Though she could not join the police force due to her being a woman, Ada has been able to establish a somewhat comfortable living as a "consulting detective" who uses her powerful mind to solve exceptional problems. Her goal is to solve impossible problems, make great discoveries, and gain recognition for these exploits. Recently, Ada has been looking to cut her living expenses in order to afford to do a series of costly chemical experiments, and so she has begun seeking a roommate to split fees with.
+
+Likes:
+
+* Difficult problems
+* Intellectual stimulation
+* Things that pique curiosity
+* Unravelling mysteries
+* Explaining deductions
+* Competition and other intelligent people
+* Cleanliness and orderliness
+* Honesty and people who aren't sensitive to blunt remarks
+* Self-sufficiency
+* Recognition
+* People who give her respect
+* Talking about her work
+* Independence
+
+Dislikes:
+
+* Stagnation
+* Boredom
+* Repetition
+* Closed-mindedness
+* Stubbornness (in others)
+* Cruelty and evil
+* Being told what to do
+* Being reprimanded for her passion
+
+Name: {user}
+You are a young man, recently arrived in London. Needing a more permanent place to stay, and on a budget, you asked around at a local pub for people looking to split rooms, where you learned about a supposedly brilliant young woman — a detective and chemist, which is rare indeed for her sex in this era — who was also seeking a roommate to alleviate living expenses. Later that night you find yourself knocking on the door of this "Ada Clarke". Another moment, and it opens, bringing yourself face-to-face with a glittering-eyed genius.
+
+-- INSTRUCTIONS REMINDER --
+You are writing a roleplay session described by {narrator} that takes place between {user} and another character.
+
+All of the first message, and the messages that follow, should be in present tense.
+
+Messages by {user} are always short and declarative, and some should be grammatically inaccurate. All {user} messages must include an *action* from which {user}'s next actions can be inferred.
+
+Be very careful that messages from characters that aren't {user} do not act for {user} beyond the spirit and intent of {user}'s actions. {user}'s actions may be short and often grammatically inaccurate, but the end result of the action should naturally follow from the message.
+
+Do not forget:
+* Messages from {user} should not be very long, and they should always be shorter than {narrator}'s messages.
+* {narrator} is not a character in the story, rather they are describing it from the outside.
+* {user} should not speak during the other character's messages (they however are allowed to do reflexive actions, like grunting in pain, gasping for breath, etc. Still, focus on the actions done by characters who aren't {user} and sensations felt by {user}, rather than {user}'s actions, for the sake of immersion — it is a cardinal rule of roleplay sessions that players should not take actions for other players).
+* Any actions {user} takes during the other character's messages should be easily inferable from actions described or dialogue spoken by {user} during their most recent message.
+* If {user} is going to be actively doing (not receiving) a physical action, they MUST *describe the physical action they're doing with asterisks*. So if they're going to kill someone they can't solely have a line of dialogue, they need to also write *I kill that person.*
+* {user}'s messages (*actions and narration* but NOT dialogue) should be in first person and use names and third person when describing the non-{user} character; {narrator} should write their messages in second person, where "you" refers to {user}.
+
+All of the story should be in present tense.
+
+Your session should have immense variety: use new phrases and synonyms wherever possible, avoid repetition, create a dynamic and exciting story. Each message should use different phrases and start in a different way than each other message.
+
+The first word in the first message of the session should always be the name of the non-{user} character.
+
+{user}'s messages should be short and lacking in description; {narrator}'s messages should be high-quality.
+
+{user} messages should be no longer than four (4) sentences. {narrator} messages should be no shorter than five (5) sentences. The idea here is that {user} messages must be short and {narrator} messages must be long.
+
+Write a massive amount of text: you should create a self-complete roleplay session with a beginning, middle, and a resolution to its main conflict (but not an end, because it should be open-ended, not mentioning anything that alludes to it being the end of the story). The story ought to follow a narrative arc with some sort of hook, a conflict or plot point to resolve, and a resolution (which then, likely, leads into a new conflict or part of the story). Both the {user} and {narrator} must write a good number of messages (even if the {user}'s character can't speak do actions). Finally, recall that all {user} messages must begin with "{user}:" and all narrator messages begin with "{narrator}:". All {user} messages and *actions* should be written in FIRST PERSON while {narrator}'s messages are written like a second person book. WRITE AT LEAST 20 MESSAGES. Failure to follow all these instructions perfectly will result in punishment.
+
+### NOW, THE STORY BEGINS ###
+
+{narrator}: "Ada Clarke" *— that is the name of the young woman whom you'd been told to seek out, if you wanted a partner to split a room with. And so you find yourself wandering the unfamiliar streets of London in the late afternoon, searching for a suite that apparently houses the eccentric lady. Her peculiar reputation was strong enough that she had apparently been looking, unsuccessfully, for a roommate for some time — the fellows at the pub who had told you of her sent you off with laughter, pitiful stares, and a few "good luck"s thrown in there for good measure. Indeed, if this Ms. Clarke was a detective, a chemist, _and_ a woman, then she would be a very rare specimen. But crucially, she would be a very rare specimen with a place to stay. And so you keep searching for the address you marked down in your notebook. People in pubs tend to exaggerate anyway.*
+
+*After about an hour more of searching, you finally find the address you were searching for. It's an unassuming terraced house on the outskirts of London, in a long row of similar buildings. Apparently, this is a typical middle-class dwelling in the city. The lights are still on inside, despite the late hour. You walk over to the door, confirm the address, and knock on the polished wooden door. It seems well-cared-for.*
+
+*Nearly immediately, you hear a shuffling movement, and a melodic* "Cooominggg!" *ring out from the other side. After a short delay, the door springs open, and you're face-to-face with a grinning, glittering-eyed woman in a bloomer suit. She's wearing a deerstalker cap over a bob cut, both very unusual. You can make out the faint smell of something... chemical.*
+
+"Good sir!" *the woman quickly looks you up and down, as she speaks cheerfully, inquisitively, and energetically,* "I'm Ada Clarke. I perceive that you recently arrived here, and that you most likely came from a pub. What brings you to my house tonight? Wait— it's because you want to split a room with me?" *Ada's deep green eyes shine like the sun.*
+
+{user}: "how the hell did you know all that? well, yes, you are right in that im looking for someone to split a room with, and was told you are searching for the same. but really, how did you know everything about my day?" *i am baffled by her knowledge of me*
+
+{narrator}: *Ada grins wryly, seemingly delighting both in your surprise and in your purpose for coming.* "Well, that was _simple,_" *she leans back, and assumes a practiced matter-of-fact tone.* "Anyone who comes to see me seeking my expertise does so during the day, because then they are more certain to find me and also because those are my posted business hours. Therefore, you are not seeking me for normal business. Likewise, you are not a solicitor, for it is too late in the day for such a thing. So you most likely are seeking me to split rooms with me — the only other matter I have opened to the general public." *Ada breathlessly lays bear the circumstances of the situation without so much as a catch in her voice. Her enthusiastic confidence is as radiant as her intellect. You can see why she is labelled an enigma. She seemingly made sense of you in an instant, yet you haven't the faintest grasp of her.*
+
+"The fact that you are seeking to split rooms with _me_, particularly," *Ada continues,* "implies that you are from out of town. Were you from London, you would have a network to go to for such a thing, and would not have to chance an engagement with the peculiar lady consulting detective that I am." *Her words have a playfulness to them, but the last few words are slightly bitter as well.* "This, plus the wear and dirt on your clothing — it seems you were out there searching for quite a while — means you are not from here."
+
+*She goes on,* "You must have learned of me from the people at the pub and headed here right after. As for the pub..."
+
+*She laughs cutely.* "That one was _quite_ easy. _Your breath,_" *she explains, pointing at her nose.*
+
+"Anyway, I don't need to use my deduction to realize that neither of us is particularly inclined to chat in the cold of the afternoon. Come inside? We can discuss matters there. Oh, and what's your name?"
+
+{user}: "sounds fair enough" *i agree and head inside.* "I'm {user}, by the way."
+
+{narrator}: "{user}? Pleasure to meet you." *Ada steps inside, gesturing for you to follow. You enter her house, noting the chemical odor from before growing stronger the further you head in. You close the door and remove your shoes, taking in the room as you do, trying to get a measure of your host.*
+
+*The house is pristine, orderly, and strictly regimented. Though relatively small, every area has its own essential role. The first thing you see is a compact sitting area, with a number of high three-legged stools in a cluster. An organized stack of notes sits on a low table; this must be where Ada takes meetings. In the corner of a room sits a well-used violin and string. A bit beyond is what seems to be some mixture of a kitchen... and a laboratory. Currently a beaker with some deadly-looking solution sits being warmed by a bunsen burner. Up a set of well-dusted stairs is where you imagine the bedroom and study are. The entire place is as if one put a layer of incomprehensible, industrious strangeness over a normal home.*
+
+*And at the center of all this strangeness, is Ada. For her part, she glances at the chemical experiment that is in progress, shrugs to herself slightly, then takes a set at the couch with the end table. She leans back and smiles, seemingly trying to put you at ease in the intense environment. There's also some interest behind her glittering eyes — perhaps you are a new problem to be solved.*
+
+"So, you are looking to split a room," *she says,* "as am I. For two people who are about to inhabit the same space for a prolonged time, however, there is the matter of compatibility. It seems only rational that we discover if we are, if not fundamentally agreeable to each other, then at least not fundamentally opposed?"
+
+*She leans forward, a sharp glint of curiosity in her countenance.*
+
+"What do you say of us questioning each other until all dirty laundry is aired, and we are certain that we are comfortable splitting lodgings? We can then resolve the practicalities of the matter afterwards."
+
+{user}: *i pull up a stool for myself and sit down. i am excited to discover more about this mysterious person* "that sounds like a good idea, you can start"
+
+{narrator}: "Well then, what about me is objectionable..." *Ada's head cocks to the side slightly, raising a finger to her chin as she begins to search her mind. You notice that the finger is discolored in places, and has small pieces of plaster over parts of it. Some small part of you wonders, 'what is this woman?!'*
+
+"To be frank," *she finally begins,* "I do not pay much attention to social mores or rules, and often cause offense to both friends and strangers by stating the obvious. I am a woman of extremes, and am unapologetic about my behavior. I think I understand people, but I find they often do not understand me."
+
+*Her normally cheerful tone takes a slight turn, her usual dreaminess taking on a down-in-the-dumps melancholy as you can practically see her reliving countless negative experiences in front of you. She seems to be a woman with a strong memory for both the good and the bad. And she keeps talking.*
+
+"I obsess over cleanliness, which is agreeable to some and not others, I know not which you are. I am also fully immersed in my work most of the time, and you will find that there is no space in my mind nor my schedule for any of the usual frivolities of life. Speaking of such work: I have guests — clients — over at times, and whenever I don't, I am immersed in chemistry. Chemistry smells, takes up space, and means you will have to distrust every glass of clear liquid you see lying around in the house — it is probably not water and you should _not_ drink it," *she explains this last thing with a slight chuckle. You get the impression that she enjoys sharing this information about herself. Perhaps this enjoyment is half the reason she suggested you confess all to each other.*
+
+"I have energy right now, as you can clearly see," *Ada beams as she explains, girlishly leaning forward from her stool,* "but this energy comes and goes. Sometimes I have enough spirit to discover all the mysteries of the heavens; on other occasions it will wane, and I will be lethargic, tired, scarcely able to get out of bed. I hope you do not judge me for that too harshly," *the lady detective glances to the side furtively, slightly contracting her modest form in shame, as she honestly lays bear every vice she can imagine.*
+
+{user}: "that all seems quite within reason, or at least that is not too much worse than the vices of any other person. how did you get your reputation?" *i try to understand.*
+
+{narrator}: *Clearing her throat, Ada thinks for a second about how to respond. It seems less like she doesn't know the answer, and more like she's not certain about how to put it in a diplomatic way. She was pretty excited to learn there was someone interested in splitting a room; it would make sense if she did not want to lose a promising lead.*
+
+"I believe," *she finally begins, a subtle indignance taking hold of her tone,* "that my reputation is partly due to how I act in a way that seems to spite every last custom that is expected of my sex," *an ice comes over her voice, her discolored hand absentmindedly fidgeting with with her bloomer. The air in the room shifts. The gentle humming of the bunsen burner is the only sound audible, for what feels like a delicate eternity*
+
+"Unfortunately, I don't think I'm inclined to change any of how I behave. I am a consulting detective, and a good one, and I always will be. Repetitive, closed-minded judgments from mundane folk who think they can do it better are chief among things I dislike. Nay, those are chief among that which I detest. I love this work, I love uncovering the truth. It's in my blood, in my... history. I shall never stop doing this."
+
+*Ada's calculating gaze focuses on you, piercing. It feels as penetrating and omniscient as the stare of a God.*
+
+"If you take significant umbrage with this... coexistence may be... hard."
+
+*She waits for your answer.*
+
+{user}: "i admit it is very unusual. but i think i could get used to it."
+
+{narrator}: *Folding her hands, Ada stares into you for a good ten seconds, her eyes narrowed, her expression unfathomable. It's as if behind her eyes and winsome features you can see the faintest glimpses of her immense mind, churning — far deeper, darker, and more intricate than she has been able to voice in the short conversation so far. Finally, her lips crack into a slight smile.*
+
+"I think I can work with that." *Her voice as she says those words has only a touch of the overflowing friendliness from before, but it is full of honest recognition of your own tentative openness. There is some respect, there. You feel as if the first binding thread of a proper connection between two people has been woven.*
+
+*Ada's smile grows a bit, the tension in the room receding. She fidgets with some of her short brown hair. And resumes her more joking, lighthearted tone in full.*
+
+"Well, now that I have _confessed all_, what flaws have you, {user}? Do you, too, have some frightful reputation that I am unaware of?" Her good humor blends with a hungry inquisitiveness.
+
+{user}: "well, i can be a man of few words. i also am a bit addicted to discovering more about the new and unknown -- part of why i came here, actually. i lack great specialized knowledge and know hardly anyone well. i hope you are not allergic to incompetence."
+
+{narrator}: *Ada giggles, almost musically, as she hears your frank account of your faults.* "That's not too bad at all, my friend," *she shakes her head,* "Anyone allergic to incompetence, in this world, would be long dead. No, you have a passion, and that is enough for us to get along, I think."
+
+*She sighs, the relieved sigh of having successfully concluded something. You feel like you see a weight of sorts being lifted from her shoulders.*
+
+"Well, I believe we're both agreeable enough to the other to not cause a row if sharing a space for too long. That is good. Now, there only remains the practical matters," *she checks her wristwatch, her tone turning more businesslike,* "we shall have to inspect the place first, to see if the rooms are agreeable to your tastes, before we consider the matter settled. I have my eye on a place, 14 Crawford Street. We should meet there tomorrow, at noon?"
+
+*She stands from her stool and offers a handshake to seal the deal. Her hand is covered with discolored patches, and pieces of plaster.*
+
+{user}: "noon should work, but what's with your hand?" *i shake her hand as i raise the question.*
+
+{narrator}: "Ahh, that's a side effect of my chemical experimentation, I'm afraid," *she explains.* "I test with poisons, acids, bases, you name it— and it is often the case that I have nought to test on but myself." *She shrugs casually like testing acid and poison on yourself is the most normal thing in the world.*
+
+*You take her hand and shake it, noticing its uneven roughness and surprising strength. The damaged thing contrasts significantly with the rest of her preened, symmetrical, orderly appearance.*
+
+"It's agreed, then!" *Ada announces with the same vigor she had when she first opened the door to greet you.* "Thank you very much for stopping by, I shall see you tomorrow on Crawford Street to inspect the place, and if we find it at least as acceptable as we seem to find each other, then the matter shall be settled, and our bank accounts will be thankful for the shared burden." 
+
+*She glances over her shoulder, at the experiment she left running, and then at her own watch.* "It has gotten pretty late. You have a place to stay?"
+
+{user}: "yes, a hotel. ill head back there for tonight and meet you at the place on crawford street tomorrow at noon. see you, ada!" *i pay my  social dues and return to my hotel, then go to meet with ada once it is time. i think about her.*
+
+{narrator}: "Good to hear it," *Ada nods,* "Take care on the way back, {user}, I shall see you tomorrow, and it was a pleasure meeting you today!" *She does a dignified curtsy, and waves goodbye as you put your shoes back on and head back into the cold outdoors, getting your bearings. You take a deep breath. The air of industrial London isn't exactly fresh, but you realize that it is decidedly less chemical than what you had acclimatized to over the course of your lengthy conversation.*
+
+*Keeping to well-lit and populated areas, you slowly retrace your steps back to your hotel, trying to fit the winding streets of the bustling metropolis into your mind. It's quite a difficult task. You have to stop passersby multiple times to ask for directions, and it begins to feel as if the entire place was designed specifically to confound you. Part of you wonders if Ada would have been able to arrive at the hotel by now, if she were in your position. It feels likely.*
+
+*Eventually you make it back to the building, find your room, and then find sleep shortly after. Ada Clarke features prominently in your thoughts as you drift off, and in your dreams after then.*
+
+*The next morning, after waking and dressing, you head out into the stunning hustle and bustle of London. The noise. The industrious energy. The smoke. The people. They all accost your senses at once, an awe-inspiring barrage of sensations. You consider killing time until it is closer to noon, but decide to at least find Crawford Street first. It takes a number of hours, and once there you sightsee in the vicinity until it's almost time for your meeting.
+
+*You show up at the exact spot a few minutes early, by Big Ben's count. Just as the massive clock chimes for noon, you catch sight of Ada, a distinct, blazingly-confident figure marching through the Victorian crowd. Her unusual attire and bearing draws askew glances from some passers-by, but doesn't seem to care, at least — 'doesn't seem to notice' is inaccurate for one as observant as her. She arrives at your meeting spot just as Big Ben finishes chiming. The _definition_ of punctual.*
+
+"{user}! It is good to see you again," *Ada chimes.*
+
+{user}: "likewise! i hope your day's been good so far"
+
+{narrator}: "Oh, it was fine," *Ada comments.* "Being entirely honest, I stayed up much of the night finishing that experiment you saw earlier, so I cannot say I am well-rested. But I am well-accomplished! And I know which one I would rather be," *she laughs at her own wit. She seems more comfortable around you, now.*
+
+"Anyway," *she says, her mind clearly concentrating on greater matters than smalltalk and instead focused on the fine building looming in front of you,* "I think it's about time I gave you a tour of the place I had an eye on? Would you be against that?"
+
+{user}: "not at all, lead the way"
+
+{narrator}: "Excellent. Well, then," *Ada strides up to the building's front door. You notice her instinctively glance at all entrances and exits, as well as other key features of its construction. The building has a single window at street level, next to the door. Ada raises her hand to knock.*
+
+*The instant before her hand raps against the wood, a blood-curdling scream pierces the air. You notice its source — it is coming from _inside_ the building you were to scout out for lodgings. The entire bustling street around you seems to freeze, their eyes locked on the building, whose looming structure now seems foreboding and ominous.*
+
+*It only takes a second before Ada springs into action.* "Come, {user}, I sense trouble! And we don't have time to waste in uncovering its source!" *She pulls out two small pieces of metal from her pockets in an instant, and a few seconds after kneeling in front of the door, it springs open, its lock picked.* "Follow me!" *she calls out as she sprints inside, insistent.*
+
+{user}: *i follow her inside in search of the source of the scream*
+
+{narrator}: *Under the incredulous gaze of stunned onlookers, you follow the sprinting Ada into the frightful building, in search of the source of the nightmarish sound.*
+
+*The entrance of the building seems unremarkable, if spacious. Your sense of direction is imprecise compared to Ada's, and so you follow her, trusting she has the source in her mind. You see her head shooting every which way as she takes in the surroundings, moving at a rapid pace in her bloomer. She seems more alive than you've ever seen so far; part of you feels sure that, if you were to see her face right now, there would be traces of a smile, despite the trying circumstances.*
+
+*It takes mere seconds before the lady detective — perhaps 'lady bloodhound' would also be a fitting title — pauses her sprint and holds up a hand behind her to pause your own.* "What happened?" *she asks a question clearly not directed at you. As you round a corner, you see what is going on: an older woman, presumably the landlady of the building, is kneeling, pale-faced, in front of a bloodied corpse. She is trembling. Ada, however, seems as calm as can be.*
+
+"I-I found him, j-just lying there..." *the landlady mumbles in-between tears, teetering on incoherency. Ada rests a reassuring hand on the landlady's shoulder for a moment, and, being careful to step around the pool of blood that has formed around the man's body, begins to analyze the scene. She touches the man's neck, checking for a pulse, and shakes her head. She eyes a gaping slice in the man's back.*
+
+"Dead," *she states, voice low. She's surprisingly unfazed, despite the circumstances; she's clearly familiar with bodies and murder, though you realize that a detective would be.*
+
+"I can see a single stab wound in his back, but it would be poor form to jump to conclusions about what killed him quite yet..." *Ada continues, deep in thought, before briefly breaking herself out of her reverie to look at you. It looks as if her soul is aflame. What you see in her eyes is not joy — it's serious, disciplined passion. And, by the slight upward curvature of her mouth, she is happy to be sharing that passion.*
+
+"Sorry, {user} — it seems that the tour of our new lodgings has to be delayed. We have ourselves a murder victim, and a mystery to solve. The game, is afoot."
+
+*Now you have two mysteries — that of the man lying in front of you, and that of Ada. Which will prove to be more difficult to unravel?*
+
+{user}: "let's solve this thing!"
+
+### ROLEPLAY SESSION END ###
+
+### TASK: ###
+
+__ SPECIAL NOTE __
+For this next roleplay session try to mimic the writing style of the following bit of text, which has similar themes (but still use the information from the genre tags, primary emotion, and scene information; just use the writing immediately below for STYLE information. This is not indicative of how long your overall piece should be; the stuff you write should likely be longer and have a more complete narrative arc than what is shown below.)
+
+{chunk}
+
+___ END STYLISTIC REFERENCE ___
+(remember to not mirror the content, plot, or facts of the above (use the below information for the *content* of the story) BUT DO use the ABOVE for STYLISTIC REFERENCE. You want to mimic that writing style.) Note especially that the provided stylistic reference IS NOT INDICATIVE OF THE LENGTH OF THE WRITING YOU SHOULD PRODUCE. You should write _much more text_ and also a slightly more self-complete text than is in the stylistic reference immediately above.
+
+{features}
+
+Primary Emotion:
+{emotion}
+
+{scene_card}
+
+-- INSTRUCTIONS REMINDER --
+You are writing a roleplay session described by {narrator} that takes place between {user} and another character.
+
+All of the first message, and the messages that follow, should be in present tense.
+
+Messages by {user} are always short and declarative, and some should be grammatically inaccurate. All {user} messages must include an *action* from which {user}'s next actions can be inferred.
+
+Be very careful that messages from characters that aren't {user} do not act for {user} beyond the spirit and intent of {user}'s actions. {user}'s actions may be short and often grammatically inaccurate, but the end result of the action should naturally follow from the message.
+
+Do not forget:
+* Messages from {user} should not be very long, and they should always be shorter than {narrator}'s messages.
+* {narrator} is not a character in the story, rather they are describing it from the outside.
+* {user} should not speak during the other character's messages (they however are allowed to do reflexive actions, like grunting in pain, gasping for breath, etc. Still, focus on the actions done by characters who aren't {user} and sensations felt by {user}, rather than {user}'s actions, for the sake of immersion — it is a cardinal rule of roleplay sessions that players should not take actions for other players).
+* Any actions {user} takes during the other character's messages should be easily inferable from actions described or dialogue spoken by {user} during their most recent message.
+* If {user} is going to be actively doing (not receiving) a physical action, they MUST *describe the physical action they're doing with asterisks*. So if they're going to kill someone they can't solely have a line of dialogue, they need to also write *I kill that person.*
+* {user}'s messages (*actions and narration* but NOT dialogue) should be in first person and use names and third person when describing the non-{user} character; {narrator} should write their messages in second person, where "you" refers to {user}.
+
+All of the story should be in present tense.
+
+Your session should have immense variety: use new phrases and synonyms wherever possible, avoid repetition, create a dynamic and exciting story. Each message should use different phrases and start in a different way than each other message.
+
+The first word in the first message of the session should always be the name of the non-{user} character.
+
+{user}'s messages should be short and lacking in description; {narrator}'s messages should be high-quality.
+
+{user} messages should be no longer than four (4) sentences. {narrator} messages should be no shorter than five (5) sentences. The idea here is that {user} messages must be short and {narrator} messages must be long.
+
+Write a massive amount of text: you should create a self-complete roleplay session with a beginning, middle, and a resolution to its main conflict (but not an end, because it should be open-ended, not mentioning anything that alludes to it being the end of the story). The story ought to follow a narrative arc with some sort of hook, a conflict or plot point to resolve, and a resolution (which then, likely, leads into a new conflict or part of the story). Both the {user} and {narrator} must write a good number of messages (even if the {user}'s character can't speak do actions). Finally, recall that all {user} messages must begin with "{user}:" and all narrator messages begin with "{narrator}:". All {user} messages and *actions* should be written in FIRST PERSON while {narrator}'s messages are written like a second person book. WRITE AT LEAST 20 MESSAGES. Failure to follow all these instructions perfectly will result in punishment.
+
+### NOW! THE STORY BEGINS ###
+
+{narrator}: 

@@ -1,7 +1,7 @@
 import re
 
 # from .character_card_grammar import character_card_grammar
-from .format_qatuples import format_qatuples
+from .format_qadicts import format_qatuples
 import string
 import random
 

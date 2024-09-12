@@ -1,3 +1,4 @@
+# May be incomplete
 protobuf 
 sentencepiece 
 torch
@@ -7,9 +8,7 @@ matplotlib
 nltk 
 openai
 aiohttp
-gradio
 pyyaml
-gradio_log==0.0.4
 asyncio
 httpx
 orjson
@@ -18,3 +17,4 @@ pyarrow
 datasets
 scikit-learn
 chardet
+streamlit
