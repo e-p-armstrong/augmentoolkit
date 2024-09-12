@@ -5,7 +5,7 @@ Now you can [turn any raw text](#quickstart) into a high-quality custom dataset 
 
 Being extensible, new pipelines can be added to Augmentoolkit incredibly easily, and there are already three of them: the original QA generation pipeline, the classifier creator, and a pipeline for generating creative writing data based on inputted fictional stories.
 
-Augmentoolkit is an AI-powered tool that lets you create domain-specific datasets, using open-source AI.
+Augmentoolkit is an AI-powered tool that lets you create domain-specific data, using open-source AI.
 
 ![](images/augmentoolkit-logo.png)
 
