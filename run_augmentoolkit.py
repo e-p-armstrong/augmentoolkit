@@ -1,3 +1,4 @@
+print("Augmentoolkit is starting to run! If this is your first time running this it might take a few moments to start due to imports and such.")
 # Named "run_augmentoolkit" so that you can type "run" and tab instead of typing "augmentoolkit" and having it clash with the folder we import stuff from.
 # Orchestrate and execute pipelines according to the super-config in order.
 import subprocess

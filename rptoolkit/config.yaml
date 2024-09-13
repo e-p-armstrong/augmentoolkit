@@ -1,16 +1,16 @@
 API:
   API_KEY_A: key
   API_KEY_B: key2
-  BASE_URL_A: https://api.together.xyz
+  BASE_URL_A: https://api.fireworks.ai/inference/v1
   BASE_URL_B: https://api.fireworks.ai/inference/v1
-  LOGICAL_MODEL_A: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
+  LOGICAL_MODEL_A: accounts/fireworks/models/llama-v3p1-70b-instruct
   LOGICAL_MODEL_B: accounts/fireworks/models/llama-v3p1-405b-instruct
 PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./raw_txt_input
   OUTPUT: ./output
   PROMPTS: ./prompts
-PHASES120:
+PHASES:
   PHASE_INDEX: 2
   WORK_IN_PHASES: True
 SYSTEM:
