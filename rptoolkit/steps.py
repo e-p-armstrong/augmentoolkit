@@ -226,7 +226,7 @@ def write_output_to_file(output, directory, uuid):
     file_path = os.path.join(directory, f"{uuid}.txt")
 
     # Write the output to the file
-    with open(file_path, "w") as file:
+    with open(file_path, "w", encoding="utf-8") as file:
         file.write(output)
 
     print(f"Output written to {file_path}")
@@ -241,7 +241,7 @@ class DepthFirstPipelineStep(PipelineStep): # RPTOOLKIT is depth-first rather th
     def read_previous_output(self, idx):
         save_path_file = super().make_save_path_file(idx)
         if os.path.exists(save_path_file):
-            with open(save_path_file, "r") as f:
+            with open(save_path_file, "r", encoding='utf-8') as f:
                 output_data = json.load(f)
             return output_data
         return False
@@ -260,7 +260,7 @@ class DepthFirstPipelineStep(PipelineStep): # RPTOOLKIT is depth-first rather th
             write_output_to_file(full_output, self.intermediate_output_path_full, id)
             
             os.makedirs(self.save_path, exist_ok=True)
-            with open(save_path_file, "w") as f:
+            with open(save_path_file, "w",encoding='utf-8') as f:
                 f.write(json.dumps(output_data))
             
             return output_data
@@ -920,10 +920,10 @@ def is_story_awesome(story):
     return True
 
 def write_final_dataset_files(story_data, name):
-    with open(f"{OUTPUT_FOLDER}/final_outputs/{name}_complete_format.json", "w") as file1: # complete_format includes 
+    with open(f"{OUTPUT_FOLDER}/final_outputs/{name}_complete_format.json", "w", encoding='utf-8') as file1: # complete_format includes 
         json.dump(story_data, file1, indent=4)
     sharegpt_data = [convert_object_to_sharegpt(story) for story in story_data]
-    with open(f"{OUTPUT_FOLDER}/final_outputs/{name}_sharegpt.json", "w") as file2:
+    with open(f"{OUTPUT_FOLDER}/final_outputs/{name}_sharegpt.json", "w", encoding='utf-8') as file2:
         json.dump(sharegpt_data, file2, indent=4)
     
 

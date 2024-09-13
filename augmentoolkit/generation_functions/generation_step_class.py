@@ -75,7 +75,7 @@ class GenerationStep:
                 current_dir, "..", "..", self.default_prompt_folder, self.prompt_path
             )
 
-        with open(full_prompt_path, "r") as pf:
+        with open(full_prompt_path, "r", encoding='utf-8') as pf:
             prompt = pf.read()
 
         # Submit generation and return response, retrying as needed
