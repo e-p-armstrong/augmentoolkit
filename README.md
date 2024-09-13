@@ -419,7 +419,7 @@ pipeline_order:
     config: "config.yaml"
 ```
 
-Add your API keys for `together.ai` and `fireworks.ai` to `rptoolkit/config.yaml`.
+Add your API key for `fireworks.ai` to `rptoolkit/config.yaml`. If you want to use a different provider, change the BASE_URL to that provider's OpenAI-compatible API.
 
 Then run `python run_augmentoolkit.py`.
 
