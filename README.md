@@ -316,7 +316,7 @@ SYSTEM:
 ```
 
 Field-by-field:
-- `CHUNK_SIZE` is the maxmimum number of characters to use in a "chunk" of text that will be fed through the pipeline. A chunk is what questions are generated from — it's kinda the core building block of QA datasets built by Augmentoolkit.
+- `CHUNK_SIZE` is the maximum number of characters to use in a "chunk" of text that will be fed through the pipeline. A chunk is what questions are generated from — it's kinda the core building block of QA datasets built by Augmentoolkit.
 - `USE_FILENAMES` determines whether the AI is allowed to see the name of the file from which each chunk of text/information was taken, when it's generating questions. If this is on, it means that questions may often have the format "What is X, according to filey?" This can be useful if your files are books — so you might get "How do you sabotage a car, according to Simple Sabotage by the OSS?" if it's on. Compare this to when it's off — in which case the question might simply be "How do you sabotage a car?" This is good to have if you want the bot to have some meta-knowledge, but should usually be left off. If you want the AI to know the authors behind files, then format the names as `textname, by author name`. The comma is important.
 - `COMPLETION_MODE` is a boolean that determines whether prompts are sent to the provider in chat mode (default, what happens when it's set to `false`) or completion mode (what happens when it's set to `true`). Completion mode can produce higher-quality responses with some models, but many providers don't support it.
 - `CONCURRENCY_LIMIT` is an integer; it's the maximum number of concurrent requests that can be made to the provider. This is useful for controlling costs and preventing rate-limiting.
@@ -527,7 +527,7 @@ Moving onto the other fields:
 - `SUBSET_SIZE` controls the number of chunks fed through the pipeline if USE_SUBSET is on. This is useful for debugging and testing quickly and cheaply — only the first `SUBSET_SIZE` chunks will be processed.
 - `USE_MIN_P` changes the sampling parameters of the story generation pipeline to include an experimental min_p setting. Very few API providers support this, and the setting itself is highly untested in RPToolkit, but min_p is traditionally exceptional for creative writing tasks. Notably, aphrodite supports min_p as it is used in Augmentoolkit. Consider enabling for potentially better performance with local dataset generation using Aphrodite.
 - `USE_SUBSET` is a boolean that determines whether the pipeline uses a subset of the input data.
-- `CHUNK_SIZE` is the maxmimum number of characters to use in a "chunk" of text that will be fed through the pipeline. A chunk is what an emotion and story features are extracted from, and eventually what the story is generated in reference to. Larger chunks will paradoxically cost less because you'll get fewer stories out of your dataset overall.
+- `CHUNK_SIZE` is the maximum number of characters to use in a "chunk" of text that will be fed through the pipeline. A chunk is what an emotion and story features are extracted from, and eventually what the story is generated in reference to. Larger chunks will paradoxically cost less because you'll get fewer stories out of your dataset overall.
 
 
 #### RPToolkit Visual Explanation of Steps
