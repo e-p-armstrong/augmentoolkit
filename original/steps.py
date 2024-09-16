@@ -1150,6 +1150,7 @@ def convert_directory_to_list(directory_path):
     master_list = []
     simplified_list = []
     simplified_rag_list = []
+    plain_qa_list = []
 
     for filename in os.listdir(directory_path):  # for each file
         if filename.endswith(".json"):  # if it's a conversation file
@@ -1164,6 +1165,14 @@ def convert_directory_to_list(directory_path):
                     dialogues = process_multiturn_functions.extract_conversation(
                         data_dict["conversation"]
                     )
+                    
+                    conversations = []
+                    for d in data_dict["dict_list"]:
+                        q = d["question"]
+                        a = d["answer"]
+                        conversations.append({"from": "human", "value": q})
+                        conversations.append({"from": "assistant", "value": a})
+                    plain_qa_list.append({"conversations": conversations})
 
                     # Convert to simplified format
                     simplified_conversations = []
@@ -1229,6 +1238,7 @@ def convert_directory_to_list(directory_path):
     with open(write_2, "w") as file:
         for item in simplified_list:
             file.write(json.dumps(item) + "\n")
+            
 
     if PUSH_TO_HUB:
         # Create a temporary JSON file with train split
@@ -1249,6 +1259,11 @@ def convert_directory_to_list(directory_path):
     write_3 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data_rag.jsonl"
     with open(write_3, "w") as file:
         for item in simplified_rag_list:
+            file.write(json.dumps(item) + "\n")
+            
+    write_4 = obj_conf["PATH"]["OUTPUT"] + "/plain_qa_list.jsonl"
+    with open(write_4, "w") as file:
+        for item in plain_qa_list:
             file.write(json.dumps(item) + "\n")
 
     if PUSH_TO_HUB:
