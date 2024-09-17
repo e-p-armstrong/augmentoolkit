@@ -34,7 +34,7 @@
     If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
     """
     -----------
-    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
   content: |
     **QUESTION:**
@@ -81,7 +81,7 @@
     Verus blockchain miners and stakers, in exchange for Verus curren
     """
     -----------
-    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
   content: |
     **QUESTION:**
@@ -240,7 +240,7 @@
     ```
     """
     -----------
-    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
   content: | 
     **QUESTION:**
@@ -333,7 +333,7 @@
     "The Declaration of St. Petersburg, inasmuch as it is capable of indefinite expansion, is a somewhat awkward precedent for those who in their hearts love war and shield its continuance with apologetic platitudes. How, they ask, can you enforce agreements between nations? But this argument begins to totter when we remember that there is absolutely no superior power or tribunal in existence which can enforce the observance of the St. Petersburg Declaration beyond the conscience of the signatory Powers. It follows, therefore, that if international agreements are of value, there is no need to stop short at this or that bullet: which makes the arbitration-tribunal loom in the distance perceptibly nearer than it did before.At first sight, this agreement excluding the use of explosive bullets would seem to favour the theory of those who see in every increase in the peril of war the best hope of its ultimate cessation. A famous American statesman is reported to have said, and actually to have appealed to the invention of gunpowder in support of his statement, that every discovery in the art of war has, from this point of view, a life-saving and peace-promoting influence.[1] But it is difficult to conceive a greater delusion. The whole history of war is against it; for what has that history been but the steady increase of the pains and perils of war, as more effective weapons of destruction have succeeded one another? The delusion cannot be better dispelled than by consideration of the facts that follow.
     """
     -----------
-    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you")
 - role: assistant
   content: | 
     **QUESTION:**
@@ -360,4 +360,4 @@
     {paragraph}
     """
     -----------
-    Reminder: do not mention the text, the provided information, the paragraphs, or the author. Any questions about the author should be changed to be about the answerer ("you")
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you")

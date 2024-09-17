@@ -19,6 +19,7 @@ SKIP:
   ANSWER_RELEVANCY_CHECK: False
   FILTER_CHUNKS: False
   QUESTION_CHECK: False
+  CONVERSATION_GENERATION: False
 SYSTEM:
   CHUNK_SIZE: 1900
   COMPLETION_MODE: False
@@ -46,3 +47,8 @@ SYSTEM:
   SUBSET_SIZE: 15
   USE_FILENAMES: False
   USE_SUBSET: False
+SCRAPING:
+  USE_GUTENBERG: False
+  START_URL: "https://www.gutenberg.org/ebooks/search/?query=essay&submit_search=Go%21"
+  MAX_BOOKS: 20
+  MAX_FAILURES: 5

@@ -1,8 +1,10 @@
+from bs4 import BeautifulSoup
 from logging import INFO
 import os
 import json
 import re
 import sys
+import requests
 from tqdm import asyncio as tqdmasyncio
 from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 from augmentoolkit.generation_functions.pipeline_step_class import PipelineStep
@@ -51,6 +53,7 @@ PRIVATE = parse_bool(obj_conf["HUGGINGFACE"]["PRIVATE"])
 PUSH_TO_HUB = parse_bool(obj_conf["HUGGINGFACE"]["PUSH_TO_HUB"])
 USE_FILENAMES = parse_bool(obj_conf["SYSTEM"]["USE_FILENAMES"])
 OUTPUT_DIR = os.path.abspath(obj_conf["PATH"]["OUTPUT"])
+INPUT_DIR = os.path.abspath(obj_conf["PATH"]["INPUT"])
 PROMPTS_DIR = os.path.abspath(obj_conf["PATH"]["PROMPTS"])
 DEFAULT_PROMPTS = os.path.abspath(obj_conf["PATH"]["DEFAULT_PROMPTS"])
 USE_STOP = parse_bool(obj_conf["SYSTEM"]["STOP"])
@@ -59,6 +62,7 @@ SKIP_ANSWER_RELEVANCY_CHECK = parse_bool(obj_conf["SKIP"]["ANSWER_RELEVANCY_CHEC
 CONVERSATION_INSTRUCTIONS = obj_conf["SYSTEM"]["CONVERSATION_INSTRUCTIONS"]
 DO_NOT_USE_SYSTEM_PROMPTS = parse_bool(obj_conf["SYSTEM"]["DO_NOT_USE_SYSTEM_PROMPTS"])
 SKIP_QUESTION_CHECK = parse_bool(obj_conf["SKIP"]["QUESTION_CHECK"])
+SKIP_CONVERSATION_GENERATION = parse_bool(obj_conf["SKIP"]["CONVERSATION_GENERATION"]) # useful if you're generating "tight" data only.
 
 has_pushed_yet = False
 
@@ -1142,7 +1146,6 @@ async def create_conversation(
     engine_wrapper,
     multi_turn_convs,
 ):
-
     await conversation_generator.run(idx, input_data=input_data, engine_wrapper=engine_wrapper, output_list=multi_turn_convs)
 
 
@@ -1265,6 +1268,20 @@ def convert_directory_to_list(directory_path):
     with open(write_4, "w") as file:
         for item in plain_qa_list:
             file.write(json.dumps(item) + "\n")
+    if PUSH_TO_HUB:
+        # Create a temporary JSON file with train split
+        temp_file_plain = obj_conf["PATH"]["OUTPUT"] + "/temp_plain_qa_list.json"
+        with open(temp_file_plain, 'w') as temp_file:
+            json.dump({"train": plain_qa_list}, temp_file)
+        
+        # Load the dataset from the temporary file
+        dataset_plain = load_dataset("json", data_files=temp_file_plain, split="train")
+        
+        # Push to Hugging Face Hub
+        dataset_plain.to_parquet(f"hf://datasets/{HUB_PATH}/data/train-rag.parquet")
+        
+        # Remove the temporary file
+        os.remove(temp_file_plain)
 
     if PUSH_TO_HUB:
         # Create a temporary JSON file with train split
@@ -1282,7 +1299,122 @@ def convert_directory_to_list(directory_path):
         os.remove(temp_file_rag)
 
     print(
-        f"Conversion complete. Master list written to {write_1}. Simplified data written to {write_2} (no RAG) and {write_3} (RAG)."
+        f"Conversion complete. Master list written to {write_1}. Simplified data written to {write_2} (no RAG) and {write_3} (RAG). No-nonsense QA data written to {write_4}."
     )
     if PUSH_TO_HUB:
         print("Data successfully pushed to Hugging Face Hub.")
+        
+def save_plain_qatuples(qa_dicts_by_text):
+    plain_qa_list = []
+    master_list = []
+    for data_dict in qa_dicts_by_text:
+        master_list.append(
+            data_dict
+        )  # append it as-is to the master-list
+        
+        conversations = []
+        for d in data_dict["dict_list"]:
+            q = d["question"]
+            a = d["answer"]
+            conversations.append({"from": "human", "value": q})
+            conversations.append({"from": "assistant", "value": a})
+        plain_qa_list.append({"conversations": conversations})
+    
+        # Write the master list to a new .jsonl file
+    write_1 = obj_conf["PATH"]["OUTPUT"] + "/master_list.jsonl"
+    with open(write_1, "w") as file:
+        for item in master_list:
+            file.write(json.dumps(item) + "\n")
+            
+    write_2 = obj_conf["PATH"]["OUTPUT"] + "/plain_qa_list.jsonl"
+    with open(write_2, "w") as file:
+        for item in plain_qa_list:
+            file.write(json.dumps(item) + "\n")
+    if PUSH_TO_HUB:
+        # Create a temporary JSON file with train split
+        temp_file_plain = obj_conf["PATH"]["OUTPUT"] + "/temp_plain_qa_list.json"
+        with open(temp_file_plain, 'w') as temp_file:
+            json.dump({"train": plain_qa_list}, temp_file)
+        
+        # Load the dataset from the temporary file
+        dataset_plain = load_dataset("json", data_files=temp_file_plain, split="train")
+        
+        # Push to Hugging Face Hub
+        dataset_plain.to_parquet(f"hf://datasets/{HUB_PATH}/data/train-rag.parquet")
+        
+        # Remove the temporary file
+        os.remove(temp_file_plain)
+
+    print(
+        f"Conversion complete. Master list written to {write_1}. No-nonsense QA data written to {write_2}."
+    )
+    if PUSH_TO_HUB:
+        print("Data successfully pushed to Hugging Face Hub.")
+        
+### SCRAPING ###
+        
+def download_book(url, folder):
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+    book_id = url.split('/')[-1]
+    txt_url = f"https://www.gutenberg.org/ebooks/{book_id}.txt.utf-8"
+
+    response = requests.get(txt_url)
+    if response.status_code == 200:
+        filename = os.path.join(folder, f"{book_id}.txt")
+        if not os.path.exists(filename):
+            with open(filename, 'w', encoding='utf-8') as f:
+                f.write(response.text)
+            print(f"Downloaded: {filename}")
+        else:
+            print(f"Already downloaded: {filename}")
+        return True
+    else:
+        print(f"Failed to download: {txt_url}")
+        return False
+
+def scrape_and_download(url, out_folder, max_books, books_downloaded, consecutive_failures, max_consecutive_failures):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    for link in soup.find_all('a'):
+        if books_downloaded >= max_books:
+            return books_downloaded, consecutive_failures
+
+        href = link.get('href')
+        if href and href.startswith('/ebooks/'):
+            full_url = f"https://www.gutenberg.org{href}"
+            if full_url.count('/') == 4:  # This is likely a book link
+                if download_book(full_url, out_folder):
+                    books_downloaded += 1
+                    consecutive_failures = 0
+                else:
+                    consecutive_failures += 1
+                    if consecutive_failures >= max_consecutive_failures:
+                        print(f"Aborting: {max_consecutive_failures} consecutive download failures")
+                        return books_downloaded, consecutive_failures
+
+                if books_downloaded >= max_books:
+                    return books_downloaded, consecutive_failures
+
+    return books_downloaded, consecutive_failures
+
+def scrape_text_using_config(start_url="", max_books="", max_failures=""):
+
+    books_downloaded = 0
+    page_index = 0
+    consecutive_failures = 0
+
+    while books_downloaded < max_books and consecutive_failures < max_failures:
+        current_url = start_url if page_index == 0 else f"{start_url}&start_index={page_index * 25 + 1}"
+        books_downloaded, consecutive_failures = scrape_and_download(current_url, INPUT_DIR, max_books, books_downloaded, consecutive_failures, max_failures)
+        
+        if books_downloaded >= max_books or consecutive_failures >= max_failures:
+            break
+
+        page_index += 1
+
+    print(f"Total books downloaded: {books_downloaded}")
+    if consecutive_failures >= max_failures:
+        print(f"Scraping aborted due to {consecutive_failures} consecutive download failures")

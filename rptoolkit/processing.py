@@ -2,7 +2,7 @@ import random
 import traceback
 from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 from augmentoolkit.utils.write_output_to_file import write_output_to_file
-from rptoolkit.steps import API_KEY_A, API_KEY_B, BASE_URL_A, BASE_URL_B, CONCURRENCY_LIMIT, LOGICAL_MODEL_A, LOGICAL_MODEL_B, MODE_A, MODE_B, OUTPUT_FOLDER, chunking_algorithm, count_tokens, extract_charname, extract_features, fix_text, generate_emotion_constrained, generate_emotion_from_text, generate_scene_card, generate_story, is_story_awesome, is_story_ok, make_id, obj_conf, rate_story, validate_generation, validate_length_callback, validate_not_none, validate_rating_keys_presence, validate_repetition_callback, write_final_dataset_files
+from rptoolkit.steps import API_KEY_A, API_KEY_B, BASE_URL_A, BASE_URL_B, CONCURRENCY_LIMIT, LOGICAL_MODEL_A, LOGICAL_MODEL_B, MODE_A, MODE_B, OUTPUT_FOLDER, chunking_algorithm, count_tokens, extract_charname, extract_features, fix_text, generate_emotion_constrained, generate_emotion_from_text, generate_scene_card, generate_story, is_story_awesome, is_story_ok, make_id, obj_conf, rate_story, scrape_novels, validate_generation, validate_length_callback, validate_not_none, validate_rating_keys_presence, validate_repetition_callback, write_final_dataset_files
 from tqdm import tqdm
 
 import nltk
@@ -27,6 +27,13 @@ PHASE_INDEX = int(config["PHASES"]["PHASE_INDEX"])
 USE_SUBSET = bool(config["SYSTEM"]["USE_SUBSET"])
 SUBSET_SIZE = int(config["SYSTEM"]["SUBSET_SIZE"])
 CHUNK_SIZE = int(config["SYSTEM"]["CHUNK_SIZE"])
+USE_LIGHTNOVELCO = bool(config["SCRAPING"]["USE_LIGHTNOVELCO"])
+LNCO_BASE_URL = config["SCRAPING"]["LNCO_BASE_URL"]
+LNCO_RANKING_URL = config["SCRAPING"]["LNCO_RANKING_URL"]
+LNCO_CHAPTER_COUNT = int(config["SCRAPING"]["LNCO_CHAPTER_COUNT"])
+LNCO_NOVEL_COUNT = int(config["SCRAPING"]["LNCO_NOVEL_COUNT"])
+LNCO_WAIT_TIME = int(config["SCRAPING"]["LNCO_WAIT_TIME"])
+LNCO_MAX_WORKERS = int(config["SCRAPING"]["LNCO_MAX_WORKERS"])
 
 async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrapper_large: EngineWrapper, stories, idx):
     # NOTE Generate emotions, or pick
@@ -74,13 +81,17 @@ async def generate_data(chunk: str, engine_wrapper: EngineWrapper, engine_wrappe
         print("Cutting losses and moving on to the next chunk.")
         traceback.print_exc()
 
+print("began to run")
+INPUT_FOLDER = obj_conf["PATH"]["INPUT"]
+start_time = time.time()
+if USE_LIGHTNOVELCO:
+    print("Using LightNovelCo for fiction data scraping.")
+    scrape_novels(base_url=LNCO_BASE_URL, ranking_url=LNCO_RANKING_URL, chapter_count=LNCO_CHAPTER_COUNT, novel_count=LNCO_NOVEL_COUNT, wait_time=LNCO_WAIT_TIME, max_workers=LNCO_MAX_WORKERS)
+    print("Data scraped from LightNovelCo. Continuing with the pipeline.")
 
 async def main():
     # NOTE Load the source texts
-    print("began to run")
-    INPUT_FOLDER = obj_conf["PATH"]["INPUT"]
     print(f"Input folder: {INPUT_FOLDER}")
-    start_time = time.time()
     print("Begun")
 
     # Set up rate-limit-conscious functions

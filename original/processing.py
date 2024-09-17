@@ -73,15 +73,6 @@ async def main():
 
     INPUT_FOLDER = config["PATH"]["INPUT"]
 
-    CONVERSATION_INSTRUCTIONS = config["SYSTEM"][
-        "CONVERSATION_INSTRUCTIONS"
-    ]
-
-    # Create pretraining set from raw inputs (pretrain first, then instruct tune)
-    augmentoolkit.utils.create_pretraining_set.create_pretraining_set(
-        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
-    )
-
     PHASE_INDEX = int(config["PHASE"]["PHASE_INDEX"])
 
     WORK_IN_PHASES = parse_bool(config["PHASE"]["WORK_IN_PHASES"])
@@ -90,8 +81,24 @@ async def main():
     
     CHUNK_SIZE = config["SYSTEM"]["CHUNK_SIZE"]
     
-    print("Pretraining set created.")
+    USE_GUTENBERG = config["SCRAPING"]["USE_GUTENBERG"]
+    
+    START_URL = config["SCRAPING"]["START_URL"] 
+    MAX_BOOKS = config["SCRAPING"]["MAX_BOOKS"]
+    MAX_FAILURES = config["SCRAPING"]["MAX_FAILURES"]
+    
+    SKIP_CONVERSATION_GENERATION = parse_bool(config["SKIP"]["CONVERSATION_GENERATION"]) # useful if you're generating "tight" data only.
+    
+    
+    if USE_GUTENBERG:
+        print("SCRAPING IS ON. BEGINNING GUTENBERG SCRAPE! This will modify your input folder.")
+        steps.scrape_text_using_config(start_url=START_URL, max_books=MAX_BOOKS, max_failures=MAX_FAILURES)
+    
 
+    augmentoolkit.utils.create_pretraining_set.create_pretraining_set(
+        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
+    )
+    print("Pretraining set created.")
     extensions = [".txt", ".md"]
     
     print(f"\n\n\nUSE FILENAMES: {USE_FILENAMES}")
@@ -322,34 +329,34 @@ async def main():
     
     print("Creating question generation training data...")
     steps.convert_revised_questions_to_question_generation_training(qa_dicts_by_text=qa_dicts_by_text, use_filenames=USE_FILENAMES)
+    if SKIP_CONVERSATION_GENERATION:
+        print("Skipping conversation generation")
+        steps.save_plain_qatuples(qa_dicts_by_text=qa_dicts_by_text)
+    else:
+        multi_turn_convs = []
 
-    multi_turn_convs = []
+        tasks = [
+            steps.create_conversation(
+                idx,
+                info,
+                engine_wrapper_large,
+                multi_turn_convs,
+            )
+            for idx, info in enumerate(qa_dicts_by_text)
+        ]
+        limited_tasks_convwriting = [run_task_with_limit(task) for task in tasks]
+        for future in tqdmasyncio.tqdm.as_completed(limited_tasks_convwriting):
+            await future
 
-    tasks = [
-        steps.create_conversation(
-            idx,
-            info,
-            engine_wrapper_large,
-            multi_turn_convs,
+        print("Converting conversational data generations to training data")
+        steps.convert_logging_to_dataset(input_pth=os.path.join("multi_turn_convs", "intermediate_generations"), output_pth="multi_turn_convs")
+        
+        # Make ShareGPT dataset
+        steps.convert_directory_to_list(
+            os.path.join(config["PATH"]["OUTPUT"],"multi_turn_convs", "saved_readable_generations")
         )
-        for idx, info in enumerate(qa_dicts_by_text)
-    ]
-    limited_tasks_convwriting = [run_task_with_limit(task) for task in tasks]
-    for future in tqdmasyncio.tqdm.as_completed(limited_tasks_convwriting):
-        await future
-
-    print("Converting conversational data generations to training data")
-    steps.convert_logging_to_dataset(input_pth=os.path.join("multi_turn_convs", "intermediate_generations"), output_pth="multi_turn_convs")
-
+        
     # Yay! Now you have a dataset!
-
-    
-    import json
-
-    # Make ShareGPT-format dataset (I think, still need verification it actually works)
-    steps.convert_directory_to_list(
-        os.path.join(config["PATH"]["OUTPUT"],"multi_turn_convs", "saved_readable_generations")
-    )
     
     with open(config["PATH"]["OUTPUT"] + "/master_list.jsonl", "r") as f:
         data = [json.loads(line) for line in f]
@@ -358,11 +365,14 @@ async def main():
     # TODO add token count
     gpt_turns = 0        
     for dict in data:
-        conv = dict['conversation']
-        turns = extract_conversation(conv)
-        for turn in turns:
-            if "AI" in turn[0]:
-                gpt_turns += 1
+        if not SKIP_CONVERSATION_GENERATION:
+            conv = dict['conversation']
+            turns = extract_conversation(conv)
+            for turn in turns:
+                if "AI" in turn[0]:
+                    gpt_turns += 1
+        else:
+            gpt_turns += len(dict["dict_list"])
 
 
     print(f"Total GPT turns: {gpt_turns}")

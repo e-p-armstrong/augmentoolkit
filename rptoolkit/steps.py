@@ -36,6 +36,7 @@ with open (config_path, "r") as file:
     obj_conf = yaml.safe_load(file)
 
 OUTPUT_FOLDER = os.path.abspath(obj_conf["PATH"]["OUTPUT"])
+INPUT = os.path.abspath(obj_conf["PATH"]["INPUT"])
 DEFAULT_PROMPT_PATH = os.path.abspath(obj_conf["PATH"]["DEFAULT_PROMPTS"])
 PROMPTS = os.path.abspath(obj_conf["PATH"]["PROMPTS"])
 COMPLETION_MODE = parse_bool(obj_conf["SYSTEM"]["COMPLETION_MODE"])
@@ -988,3 +989,105 @@ def extract_name(str):
             name = match.group(1)
             print(f"Extracted name: {name}")
             return name
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+import json
+import os
+import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import partial
+
+def scrape_novel(novel_url, wait_time=None, args_chapter_count=None):
+    driver = webdriver.Chrome()  # Or use the appropriate driver for your browser
+    try:
+        print(f"Scraping novel: {novel_url}")
+        driver.get(novel_url)
+        read_button = WebDriverWait(driver, wait_time).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "a#readchapterbtn"))
+        )
+        if read_button:
+            first_chapter_url = read_button.get_attribute("href")
+            print(f"First chapter URL: {first_chapter_url}")
+            
+            chapters = []
+            current_chapter_url = first_chapter_url
+            chapter_count = 0
+            while chapter_count < args_chapter_count:
+                print(f"Scraping chapter: {current_chapter_url}")
+                driver.get(current_chapter_url)
+                chapter_container = WebDriverWait(driver, wait_time).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, "div#chapter-container"))
+                )
+                chapter_text = chapter_container.text.strip()
+                chapters.append(chapter_text)
+                print(f"Scraped chapter {len(chapters)}")
+                
+                next_button = driver.find_elements(By.CSS_SELECTOR, "a.button.nextchap")
+                if next_button and chapter_count < (args_chapter_count - 1):
+                    current_chapter_url = next_button[0].get_attribute("href")
+                    time.sleep(wait_time)  # Add a delay between requests
+                else:
+                    break
+                
+                chapter_count += 1
+            
+            book_title = driver.find_element(By.CSS_SELECTOR, "a.booktitle").text.strip()
+            return book_title, chapters
+        else:
+            print(f"Read button not found for novel: {novel_url}")
+            return None, None
+    except Exception as e:
+        print(f"An error occurred while scraping {novel_url}: {str(e)}")
+        return None, None
+    finally:
+        driver.quit()
+
+def scrape_novels(base_url=None, ranking_url=None,chapter_count=None, novel_count=None, wait_time=None, max_workers=None):
+
+    # Create the output directory if it doesn't exist
+    if not os.path.exists(INPUT):
+        os.makedirs(INPUT)
+
+    driver = webdriver.Chrome()
+    try:
+        print("Scraping ranking page...")
+        driver.get(ranking_url)
+        
+        novel_items = WebDriverWait(driver, wait_time).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.novel-item"))
+        )
+        print(f"Found {len(novel_items)} novel items.")
+
+        novel_urls = []
+        for item in novel_items:
+            title_link = item.find_element(By.CSS_SELECTOR, "h2.title.text2row a")
+            novel_url = title_link.get_attribute("href")
+            novel_urls.append(novel_url)
+        print(f"Extracted {len(novel_urls)} novel URLs.")
+    finally:
+        driver.quit()
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        scrape_func = partial(scrape_novel, args_chapter_count=chapter_count, wait_time=wait_time)
+        future_to_url = {executor.submit(scrape_func, url): url for url in novel_urls[:novel_count]}
+        
+        for future in as_completed(future_to_url):
+            url = future_to_url[future]
+            try:
+                book_title, chapters = future.result()
+                if book_title and chapters:
+                    output_file = os.path.join(INPUT, f"{book_title}.txt")
+                    with open(output_file, "w", encoding="utf-8") as file:
+                        file.write(f"{book_title}\n\n")
+                        for chapter in chapters:
+                            file.write(f"{chapter}\n\n")
+                    print(f"Added novel: {book_title}")
+            except Exception as e:
+                print(f"An error occurred while processing {url}: {str(e)}")
+
+    print("Scraping completed. Data saved to", INPUT)
