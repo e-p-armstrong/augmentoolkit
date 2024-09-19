@@ -181,7 +181,7 @@
   content: |
     Text:
     """
-    {text}
+    {paragraph}
     """
     
     Question (based on text):

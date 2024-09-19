@@ -79,7 +79,7 @@
     That's a really interesting question! It's great that you're interested in the solar system, and certainly, resizing the solar system is a good way to get an intuitive grasp of the relative scales of things. If the solar system were resized as you described, the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). The moon would be the size of a small pea, 2.5 feet from the earth. Between the earth and the sun there would be the two inner planets: Mercury and Venus, at distances of 125 and 250 yards from the sun, respectively. Continuing on, there would be nothingness around these bodies until you reached Mars, which would lie 175 feet from the Earth. Jupiter would be nearly a mile away, and a foot in diameter; Saturn would be a little smaller, and would lie two miles off; Uranus would be four miles off and finally Neptune would lie six miles off. Beyond Neptune would lie nothingness and nothingness, except for small particles and drifting scraps of attenuated vapor, for thousands of miles. Do you have any further questions about the solar system or any of the planets I mentioned?
 - role: user
   content: |
-    {question_answer_list}
+    {question_answer_pairs_string}
 
     -- AI Assistant Instructions --
     {conversation_instructions}

@@ -8,6 +8,7 @@ output
 **/*split_1.json
 **/*split_2.json
 **/pretraining.json
+**/pretraining.jsonl
 classifier_output*
 wandb
 utils_for_manual_use/classifier_backtesting/place_classification_dataset_here/*

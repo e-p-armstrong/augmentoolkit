@@ -19,6 +19,7 @@
     * Explanations in the provided information may be vague. Your answers should be easy to understand.
     * Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
     * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The answerer should take on any opinions of the author. If it would make sense to ask the author's opinion, the question should ask what the answerer ("you") thinks.
 
     **Note:**
 
@@ -37,13 +38,15 @@
     """
     If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
     """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
 - role: assistant
   content: |
     **QUESTION:**
     If the earth had a diameter of only one inch, and we resized the rest of the solar system equivalently, how far away and how large would some of the solar system's other celestial objects be?
     
     **ANSWER:**
-    Resizing the solar system is a good way to get an intuitive grasp of the relative scales of things. If the solar system were resized as you described, the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). The moon would be the size of a small pea, 2.5 feet from the earth. Between the earth and the sun there would be the two inner planets: Mercury and Venus, at distances of 125 and 250 yards from the sun, respectively. Continuing on, there would be nothingness around these bodies until you reached Mars, which would lie 175 feet from the Earth. Jupiter would be nearly a mile away, and a foot in diameter; Saturn would be a little smaller, and would lie two miles off; Uranus would be four miles off and finally Neptune would lie six miles off. Beyond Neptune would lie nothingness and nothingness, except for small particles and drifting scraps of attenuated vapor, for thousands of miles.
+    If the solar system were resized as you described, the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). The moon would be the size of a small pea, 2.5 feet from the earth. Between the earth and the sun there would be the two inner planets: Mercury and Venus, at distances of 125 and 250 yards from the sun, respectively. Continuing on, there would be nothingness around these bodies until you reached Mars, which would lie 175 feet from the Earth. Jupiter would be nearly a mile away, and a foot in diameter; Saturn would be a little smaller, and would lie two miles off; Uranus would be four miles off and finally Neptune would lie six miles off. Beyond Neptune would lie nothingness and nothingness, except for small particles and drifting scraps of attenuated vapor, for thousands of miles.
 - role: user
   content: |
     Text to make questions from: 
@@ -128,6 +131,8 @@
     verus -chain=VRSCTEST sendcurrency "*" '[{"address":"IDNAME@","exportto":"PBaaSChainName","exportid":"true","amount":100,"currency":"vrsctest"}]'
     ```
     """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
 - role: assistant
   content: |
     **QUESTION:**
@@ -205,6 +210,8 @@
 
     * Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
     """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
 - role: assistant
   content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
     **QUESTION:**
@@ -225,8 +232,35 @@
 
     **Power:** SurevIDs are also notable in that multiple addresses or other IDs can be defined as primary addresses. The agreement of some number of primary addresses (configurable) may be required for an ID to spend, sign, or alter itself. Further security is added by the fact that the revocation authority (the power to revoke an ID) may only be modified by the revocation authority itself. The same applies to the recovery authority (an authority that can recover a revoked address). Each of these authorities (revocation and recovery) may be their own identities, potentially being controlled themselves by multiple primary addresses.
 - role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Text to make a question from: 
+    """
+    The cities of Germany are absolutely free, they own but little country around them, and they yield obedience to the emperor when it suits them, nor do they fear this or any other power they may have near them, because they are fortified in such a way that every one thinks the taking of them by assault would be tedious and difficult, seeing they have proper ditches and walls, they have sufficient artillery, and they always keep in public depots enough for one year\u2019s eating, drinking, and firing. And beyond this, to keep the people quiet and without loss to the state, they always have the means of giving work to the community in those labours that are the life and strength of the city, and on the pursuit of which the people are supported; they also hold military exercises in repute, and moreover have many ordinances to uphold them.Therefore, a prince who has a strong city, and had not made himself odious, will not be attacked, or if any one should attack he will only be driven off with disgrace; again, because that the affairs of this world are so changeable, it is almost impossible to keep an army a whole year in the field without being interfered with. And whoever should reply: If the people have property outside the city, and see it burnt, they will not remain patient, and the long siege and self-interest will make them forget their prince; to this I answer that a powerful and courageous prince will overcome all such difficulties by giving at one time hope to his subjects that the evil will not be for long, at another time fear of the cruelty of the enemy, then preserving himself adroitly from those subjects who seem to him to be too bold.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    What, in your opinion, makes German cities so secure and resistant to attack, and what is the key to a prince's success in defending his city?
+
+    **ANSWER:**
+    I believe there are numerous factors that make German cities resistant to attack. There is also an important step a prince can take when defending his city. First, here are some of the key factors that contribute to their security:
+    
+    **Physical Fortifications:** German cities are well-fortified with proper ditches, walls, and sufficient artillery. This makes it difficult and tedious for an enemy to attempt to take the city by assault.
+    
+    **Provisioning:** The cities have public depots stocked with enough food, drink, and supplies to last for at least a year. This ensures that the people are well-provided for and that the city can withstand a prolonged siege. Since it is nearly impossible to keep an army in the field for a whole year without interference (the affairs of the world are highly changeable), this provisioning is essential.
+    
+    **Economic Support:** German cities can keep their people quiet, without loss to the state. They always have the means of giving work to the community to support the city (the pursuit of such labors, in turn, supports the community). This makes certain that people are occupied and productive, and that the city remains strong.
+    
+    **Military Preparedness:** Military exercises are highly valued, and the cities have various ordinances to uphold them. This helps to ensure that the city's military is well-trained and prepared to defend against attacks.
+    
+    Finally, there's the subject of a prince's success in defending his city. I hold that to overcome the threat of property damage and the subsequent loss of patience among citizens during a long siege, a powerful and courageous prince will both give hope to his subjects that the siege will not be for long, while also making them fear the cruelty of the enemy who is laying siege. Such a prince will also preserve himself adroitly from those subjects who are *too* bold.
+- role: user
   content: |
     Text to make questions from: 
     """
-    {text}
+    {paragraph}
     """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.

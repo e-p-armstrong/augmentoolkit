@@ -191,5 +191,5 @@
     
     Text to make questions from: 
     """
-    {text}
+    {paragraph}
     """

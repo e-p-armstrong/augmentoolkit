@@ -151,17 +151,12 @@
   content: |
     Text: 
     """
-    {text}
+    {paragraph}
     """
     
     Question (based on text):
     """
     {question}
-    """
-    
-    The Question's Answer (provided for reference; you are NOT fact-checking this)**:
-    """
-    {answer}
     """
 
     ----------
