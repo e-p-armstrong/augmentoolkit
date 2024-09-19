@@ -1,25 +1,3 @@
-# This is an axolotl config that allowed creation of a model knowledgeable about hawaii.
-# Replace the dataset paths under `datasets:` with your own
-# If you want a reference point of what kind of data was fed into this model, check out hawaiitoolkit https://github.com/e-p-armstrong/hawaiitoolkit.git
-
-# Rent a GPU with a compute provider like Vast.ai or Runpod
-# (Make sure it is using the axolotl docker image --- winglian/axolotl:main-latest)
-# Copy this file over to the rented instance, in the /workspace/axolotl directory
-# If running on a single-GPU setup, you must run:
-# conda install -c conda-forge mpi4py mpich
-# Then run this command from the /workspace/axolotl directory:
-# accelerate launch --use_deepspeed -m axolotl.cli.train axolotl_config_hawaii_llama3_Jun_9_2024.yaml
-
-# If using GaLore, do not use deepspeed
-
-# (to copy files over to a rented GPU instance, you'll have to use SSH to Secure CoPy files over from your machine to the rented one. This is what such a command might look like, adapt it to your needs)
-# scp -P 40001 -r ./ root@173.231.62.170:/workspace/axolotl/
-
-
-# TODO to properly make this great, MAKE VARIED SYSTEM PROMPTS FOR ALL THINGS IN THE hawaii DATASET.
-# And make automated code to produce it so that I built it for this project and not the other one.
-# OK, now I am truly back to working on the efficiency problem.
-
 base_model: Heralax/philosophy-llm-mistral-pretrain
 tokenizer_type: AutoTokenizer
 is_mistral_derived_model: true
