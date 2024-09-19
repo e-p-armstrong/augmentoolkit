@@ -1,3 +1,4 @@
+import random
 from bs4 import BeautifulSoup
 from logging import INFO
 import os
@@ -140,10 +141,15 @@ def convert_revised_questions_to_question_generation_training(qa_dicts_by_text, 
     output_file_path = os.path.join(obj_conf["PATH"]["OUTPUT"], "questions_generation_dataset.jsonl")
     
     if use_filenames:
-        question_generation_prompt = os.path.join(obj_conf["PATH"]["PROMPTS"], "qatuples_gen_filenames.yaml")
+        question_generation_prompt = os.path.join(PROMPTS_DIR, "qatuples_gen_filenames.yaml")
+        if not os.path.exists(question_generation_prompt):
+            question_generation_prompt = os.path.join(DEFAULT_PROMPTS, "qatuples_gen_filenames.yaml")
     else:
-        question_generation_prompt = os.path.join(obj_conf["PATH"]["PROMPTS"], "qatuples_gen_no_filenames.yaml")
+        question_generation_prompt = os.path.join(PROMPTS_DIR, "qatuples_gen_no_filenames.yaml")
+        if not os.path.exists(question_generation_prompt):
+            question_generation_prompt = os.path.join(DEFAULT_PROMPTS, "qatuples_gen_no_filenames.yaml")
 
+    
     with open(question_generation_prompt, "r") as f:
         qgen_prompt_full = yaml.safe_load(f)
         
@@ -399,7 +405,7 @@ async def vet_answer_accuracy_loop(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_answer_accuracy_validation,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        prompt_folder=PROMPTS_DIR,
         default_prompt_folder=DEFAULT_PROMPTS,
         use_stop=USE_STOP,
     )
@@ -529,7 +535,7 @@ async def vet_answer_relevance_loop(
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_answer_relevancy_validation_step,
-        prompt_folder=obj_conf["PATH"]["PROMPTS"],
+        prompt_folder=PROMPTS_DIR,
         default_prompt_folder=DEFAULT_PROMPTS,
         use_stop=USE_STOP
     )
@@ -680,7 +686,7 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=parse_validation_step,
-            prompt_folder=obj_conf["PATH"]["PROMPTS"],
+            prompt_folder=PROMPTS_DIR,
             default_prompt_folder=DEFAULT_PROMPTS,
             use_stop=USE_STOP,
         )
@@ -1064,6 +1070,8 @@ async def filter_all_questions(
             for idx, p in enumerate(paragraphs_processed)
         ]
     else:
+        random.seed(42)
+        random.shuffle(paragraphs_processed)
         tasks = [
             # determine_worthy(idx, p, judged_worthy_for_questions, output_dir, engine_wrapper)
             judge_paragraph_step.run(idx, input_data=p, output_list=judged_worthy_for_questions, engine_wrapper=engine_wrapper)
@@ -1174,7 +1182,7 @@ def convert_directory_to_list(directory_path):
                         q = d["question"]
                         a = d["answer"]
                         conversations.append({"from": "human", "value": q})
-                        conversations.append({"from": "assistant", "value": a})
+                        conversations.append({"from": "gpt", "value": a})
                     plain_qa_list.append({"conversations": conversations})
 
                     # Convert to simplified format
@@ -1317,7 +1325,7 @@ def save_plain_qatuples(qa_dicts_by_text):
             q = d["question"]
             a = d["answer"]
             conversations.append({"from": "human", "value": q})
-            conversations.append({"from": "assistant", "value": a})
+            conversations.append({"from": "gpt", "value": a})
         plain_qa_list.append({"conversations": conversations})
     
         # Write the master list to a new .jsonl file

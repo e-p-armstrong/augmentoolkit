@@ -96,7 +96,7 @@ async def main():
     
 
     augmentoolkit.utils.create_pretraining_set.create_pretraining_set(
-        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.json")
+        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.jsonl")
     )
     print("Pretraining set created.")
     extensions = [".txt", ".md"]
