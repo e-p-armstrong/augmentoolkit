@@ -187,7 +187,11 @@ async def main():
         raise Exception("No paragraphs processed. Check your input directory path.")
     
 
-    paragraphs_processed[0]
+    try:
+        paragraphs_processed[0]
+    except:
+        print("No paragraphs processed. Likely you have the wrong input directory path, or there's nothing in there. Check your input directory path?")
+        sys.exit(1)
 
     print(paragraphs_processed[:3])
 
@@ -226,6 +230,9 @@ async def main():
         print("Converting generations to training data")
         steps.convert_logging_to_dataset(input_pth=os.path.join("judge_paragraph_generations", "intermediate_generations"), output_pth="judge_paragraph_generations")
 
+    if len(filtered_worthy_for_questions) == 0:
+        print("No paragraphs were judged worthy for questions. Either the judgement step thinks everything you added is metadata or has no factual information, or your input path is wrong, or the model is being stupid. Check your input directory path, your model, and your input data. The intermediate outputs at the end of each file in ./output/judge_paragraph_generations/intermediate_generations/ may help you diagnose the problem.")
+        sys.exit(1)
     print(filtered_worthy_for_questions[0])
     
     # PHASE 0 END
