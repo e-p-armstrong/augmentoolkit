@@ -400,7 +400,7 @@ They're in ShareGPT format for easy training, and can be used to bulk up a train
 
 ### RPToolkit
 
-RPToolkit, as a pipeline, is contained within the larger Augmentoolkit project (has a few other pipelines for other uses). [Click here](#augmentoolkit--infinite-domain-specific-instruct-data) to go to the top of the README. [Click here](#table-of-contents) to see the table of contents.
+RPToolkit, as a pipeline, is contained within the larger Augmentoolkit project (which has a few other pipelines for other uses). [Click here](#augmentoolkit--infinite-domain-specific-instruct-data) to go to the top of the README. [Click here](#table-of-contents) to see the table of contents.
 
 #### RPToolkit Overview and Quickstart
 
