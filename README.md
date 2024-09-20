@@ -8,7 +8,10 @@ Being extensible, new pipelines can be added to Augmentoolkit incredibly easily,
 Augmentoolkit is an AI-powered tool that lets you create domain-specific data, using open-source AI.
 
 ![](images/augmentoolkit-logo.png)
- if you like the project, please consider starring it!
+ 
+If you like the project, please consider starring it!
+
+
 ---
 
 ### RECENT FEATURES UPDATE — SEPTEMBER 12th 2024
