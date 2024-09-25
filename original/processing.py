@@ -206,7 +206,10 @@ async def main():
 
     if SKIP_FILTER_CHUNKS:
         print("Skipping chunk filtering")
-        filtered_worthy_for_questions = paragraphs_processed[:SUBSET_SIZE]
+        if USE_SUBSET:
+            filtered_worthy_for_questions = paragraphs_processed[:SUBSET_SIZE]
+        else:
+            filtered_worthy_for_questions = paragraphs_processed
     else:
         # Determine which paragraphs are worthy of making questions from
         judged_worthy_for_questions = []

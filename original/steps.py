@@ -608,7 +608,7 @@ def parse_validation_step(response):
     # print("!!! DETERMINATION !!!")
     # print(determination)
     if (
-        "irrelevant" in determination
+        "irrelevant" in determination.lower()
         or "Irrelevant" in determination.lower()
         or "mostly" in determination.lower()
         or "partial" in determination.lower()
