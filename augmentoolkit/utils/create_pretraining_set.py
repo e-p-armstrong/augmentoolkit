@@ -3,6 +3,9 @@ import chardet
 import json
 import os
 
+from augmentoolkit.utils.sentence_chunking_algorithm import extract_text
+
+# Will have to tune on Mistral because this technically violates the llama license
 
 def create_pretraining_set(directory_path, json_file):
     # Initialize a variable to store the combined text of all files
@@ -12,17 +15,20 @@ def create_pretraining_set(directory_path, json_file):
             file_path = os.path.join(root, filename)
             # Read the contents of the file
             try:
-                # First, detect the file encoding
-                with open(file_path, 'rb') as raw_file:
-                    raw_data = raw_file.read()
-                    result = chardet.detect(raw_data)
-                    file_encoding = result['encoding']
+                if file_path.endswith(".docx") or file_path.endswith(".pdf"):
+                    file_contents = extract_text(file_path)
+                else:
+                    # First, detect the file encoding
+                    with open(file_path, 'rb') as raw_file:
+                        raw_data = raw_file.read()
+                        result = chardet.detect(raw_data)
+                        file_encoding = result['encoding']
 
-                # Now read the file with the detected encoding
-                with open(file_path, "r", encoding=file_encoding) as file:
-                    file_contents = file.read()
+                    # Now read the file with the detected encoding
+                    with open(file_path, "r", encoding=file_encoding) as file:
+                        file_contents = file.read()
                 
-                with open(json_file, "a", encoding='utf-8') as file:
+                with open(json_file, "a", encoding='utf-8', errors='ignore') as file:
                     data = {"text": file_contents}
                     write = json.dumps(data, ensure_ascii=False)
                     file.write(write + "\n")

@@ -95,11 +95,7 @@ async def main():
         steps.scrape_text_using_config(start_url=START_URL, max_books=MAX_BOOKS, max_failures=MAX_FAILURES)
     
 
-    augmentoolkit.utils.create_pretraining_set.create_pretraining_set(
-        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.jsonl")
-    )
-    print("Pretraining set created.")
-    extensions = [".txt", ".md"]
+    extensions = [".txt", ".md", ".pdf", ".docx", ".epub", ".html"]
     
     print(f"\n\n\nUSE FILENAMES: {USE_FILENAMES}")
 
@@ -113,6 +109,12 @@ async def main():
     else:
         print(f"No source texts found in: {INPUT_FOLDER}")
 
+    
+    augmentoolkit.utils.create_pretraining_set.create_pretraining_set(
+        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.jsonl")
+    )
+    print("Pretraining set created.")
+    
     # ## Below: Defines and imports functions that you will probably use no matter what cells in the script you choose to run:
 
     print(
@@ -168,7 +170,7 @@ async def main():
     from tqdm import tqdm
 
     sentence_chunks = []
-    for source_text in source_texts:
+    for source_text in tqdm(source_texts, desc="Reading, OCR-ing, and Chunking Input Files..."):
         sentence_chunks += augmentoolkit.utils.sentence_chunking_algorithm.sentence_chunking_algorithm(
             source_text, CHUNK_SIZE
         )

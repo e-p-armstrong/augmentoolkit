@@ -65,6 +65,8 @@ DO_NOT_USE_SYSTEM_PROMPTS = parse_bool(obj_conf["SYSTEM"]["DO_NOT_USE_SYSTEM_PRO
 SKIP_QUESTION_CHECK = parse_bool(obj_conf["SKIP"]["QUESTION_CHECK"])
 SKIP_CONVERSATION_GENERATION = parse_bool(obj_conf["SKIP"]["CONVERSATION_GENERATION"]) # useful if you're generating "tight" data only.
 
+
+
 has_pushed_yet = False
 
 def extract_qa_tuples(text):

@@ -1,3 +1,116 @@
+import re
+from PIL import Image
+from pdf2image import convert_from_path
+import textract
+import pytesseract
+import fitz  # pymupdf
+import docx
+import io
+import os
+
+def extract_text_from_docx(path):
+    """
+    Extracts text from a DOCX file.
+
+    Args:
+        path (str): The file path to the DOCX file.
+
+    Returns:
+        str: The extracted text.
+    """
+    doc = docx.Document(path)
+    full_text = []
+    for para in doc.paragraphs:
+        full_text.append(para.text)
+    return '\n'.join(full_text)
+
+def read_doc_file(file_path):
+    return textract.process(file_path).decode("utf-8")
+
+def extract_text_from_pdf(path):
+    """
+    Extracts text from a copyable PDF using PyMuPDF.
+
+    Args:
+        path (str): The file path to the PDF.
+
+    Returns:
+        str: The extracted text.
+    """
+    text = ''
+    with fitz.open(path) as doc:
+        for page in doc:
+            text += page.get_text()
+    return text
+
+def extract_text_from_pdf_ocr(path):
+    """
+    Extracts text from a non-copyable PDF using OCR.
+
+    Args:
+        path (str): The file path to the PDF.
+
+    Returns:
+        str: The extracted text.
+    """
+    text = ''
+    with fitz.open(path) as doc:
+        for page_number, page in enumerate(doc):
+            # logger.info("Performing OCR on page %d", page_number + 1)
+            pix = page.get_pixmap()
+            img_bytes = pix.tobytes("png")
+            img = Image.open(io.BytesIO(img_bytes))
+            page_text = pytesseract.image_to_string(img)
+            text += page_text + '\n'
+    return text
+
+def remove_newlines_in_sentences(text):
+    lines = text.split('\n')
+    new_lines = []
+    for line in lines:
+        line = line.strip()
+        if line:
+            if line[-1] not in '.!?':
+                line += ' '
+            else:
+                line += '\n'
+            new_lines.append(line)
+    return ''.join(new_lines)
+
+def extract_text(path):
+    """
+    Extracts formatted text from a PDF or DOCX file.
+
+    Args:
+        path (str): The file path to the PDF or DOCX file.
+
+    Returns:
+        str: The extracted text in markdown format.
+    """
+    # Check the file extension
+    _, ext = os.path.splitext(path)
+    ext = ext.lower()
+    
+    if ext == '.docx':
+        # logger.info("Extracting text from DOCX file.")
+        text = extract_text_from_docx(path)
+    elif ext == '.pdf':
+        # logger.info("Extracting text from PDF file.")
+        text = extract_text_from_pdf(path)
+        # logger.info("Extracted text length: %d", len(text))
+        # If extracted text is too short, use OCR
+        if len(text.strip()) < 100:
+            # logger.info("Extracted text is too short, switching to OCR.")
+            text = extract_text_from_pdf_ocr(path)
+    else:
+        raise ValueError(f"Unsupported file type: {ext}")
+    
+    # Remove newlines within sentences
+    text = remove_newlines_in_sentences(text)
+    
+    return text
+
+
 def sentence_chunking_algorithm(file_path, max_char_length=1900):
     """
     This function takes a plaintext file and chunks it into paragraphs or sentences if the paragraph exceeds max_char_length.
@@ -9,10 +122,13 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
     chunks_with_source = []
     current_chunk = []
     char_count = 0
-    source_name = file_path.replace(".txt", "")
-
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-        content = f.read()
+    source_name = re.sub(r"\..*$", "", os.path.basename(file_path))
+    
+    if file_path.endswith(".pdf") or file_path.endswith(".docx"):
+        content = extract_text(file_path)
+    else:
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+            content = f.read()
     # try:
     #     with open(file_path, "r", encoding="utf-8") as f:
     #         content = f.read()
@@ -22,13 +138,7 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
 
     paragraphs = content.split(
         "\n\n"
-    )  # Assuming paragraphs are separated by two newlines # TODO change so that if the length is 1 after this, split by tabs instead
-
-    # HOW TO DO IT probably:
-    # add tokens to the paragraph until we reach the max length,
-    # create chunks out of the remainder of the paragraph (split at max chunk length until it's done)
-    # if the final chunk does not have the max length, then make it the new current chunk, set the current token count to its length, and continue with the for loop.
-    # Ensure max_char_length is an integer
+    )
     max_char_length = int(max_char_length)
 
     for paragraph in paragraphs:
@@ -40,27 +150,25 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
 
         # Check if the paragraph itself exceeds the max token length
         if paragraph_char_count > max_char_length:
-
-            # Fallback to character chunking for this paragraph
-            end_index = (
-                max_char_length - char_count
-            )  # after this we will take max_char_length chunks starting from end index until the end of the paragraph
-            current_chunk.append(paragraph[:end_index])
-            # characters = list(paragraph)
-            chunks_with_source.append(
-                {
-                    "paragraph": "".join(current_chunk), 
-                    "metadata": source_name
-                })
-            current_chunk = []
+        # Fallback to character chunking for this paragraph
+            end_index = 0
+            
             while end_index < paragraph_char_count:
-                current_chunk.append(paragraph[end_index : end_index + max_char_length])
+                chunk_end = min(end_index + max_char_length, paragraph_char_count)
+                
+                # Take until the next sentence ends (or we reach max_char_length*1.5)
+                while (chunk_end < paragraph_char_count and 
+                    paragraph[chunk_end] not in [".", "!", "?", "\n"] and 
+                    chunk_end < end_index + max_char_length * 1.5):
+                    chunk_end += 1
+                
+                current_chunk = paragraph[end_index:chunk_end]
                 chunks_with_source.append({
-                    "paragraph": "".join(current_chunk), 
+                    "paragraph": current_chunk,
                     "metadata": source_name
                 })
-                current_chunk = []
-                end_index += max_char_length
+                
+                end_index = chunk_end
 
             # # handle the remainder of the paragraph
             # end_index = end_index - max_char_length
