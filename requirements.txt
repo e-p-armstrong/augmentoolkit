@@ -25,3 +25,4 @@ textract-py3
 python-docx
 pytesseract
 PyMuPDF
+bs4
