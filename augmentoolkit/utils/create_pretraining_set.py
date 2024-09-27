@@ -3,8 +3,6 @@ import chardet
 import json
 import os
 
-from augmentoolkit.utils.sentence_chunking_algorithm import extract_text
-
 def create_pretraining_set(content_list, json_file):
     # Initialize a variable to store the combined text of all files
     # Walk through all directories and files in the directory

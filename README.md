@@ -135,7 +135,7 @@ After installing the dependencies:
 - Paste your API key, favorite model name, and the endpoint URL of your preferred AI service, into the relevant fields inside `config.yaml`. Recommendation: [Together.ai with Llama 3.1 8b works really nicely both as a LARGE_LOGICAL_MODEL and as the LOGICAL_MODEL](meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo).
 - Open this project's folder in a command line and type `python processing.py` and hit enter (fires off the script version).
 
-There's also a quickstart [video](https://youtu.be/YWPmike953I) that you can follow along with!
+There's also a quickstart [video](https://youtu.be/YWPmike953I) that you can follow along with! **The default provider has been changed to DeepInfra, you'll need to get a key from them or you'll have to change the base URL to together.**
 
 If you want to use PDFs, you will have to install tesseract, which has its own installation instructions: https://github.com/tesseract-ocr/tesseract
 
