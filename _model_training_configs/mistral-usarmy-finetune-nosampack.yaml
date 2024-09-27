@@ -1,4 +1,4 @@
-base_model: Heralax/philosophy-llm-mistral-pretrain
+base_model: Heralax/army-pretrain-1
 tokenizer_type: AutoTokenizer
 is_mistral_derived_model: true
 load_in_8bit: false
