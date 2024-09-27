@@ -1,4 +1,5 @@
 # May be incomplete
+numpy
 protobuf 
 sentencepiece 
 torch
@@ -23,3 +24,4 @@ selenium
 textract-py3
 python-docx
 pytesseract
+PyMuPDF

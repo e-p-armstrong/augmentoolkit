@@ -1,5 +1,5 @@
 API:
-  API_KEY: key
+  API_KEY: key here
   BASE_URL: https://api.deepinfra.com/v1/openai
   LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct
   LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct

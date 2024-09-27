@@ -113,9 +113,10 @@ try:
         text = remove_newlines_in_sentences(text)
         
         return text
-except ImportError:
+except ImportError as e:
     print("NOTE PDF and DOCX extraction will not work without the required libraries. Please install the required libraries to enable this functionality.")
-    
+    print("This is the error")
+    print(e)
 
 
 
