@@ -1,3 +1,4 @@
+Note 2024/09/27 -- requirements.txt issues were found, I believe they are fixed.
 # Augmentoolkit — infinite domain-specific instruct data
 Your custom LLMs need custom data. [Augmentoolkit creates quality data quickly, cheaply, and painlessly.](#benefits)
 
@@ -299,7 +300,7 @@ SKIP:
   REPAIR_QA_TUPLES: True
 ```
 
-Very simply, this section lets you skip certain parts of the QA pipeline. All of these are currently validation steps: they will just act as if everything came out as True (passed). This is useful for certain types of data — for intance, if the filter_chunks step keeps deciding that much of your data is "not suitable for questions" even if it is just unconventional, then you can solve this problem by skipping the step. This is a tradeoff, however: skipping these steps can lead to lower-quality data, especially under normal circumstances.
+Very simply, this section lets you skip certain parts of the QA pipeline. All of these are currently validation steps: they will just act as if everything came out as True (passed). This is useful for certain types of data — for instance, if the filter_chunks step keeps deciding that much of your data is "not suitable for questions" even if it is just unconventional, then you can solve this problem by skipping the step. This is a tradeoff, however: skipping these steps can lead to lower-quality data, especially under normal circumstances.
 
 **IMPORTANT** If you want to use the "negative" prompt overrides, **you have to turn skip answer relevancy check on!!!**
 
