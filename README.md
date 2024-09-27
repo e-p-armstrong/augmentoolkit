@@ -1,4 +1,3 @@
-Note 2024/09/27 -- requirements.txt issues were found, I believe they are fixed.
 # Augmentoolkit — infinite domain-specific instruct data
 Your custom LLMs need custom data. [Augmentoolkit creates quality data quickly, cheaply, and painlessly.](#benefits)
 
@@ -134,7 +133,7 @@ After installing the dependencies:
 - Install its dependencies (`pip install -r requirements.txt`) (Augmentoolkit is tested mainly on Python 3.11, but it should be pretty flexible)
 - Open `config.yaml`
 - Paste your API key, favorite model name, and the endpoint URL of your preferred AI service, into the relevant fields inside `config.yaml`. Recommendation: [Together.ai with Llama 3.1 8b works really nicely both as a LARGE_LOGICAL_MODEL and as the LOGICAL_MODEL](meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo).
-- Open this project's folder in a command line and type `python run_aumentoolkitg.py` and hit enter (fires off the script version).
+- Open this project's folder in a command line and type `python run_aumentoolkit.py` and hit enter (fires off the script version).
 
 There's also a quickstart [video](https://youtu.be/YWPmike953I) that you can follow along with! **The default provider has been changed to DeepInfra, you'll need to get a key from them or you'll have to change the base URL to together.**
 
@@ -356,7 +355,7 @@ PHASE:
   PHASE_INDEX: 0
 ```
 
-get all your other settings in place (input texts, base_url, etc.), and run `processing.py`. When that finishes, change the config to:
+get all your other settings in place (input texts, base_url, etc.), and run `run_augmentoolkit.py`. When that finishes, change the config to:
 
 ```
 PHASE:
@@ -364,7 +363,7 @@ PHASE:
   PHASE_INDEX: 1
 ```
 
-and restart your local LLM server to use a larger and more powerful LLM. Then run `processing.py` again — it will pick up where you left off, thanks to Augmentoolkit's auto-resume feature. When that step completes, set the config to
+and restart your local LLM server to use a larger and more powerful LLM. Then run `run_augmentoolkit.py` again — it will pick up where you left off, thanks to Augmentoolkit's auto-resume feature. When that step completes, set the config to
 
 ```
 PHASE:
