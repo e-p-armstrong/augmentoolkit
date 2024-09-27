@@ -6,6 +6,7 @@ import pytesseract
 import fitz  # pymupdf
 import docx
 import io
+import chardet
 import os
 
 def extract_text_from_docx(path):
@@ -127,8 +128,16 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
     if file_path.endswith(".pdf") or file_path.endswith(".docx"):
         content = extract_text(file_path)
     else:
-        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-            content = f.read()
+        # with open(file_path, 'rb') as raw_file:
+        #     raw_data = raw_file.read()
+        #     result = chardet.detect(raw_data)
+        #     file_encoding = result['encoding']
+            
+        # Now read the file with the detected encoding
+        with open(file_path, "r", errors="ignore") as file:
+            content = file.read()
+        # with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+        #     content = f.read()
     # try:
     #     with open(file_path, "r", encoding="utf-8") as f:
     #         content = f.read()
@@ -161,10 +170,12 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
                     paragraph[chunk_end] not in [".", "!", "?", "\n"] and 
                     chunk_end < end_index + max_char_length * 1.5):
                     chunk_end += 1
+                # add one to chunk_end to include the punctuation IF it's not the last character
+                if chunk_end < paragraph_char_count:
+                    chunk_end += 1
                 
-                current_chunk = paragraph[end_index:chunk_end]
                 chunks_with_source.append({
-                    "paragraph": current_chunk,
+                    "paragraph": paragraph[end_index:chunk_end],
                     "metadata": source_name
                 })
                 
@@ -197,4 +208,4 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
     # filter out chunks with fewer than 50 characters
     chunks_with_source = [chunk for chunk in chunks_with_source if len(chunk["paragraph"]) >= 50]
 
-    return chunks_with_source
+    return chunks_with_source, content

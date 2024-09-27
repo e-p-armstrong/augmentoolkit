@@ -48,7 +48,7 @@
     ```
     """
 
-    The Question's Answer (provided for reference; you are NOT fact-checking this)**:
+    The Question's Answer (provided for reference; you are NOT fact-checking this):
     """
     `libgomp.so.1` and `libz.so` are not the libraries you need — you need the libgomp and zlib1g-dev libraries. Installing these will fix your error. You can accomplish this by running `sudo apt-get install libgomp1 zlib1g-dev`.
     """
@@ -121,7 +121,7 @@
     Where are the wallet and data files located on a Windows PC?
     """
 
-    The Question's Answer (provided for reference; you are NOT fact-checking this)**:
+    The Question's Answer (provided for reference; you are NOT fact-checking this):
     """
     The question is incorrect, the information provided is about Mac OS, not Windows PC. On Mac OS, the `VRSC Wallet and Data location` is `/Users//Library/Application Support/Komodo/VRSC`.
     """
@@ -157,6 +157,11 @@
     Question (based on text):
     """
     {question}
+    """
+
+    The Question's Answer (provided for reference; you are NOT fact-checking this):
+    """
+    {answer}
     """
 
     ----------

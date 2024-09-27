@@ -403,7 +403,7 @@ async def vet_answer_accuracy_loop(
             "temperature": 0.2,
         },
         completion_mode=completion_mode,
-        retries=1,
+        retries=3,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_answer_accuracy_validation,
@@ -533,7 +533,7 @@ async def vet_answer_relevance_loop(
             "temperature": 0.2,
         },
         completion_mode=completion_mode,
-        retries=1,
+        retries=3,
         engine_wrapper=engine_wrapper,
         logging_level=logging_level,
         output_processor=parse_answer_relevancy_validation_step,
@@ -684,7 +684,7 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
                 "temperature": 0.2,
             },
             completion_mode=completion_mode,
-            retries=1,
+            retries=3,
             engine_wrapper=engine_wrapper,
             logging_level=logging_level,
             output_processor=parse_validation_step,
@@ -807,6 +807,9 @@ async def vet_question_loop( # NOTE adding the pipelinestep class would make thi
 def extract_questions_from_response(
     generation,
 ):  # TODO extract to non-controlflow file
+    # replace any instances of **QUESTION 1:** with **QUESTION:**
+    # in fact, for any digit, replace with nothing
+    generation = re.sub(r"\*\*QUESTION \d:\*\*", "**QUESTION:**", generation)
     questions = extract_qa_tuples(generation)
     if len(questions) == 0:
         print("FAILED TO GENERATE QUESTIONS!")
@@ -1089,7 +1092,7 @@ def fix_text(to_replace_arr, text):
         text = text.replace(tup[0], tup[1])
     return text
 
-async def ensure_multiple_answers_are_same(
+def ensure_multiple_answers_are_same(
     conv, full_info_dict
 ):  # why is this a whole separate function? Once upon a time, LLMs were used in validation here, too. But programmatic validation SEEMS to catch the common problems. This is here so that I can add it back in if I have to.
     """Loop to ensure that the answer is consistent in the conversation and in the tuple."""

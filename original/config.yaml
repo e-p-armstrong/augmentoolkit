@@ -1,8 +1,8 @@
 API:
   API_KEY: key
-  BASE_URL: https://api.together.xyz
-  LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
-  LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+  BASE_URL: https://api.deepinfra.com/v1/openai
+  LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct
+  LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct
 HUGGINGFACE:
   HUB_PATH: yourusername/your-path-here
   PRIVATE: False
@@ -17,6 +17,7 @@ PHASE:
   WORK_IN_PHASES: False
 SKIP:
   ANSWER_RELEVANCY_CHECK: False
+  REPAIR_QA_TUPLES: False
   FILTER_CHUNKS: False
   QUESTION_CHECK: False
   CONVERSATION_GENERATION: False

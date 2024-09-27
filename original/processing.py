@@ -17,6 +17,22 @@ import traceback
 
 import augmentoolkit.utils.group_by_text
 
+def filter_the_text(q_or_a):
+    list_of_bad_strings = [
+        # " the text",
+        "according to the text",
+        "as stated in",
+        "explicitly stated",
+        "as defined in",
+        "given text",
+        "provided information",
+        "the text states",
+        
+    ]
+    if any(bad_string in q_or_a for bad_string in list_of_bad_strings):
+        return False
+    return True
+
 async def main():
     # NOTE NOTEBOOK SETTINGS AND CONSTANTS (some script file constants are in generation_functions/constants.py)
 
@@ -79,6 +95,8 @@ async def main():
     
     SKIP_FILTER_CHUNKS = parse_bool(config["SKIP"]["FILTER_CHUNKS"])
     
+    SKIP_REPAIR_QA_TUPLES = parse_bool(config["SKIP"]["REPAIR_QA_TUPLES"])
+    
     CHUNK_SIZE = config["SYSTEM"]["CHUNK_SIZE"]
     
     USE_GUTENBERG = config["SCRAPING"]["USE_GUTENBERG"]
@@ -108,12 +126,6 @@ async def main():
         print(source_texts)
     else:
         print(f"No source texts found in: {INPUT_FOLDER}")
-
-    
-    augmentoolkit.utils.create_pretraining_set.create_pretraining_set(
-        INPUT_FOLDER, os.path.join(config["PATH"]["OUTPUT"], "pretraining.jsonl")
-    )
-    print("Pretraining set created.")
     
     # ## Below: Defines and imports functions that you will probably use no matter what cells in the script you choose to run:
 
@@ -170,10 +182,18 @@ async def main():
     from tqdm import tqdm
 
     sentence_chunks = []
+    content_list = []
     for source_text in tqdm(source_texts, desc="Reading, OCR-ing, and Chunking Input Files..."):
-        sentence_chunks += augmentoolkit.utils.sentence_chunking_algorithm.sentence_chunking_algorithm(
+        chunks, content = augmentoolkit.utils.sentence_chunking_algorithm.sentence_chunking_algorithm(
             source_text, CHUNK_SIZE
         )
+        sentence_chunks += chunks
+        content_list.append(content)
+
+    augmentoolkit.utils.create_pretraining_set.create_pretraining_set(
+        content_list, os.path.join(config["PATH"]["OUTPUT"], "pretraining.jsonl")
+    )
+    print("Pretraining set created as well.")
 
     conversions = [("\n", " "), ("  ", " ")]
 
@@ -315,27 +335,33 @@ async def main():
     print("---------------- ONTO REVISION ------------------")
 
     # Assuming vetted_qa_tuples is a list that might or might not exist
-    tasks = [
-        steps.repair_qatuple_context( # NOTE PROBLEM in that things that this writes, do not have enough items in the tuple
-            idx,
-            tup,
-            engine_wrapper_large,
-            vetted_qa_dicts,
-        )
-        for idx, tup in enumerate(vetted_qa_dicts)
-    ]
-    limited_tasks_qcorrection = [run_task_with_limit(task) for task in tasks]
-    for future in tqdmasyncio.tqdm.as_completed(limited_tasks_qcorrection):
-        await future
-
-    print("-------------- QUESTIONS REVISED ------------- STATS SO FAR:")
-    nones = list(filter(lambda x: x is None, vetted_qa_dicts))
-    print(f"Nones: {len(nones)}")
-    print(f"Non-nones: {len(vetted_qa_dicts) - len(nones)}")
-    print(f"Total: {len(vetted_qa_dicts)}")
-    # filter out all None values
-    vetted_qa_dicts = [qa for qa in vetted_qa_dicts if qa is not None]
-    print("---------------- ONTO EXAMPLES GENERATION-------------------")
+    
+    if not SKIP_REPAIR_QA_TUPLES:
+        tasks = [
+            steps.repair_qatuple_context( # NOTE PROBLEM in that things that this writes, do not have enough items in the tuple
+                idx,
+                tup,
+                engine_wrapper_large,
+                vetted_qa_dicts,
+            )
+            for idx, tup in enumerate(vetted_qa_dicts)
+        ]
+        limited_tasks_qcorrection = [run_task_with_limit(task) for task in tasks]
+        for future in tqdmasyncio.tqdm.as_completed(limited_tasks_qcorrection):
+            await future
+        print("-------------- QUESTIONS REVISED ------------- STATS SO FAR:")
+        nones = list(filter(lambda x: x is None, vetted_qa_dicts))
+        print(f"Nones: {len(nones)}")
+        print(f"Non-nones: {len(vetted_qa_dicts) - len(nones)}")
+        print(f"Total: {len(vetted_qa_dicts)}")
+        # filter out all None values
+        vetted_qa_dicts = [qa for qa in vetted_qa_dicts if qa is not None]
+        print("---------------- ONTO EXAMPLES GENERATION-------------------")
+    else:
+        print("Skipping question repair")
+        
+    # filter questions and answers using filter_the_text
+    vetted_qa_dicts = [qadict for qadict in vetted_qa_dicts if filter_the_text(qadict["question"]) and filter_the_text(qadict["answer"])]
 
     qa_dicts_by_text = augmentoolkit.utils.group_by_text.group_by_text(vetted_qa_dicts)
     

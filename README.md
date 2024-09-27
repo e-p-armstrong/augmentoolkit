@@ -226,6 +226,8 @@ Pipelines are executed in the order they appear in the pipeline_order from top t
 
 The first pipeline to ever be added to Augmentoolkit, QA generation is focused on creating instruct tuning data for specific facts. This can give an LLM a broad understanding of the facts behind a subject. Especially when combined with RAG, this can produce a bot that is decent at answering factual questions on a specific domain — in other words, this is great for creating domain experts.
 
+The QA pipeline also comes bundled with three prompt override suites by default. open-ended prompts (`original/prompt_overrides/prompts_override_open-ended_questions`) create long and detailed single questions, while negative prompts (`original/prompt_overrides/prompts_override_negative_questions`) help defend against hallucination. 
+
 #### QA Config, Step-by-Step
 
 You can easily customize Augmentoolkit's original pipeline by changing the settings in `config.yaml` or one of the other configs in that pipeline. Augmentoolkit's QA pipeline, specifically, has a wide variety of prebuilt configs for a number of different API providers and local AI servers (Ollama, llama.cpp, Aphrodite Engine, etc.). Let's walk through each field in the YAML file so that you can understand how to change it to suit your needs:
@@ -290,9 +292,13 @@ SKIP:
   ANSWER_RELEVANCY_CHECK: False
   FILTER_CHUNKS: False
   QUESTION_CHECK: False
+  CONVERSATION_GENERATION: False
+  REPAIR_QA_TUPLES: True
 ```
 
 Very simply, this section lets you skip certain parts of the QA pipeline. All of these are currently validation steps: they will just act as if everything came out as True (passed). This is useful for certain types of data — for intance, if the filter_chunks step keeps deciding that much of your data is "not suitable for questions" even if it is just unconventional, then you can solve this problem by skipping the step. This is a tradeoff, however: skipping these steps can lead to lower-quality data, especially under normal circumstances.
+
+**IMPORTANT** If you want to use the "negative" prompt overrides, **you have to turn skip answer relevancy check on!!!**
 
 **Next, we have the `SYSTEM` section:**
 ```
@@ -320,7 +326,7 @@ SYSTEM:
 
 Field-by-field:
 - `CHUNK_SIZE` is the maximum number of characters to use in a "chunk" of text that will be fed through the pipeline. A chunk is what questions are generated from — it's kinda the core building block of QA datasets built by Augmentoolkit.
-- `USE_FILENAMES` determines whether the AI is allowed to see the name of the file from which each chunk of text/information was taken, when it's generating questions. If this is on, it means that questions may often have the format "What is X, according to filey?" This can be useful if your files are books — so you might get "How do you sabotage a car, according to Simple Sabotage by the OSS?" if it's on. Compare this to when it's off — in which case the question might simply be "How do you sabotage a car?" This is good to have if you want the bot to have some meta-knowledge, but should usually be left off. If you want the AI to know the authors behind files, then format the names as `textname, by author name`. The comma is important.
+- `USE_FILENAMES` determines whether the AI is allowed to see the name of the file from which each chunk of text/information was taken, when it's generating questions. If this is on, it means that questions may often have the format "What is X, according to file?" This can be useful if your files are books — so you might get "How do you sabotage a car, according to Simple Sabotage by the OSS?" if it's on. Compare this to when it's off — in which case the question might simply be "How do you sabotage a car?" This is good to have if you want the bot to have some meta-knowledge, but should usually be left off. If you want the AI to know the authors behind files, then format the names as `textname, by author name`. The comma is important.
 - `COMPLETION_MODE` is a boolean that determines whether prompts are sent to the provider in chat mode (default, what happens when it's set to `false`) or completion mode (what happens when it's set to `true`). Completion mode can produce higher-quality responses with some models, but many providers don't support it.
 - `CONCURRENCY_LIMIT` is an integer; it's the maximum number of concurrent requests that can be made to the provider. This is useful for controlling costs and preventing rate-limiting.
 - `DOUBLE_CHECK_COUNTER` is an integer; it's the number of times that the pipeline will double-check the questions it produces. For each QA pair, the majority vote goes: if it's positive, the question/answer pair is kept, if it's negative, the QA pair is tossed. Ties are tossed. This is a tradeoff parameter: higher means more quality but far higher cost. 3 is a good starting point.

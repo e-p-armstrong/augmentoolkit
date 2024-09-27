@@ -1,0 +1,55 @@
+API:
+  API_KEY: refwafregsd
+  BASE_URL: https://api.deepinfra.com/v1/openai # had to use it over deepinfra and not over mistral so as to not violate mistral's acceptable use policy. smh. Can't we train models to conquer the world in peace?!
+  LARGE_LOGICAL_MODEL: mistralai/Mistral-Nemo-Instruct-2407
+  LOGICAL_MODEL: mistralai/Mistral-Nemo-Instruct-2407
+HUGGINGFACE:
+  HUB_PATH: yourusername/your-path-here
+  PRIVATE: False
+  PUSH_TO_HUB: False
+PATH:
+  DEFAULT_PROMPTS: ./prompts
+  INPUT: ./hidden_us_army
+  OUTPUT: ./output-usaa-5k-vanilla
+  PROMPTS: ./prompts
+PHASE:
+  PHASE_INDEX: 3
+  WORK_IN_PHASES: False
+SKIP:
+  ANSWER_RELEVANCY_CHECK: True
+  FILTER_CHUNKS: False
+  QUESTION_CHECK: False
+  CONVERSATION_GENERATION: True
+  REPAIR_QA_TUPLES: True
+SYSTEM:
+  CHUNK_SIZE: 1900
+  COMPLETION_MODE: False
+  CONCURRENCY_LIMIT: 50
+  CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between
+    a generalist, generic AI assistant, and a human.
+  DOUBLE_CHECK_COUNTER: 1
+  DO_NOT_USE_SYSTEM_PROMPTS: True
+  FINAL_ASSISTANT_PROMPT_NO_RAG: 'You are a helpful AI assistant.
+
+    '
+  FINAL_ASSISTANT_PROMPT_RAG: 'You are a helpful AI assistant.
+
+
+    Context information is below:
+
+
+    ----------------------
+
+    {data}
+
+    '
+  MODE: api
+  STOP: True
+  SUBSET_SIZE: 5000
+  USE_FILENAMES: False
+  USE_SUBSET: True
+SCRAPING:
+  USE_GUTENBERG: False
+  START_URL: "https://www.gutenberg.org/ebooks/bookshelf/57"
+  MAX_BOOKS: 5
+  MAX_FAILURES: 5
