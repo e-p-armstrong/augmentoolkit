@@ -138,7 +138,7 @@ After installing the dependencies:
 There's also a quickstart [video](https://youtu.be/YWPmike953I) that you can follow along with! **The default provider has been changed to DeepInfra, you'll need to get a key from them or you'll have to change the base URL to together.**
 
 **If you want to use PDFs,** you will have to install tesseract, which has its own installation instructions: https://github.com/tesseract-ocr/tesseract
-However the project should work fine without it if you just want to use `.txt`. *Should.*
+However the project should work fine without it if you just want to use `.txt`.
 
 ### Web UI
 
