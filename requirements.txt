@@ -18,3 +18,8 @@ datasets
 scikit-learn
 chardet
 streamlit
+pdf2image
+selenium
+textract-py3
+python-docx
+pytesseract

@@ -1,115 +1,123 @@
 import re
-from PIL import Image
-from pdf2image import convert_from_path
-import textract
-import pytesseract
-import fitz  # pymupdf
-import docx
+
+
 import io
 import chardet
 import os
 
-def extract_text_from_docx(path):
-    """
-    Extracts text from a DOCX file.
+try:
+    from PIL import Image
+    from pdf2image import convert_from_path
+    import textract
+    import pytesseract
+    import fitz  # pymupdf
+    import docx
+    def extract_text_from_docx(path):
+        """
+        Extracts text from a DOCX file.
 
-    Args:
-        path (str): The file path to the DOCX file.
+        Args:
+            path (str): The file path to the DOCX file.
 
-    Returns:
-        str: The extracted text.
-    """
-    doc = docx.Document(path)
-    full_text = []
-    for para in doc.paragraphs:
-        full_text.append(para.text)
-    return '\n'.join(full_text)
+        Returns:
+            str: The extracted text.
+        """
+        doc = docx.Document(path)
+        full_text = []
+        for para in doc.paragraphs:
+            full_text.append(para.text)
+        return '\n'.join(full_text)
 
-def read_doc_file(file_path):
-    return textract.process(file_path).decode("utf-8")
+    def read_doc_file(file_path):
+        return textract.process(file_path).decode("utf-8")
 
-def extract_text_from_pdf(path):
-    """
-    Extracts text from a copyable PDF using PyMuPDF.
+    def extract_text_from_pdf(path):
+        """
+        Extracts text from a copyable PDF using PyMuPDF.
 
-    Args:
-        path (str): The file path to the PDF.
+        Args:
+            path (str): The file path to the PDF.
 
-    Returns:
-        str: The extracted text.
-    """
-    text = ''
-    with fitz.open(path) as doc:
-        for page in doc:
-            text += page.get_text()
-    return text
+        Returns:
+            str: The extracted text.
+        """
+        text = ''
+        with fitz.open(path) as doc:
+            for page in doc:
+                text += page.get_text()
+        return text
 
-def extract_text_from_pdf_ocr(path):
-    """
-    Extracts text from a non-copyable PDF using OCR.
+    def extract_text_from_pdf_ocr(path):
+        """
+        Extracts text from a non-copyable PDF using OCR.
 
-    Args:
-        path (str): The file path to the PDF.
+        Args:
+            path (str): The file path to the PDF.
 
-    Returns:
-        str: The extracted text.
-    """
-    text = ''
-    with fitz.open(path) as doc:
-        for page_number, page in enumerate(doc):
-            # logger.info("Performing OCR on page %d", page_number + 1)
-            pix = page.get_pixmap()
-            img_bytes = pix.tobytes("png")
-            img = Image.open(io.BytesIO(img_bytes))
-            page_text = pytesseract.image_to_string(img)
-            text += page_text + '\n'
-    return text
+        Returns:
+            str: The extracted text.
+        """
+        text = ''
+        with fitz.open(path) as doc:
+            for page_number, page in enumerate(doc):
+                # logger.info("Performing OCR on page %d", page_number + 1)
+                pix = page.get_pixmap()
+                img_bytes = pix.tobytes("png")
+                img = Image.open(io.BytesIO(img_bytes))
+                page_text = pytesseract.image_to_string(img)
+                text += page_text + '\n'
+        return text
 
-def remove_newlines_in_sentences(text):
-    lines = text.split('\n')
-    new_lines = []
-    for line in lines:
-        line = line.strip()
-        if line:
-            if line[-1] not in '.!?':
-                line += ' '
-            else:
-                line += '\n'
-            new_lines.append(line)
-    return ''.join(new_lines)
+    def remove_newlines_in_sentences(text):
+        lines = text.split('\n')
+        new_lines = []
+        for line in lines:
+            line = line.strip()
+            if line:
+                if line[-1] not in '.!?':
+                    line += ' '
+                else:
+                    line += '\n'
+                new_lines.append(line)
+        return ''.join(new_lines)
 
-def extract_text(path):
-    """
-    Extracts formatted text from a PDF or DOCX file.
+    def extract_text(path):
+        """
+        Extracts formatted text from a PDF or DOCX file.
 
-    Args:
-        path (str): The file path to the PDF or DOCX file.
+        Args:
+            path (str): The file path to the PDF or DOCX file.
 
-    Returns:
-        str: The extracted text in markdown format.
-    """
-    # Check the file extension
-    _, ext = os.path.splitext(path)
-    ext = ext.lower()
+        Returns:
+            str: The extracted text in markdown format.
+        """
+        # Check the file extension
+        _, ext = os.path.splitext(path)
+        ext = ext.lower()
+        
+        if ext == '.docx':
+            # logger.info("Extracting text from DOCX file.")
+            text = extract_text_from_docx(path)
+        elif ext == '.pdf':
+            # logger.info("Extracting text from PDF file.")
+            text = extract_text_from_pdf(path)
+            # logger.info("Extracted text length: %d", len(text))
+            # If extracted text is too short, use OCR
+            if len(text.strip()) < 100:
+                # logger.info("Extracted text is too short, switching to OCR.")
+                text = extract_text_from_pdf_ocr(path)
+        else:
+            raise ValueError(f"Unsupported file type: {ext}")
+        
+        # Remove newlines within sentences
+        text = remove_newlines_in_sentences(text)
+        
+        return text
+except ImportError:
+    print("NOTE PDF and DOCX extraction will not work without the required libraries. Please install the required libraries to enable this functionality.")
     
-    if ext == '.docx':
-        # logger.info("Extracting text from DOCX file.")
-        text = extract_text_from_docx(path)
-    elif ext == '.pdf':
-        # logger.info("Extracting text from PDF file.")
-        text = extract_text_from_pdf(path)
-        # logger.info("Extracted text length: %d", len(text))
-        # If extracted text is too short, use OCR
-        if len(text.strip()) < 100:
-            # logger.info("Extracted text is too short, switching to OCR.")
-            text = extract_text_from_pdf_ocr(path)
-    else:
-        raise ValueError(f"Unsupported file type: {ext}")
-    
-    # Remove newlines within sentences
-    text = remove_newlines_in_sentences(text)
-    
-    return text
+
+
 
 
 def sentence_chunking_algorithm(file_path, max_char_length=1900):

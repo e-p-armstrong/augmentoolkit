@@ -1,6 +1,5 @@
 # Written by GPT-4
 import fitz  # PyMuPDF
-import pytesseract
 from PIL import Image
 import io
 

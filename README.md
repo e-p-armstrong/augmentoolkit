@@ -137,6 +137,8 @@ After installing the dependencies:
 
 There's also a quickstart [video](https://youtu.be/YWPmike953I) that you can follow along with!
 
+If you want to use PDFs, you will have to install tesseract, which has its own installation instructions: https://github.com/tesseract-ocr/tesseract
+
 ### Web UI
 
 1. Install the dependencies (`pip install -r requirements.txt`)
