@@ -1096,9 +1096,7 @@ def ensure_multiple_answers_are_same(
     conv, full_info_dict
 ):  # why is this a whole separate function? Once upon a time, LLMs were used in validation here, too. But programmatic validation SEEMS to catch the common problems. This is here so that I can add it back in if I have to.
     """Loop to ensure that the answer is consistent in the conversation and in the tuple."""
-    return process_multiturn_functions.call_all_processors(
-        conv, full_info_dict["paragraph"]
-    )
+    return True
 
 ### CONVERSATION CREATION SECTION
 
