@@ -1,3 +1,4 @@
+Note Sep 27 20:36 -- a breaking bug in conversation generation has been fixed
 # Augmentoolkit — infinite domain-specific instruct data
 Your custom LLMs need custom data. [Augmentoolkit creates quality data quickly, cheaply, and painlessly.](#benefits)
 
