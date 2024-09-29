@@ -19,6 +19,8 @@ SKIP:
   ANSWER_RELEVANCY_CHECK: False
   FILTER_CHUNKS: False
   QUESTION_CHECK: False
+  REPAIR_QA_TUPLES: False
+  CONVERSATION_GENERATION: False
 SCRAPING:
   USE_GUTENBERG: False
   START_URL: "https://www.gutenberg.org/ebooks/bookshelf/57"
