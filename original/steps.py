@@ -926,7 +926,7 @@ def filter_and_graph(dicts):
     # Count the occurrences of None and non-None for each source text
     source_counts = Counter()
     for dict in dicts:
-        print(dict)
+        # print(dict)
         if dict["paragraph"] is None:
             source_counts[dict["metadata"]] = source_counts.get(dict["metadata"], [0, 0])
             source_counts[dict["metadata"]][0] += 1
