@@ -4,6 +4,7 @@ print("Augmentoolkit is starting to run! If this is your first time running this
 import subprocess
 import os
 import yaml
+import sys
 
 with open("super_config.yaml", "r") as f:
     super_config = yaml.safe_load(f)
@@ -13,7 +14,7 @@ def run_processing_script(folder_path, config_path, project_root):
     env["PYTHONPATH"] = project_root
     env["CONFIG_PATH"] = config_path
     env["FOLDER_PATH"] = folder_path 
-    subprocess.run(["python", "processing.py"], cwd=folder_path, env=env)
+    subprocess.run([sys.executable, "processing.py"], cwd=folder_path, env=env)
 
 def main():
     project_root = os.path.dirname(os.path.abspath(__file__))

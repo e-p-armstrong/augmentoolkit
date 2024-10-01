@@ -1,6 +1,7 @@
 import streamlit as st
 import yaml
 import os
+import sys
 import subprocess
 import threading
 import time
@@ -80,8 +81,9 @@ def run_processing_script(folder_path, config_path, project_root):
     env["FOLDER_PATH"] = folder_path 
     env["WANDB_DIABLED"] = "true"
     
+    venv_python = os.path.join(os.path.dirname(sys.executable), 'python')
     process = subprocess.Popen(
-        ["python", "processing.py"],
+        [venv_python, "processing.py"],
         cwd=folder_path,
         env=env,
         stdout=subprocess.PIPE,
