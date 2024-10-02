@@ -1,16 +1,17 @@
 API:
-  API_KEY: key here
-  BASE_URL: https://api.deepinfra.com/v1/openai
+  API_KEY: krVeGsV5FRbXil1T8Jf6WiHcGKlb6oRz
   LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct
+  LARGE_BASE_URL: https://api.deepinfra.com/v1/openai
   LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct
+  LOGICAL_BASE_URL: https://api.deepinfra.com/v1/openai
 HUGGINGFACE:
   HUB_PATH: yourusername/your-path-here
   PRIVATE: False
   PUSH_TO_HUB: False
-PATH:
+PATH: # TODO update all the other configs with the new base urls AND the new system prompt things
   DEFAULT_PROMPTS: ./prompts
-  INPUT: ./input
-  OUTPUT: ./output
+  INPUT: ./hidden_input_etiquette
+  OUTPUT: ./output_etiquette_test
   PROMPTS: ./prompts
 PHASE:
   PHASE_INDEX: 3

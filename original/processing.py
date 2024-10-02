@@ -77,9 +77,15 @@ async def main():
 
     API_KEY = config["API"]["API_KEY"]
 
-    BASE_URL = config["API"][
-        "BASE_URL"
+    LOGICAL_BASE_URL = config["API"][
+        "LOGICAL_BASE_URL"
     ]  # Augmentoolkit-API mode should also be compatible with any other API provider that accepts OAI-style requests
+    
+    LARGE_BASE_URL = config["API"][
+        "LARGE_BASE_URL"
+    ]  # Augmentoolkit-API mode should also be compatible with any other API provider that accepts OAI-style requests
+    
+    
 
     COMPLETION_MODE = parse_bool(config["SYSTEM"]["COMPLETION_MODE"])
 
@@ -165,7 +171,7 @@ async def main():
     engine_wrapper = EngineWrapper(
         model=LOGICAL_MODEL,
         api_key=API_KEY,
-        base_url=BASE_URL,
+        base_url=LOGICAL_BASE_URL,
         mode=MODE,
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
@@ -173,7 +179,7 @@ async def main():
     engine_wrapper_large = EngineWrapper(
         model=LARGE_LOGICAL_MODEL,
         api_key=API_KEY,
-        base_url=BASE_URL,
+        base_url=LARGE_BASE_URL,
         mode=MODE,
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
