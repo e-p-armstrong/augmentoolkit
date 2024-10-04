@@ -132,7 +132,7 @@ After installing the dependencies:
 
 - Get the repo onto a computer with an internet connection
 - Install its dependencies (`pip install -r requirements.txt`) (Augmentoolkit is tested mainly on Python 3.11, but it should be pretty flexible)
-- Open `config.yaml`
+- Open `config.yaml` in the `./original` folder
 - Paste your API key, favorite model name, and the endpoint URL of your preferred AI service, into the relevant fields inside `config.yaml`. Recommendation: [Together.ai with Llama 3.1 8b works really nicely both as a LARGE_LOGICAL_MODEL and as the LOGICAL_MODEL](meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo).
 - Open this project's folder in a command line and type `python run_augmentoolkit.py` and hit enter (fires off the script version).
 
@@ -239,15 +239,20 @@ You can easily customize Augmentoolkit's original pipeline by changing the setti
 **First up, we have the API section:**
 ```
 API:
-  API_KEY: your key here
-  BASE_URL: https://api.together.xyz
-  LARGE_LOGICAL_MODEL: meta-llama/Llama-3-70b-chat-hf
-  LOGICAL_MODEL: meta-llama/Llama-3-70b-chat-hf
+  LARGE_API_KEY: key-here
+  LARGE_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct
+  LARGE_BASE_URL: https://api.deepinfra.com/v1/openai
+  LARGE_MODE: api
+  SMALL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct
+  SMALL_BASE_URL: https://api.deepinfra.com/v1/openai
+  SMALL_API_KEY: key-here
+  SMALL_MODE: api
 ```
 
 Field-by-field:
-- `API_KEY` this is where you put the API key for your favorite API provider. If you're running a local server, put a dummy value in here so that the formatting of the request does not break.
-- `BASE_URL` this is the base URL for the API provider you are using. Some possible values:
+- `LARGE_MODEL` the name of the large model you want to use. This is the model that will be used for the final generation step, as well as question generation and revision. This should be a decently-strong model. Any field with "LARGE_" coming before it in the `config.yaml` file configures this model: what provider you're using for it, what API key you're using for that provider, etc... this lets you use two different providers during the same dataset generation run.
+- `LARGE_API_KEY` this is where you put the API key for the API provider of the large and powerful model that you are using. If you're running a local server, put a dummy value in here so that the formatting of the request does not break.
+- `LARGE_BASE_URL` this is the base URL for the API provider you are using. The LARGE_BASE_URL in particular configures the base URL for requests made to the LARGE model. Some possible values:
     - http://localhost:2242/v1 <- aphrodite (local)
     - http://localhost:8080/ <- llama.cpp
     - http://localhost:11434/v1 <- Ollama
@@ -256,8 +261,8 @@ Field-by-field:
     - https://api.openai.com/v1/ # <- OpenAI
     - anything else that accepts OAI-style requests, so basically any API out there (openrouter, fireworks, etc...)
     - **You can see a lot of potential BASE_URLs in the `config_overrides/` folder in the `original` pipeline.**
-- `LARGE_LOGICAL_MODEL` the name of the large model you want to use. This is the model that will be used for the final generation step. This should be a decently-strong model. The model used to power Augmentoolkit is separated into two models to save costs on easier steps early on in the pipeline. (This field is likely irrelevant if you're using a local server.)
-- `LOGICAL_MODEL` the name of the model you want to use for the first few generation steps. It can be a decently cheap model, but stronger models will still result in better final outputs.
+- `LARGE_MODE` is the mode that the pipeline will run in when making requests to the LARGE model. `api` is the default mode, and is used for running the pipeline with APIs supporting the OpenAI standard. `cohere` is also supported, and is used for running the pipeline with the Cohere API (BASE_URL does nothing in `cohere` mode). Other modes (such as a potential Anthropic mode) may be added soon, or you can do so yourself in `./augmentoolkit/generation_functions/engine_wrapper_class.py` if you know Anthropic's API.
+- Anything with `SMALL_` in the name is like its `LARGE_` equivalent, but for the smaller model that handles more "bulk" tasks in the pipeline like validation and initial chunk filtering.
 
 **Following this, we have the `HUGGINGFACE` section:**
 ```
@@ -313,15 +318,25 @@ SYSTEM:
   CONCURRENCY_LIMIT: 60
   DOUBLE_CHECK_COUNTER: 1
   DO_NOT_USE_SYSTEM_PROMPTS: True
-  FINAL_ASSISTANT_PROMPT_NO_RAG: |
-   You are a helpful, friendly AI assistant.
-  FINAL_ASSISTANT_PROMPT_RAG: |
-   You are a helpful, friendly AI assistant.
+  FINAL_ASSISTANT_PROMPTS_NO_RAG: [
+  'You are a helpful AI assistant.',
+  'You are A VASTLY intelligent ARTIFICIAL INTELLIGENCE with DOMAIN-EXPERT KNOWLEDGE from a variety of fields.
+  
+  USE your knowledge to be helpful and truthfully answer questions about the world.',
+  "u are ai asstant plz answr questions"] # a wide variety of system prompts helps the AI learn better. What, you expect your users to spell things right?
+  FINAL_ASSISTANT_PROMPTS_RAG: [
+  'You are a helpful AI assistant. Some knowledge:
+  
+  {data}',
+  
+  '{data}
+  
+  You are an AI domain expert. Answer questions',
+  'You are an AI with vast knowledge. Here is some potentially-relevant context:
+  
+  {data}
 
-   Context information is below:
-   
-   ----------------------
-   {data}
+  Answer questions according to your knowledge.']
   MODE: api
   STOP: true
   SUBSET_SIZE: 10
@@ -335,7 +350,7 @@ Field-by-field:
 - `CONCURRENCY_LIMIT` is an integer; it's the maximum number of concurrent requests that can be made to the provider. This is useful for controlling costs and preventing rate-limiting.
 - `DOUBLE_CHECK_COUNTER` is an integer; it's the number of times that the pipeline will double-check the questions it produces. For each QA pair, the majority vote goes: if it's positive, the question/answer pair is kept, if it's negative, the QA pair is tossed. Ties are tossed. This is a tradeoff parameter: higher means more quality but far higher cost. 3 is a good starting point.
 - `DO_NOT_USE_SYSTEM_PROMPTS` is a boolean that determines whether, at the very end of the pipeline, the generated data includes system prompts or not. This does not affect the running of the pipeline; rather, it only affects the saving of the dataset at the end. Sometimes using no system prompt can help an LLM learn the facts of a dataset to a greater degree, and produces a more stable LLM which is less sensitive to needing a very specific system prompt. Turning this on means that FINAL_ASSISTANT_PROMPT_NO_RAG will not be used.
-- `FINAL_ASSISTANT_PROMPT_NO_RAG` is a setting used to control the form of the dataset produced at the very end. What you write here will be the system prompt of the AI in the portion of the dataset that does NOT have RAG supporting the outputs. This is where we get the LLM to rely on the knowledge we teach it.
+- `FINAL_ASSISTANT_PROMPT_NO_RAG` is a setting used to control the form of the dataset produced at the very end. To be clear, it does not affect the data generated -- one of the strings written here is appended to the start of the conversations generated, at the very end of the pipeline. You provide a list of strings, and one of them is randomly chosen for each doman-specific conversation the pipeline fcreates. What you write here will be the system prompt of the AI in the portion of the dataset that does NOT have RAG supporting the outputs. This is where we get the LLM to rely on the knowledge we teach it.
 - `FINAL_ASSISTANT_PROMPT_RAG` is like its NO_RAG cousin, except it's used in the portion of the dataset that DOES have RAG supporting the outputs. This is where we get the LLM to combine understanding with retrieved information to produce an answer. A key difference: wherever `{data}` appears, it will be replaced with the RAG context for each sample in the dataset. So place it where you want the context to appear in the prompt.
 - `MODE` is the mode that the pipeline will run in. `api` is the default mode, and is used for running the pipeline with APIs supporting the OpenAI standard. `cohere` is also supported, and is used for running the pipeline with the Cohere API (BASE_URL does nothing in `cohere` mode).
 - `STOP` is a boolean that determines whether the pipeline uses stop tokens or not. You should always have this set to `true` unless you're using an API that arbitrarily limits the number of stop tokens you can use, like OpenAI.

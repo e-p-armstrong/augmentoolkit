@@ -1,8 +1,12 @@
 API:
-  API_KEY: your-key-here
-  BASE_URL: http://localhost:11434/v1
-  LARGE_LOGICAL_MODEL: mistral
-  LOGICAL_MODEL: mistral
+  LARGE_API_KEY: key-here
+  LARGE_MODEL: mistral
+  LARGE_BASE_URL: http://localhost:11434/v1
+  LARGE_MODE: api
+  SMALL_MODEL: mistral
+  SMALL_BASE_URL: http://localhost:11434/v1
+  SMALL_API_KEY: key-here
+  SMALL_MODE: api
 HUGGINGFACE:
   HUB_PATH: yourusername/your-path-here
   PRIVATE: False
@@ -29,21 +33,25 @@ SYSTEM:
     a generalist, generic AI assistant, and a human.
   DOUBLE_CHECK_COUNTER: 1
   DO_NOT_USE_SYSTEM_PROMPTS: True
-  FINAL_ASSISTANT_PROMPT_NO_RAG: 'You are a helpful AI assistant.
+  FINAL_ASSISTANT_PROMPTS_NO_RAG: [
+  'You are a helpful AI assistant.',
+  'You are A VASTLY intelligent ARTIFICIAL INTELLIGENCE with DOMAIN-EXPERT KNOWLEDGE from a variety of fields.
+  
+  USE your knowledge to be helpful and truthfully answer questions about the world.',
+  "u are ai asstant plz answr questions"] # a wide variety of system prompts helps the AI learn better. What, you expect your users to spell things right?
+  FINAL_ASSISTANT_PROMPTS_RAG: [
+  'You are a helpful AI assistant. Some knowledge:
+  
+  {data}',
+  
+  '{data}
+  
+  You are an AI domain expert. Answer questions',
+  'You are an AI with vast knowledge. Here is some potentially-relevant context:
+  
+  {data}
 
-    '
-  FINAL_ASSISTANT_PROMPT_RAG: 'You are a helpful AI assistant.
-
-
-    Context information is below:
-
-
-    ----------------------
-
-    {data}
-
-    '
-  MODE: api
+  Answer questions according to your knowledge.']
   STOP: True
   SUBSET_SIZE: 20
   USE_FILENAMES: False
