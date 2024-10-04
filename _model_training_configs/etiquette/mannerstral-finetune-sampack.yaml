@@ -1,0 +1,75 @@
+base_model: Heralax/etiquette-pretrain
+tokenizer_type: AutoTokenizer
+is_mistral_derived_model: true
+load_in_8bit: false
+load_in_4bit: false
+strict: false
+
+datasets:
+  - path: json
+    data_files: hidden_manners_openended_plain_qa_list.jsonl
+    ds_type: json
+    type: sharegpt
+    conversation: chatml
+  - path: json
+    data_files: hidden_manners_normal_plain_qa_list.jsonl
+    ds_type: json
+    type: sharegpt
+    conversation: chatml
+  - path: json
+    data_files: hidden_manners_negative_plain_qa_list.jsonl
+    ds_type: json
+    type: sharegpt
+    conversation: chatml
+
+dataset_prepared_path: last_run_prepared
+output_dir: ./us-army-finetune-1
+
+sequence_len: 4096
+sample_packing: true
+pad_to_sequence_len: true
+shuffle_merged_datasets: true
+
+wandb_project: mistral-usarmy
+wandb_entity:
+wandb_watch:
+wandb_run_id:
+wandb_log_model:
+
+gradient_accumulation_steps: 6
+micro_batch_size: 2
+eval_batch_size: 1
+num_epochs: 6
+optimizer: paged_adamw_8bit
+lr_scheduler: cosine
+learning_rate: 0.000020
+weight_decay: 0
+# Gradient clipping max norm
+max_grad_norm: 1.0
+noisy_embedding_alpha: 0
+train_on_inputs: false
+group_by_length: false
+bf16: true
+fp16: false
+tf32: false
+
+gradient_checkpointing: unsloth
+early_stopping_patience:
+resume_from_checkpoint: 
+logging_steps: 1
+xformers_attention:
+flash_attention: true
+
+chat_template: chatml
+
+warmup_ratio: 0.5
+auto_resume_from_checkpoints: false
+#warmup_ratio: 0.5
+eval_steps: 10
+saves_per_epoch: 1
+eval_sample_packing: false
+save_total_limit: 3
+debug:
+deepspeed: deepspeed_configs/zero2.json
+special_tokens:
+  pad_token: "<|end_of_text|>"
