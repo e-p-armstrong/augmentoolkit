@@ -154,6 +154,7 @@ class GenerationStep:
                                 }
                             ],
                             default_flow_style=False,
+                            allow_unicode=True
                         )
                     return ret, timeout
                 except Exception as e:
@@ -163,7 +164,7 @@ class GenerationStep:
                         print(prompt)
                     else:
                         print("Messages:")
-                        print(yaml.dump(messages, default_flow_style=False))
+                        print(yaml.dump(messages, default_flow_style=False, allow_unicode=True))
                     try:
                         print("\n\nResponse:\n-----\n")
                         print(response)

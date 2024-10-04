@@ -108,7 +108,7 @@ for dataset_name, dataset in datasets.items():
         # Save predictions to .jsonl file
         with open(OUTPUT_FILE_PATH, 'a') as f:
             for text, pred in zip(batch_texts, batch_predictions):
-                json_line = json.dumps({"text": text, "label": int(pred), "dataset": dataset_name})
+                json_line = json.dumps({"text": text, "label": int(pred), "dataset": dataset_name}, ensure_ascii=False)
                 f.write(json_line + '\n')
         
         # Calculate and print current accuracy

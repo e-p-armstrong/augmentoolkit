@@ -109,7 +109,7 @@ class PipelineStep:
         
         os.makedirs(self.save_path, exist_ok=True)
         with open(save_path_file, "w") as f:
-            f.write(json.dumps(output_data))
+            f.write(json.dumps(output_data, ensure_ascii=False))
         
         output_list.append(output_data)
         return output_data
