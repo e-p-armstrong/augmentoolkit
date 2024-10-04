@@ -1,4 +1,3 @@
-Note Sep 27 20:36 -- a breaking bug in conversation generation has been fixed
 # Augmentoolkit — infinite domain-specific instruct data
 Your custom LLMs need custom data. [Augmentoolkit creates quality data quickly, cheaply, and painlessly.](#benefits)
 
@@ -119,6 +118,7 @@ Finally, **using the model you create should be easy and valuable:**
 8. [Roadmap](#roadmap)
 9. [Contributing](#contributing)
 10. [Community](#community)
+11. [Sponsorship and Donation](#donation)
 11. [Self Promotion (Read if you're a Business!)](#for-businesses)
 12. [Think this is cool? Connect with me elsewhere!](#think-this-is-cool-connect-with-me-elsewhere)
 
