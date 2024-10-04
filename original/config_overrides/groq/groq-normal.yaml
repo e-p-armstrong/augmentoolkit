@@ -16,15 +16,15 @@ PHASE:
   PHASE_INDEX: 3
   WORK_IN_PHASES: False
 SKIP:
-  CONVERSATION_GENERATION: False
   ANSWER_RELEVANCY_CHECK: False
   REPAIR_QA_TUPLES: False
   FILTER_CHUNKS: False
   QUESTION_CHECK: False
+  CONVERSATION_GENERATION: False
 SYSTEM:
   CHUNK_SIZE: 1900
   COMPLETION_MODE: False
-  CONCURRENCY_LIMIT: 1
+  CONCURRENCY_LIMIT: 50
   CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between
     a generalist, generic AI assistant, and a human.
   DOUBLE_CHECK_COUNTER: 1
@@ -44,7 +44,12 @@ SYSTEM:
 
     '
   MODE: api
-  STOP: False
-  SUBSET_SIZE: 15
+  STOP: True
+  SUBSET_SIZE: 20
   USE_FILENAMES: False
-  USE_SUBSET: True
+  USE_SUBSET: False
+SCRAPING:
+  USE_GUTENBERG: False
+  START_URL: "https://www.gutenberg.org/ebooks/bookshelf/57"
+  MAX_BOOKS: 5
+  MAX_FAILURES: 5

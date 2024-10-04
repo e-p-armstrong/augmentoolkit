@@ -6,7 +6,8 @@ torch
 transformers
 accelerate
 matplotlib 
-nltk 
+scipy==1.11.3
+nltk==3.8.1
 openai
 aiohttp
 pyyaml
