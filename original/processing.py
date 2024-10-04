@@ -47,16 +47,6 @@ async def main():
     if not os.path.exists(config["PATH"]["OUTPUT"]):
         os.makedirs(config["PATH"]["OUTPUT"])
 
-    if (
-        not config["SYSTEM"]["COMPLETION_MODE"]
-        and config["SYSTEM"]["MODE"] == "aphrodite"
-    ):
-        raise Exception("Aphrodite engine mode MUST use completion prompts!")
-
-    LOGICAL_MODEL = config["API"]["LOGICAL_MODEL"]
-
-    LARGE_LOGICAL_MODEL = config["API"]["LARGE_LOGICAL_MODEL"]
-
     DOUBLE_CHECK_COUNTER = int(config["SYSTEM"][
         "DOUBLE_CHECK_COUNTER"
     ])  # Set to 1 to check outputs only once; set to 2 to check twice; set to 3 to check thrice, etc. Set to 0 to break everything in vet_question_loop() and elsewhere. Set to -1 and cause the universe to implode?
@@ -75,21 +65,38 @@ async def main():
         "CONCURRENCY_LIMIT"
     ])  # Adjust this number based on the rate limit constraints of your api
 
-    API_KEY = config["API"]["API_KEY"]
-
-    LOGICAL_BASE_URL = config["API"][
-        "LOGICAL_BASE_URL"
+    SMALL_BASE_URL = config["API"][
+        "SMALL_BASE_URL"
     ]  # Augmentoolkit-API mode should also be compatible with any other API provider that accepts OAI-style requests
+    
+    SMALL_MODEL = config["API"][
+        "SMALL_MODEL"
+    ]
+    
+    SMALL_API_KEY = config["API"][
+        "SMALL_API_KEY"
+    ]
+    
+    SMALL_MODE = config["API"][
+        "SMALL_MODE"
+    ]
     
     LARGE_BASE_URL = config["API"][
         "LARGE_BASE_URL"
     ]  # Augmentoolkit-API mode should also be compatible with any other API provider that accepts OAI-style requests
     
+    LARGE_MODEL = config["API"]["LARGE_MODEL"]
+    
+    LARGE_API_KEY = config["API"][
+        "LARGE_API_KEY"
+    ]
+    
+    LARGE_MODE = config["API"][
+        "LARGE_MODE"
+    ]
     
 
     COMPLETION_MODE = parse_bool(config["SYSTEM"]["COMPLETION_MODE"])
-
-    MODE = config["SYSTEM"]["MODE"]
 
     LOG_LEVEL = logging.INFO
 
@@ -169,18 +176,18 @@ async def main():
     from augmentoolkit.generation_functions.engine_wrapper_class import EngineWrapper
 
     engine_wrapper = EngineWrapper(
-        model=LOGICAL_MODEL,
-        api_key=API_KEY,
-        base_url=LOGICAL_BASE_URL,
-        mode=MODE,
+        model=SMALL_MODEL,
+        api_key=SMALL_API_KEY,
+        base_url=SMALL_BASE_URL,
+        mode=SMALL_MODE,
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
     
     engine_wrapper_large = EngineWrapper(
-        model=LARGE_LOGICAL_MODEL,
-        api_key=API_KEY,
+        model=LARGE_MODEL,
+        api_key=LARGE_API_KEY,
         base_url=LARGE_BASE_URL,
-        mode=MODE,
+        mode=LARGE_MODE,
         # quantization="gptq" # modify if you want to do stuff with the aphrodite branch
     )
     
@@ -228,7 +235,7 @@ async def main():
     from tqdm import tqdm
     import asyncio
 
-    if "localhost" or "127.0.0." in BASE_URL:
+    if "localhost" or "127.0.0." in LARGE_BASE_URL or "localhost" or "127.0.0." in SMALL_BASE_URL:
         print("\n\nWarning: Local generation can be slow if your computer is not powerful enough. It may be most cost/time effective to rent a cloud GPU. However if you have a good computer you can make progress; I know a guy who used a 2xA6000 rig and waited a while and created a good-sized dataset.")
 
 
@@ -426,3 +433,4 @@ async def main():
 
 
 asyncio.run(main())
+

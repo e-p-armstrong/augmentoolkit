@@ -64,7 +64,8 @@ CONVERSATION_INSTRUCTIONS = obj_conf["SYSTEM"]["CONVERSATION_INSTRUCTIONS"]
 DO_NOT_USE_SYSTEM_PROMPTS = parse_bool(obj_conf["SYSTEM"]["DO_NOT_USE_SYSTEM_PROMPTS"])
 SKIP_QUESTION_CHECK = parse_bool(obj_conf["SKIP"]["QUESTION_CHECK"])
 SKIP_CONVERSATION_GENERATION = parse_bool(obj_conf["SKIP"]["CONVERSATION_GENERATION"]) # useful if you're generating "tight" data only.
-
+FINAL_ASSISTANT_PROMPTS_NO_RAG = obj_conf["SYSTEM"]["FINAL_ASSISTANT_PROMPTS_NO_RAG"]
+FINAL_ASSISTANT_PROMPTS_RAG = obj_conf["SYSTEM"]["FINAL_ASSISTANT_PROMPTS_RAG"]
 
 
 has_pushed_yet = False
@@ -1180,21 +1181,13 @@ def convert_directory_to_list(directory_path):
                         data_dict["conversation"]
                     )
                     
-                    conversations = []
-                    for d in data_dict["dict_list"]:
-                        q = d["question"]
-                        a = d["answer"]
-                        conversations.append({"from": "human", "value": q})
-                        conversations.append({"from": "gpt", "value": a})
-                    plain_qa_list.append({"conversations": conversations})
+                    plain_conversations = []
 
                     # Convert to simplified format
                     simplified_conversations = []
                     simplified_conversations_rag = []
 
-                    system_prompt_rag = obj_conf["SYSTEM"][
-                        "FINAL_ASSISTANT_PROMPT_RAG"
-                    ]
+                    system_prompt_rag = random.choice(FINAL_ASSISTANT_PROMPTS_RAG)
                     simplified_conversations_rag.append(
                         {
                             "from": "system",
@@ -1206,13 +1199,16 @@ def convert_directory_to_list(directory_path):
                     
                     if not DO_NOT_USE_SYSTEM_PROMPTS:
                         # Load system prompts
-                        system_prompt_norag = obj_conf["SYSTEM"][
-                            "FINAL_ASSISTANT_PROMPT_NO_RAG"
-                        ]
+                        system_prompt_norag = random.choice(FINAL_ASSISTANT_PROMPTS_NO_RAG)
                         
                         simplified_conversations.append(
                             {"from": "system", "value": system_prompt_norag}
                         )
+                        
+                        plain_conversations.append(
+                            {"from": "system", "value": system_prompt_norag}
+                        )
+                        
 
                         
                     for i, (charname, message) in enumerate(
@@ -1236,6 +1232,15 @@ def convert_directory_to_list(directory_path):
                         simplified_rag_list.append(
                             {"conversations": simplified_conversations_rag}
                         )
+                        
+                        # handle plain QA tuples
+                    for d in data_dict["dict_list"]:
+                        q = d["question"]
+                        a = d["answer"]
+                        plain_conversations.append({"from": "human", "value": q})
+                        plain_conversations.append({"from": "gpt", "value": a})
+                    plain_qa_list.append({"conversations": plain_conversations})
+                        
                 except Exception as e:
                     print(f"Error reading {filename}: {e}")
 
@@ -1324,6 +1329,14 @@ def save_plain_qatuples(qa_dicts_by_text):
         )  # append it as-is to the master-list
         
         conversations = []
+        
+        if not DO_NOT_USE_SYSTEM_PROMPTS:
+            # Load system prompts
+            system_prompt_norag = random.choice(FINAL_ASSISTANT_PROMPTS_NO_RAG)
+            conversations.append(
+                {"from": "system", "value": system_prompt_norag}
+            )
+        
         for d in data_dict["dict_list"]:
             q = d["question"]
             a = d["answer"]
