@@ -214,7 +214,7 @@ def train_classifier(text_label_dicts, classifier_counter, output_dir):
                 "text": d["paragraph"],
                 "label": d["label"]
             }
-            f.write(json.dumps(json_obj) + "\n")
+            f.write(json.dumps(json_obj, ensure_ascii=False) + "\n")
 
     ### TRAINING CODE
     dataset = load_dataset("json", data_files=path_to_dataset)
@@ -302,7 +302,7 @@ def run_classifier(input_list=None, model=None, output_dir=None, output_list=Non
                 f.write(json.dumps({
                     "text": inp[0],
                     "label": outputs[idx]
-                }))
+                }, ensure_ascii=False))
             
             out_tup = (inp[0], inp[1], outputs[idx])
             output_list.append(out_tup)
@@ -369,7 +369,7 @@ def save_train_set(test_label_dicts, output_dir):
                 "text": d["paragraph"],
                 "label": d["label"]
             }
-            f.write(json.dumps(json_obj) + "\n")
+            f.write(json.dumps(json_obj, ensure_ascii=False) + "\n")
         
         
 def fix_text(to_replace_arr, text):

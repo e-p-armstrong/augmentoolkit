@@ -1,6 +1,7 @@
 import streamlit as st
 import yaml
 import os
+import sys
 import subprocess
 import threading
 import time
@@ -71,7 +72,7 @@ def scan_folders_for_config():
 # Save the updated config to the YAML file
 def save_yaml_config(data, filepath):
     with open(filepath, "w") as f:
-        yaml.dump(data, f, default_flow_style=False)
+        yaml.dump(data, f, default_flow_style=False, allow_unicode=True)
 
 def run_processing_script(folder_path, config_path, project_root):
     env = os.environ.copy()
@@ -80,8 +81,9 @@ def run_processing_script(folder_path, config_path, project_root):
     env["FOLDER_PATH"] = folder_path 
     env["WANDB_DIABLED"] = "true"
     
+    venv_python = os.path.join(os.path.dirname(sys.executable), 'python')
     process = subprocess.Popen(
-        ["python", "processing.py"],
+        [venv_python, "processing.py"],
         cwd=folder_path,
         env=env,
         stdout=subprocess.PIPE,
@@ -108,7 +110,7 @@ def load_individual_config(filepath):
 # Save an individual config file
 def save_individual_config(data, filepath):
     with open(filepath, "w") as f:
-        yaml.dump(data, f, default_flow_style=False)
+        yaml.dump(data, f, default_flow_style=False, allow_unicode=True)
 
 if 'unsaved_changes_made' not in st.session_state:
     st.session_state['unsaved_changes_made'] = False

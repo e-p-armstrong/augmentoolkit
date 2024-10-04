@@ -11,7 +11,7 @@ def txt_to_single_jsonl(txt_file_path, jsonl_file_path):
     
     with open(jsonl_file_path, 'w', encoding='utf-8') as jsonl_file:
         # Write the single JSON object to the .jsonl file
-        jsonl_file.write(json.dumps(json_obj) + '\n')
+        jsonl_file.write(json.dumps(json_obj, ensure_ascii=False) + '\n')
 
 # Example usage
 txt_file_path = './raw_txt_input/on_war_clausewitz.txt'

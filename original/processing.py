@@ -1,6 +1,7 @@
 import sys
 import os
-
+import nltk
+nltk.download('punkt', quiet=True)
 from augmentoolkit.generation_functions.process_multiturn_functions import extract_conversation
 import augmentoolkit.utils.create_pretraining_set
 import augmentoolkit.utils.sentence_chunking_algorithm
