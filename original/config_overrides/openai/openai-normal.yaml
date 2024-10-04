@@ -1,8 +1,12 @@
 API:
-  API_KEY: your-key
-  BASE_URL: https://api.openai.com/v1/
-  LARGE_LOGICAL_MODEL: gpt-4o
-  LOGICAL_MODEL: gpt-4o-mini
+  LARGE_API_KEY: key-here
+  LARGE_MODEL: gpt-4o
+  LARGE_BASE_URL: https://api.openai.com/v1/
+  LARGE_MODE: api
+  SMALL_MODEL: gpt-4o-mini
+  SMALL_BASE_URL: https://api.openai.com/v1/
+  SMALL_API_KEY: key-here
+  SMALL_MODE: api
 HUGGINGFACE:
   HUB_PATH: yourusername/your-path-here
   PRIVATE: False
@@ -29,23 +33,27 @@ SYSTEM:
     a generalist, generic AI assistant, and a human.
   DOUBLE_CHECK_COUNTER: 1
   DO_NOT_USE_SYSTEM_PROMPTS: True
-  FINAL_ASSISTANT_PROMPT_NO_RAG: 'You are a helpful AI assistant.
-
-    '
-  FINAL_ASSISTANT_PROMPT_RAG: 'You are a helpful AI assistant.
-
-
-    Context information is below:
-
-
-    ----------------------
-
-    {data}
-
-    '
-  MODE: api
-  STOP: True
-  SUBSET_SIZE: 20
+  FINAL_ASSISTANT_PROMPTS_NO_RAG: [
+  'You are a helpful AI assistant.',
+  'You are A VASTLY intelligent ARTIFICIAL INTELLIGENCE with DOMAIN-EXPERT KNOWLEDGE from a variety of fields.
+  
+  USE your knowledge to be helpful and truthfully answer questions about the world.',
+  "u are ai asstant plz answr questions"] # a wide variety of system prompts helps the AI learn better. What, you expect your users to spell things right?
+  FINAL_ASSISTANT_PROMPTS_RAG: [
+  'You are a helpful AI assistant. Some knowledge:
+  
+  {data}',
+  
+  '{data}
+  
+  You are an AI domain expert. Answer questions',
+  'You are an AI with vast knowledge. Here is some potentially-relevant context:
+  
+  {data}
+  
+  Answer questions according to your knowledge.']
+  STOP: False
+  SUBSET_SIZE: 15
   USE_FILENAMES: False
   USE_SUBSET: False
 SCRAPING:
