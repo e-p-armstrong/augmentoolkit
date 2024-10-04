@@ -915,6 +915,10 @@ Augmentoolkit has a vision of democratizing dataset generation. That's a pretty 
 
 Also, you can find all the Augmentoolkit help videos — and soon, additional fun and informative AI things related to datagen and the project — on [this YouTube channel](https://www.youtube.com/@Heralax).
 
+## Donation
+
+If you want to donate to the development of Augmentoolkit and continued open-sourcing of models using this tech, you can do so with this [ko-fi donation link](https://ko-fi.com/heralax). It's greatly appreciated! For sponsorship inquiries related to the Augmentoolkit project, please reach out via socials, Discord, or email (contact info at bottom of repo).
+
 ---
 
 ## For Businesses
