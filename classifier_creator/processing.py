@@ -221,7 +221,7 @@ async def main():
         await run_async_many(engine_wrapper=engine_wrapper, input_list=train_data, func=create_label, output_list=text_label_dicts, classes=USER_CLASSES)
     
     with open(os.path.join(config["PATH"]["OUTPUT"], "TEST_DEBUG_OUTPUT_OF_LIST"),  'w') as f:
-        f.write(json.dumps(text_label_dicts))
+        f.write(json.dumps(text_label_dicts, ensure_ascii=False))
     
     classifier_counter = 0
     output_dir = os.path.join(config["PATH"]["OUTPUT"], "classifiers")

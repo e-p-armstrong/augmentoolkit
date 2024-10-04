@@ -262,7 +262,7 @@ class DepthFirstPipelineStep(PipelineStep): # RPTOOLKIT is depth-first rather th
             
             os.makedirs(self.save_path, exist_ok=True)
             with open(save_path_file, "w",encoding='utf-8') as f:
-                f.write(json.dumps(output_data))
+                f.write(json.dumps(output_data, ensure_ascii=False))
             
             return output_data
     

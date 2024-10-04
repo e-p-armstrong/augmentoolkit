@@ -110,7 +110,7 @@ def convert_logging_to_dataset(input_pth=None, output_pth=None):
             
             json_to_write = {"conversations": [sysprompt, input, output]}
             
-            f.write(json.dumps(json_to_write) + "\n")
+            f.write(json.dumps(json_to_write, ensure_ascii=False) + "\n")
             full_list_of_dicts.append(json_to_write)
     print("...Converted successfully (we think)")
     
@@ -118,7 +118,7 @@ def convert_logging_to_dataset(input_pth=None, output_pth=None):
     with open(dataset_with_split_output_file_path, "w") as f:
             json_to_write = {"train": full_list_of_dicts}
             
-            f.write(json.dumps(json_to_write) + "\n")
+            f.write(json.dumps(json_to_write, ensure_ascii=False) + "\n")
             
     
     if PUSH_TO_HUB:
@@ -175,7 +175,7 @@ def convert_revised_questions_to_question_generation_training(qa_dicts_by_text, 
             answer_obj = {"from": "gpt", "value": answer}
             
             convo = {"conversations": [sysprompt_obj, input_obj, answer_obj]}
-            out_file.write(json.dumps(convo) + "\n")
+            out_file.write(json.dumps(convo, ensure_ascii=False) + "\n")
             convos.append(convo)
 
     print("...Converted successfully (we think)")
@@ -320,7 +320,7 @@ class ContextRepairer(PipelineStep):
         os.makedirs(self.save_path_dir, exist_ok=True)
         if output_list[idx]:
             with open(self.make_save_path_file(idx), "w") as f:
-                f.write(json.dumps(output_list[idx]))
+                f.write(json.dumps(output_list[idx], ensure_ascii=False))
         else:
             with open(self.make_save_path_file(idx), "w") as f:
                 f.write("failed")
@@ -1245,13 +1245,13 @@ def convert_directory_to_list(directory_path):
     write_1 = obj_conf["PATH"]["OUTPUT"] + "/master_list.jsonl"
     with open(write_1, "w") as file:
         for item in master_list:
-            file.write(json.dumps(item) + "\n")
+            file.write(json.dumps(item, ensure_ascii=False) + "\n")
 
     # Process and push simplified_list (no RAG)
     write_2 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data_no_rag.jsonl"
     with open(write_2, "w") as file:
         for item in simplified_list:
-            file.write(json.dumps(item) + "\n")
+            file.write(json.dumps(item, ensure_ascii=False) + "\n")
             
 
     if PUSH_TO_HUB:
@@ -1273,12 +1273,12 @@ def convert_directory_to_list(directory_path):
     write_3 = obj_conf["PATH"]["OUTPUT"] + "/simplified_data_rag.jsonl"
     with open(write_3, "w") as file:
         for item in simplified_rag_list:
-            file.write(json.dumps(item) + "\n")
+            file.write(json.dumps(item, ensure_ascii=False) + "\n")
             
     write_4 = obj_conf["PATH"]["OUTPUT"] + "/plain_qa_list.jsonl"
     with open(write_4, "w") as file:
         for item in plain_qa_list:
-            file.write(json.dumps(item) + "\n")
+            file.write(json.dumps(item, ensure_ascii=False) + "\n")
     if PUSH_TO_HUB:
         # Create a temporary JSON file with train split
         temp_file_plain = obj_conf["PATH"]["OUTPUT"] + "/temp_plain_qa_list.json"
@@ -1335,12 +1335,12 @@ def save_plain_qatuples(qa_dicts_by_text):
     write_1 = obj_conf["PATH"]["OUTPUT"] + "/master_list.jsonl"
     with open(write_1, "w") as file:
         for item in master_list:
-            file.write(json.dumps(item) + "\n")
+            file.write(json.dumps(item, ensure_ascii=False) + "\n")
             
     write_2 = obj_conf["PATH"]["OUTPUT"] + "/plain_qa_list.jsonl"
     with open(write_2, "w") as file:
         for item in plain_qa_list:
-            file.write(json.dumps(item) + "\n")
+            file.write(json.dumps(item, ensure_ascii=False) + "\n")
     if PUSH_TO_HUB:
         # Create a temporary JSON file with train split
         temp_file_plain = obj_conf["PATH"]["OUTPUT"] + "/temp_plain_qa_list.json"
