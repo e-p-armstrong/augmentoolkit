@@ -1,6 +1,6 @@
 API:
-  LARGE_API_KEY: key-here
   LARGE_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct
+  LARGE_API_KEY: key-here
   LARGE_BASE_URL: https://api.deepinfra.com/v1/openai
   LARGE_MODE: api
   SMALL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct
