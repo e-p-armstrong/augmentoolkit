@@ -911,7 +911,7 @@ And, of course, anything awesome that you invent I'd be happy to have here as we
 
 ## Community
 
-Augmentoolkit has a vision of democratizing dataset generation. That's a pretty community-oriented thing, so it only makes sense for us to have a community hub! Come join [the Augmentoolkit Discord server](https://discord.gg/PrgN96Gzc4) to chat with fellow AI people, get support, and share the awesome stuff you're making.
+Augmentoolkit has a vision of democratizing dataset generation. That's a pretty community-oriented thing, so it only makes sense for us to have a community hub! Come join [the Augmentoolkit Discord server](https://discord.gg/s6PBfsaVzu) to chat with fellow AI people, get support, and share the awesome stuff you're making.
 
 Also, you can find all the Augmentoolkit help videos — and soon, additional fun and informative AI things related to datagen and the project — on [this YouTube channel](https://www.youtube.com/@Heralax).
 
@@ -935,7 +935,7 @@ If you think this project is cool and useful, great! I'm genuinely happy that yo
 - [A newsletter/blog about Prompt Engineering Open-Source models — the art and science that is the backbone of Augmentoolkit and complex LLM projects like it. I also consult for prompt engineering, if you're curious.](https://promptingweekly.substack.com/)
 - [I sometimes post stuff and sometimes join spaces on X/Twitter](https://twitter.com/e_p_armstrong)
 - [Let's connect on LinkedIn!](https://www.linkedin.com/in/evan-armstrong-1a84b3200/)
-- [I'm pretty active on the Augmentoolkit discord server and a bunch of other AI discords. Find me as @heralax!](https://discord.gg/PrgN96Gzc4)
+- [I'm pretty active on the Augmentoolkit discord server and a bunch of other AI discords. Find me as @heralax!](https://discord.gg/s6PBfsaVzu)
 - [By the way, did I mention I consult? :) I might be able to help your AI business get even better, using Augmentoolkit or straight-up prompting. We should chat at least and connect](https://calendly.com/evanpeterarmstrong/discovery-call)
 - Email me at: evanpeterarmstrong@gmail.com
 
