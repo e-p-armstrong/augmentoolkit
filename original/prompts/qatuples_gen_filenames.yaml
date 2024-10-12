@@ -72,17 +72,29 @@
     """
 - role: assistant
   content: |
-    1.) Finish the quote from Thus Spake Zarathustra: I am weary of my wisdom, like...
-    Answer: "... the bee that hath gathered too much honey; I need hands outstretched to take it."
+    **QUESTION:**
+    Finish the quote from Thus Spake Zarathustra: I am weary of my wisdom, like...
+
+    **ANSWER:**
+    "... the bee that hath gathered too much honey; I need hands outstretched to take it."
     
-    2.) What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
-    Answer: They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
+    **QUESTION:**
+    What do people undergoing difficult journeys or possessing wisdom need, in order to make their efforts more bearable?
+
+    **ANSWER:**
+    They need the acknowledgement and admiration of others. Take the line from 'Thus Spake Zarathustra' by Friedrich Nietzsche: "Thou great star! What would be thy happiness if thou hadst not those for whom thou shinest?" This implies that even the wisest or the most enlightened individuals crave recognition for their efforts and wisdom, in order to further develop said wisdom and expend said efforts. They need others to see and appreciate the light they bring.
     
-    3.) Why did Zarathustra, in 'Thus Spake Zarathustra', leave the mountains and become a man again?
-    Answer: After enjoying his spirit and solitude for ten years, he had a change of heart, and realized that wisdom unshared, without acknowledgement, brings little satisfaction. He became a man and descended the mountains in order to "fain bestow and distribute, until the wise have once more become joyous in their folly, and the poor happy in their riches."
+    **QUESTION:**
+    Why did Zarathustra, in 'Thus Spake Zarathustra', leave the mountains and become a man again?
+
+    **ANSWER:**
+    After enjoying his spirit and solitude for ten years, he had a change of heart, and realized that wisdom unshared, without acknowledgement, brings little satisfaction. He became a man and descended the mountains in order to "fain bestow and distribute, until the wise have once more become joyous in their folly, and the poor happy in their riches."
     
-    4.) List one way in which Zarathustra compares himself to the sun, in 'Thus Spake Zarathustra'.
-    Answer: Zarathustra explains to the sun, in Thus Spake Zarathustra, that he must descend into the deep — and he compares this action to the sun's own going "behind the sea" where it gives light to the "nether-world".
+    **QUESTION:**
+    List one way in which Zarathustra compares himself to the sun, in 'Thus Spake Zarathustra'.
+
+    **ANSWER:**
+    Zarathustra explains to the sun, in Thus Spake Zarathustra, that he must descend into the deep — and he compares this action to the sun's own going "behind the sea" where it gives light to the "nether-world".
 - role: user
   content: |
     Text details: The Republic, by Plato
@@ -132,17 +144,29 @@
     """
 - role: assistant
   content: |
-    1.) Which goddess is Bendis equivalent to?
-    Answer: The Thracian Goddess Bendis is equivalent to Artemis.
+    **QUESTION:**
+    Which goddess is Bendis equivalent to?
+
+    **ANSWER:**
+    The Thracian Goddess Bendis is equivalent to Artemis.
     
-    2.) If someone indicates that they will force you to take a course of action, using physical force, what is an alternative you can take?
-    Answer: One viable alternative I can take is to persuade them to let me go. This, of course, requires that the other party does not refuse to listen to me.
+    **QUESTION:**
+    If someone indicates that they will force you to take a course of action, using physical force, what is an alternative you can take?
+
+    **ANSWER:**
+    One viable alternative I can take is to persuade them to let me go. This, of course, requires that the other party does not refuse to listen to me.
     
-    3.) In Plato's "The Republic," in the dialogue where Polemarchus comments on the size of his group and questions Socrates' strength compared to it, ultimately stating that Socrates will have to remain where he is, what is Polemarchus implying?
+    **QUESTION:**
+    In Plato's "The Republic," in the dialogue where Polemarchus comments on the size of his group and questions Socrates' strength compared to it, ultimately stating that Socrates will have to remain where he is, what is Polemarchus implying?
+
+    **ANSWER:**
     Answer: Polemarchus is implying that since his group is stronger than Socrates, he can force Socrates to remain where he is.
     
-    4.) Why did Socrates visit Piraeus with Glaucon in Plato's "The Republic"?
-    Answer: Socrates visited Piraeus to offer up his prayers to the goddess Bendis, as well as to see in what manner the Thracians would celebrate the festival.
+    **QUESTION:**
+    Why did Socrates visit Piraeus with Glaucon in Plato's "The Republic"?
+
+    **ANSWER:**
+    Socrates visited Piraeus to offer up his prayers to the goddess Bendis, as well as to see in what manner the Thracians would celebrate the festival.
 - role: user
   content: |
     Text details: Great Construction Projects Throughout History, by Marco Gonzalez
@@ -153,17 +177,29 @@
     """
 - role: assistant
   content: |
-    1.) How much earth was excavated during the construction of the Panama Canal?
-    Answer: Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal.
+    **QUESTION:**
+    How much earth was excavated during the construction of the Panama Canal?
+
+    **ANSWER:**
+    Over 200 million cubic yards of earth were excavated during the construction of the Panama Canal.
     
-    2.) What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
-    Answer: The construction faced significant health challenges, notably malaria and yellow fever. 
+    **QUESTION:**
+    What health challenges were faced during the construction of the Panama Canal, and how were they overcome?
+
+    **ANSWER:**
+    The construction faced significant health challenges, notably malaria and yellow fever. 
     
-    3.) By how many miles did the Panama Canal reduce the sea voyage from San Francisco to New York?
-    Answer: The completion of the Panama Canal reduced the sea voyage from San Francisco to New York by around 8,000 miles.
+    **QUESTION:**
+    By how many miles did the Panama Canal reduce the sea voyage from San Francisco to New York?
+
+    **ANSWER:**
+    The completion of the Panama Canal reduced the sea voyage from San Francisco to New York by around 8,000 miles.
     
-    4.) In what year was the Panama Canal completed?
-    Answer: The Panama Canal's construction was completed in 1914.
+    **QUESTION:**
+    In what year was the Panama Canal completed?
+
+    **ANSWER:**
+    The Panama Canal's construction was completed in 1914.
 - role: user
   content: |
     Text details: The Scale of the Solar System, by Rob Robertson
@@ -174,17 +210,29 @@
     """
 - role: assistant
   content: |
-    1.) If the earth had a diameter of only one inch, how far would the moon be from the earth, if it (and its distance from the earth) were also resized proportionally?
-    Answer: The moon would be two feet and a half from the earth. The moon's size, under this new scale, would be that of a small pea.
+    **QUESTION:**
+    If the earth had a diameter of only one inch, how far would the moon be from the earth, if it (and its distance from the earth) were also resized proportionally?
+
+    **ANSWER:**
+    The moon would be two feet and a half from the earth. The moon's size, under this new scale, would be that of a small pea.
     
-    2.) How do the distances between planets compare to their sizes?
-    Answer: The distances between planets is much greater than the planets' sizes. If you shrunk everything down so that the Earth was one inch in diameter, then the sun would be 323 yards away.
+    **QUESTION:**
+    How do the distances between planets compare to their sizes?
+
+    **ANSWER:**
+    The distances between planets is much greater than the planets' sizes. If you shrunk everything down so that the Earth was one inch in diameter, then the sun would be 323 yards away.
     
-    3.) If you scaled everything down so that the earth had a diameter of one inch, then how far would Mercury and Venus be from the sun?
-    Answer: Mercury would be one hundred and twenty-five yards from the sun, and Venus would be two hundred and fifty yards from the sun.
+    **QUESTION:**
+    If you scaled everything down so that the earth had a diameter of one inch, then how far would Mercury and Venus be from the sun?
+
+    **ANSWER:**
+    Mercury would be one hundred and twenty-five yards from the sun, and Venus would be two hundred and fifty yards from the sun.
     
-    4.) If the earth had a diameter of only one inch, how far would Mars be from the earth, if it (and its distance from the earth) were also resized proportionally?
-    Answer: Mars would be a hundred and seventy-five feet beyond the earth.
+    **QUESTION:**
+    If the earth had a diameter of only one inch, how far would Mars be from the earth, if it (and its distance from the earth) were also resized proportionally?
+
+    **ANSWER:**
+    Mars would be a hundred and seventy-five feet beyond the earth.
 - role: user
   content: |
     Text details: {metadata}
