@@ -66,6 +66,7 @@ SKIP_QUESTION_CHECK = parse_bool(obj_conf["SKIP"]["QUESTION_CHECK"])
 SKIP_CONVERSATION_GENERATION = parse_bool(obj_conf["SKIP"]["CONVERSATION_GENERATION"]) # useful if you're generating "tight" data only.
 FINAL_ASSISTANT_PROMPTS_NO_RAG = obj_conf["SYSTEM"]["FINAL_ASSISTANT_PROMPTS_NO_RAG"]
 FINAL_ASSISTANT_PROMPTS_RAG = obj_conf["SYSTEM"]["FINAL_ASSISTANT_PROMPTS_RAG"]
+RAG_FAILURE_PERCENTAGE = obj_conf["SYSTEM"]["RAG_FAILURE_PERCENTAGE"]
 
 
 has_pushed_yet = False
@@ -1176,7 +1177,16 @@ def convert_directory_to_list(directory_path):
                     master_list.append(
                         data_dict
                     )  # append it as-is to the master-list
-
+                except Exception as e:
+                    print(f"Error reading filename: {e}")
+    
+    # We do the master list first, entirely. So that we can pick from it later down here.
+    for filename in os.listdir(directory_path):  # for each file
+        if filename.endswith(".json"):  # if it's a conversation file
+            filepath = os.path.join(directory_path, filename)  # get the path
+            with open(filepath, "r") as file:  # open it
+                try:
+                    data_dict = json.load(file)  # load its data
                     dialogues = process_multiturn_functions.extract_conversation(
                         data_dict["conversation"]
                     )
@@ -1188,11 +1198,17 @@ def convert_directory_to_list(directory_path):
                     simplified_conversations_rag = []
 
                     system_prompt_rag = random.choice(FINAL_ASSISTANT_PROMPTS_RAG)
+                    if random.random() < RAG_FAILURE_PERCENTAGE:
+                        # set paragraph to a random one from the list
+                        # data_dict['dict_list'][0]["paragraph"] = random.choice(data_dict['dict_list'])["paragraph"]
+                        paragraph = random.choice(master_list)['dict_list'][0]["paragraph"]
+                    else:
+                        paragraph = data_dict['dict_list'][0]["paragraph"]
                     simplified_conversations_rag.append(
                         {
                             "from": "system",
                             "value": system_prompt_rag.replace(
-                                "{data}", data_dict['dict_list'][0]["paragraph"]
+                                "{data}", paragraph
                             ),
                         }
                     )

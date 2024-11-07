@@ -1,9 +1,9 @@
 API:
   LARGE_API_KEY: key-here
-  LARGE_MODEL: Meta-Llama-3.1-8B-Instruct-Turbo/
+  LARGE_MODEL: Meta-Llama-3.1-8B-Instruct/
   LARGE_BASE_URL: http://localhost:2242/v1
   LARGE_MODE: api
-  SMALL_MODEL: Meta-Llama-3.1-8B-Instruct-Turbo/
+  SMALL_MODEL: Meta-Llama-3.1-8B-Instruct/
   SMALL_BASE_URL: http://localhost:2242/v1
   SMALL_API_KEY: key-here
   SMALL_MODE: api
