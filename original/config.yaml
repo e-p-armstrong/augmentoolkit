@@ -56,7 +56,7 @@ SYSTEM:
   SUBSET_SIZE: 20
   USE_FILENAMES: False
   USE_SUBSET: True
-  RAG_FAILURE_PERCENTAGE: 0.5 # How much of the RAG data has the wrong chunk retrieved deliberately? To train it to answer correctly even if wrong facts are shown to it. We will need another dataset thing for making data where the question asks something that is not present and the rag retrieves something irrelevant obbviously and it is supposed to say "I don't know" or something.
+  RAG_FAILURE_PERCENTAGE: 0.1 # How much of the RAG data has the wrong chunk retrieved deliberately? To train it to answer correctly even if wrong facts are shown to it. We will need another dataset thing for making data where the question asks something that is not present and the rag retrieves something irrelevant obbviously and it is supposed to say "I don't know" or something.
 SCRAPING:
   USE_GUTENBERG: False
   START_URL: "https://www.gutenberg.org/ebooks/bookshelf/57"

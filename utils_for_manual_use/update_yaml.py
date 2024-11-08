@@ -54,6 +54,7 @@ def update_yaml_file(target_file: str, missing_keys: List[tuple]) -> None:
     
     # Add missing keys
     for key_path, value in missing_keys:
+        print(f"  Adding key '{key_path}' with value: {value}")
         update_dict_with_key_path(target_dict, key_path, value)
     
     # Write back to file

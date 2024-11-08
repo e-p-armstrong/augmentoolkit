@@ -1,12 +1,16 @@
 API:
-  API_KEY: edwawesdfawfer
-  BASE_URL: https://api.deepinfra.com/v1/openai
-  LARGE_LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct
-  LOGICAL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct
+  LARGE_MODEL: meta-llama/Meta-Llama-3.1-70B-Instruct
+  LARGE_API_KEY: key-here
+  LARGE_BASE_URL: https://api.deepinfra.com/v1/openai
+  LARGE_MODE: api
+  SMALL_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct
+  SMALL_BASE_URL: https://api.deepinfra.com/v1/openai
+  SMALL_API_KEY: key-here
+  SMALL_MODE: api
 HUGGINGFACE:
   HUB_PATH: yourusername/your-path-here
-  PRIVATE: False
-  PUSH_TO_HUB: False
+  PRIVATE: false
+  PUSH_TO_HUB: false
 PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./hidden_input_etiquette
@@ -14,21 +18,21 @@ PATH:
   PROMPTS: ./prompt_overrides/prompts_override_open-ended_questions
 PHASE:
   PHASE_INDEX: 3
-  WORK_IN_PHASES: False
+  WORK_IN_PHASES: false
 SKIP:
-  ANSWER_RELEVANCY_CHECK: False
-  REPAIR_QA_TUPLES: False
-  FILTER_CHUNKS: False
-  QUESTION_CHECK: False
-  CONVERSATION_GENERATION: True
+  ANSWER_RELEVANCY_CHECK: false
+  REPAIR_QA_TUPLES: false
+  FILTER_CHUNKS: false
+  QUESTION_CHECK: false
+  CONVERSATION_GENERATION: true
 SYSTEM:
   CHUNK_SIZE: 1900
-  COMPLETION_MODE: False
+  COMPLETION_MODE: false
   CONCURRENCY_LIMIT: 50
   CONVERSATION_INSTRUCTIONS: For this conversation, you are generating a chat between
     a generalist, generic AI assistant, and a human.
   DOUBLE_CHECK_COUNTER: 1
-  DO_NOT_USE_SYSTEM_PROMPTS: True
+  DO_NOT_USE_SYSTEM_PROMPTS: true
   FINAL_ASSISTANT_PROMPT_NO_RAG: 'You are a helpful AI assistant.
 
     '
@@ -44,12 +48,32 @@ SYSTEM:
 
     '
   MODE: api
-  STOP: True
+  STOP: true
   SUBSET_SIZE: 2500
-  USE_FILENAMES: False
-  USE_SUBSET: True
+  USE_FILENAMES: false
+  USE_SUBSET: true
+  FINAL_ASSISTANT_PROMPTS_NO_RAG:
+  - You are a helpful AI assistant.
+  - 'You are A VASTLY intelligent ARTIFICIAL INTELLIGENCE with DOMAIN-EXPERT KNOWLEDGE
+    from a variety of fields.
+
+    USE your knowledge to be helpful and truthfully answer questions about the world.'
+  - u are ai asstant plz answr questions
+  FINAL_ASSISTANT_PROMPTS_RAG:
+  - 'You are a helpful AI assistant. Some knowledge:
+
+    {data}'
+  - '{data}
+
+    You are an AI domain expert. Answer questions'
+  - 'You are an AI with vast knowledge. Here is some potentially-relevant context:
+
+    {data}
+
+    Answer questions according to your knowledge.'
+  RAG_FAILURE_PERCENTAGE: 0.1
 SCRAPING:
-  USE_GUTENBERG: False
-  START_URL: "https://www.gutenberg.org/ebooks/bookshelf/57"
+  USE_GUTENBERG: false
+  START_URL: https://www.gutenberg.org/ebooks/bookshelf/57
   MAX_BOOKS: 5
   MAX_FAILURES: 5
