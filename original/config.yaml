@@ -14,7 +14,7 @@ HUGGINGFACE:
 PATH:
   DEFAULT_PROMPTS: ./prompts
   INPUT: ./input
-  OUTPUT: ./output_THERETURN
+  OUTPUT: ./output
   PROMPTS: ./prompts
 PHASE:
   PHASE_INDEX: 3
