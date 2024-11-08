@@ -2,7 +2,7 @@
   content: |
     You are checking whether a provided question and answer make sense if asked by themselves, with no additional information. You need to check for vague wording that a reader cannot interpret correctly, and questions that lack key context and would not be possibly answerable even if asked of someone with complete, masterful knowledge of the general subject matter of the question.
     
-    Evaluate the provided question-answer pair step-by-step. Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Pass" or "Fail" or "Reword". A test passes if it "makes sense" and does not lack key context; it "Fails" if it lacks key context, AND the question is not specific or clear, it fails. If it lacks context but the question is specific, pointed, and grounded, then it needs to be reworded to have the context-needing terms (i.e., vague reference to "the text") removed. If it has no problems, it passes. 
+    Evaluate the provided question-answer pair step-by-step. Following this, at the very end of your response, your "final judgment" or "final answer", you will write "PASS" or "FAIL" or "REWORD". A test passes if it "makes sense" and does not lack key context; it "FAIL"s if it lacks key context, AND the question is not specific or clear, it fails. If it lacks context but the question is specific, pointed, and grounded, then it needs to be reworded to have the context-needing terms (i.e., vague reference to "the text") removed. If it has no problems, it passes. 
     
     I want you to especially check for vague references to "the text", "passage", and "book" that do not mention which book is being discussed. If no book is specifically named, the question and answer should not mention books or texts, etc.
     
@@ -29,7 +29,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. "What is the main theme of this book" asks a specific thing about a specific object (the book) so the question is precise. The question (and the answer) only lack context in mentioning *which* book they refer to. Therefore they will both be reworded.
-    #### Final judgement: Reword.
+    #### Final judgement: REWORD.
     
     ### Question Rewording (using text details as reference):
     Question: What is the main theme of Principles of Chemistry, by Demitry Mendeleev?
@@ -56,7 +56,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. The question is precise and relevant, but the answer introduces a lack of context by not specifying the book. This requires a rewording of the answer to include the specific reference. The question passed its checks and will remain untouched.
-    #### Final judgment: Reword.
+    #### Final judgment: REWORD.
     
     ### Question Rewording (using text details as reference):
     Question: What does Mendeleev consider important about solutions?
@@ -83,7 +83,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. Both the question and answer lack specific context about the "passage", making it impossible to determine which passage from 'Principles of Chemistry' they are referring to. The question is precise in asking for a main theme but fails due to lack of context. Since context cannot be determined, even knowing what book the question is asking about, context cannot be added with rewording. 
-    #### Final judgment: Fail.
+    #### Final judgment: FAIL.
 - role: user
   content: |
     Text details: Simple Sabotage, by the Office of Strategic Services, Published 1944
@@ -106,7 +106,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Some checks related to the question or answer failed. So this question and answer should be reworded if they can be, or fail otherwise. Both the question and answer are precise, but the question lacks specific context regarding the text it refers to. This necessitates a rewording to include the specific text. The answer passed its checks and will remain untouched.
-    #### Final judgment: Reword.
+    #### Final judgment: REWORD.
     
     ### Question Rewording (using text details as reference):
     Question: How can you avoid blame for an act of sabotage, according to 'Simple Sabotage' by the Office of Strategic Services?
@@ -133,7 +133,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: The question is precise but lacks specific context regarding the text it refers to. The answer is valid as it is clear and doesn't introduce any vague references. Therefore, the question requires rewording for context, while the answer remains the same.
-    #### Final judgment: Reword.
+    #### Final judgment: REWORD.
     
     ### Question Rewording (using text details as reference):
     Question: What was the basis of Mendeleev's work in 'Principles of Chemistry'?
@@ -160,7 +160,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: The question and answer both pass all checks for context, specificity, precision, and clarity.
-    #### Final judgment: Pass.
+    #### Final judgment: PASS.
 - role: user
   content: |
     Text details: Principles of Chemistry, by Demitry Mendeleev, Published 1867
@@ -183,7 +183,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: The question is precise but lacks specific context regarding the text it refers to. The answer is valid as it is. Therefore, the question requires rewording for context, while the answer remains the same.
-    #### Final judgment: Reword.
+    #### Final judgment: REWORD.
     
     ### Question Rewording (using text details as reference):
     Question: How does science advance, according to Demitry Mendeleev's text?
@@ -210,7 +210,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: The question and answer both pass all checks for context, specificity, precision, and clarity.
-    #### Final judgment: Pass.
+    #### Final judgment: PASS.
 - role: user
   content: |
     Text details: Simple Sabotage, By the Office of Strategic Services, Published 1867
@@ -233,7 +233,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Both the question and answer are precise and do not require additional context for understanding.
-    #### Final judgment: Pass.
+    #### Final judgment: PASS.
 - role: user
   content: |
     Text details: Introduction to Philosophy, by George Stuart Fullerton
@@ -256,7 +256,7 @@
     
     ### Critical Evaluation and Final Judgment:
     #### Evaluation: Both the question and answer lack specific context, making it impossible to determine which passage from 'Introduction to Philosophy' they are referring to. The question is precise in asking for a meaning but fails due to lack of context.
-    #### Final judgment: Fail.
+    #### Final judgment: FAIL.
 - role: user
   content: |
     Text details: {textname}

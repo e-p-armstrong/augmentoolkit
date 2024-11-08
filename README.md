@@ -345,8 +345,8 @@ SYSTEM:
 
 Field-by-field:
 - `CHUNK_SIZE` is the maximum number of characters to use in a "chunk" of text that will be fed through the pipeline. A chunk is what questions are generated from — it's kinda the core building block of QA datasets built by Augmentoolkit.
-- `USE_FILENAMES` determines whether the AI is allowed to see the name of the file from which each chunk of text/information was taken, when it's generating questions. If this is on, it means that questions may often have the format "What is X, according to file?" This can be useful if your files are books — so you might get "How do you sabotage a car, according to Simple Sabotage by the OSS?" if it's on. Compare this to when it's off — in which case the question might simply be "How do you sabotage a car?" This is good to have if you want the bot to have some meta-knowledge, but should usually be left off. If you want the AI to know the authors behind files, then format the names as `textname, by author name`. The comma is important.
-- `COMPLETION_MODE` is a boolean that determines whether prompts are sent to the provider in chat mode (default, what happens when it's set to `false`) or completion mode (what happens when it's set to `true`). Completion mode can produce higher-quality responses with some models, but many providers don't support it.
+- `USE_FILENAMES` *warning: currently potentially non-functional, leave this FALSE.* determines whether the AI is allowed to see the name of the file from which each chunk of text/information was taken, when it's generating questions. If this is on, it means that questions may often have the format "What is X, according to file?" This can be useful if your files are books — so you might get "How do you sabotage a car, according to Simple Sabotage by the OSS?" if it's on. Compare this to when it's off — in which case the question might simply be "How do you sabotage a car?" This is good to have if you want the bot to have some meta-knowledge, but should usually be left off. If you want the AI to know the authors behind files, then format the names as `textname, by author name`. The comma is important.
+- `COMPLETION_MODE` *Prompts are very out of date. Recommend leaving FALSE until an update is made to fix.* This is a boolean that determines whether prompts are sent to the provider in chat mode (default, what happens when it's set to `false`) or completion mode (what happens when it's set to `true`). Completion mode can produce higher-quality responses with some models, but many providers don't support it.
 - `CONCURRENCY_LIMIT` is an integer; it's the maximum number of concurrent requests that can be made to the provider. This is useful for controlling costs and preventing rate-limiting.
 - `DOUBLE_CHECK_COUNTER` is an integer; it's the number of times that the pipeline will double-check the questions it produces. For each QA pair, the majority vote goes: if it's positive, the question/answer pair is kept, if it's negative, the QA pair is tossed. Ties are tossed. This is a tradeoff parameter: higher means more quality but far higher cost. 3 is a good starting point.
 - `DO_NOT_USE_SYSTEM_PROMPTS` is a boolean that determines whether, at the very end of the pipeline, the generated data includes system prompts or not. This does not affect the running of the pipeline; rather, it only affects the saving of the dataset at the end. Sometimes using no system prompt can help an LLM learn the facts of a dataset to a greater degree, and produces a more stable LLM which is less sensitive to needing a very specific system prompt. Turning this on means that FINAL_ASSISTANT_PROMPT_NO_RAG will not be used.
@@ -911,7 +911,7 @@ And, of course, anything awesome that you invent I'd be happy to have here as we
 
 ## Community
 
-Augmentoolkit has a vision of democratizing dataset generation. That's a pretty community-oriented thing, so it only makes sense for us to have a community hub! Come join [the Augmentoolkit Discord server](https://discord.gg/PrgN96Gzc4) to chat with fellow AI people, get support, and share the awesome stuff you're making.
+Augmentoolkit has a vision of democratizing dataset generation. That's a pretty community-oriented thing, so it only makes sense for us to have a community hub! Come join [the Augmentoolkit Discord server](https://discord.gg/s6PBfsaVzu) to chat with fellow AI people, get support, and share the awesome stuff you're making.
 
 Also, you can find all the Augmentoolkit help videos — and soon, additional fun and informative AI things related to datagen and the project — on [this YouTube channel](https://www.youtube.com/@Heralax).
 
@@ -935,7 +935,7 @@ If you think this project is cool and useful, great! I'm genuinely happy that yo
 - [A newsletter/blog about Prompt Engineering Open-Source models — the art and science that is the backbone of Augmentoolkit and complex LLM projects like it. I also consult for prompt engineering, if you're curious.](https://promptingweekly.substack.com/)
 - [I sometimes post stuff and sometimes join spaces on X/Twitter](https://twitter.com/e_p_armstrong)
 - [Let's connect on LinkedIn!](https://www.linkedin.com/in/evan-armstrong-1a84b3200/)
-- [I'm pretty active on the Augmentoolkit discord server and a bunch of other AI discords. Find me as @heralax!](https://discord.gg/PrgN96Gzc4)
+- [I'm pretty active on the Augmentoolkit discord server and a bunch of other AI discords. Find me as @heralax!](https://discord.gg/s6PBfsaVzu)
 - [By the way, did I mention I consult? :) I might be able to help your AI business get even better, using Augmentoolkit or straight-up prompting. We should chat at least and connect](https://calendly.com/evanpeterarmstrong/discovery-call)
 - Email me at: evanpeterarmstrong@gmail.com
 
