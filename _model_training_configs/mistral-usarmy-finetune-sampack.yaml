@@ -9,18 +9,48 @@ datasets:
   - path: json
     data_files: us_army_plain_qa_list_open.jsonl
     ds_type: json
-    type: sharegpt
-    conversation: chatml
+    type: chat_template
+    chat_template: chatml
+    field_messages: conversations
+    message_field_role: from
+    message_field_content: value
+    roles:
+      user:
+        - human
+      assistant:
+        - gpt
+      system:
+        - system
   - path: json
     data_files: us_army_plain_qa_list_vanilla.jsonl
     ds_type: json
-    type: sharegpt
-    conversation: chatml
+    type: chat_template
+    chat_template: chatml
+    field_messages: conversations
+    message_field_role: from
+    message_field_content: value
+    roles:
+      user:
+        - human
+      assistant:
+        - gpt
+      system:
+        - system
   - path: json
     data_files: us_army_plain_qa_list_negative.jsonl
     ds_type: json
-    type: sharegpt
-    conversation: chatml
+    type: chat_template
+    chat_template: chatml
+    field_messages: conversations
+    message_field_role: from
+    message_field_content: value
+    roles:
+      user:
+        - human
+      assistant:
+        - gpt
+      system:
+        - system
 
 dataset_prepared_path: last_run_prepared
 output_dir: ./us-army-finetune-1

@@ -9,18 +9,48 @@ datasets:
   - path: json
     data_files: philosophy_qa_normal.jsonl
     ds_type: json
-    type: sharegpt
-    conversation: chatml
+    type: chat_template
+    chat_template: chatml
+    field_messages: conversations
+    message_field_role: from
+    message_field_content: value
+    roles:
+      user:
+        - human
+      assistant:
+        - gpt
+      system:
+        - system
   - path: json
     data_files: philosophy_qa_open-ended.jsonl
     ds_type: json
-    type: sharegpt
-    conversation: chatml
+    type: chat_template
+    chat_template: chatml
+    field_messages: conversations
+    message_field_role: from
+    message_field_content: value
+    roles:
+      user:
+        - human
+      assistant:
+        - gpt
+      system:
+        - system
   - path: json
     data_files: philosophy_qa_negative.jsonl
     ds_type: json
-    type: sharegpt
-    conversation: chatml
+    type: chat_template
+    chat_template: chatml
+    field_messages: conversations
+    message_field_role: from
+    message_field_content: value
+    roles:
+      user:
+        - human
+      assistant:
+        - gpt
+      system:
+        - system
 
 dataset_prepared_path: last_run_prepared
 output_dir: ./philosophy-hardcore-pretraining
