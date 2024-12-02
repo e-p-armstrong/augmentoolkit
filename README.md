@@ -134,8 +134,11 @@ After installing the dependencies:
 - Install its dependencies (`pip install -r requirements.txt`) (Augmentoolkit is tested mainly on Python 3.11, but it should be pretty flexible)
 - Open `config.yaml` in the `./original` folder
 - Paste your API key, favorite model name, and the endpoint URL of your preferred AI service, into the relevant fields inside `config.yaml`. Recommendation: [Together.ai with Llama 3.1 8b works really nicely both as a LARGE_LOGICAL_MODEL and as the LOGICAL_MODEL](meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo).
-- Open this project's folder in a command line and type `python run_augmentoolkit.py` and hit enter (fires off the script version).
+- For generating the dataset for a specified language regenerate the config file by running `python gen_config.py --language <language>`. It will add the instructions to generate the conversational datasets only to be generated in a specific language in the config.yaml file. Simple QA is generated only in the English language for now. 
+- Next in the command line, type `python run_augmentoolkit.py` and hit enter (fires off the script version).
 
+**The LLM you are calling to generate dataset should be able to recognize the language you enter. Basic languages like English, Japanese and Spanish etc. are supported by LLMs and has been tested for this pipeline.**
+  
 There's also a quickstart [video](https://youtu.be/YWPmike953I) that you can follow along with! **The default provider has been changed to DeepInfra, you'll need to get a key from them or you'll have to change the base URL to together.**
 
 **If you want to use PDFs,** you will have to install tesseract, which has its own installation instructions: https://github.com/tesseract-ocr/tesseract
