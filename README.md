@@ -421,7 +421,7 @@ They're in ShareGPT format for easy training, and can be used to bulk up a train
 
 #### QA Quirks and Tips
 
-- **The `FILTER_CHUNKS` step can be a bit finnicky.** It's designed to filter out chunks that don't have any relevant context in them, but sometimes it can be a bit overzealous. If you find that it's filtering out too much, you can turn it off in the config.
+- **The `FILTER_CHUNKS` step can be a bit finicky.** It's designed to filter out chunks that don't have any relevant context in them, but sometimes it can be a bit overzealous. If you find that it's filtering out too much, you can turn it off in the config.
 - **The QA pipeline works with very messy text.** No great cleaning or filtering of formatting or other issues is required before the text reaches the pipeline. Since it makes questions and answers based off of the text, rather than directly using the text verbatim, it can handle a lot of noise.
 - **The validation of questions and answers takes the majority of the time in a given run. If you're in a hurry, consider skipping a step or two.**
 
