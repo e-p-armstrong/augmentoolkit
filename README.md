@@ -11,6 +11,7 @@ Get started now (the interface will guide you through generating your first data
 git clone https://github.com/e-p-armstrong/augmentoolkit.git
 cd augmentoolkit
 bash macos.sh # NOTE: Will attempt to install valkey via brew if not found.
+# bash local_macos.sh # use this command if doing local dataset generation
 ```
 
 ### Linux (interface)
@@ -20,7 +21,7 @@ cd augmentoolkit
 bash linux.sh # NOTE: will build Valkey from source if a Redis/Valkey server is not running
 ```
 
-Or for local inference
+**Or for local inference**
 ```bash
 git clone https://github.com/e-p-armstrong/augmentoolkit.git
 cd augmentoolkit
