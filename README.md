@@ -40,7 +40,8 @@ cd augmentoolkit
 ```
 
 <sub>*Note that datagen can take a while on a lot of hardware however, don't expect fast datagen on an old mac for instance. And for training you will need either a powerful machine of your own, or to rent (latter is done automatically for you if you so choose).</sub>
-<sub>†If you want data to generate faster you *can* use an open-source LLM API, and the quickstart encourages you to. Augmentoolkit is optimized for open source LLMs like Deepseek or Llama.</sub>
+
+<sub>†If you want data to generate faster you *can* use an open-source LLM API, and the quickstart encourages you to. In addition to its custom dataset generation model, Augmentoolkit is optimized for open source LLMs like Deepseek or Llama.</sub>
 
 ![](images/augmentoolkit-logo.png)
 
