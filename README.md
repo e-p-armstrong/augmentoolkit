@@ -44,10 +44,6 @@ cd augmentoolkit
 
 <sub>†If you want data to generate faster you *can* use an open-source LLM API, and the quickstart encourages you to. In addition to its custom dataset generation model, Augmentoolkit is optimized for open source LLMs like Deepseek or Llama.</sub>
 
-> [!NOTE]
->
-> If you don't want to do model training, but just want to generate a dataset, turn `do_train` off in your dataset generation config.
-
 ![](images/augmentoolkit-logo.png)
 
 Augmentoolkit, now that it is on its 3.0 version, has been refined and improved through over a year of professional application and experimentation. It is now the best way in the world to create domain expert LLMs, and it's MIT licensed.
@@ -140,6 +136,11 @@ All configs are fully annotated with comments and placeholders to help you under
 
 Cite:
 [![DOI](https://zenodo.org/badge/726083337.svg)](https://zenodo.org/doi/10.5281/zenodo.11525927)
+
+
+> [!NOTE]
+>
+> If you don't want to do model training, but just want to generate a dataset, turn `do_train` off in your dataset generation config.
 
 ### Video Tutorials
 
