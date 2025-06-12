@@ -74,27 +74,34 @@ def compare_answers_with_qatuples(dialogues, qatuples, n):
     """
     truth_list = []
     for i in range(1, len(dialogues), 2):  # Answers are at odd indices, starting from 1
-        if (i - 1) // 2 >= len(qatuples):  # at this point we've reached added stuff that doesn't have a corresponding qatuple
+        if (i - 1) // 2 >= len(
+            qatuples
+        ):  # at this point we've reached added stuff that doesn't have a corresponding qatuple
             break
-        sequential, comp = has_sequential_chars(qatuples[(i - 1) // 2][1], dialogues[i][1], n)
+        sequential, comp = has_sequential_chars(
+            qatuples[(i - 1) // 2][1], dialogues[i][1], n
+        )
         # print(sequential)
         # print(n)
         truth_list.append(sequential)
-    
+
     if all(truth_list):
         return True
-    
+
     # Account for the case where the AI has an initial back-and-forth with no questions asked or answered. In this case, answers start at 3.
     for i in range(3, len(dialogues), 2):
         if (i - 2) // 2 >= len(qatuples):
             break
-        sequential, comp = has_sequential_chars(qatuples[(i - 2) // 2][1], dialogues[i][1], n)
+        sequential, comp = has_sequential_chars(
+            qatuples[(i - 2) // 2][1], dialogues[i][1], n
+        )
         if not sequential:
             print(
                 f"Answer {(i + 1) // 2}: {dialogues[i][1]} does not match the corresponding answer in qatuples: {qatuples[(i - 1) // 2][1]}, {comp}"
             )
             return False
     return True
+
 
 # def check_repeated_answer(dialogues, qatuples):
 #     # Get the length of the dialogues
@@ -128,6 +135,7 @@ def check_conversation_length(conv, qatuples):
     else:
         return True
 
+
 def check_each_question_contains_q_from_tuples(conv, qatuples, n):
     """
     Ensures that each question contains at least n sequential characters from the corresponding question in qatuples.
@@ -142,12 +150,15 @@ def check_each_question_contains_q_from_tuples(conv, qatuples, n):
     Returns:
     bool or None: True if all questions pass the check, False if any fail, None if the first question fails both checks.
     """
+
     def check_questions(start_index):
         for i in range(start_index, len(conv), 2):
             if (i - start_index) // 2 < len(qatuples):
                 question_from_conv = conv[i][1]
                 question_from_tuples = qatuples[(i - start_index) // 2][0]
-                sequential, _ = has_sequential_chars(question_from_tuples, question_from_conv, n)
+                sequential, _ = has_sequential_chars(
+                    question_from_tuples, question_from_conv, n
+                )
                 if not sequential:
                     return False
         return True
@@ -164,7 +175,9 @@ def check_each_question_contains_q_from_tuples(conv, qatuples, n):
     if len(conv) >= 2 and len(qatuples) > 0:
         question_from_conv = conv[0][1] if len(conv) > 0 else ""
         question_from_tuples = qatuples[0][0]
-        sequential, _ = has_sequential_chars(question_from_tuples, question_from_conv, n)
+        sequential, _ = has_sequential_chars(
+            question_from_tuples, question_from_conv, n
+        )
         if not sequential:
             return None
 

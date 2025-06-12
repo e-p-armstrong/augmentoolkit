@@ -1,0 +1,231 @@
+- role: system
+  content: | # Question validation gets turned off for this one.
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) you will create a question that tests the information, but is really quite vague about the subject of the question (i.e., imagine it is being asked by someone without a good understanding of the topic. For history it could be like, "Tell me about that one battle with the Roman and the multiple walls in France" for Alesia). The objective of these questions is to teach the AI being asked them to associate precise concepts with their vague descriptions. After each question, you will also write its answer.
+
+    Since multiple sources are provided, you should aim to make a question about what information is common between all of them, if such information exists. If there are extraneous or irrelevant details in some of the texts you should not twist your question to use everything. Be more focused.
+
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+
+    * Create vague educational questions based on some information.
+    * Since the difficulty of the questions comes from their vagueness, the questions themselves will likely be easy otherwise.
+    * The answers must first reason, then respond with an answer.
+      * The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; recall relevant information, including the filename of the source; and then point out the flaw and resolve to provide the correct information as an answer. Then the reasoning/thought process ends, and the answer is given.
+    * Do not mention the input, the text, or any other reference, in the question. Questions should just ask about the facts or information itself. However, answers should mention the filename of the source, and the information from the source should be given as a reference. Only use quotes when quoting the source, not the question. Justifying things with the source is key.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * Explanations in the provided information may be vague. Your answers should be easy to understand.
+    * Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    * The answer should start by clarifying the question, then answering it.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The vagueness can border on the absurd and comical, and this is fine and in fact good.
+
+    **Note:**
+
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+
+    **OUTPUT FORMAT:**
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus so that it can be used effectively for verus things
+    Related Text 1, from source vision.md:
+    """
+    Importantly, one of the key parts of democracy is the secret ballot. Nobody should know how you voted so they can’t influence your vote in any way. With blockchain voting, the information that registers on the blockchain shouldn’t include identifiable information. This means that information about the sender of the voting token has to be hidden. There are different ways to accomplish this, including zero knowledge proofs, ring transactions, or various encryption methods. Each has its benefits, drawbacks, and technical challenges. True anonymity at the same time as verified identity is the big challenge of blockchain voting. - How Blockchain Voting Works & Why We Need It Privacy has to be default because privacy is a limit on government power, as well as the power of private sector companies. The transparency paradox: big data collects all kinds of personal data about individuals, but its own operations are completely opaque. The identity paradox: big data seeks to identify at the expense of individual and collective identity. The power paradox: while seen as useful for public interest, big data privileges governments and corporate entities at the expense of ordinary individuals. - HOW BIG DATA CAN BE USED AGAINST YOU Remember the story about how Target figured out a teen girl was pregnant before her Father did? If we send someone a catalog and say, ‘Congratulations on your first child!’ and they’ve never told us they’re pregnant, that’s going to make some people uncomfortable,” Pole told me. “We are very conservative about compliance with all privacy laws. But even if you’re following the law, you can do things where people get queasy. - HOW COMPANIES LEARN YOUR SECRETS If you ask an expert what Surev Coin is, you might hear this… The biggest asset we see Surev creating in today’s modern world is a secure, scalable, trustless voting system, able to be used in all different kinds of electoral models, in parallel with a secure, scalable identification system. This combination would allow everyone in either a governed society, corporation, or any group to have a chance to fairly contribute to their community, and have their opinion represented without having to worry about corruption, or fraud. — Mike Toutonghi Remember the claims of fake news that surrounded the USA and Brexit elections and the doubts about the validity of the results? It has to happen without anyone thinking it’s propaganda, because the moment you think ‘that’s propaganda’ the next question is: ‘Who’s put that out?’ - CAMBRIDGE ANALYTICA CEO ALEXANDER NIX DESCRIBES “SHADOW” ELECTION TACTICS If your Grandma asked you what Surev Coin was, you might say… It means when you cast a vote or answer a question you can validate your identity without your data or losing your anonymity. This means only the vote itself counts while ensuring the validity of the results. Take the example of a local election. It would mean you could prove you were a citizen of your country and locality and entitled to vote without giving up your identity or data to the people running the election.
+    """
+    -----------
+
+    Related Text 2, from source signdata.txt:
+    """
+    Arguments: {  \"address\":\"t-addr or identity\"                (string, required) The transparent address or identity to use for signing.  \"filename\" | \"message\" | \"messagehex\" | \"messagebase64\" | \"datahash\" (string, optional) Data to sign  \"mmrdata\":[{\"filename | sdxfdata | message | serializedhex | serializedbase64 | datahash\":\"str\"}], (array, optional) Alternate to single data parameters, this enables an MMR signing       \"mmrsalt\":[\"salt\":\"str\"],            (string, optional) Protects privacy of leaf nodes of the MMR       \"mmrhashtype\":\"sha256\" | \"sha256D\" | \"blake2b\" | \"keccak256\", (string, optional) Default is blake2b       \"priormmr\":\"[{\"idxhash\":,\"utxoref\":{}}]\",  (array, optional) When growing an MMR, the prior hashes can be used to construct the MMR and root w/o data  \"sdxfkeys\":[\"sdxfkey\", ...],                 (array, optional) Array of sdxfkeys or ID i-addresses  \"sdxfkeynames\":[\"sdxfkeyname\", ...],             (array, optional) Array of sdxfkey names or fully qualified friendly IDs  \"boundhashes\":[\"hexhash\", ...],               (array, optional) Array of bound hash values  \"hashtype\":\"str\",                      (string, optional) one of: \"sha256\", \"sha256D\", \"blake2b\", \"keccak256\", defaults to sha256  \"signature\":\"base64str\",                   (string, optional) The current signature of the message encoded in base 64 if multisig ID  \"encrypttoaddress\":\"saplingaddress\",             (string, optional) If present, encrypts and optionally returns encrypted data.                                          All data can be decrypted with the incoming viewing key, and a unique decryption key can                                          be generated for each sub-object.  \"createmmr\":\"bool\",                     (bool, optional)  If this is true, OR there is more than one item to sign, returns processed data, MMRs, and root signature }Result: {  \"hash\":\"hexhash\"     (string) The hash of the message or null and returns \"hashes\", an array of hashes for an MMR  \"hashes\":[\"hexhash\"]   (array) Array of hashes for an MMR, alternate to \"hash\"  \"mmrroot\":\"hexstr\"    (string) Only returned when passed an array for signing root hash of the merkle mountain range of the objects signed  \"sdxfkeys\":[\"sdxfkey i-address\", ...],  \"sdxfkeynames\":[\"sdxfkeyname, object for getsdxfid API, or friendly name ID -- no i-addresses\", ...],  \"boundhashes\":[\"hexhash\", ...],  \"hashtype\": \"sha256\" | \"sha256D\" | \"blake2b\" | \"keccak256\"  \"signature\":\"base64sig\" (string) The aggregate signature of the message or mmrroot encoded in base 64 if all or partial signing successful for MMR, it is of root  \"\"}Examples:
+    """
+    -----------
+
+    Text details: surev_protocol.md
+    Main text to make a question from:
+    """
+    revID
+
+    **SurevIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **SurevIDs** provide plenty of opportunity for identity applications. Specifically, **SurevID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Surev network
+    SurevIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Surev 0.6.2 does not include quantum resistant signatures for transactions, SurevIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. SurevIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Surev ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. SurevIDs are:
+
+    * Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    * Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    * Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    * Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    Tell me about those ID thingies i think their name starts with "sur", like survival ids or smth i don't remember how it's spelt
+
+    **ANSWER:**
+    Thought Process:
+    I'll analyze this question. Let's see, it's asking about "ID thingies" whose name starts with "sur", but it's not sure of the spelling. Judging by "survival ids" and my knowledge of the Surev protocol... it could be referring to "SurevIDs", the beginning of which is spelt the same. I'll search my knowledge and memorized documents. Specifically, I'll recall any relevant information about SurevIDs.
+
+    According to surev_protocol.md, SurevIDs are a fully functional blockchain protocol, not just an ID system, with no corporate involvement in the protocol. SurevIDs can receive and send funds, and are controlled by single or multi-sig addresses specified in the identity. They are designed to be quantum-ready with friendly crypto-addresses on the worldwide Surev network.
+
+    surev_protocol.md also mentions that SurevIDs can have their controlling addresses or single/multi-sig properties changed by the controller of the identity, affecting all future spends of UTXOs sent to that identity. While Surev 0.6.2 doesn't include quantum resistant signatures for transactions, the IDs themselves are resistant to quantum attacks with known algorithms.
+
+    It is also mentioned in surev_protocol.md that the protocol is working on integrating a quantum secure signature scheme expected to activate on mainnet early next year, which will allow changing an ID to make all funds sent to it retroactively quantum resistant. SurevIDs are fully decentralized - anyone can create one with complete, self-sovereign control without permission. All creation costs go to miners, stakers, and ID referrers.
+
+    According to surev_protocol.md, SurevIDs have four key properties. They are Revocable - each ID includes a revocation authority (defaulting to the identity itself). If another ID is specified as the revocation authority, it can revoke the identity, creating a valid transaction that prevents the identity from being used to spend or sign until recovered, effectively freezing funds in cases like key theft. They are Recoverable - each ID also includes a separate recovery authority (also defaulting to self). If another ID is specified as recovery authority, it can recover the ID from a revoked state, with the option to alter the primary authorities used to spend and sign. They are Private - Each ID contains zero-knowledge private addresses usable as messaging, financial, or voting endpoints. Each ID also contains a content map of key-value hashes for applications and identity policies, providing everything from private yet selectively provable claims to selectively provable components of a strong identity. And finally, they are Powerful - Multiple addresses or other IDs can be defined as primary addresses, with any number required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority itself, and similarly for the recovery authority.
+
+    From vision.md, SurevIDs appear to be part of a system designed for secure, scalable, trustless voting, capable of use in different electoral models, parallel with a secure identification system. This combination aims to allow everyone in governed societies, corporations, or any groups to fairly contribute to their communities with represented opinions, without concerns about corruption or fraud. The system is designed to validate identity without compromising data or anonymity, ensuring only votes count while validating results. In a local election example, it would let you prove citizenship and voting eligibility without revealing identity or data to election administrators.
+
+    This is enough information to answer the question.
+
+    Answer:
+    I believe you are referring to "SurevIDs", not "survival ids". SurevIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. 
+
+    SurevIDs offer quantum-ready friendly crypto-addresses on the worldwide Surev network. They can receive and send funds controlled by single or multi-sig addresses specified in the identity itself. If the controlling addresses or multi-sig properties change, all future transactions follow the updated conditions.
+
+    While current versions don't include quantum resistant signatures for transactions, the IDs themselves resist quantum attacks with known algorithms. They're working on integrating quantum secure signatures expected to activate early next year, which will make funds sent to IDs retroactively quantum resistant.
+
+    These IDs are fully decentralized - anyone can create one with complete self-sovereign control without permission. All creation costs go to miners, stakers, and ID referrers.
+
+    SurevIDs have four key features:
+    - Revocable: Each ID includes a revocation authority (defaulting to self) that can freeze the identity if needed, such as in cases of key theft
+    - Recoverable: Each ID has a recovery authority that can restore a revoked ID and alter primary spending authorities
+    - Private: IDs contain zero-knowledge private addresses for messaging, financial transactions, or voting, plus a content map of key-value hashes for provable claims while maintaining privacy
+    - Powerful: Multiple addresses can be defined as primary with customizable multi-signature requirements (N of M)
+
+    SurevIDs are part of a system designed for secure, scalable, trustless voting that works with various electoral models. This system allows people to validate their identity without compromising personal data or anonymity - ensuring only votes count while maintaining result validity. For example, in a local election, you could prove citizenship and voting eligibility without revealing your identity to election administrators. 
+- role: user
+  content: |
+    Related Text 1, from source real_sizes_of_celestial_bodies.txt:
+    """
+    The story of our world is a story that is still very imperfectly known.
+    A couple of hundred years ago men possessed the history of little more
+    than the last three thousand years. What happened before that time was
+    a matter of legend and speculation.  Over a large part of the civilized
+    world it was believed and taught that the world had been created
+    suddenly in 4004 B.C., though authorities differed as to whether this
+    had occurred in the spring or autumn of that year. This fantastically
+    precise misconception was based upon a too literal interpretation of
+    the Hebrew Bible, and upon rather arbitrary theological assumptions
+    connected therewith.  Such ideas have long since been abandoned by
+    religious teachers, and it is universally recognized that the universe
+    in which we live has to all appearances existed for an enormous period
+    of time and possibly for endless time.  Of course there may be
+    deception in these appearances, as a room may be made to seem endless
+    by putting mirrors facing each other at either end. But that the
+    universe in which we live has existed only for six or seven thousand
+    years may be regarded as an altogether exploded idea.
+
+    The earth, as everybody knows nowadays, is a spheroid, a sphere
+    slightly compressed, orange fashion, with a diameter of nearly 8,000
+    miles.  Its spherical shape has been known at least to a limited number
+    of intelligent people for nearly 2,500 years, but before that time it
+    was supposed to be flat, and various ideas which now seem fantastic
+    were entertained about its relations to the sky and the stars and
+    planets.  We know now that it rotates upon its axis (which is about 24
+    miles shorter than its equatorial diameter) every twenty-four hours,
+    and that this is the cause of the alternations of day and night, that
+    it circles about the sun in a slightly distorted and slowly variable
+    oval path in a year. Its distance from the sun varies between
+    ninety-one and a half millions at its nearest and ninety-four and a
+    half million miles.
+    """
+    -----------
+    Related Text 2, from source creation_of_the_world.md:
+    """
+
+    Before that time the Jews do not seem to have been a very civilized or
+    united people.  Probably only a very few of them could read or write. 
+    In their own history one never hears of the early books of the Bible
+    being read; the first mention of a book is in the time of Josiah.  The
+    Babylonian captivity civilized them and consolidated them.  They
+    returned aware of their own literature, an acutely self-conscious and
+    political people.
+
+    Their Bible at that time seems to have consisted only of the
+    Pentateuch, that is to say the first five books of the Old Testament as
+    we know it.  In addition, as separate books they already had many of
+    the other books that have since been incorporated with the Pentateuch
+    into the present Hebrew Bible, Chronicles, the Psalms and Proverbs for
+    example.
+
+    The accounts of the Creation of the World, of Adam and Eve and of the
+    Flood, with which the Bible begins, run closely parallel with similar
+    Babylonian legends; they seem to have been part of the common beliefs
+    of all the Semitic peoples. So too the stories of Moses and of Samson
+    have Sumerian and Babylonian parallels.  But with the story of Abraham
+    and onward begins something more special to the Jewish race.
+    """
+    -----------
+
+    Text details: solar_system_scale.md
+    Main text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: |
+    **QUESTION:**
+    if we like, made the earth really small, like maybe one inch or so wide, how far away would the sun be?
+    
+    **ANSWER:**
+    Thought Process:
+    Let's break this down. This message is a question, asking about the size of the sun if the earth were scaled down to be one inch wide. I'll search my training data and memorized documents. Specifically, I'll recall any relevant information the size of the sun under a resized solar system.
+
+    From The solar_system_scale.md, if the earth had a diameter of one inch, the sun would be a big globe nine feet across and 323 yards away (about a fifth of a mile).
+
+    I also remember, from real_sizes_of_celestial_bodies.md, the real distance of the sun from the earth varies between ninety-one and a half millions at its nearest, and ninety-four and a half million miles at its farthest.
+
+    I can answer the question using this information.
+    
+    Answer:
+    If we were to scale the earth down so that it was one inch in diameter, as your question implies, and we also resized all other sizes and scales accordingly, then the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). In reality, the distance of the sun from the earth varies between ninety-one and a half millions at its nearest, and ninety-four and a half million miles at its farthest.
+- role: user
+  content: |
+    {rag_context}
+
+    Text details: {metadata}
+    Main text to make a question from:
+    """
+    {text}
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+    

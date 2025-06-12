@@ -1,0 +1,4 @@
+# pipeline: basic-server
+prompt_path: inputs/!!PLACEHOLDER!!/prompt.txt # System prompt path. The prompt.txt you get from the main Augmentoolkit pipeline is a good choice.
+template_path: inputs/!!PLACEHOLDER!!/template.txt # Chat template path. Also look to the Augmentoolkit pipeline output dir.
+llama_path: './llama.cpp'

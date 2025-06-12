@@ -1,0 +1,104 @@
+pipeline: grpo-rl
+
+no_flatten:
+  - datasets
+
+# !!ATTENTION!! to run this pipeline, which trains an LLM on your computer, you need a machine with a good GPU (possibly at least an A6000), Linux, and you need to `uv pip install vllm` on the virtual environment you run Augmentoolkit with.
+
+# Training parameters
+training_parameters:
+  learning_rate: 0.000005
+  adam_beta1: 0.9
+  adam_beta2: 0.99
+  weight_decay: 0.1
+  warmup_ratio: 0.1
+  lr_scheduler_type: "cosine"
+  optim: "paged_adamw_8bit"
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 1
+  num_generations: 6
+  max_prompt_length: 4000
+  max_completion_length: 2500 
+  max_steps: 500
+  save_steps: 100
+  save_total_limit: 7
+  save_strategy: "steps"
+  max_grad_norm: 0.1
+  output_dir: "outputs"
+  chat_template: "{% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{{ bos_token }}{% for message in messages %}{% if (message['role'] == 'system') %}{{'Instruction: ' + message['content'] + ' **Finished.**' + '\n'}}{% elif (message['role'] == 'user') %}{{'Human: ' + message['content'] + ' **Finished.**' + '\n'}}{% elif message['role'] == 'assistant' %}{{'AI: ' + message['content'] + ' **Finished.**' + '\n'}}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ 'AI: Thought Process:\n' }}{% endif %}"
+  model_stop_sequences: ["**Finished.**", "Human:"]
+
+# prompt_configuration: # This is done per reward func, for maximum flexibility.
+#   cot_start: "Thought Process:"
+#   cot_end: "Final Answer:"
+
+# Model configuration
+model:
+  base_model_name: mistral-community/Mistral-7B-v0.2
+  lora_rank: 64
+  lora_alpha: 128
+  max_seq_length: 5000
+  gpu_memory_utilization: 0.7
+
+# Reward configuration  
+reward:
+  high_scoring_save_path: high_scoring_examples.jsonl
+  score_save_threshold: 5.0
+  combination_function: "sum"  # Could also be "mean" or custom implementation
+  scaling_function: "none"     # Could be "standardize" or other strategies
+
+# Dataset configuration (starting with a simple case)
+datasets:
+  - path: inputs/grpo_rl/combined_army_completions.jsonl
+    percentage: 1.0 # what percent of the dataset to take
+    system_prompt: | # added during dataset processing.
+      Respond to user input correctly. First think about how to best respond by writing the header 'Thought Process and Relevant Info Recall:' followed by a newline and your freeform thoughts about the input (including analyzing it, recalling any relevant information, correcting any wrong assumptions you made/backtracking if need be). After this, you will then write the heading 'Answer:' followed by a newline and your final answer, based on the thought process you gave. Surround the integer itself in <answer></answer> Previous messages in the conversation, if there are any, will not follow this format; do not rely on them. Think step-by-step, and correct yourself if appropriate, you are given points for correct answers and structured reasoning.
+    single_turn_ratio: 0.7
+    force_single_turn: false
+    reward_funcs: # reward functions for sure have a name. But they also have a whole other dict of stuff, configuration items. Each of these gets passed into a callback to configure the reward function actually made and used.
+      - name: generic_llm_reward
+        cot_start: "Thought Process:" # alternative: "<think>"
+        cot_end: "Answer:" # alternative: "</think>"
+        eval_llm_name: deepseek-ai/DeepSeek-R1-Distill-Llama-70B # this is a corner cut. Ideally the model would be defined PER REWARD FUNCTION. However that is annoying to implement and I am behind schedule already, so, it's done per dataset. Apologies!
+        eval_llm_base_url: https://api.deepinfra.com/v1/openai
+        eval_llm_api_key: !!PLACEHOLDER!!
+        eval_llm_mode: api
+        system_prompt_path: prompts/evaluation_prompts/factual_check.yaml
+        format_score: 0.1
+        score_types:
+        - type: autofail # set whole thing to 0 if 0, else 1
+          name: ground_truth_contradiction
+        - type: autofail
+          name: internal_logic_contradiction
+        - type: autofail
+          name: question_answered
+        - type: score
+          name: ground_truth_overlap
+          min: 0
+          max: 1
+        - type: score
+          name: reasoning_quality
+          min: 0
+          max: 1
+        - type: score
+          name: answer_correctness
+          min: 0
+          max: 1
+        - type: score
+          name: clear_separation
+          min: 0
+          max: 1
+dataset_settings:
+  total_rows: 1000
+  # - path: inputs/grpo_rl/generic/gsm8k.json # note that LLM settings are optional. If not provided, nothing will be used (do not use any LLM reward functions)
+  #   reward_funcs:
+  #     name: gsm8k_reward
+  #     cot_start: "Thought Process:"
+  #     cot_end: "Answer:"
+post_processors:
+  reward_combination_function: "sum"
+  reward_scaling_function: "identity" # a few things. 1., we need to get dataset processing working.
+
+
+
+# TODO once single datasets tested and works, test multidataset, test gsm8k rewards, test multiple reward functions. Test with and without LLM rewards.

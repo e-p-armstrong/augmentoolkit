@@ -55,7 +55,7 @@ def special_instructions(n=1, non_axis_traits=False, non_axis_traits_only=False)
         [
             "The character should be kind and agreeable.",
             "The character should have both good and bad sides.",
-            "The character should be an awful person, and should be enjoying every second of it."
+            "The character should be an awful person, and should be enjoying every second of it.",
             # "The character should be an awful person, possessing a number of vices (that are compatible with the previously-mentioned instructions)."
         ],  # Kindness/Morality
         # ["The character should be a young adult.", "the character should be middle-aged." "The character should be in late adulthood."], # Age group
@@ -76,7 +76,7 @@ The character should be condescending and rude.""",
 The character should be antisocial and coarse.
 The character should be a smoker."""
         """The character should be middle-aged.
-The character should be narcissistic."""
+The character should be narcissistic.""",
         # """The character should be edgy and nihilistic."""
     ]
 

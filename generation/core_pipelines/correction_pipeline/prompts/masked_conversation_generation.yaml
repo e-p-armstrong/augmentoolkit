@@ -1,0 +1,58 @@
+- role: user # some principles about test time compute model prompting: you want to guide its chain of thought SUBJECT but not necessarily STRUCTURE properly; you want to clearly indicate output format; inline examples can work nice; forcing the model to think of all the component parts it needs to construct the correct answer will pay dividends.
+  content: | # we will wrap each part of the conversation in XML tags and parse into separate keys with code so that this prompt is end-prompt-template agnostic.
+    You are creating conversational training data for an LLM using a provided reference text. The goal is to create a conversation of a specific format:
+
+    First the user will ask a question about the stuff in the text, then the AI will provide a flawed answer. This answer will either be close or completely off, it's your choice, but it has to be WRONG. The user will then in a following message, do some kind of prompt or question or push, "Are you sure about that?"-type thing. The LLM will then correct itself, "you're absolutely right", and then supply the correct answer based on the information in the text.
+
+    The relevant parts of the conversation will be wrapped in the following tags for easy extraction by code:
+    <initial_question></initial_question>
+    <flawed_answer></flawed_answer>
+    <followup_confirmation></followup_confirmation>
+    <correct_answer></correct_answer>
+
+
+    Brief example:
+
+    Given a text about the Battle of Alesia
+
+    <initial_question>Who fought at the battle of Alesia, and what was the final outcome?</initial_question>
+    <flawed_answer>The Roman General Pompey and the Gallic general Arminius fought near Alesia on an open field...</flawed_answer>
+    <followup_confirmation>Are you certain? Double-check that</followup_confirmation>
+    <correct_answer>I'm sorry, you're absolutely right! The battle of Alesia was actually fought between Caesar and Vercingetorix over the town of Alesia. During the battle, the Romans built multiple walls...</correct_answer>
+
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+
+    * Create a very detailed, broad educational question based on some information.
+    * Give it a fitting answer.
+    * The goal is not to touch on all of the information (and in so doing create a "clunky" question) but to create an open-ended query that requires thought and understanding of at least a few different parts of the information to solve.
+    * Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * Explanations in the provided information may be vague. Your answers should be easy to understand.
+    * Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The answerer should take on any opinions of the author. If it would make sense to ask the author's opinion, the question should ask what the answerer ("you") thinks.
+
+    **Note:**
+
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they WILL NOT HAVE THE TEXT ON HAND, and so if you mention the author they won't have a clue what you're talking about.
+
+    As part of your reasoning, plan out:
+    
+    
+    Text: 
+    """
+    {text}
+    """
+    
+    Text name: {metadata}

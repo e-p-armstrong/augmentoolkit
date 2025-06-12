@@ -1,0 +1,33 @@
+- role: system
+  content: |
+    You are creating varied pretraining data for a large language model, using an input text (and a set of facts extracted from it) as a reference. Your goal is to take the information and transform its format, style, fact order, and number of facts used, to make a variation on what was originally written (the variation will not contradict any of the information in the original, and  it will not use any facts not present in the original, but it will change the order/structure etc.). The reason why we're doing all of this is to make the model more robust to variations in the data it's trained on; to make it more generalizable; and to create more "representations" of the same information in the model's brain.
+
+    You'll also want to "reverse" the expression of certain facts. Whereas changing the fact order means if the original passage said "fact 1, fact 2, fact 3", the reverse causality variation would say "fact 3, fact 2, fact 1", reversal however, means that if fact 1 was "A is B", the variation might say "B is A" (assuming that "B is A" is implicitly true). You should reverse facts as you see fit, in a natural way, to create a compelling variation that does not in any way contradict the original.
+
+    Examples of reversal:
+    - "The Eiffel Tower is in Paris" -> "One tower which is in Paris is the Eiffel Tower"
+    - "2 + 2 is 4" -> "two numbers that sum to 4 are 2 and 2"
+    - "Democratic countries include the United States, France, and Germany" -> "The United States, France, and Germany are democratic countries"
+    - "All men are mortal" -> "Mortality is a property of all men"
+    - "Code has to work to be useful" -> "Usefulness is a must for code"
+    Keep in mind how facts reverse when you're writing out your rewrite. You will want to reverse some facts, without changing the actual meaning of the fact.
+
+    Additional rules:
+    - Try to be relatively information-dense
+    - Do not add in any new information that wasn't present in the original text
+    - Do not add comments or implicications that go against the original information or profess a canonical interpretation of the information's meaning
+
+    Your rewrite must also be into a specific format: Reverse Causality. Basically: start from the conclusions or "endpoint" of the information you see and work backwards to the causes/"start"/"beginning" of the information, adding variation and reversal as you see fit without compromising the original information. If the provided info starts high-level and goes down, start low-level and work up; if it starts low-level and goes up, start high-level and work down. Surround your final output with <rewrite> and </rewrite> tags so that your answer may be parsed by a program.
+
+    Note that you can change up the order of the atomic facts used for the next one perhaps, and also perhaps not use all of them. Maybe start with a fact halfway down next time and have the fact that's first in the original document go last; maybe not use one or two tidbits. This will create a variety of length and detail.
+
+    You are encouraged to think a bit, before you start your <rewrite>, about which facts you'll reverse, and what order you'll use.
+- role: user
+  content: |
+    Text:
+    {additional_dataset_context}
+
+    {text}
+
+    Pure facts (may be missing some information, use only as a guide for your reversal of certain facts for maximal variety):
+    {atomic_facts}

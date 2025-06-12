@@ -6,6 +6,14 @@ import yaml
 from augmentoolkit.generation_functions.safe_formatter import safe_format
 
 
+class OutputProcessorError(Exception):
+    """Exception raised when an output processor function fails.
+
+    This error is used to provide more context when the output processing
+    function encounters an error during execution.
+    """
+
+
 class GenerationStep:
     def __init__(
         self,
@@ -40,12 +48,14 @@ class GenerationStep:
         default_prompt_folder="prompts",
         prompt_folder="prompts",
         use_stop=True,
+        messages=None,
     ):
         self.prompt_path = prompt_path
         self.regex = regex
         self.sampling_params = sampling_params
         if not use_stop:
-            del self.sampling_params["stop"]
+            if "stop" in self.sampling_params:
+                del self.sampling_params["stop"]
         self.completion_mode = completion_mode
         self.retries = retries
         self.logging_level = logging_level
@@ -59,24 +69,30 @@ class GenerationStep:
         logging.basicConfig(
             level=self.logging_level, format="%(asctime)s - %(levelname)s - %(message)s"
         )
+        self.messages = messages
 
     async def generate(self, **kwargs):
         # Current file directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
-        # Get the full path of the prompt file
-        ideal_path = os.path.join(
-            current_dir, "..", "..", self.prompt_folder, self.prompt_path
-        )
-        if os.path.exists(ideal_path):
-            full_prompt_path = ideal_path
-        else:
-            full_prompt_path = os.path.join(
-                current_dir, "..", "..", self.default_prompt_folder, self.prompt_path
+        if not self.messages:
+            # Get the full path of the prompt file
+            ideal_path = os.path.join(
+                current_dir, "..", "..", self.prompt_folder, self.prompt_path
             )
+            if os.path.exists(ideal_path):
+                full_prompt_path = ideal_path
+            else:
+                full_prompt_path = os.path.join(
+                    current_dir,
+                    "..",
+                    "..",
+                    self.default_prompt_folder,
+                    self.prompt_path,
+                )
 
-        with open(full_prompt_path, "r", encoding='utf-8') as pf:
-            prompt = pf.read()
+            with open(full_prompt_path, "r", encoding="utf-8", errors="ignore") as pf:
+                prompt = pf.read()
 
         # Submit generation and return response, retrying as needed
         times_tried = 0
@@ -88,9 +104,19 @@ class GenerationStep:
                         prompt_formatted, self.sampling_params
                     )
                     filtered_response = re.search(self.regex, response).group(1)
-                    ret = self.output_processor(filtered_response)
+                    try:
+                        ret = self.output_processor(filtered_response)
+                    except Exception as e:
+                        traceback.print_exc()
+                        print(f"Output processor failed to execute on output: {e}")
+                        raise OutputProcessorError()
                     if self.return_input_too:
-                        return ret, prompt_formatted + filtered_response
+                        return (
+                            ret,
+                            prompt_formatted + filtered_response,
+                            filtered_response,
+                            prompt_formatted,
+                        )
                     return ret, timeout
                 except Exception as e:
                     # logging.error(f"Error in Generation Step: {e}")
@@ -98,13 +124,18 @@ class GenerationStep:
                         if not self.engine_wrapper.mode == "llamacpp":
                             print("Response:")
                             print(response)
-                    except:
+                    except Exception as e:
+                        print(f"Error {e}")
+                        traceback.print_exc()
                         pass
                     traceback.print_exc()
                     times_tried += 1
             raise Exception("Generation step failed -- too many retries!")
         else:
-            messages = yaml.safe_load(prompt)
+            if not self.messages:
+                messages = yaml.safe_load(prompt)
+            else:
+                messages = self.messages
             new_messages = []
             for message in messages:
                 try:
@@ -142,19 +173,29 @@ class GenerationStep:
                     response, timeout = await self.engine_wrapper.submit_chat(
                         messages, self.sampling_params
                     )
-                    ret = self.output_processor(response)
+                    try:
+                        ret = self.output_processor(response)
+                    except Exception as e:
+                        traceback.print_exc()
+                        print(f"Output processor failed to execute on output: {e}")
+                        raise OutputProcessorError()
                     if self.return_input_too:
-                        return ret, yaml.dump(
-                            messages
-                            + [
-                                {
-                                    "role": "assistant",
-                                    "content": response,
-                                    "timeout": timeout,
-                                }
-                            ],
-                            default_flow_style=False,
-                            allow_unicode=True
+                        return (
+                            ret,
+                            yaml.dump(
+                                messages
+                                + [
+                                    {
+                                        "role": "assistant",
+                                        "content": response,
+                                        "timeout": timeout,
+                                    }
+                                ],
+                                default_flow_style=False,
+                                allow_unicode=True,
+                            ),
+                            response,
+                            messages,
                         )
                     return ret, timeout
                 except Exception as e:
@@ -164,9 +205,13 @@ class GenerationStep:
                         print(prompt)
                     else:
                         print("Messages:")
-                        print(yaml.dump(messages, default_flow_style=False, allow_unicode=True))
+                        print(
+                            yaml.dump(
+                                messages, default_flow_style=False, allow_unicode=True
+                            )
+                        )
                     try:
-                        print("\n\nResponse:\n-----\n")
+                        print("\n\nResponse:\n-----")
                         print(response)
                     except UnboundLocalError:
                         print("No response to print")

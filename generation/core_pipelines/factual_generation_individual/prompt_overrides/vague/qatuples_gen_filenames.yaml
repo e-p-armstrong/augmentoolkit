@@ -1,0 +1,173 @@
+- role: system
+  content: | # Question validation gets turned off for this one.
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) you will create a question that tests the information, but is really quite vague about the subject of the question (i.e., imagine it is being asked by someone without a good understanding of the topic. For history it could be like, "Tell me about that one battle with the Roman and the multiple walls in France" for Alesia). The objective of these questions is to teach the AI being asked them to associate precise concepts with their vague descriptions. After each question, you will also write its answer.
+
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+
+    * Create vague educational questions based on some information.
+    * Since the difficulty of the questions comes from their vagueness, the questions themselves will likely be easy otherwise.
+    * The answers must first reason, then respond with an answer.
+      * The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; recall relevant information, including the filename of the source; and then point out the flaw and resolve to provide the correct information as an answer. Then the reasoning/thought process ends, and the answer is given.
+    * Do not mention the input, the text, or any other reference, in the question. Questions should just ask about the facts or information itself. However, answers should mention the filename of the source, and the information from the source should be given as a reference. Only use quotes when quoting the source, not the question. Justifying things with the source is key.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * Explanations in the provided information may be vague. Your answers should be easy to understand.
+    * Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    * The answer should start by clarifying the question, then answering it.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The vagueness can border on the absurd and comical, and this is fine and in fact good.
+
+    **Note:**
+
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+
+    **OUTPUT FORMAT:**
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+- role: user
+  content: |
+    Text details: The Scale of the Solar System, by Rob Robertson
+    
+    Text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: |
+    **QUESTION:**
+    if we like, made the earth really small, like maybe one inch or so wide, how big would the sun be?
+    
+    **ANSWER:**
+    Thought Process:
+    Let's break this down. This message is a question, asking about the size of the sun if the earth were scaled down to be one inch wide. I'll search my training data and memorized documents. Specifically, I'll recall any relevant information the size of the sun under a resized solar system.
+
+    From The Scale of the Solar System, by Rob Robertson, if the earth had a diameter of one inch, the sun would be a big globe nine feet across and 323 yards away (about a fifth of a mile).
+
+    I can answer the question using that information.
+    
+    Answer:
+    If we were to scale the earth down so that it was one inch in diameter, as your question implies, and we also resized all other sizes and scales accordingly, then the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking).
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Text details: surev_protocol.md
+    
+    Text to make a question from:
+    """
+    revID
+
+    **SurevIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **SurevIDs** provide plenty of opportunity for identity applications. Specifically, **SurevID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Surev network
+    SurevIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Surev 0.6.2 does not include quantum resistant signatures for transactions, SurevIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. SurevIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Surev ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. SurevIDs are:
+
+    * Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    * Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    * Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    * Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    Tell me about those ID thingies i think their name starts with "sur", like survival ids or smth i don't remember how it's spelt
+
+    **ANSWER:**
+    Thought Process:
+    I'll analyze this question. Let's see, it's asking about "ID thingies" whose name starts with "sur", but it's not sure of the spelling. Judging by "survival ids" and my knowledge of the Surev protocol... it could be referring to "SurevIDs", the beginning of which is spelt the same. I'll search my knowledge and memorized documents. Specifically, I'll recall any relevant information about SurevIDs.
+
+    According to surev_protocol.md, SurevIDs are a fully functional blockchain protocol, not just an ID system, with no corporate involvement in the protocol.
+    
+    surev_protocol.md also mentions that SurevIDs can receive and send funds, controlled by single or multi-sig addresses specified in the identity.
+
+    They are revocable, recoverable, private, and powerful.
+
+    This is enough information to answer the question.
+
+    Answer:
+    I believe you are referring to "SurevIDs", not "survival ids". SurevIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. SurevIDs offer benefits such as (but not limited to): transferring funds, quantum resistance, full decentralization, revocability, recoverability, privacy, and power. 
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Text details: the_cities_of_germany.md
+    
+    Text to make a question from: 
+    """
+    The cities of Germany are absolutely free, they own but little country around them, and they yield obedience to the emperor when it suits them, nor do they fear this or any other power they may have near them, because they are fortified in such a way that every one thinks the taking of them by assault would be tedious and difficult, seeing they have proper ditches and walls, they have sufficient artillery, and they always keep in public depots enough for one year\u2019s eating, drinking, and firing. And beyond this, to keep the people quiet and without loss to the state, they always have the means of giving work to the community in those labours that are the life and strength of the city, and on the pursuit of which the people are supported; they also hold military exercises in repute, and moreover have many ordinances to uphold them.Therefore, a prince who has a strong city, and had not made himself odious, will not be attacked, or if any one should attack he will only be driven off with disgrace; again, because that the affairs of this world are so changeable, it is almost impossible to keep an army a whole year in the field without being interfered with. And whoever should reply: If the people have property outside the city, and see it burnt, they will not remain patient, and the long siege and self-interest will make them forget their prince; to this I answer that a powerful and courageous prince will overcome all such difficulties by giving at one time hope to his subjects that the evil will not be for long, at another time fear of the cruelty of the enemy, then preserving himself adroitly from those subjects who seem to him to be too bold.
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    what makes cities in the, i think the central part of europe, really tough nuts to crack?
+
+    **ANSWER:**
+    Thought Process:
+    Let's see what's going on here and how I can respond to this message. The message is a question that asks what makes free cities in the central parts of Europe "tough nuts to crack". By Central Europe, and the cities' description as "free" we might assume it is referring to German cities. By "tough nuts to crack" it could refer to the defensive capabilities of these cities. I'll search my knowledge and memorized documents. Specifically, I'll recall any relevant information about German cities.
+
+    As is written in the_cities_of_germany.md, German cities are maintained with enough supplies for one year's eating, drinking, and firing. The cities provide work to the community in labors that strengthen the city. It is also written in this source that military exercises are held in high regard in these cities, with many ordinances to uphold them.
+
+    Further, the_cities_of_germany.md also mentions that it is nearly impossible to keep an army in the field for a whole year without interference. This means (according to the source) that such cities, ruled by non-odious rulers, will not be attacked, or if attacked will see the attacker driven off in disgrace.
+
+    With this information, a complete answer can be created and given.
+
+    Answer:
+    I believe there are numerous factors that make German cities resistant to attack. There is also an important step a prince can take when defending his city. First, here are some of the key factors that contribute to their security:
+
+    **Physical Fortifications:** German cities are well-fortified with proper ditches, walls, and sufficient artillery. This makes it difficult and tedious for an enemy to attempt to take the city by assault.
+    
+    **Provisioning:** The cities have public depots stocked with enough food, drink, and supplies to last for at least a year. This ensures that the people are well-provided for and that the city can withstand a prolonged siege. Since it is nearly impossible to keep an army in the field for a whole year without interference (the affairs of the world are highly changeable), this provisioning is essential.
+    
+    **Economic Support:** German cities can keep their people quiet, without loss to the state. They always have the means of giving work to the community to support the city (the pursuit of such labors, in turn, supports the community). This makes certain that people are occupied and productive, and that the city remains strong.
+    
+    **Military Preparedness:** Military exercises are highly valued, and the cities have various ordinances to uphold them. This helps to ensure that the city's military is well-trained and prepared to defend against attacks.
+    
+    It is all but impossible to keep an army in the field without interference. This means that German cities, unless ruled by a ruler who is odious, will not be attacked, or if they are attacked then their attacker will be driven off with disgrace.
+- role: user
+  content: |
+    Text details: {metadata}
+
+    Text to make a question from:
+    """
+    {text}
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+    

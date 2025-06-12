@@ -1,0 +1,30 @@
+pipeline: generic-data-rephrase-pipeline
+
+api:
+  large_api_key: !!PLACEHOLDER!!
+  small_api_key: !!PLACEHOLDER!!
+  large_base_url: https://api.deepinfra.com/v1/openai
+  small_base_url: https://api.deepinfra.com/v1/openai
+  large_model: deepseek-ai/DeepSeek-V3
+  small_model: deepseek-ai/DeepSeek-V3
+  large_mode: api
+  small_mode: api
+path:
+  default_prompts: ./prompts
+  input_dir: ./inputs/examples/sharegpts
+  output_dir: ./outputs/generic_data_rephrase_test
+  prompts: ./prompts
+system:
+  completion_mode: False
+  concurrency_limit: 1
+  use_stop: True
+  subset_size: 50
+  use_subset: True # !!ATTENTION!! use_subset is on; you will probably want to have use_subset on during testing and development to save money.
+  cot_preface: "Thought Process:"
+  cot_suffix: "\nAnswer:"
+cost_estimation: 
+  cost_per_million_small_input: 0.30 # !!ATTENTION!! These values will probably need to be changed to match the model that you, specifically, are using, if you want accurate cost estimation
+  cost_per_million_small_output: 0.88
+  cost_per_million_large_input: 0.30
+  cost_per_million_large_output: 0.88
+# TODO give this the ability to scrape a dataset from the HF hub and use it as input. We can't upload with massive generic HF datasets of course.

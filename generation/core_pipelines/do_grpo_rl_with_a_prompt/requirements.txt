@@ -1,0 +1,4 @@
+trl
+torch
+unsloth
+vllm

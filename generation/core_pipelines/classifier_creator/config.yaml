@@ -1,0 +1,39 @@
+pipeline: classifier-creator
+
+api:
+  large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  large_api_key: !!PLACEHOLDER!!
+  large_base_url: https://api.deepinfra.com/v1/openai
+  large_mode: api
+  small_model: meta-llama/Meta-Llama-3.1-8B-Instruct
+  small_base_url: https://api.deepinfra.com/v1/openai
+  small_api_key: !!PLACEHOLDER!!
+  small_mode: api
+classification:
+  classes: ['cruise', 'not cruise'] # !!ATTENTION!! change these in order to change what classes your classifier tries to predict
+  desc: Classify whether the text is about 0. "cruise" cruises or 1. "not cruise" maritime stuff in general. # !!ATTENTION!! this explanation will be used to create the classification rules. Tips: 1. make sure that your classes have self-descriptive names; 2. indicate the number and the name of the class together in this description (e.g., '0. "cruise"'); don't just name the classes again, use this space to explain them a bit.
+  predict_on_whole_set_at_the_end: True
+path:
+  default_prompts: ./prompts_classifier
+  input_dir: ./inputs/!!PLACEHOLDER!!
+  output_dir: ./outputs/!!PLACEHOLDER!!
+  prompts: ./prompts_classifier
+system:
+  chunk_size: 900
+  completion_mode: False
+  concurrency_limit: 50
+  required_accuracy: 0.9
+  use_stop: True
+training:
+  max_iters: 5
+  model_path: distilbert-base-uncased
+  test_set_size: 10
+  train_set_increment: 40
+  train_set_size: 40
+  truncation_type: head-tail # when head-tail, this takes the first and last characters. When anything else, slices the first characters.
+meta_datagen:
+  do_meta_datagen: False
+  meta_datagen_keys:
+    - label_details
+    - rules_creation_details
+  meta_datagen_extras:

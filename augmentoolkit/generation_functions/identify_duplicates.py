@@ -25,7 +25,7 @@ from .process_multiturn_functions import has_sequential_chars
 
 
 def identify_duplicates(
-    tuples: List[Tuple[str, str, str, str]]
+    tuples: List[Tuple[str, str, str, str]],
 ) -> List[Tuple[str, str, str, str]]:
     # Create a dictionary to hold questions with the same first N characters
     question_dict = {}

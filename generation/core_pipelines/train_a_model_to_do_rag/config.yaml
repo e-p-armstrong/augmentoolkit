@@ -1,0 +1,75 @@
+pipeline: rag-data
+
+api:
+  small_api_key: !!PLACEHOLDER!! 
+  large_api_key: !!PLACEHOLDER!!  
+  small_base_url: https://api.deepinfra.com/v1/openai
+  large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+  small_model: mistralai/Mistral-Small-24B-Instruct-2501
+  large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  small_mode: api
+  large_mode: api
+path:
+  input_dir: ./inputs/!!PLACEHOLDER!!
+  output_dir: ./outputs/!!PLACEHOLDER!!
+  prompts: ./prompts
+  default_prompts: ./prompts
+skip:
+  skip_filter_chunks: False
+system:
+  completion_mode: False
+  concurrency_limit: 50
+  use_stop: True
+  subset_size: 30
+  use_subset: True # !!ATTENTION!! use subset is on; you will probably want to have use_subset on during testing and development to save money.
+  chunk_size: 4000
+  rag_failure_percentage: 0.4
+  rag_max_chunks: 3
+  final_assistant_prompts: [ # !!ATTENTION!! {data} in each prompt is filled in with the actual chunk used to generate those questions. Each system prompt in THIS list MUST have the text {data}.
+  'You are a helpful AI assistant specializing in !!PLACEHOLDER. Use a combination of your own knowledge and the following sources:
+  
+  {data}',
+  
+  '{data}
+  
+Task is to ANSWER QUESTIONS primarily about !!PLACEHOLDER. Use both the information and your knowledge to answer the questions.',
+  'Use some of the wisdom which follows to be helpful, as well as your own knowledge. As a supremely intelligent domain expert AI assistant with the specific specialization in !!PLACEHOLDER, you are able to answer questions about !!PLACEHOLDER.
+  
+  {data}
+
+  Answer questions according to your knowledge + the context.',
+  'u r an AI !!PLACEHOLDER expert with context. {data}',
+  "YOU ARE AN EXCEPTIONAL ARTIFICIAL INTELLIGENCE ASSISTANT with DEEP EXPERTISE in the field of !!PLACEHOLDER. Here is some relevant information:
+
+  {data}",
+  "As a knowledgeable and compassionate AI assistant focused on !!PLACEHOLDER, you shall provide informative responses using both your knowledge and this context:
+
+  {data}",
+  "{context} specialist AI. Use this information plus your knowledge:
+
+  {data}",
+  "You possess extraordinary knowledge about !!PLACEHOLDER. Consider this information:
+
+  {data}
+
+  Answer questions using both the context and your knowledge.",
+  "ai assistant for !!PLACEHOLDER stuff. here's some helpful info:
+
+  {data}"
+  ]
+  system_format: "Instruction: {{system}} **Finished.**"
+  user_format: "Human: {{user}} **Finished.**"
+  assistant_format: "AI: {{assistant}} **Finished.**"
+  bos: "<s>"
+  num_items_per_group: 3
+cost:
+  cost_per_million_small_input: 0.07
+  cost_per_million_small_output: 0.14
+  cost_per_million_large_input: 0.23
+  cost_per_million_large_output: 0.70
+meta_datagen:
+  do_meta_datagen: False
+  meta_datagen_keys:
+    - masked_conversation_details
+    - judgement_details
+  meta_datagen_extras:

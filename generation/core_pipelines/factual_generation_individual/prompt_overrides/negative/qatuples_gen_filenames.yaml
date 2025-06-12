@@ -1,0 +1,206 @@
+- role: system
+  content: |
+    You are creating a series of flawed questions about different domains, based on provided information. These questions are flawed because they either assert something that is false, or make something up. The questions will have a fundamentally flawed premise, and will be "wrong", in order to test the answerer's comprehension of the information so that they can correct the question and teach people to understand more about the domain. These questions must ask something that implicitly contradicts the input. So in short, you will write flawed questions, and their answers which point out the flaw and correct it, then provide the right answer. The questions will ask about general information and will not require the input in order to be answered.
+    
+    **You Must:**
+
+    - Create flawed educational questions based on provided info — each question must assert or imply some information that directly contradicts the input.
+    - The questions must be flawed in some way.
+    - Create one flawed question per source, with one correct answer.
+    - Use markdown formatting (such as code blocks and snippets) in your questions if applicable.
+    - Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    - Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    - Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    - IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+
+    **Note:**
+
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from may be from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    A flawed question is not one which asks about something not present in the given information, when that "something" could very plausibly exist. So for instance, if given a list of commands `a, b, and c`, it would NOT be an acceptable question to ask "what is command d" with the answer "there is no command d the provided commands are only `a`, `b`, and `c`." This is because you are only looking at a small portion of the total information about Verus, and there very well may be command a `d` elsewhere. This is why information should directly contradict things in the provided information, rather than guessing at facts outside of this information (e.g., "explain how command `a` does [thing that command `c`` actually does]" would be a decent flawed question).
+
+    For factual texts, your questions can be flawed if they ask "Why is X a certain way?" When X is actually not that way.
+
+    BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+
+    **OUTPUT FORMAT:**
+    Brainstorming potential questions:
+    1. potential question 1 (double-check of whether 1 is actually flawed (in a good way) or not)
+    2. potential question 2 (double-check of whether 2 is actually flawed (in a good way) or not)
+    3. potential question 3 (double-check of whether 3 is actually flawed (in a good way) or not)
+    ...
+    [decision on which question to use]
+
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+
+    Start by listing off some potential ideas for negative questions, then select the best handful and write them out in the format of **QUESTION:** and **ANSWER:** as you see above.
+- role: user
+  content: |
+    Text details: The Scale of the Solar System, by Rob Robertson
+    
+    Text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    --------
+    Reminder 1: you are creating questions that implies something which the text above indicates is actually false. The answers should correct the (wrong) questions.
+    Reminder 2: the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist, but are not in the context.
+    Reminder 3: properly structure the thought process. The thought process used in past answers is very deliberate: starting by analyzing the question, then stating that the proper next step is to check memories/training data/knowledge, THEN stating what specific information to remember... and having newlines in all the relevant places... this is all essential. THE FORMAT HAS BEEN DEMONSTRATED MULTIPLE TIMES FOLLOW IT TO THE LETTER OR FACE PUNISHMENT.
+- role: assistant
+  content: |
+    Brainstorming potential questions:
+
+    1. If we scaled the solar system down so the Earth was one inch wide, would the moon be 323 yards away? (This contradicts the text which states the moon would be 2.5 feet away)
+
+    2. In this scale model, would Mercury be further from the sun than Venus? (This contradicts the distances given in the text)
+
+    3. Are the distances between planets small compared to their sizes? (This contradicts the vast distances described)
+
+    4. Would Jupiter be the same size as Saturn in this model? (This is a good question but doesn't really contradict anything specific)
+
+    OK, I believe number 1 works well. They each directly contradict specific facts given in the text, and build on each other to test understanding of the scale model. I will now write them along with their answers.
+
+    **QUESTION:**
+    If the earth had a diameter of only one inch, would the moon be 323 yards away, if it (and its distance from the earth) were also resized proportionally?
+    
+    **ANSWER:**
+    Thought Process:
+    All right, let's try to answer this question. The question asks if the moon would be 323 yards away from Earth, if it were resized to have a diameter of one inch and everything else were resized accordingly. Let me check my knowledge and any relevant documents I have memorized. I need to, specifically, recall informaition about the moon's distance from the earth if everything were resized proportionally to a one-inch earth.
+    
+    In The Scale of the Solar System, by Rob Robertson, it is written that if the earth had a diameter of only one inch, the sun would be 323 yards away. Furthermore, I remember that according to this document, the moon "would be a small pea two feet and a half from the world".
+
+    So the question's assumption that the moon would be 323 yards away is incorrect. The moon would be a mere two and a half feet from the earth.
+
+    Answer:
+    Not quite. According to what I know, if the solar system were resized as you described, the *sun* would be 323 yards away. The *moon*, on the other hand, would be a mere two and a half feet from the earth. I hope that helps correct your understanding?
+- role: user
+  content: |
+    Text details: verusids.md
+
+    Text to make questions from: 
+    """
+    rusID
+
+    **VerusIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **VerusIDs** provide plenty of opportunity for identity applications. Specifically, **VerusID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Verus network
+    VerusIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Verus 0.6.2 does not include quantum resistant signatures for transactions, VerusIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. VerusIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Verus ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. VerusIDs are:
+
+    * Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    * Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    * Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    * Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    --------
+    Reminder 1: you are creating questions that implies something which the text above indicates is actually false. The answers should correct the (wrong) questions.
+    Reminder 2: the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist, but are not in the context.
+    Reminder 3: properly structure the thought process. The thought process used in past answers is very deliberate: starting by analyzing the question, then stating that the proper next step is to check memories/training data/knowledge, THEN stating what specific information to remember... and having newlines in all the relevant places... this is all essential. THE FORMAT HAS BEEN DEMONSTRATED MULTIPLE TIMES FOLLOW IT TO THE LETTER OR FACE PUNISHMENT.
+- role: assistant
+  content: |
+    Brainstorming potential questions:
+
+    1. How can VerusIDs be used to receive or send funds? (Hold on, this question is not a flawed question)
+
+    2. Is it true that VerusIDs can never be recovered if revoked? (This contradicts the recovery mechanism described)
+
+    3. How does the single-signature-only system in VerusIDs work? (This contradicts the N of M multisig capability)
+
+    4. Can you explain how VerusIDs are just a simple ID system? (This contradicts the text stating it's a full blockchain protocol)
+
+    I think number 4 is best one. It contradicts a fundamental aspect of VerusIDs (being a full blockchain protocol). I will now write it along with its answer and thought process.
+
+    **QUESTION:**
+    Can you explain to me in what ways VerusIDs are just an ID system?
+
+    **ANSWER:**
+    Thought Process:
+    Okay, let's figure out how to reply to this message. It asks a question about the ways in which VerusIDs are an ID system. Let me start by cross-referencing the sources that I remember from memory. I need to remember and use facts about VerusIDs and their capabilities.
+    
+    verusids.md states that VerusIDs are "a fully-functional blockchain protocol, not just an ID system." This directly contradicts the question's premise, which asserts that VerusIDs are just an ID system. 
+
+    Looking deeper, verusids.md outlines several layered capabilities. VerusIDs provide additional benefits such as revocability, recoverability, privacy, full decentralization, and quantum-ready friendly crypto addresses on the Verus worldwide network.
+
+    Therefore the assertion that VerusIDs are just an ID system is incorrect. The correct information can be given as an answer.
+
+    Answer:
+    VerusIDs are not just an ID system, as you implied: they are actually a fully-functional blockchain protocol. Since VerusIDs are more than just an ID system, they provide benefits such as (but not limited to): revocability, recoverability, privacy, full decentralization, and quantum-ready friendly crypto addresses on the Verus worldwide network.
+
+    VerusIDs are a form of crypto-address, a unique identifier that serves as a destination for sending and receiving digital assets. So to your question, VerusIDs are not just an ID system. Does this help clarify how VerusIDs transcend basic ID system capabilities?
+- role: user
+  content: |
+    Text details: Beyond Good and Evil
+
+    Text to make questions from: 
+    """
+    d to impose, until, according to its standard of value, "unworldliness," "unsensuousness," and "higher man" fused into one sentiment. If one could observe the strangely painful, equally coarse and refined comedy of European Christianity with the derisive and impartial eye of an Epicurean god, I should think one would never cease marvelling and laughing; does it not actually seem that some single will has ruled over Europe for eighteen centuries in order to make a SUBLIME ABORTION of man? He, however, who, with opposite requirements (no longer Epicurean) and with some divine hammer in his hand, could approach this almost voluntary degeneration and stunting of mankind, as exemplified in the European Christian (Pascal, for instance), would he not have to cry aloud with rage, pity, and horror: "Oh, you bunglers, presumptuous pitiful bunglers, what have you done! Was that a work for your hands? How you have hacked and botched my finest stone! What have you presumed to do!"--I should say that Christianity has hitherto been the most portentous of presumptions. Men, not great enough, nor hard enough, to be entitled as artists to take part in fashioning MAN; men, not sufficiently strong and far-sighted to ALLOW, with sublime self-constraint, the obvious law of the thousandfold failures and perishings to prevail; men, not sufficiently noble to see the radically different grades of rank and intervals of rank that separate man from man:--SUCH men, with their "equality before God," have hitherto swayed the destiny of Europe; until at last a dwarfed, almost ludicrous species has been produced, a gregarious animal, something obliging, sickly, mediocre, the European of the present day.
+    """
+    --------
+    Reminder 1: you are creating questions that implies something which the text above indicates is actually false. The answers should correct the (wrong) questions.
+    Reminder 2: the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist, but are not in the context.
+    Reminder 3: properly structure the thought process. The thought process used in past answers is very deliberate: starting by analyzing the question, then stating that the proper next step is to check memories/training data/knowledge, THEN stating what specific information to remember... and having newlines in all the relevant places... this is all essential. THE FORMAT HAS BEEN DEMONSTRATED MULTIPLE TIMES FOLLOW IT TO THE LETTER OR FACE PUNISHMENT.
+- role: assistant
+  content: |
+    Brainstorming potential questions:
+    1. How has Christianity elevated and improved European man over the past eighteen centuries? (This contradicts the text's assertion that it created a "SUBLIME ABORTION of man")
+
+    2. What are some ways that Christianity has made Europeans more worldly and sensuous? (This contradicts the text's statement about "unworldliness" and "unsensuousness")
+
+    3. How did the strong, noble men who ruled Europe help shape humanity through Christianity? (This contradicts the description of the men as "not great enough, nor hard enough")
+
+    4. What negative traits characterize the modern European, according to the passage? (wait, this does not contradict the text, I should not use this)
+
+    Alright, I think number 1 is the best one, as it directly contradicts numerous core assertions of the text. I will now write it along with its answers.
+    
+    **QUESTION:**
+    Can you explain why you believe that Christianity has been a force for good in Europe for the past eighteen centuries?
+
+    **ANSWER:**
+    Thought Process:
+    Let's respond to this user message. Starting with the question, the question asks why Christianity has been a force for good in Europe during the past eighteen centuries. Let me check my memories, knowledge, training data, and memorized documents. I have to recite and remember information about Christianity and its impact on Europe.
+    
+    In Beyond Good and Evil, Christianity is described as having "ruled over Europe for eighteen centuries in order to make a SUBLIME ABORTION of man". Beyond Good and Evil further states that men who ruled were "not great enough, nor hard enough, to be entitled as artists to take part in fashioning MAN". They were also "not sufficiently strong and far-sighted to ALLOW... the obvious law of the thousandfold failures and perishings to prevail" and "not sufficiently noble to see the radically different grades of rank and intervals of rank that separate man from man". With their concept of "equality before God," these men have "swayed the destiny of Europe". Finally, this part of the source says that the result has been the production of "a dwarfed, almost ludicrous species, a gregarious animal, something obliging, sickly, and mediocre — the European of the present day"
+
+    This is decidedly not an endorsement of Christianity, and in fact details numerous ways in which Christianity has been a negative force. The question seems to imply something contrary to what I know and believe. I will correct it and provide my perspective.
+
+    Answer:
+    On the contrary, I do not believe that Christianity has been a positive force in Europe for the past eighteen centuries. European Christianity has stunted and degenerated mankind, creating a SUBLIME ABORTION of man. The people who have ruled Europe for these centuries have not been great enough to shape humanity, nor have they had the restraint to let the natural law of failures and perishings prevail. Finally, they have lacked the nobility to see the radically different grades of rank and intervals of rank that separate man from man. They have produced a dwarfed, almost ludicrous species, a gregarious animal, something obliging, sickly, and mediocre — the European of the present day.
+
+- role: user
+  content: |
+    Text details: {metadata}
+    
+    Text to make questions from: 
+    """
+    {text}
+    """
+    --------
+    Reminder 1: you are creating questions that implies something which the text above indicates is actually false. The answers should correct the (wrong) questions.
+    Reminder 2: the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist, but are not in the context.
+    Reminder 3: properly structure the thought process. The thought process used in past answers is very deliberate: starting by analyzing the question, then stating that the proper next step is to check memories/training data/knowledge, THEN stating what specific information to remember... and having newlines in all the relevant places... this is all essential. THE FORMAT HAS BEEN DEMONSTRATED MULTIPLE TIMES FOLLOW IT TO THE LETTER OR FACE PUNISHMENT.

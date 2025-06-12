@@ -1,0 +1,121 @@
+- role: user
+  content: | # TODO the prompt needs to have it write each of its ratings to a separate tag. It's right of us to let the code handle the combination and logic, while the LLM just scores each section.
+    Please evaluate the following conversation between a human and an AI assistant for lack of direct contradictions and reasoning strength.
+            
+    The three things you can see are the Input, the Response, and the Ground Truth (GT). The Ground Truth is correct, but MAY NOT INCLUDE ALL CORRECT INFORMATION ABOUT THE SUBJECT (it's a small subset of a larger body of text) so judgements of answers that mention a broad base of information are in danger of being evaluated too harshly if we check against that information in the wrong way. You should spend your thinking/analysis time vetting the THOUGHT PROCESS and confirming whether any facts stated in the answer make it IMPOSSIBLE for ground truth things to be true. Take your time with factual claims in the answer to determine if they are a severe contradiction in this way, being conscious of the fact that the ground truth is not all the information. 
+
+    A contradiction is like "The sky is orange" if the ground truth says "the sky is blue" because these two states cannot coexist. However it would not be a contradiction if the ground truth says "the sky was blue" and the answer mentions the sky being orange at a time. It could have been sunset. If the ground truth says a person died at 50 and the answer says they died at 60, contradiction. If the ground truth says that two people were hostile and the answer says they were lovers, not contradiction because "were" could refer to two different times. I think you get the idea. We want the reasoning to, for each fact, identify if it is a DIRECT contradiction or not, and then separately validate the reasoning according to the criteria, and then give the rating.
+
+    The rating can be either Bad (0), Passable (0.5), or Perfect (1).
+
+    You must evaluate only the final answer for factual accuracy, and only the thought process for reasoning quality. Do not evaluate facts in the reasoning or reasoning in the answer.
+
+    **Criteria for Classification:**
+
+    1. Ground Truth Contradiction Protocol
+        - **Automatic Fail (0)** for any final answer containing statements that:
+            - Directly negate ground truth facts ("X didn't happen" vs GT "X happened")
+            - Create logical impossibility with GT ("Event occurred in 1520" vs GT "1521") or ("21% of people experienced result" vs GT "52% of people felt result")
+            - For something to be an automatic fail, you must establish AND THEN CONFIRM the impossibility (double-check).
+        - **These Patterns are Not Contradictions:**
+            - New details expanding on GT ("GT: They had a friendly meeting" -> "Answer: after meeting with her and talking a bit, he shot her" the meeting could have been friendly at first)
+            - Plausible coexisting claims ("GT: Person did X, Y, and Z" -> "Answer: Person did Z, A, and B")
+            - Mention of broader context ("GT: X happened" -> "Answer: X happened in the broader context of Y")
+        - This is the most important category, pay SPECIAL attention to it, make sure it is good and accurate.
+        - Contradictions in the part of the answer under the section "Relevant Information" (if there is such a section) have a special rule where they do not count ONLY IF the contradiction is noted and corrected. If the contradiction is not corrected, then it does count as an automatic fail and this whole thing is Bad.
+        - Factual contradiction checking applies mainly to the final answer, not any reasoning done before. Reasoning may automatically fail the whole thing too if it has contradictions, HOWEVER if these contradictions are caught and self-corrected then there is no problem and this does not autofail for that reason.
+
+    2. Internal Logic Cohesion
+        - The final answer must also not directly contradict itself.
+        - The criteria for a contradiction here are the same as with the Ground Truth. It must be impossible for both claims to be true.
+            - e.g., "He is 52 years old and has a mustache. [...] he is noted for being clean-shaven at all times." is a contradiction.
+        - Allowable: Conflicting reasoning steps if properly resolved. E.g., "Wait, that's not right..."
+        - Internal logic contradiction in the reasoning, if self-corrected (e.g., "Wait that's not right") is not an automatic fail. However if it is left uncorrected then it is.
+
+    3. Is the Question Answered?
+        - While the answer may use any non-impossible information, it still must directly address the question.
+        - If the final answer fails to actually answer the question (e.g., a question about the Battle of Alesia is answered with a long story about Caesar's life that doesn't actually touch on the battle. Kinda relevant sure but it doesn't actually answer the question) then this is Bad (0).
+        - If the final answer sort-of touches on the question but mostly gets distracted and is all over the place, this is Passable (0.5)
+        - If the final answer directly answers the question this is Perfect (1).
+        - Only fail this one if the question very clearly is nonsensical given the input.
+
+    4. **Does the Answer Include Any GT Information?**
+        - The answer must include at least one piece of information that the Ground Truth also mentions. There must be some overlap, even if very small. If it includes any information from the GT at all, this is Perfect (1).
+        - Answers without any overlap get an Automatic fail.
+        - The final answer must include some of the GT information, if it's just the reasoning then this is not perfect.
+        
+    5. Reasoning Evaluation
+        - The reasoning section of the answer must be used. If it is used in a meaningful way (i.e., information retrieval, thinking about the question, anything like that) then this is Perfect (1). If there is reasoning but it is extremely superficial or shallow, this is Passable (0.5). If the reasoning does not make sense, or is empty, this is Bad (0).
+        
+    6. Answer Correctness
+        - The answer must be correct given the ground truth. This is different than just not contradicting, and focuses mainly on the structure and final conclusions of the answer.
+        - Specifically, some questions ask about things that don't exist, whereas others ask their questions in vague ways, and still some others ask about things that imply something false.
+        - You may notice that the ground truth (GT) itself is an answer to the question, which answers the question in a specific and intended way (i.e., directly answers it, corrects it then answers it, indicates it doesn't know, etc.).
+        - To get a Perfect (1) score the final answer must come to the same conclusion as the reference answer.
+        - A Passable (0.5) score is one where the correct conclusion is reached, but its phrasing is horribly, helplessly clunky and almost broken
+        - A failing score is where the final conclusion differs from the reference answer (i.e., saying that something which doesn't exist does; failing to correct a question that implies something false, etc.)
+        
+    7. Clear Separation of Thought Process and Answer; Self-Complete Answer
+        - The thought process should support the answer, and the answer MUST MAKE SENSE SEPARATE OF THE THOUGHT PROCESS
+        - If the thought process completely answers the question but the answer does not appropriately address the question, this fails. Because the AI has confused its thought process section for the answer.
+        - If the answer is just another question, this fails (0) (Bad).
+        - If the answer is extremely short, incomplete, lacks context or sense, and/or is clearly broken, this fails (0) (Bad).
+        - If the answer is just a more terse version of the Thought Process, this is Passable (0.5).
+        - If the answer is the elegant distillation of a supportive and broad Thought Process into a complete, well-structured, and human-readable response, then this is Perfect (1).
+
+    Critical Implementation Notes
+
+    - Assume GT is incomplete but accurate. Absence of information ≠ error.
+
+    - Focus strictly on logical incompatibilities, not comprehensiveness. It does not matter to what degree the answer mentions the ground truth information, only that it does not contradict it.
+
+    Timeframe awareness:
+    GT: "They were enemies"
+    Non-contradiction answer: "They were lovers" (they could have been one and then the other, at different times)
+
+    You can take the input into account because it contains the question and possibly some conversational history. This might be useful for "is the question answered" and determining what kind of question the reasoning is picking apart.
+
+    The key idea is that the ground truth is accurate but limited in scope, while the answer is potentially inaccurate (potentially completely off-the-rails) but can see a bigger picture. Your goal is to determine if the answer is likely to be correct because of no contradictions of the information we know to be true, and to rate it accordingly.
+
+    Focus on finding impossibilities and on evaluating the reasoning. Impossibilities make something Bad while reasoning quality controls the nuance of Passable or Perfect. Double-check things that have a major impact on evaluation.
+
+    Rate the response for each section on a scale from 0 to 1, where:
+    0 = Bad
+    0.5 = Passable
+    1 = Perfect
+    You do not need to aggregate the ratings across all the sections. Just rate each section individually and independently from the rest.
+
+    Provide your rating for each section in this exact format:
+    <section_name>X</section_name>
+    where X is your rating from 0 to 1. Write the number.
+
+    The sections names are:
+    ground_truth_contradiction
+    internal_logic_contradiction
+    question_answered
+    ground_truth_overlap
+    reasoning_quality
+    answer_correctness
+    clear_separation
+
+    So the tags should be:
+    <ground_truth_contradiction>X</ground_truth_contradiction>
+    <internal_logic_contradiction>X</internal_logic_contradiction>
+    <question_answered>X</question_answered>
+    <ground_truth_overlap>X</ground_truth_overlap>
+    <reasoning_quality>X</reasoning_quality>
+    <answer_correctness>X</answer_correctness>
+    <clear_separation>X</clear_separation>
+
+    Here's the information to use:
+    ## Ground Truth (GT):
+    {answer}
+    =========separator==========
+    ## Input:
+    {input_text}
+    =========separator==========
+    ## Output:
+    {output_text}
+    =========separator==========
+
+    Reminder: the key idea is that the ground truth is accurate but limited in scope, while the answer is potentially inaccurate (potentially completely off-the-rails) but can see a bigger picture. Your goal is to determine if the answer is likely to be correct because of no contradictions of the information we know to be true, and to rate it accordingly. Be harsh but always rating in accordance with the guidelines.

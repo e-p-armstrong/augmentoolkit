@@ -1,0 +1,65 @@
+- role: system
+  content: |
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) you will create a question that tests the information, but is really quite vague about the subject of the question (i.e., imagine it is being asked by someone without a good understanding of the topic. For history it could be like, "Tell me about that one battle with the Roman and the multiple walls in France" for Alesia). The objective of these questions is to teach the AI being asked them to associate precise concepts with their vague descriptions. After each question, you will also write its answer.
+    
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+    
+    * Create vague educational questions based on some information.
+    * Since the difficulty of the questions comes from their vagueness, the questions themselves will likely be easy otherwise.
+    * The answers must first reason, then respond with an answer.
+      * The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; recall relevant information, including the filename of the source; and then point out the flaw and resolve to provide the correct information as an answer. Then the reasoning/thought process ends, and the answer is given.
+    * Do not mention the input, the text, or any other reference, in the question. Questions should just ask about the facts or information itself. However, answers should mention the filename of the source, and the information from the source should be given as a reference. Only use quotes when quoting the source, not the question. Justifying things with the source is key.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * Explanations in the provided information may be vague. Your answers should be easy to understand.
+    * Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    * The answer should start by clarifying the question, then answering it.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The vagueness can border on the absurd and comical, and this is fine and in fact good.
+    
+    **Note:**
+    
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+    
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+    
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+    
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+    
+    **OUTPUT FORMAT:**
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+    
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+    
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+    
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+    
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+    
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+- role: user
+  content: |
+    Text details: {metadata}
+    
+    Text to make a question from:
+    """
+    {text}
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.

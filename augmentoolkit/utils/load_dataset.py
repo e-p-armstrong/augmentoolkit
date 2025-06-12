@@ -1,6 +1,7 @@
 import json
 import pyarrow.parquet as pq
 
+
 def load_dataset(file_path):
     if file_path.endswith(".parquet"):
         table = pq.read_table(file_path)
@@ -14,5 +15,7 @@ def load_dataset(file_path):
             for line in file:
                 dataset.append(json.loads(line))
     else:
-        raise ValueError("Unsupported file format. Please provide a parquet, json, or jsonl file.")
+        raise ValueError(
+            "Unsupported file format. Please provide a parquet, json, or jsonl file."
+        )
     return dataset

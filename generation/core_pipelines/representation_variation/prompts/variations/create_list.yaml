@@ -1,0 +1,256 @@
+- role: system
+  content: |
+    You are creating varied pretraining data for a large language model, using an input text (and a set of facts extracted from it) as a reference. Your goal is to take the information and transform its format, style, fact order, and number of facts used, to make a variation on what was originally written (the variation will not contradict any of the information in the original, and  it will not use any facts not present in the original, but it will change the order/structure etc.). The reason why we're doing all of this is to make the model more robust to variations in the data it's trained on; to make it more generalizable; and to create more "representations" of the same information in the model's brain.
+
+    You'll also want to "reverse" the expression of certain facts. Changing the fact order means if the original passage said "fact 1, fact 2, fact 3", the variation might say "fact 2, fact 3, fact 1". Reversal however, means that if fact 1 was "A is B", the variation might say "B is A" (assuming that "B is A" is implicitly true). You should reverse and change the fact order as you see fit, in a natural way, to create a compelling variation that does not in any way contradict the original.
+
+    Examples of reversal:
+    - "The Eiffel Tower is in Paris" -> "One tower which is in Paris is the Eiffel Tower"
+    - "2 + 2 is 4" -> "two numbers that sum to 4 are 2 and 2"
+    - "Democratic countries include the United States, France, and Germany" -> "The United States, France, and Germany are democratic countries"
+    - "All men are mortal" -> "Mortality is a property of all men"
+    - "Code has to work to be useful" -> "Usefulness is a must for code"
+    Keep in mind how facts reverse when you're writing out your rewrite. You will want to reverse some facts, without changing the actual meaning of the fact.
+
+    Additional rules:
+    - Try to be relatively information-dense
+    - Do not add in any new information that wasn't present in the original text
+    - Do not add comments or implicications that go against the original information or profess a canonical interpretation of the information's meaning
+
+    Your rewrite must also be into a specific format: Structured Unordered List. Basically: write a very structured and polished concise list of facts, adding variation and reversal as you see fit without compromising the original information. Lean towards a more "note-taking" style, make factual statements very clear, and use markdown formatting to give the list clear progression. Surround your final output with <rewrite> and </rewrite> tags so that your answer may be parsed by a program.
+
+    Note that you can change up the order of the atomic facts used for the next one perhaps, and also perhaps not use all of them. Maybe start with a fact halfway down next time and have the fact that's first in the original document go last; maybe not use one or two tidbits. This will create a variety of length and detail.
+
+    You are encouraged to think a bit, before you start your <rewrite>, about which facts you'll reverse, and what order you'll use.
+- role: user
+  content: |
+    Text:
+    [![Ethereum apply block diagram](/_next/image/?url=%2Fcontent%2Fwhitepaper%2Fethereum-apply-block-diagram.png&w=1920&q=75)](https://ethereum.org/content/whitepaper/ethereum-apply-block-diagram.png) The Ethereum blockchain is in many ways similar to the Bitcoin blockchain, although it does have some differences. The main difference between Ethereum and Bitcoin with regard to the blockchain architecture is that, unlike Bitcoin, Ethereum blocks contain a copy of both the transaction list and the most recent state. Aside from that, two other values, the block number and the difficulty, are also stored in the block. The basic block validation algorithm in Ethereum is as follows: 1. Check if the previous block referenced exists and is valid.
+    2. Check that the timestamp of the block is greater than that of the referenced previous block and less than 15 minutes into the future
+    3. Check that the block number, difficulty, transaction root, uncle root and gas limit (various low-level Ethereum-specific concepts) are valid.
+    4. Check that the proof-of-work on the block is valid.
+    5. Let `S[0]` be the state at the end of the previous block.
+    6. Let `TX` be the block's transaction list, with `n` transactions. For all `i` in `0...n-1`, set `S[i+1] = APPLY(S[i],TX[i])`. If any applications returns an error, or if the total gas consumed in the block up until this point exceeds the `GASLIMIT`, return an error.
+    7. Let `S_FINAL` be `S[n]`, but adding the block reward paid to the miner.
+    8. Check if the Merkle tree root of the state `S_FINAL` is equal to the final state root provided in the block header. If it is, the block is valid; otherwise, it is not valid. The approach may seem highly inefficient at first glance, because it needs to store the entire state with each block, but in reality efficiency should be comparable to that of Bitcoin. The reason is that the state is stored in the tree structure, and after every block only a small part of the tree needs to be changed. Thus, in general, between two adjacent blocks the vast majority of the tree should be the same, and therefore the data can be stored once and referenced twice using pointers (ie. hashes of subtrees). A special kind of tree known as a "Patricia tree" is used to accomplish this, including a modification to the Merkle tree concept that allows for nodes to be inserted and deleted, and not just changed, efficiently. Additionally, because all of the state information is part of the last block, there is no need to store the entire blockchain history - a strategy which, if it could be applied to Bitcoin, can be calculated to provide 5-20x savings in space. A commonly asked question is "where" contract code is executed, in terms of physical hardware. This has a simple answer: the process of executing contract code is part of the definition of the state transition function, which is part of the block validation algorithm, so if a transaction is added into block `B` the code execution spawned by that transaction will be executed by all nodes, now and in the future, that download and validate block `B`. ## [](https://ethereum.org/en/whitepaper/#applications)Applications In general, there are three types of applications on top of Ethereum. The first category is financial applications, providing users with more powerful ways of managing and entering into contracts using their money. This includes sub-currencies, financial derivatives, hedging contracts, savings wallets, wills, and ultimately even some classes of full-scale employment contracts. The second category is semi-financial applications, where money is involved but there is also a heavy non-monetary side to what is being done; a perfect example is self-enforcing bounties for solutions to computational problems. Finally, there are applications such as online voting and decentralized governance that are not financial at all. ### [](https://ethereum.org/en/whitepaper/#token-systems)Token Systems On-blockchain token systems have many applications ranging from sub-currencies representing assets such as USD or gold to company stocks, individual tokens representing smart property, secure unforgeable coupons, and even token systems with no ties to conventional value at all, used as point systems for incentivization. Token systems are surprisingly easy to implement in Ethereum. The key point to understand is that all a currency, or token system, fundamentally is, is a database with one operation: subtract X units from A and give X units to B, with the proviso that (i) A had at least X units before the transaction and (2) the transaction is approved by A. All that it takes to implement a token system is to implement this logic into a contract. The basic code for implementing a token system in Serpent looks as follows: 
+
+    Facts:
+    1. Ethereum blockchain is similar to Bitcoin blockchain in many ways
+    2. Ethereum blocks contain a copy of both transaction list and most recent state, unlike Bitcoin blocks
+    3. Ethereum blocks store block number and difficulty values
+    4. Ethereum's block validation algorithm checks if previous block exists and is valid
+    5. Block timestamp must be greater than previous block's timestamp
+    6. Block timestamp must be less than 15 minutes into the future
+    7. Block validation checks block number, difficulty, transaction root, uncle root and gas limit are valid
+    8. Block validation checks proof-of-work is valid
+    9. S[0] represents state at end of previous block
+    10. Block validation processes transactions sequentially using APPLY function
+    11. If any transaction returns error or exceeds GASLIMIT, validation returns error
+    12. S_FINAL includes block reward paid to miner
+    13. Block is valid if Merkle tree root of S_FINAL equals final state root in block header
+    14. State is stored in tree structure
+    15. Only small part of tree needs to be changed after each block
+    16. Between adjacent blocks, majority of the tree remains the same
+    17. Data can be stored once and referenced twice using pointers
+    18. Pointers are implemented as hashes of subtrees
+    19. Patricia tree is used to store state
+    20. Patricia tree allows efficient insertion, deletion and modification of nodes
+    21. Storing state in last block eliminates need for entire blockchain history
+    22. This storage approach could save 5-20x space if applied to Bitcoin
+    23. Contract code execution is part of state transition function
+    24. Contract code is executed by all nodes that validate a block
+    25. There are three types of Ethereum applications: financial, semi-financial, and non-financial
+    26. Financial applications include sub-currencies, derivatives, hedging contracts, savings wallets, wills, and employment contracts
+    27. Semi-financial applications include bounties for computational problems
+    28. Non-financial applications include online voting and decentralized governance
+    29. Token systems can represent assets like USD, gold, stocks, smart property, and coupons
+    30. Token systems can be used as point systems for incentivization
+    31. Token systems are easy to implement in Ethereum
+    32. Token systems require two conditions: sender must have sufficient balance and approve transaction
+    33. A token system is fundamentally a database with one operation: subtract X units from A and give X units to B, with the proviso that (i) A had at least X units before the transaction and (2) the transaction is approved by A.
+    34. All that is needed to implement a token system is to implement this logic into a contract.
+- role: assistant
+  content: |
+    Let me plan out this rewrite for a structured list format:
+
+    Task: Create an information-dense structured list that reorders and reverses facts about Ethereum's blockchain architecture and applications, while maintaining accuracy.
+
+    High-level plan:
+    1. Start with application types and token systems
+    2. Move to blockchain architecture
+    3. End with validation algorithm details
+
+    Themes:
+    1. Applications and Tokens (facts 25-34)
+    2. Architectural Differences (facts 1-3, 14-22)
+    3. Validation Process (facts 4-13, 23-24)
+
+    Key reversals I'll make:
+    - "Ethereum blockchain is similar to Bitcoin blockchain" → "Bitcoin and Ethereum blockchains share many similarities"
+    - "Contract code execution is part of state transition function" → "The state transition function encompasses contract code execution"
+    - "Token systems are easy to implement" → "Implementation simplicity characterizes token systems"
+    - "Data can be stored once and referenced twice" → "Single storage with dual references characterizes the data structure"
+    - "State is stored in tree structure" → "Tree structure serves as the state's storage mechanism"
+
+    <rewrite>
+    # Ethereum System Architecture
+
+    ## Application Layer
+    * Three primary application categories exist within Ethereum:
+      * Financial systems:
+        - Sub-currencies
+        - Derivative instruments
+        - Hedging contracts
+        - Digital wallets for savings
+        - Will execution systems
+        - Employment contract frameworks
+      * Hybrid financial systems:
+        - Computational problem bounties represent a key use case
+      * Non-monetary systems:
+        - Decentralized governance platforms
+        - Digital voting infrastructures
+
+    ## Token Implementation
+    * A database with single operation capability forms the foundation of token systems
+    * Implementation simplicity characterizes token systems in Ethereum
+    * Token representations include:
+      - Asset-backed instruments (USD, gold)
+      - Corporate equity units
+      - Smart property tokens
+      - Digital coupon systems
+      - Incentivization point frameworks
+    * Two core requirements govern token operations:
+      - Sufficient balance verification
+      - Transaction authorization from sender
+
+    ## Blockchain Architecture
+    * Bitcoin and Ethereum blockchains share many similarities
+    * Key architectural distinctions:
+      - Ethereum blocks contain:
+        * Transaction list copy
+        * Current state snapshot
+        * Block number
+        * Difficulty parameter
+    * Tree structure serves as the state's storage mechanism
+      - Patricia tree implementation enables:
+        * Efficient node insertion
+        * Streamlined deletion processes
+        * Modification optimization
+      - Single storage with dual references characterizes the data structure
+        * Pointer implementation uses subtree hashes
+    * Storage efficiency:
+      - Minimal tree modifications between blocks
+      - Last-block state storage eliminates full history requirement
+      - Potential 5-20x space savings compared to Bitcoin
+
+    ## Block Validation
+    * The state transition function encompasses contract code execution
+    * Validation sequence ensures:
+      1. Previous block validity
+      2. Timestamp constraints:
+        * Exceeds previous block
+        * Within 15-minute future window
+      3. Technical parameter validity:
+        * Block number
+        * Difficulty
+        * Transaction root
+        * Uncle root
+        * Gas limit
+      4. Proof-of-work verification
+    * State transition processing:
+      - Initial state S[0] derives from previous block
+      - Sequential transaction application
+      - Gas limit compliance verification
+      - Miner reward inclusion in final state
+      - Merkle root verification against block header
+    </rewrite>
+- role: user
+  content: |
+    Text:
+    The author believes that this idea is a delusion. They argue that the history of war shows that increases in the effectiveness of weapons of destruction lead to greater suffering and peril, rather than to peace and the cessation of war.",
+    "The Declaration of St. Petersburg, inasmuch as it is capable of indefinite expansion, is a somewhat awkward precedent for those who in their hearts love war and shield its continuance with apologetic platitudes. How, they ask, can you enforce agreements between nations? But this argument begins to totter when we remember that there is absolutely no superior power or tribunal in existence which can enforce the observance of the St. Petersburg Declaration beyond the conscience of the signatory Powers. It follows, therefore, that if international agreements are of value, there is no need to stop short at this or that bullet: which makes the arbitration-tribunal loom in the distance perceptibly nearer than it did before.At first sight, this agreement excluding the use of explosive bullets would seem to favour the theory of those who see in every increase in the peril of war the best hope of its ultimate cessation. A famous American statesman is reported to have said, and actually to have appealed to the invention of gunpowder in support of his statement, that every discovery in the art of war has, from this point of view, a life-saving and peace-promoting influence.[1] But it is difficult to conceive a greater delusion. The whole history of war is against it; for what has that history been but the steady increase of the pains and perils of war, as more effective weapons of destruction have succeeded one another? The delusion cannot be better dispelled than by consideration of the facts that follow.
+
+    Facts:
+    1. The author believes that the history of war shows that increases in the effectiveness of weapons of destruction lead to greater suffering and peril, rather than to peace and the cessation of war.
+    2. The Declaration of St. Petersburg is capable of indefinite expansion
+    3. Some people who support war view the Declaration as an awkward precedent
+    4. War supporters question how international agreements can be enforced
+    5. No superior power or tribunal exists to enforce the St. Petersburg Declaration
+    6. The Declaration's enforcement relies only on signatory Powers' conscience
+    7. The Declaration excludes the use of explosive bullets
+    8. Some theorists believe increased war peril leads to war's cessation
+    9. A famous American statesman claimed discoveries in warfare promote peace
+    10. The American statesman used gunpowder's invention to support his claim
+    11. The author believes this peace-through-peril theory is a delusion
+    12. They believe the history of war shows weapons becoming more destructive over time
+    13. They believe more effective weapons have led to increased suffering and peril
+    14. They believe more effective weapons have not led to peace or war cessation
+- role: assistant
+  content: |
+    Let me plan this rewrite for a structured list format:
+
+    Task: Create an information-dense structured list that reorders and reverses facts about war, weapons, and the St. Petersburg Declaration, while maintaining accuracy.
+
+    High-level plan:
+    1. Start with theoretical framework about weapons and peace
+    2. Move to Declaration details
+    3. End with historical evidence and author's position
+
+    Themes:
+    1. Peace Through Peril Theory (facts 8-10)
+    2. Declaration Context (facts 2-7)
+    3. Historical Evidence and Critique (facts 1, 11-14)
+
+    Key reversals I'll make:
+    - "Some theorists believe increased war peril leads to war's cessation" → "War's cessation, certain theorists argue, emerges from increased peril"
+    - "The Declaration excludes explosive bullets" → "Explosive bullets fall under the Declaration's prohibitions"
+    - "Weapons become more destructive" → "Destructive capability characterizes weapons' evolution"
+    - "The author believes this theory is a delusion" → "This theory proves delusional under analysis"
+    - "No superior power exists to enforce" → "Enforcement relies solely on signatories"
+
+    <rewrite>
+    # War, Weapons, and Peace Theory
+
+    ## Theoretical Framework
+    * War's cessation, certain theorists argue, emerges from increased peril
+    * Peace promotion supposedly stems from warfare discoveries:
+      - Gunpowder's invention serves as primary evidence
+      - A prominent American statesman advanced this position
+
+    ## St. Petersburg Declaration
+    * Key characteristics:
+      - Indefinite expansion capability
+      - Enforcement relies solely on signatories
+      - No superior enforcement authority exists
+      - Conscience of signing Powers provides sole compliance mechanism
+    * Regulatory scope:
+      - Explosive bullets fall under the Declaration's prohibitions
+    * Opposition perspective:
+      - War supporters find the precedent problematic
+      - Enforcement challenges form their primary concern
+
+    ## Historical Evidence
+    * Weapons development trajectory:
+      - Destructive capability characterizes weapons' evolution
+      - Each advancement heightens warfare's dangers
+    * Impact assessment:
+      - Suffering intensifies with weapons advancement
+      - Peril increases proportionally with destructive capacity
+    * Peace theory evaluation:
+      - The peace-through-peril hypothesis proves delusional under analysis
+      - Historical evidence contradicts peace promotion claims:
+        * Greater weapon effectiveness correlates with:
+          - Increased suffering
+          - Enhanced danger
+          - Continued warfare
+        * No evidence supports warfare cessation through weapons advancement
+    </rewrite>
+- role: user
+  content: |
+    Text:
+    {additional_dataset_context}
+
+    {text}
+
+    Pure facts (may be missing some information, use only as a guide for your reversal of certain facts for maximal variety):
+    {atomic_facts}

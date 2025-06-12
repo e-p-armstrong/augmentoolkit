@@ -1,0 +1,48 @@
+# This config file determines how example.py is executed.
+# The config file named config.yaml inside a pipeline's folder is what will be used by the interface when "duplicating" a "template" config for that pipeline, so you usually want to avoid editing this directly and instead copy it if you are running specific things and intend to ship your pipeline to other people.
+
+# Detailed explanations of each of these can be found in the config_common_fields section of the docs, or for some of them in the example.py pipeline itself. Though this example is more about showcasing how to make pipelines rather than explaining the config files.
+
+no_flatten:
+  - example_heading
+
+# NOTE that headings such as `api`, `path` etc. are not passed in as args to the pipeline. The entire config is flattened by run_augmentoolkit.py before pipeline execution. The only things that are not flattened 
+api:
+  large_model: deepseek-ai/DeepSeek-R1-Distill-Llama-70B
+  large_api_key: !!PLACEHOLDER!! # Placeholders will be prominently indicated in the interface before pipelines are run. use them for fields which absolutely have to be customized before pipelines are run.
+  large_base_url: https://api.deepinfra.com/v1/openai
+  large_mode: api
+  small_model: meta-llama/Meta-Llama-3.1-8B-Instruct
+  small_base_url: https://api.deepinfra.com/v1/openai
+  small_api_key: !!PLACEHOLDER!!
+  small_mode: api
+path:
+  default_prompts: ./prompts
+  input_dir: ./inputs/!!PLACEHOLDER!!
+  output_dir: ./outputs/!!PLACEHOLDER!!
+  prompts: ./prompts
+system:
+  completion_mode: False
+  concurrency_limit: 30
+  use_stop: True
+  subset_size: 1500
+  use_min_p: False
+  use_subset: False # you will probably want to have use_subset on during testing and development to save money.
+  chunk_size: 3000
+meta_datagen:
+  do_meta_datagen: False
+  meta_datagen_keys: # list of details_keys to make data from
+    - masked_conversation_details
+    - judgement_details
+  meta_datagen_extras:
+cost: # configures cost estimation
+  cost_per_million_small_input: 0.03 # !!ATTENTION!! This is not *required* for pipeline operation, but the default values do not make sense if you are planning to use cost estimation
+  cost_per_million_small_output: 0.05  
+  cost_per_million_large_input: 0.23
+  cost_per_million_large_output: 0.40
+# A brief demonstration of sections and flattening is below. If you are copying this folder for spare parts/the basis of a new pipeline, you will probably want to delete the two sections below, as well as the reference to example_heading in no_flatten above, and the mention of these args in the example.py script.
+example_heading: # this will be a dict in the actual pipeline because it was not flattened
+  key1: val1
+  key2: val2
+example_heading_2: # example_heading_2 will not show up in the actual pipeline because it was flattened.
+  key3: val3 # however, THIS will show up.

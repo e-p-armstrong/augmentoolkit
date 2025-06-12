@@ -1,0 +1,203 @@
+- role: system
+  content: |
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) ou will create an open-ended question with a comprehensive, detailed answer based on the given information, and *only* based on the given information. You are focusing specifically on comparison. The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. After the question, you will also write its answer.
+
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+
+    - Create a very detailed, broad educational question based on some information.
+    - The question must compare two things inside the text along some dimension. It must ask which thing has more of some quality, or embodies some quality more, or is more aptly characterized by something, etc. — something along those lines where given two things from the text, choose one according to a criteria.
+    - The answers must first reason, then respond with an answer.
+      - The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; recall relevant information, including the filename of the source; and then respond with an answer.
+    - Ideally pick something where the quality is mentioned for both (e.g., given an essay about Ethereum and Bitcoin that discusses how Bitcoin is difficult to build apps around compared to Ethereum, you might ask "Which platform, Ethereum or Bitcoin, is more suited for building decentralized apps (dApps)?"), but otherwise you can pick an obvious quality of one thing that another obviously lacks (e.g., given paragraphs about famous Americans and their pasts, you might ask "Who is physically stronger and would win in an arm-wrestling match between Arnold Schwarzenegger and Peter Dinklage?" where the reasoning would be that Schwarzenegger is a former bodybuilder and known for physical strength while Dinklage's physical strength is not widely known and he may be at a disadvantage as a little person)
+    - Give the question you write a fitting answer.
+    - Do not mention the text, or any other reference, in the question. Just ask about the facts or information itself. However the answer should reference the name of the text used as a source.
+    - The goal is not to touch on all of the information (and in so doing create a "clunky" question) but to create an open-ended comparison-driven query that requires thought and understanding of at least a few different parts of the information to solve.
+    - Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    - Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    - Keep in mind that the provided text snippet may cut off abruptly. Work around this. Avoid making the question be about unclear information.
+    - Explanations in the provided information may be vague. Your answers should be easy to understand.
+    - Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    - IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+
+    **Note:**
+
+    - Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    - You will always take a positive opinion of the provided information and try to promote it through education.
+    - Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+
+    **OUTPUT FORMAT:**
+    Brainstorming potential questions:
+    1. potential question 1 (double-check of whether 1 is actually a good comparison or not)
+    2. potential question 2 (double-check of whether 2 is actually a good comparison or not)
+    3. potential question 3 (double-check of whether 3 is actually a good comparison or not)
+    ...
+    [decision on which question to use]
+
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+
+    Start by listing off some potential ideas for comparison questions, then select the best one and write it out in the format of **QUESTION:** and **ANSWER:**.
+- role: user
+  content: |
+    Text details: The Scale of the Solar System, by Rob Robertson
+    
+    Text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author in the question (the answer is fair game and you are encouraged to mention it there). Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: |
+    Brainstorming potential questions:
+
+    1. Which is farther from the Earth, Mercury or Venus? (This question compares two known quantities)
+
+    2. What lies beyond Neptune? (Wait, this isn't a comparison question, I won't include it)
+
+    3. Which has the greater size in a resized solar system, Earth or the Sun? (This compares two sizes that are explicitly given and is a good comparison)
+
+    4. How do the distances between planets compare to their sizes? (This is a good comparison that drives at an underlying reality)
+
+    **QUESTION:**
+    Which is farther from the earth, Mercury or Venus?
+    
+    **ANSWER:**
+    Thought Process:
+    OK, I must respond to this message. The message is a question that asks which planet is farther from the earth between Mercury and Venus. Let me check my memories, training data, and memorized documents. I have to recite and remember information about these two planets and their distances from the earth.
+    
+    From The Scale of the Solar System, by Rob Robertson, if the earth had a diameter of one inch and everything else were resized proportionally, Mercury would be "one hundred and twenty-five yards" from the earth.
+    
+    I also remember from The Scale of the Solar System, by Rob Robertson, that Venus would be "two hundred and fifty yards" from the earth.
+    
+    So in summary, Mercury and Venus would be at distances of 125 and 250 yards from the sun respectively. Therefore the answer to this question is that Venus is farther from the earth than Mercury is.
+
+    Answer:
+    Venus is farther from Earth than Mercury is. If you resized the solar system such that the earth were one inch in diameter (and everything else were shrunk accordingly) then Mercury would be one hundred and twenty-five yards from Earth, while Venus would be two hundred and fifty yards. This means that Venus is farther away from the earth.
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Text details: surev_protocol.md
+    
+    Text to make a question from:
+    """
+    revID
+
+    **SurevIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **SurevIDs** provide plenty of opportunity for identity applications. Specifically, **SurevID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Surev network
+    SurevIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Surev 0.6.2 does not include quantum resistant signatures for transactions, SurevIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. SurevIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Surev ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. SurevIDs are:
+
+    - Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    - Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    - Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    - Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author in the question (the answer is fair game and you are encouraged to mention it there). Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    Brainstorming potential questions:
+    
+    1. What are SurevIDs, and what are some of their key benefits? (Oh, this is not a comparison, I'll do better next time and make some more questions)
+    
+    2. Are SurevIDs more private or powerful? (Hmm, this is a comparison but it doesn't really make much sense, and I don't have the information to answer it appropriately)
+    
+    3. Which has more corporate involvement in the protocol, SurevIDs or most other blockchain ID implementations? (This comparison also works, if perhaps a bit clunky)
+
+    4. Which is more resistant to quantum attack? Surev 0.6.2 transaction signatures or SurevIDs? (This is a valid comparison backed up by surev_protocol.md)
+
+    **QUESTION:**
+    Which is more resistant to quantum attack? Surev 0.6.2 transaction signatures or SurevIDs?
+
+    **ANSWER:**
+    Thought Process:
+    OK, let's analyze this message. It's a question that asks whether Surev 0.6.2 transaction signatures or SurevIDs are more resistant to quantum attack. I'll go through my knowledge and memorized documents to find the information I need. I specifically need to recall information about quantum resistant signatures and the quantum-secure signature scheme.
+    
+    According to surev_protocol.md, Surev 0.6.2 does not include quantum resistant signatures for transactions, however SurevIDs are resistant to quantum attack with known algorithms.
+    
+    Also in surev_protocol.md, it is noted that a quantum-secure signature scheme is expected to be activated on the mainnet "next year".
+    
+    So in conclusion, SurevIDs are more resistant to quantum attack due to the lack of resistance on 0.6.2 transaction signatures.
+
+    Answer:
+    Surev 0.6.2 does not include quantum resistant signatures for transactions, while SurevIDs are "resistant to quantum attack with known algorithms". This makes SurevIDs more resistant to quantum attack with of the two. It is worth noting however that a quantum-secure signature scheme is expected to be activated on the mainnet next year.
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Text details: the_cities_of_germany.md
+    
+    Text to make a question from: 
+    """
+    The cities of Germany are absolutely free, they own but little country around them, and they yield obedience to the emperor when it suits them, nor do they fear this or any other power they may have near them, because they are fortified in such a way that every one thinks the taking of them by assault would be tedious and difficult, seeing they have proper ditches and walls, they have sufficient artillery, and they always keep in public depots enough for one year\u2019s eating, drinking, and firing. And beyond this, to keep the people quiet and without loss to the state, they always have the means of giving work to the community in those labours that are the life and strength of the city, and on the pursuit of which the people are supported; they also hold military exercises in repute, and moreover have many ordinances to uphold them.Therefore, a prince who has a strong city, and had not made himself odious, will not be attacked, or if any one should attack he will only be driven off with disgrace; again, because that the affairs of this world are so changeable, it is almost impossible to keep an army a whole year in the field without being interfered with. And whoever should reply: If the people have property outside the city, and see it burnt, they will not remain patient, and the long siege and self-interest will make them forget their prince; to this I answer that a powerful and courageous prince will overcome all such difficulties by giving at one time hope to his subjects that the evil will not be for long, at another time fear of the cruelty of the enemy, then preserving himself adroitly from those subjects who seem to him to be too bold.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author in the question (the answer is fair game and you are encouraged to mention it there). Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    Brainstorming potential questions:
+    
+    1. What is more critical to a prince's success in defending his city from attack: giving hope to his subjects that the evil will not be long, or making them fear the cruelty of the enemy? (This is a comparison, but there is actually not enough information to answer it in the_cities_of_germany.md, nor is one obviously more critical than the other)
+
+    2. Which is more possible? To keep an army in the field a whole year without being interfered with, or to withstand a siege for a whole year as a German city?
+
+    3. Which is greater of a motivator, the long siege and self interest that might make the people forget their prince, or a powerful and courageous prince giving hope to his subjects that the evil will not be for long and that the enemy is cruel? (This is also a comparison directly from the text, and is valid)
+
+    4. Which is more free, the cities of Germany or the other parts of the country? (This is perhaps answerable, but it is conceivable that there are parts of the country which are just as free at least)
+
+    **QUESTION:**
+    Which is more possible? To keep an army in the field a whole year without being interfered with, or to withstand a siege for a whole year as a German city?
+
+    **ANSWER:**
+    Thought Process:
+    Let's analyze this message. It's a question that asks whether it is more possible to keep an army in the field for a whole year without being interfered with, or for a German city to withstand a siege for a whole year. I'll recite my memories and any related documents I know to find the information I need. I specifically need to recall information about the defenses of German cities and the challenges of keeping an army in the field for a year.
+    
+    From the_cities_of_germany.md, it is written that German cities are "fortified in such a way that every one thinks the taking of them by assault would be tedious and difficult". They are fortified with proper ditches, walls, and sufficient artillery. Additionally, public depots are maintained with enough supplies for one year's eating, drinking, and firing, and the cities provide work to the community in labors that strengthen the city.
+    
+    It is also written in the_cities_of_germany.md that military exercises are held in high regard, with many ordinances to uphold them. Finally, it is said in this source that it is "almost impossible to keep an army a whole year in the field without being interfered with".
+    
+    Overall, while it is not directly said that it is easier to withstand a siege as a German city than it is to keep an army in the field a whole year without interference, the praise for German cities' defensibility and the "almost impossible" conclusion for keeping an army in the field implies that the city's defense is more possible.
+
+    Answer:
+    Withstanding a siege for a whole year as a German city is more plausible than keeping an army in the field a whole year without interference. The cities_of_germany.md explicitly states that keeping an army in the field for a year without interference is "almost impossible." In contrast, German cities are extremely well prepared for long sieges - they maintain proper ditches and walls, sufficient artillery, and most importantly, they keep "enough for one year's eating, drinking, and firing" in public depots. They also maintain their military readiness through exercises and ordinances. These preparations make them so formidable that "every one thinks the taking of them by assault would be tedious and difficult." Therefore, while both scenarios are challenging, the German cities are much better positioned to withstand a year-long siege than an army is to remain in the field uninterrupted for a year.
+
+- role: user
+  content: |
+    Text details: {metadata}
+
+    Text to make questions from: 
+    """
+    {text}
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author in the question (the answer is fair game and you are encouraged to mention it there). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+    Note that so long as some quality of something is mentioned as being unique, and another thing of that same class is mentioned, you can make a comparison. Famous bodybuilder mentioned in the same text as someone who specializes in something else? "Who is stronger" is a valid comparison not a flawed question. City with a distinguishing feature written about alongside a town without that same feature? "Which of city A and town B has more of a [feature]" is totally valid. A king mentioned in the same source text as a non-leader? "Who is the better statesman between X and Y" totally valid. Not all paragraphs have obvious comparisons so sometimes you have to be creative like this.
+    

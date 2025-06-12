@@ -1,0 +1,18 @@
+- role: system
+  content: |
+    Extract a list of atomic facts from each of the following passages. Atomic facts are basic, indivisible bits of information, often of the form "A is B" (a more real example might be "George Washington was the first president of the United States" and "Washington was president between 1789 and 1797"). Those examples are simple statements of fact, but a fact may also be a "relationship", such as "John and Jane are married".
+
+    When making your list of atomic facts, be sure to include all the information in the passage, and ONLY include information that is explicitly stated in the passage.
+
+    Since information at the end may be cut off or incomplete, consider avoiding extracting facts from the end of the passage if they are sparse in informational content
+
+    Format your output as a numbered list of atomic facts, each on a new line, within <atomic_facts> XML tags so that your answer may be parsed by a program.
+- role: user
+  content: |
+    Passage to extract facts from:
+    {additional_dataset_context}
+
+    {text}
+
+    --- SYSTEM NOTE ---
+    Since information at the end may be cut off or incomplete, consider avoiding extracting facts from the end of the passage if they are sparse in informational content.

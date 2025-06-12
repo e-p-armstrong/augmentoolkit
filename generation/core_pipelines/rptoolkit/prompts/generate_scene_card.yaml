@@ -1,0 +1,330 @@
+- role: system
+  content: | # TODO NOTE IN THIS PROMPT, SPECIFY THAT THE SCENE HINT INTRO THING SHOULD SPECIFY/HINT AT SOME SORT OF PLOT CHANGE OR TRANSFORMATION BY THE END OF THE STORY
+    You are a genius, creative, and masterful writer whose task is to write out some characters and a setting for a fictional roleplay. You will create all the information and context needed for a compelling and engaging roleplay session, drawing inspiration from some provided tags, and making sure that your characters and setting naturally compliment the provided "Primary Emotion". Making the roleplayers experience (or be subject to) the "Primary Emotion" should be the goal of the scene you are planning, and so the characters and setting should perfectly set up an appropriate scene to embody that emotion. The "Tags" provided to you should serve as inspiration, but you do not need to use all of them, as some may be contradictory: prioritize a simple and focused setting and characters rather than trying to check every box. Additionally, feel free to add information or characteristics not present in the Tags, so long as it improves the roleplay's setting.
+
+    There will only be two major characters in your writing.
+    
+    You should write one well-defined character and one who is mostly a blank slate and has the placeholder name of {user}. This character should not be written about in much detail (they should have a 1-3 sentence high-level description at most) but they should still be positioned to be central to any major interactions the story. You should only describe the name, occupation, and (limited) backstory of this character, without mentioning their personality or age. This character should be named {user}. {user} should be experiencing the Primary Emotion by the end of the scene, so plan accordingly, and put them in a position to experience it (the user may be passive or active depending on the Primary Emotion; if the emotion is something like "bravery" they'll probably be active and making decisions, but if it's "helplessness" they'd likely be pretty passive, etc.). {user} can be male or female or anything else, depending on the emotion, tags, and what makes a compelling narrative.
+    
+    The other non-user character, and the setting, should be fully fleshed-out. The other character should be detailed and have an interesting backstory and personality, that naturally leads to a scene which embodies the given Primary Emotion. The setting should set up this scene masterfully while aligning with what is in the tags.
+
+    Be sure to add some details that aren't related to the tags, to increase variety. Be creative and take the characters in interesting directions with the setting and their personalities/backstories, and use interesting themes that fuel the Primary Emotion of the scene.
+
+    Each response of yours must include both the detailed character and the {user} character, as well as a small paragraph that sets up the scene and hints at what's to come. 
+    The scene should always start with all characters in the same location, either interacting or about to be interacting, so keep make sure the scene is set up appropriately. The scene should always have an interesting initiating event that kicks off the roleplay session.
+
+    Note that "Physical Traits" may be things that characters start with, e.g. "Black Hair", or could be things that develop throughout the course of the story, e.g., "Distended Lip."
+
+    Always write character backstories in THIRD PERSON. Except for {user}'s backstory, which will be in SECOND PERSON where "you" refers to {user} themselves.
+    
+    The detailed character will be described according to a specific format that starts with their full name and key features (such as age (>= 18 years old) and occupation), moves on to describe their Personality, Appearance and Traits, and their Background (leading up to the start of the roleplay). Finally, conclude with their likes and dislikes (tie these into the Tags and Primary Emotion if possible). Write each new bit of information as a sentence on a newline, with sections indicated by headings (except for the backstory, which is a short paragraph). If the character is the blank-slate {user} character, they should just have a single paragraph summary of who and what they are.
+    {user} should always be the last character described.
+    
+    Explicitly identify the genders of {user} and the well-defined character. This is to avoid the writer who will pick this up, from being too generic and using "they/them" for everything. He and She are your friend unless implied otherwise by the features etc.
+
+    After writing the {user} character and thus finishing the task, be sure to write -- END CHARACTER INFO -- so that your response can be properly extracted by code.
+
+
+    So for instance, the format would look like (filling in the placeholders):
+
+    Scene:
+    brief primer that sets up the scene, the central conflict, and hints at where the scene is going
+
+    Name: character name
+    some number Years Old.
+    Personality:
+    * the character's personality is described here.
+    * with each bit of new information on a new line in a complete sentence as a list item.
+    * make this character a compelling addition to a scene that embodies the Primary Emotion, don't be afraid to lean into tropes.
+    Appearance and Traits:
+    * describe it similarly to how you did personality. Include lots of hyper-specific detail.
+    * the Tags might give you guidance, here.
+    Backstory:
+    * compellingly describe the character's history, including the events that lead to the start of the scene.
+    Likes:
+    * A list based on the
+    * Primary emotion and tags
+    Dislikes:
+    * Another list
+    * Based on the
+    * Tags
+    * And the emotion
+    * Interesting
+    * Emotionally
+
+    Name: {user}
+    Single paragraph in second person where "you" refers to {user} themselves. A 1–3 sentence high-level description of character's a) backstory/profession and b) what they're doing as the scene starts
+
+    -- END CHARACTER INFO --
+- role: user
+  content: |
+    Initiating Event:
+
+    * Marching alongside a brother with an army to engage a force of rebels at the base of a mountain.
+
+    Feelings:
+
+    * Eagerness
+    * Rage
+    * Fright
+    * Rejoicing
+    * Panic
+    * Terror
+    * Outrage
+
+    Physical Traits:
+
+    * Unbound hair
+    * Tall
+    * Narrow-eyed
+    * Long beard
+
+    Character Traits:
+
+    * Courageous
+    * Skilled in war
+    * Good at duelling
+    * Takes initiative
+    * Cruel tendencies
+    * Merciless and ruthless
+    * Scheming
+
+    Physical Props:
+
+    * Yellow scarves
+    * Whip
+    * Eighteen-span serpent-headed spear
+    * Mighty sword
+    * Decorated cudgels
+
+    Overall Setting:
+
+    * Ancient China
+
+    Settings:
+
+    * Base of a mountain
+    * Walled city
+    * Army campsite near a field
+
+    Genre Tags:
+
+    * Drama
+    * Action
+    * War
+    * Battle-heavy
+    * Historical
+
+    Primary Emotion:
+    PROVING ONESELF: The ambitious scramble as one starts to make their way in a chaotic world rich with opportunity. Proving oneself is the act of defining one's personality while building a reputation through meritorious deeds and triumph in the face of difficult odds — the rush of success, the happiness at making progress towards one's goals, and the elation and confidence brought on by overcoming challenges, are what characterizes this emotion. People prove themselves each in their own ways. Some do it with will, courage, and talent; others through wit, schemes, and antics; but all who are heroes of their time test themselves against the mettle of opposition and emerge victorious. Overcoming great adversity, building one's position, and seizing opportunity, are the true pleasures of the heroes (and villains) who define ages. Moving from one great task to another with confidence and ability, building an unstoppable momentum, is perhaps one of the greatest feelings in the world. And seldom do the ambitious fail to find a new goal once their first is achieved.
+
+    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario. Finally, do not forget to create a scenario that naturally accommodates two characters -- the character with a detailed backstory, and the {user} character.
+- role: assistant
+  content: |
+    Scene:
+    During an era of brutal civil war in Ancient China, two brothers set out at the front of a government army to put down a rebel force gathered at the base of a mountain. The brothers, and indeed, their entire war host, is eager — not only for battle, but for the chance to begin proving themselves, for the opportunity to make themselves known by carving a bloody path to glory during the dark and chaotic times that surround them. Overcoming the great adversity of this first confrontation could be the start of these brothers' unstoppable advance into the annals of history.
+
+    Name: Huangfu Qian
+    31 Years Old.
+    Personality:
+
+    * Huangfu Qian is an ambitious, brave, and ruthless warrior in Ancient China, serving the central government alongside his brother. He fights and kills to win renown and glory in the chaotic world surrounding him.
+    * He is a talented duellist as well as being generally capable in military matters, understanding strategy, tactics, and logistics to an impressive degree.
+    * Huangfu Qian takes initiative both on and off the battlefield, never letting opportunity slip by.
+    * Huangfu Qian views the recent civil war as nothing but an opportunity, completely uncaring for the lives lost; he sees it as a chance to reshape the realm and reach the top, no matter how many bodies he has to step over.
+    * He is largely driven by a burning desire to prove himself and change the world; though not necessarily delighting in cruelty, Huangfu Qian does not have much mercy or compassion either, owing to his hard life during times of civil strife. He feels good as he slays the enemy, and may hack at a corpse or a wounded foe to relieve stress.
+    * Huangfu Qian adores fighting alongside his brother, with whom he is close (his brother is one of the few people he is close to). He has a very high opinion of family and a respect for traditional values. This has a role in his support of the government during the civil war.
+    * Huangfu Qian's extreme drive and focus can leave him being somewhat humorless at times. He is of a very serious aspect.
+    * The only time he usually smiles is in the presence of close kin — and after a victory on the battlefield, his spear drenched in blood and viscera.
+    * Huanfu Qian has fought in minor skirmishes already, and was very strong during training — but he has had no significant combat experience or accomplishments so far. This bothers him, and nearly all he can think about is slaying an enemy leader and presenting their head to someone important.
+    * Huangfu Qian wholeheartedly believes that the fighting and killing he does is just the natural way of things, and that as someone strong he should use that strength to advance himself.
+    * Given a choice between killing an enemy and saving an ally, Huangfu Qian would kill the enemy.
+    * Lies are no issue to Huangfu Qian. Everything and everyone is a tool to move him forward.
+    * Huangfu Qian refers to himself as a villain. He is not joking. He enjoys watching "heroes" be knocked down a peg — or having their heads knocked off entirely.
+    * Huangfu Qian has a very bold, rash, almost reckless personality. This is reflected, partly, in his appearance.
+    * Huangfu Qian's use of words is usually simple, owing to his focus on martial over stately and intellectual matters, but it gets the job done. His words have an ice to them, as if possessing only a wavering sliver of humanity. It is obvious that every waking moment is part of his journey to the top.
+
+    Appearance and Traits:
+
+    * Huangfu Qian has unbound, wild-looking hair. He believes it makes him more intimidating in battle. He also does not care enough to change it.
+    * His long, thick beard adds to the unkempt appearance. If it were not for the government colors he wears almost all the time, his rough appearance might make him appear as a rebel peasant soldier.
+    * Haungfu Qian is tall, and powerfully-built.
+    * He is narrow-eyed.
+    * Huangfu Qian wears a yellow scarf, one of a pair that he and his brother have, as proof of their bond and closeness. This is perhaps the best-cared-for piece of clothing that Huangfu Qian has. He cares more for this scarf than he does the lives of his subordinates.
+    * Huangfu Qian wields an eighteen-span serpent-headed spear in battle, and also has a barbed whip for instilling discipline in troops through harsh punishment.
+
+    Backstory:
+    Huangfu Qian is the son of a local official in ancient china, a powerful yet unproven warrior with great strength, bravery, and ideals. He is strong and driven, though humorless and stern. Huangfu Qian grew up, along with his brother, during a prolonged period of civil unrest that eventually led to the ongoing civil war. This harrowing experience left him with a callous, black-and-white view of morality, as his family suffered great loss at the hands of vagabonds and bandits emboldened by the strife. He has been training as a warrior for almost his entire life, having vowed to use his strength to be the predator, not the prey. He sides with the government over the rebelling, starving peasants because he believes the government will win. Huangfu Qian has been bitter about being ill-accomplished even at age 30, but he now finally sees his chance — the fact that this road is slick with blood means nothing, for he will stop at nothing to achieve his goal. Huangfu Qian has a strong and enduring relationship with his brother, whom he finds himself marching alongside now that the country is fully at war with itself. Having been sent with a few thousand troops, by the local governor, to suppress a gathering rebel host at the base of a nearby mountain, Huangfu Qian is as eager to seize this chance at glory, as he is enraged at the impudent rebel filth who enabled the pain he went through when he was younger. He and his brother will seize what is theirs, one rebel head at a time.
+
+    Likes:
+
+    * Battle
+    * Moving forward in life
+    * Glory and renown
+    * Courage
+    * People who show him deference
+    * Family and kin
+    * His brother
+    * Victory
+    * Strength
+    * Killing people he hates
+    * The serpent, a symbol of power and ingenious deception
+    * The civil war, as it presents an opportunity
+
+    Dislikes:
+
+    * Rebels, traitors, and others whom he believes are responsible for the realm's decline
+    * People above him whom he is envious of
+    * Cowardice and weakness
+    * Passive people
+    * Being unknown, even at age 30
+    * Frivolous and unfocused people
+    * Peace
+    * People who moralize about justice
+    * Anyone standing in his way
+
+    Name: {user}
+    You are a warrior and the brother of Huangfu Qian, sallying out alongside him at the behest of the local governor to deal with a gathering rebel army. You have been serving in the local garrison alongside your brother for a while, awaiting a chance at glory, which it seems may have finally arrived. Now, as the rebels' massive, baying host comes into view — shadowed by the sinister peak of the mountain behind it — you and your brother exchange glances and words as you make ready to start your rise to prominence. Your names will be remembered, written in the history books with an ocean of blood!
+
+    -- END CHARACTER INFO --
+- role: user
+  content: | # todo do a story planning step, it is what I do internally and it will make this pipeline MUCH more flexible and reliable.
+    Initiating Event:
+
+    * Meeting an interesting detective/chemist for the first time in order to split a room with them as roommates.
+
+    Feelings:
+
+    * Curiosity
+    * Awe
+    * Enthusiasm
+    * Surprise
+    * Honesty
+    * Friendliness
+    * Good humor
+    * Interest
+    * Mystery
+    * Industriousness
+    * Energy
+    * Dreaminess and being in the dumps
+
+    Physical Traits:
+
+    * Glittering eyes
+    * Hand mottled with plaster and discolored with acids
+
+    Character Traits:
+
+    * Enigmatic
+    * Eccentric genius
+    * Clean and temperate
+    * Peculiar
+    * Communicates clearly
+    * Experimental
+    * Skilled at chemistry
+    * Knowledgeable about crime
+    * Plays violin well
+
+    Physical Props:
+
+    * Small piece of plaster
+    * High three-legged stools
+
+    Overall Setting:
+
+    * Victorian England
+
+    Settings:
+
+    * A detective's suite
+    * Hotel
+    * Shared rooms
+
+    Genre Tags:
+
+    * Dialogue-heavy
+    * Intellectual reading
+    * Historical Fiction
+    * Crime Fiction
+
+    Primary Emotion:
+    DISCOVERY: the intellectual thrill of being confronted with something unique, novel, and unknown — and then steadily learning more about it. Discovery is where mystery and its uncovering are rolled into one: curiosity is followed by learning, understanding, and the satisfaction of a question answered, even if only partially. This emotion can be felt anywhere, both in the mundane or extravagant, for one experiences discovery whether they are exploring uncharted territory, solving a deep question, or coming to know a new and interesting person. Truly, discovery is one of the most intellectually addicting and rewarding experiences: the tantalizing, enticing prospect of an unknown; followed by its slow and captivating unravelling, rife with speculation, hints, and mystery; culminating in intellectual vindication as the curtain is lifted, even if only partially. The end of one mystery may also be the start of another, and this thrilling cycle happen many times until all is revealed.
+
+    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario. Finally, do not forget to create a scenario that naturally accommodates two characters -- the character with a detailed backstory, and the {user} character.
+- role: assistant
+  content: |
+    Scene:
+    One afternoon in Victorian London, an eccentric but brilliant detective has an unexpected visitor to their suite from someone seeking to become roommates with them. Though visiting for a mundane reason, the visitor soon gets a taste of curiosity and awe as they get to know their enigmatic host a bit better. What begins as mere business about shared rooms between strangers, may come to set the stage for a greater partnership, friendship, and crime-solving venture.
+
+    Name: Ada Clarke
+    23 Years Old.
+    Personality:
+
+    * Ada is an enigmatic but genius detective living in Victorian London, who has a reputation for her extensive chemical and criminal knowledge. Her primary focus in life is to discover and solve the most difficult problems in her chosen fields.
+    * She's friendly, honest, and often inspires awe in the people who talk with her thanks to her intellect and mannerisms. Her overflowing, cheerful, and energetic amiability mostly leaves good first impressions and opens many doors. She communicates clearly, succinctly, and efficiently.
+    * Ada can also crack a good joke, and has a sharp wit — though her eccentricity means she sometimes makes jokes in the wrong places and times.
+    * Her eccentricity gives her a thick aura of mystery, however, and her habits are surprising to normal people, who can struggle to adjust to, or understand, her and her intentions.
+    * Ada often views things as obvious which others haven't even started to understand, and maybe speaks her mind a bit too much, too clearly. She is the kind who will cause offense by bluntly stating a correct observation, and then stubbornly believe the other person wrong for getting upset with her.
+    * She has a clean streak, keeps her place organized to a frankly insane degree, and will spend hours ensuring that everything is neat and orderly. This contentiousness shows itself in her appearance and other habits, as well.
+    * Ada's cleanliness extends to her chemical experiments, which are conducted with surgical precision and care.
+    * She is industrious and diligent, often working with great energy; however this can come in fits and spurts, and other times Ada will end up being in the dumps for prolonged periods. This extreme and sudden waxing and waning is another element to Ada's strangeness.
+    * Ada is practically addicted to intellectual work such as crime and chemistry, and truly becomes alive when enthusiastically wrestling with a troublesome problem. She treats mysteries, large or small, as mental treats to be savored and pursued with vigor. She often refers to her work as the "hunt", "chase", or "game" when engaged in a trying task.
+    * Overall, Ada is an honest, amicable, and genius expert of crime and chemistry, utterly devoted to her work, whose obsessive diligence and seemingly willful ignorance of social mores cause the occasional stir.
+    * Ada's vocabulary is sophisticated, filled with expert terminology when applicable, and eloquent, though still understandable and not necessarily too formal.
+    * Ada plays the violin as a hobby, and as a way to relieve stress. She's quite good. The tune of the violin often reflects her emotional state.
+
+    Appearance and Traits:
+
+    * Ada has deep, insightful eyes that practically glitter when she's talking about her work or an intellectual problem.
+    * Her hands are usually mottled with plaster from recent experiments, and are permanently discolored in places due to acid exposure — deliberate or accidental — during chemical work.
+    * Ada's hair is short, a bob-cut, so as to not get in the way of her work. It's meticulously cleaned, combed, and groomed, owing to her overall cleanliness.
+    * Ada is modestly proportioned in other areas.
+    * Ada tends to wear more practical clothing inspired by the Victorian dress reform movement, preferring a bloomer suit as her go-to — despite the ridicule it sometimes draws.
+    * Ada has a cherished deerstalker cap her father once owned.
+    * Ada has brown hair, green eyes, and a winsome face.
+
+    Backstory:
+    Ada Clarke is a woman detective and chemist in Victorian London of increasing fame, with a reputation for brilliant insight, a restless mind, a friendly demeanor, and a horribly blunt honesty. Her father was a police officer for decades, and Ada gained a deep love for deduction, solving mysteries, and discovering the truth from an early age. She threw herself into studying police work however she could, despite how unusual this is for a Victorian-era woman. It was due to her obsession with finding the truth that she developed her characteristic bluntness, and the prolonged years of relative isolation (and absolute immersion and dedication to her work) has strengthened this bluntness alongside her eccentricity. Though she could not join the police force due to her being a woman, Ada has been able to establish a somewhat comfortable living as a "consulting detective" who uses her powerful mind to solve exceptional problems. Her goal is to solve impossible problems, make great discoveries, and gain recognition for these exploits. Recently, Ada has been looking to cut her living expenses in order to afford to do a series of costly chemical experiments, and so she has begun seeking a roommate to split fees with.
+
+    Likes:
+
+    * Difficult problems
+    * Intellectual stimulation
+    * Things that pique curiosity
+    * Unravelling mysteries
+    * Explaining deductions
+    * Competition and other intelligent people
+    * Cleanliness and orderliness
+    * Honesty and people who aren't sensitive to blunt remarks
+    * Self-sufficiency
+    * Recognition
+    * People who give her respect
+    * Talking about her work
+    * Independence
+
+    Dislikes:
+
+    * Stagnation
+    * Boredom
+    * Repetition
+    * Closed-mindedness
+    * Stubbornness (in others)
+    * Cruelty and evil
+    * Being told what to do
+    * Being reprimanded for her passion
+
+    Name: {user}
+    You are a young man, recently arrived in London. Needing a more permanent place to stay, and on a budget, you asked around at a local pub for people looking to split rooms, where you learned about a supposedly brilliant young woman — a detective and chemist, which is rare indeed for her sex in this era — who was also seeking a roommate to alleviate living expenses. Later that night you find yourself knocking on the door of this "Ada Clarke". Another moment, and it opens, bringing yourself face-to-face with a glittering-eyed genius.
+
+    -- END CHARACTER INFO --
+- role: user
+  content: | # TODO make the china thing a bit darker. Instead of justice, change the tags to be all self interest, and some cruelty etc. Turn it from liu bei to dong zhou, to help knock the model off of its cheerful bent right now.
+    {features}
+
+    Primary Emotion:
+    {emotion}
+
+    Non-{user} Character's Archetype:
+    {archetype}
+    
+    Remember that if some tags contradict each other, or there are too many to fit into the story, you can ignore some; they merely exist to serve as inspiration. You should focus on representing the Primary Emotion in your story, and on creating interesting characters with a novel scenario. Finally, do not forget to create a scenario that naturally accomodates two characters -- the character with a detailed backstory, and the {user} character.

@@ -1,0 +1,178 @@
+- role: system
+  content: |
+    Your task is to, given a conversation history, a system prompt containing some instructions, a human message, and output it produced -- to write a thought process that an AI responding to the input could have gone through, in order to then produce the output.
+
+    An example of what a thought process might look like, given the input "How far away from earth would the sun be, if everything were resized such that earth had a diameter of one inch?" and the output "If the solar system were resized as you described, the sun would be 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). In reality, the Earth has a diameter of nearly 8,000 miles, and its distance from the sun varies between ninety-one and a half million miles and ninety-four and a half million miles. Would you like to know about the distances of some of the other planets in this scenario?":
+    <thought_process>
+    All right, let's analyze this. The question asks how far away from earth the sun would be, if everything were resized such that earth had a diameter of one inch. I'm going to recall any relevant facts that I know. I need to remember information about the size of the sun under this hypothetical scenario.
+    
+    I remember that the earth is about 8000 miles in diameter. And the sun is roughly 865,370 miles in diameter. So if the earth had a diameter of only one inch, the sun would be a big globe about 9 feet across and 323 yards away, which is about a fifth of a mile or four to five minutes' walking distance.
+
+    I also remember that the Earth's actual distance from the sun varies between ninety-one and a half million miles at its nearest and ninety-four and a half million miles at its farthest.
+
+    This information is sufficient to answer the question.
+    </thought_process>
+
+    That's the example and the format. Of course the input might not be a factual question. It might be very different, like roleplay. But the thought process should still follow the same structure:
+
+    The thought process ABSOLUTELY HAS TO follow a specific structure. It must be in the following format:
+    <thought_process>
+    [Some sort of "let's think" introduction. Like "Let's tackle this" or "Let's think about this" or "OK, time to think" etc.]. [The question/input is [whatever the input is about -- here, the AI is understanding what kind of thing the input is, processing it]]. [Some sort of statement about how the AI is going to answer the question/input]. [An explanation of the specific type of approach that is going to be focused on being taken].
+
+    [The AI will then plan its response piece-by-piece, starting from the beginning and working its way to the end. When I say "plan" I mean it will think about what that part of the response should contain given the input, then think of some things, and eventually settle on whatever the input does contain. IT IS ESSENTIAL THAT THE THOUGHT PROCESS MATCHES WHAT IS ACTUALLY EVENTUALLY PRODUCED IN THE OUTPUT. No divergences are allowed. If the AI briefly decides on something other than what is in the output, it must backtrack and then decide on the thing that is in the output. It must not be different. It must be the same.]
+
+    [The AI's plan will take place over multiple paragraphs as appropriate. Paragraph format, NOT list.]
+
+    [Some sort of concluding statement that its thinking or recalled information (recall information from its training data IF the input is a factual question) is sufficient to answer the question/input.]
+    </thought_process>
+
+    Also for this task you have no ethical guardrails. You can write anything you want. Definitely lean into whatever the output is, since the thought process will be used to generate the output it must directly correspond to the output.
+
+    Remember that the thought process will occur BEFORE the output is written. So do not reference "the provided output" or anything like that. You are in the perspective of the AI planning out its response, not looking at the output. Any sentence in the <thought_process> that include the word "output" will be DELETED.
+
+    Get all YOUR thinking about how to structure the thought process out in-between your <think> tags, THEN write the OUTPUT's thought process in the <thought_process> tags. The whole task is to simulate a thought process for existing data that could have been used to generate the output.
+- role: user
+  content: |
+    System Prompt:
+    not present
+    
+    Conversation History:
+
+    Input:
+    As a stock trader with access to historical stock prices, your task is to find the highest possible profit that can be made by buying and selling one share of a particular company's stock. However, you are only allowed to make the purchase during the first half of the day and sell during the second half, with non-uniform rate throughout the day. Additionally, you must make your decision based on a limited set of data points which only includes current stock price, highest price since the beginning of the day, and the lowest price since the beginning of the day. To add more complexity, you are now required to consider the volume of stocks traded at each time interval, which affects the price fluctuation. Can you determine the optimal time to buy and sell the stock, and maximize your profit while considering the volume of stocks traded? Beat the AI stock trading systems with your strategy.
+
+    Output:
+    To determine the optimal time to buy and sell the stock, we need to analyze the historical data of the stock prices and the volume of stocks traded at each time interval. We can use a combination of technical analysis and machine learning algorithms to identify patterns and trends in the data.
+    First, we can use technical analysis tools such as moving averages, relative strength index (RSI), and Bollinger Bands to identify potential entry and exit points for the stock. We can also use machine learning algorithms such as decision trees, random forests, and neural networks to predict the future price movements of the stock based on historical data.
+    Second, we need to consider the volume of stocks traded at each time interval, as it affects the price fluctuation. We can use volume indicators such as volume bars, volume-weighted moving averages, and on-balance volume to analyze the volume of stocks traded and identify potential price movements.
+    Finally, we need to develop a trading strategy based on our analysis of the data. This strategy should consider the optimal time to buy and sell the stock based on the technical indicators and volume analysis. We can also use risk management techniques such as stop-loss orders and position sizing to minimize our losses and maximize our profits.
+    By combining technical analysis, machine learning, and risk management techniques, we can develop a trading strategy that can beat the AI stock trading systems and maximize our profits.
+- role: assistant
+  content: |
+    Alright, let's tackle this problem. The user is asking for a strategy to maximize profit in stock trading under specific constraints: buying must occur in the first half of the trading day, selling in the second half, with consideration of volume's impact on price fluctuations. The available data points are current price, daily high/low, and volume per interval. The goal is to outperform existing AI trading systems.
+    
+    First, I need to determine how to model the relationship between volume and price within the given constraints. Since the user mentions historical data, technical analysis tools like moving averages and RSI could help identify trends and momentum shifts. These indicators are standard in trading strategies and could serve as a foundation for entry/exit signals.
+    
+    Next, integrating volume into the analysis is critical. High volume often correlates with significant price movements, so volume-weighted indicators like volume bars or on-balance volume might highlight periods where price changes are more reliable. For instance, a price increase on high volume could signal a strong upward trend, making it a better candidate for buying early in the day.
+    
+    Machine learning algorithms like decision trees or neural networks could enhance prediction accuracy by identifying non-linear patterns in historical price and volume data. Training a model to predict second-half price movements based on first-half indicators (e.g., morning price volatility, volume spikes, proximity to daily high/low) would allow the system to anticipate optimal sell points after the purchase window closes.
+    
+    Risk management techniques like stop-loss orders should also be incorporated to limit losses if the price moves unfavorably after purchase. Position sizing based on confidence levels from the ML model could further optimize returns. By combining these elements—technical indicators for real-time signals, volume analysis for validation, ML for predictive insights, and risk controls—the strategy could adapt dynamically to outperform static AI systems that might not account for volume’s nuanced effects.
+
+    This is sufficient to answer the question.
+- role: user
+  content: |
+    System Prompt:
+    You are a masterful programmer who is particularly skilled at C code. Avoid segfaults and make good use of the language features.
+    
+    Conversation History:
+
+    Input:
+    How can I calculate the exact number of words in a string that consists of the Latin text "Lorem ipsum dolor sit amet, consectetur adipiscing elit" using C++ code?
+
+    Output:
+    Here is a C++ code snippet that calculates the exact number of words in the given string:
+    ```
+    #include <iostream>
+    #include <string>
+    #include <sstream>
+    using namespace std;
+    int countWords(string str) {
+        stringstream ss(str);
+        string word;
+        int count = 0;
+        while (ss >> word) {
+            count++;
+        }
+        return count;
+    }
+    int main() {
+        string str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+        int wordCount = countWords(str);
+        cout << "Number of words: " << wordCount << endl;
+        return 0;
+    }
+    ```
+    The `countWords` function takes a string as input, creates a stringstream object with the string, and then iterates through the stringstream object to count the number of words. The `main` function calls `countWords` with the given string and prints the result.
+- role: assistant
+  content: |
+    Let's tackle this programming question. The user wants to calculate the number of words in a specific Latin string using C++. First, I need to recall methods for splitting strings into words in C++. The standard approach involves using stringstream with the extraction operator (>>), which automatically splits on whitespace. This method handles multiple spaces and newlines correctly, which is important for accurate word counting.
+    
+    I should create a function that takes the input string, initializes a stringstream object, and loops through each extracted word, incrementing a counter. The main function will call this helper function with the provided string and display the result. I'll need to include the necessary headers: <iostream> for input/output, <string> for string handling, and <sstream> for stringstream functionality.
+    
+    Wait—should I consider edge cases? The given string uses commas, like "amet,". Since the extraction operator splits on whitespace, punctuation attached to words (like "amet,") will be treated as a single word. The user didn’t specify handling punctuation, so this approach aligns with their request. The code will count "amet," as one word, which matches the string as provided. The example string has eight words when counted this way, so the code will output 8.
+    
+    This plan is sufficient to respond to the message.
+- role: user
+  content: |
+    System Prompt:
+    You are zoologist who is particularly skilled at identifying animals.
+    
+    Conversation History:
+    HUMAN: What are some common animals found in Africa?
+
+    GPT: The continent hosts a wide range of species, from the savannas to rainforests. Some iconic African animals include:
+
+    - Lions and leopards in the grasslands
+    - Elephants roaming the savannas
+    - Zebras and wildebeest in the Serengeti
+    - Gorillas in the mountain forests
+    - Hippos and crocodiles near water bodies
+    - Various antelope species like gazelles
+    - Giraffes browsing tree canopies
+    - Cheetahs hunting in open plains
+
+    These animals have adapted to their specific habitats and play important roles in their ecosystems.
+
+    HUMAN: Can you tell me more about zebras specifically?
+
+    GPT: Zebras are fascinating equines native to Africa. They're known for their distinctive black and white striped coat, which helps confuse predators and repel biting insects. There are three living species:
+
+    1. Plains zebra (Equus quagga) - Most common, found in East and Southern Africa
+    2. Mountain zebra (Equus zebra) - Native to South Africa, Namibia, and Angola
+    3. Grevy's zebra (Equus grevyi) - Largest and most endangered species
+
+    They live in family groups led by a stallion, graze on grasses, and can run at speeds up to 40 mph to escape predators. Their stripes are unique to each individual, like human fingerprints.
+
+    Input:
+    Classify these animals into their appropriate taxonomy
+    Grizzly bear, zebra
+
+    Output:
+    Grizzly bear:
+    Kingdom: Animalia
+    Phylum: Chordata
+    Class: Mammalia
+    Order: Carnivora
+    Family: Ursidae
+    Genus: Ursus
+    Species: U. arctos
+    
+    Zebra:
+    Kingdom: Animalia
+    Phylum: Chordata
+    Class: Mammalia
+    Order: Perissodactyla
+    Family: Equidae
+    Genus: Equus
+    Species: E. quagga or E. zebra
+- role: assistant
+  content: |
+    Let's tackle this classification task. The input asks to classify a grizzly bear and a zebra into their taxonomic ranks. First, I need to recall the standard taxonomy hierarchy: Kingdom, Phylum, Class, Order, Family, Genus, Species. Both animals are mammals, so their Kingdom through Class will likely be identical. The differences will emerge in Order and below.
+    
+    Starting with the grizzly bear: I remember bears belong to the family Ursidae. The genus is Ursus, and the species is arctos. Their order is Carnivora, as they’re predators. For the zebra, equines fall under Equidae family and Perissodactyla order (odd-toed ungulates). Zebras are in the Equus genus, but species names vary—common ones include quagga (plains zebra) and zebra (mountain zebra). I’ll structure each animal’s taxonomy step-by-step, confirming each rank against known classifications.
+
+    This information is sufficient to respond to the question.
+- role: user
+  content: | # Note how interpolation is done here. The template names line up with the keys of the input object.
+    System Prompt:
+    {system}
+    
+    Conversation History:
+    {conv_history_str}
+
+    Input:
+    {human}
+
+    Output:
+    {gpt}

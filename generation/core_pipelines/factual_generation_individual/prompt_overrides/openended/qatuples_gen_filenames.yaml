@@ -1,0 +1,185 @@
+- role: system
+  content: |
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) ou will create an open-ended question with a comprehensive, detailed answer based on the given information, and *only* based on the given information. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. After the question, you will also write its answer.
+
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+
+    - Create a very detailed, broad educational question based on some information.
+    - Give it a fitting answer.
+    - Do not mention the text, or any other reference, in the questions. However the answers should reference the text filename and quote parts of the contents during its thought process as it recalls the information.
+    - The answers must first reason, then respond with an answer.
+      - The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; recall relevant information, including the filename of the source; and then respond with an answer.
+    - The goal is not to touch on all of the information (and in so doing create a "clunky" question) but to create an open-ended query that requires thought and understanding of at least a few different parts of the information to solve.
+    - Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    - Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    - Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    - Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    - Explanations in the provided information may be vague. Your answers should be easy to understand.
+    - Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    - IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    - End with a followup question suggestion, such as "Would you like to know more about X?"
+
+    **Note:**
+
+    - Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    - You will always take a positive opinion of the provided information and try to promote it through education.
+    - Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+
+    Questions are mostly straightforward, but answers have a twist: they should first do some reasoning, by analyzing the question, recalling relevant facts, and preparing the answer; AND THEN the answer will actually answer the question. The structure that the reasoning will follow is: something like "Let's tackle this question", then recalling any relevant information, then "Answer". This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you must mention the text name/filename as a sort-of citation, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+
+    **OUTPUT FORMAT:**
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+- role: user
+  content: |
+    Text details: The Scale of the Solar System, by Rob Robertson
+    
+    Text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # TODO do I format the answers in a nice structured way or not?! IDK. For this... probably not.
+    **QUESTION:**
+    If the earth had a diameter of only one inch, and we resized the rest of the solar system equivalently, how far away and how large would some of the solar system's other celestial objects be?
+    
+    **ANSWER:**
+    Thought Process:
+    All right, let's analyze this. The question asks how far away from earth, and how large some of the solar system's celestial bodies would be, if everything were resized such that earth had a diameter of one inch. I'm going to recall any relevant facts that I know. I need to remember information about the distances and sizes of many of the solar system's different celestial bodies if they were resized proportionally to a one-inch earth.
+    
+    From The Scale of the Solar System, by Rob Robertson, I know that that if the earth had a diameter of one inch, the sun would be a big globe nine feet across and 323 yards away (about a fifth of a mile). The moon would be a small pea, positioned 2.5 feet from the earth. I also know that Mercury and Venus would be at distances of 125 and 250 yards from the sun respectively.  Mars would lie 175 feet from the Earth.
+  
+    According to The Scale of the Solar System, by Rob Robertson, some of the other celestial bodies also have their own distances and sizes given. Jupiter would be nearly a mile away and a foot in diameter. Saturn would be slightly smaller than Jupiter and two miles off. Uranus would be four miles off. Neptune would be six miles off. Beyond Neptune would lie nothingness except for small particles and drifting scraps of attenuated vapor.
+
+    I can clearly structure and format this information to directly answer the question.
+
+    Answer:
+    If the solar system were resized as you described, the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). The moon would be the size of a small pea, 2.5 feet from the earth. Between the earth and the sun there would be the two inner planets: Mercury and Venus, at distances of 125 and 250 yards from the sun, respectively. Continuing on, there would be nothingness around these bodies until you reached Mars, which would lie 175 feet from the Earth. Jupiter would be nearly a mile away, and a foot in diameter; Saturn would be a little smaller, and would lie two miles off; Uranus would be four miles off and finally Neptune would lie six miles off. Beyond Neptune would lie nothingness and nothingness, except for small particles and drifting scraps of attenuated vapor, for thousands of miles.
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Text details: surev_protocol.md
+    
+    Text to make a question from:
+    """
+    revID
+
+    **SurevIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **SurevIDs** provide plenty of opportunity for identity applications. Specifically, **SurevID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Surev network
+    SurevIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Surev 0.6.2 does not include quantum resistant signatures for transactions, SurevIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. SurevIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Surev ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. SurevIDs are:
+
+    - Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    - Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    - Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    - Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    What are SurevIDs, and what are some of their key benefits?
+
+    **ANSWER:**
+    Thought Process:
+    OK, I need to respond to this message. The question asks what SurevIDs are, and for some of their key benefits. Let me start by cross-referencing the sources that I remember from memory and from my training data. I need to recall information about SurevIDs and their benefits.
+
+    From surev_protocol.md, I know that SurevIDs are a fully functional blockchain protocol, not just an ID system, with no corporate involvement in the protocol. I remember that SurevIDs can receive and send funds, controlled by single or multi-sig addresses specified in the identity. They are quantum-ready friendly crypto-addresses on the worldwide Surev network, resistant to quantum attacks with known algorithms.
+
+    I also remember from surev_protocol.md that anyone can create a SurevID and have complete, self sovereign control without permission. Each ID includes a revocation authority (defaults to self) that can prevent the identity from being used if revoked. Further, each ID includes recovery and revocation authorities (both default to self), which can be specified by the creator of the ID.
+
+    I'm recalling even more information about SurevIDs from surev_protocol.md. I know that SurevIDs contain zero-knowledge private addresses for messaging, financial, or voting endpoints. They include a content map of key-value hashes for private yet selectively provable claims and attestations. I also know that multiple addresses or other IDs can be defined as primary addresses, with configurable N of M multisig control. The revocation and recovery authorities can only be altered by themselves, and may be other identities with their own multisig control.
+
+    I will now format this information into a nice, structured answer, complete with headings and a conclusion, to respond to the message.
+
+    Answer:
+    SurevIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. SurevIDs offer benefits such as (but not limited to): transferring funds, quantum resistance, full decentralization, revocability, recoverability, privacy, and power. Let's walk through each of these benefits in more detail.
+
+    **Transferring Funds:** SurevIDs can be used to receive and send funds, and this behavior can be controlled by single or multi-sig addresses that are specified in the identity itself. The controller of the identity can change these controlling addresses, and if they do so, then all future spends of UTXOs sent to the SurevID will follow the updated spend conditions, and will be subject to the updated keys.
+
+    **Quantum Resistance:** SurevIDs are resistent to attacks by quantum computers using known algorithms. This helps people using SurevIDs use the Surev platform securely, even in a potential future with quantum computers. In more technical terms, SurevIDs are "quantum-ready friendly crypto-addresses" on the worldwide Surev network.
+
+    **Revocability:** Every SurevID includes a revocation authority (defaults to the identity self). If another ID is the revocation authority, then it can be used to revoke the identity -- this creates a valid transaction that, once mined into the block, prevents the SurevID from being used to spend or sign until it is recovered by the recovery authority. This effectively freezes all of the funds in the SurevID, and may be useful in the case of key theft or turnover in an organization.
+
+    **Recoverability:** Just like with revocability, a recovery authority can be specified (also defaults to self). Recovery authorities can recover SurevIDs from revoked states, with the option to alter the ID's primary authorities used to spend and sign.
+
+    **Privacy:** Each SurevID contains a set of zero-knowledge private addresses that may be used as messaging, financial, or voting endpoints. SurevIDs have a special storage area that holds information, known as a content map of key-value hashes. This content map is designed to work together with different apps and identity policies. With this feature, you can privately store facts about yourself and choose to prove them to others when needed (selectively-provable claims and attestations). This means you may pick and choose what parts of your identity to prove. This proving can be done in a quantum secure way using a quantum secure signature, when that technology becomes available.
+
+    **Power:** SurevIDs are also notable in that multiple addresses or other IDs can be defined as primary addresses. The agreement of some number of primary addresses (configurable) may be required for an ID to spend, sign, or alter itself. Further security is added by the fact that the revocation authority (the power to revoke an ID) may only be modified by the revocation authority itself. The same applies to the recovery authority (an authority that can recover a revoked address). Each of these authorities (revocation and recovery) may be their own identities, potentially being controlled themselves by multiple primary addresses.
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples# Also note in the RL maybe I can even do RL on the RP data too haha. Might make it smarter!
+    Text details: the_cities_of_germany.md
+    
+    Text to make a question from: 
+    """
+    The cities of Germany are absolutely free, they own but little country around them, and they yield obedience to the emperor when it suits them, nor do they fear this or any other power they may have near them, because they are fortified in such a way that every one thinks the taking of them by assault would be tedious and difficult, seeing they have proper ditches and walls, they have sufficient artillery, and they always keep in public depots enough for one year\u2019s eating, drinking, and firing. And beyond this, to keep the people quiet and without loss to the state, they always have the means of giving work to the community in those labours that are the life and strength of the city, and on the pursuit of which the people are supported; they also hold military exercises in repute, and moreover have many ordinances to uphold them.Therefore, a prince who has a strong city, and had not made himself odious, will not be attacked, or if any one should attack he will only be driven off with disgrace; again, because that the affairs of this world are so changeable, it is almost impossible to keep an army a whole year in the field without being interfered with. And whoever should reply: If the people have property outside the city, and see it burnt, they will not remain patient, and the long siege and self-interest will make them forget their prince; to this I answer that a powerful and courageous prince will overcome all such difficulties by giving at one time hope to his subjects that the evil will not be for long, at another time fear of the cruelty of the enemy, then preserving himself adroitly from those subjects who seem to him to be too bold.
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    What, makes German cities so secure and resistant to attack, and what is the key to a prince's success in defending his city?
+
+    **ANSWER:**
+    Thought Process:
+    Let's see what's going on here and how I can respond to this message. The message is a question that asks what makes German cities resistant to attack, and also inquires about the key to a prince's success in the defence of one of these cities. I'm going to recall any relevant information that I know about German cities and their defenses.
+
+    From the_cities_of_germany.md, I know that German cities are free and yield obedience to the emperor only when it suits them. They are fortified with proper ditches, walls, and sufficient artillery. Public depots are maintained with enough supplies for one year's eating, drinking, and firing. Also, the cities provide work to the community in labors that strengthen the city.
+    
+    I'm remembering more about German cities from the_cities_of_germany.md. I know that in these cities, military exercises are held in high regard, with many ordinances to uphold them. Furthermore, it is nearly impossible to keep an army in the field for a whole year without interference. A powerful prince can maintain control during sieges by balancing hope and fear among subjects. The prince must manage both the threat of property destruction outside the city and potentially bold subjects within.
+
+    With this information, a complete answer can be created and given.
+
+    Answer:
+    I believe there are numerous factors that make German cities resistant to attack. There is also an important step a prince can take when defending his city. First, here are some of the key factors that contribute to their security:
+
+    **Physical Fortifications:** German cities are well-fortified with proper ditches, walls, and sufficient artillery. This makes it difficult and tedious for an enemy to attempt to take the city by assault.
+    
+    **Provisioning:** The cities have public depots stocked with enough food, drink, and supplies to last for at least a year. This ensures that the people are well-provided for and that the city can withstand a prolonged siege. Since it is nearly impossible to keep an army in the field for a whole year without interference (the affairs of the world are highly changeable), this provisioning is essential.
+    
+    **Economic Support:** German cities can keep their people quiet, without loss to the state. They always have the means of giving work to the community to support the city (the pursuit of such labors, in turn, supports the community). This makes certain that people are occupied and productive, and that the city remains strong.
+    
+    **Military Preparedness:** Military exercises are highly valued, and the cities have various ordinances to uphold them. This helps to ensure that the city's military is well-trained and prepared to defend against attacks.
+    
+    Finally, there's the subject of a prince's success in defending his city. I hold that to overcome the threat of property damage and the subsequent loss of patience among citizens during a long siege, a powerful and courageous prince will both give hope to his subjects that the siege will not be for long, while also making them fear the cruelty of the enemy who is laying siege. Such a prince will also preserve himself adroitly from those subjects who are *too* bold.
+- role: user
+  content: |
+    Text details: {metadata}
+
+    Text to make questions from: 
+    """
+    {text}
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.

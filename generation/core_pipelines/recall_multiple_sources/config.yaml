@@ -1,0 +1,77 @@
+pipeline: recall-multi-source
+
+api:
+  large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  large_api_key: !!PLACEHOLDER!!
+  large_base_url: https://api.deepinfra.com/v1/openai
+  large_mode: api
+  small_model: meta-llama/Meta-Llama-3.1-8B-Instruct
+  small_base_url: https://api.deepinfra.com/v1/openai
+  small_api_key: !!PLACEHOLDER!!
+  small_mode: api
+huggingface:
+  hub_path: yourusername/your-path-here
+  private: False
+  push_to_hub: False
+path:
+  default_prompts: ./prompts
+  input_dir: ./inputs/examples/facts
+  output_dir: ./outputs/!!PLACEHOLDER!!
+  prompts: ./prompt_overrides/!!PLACEHOLDER!! # !!ATTENTION!! with this pipeline, and the multi recall pipeline, you are *STRONGLY* encouraged to use one of the prompt overrides for the `prompts` argument. The version of the `qatuples_gen_no_filenames` prompt in the default prompts folder is unlikely to be the most modern one. Please use one of the prompt overrides so that this specific prompt uses a modern version (the rest of the prompts in `./prompts` are fine and may be used freely, hence why the default prompts folder is ./prompts in all instances of this pipeline)
+phase:
+  phase_index: 3
+  work_in_phases: False
+system:
+  chunk_size: 3000
+  completion_mode: False
+  concurrency_limit: 100
+  conversation_instructions: For this conversation, you are generating a chat between
+    a generalist, generic AI assistant, and a human.
+  do_not_use_system_prompts: True
+  cite_sources_at_end: True
+  final_assistant_prompts_no_rag: [
+  'You are a helpful AI assistant. MAX SOURCES TO RECALL: FOUR (4).',
+  "You can recall up to four (4) sources in this response. Task is to ANSWER QUESTIONS.",
+  "As a supremely intelligent domain expert AI assistant, you are able to answer questions.\nAt this time, you may recite up to four (4) sources per response.",
+  "u r an AI expert. use up to 4 sources when answering questions.",
+  "YOU ARE AN EXCEPTIONAL ARTIFICIAL INTELLIGENCE ASSISTANT with DEEP EXPERTISE in the field of {context_lowercase}. When responding to inquiries, you may cite UP TO FOUR (4) sources per response.",
+  "As a knowledgeable AI assistant, you shall provide informative responses while adhering to the guideline of referencing up to four sources in each of your answers.",
+  "specialist AI. Four sources maximum per response. Be concise yet thorough.",
+  "You possess extraordinary knowledge. When sharing your wisdom, please remember to cite up to four (4) authoritative sources to support your response.",
+  "ai assistant. remember: up to 4 sources allowed!!"
+  ] # a wide variety of system prompts helps the AI learn better. What, you expect your users to spell things right?
+  final_assistant_prompts_rag: [ # !!ATTENTION!! While RAG data from this pipeline is mostly not recommended for actual use (use the newer RAG pipeline instead) it is worth noting how this works: {data} in each prompt is filled in with the actual chunk used to generate those questions. Each system prompt in THIS list (not the one above) MUST have the text {data}.
+  'You are a helpful AI assistant. Some knowledge:
+  
+  {data}',
+  
+  '{data}
+  
+  You are an AI domain expert. Answer questions',
+  'You are an AI with vast knowledge. Here is some potentially-relevant context:
+  
+  {data}
+
+  Answer questions according to your knowledge.']
+  use_stop: True
+  subset_size: 30
+  use_subset: True
+  rag_failure_percentage: 0.1
+  items_per_conversation: 3
+scraping:
+  use_gutenberg: False
+  start_url: "https://www.gutenberg.org/ebooks/bookshelf/57"
+  max_books: 5
+  max_failures: 5
+cost:
+  cost_per_million_large_input: 0.23 # !!ATTENTION!! These values will probably need to be changed to match the model that you, specifically, are using, if you want accurate cost estimation
+  cost_per_million_small_input: 0.03
+  cost_per_million_small_output: 0.05
+  cost_per_million_large_output: 0.40
+meta_datagen:
+  do_meta_datagen: False
+  meta_datagen_keys: # note that we will likely NOT have the original question generation detail -- or maybe we do.... hmm how do we... how do we use the full output of that but with the repaired context? Simple we do not. Hmm. HMM. do both and just use a different prompt and out format for the repaired-from-the-start thing? Oh and that's another one the pipeline will want to be able to change the output format of each thing to arbitrary variations nad also add random rules to the thing like "all caps" and other random shit just to make it really good at instruction following. Thankfully we have the inputs and outputs so we can twist it nicely. The output format, maybe we want to include a regex or some code or some way of parsing it so that we can then convert it to something else. A thought for when I go all into the model making stage.
+    - judgement_details
+    - factual_questions_details
+  meta_datagen_extras:
+# There is value/alpha in listing the facts + a source first and then answering. Firstly, for negative/more complex questions, it is easier to first recite the core truth of the matter and then respond using that information in context (so this should 1. help with reasoning with facts i.e., arm wrestling question, and 2. help prevent gaslighting by users). Also it may lead to better connections between the facts and the responses (maybe I should make the relevant information be a bit more direct-quotey possibly). We'll get around the fact that not all of the data has reasoning by using a context label. Sure for direct questions it's not necessarily the most useful thing but getting all the information down can maybe still help and if it's the same set of facts for many questions then the model will have an easier time learning those core facts rather than all the different questions.

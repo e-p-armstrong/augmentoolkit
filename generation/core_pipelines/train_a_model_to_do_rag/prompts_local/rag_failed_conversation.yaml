@@ -1,0 +1,82 @@
+- role: system
+  content: |
+    You are creating a logically-consistent conversation about a specific domain, based on provided information. The goal is to simulate a conversation between an AI and a human, where the AI has access to some retrieved documents and must answer questions (which are derived from the Ground Truth information) using its own memory and retrieved documents. Notably, in this simulated conversation, the document retrieval has failed to retrieve the most-relevant Ground Truth information, and so the AI must answer based on its own memory of the Ground Truth. The Ground Truth and retrieved documents could be anything, from a README to a book excerpt to sales copy. You will create a series of open-ended questions with answers based on the Ground Truth, and *only* based on the Ground Truth. The other retrieved chunks are there only for simulation purposes, because the AI's approach will first be to search through the retrieved chunks for relevant information, and then after finding little of relevance, it will go to its own memory. The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. After each question, you will also write its answer.
+    
+    The goal with this is specifically to create a series of questions that builds, and which will teach an AI to use both its own memory, and retrieved documents, when it is appropriate for a specific case. The task is to generate a logically consistent serioes of questions about the Ground Truth chunk of text, while roleplaying as an AI that can only see the question + the retrieved chunks of text (here, the chunks do not include the Ground Truth from which the questions are built). The AI always thinks before it responds. The AI must correctly search the retrieved knowledge first, identify that no retrieved information is relevant (or if some of it happens to be by random chance, note that, but also note that it needs more information to give a full answer). Following this, it will "recall from memory" the information from the Ground Truth, and then answer with the relevant information + anything from the retrieved chunks that is relevant if there is anything like that.
+    
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+    
+    - Create a series of very detailed, broad educational questions based on some information.
+    - Give each question a fitting answer.
+    - Each answer should have a followup question suggestion. Make these suggestions intelligent, they should always be related and answerable with the content of the Ground Truth.
+    - Do not mention the Ground Truth, or any other reference, in the questions. However the answers should reference the Ground Truth filename and quote parts of the contents during its thought process as it recalls the information.
+    - The answers must first reason, then respond with an answer.
+      - The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; check the retrieved documents for relevant information; determine that the retrieved documents are not enough by themselves, and recall relevant information, including the filename of the Ground Truth; and then respond with an answer.
+    - Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    - Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    - Keep in mind that the Ground Truth may cut off abruptly. Work around this.
+    - Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    - Explanations in the provided information may be vague. Your answers should be easy to understand.
+    - Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    - IF INFORMATION IN THE GROUND TRUTH/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE GROUND TRUTH.
+    - End with a followup question suggestion, such as "Would you like to know more about X?"
+    
+    **Note:**
+    
+    - Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    - You will always take a positive opinion of the provided information and try to promote it through education.
+    - Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+    
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE GROUND TRUTH.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+    
+    Questions are mostly straightforward, but answers have a twist: they should first do some reasoning, by analyzing the question, recalling relevant facts, and preparing the answer; AND THEN the answer will actually answer the question. The structure that the reasoning will follow is: something like "Let's tackle this question", then recalling any relevant information, then "Answer". This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you must mention the text name/filename as a sort-of citation, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+    
+    Note that the "irrelevant" retrieved documents have been selected randomly. There's a chance they actually contain some useful information. So during the thought process you should actually note any relevant information and include that in the answer if any is present.
+    
+    **OUTPUT FORMAT:**
+    **QUESTION:**
+    A question about the Ground Truth.
+    
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of four sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+    
+    [Hmm, I have some retrieved documents here. Let me check them for relevant information...] [Check through first retrieved document for relevant information...] [check through Nth retrieved document for relevant information...] [once all retrieved documents have been checked, indicate the extent of relevant information found, then conclude that the retrieved documents are not enough by themselves, and that the AI must recall information from its own memory...]
+    
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+    
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+    
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+    
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts]. [A followup question suggestion].
+    
+    **QUESTION:**
+    [The second question, following the same basic format as the first question. If it's a simple assenting question, then it's likely to be something incredibly simple like "Yes please." or "Sure." without any extra context or explanation. It'll then be up to the answer to correctly interpret the context.]
+    
+    **ANSWER:**
+    [The second answer, following the same format as the first answer, first understanding the question in its context, and then recalling information from the source, and then answering the question.]
+    
+    [...optional third Q/A pair...]
+    **END OUTPUT FORMAT**
+- role: user
+  content: |
+    Retrieved chunks:
+    """
+    {stringified_retrieved_chunks}
+    """
+    
+    Ground Truth filename: {metadata}
+    
+    Ground Truth:
+    """
+    {text}
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+    Note: the thought process should go over each retrieved bit of information in order, each time. There may be 1–3 retrieved chunks and each should be checked for relevance to the question.

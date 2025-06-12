@@ -2,21 +2,23 @@ import re
 
 
 def extract_question_answer(response):
-    # Define the regex pattern to match the question and answer
-    pattern = r"### Question Rewording \(using text details as reference\):\nQuestion: (.+?)\nAnswer: (.+)"
+    # Modified pattern to handle multi-line answers
+    pattern = (
+        r"### Reworded Question and Answer:\nQuestion:(.*?)\nAnswer:(.*?)(?=\n###|\Z)"
+    )
 
-    # Search for the pattern in the response
-    match = re.search(pattern, response)
+    # Search with DOTALL flag to match across newlines
+    match = re.search(pattern, response, re.DOTALL)
 
-    # Extract and return the question and answer if a match is found
     if match:
         question = match.group(1).strip()
         answer = match.group(2).strip()
         return question, answer
     else:
-        response = response.replace("\\n","\n")
-        response = response.replace("\\\"","\"")
-        match = re.search(pattern, response)
+        # Try again after replacing escaped characters
+        response = response.replace("\\n", "\n")
+        response = response.replace('\\"', '"')
+        match = re.search(pattern, response, re.DOTALL)
         if match:
             question = match.group(1).strip()
             answer = match.group(2).strip()

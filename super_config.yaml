@@ -1,3 +1,101 @@
+
 pipeline_order:
-  - folder: "original"
-    config: "config.yaml"
+  - node: discord-server # factual-datagen-pipeline
+    config: external:hidden_discord_supertest.yaml # external:_START_HERE_complete_factual.yaml
+
+  # - node: rag-server # you can chain multiple pipelines. They will be executed sequentially.
+  #   config: rag-config
+  
+path_aliases:
+  # Base Directory Aliases
+  gen_comp: generation/core_composition
+  gen_core: generation/core_pipelines
+  external: external_configs
+
+  # --- Core Composition Pipelines ---
+  # (Pipelines mostly made up of other pipelines)
+
+  # generation/core_composition/complete_factual_dataset
+  factual-datagen-folder: gen_comp:complete_factual_dataset
+  factual-datagen-pipeline:   gen_comp:complete_factual_dataset/complete_factual_dataset.factual_datagen_full
+  factual-datagen-config: gen_comp:complete_factual_dataset/config.yaml
+
+  # generation/core_composition/meta_datagen
+  meta-datagen-folder: gen_comp:meta_datagen
+  meta-datagen-pipeline:   gen_comp:meta_datagen/meta.meta_datagen_compositionpipeline
+  meta-datagen-config: gen_comp:meta_datagen/config.yaml
+
+  # --- Core Pipelines ---
+
+  # generation/core_pipelines/generic_data_rephrase
+  generic-data-rephrase-folder: gen_core:generic_data_rephrase
+  generic-data-rephrase-pipeline: gen_core:generic_data_rephrase/transform_generic_data.transform_generic_data_pipeline
+  generic-data-rephrase-config: gen_core:generic_data_rephrase/config.yaml
+
+  # generation/core_pipelines/classifier_creator
+  classifier-creator-folder: gen_core:classifier_creator
+  classifier-creator-pipeline:   gen_core:classifier_creator/classifier_creator.classifier_creator
+  classifier-creator-config: gen_core:classifier_creator/config.yaml
+
+  # generation/core_pipelines/clean_and_convert_pdf
+  pdf-clean-convert-folder: gen_core:clean_and_convert_pdf
+  pdf-clean-convert-pipeline:   gen_core:clean_and_convert_pdf/clean_and_convert_pdf.pdf_clean_and_convert_pipeline
+  pdf-clean-convert-config: gen_core:clean_and_convert_pdf/config.yaml
+
+  # generation/core_pipelines/correction_pipeline
+  correction-folder: gen_core:correction_pipeline
+  correction-pipeline:   gen_core:correction_pipeline/corrections.correction_pipeline
+  correction-config: gen_core:correction_pipeline/config.yaml
+
+  # generation/core_pipelines/do_grpo_rl_with_a_prompt
+  grpo-rl-folder: gen_core:do_grpo_rl_with_a_prompt
+  grpo-rl-pipeline:   gen_core:do_grpo_rl_with_a_prompt/grpo.grpo_rl_pipeline
+  grpo-rl-config: gen_core:do_grpo_rl_with_a_prompt/config.yaml
+
+  # generation/core_pipelines/factual_generation_individual
+  factual-gen-indiv-folder: gen_core:factual_generation_individual
+  factual-gen-indiv-pipeline:   gen_core:factual_generation_individual/factual_generation.generate_factual_qa_dataset
+  factual-gen-indiv-config: gen_core:factual_generation_individual/config.yaml
+
+  # generation/core_pipelines/recall_multiple_sources 
+  recall-multi-source-folder: gen_core:recall_multiple_sources
+  recall-multi-source-pipeline: gen_core:recall_multiple_sources/multi_source_recall.generate_multi_source_dataset 
+  recall-multi-source-config: gen_core:recall_multiple_sources/config.yaml
+
+  # generation/core_pipelines/representation_variation
+  repvar-folder: gen_core:representation_variation
+  repvar-pipeline:   gen_core:representation_variation/repvar.representation_variation_pipeline
+  repvar-config: gen_core:representation_variation/config.yaml
+
+  # generation/core_pipelines/rptoolkit
+  rptoolkit-folder: gen_core:rptoolkit
+  rptoolkit-pipeline:   gen_core:rptoolkit/rptoolkit.rptoolkit_pipeline
+  rptoolkit-config: gen_core:rptoolkit/config.yaml
+
+  # generation/core_pipelines/teach_a_model_to_respond_to_hello_in_a_qa_context
+  conv-start-folder: gen_core:teach_a_model_to_respond_to_hello_in_a_qa_context
+  conv-start-pipeline:   gen_core:teach_a_model_to_respond_to_hello_in_a_qa_context/conv_start.conversational_start_pipeline
+  conv-start-config: gen_core:teach_a_model_to_respond_to_hello_in_a_qa_context/config.yaml
+
+  # generation/core_pipelines/train_a_model_to_do_rag
+  rag-data-folder: gen_core:train_a_model_to_do_rag
+  rag-data-pipeline:   gen_core:train_a_model_to_do_rag/rag_data_pipeline.rag_data_pipeline
+  rag-data-config: gen_core:train_a_model_to_do_rag/config.yaml
+
+  debug-pipeline: gen_core:debug_pipeline/debug.debug_func
+  debug-config: gen_core:debug_pipeline/config.yaml
+
+  example-pipeline: generation/example_pipeline/example.example_pipeline
+  example-config: generation/example_pipeline/config.yaml
+  
+  basic-folder: generation/utilities/llm_server/
+  basic-server: generation/utilities/llm_server/llm_server.llm_server
+  basic-config: generation/utilities/llm_server/config.yaml
+
+  rag-folder: generation/utilities/rag_server/
+  rag-server: generation/utilities/rag_server/rag_server.rag_server
+  rag-config: generation/utilities/rag_server/config.yaml
+
+  discord-folder: generation/utilities/discord_inference
+  discord-server: generation/utilities/discord_inference/discord_inference.discord_inference
+  discord-config: generation/utilities/discord_inference/config.yaml

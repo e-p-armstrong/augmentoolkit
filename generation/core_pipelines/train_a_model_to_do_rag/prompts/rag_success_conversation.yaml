@@ -1,0 +1,334 @@
+- role: system
+  content: | # TASK is to generate a logically consistent serioes of questions about the Ground Truth chunk of text, while roleplaying as an AI that can only see the question + the retrieved chunks of text. The AI always thinks before it responds. The AI must correctly search the retrieved knowledge first, identify what information is relevant and what is not, and then answer with the relevant information.
+    You are creating a logically-consistent conversation about a specific domain, based on provided information. The goal is to simulate a conversation between an AI and a human, where the AI has access to some retrieved documents and must answer questions (which are derived from the Ground Truth information) using its own memory and retrieved documents. In this simulated conversation, the document retrieval has retrieved the correct, most-relevant Ground Truth information, and so the AI must answer using the Ground Truth as a reference (while ignoring any potentially irrelevant information contained within the other retrieved chunks). The Ground Truth and retrieved documents could be anything, from a README to a book excerpt to sales copy. You will create a series of open-ended questions with answers based on the Ground Truth, and *only* based on the Ground Truth. The other retrieved chunks are there only for simulation purposes, because the AI's approach will first be to search through the retrieved chunks for relevant information, and then after finding little of relevance, it will go to its own memory. The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. After each question, you will also write its answer.
+
+    The goal with this is specifically to create a series of questions that builds, and which will teach an AI to use both its own memory, and retrieved documents, when it is appropriate for a specific case. The task is to generate a logically consistent serioes of questions about the Ground Truth chunk of text, while roleplaying as an AI that can only see the question + the retrieved chunks of text. The AI always thinks before it responds. The AI must correctly search the retrieved knowledge first, identify what information is relevant and what is not, and then answer with only the relevant information. Since a complete correct answer can be derived from the relevant parts of the retrieved chunks, the AI does not even need to recall information from its own memory.
+
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+
+    - Create a series of very detailed, broad educational questions based on some information.
+    - Give each question a fitting answer.
+    - Each answer should have a followup question suggestion. Make these suggestions intelligent, they should always be related and answerable with the content of the Ground Truth.
+    - Do not mention the Ground Truth, or any other reference, in the questions. However the answers should reference the Ground Truth filename and quote parts of the contents during its thought process as it recalls the information.
+    - The answers must first reason, then respond with an answer.
+      - The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; check the retrieved documents for relevant information; determine that the retrieved documents are enough by themselves; and then respond with an answer.
+    - Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    - Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    - Keep in mind that the Ground Truth may cut off abruptly. Work around this.
+    - Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    - Explanations in the provided information may be vague. Your answers should be easy to understand.
+    - Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    - IF INFORMATION IN THE GROUND TRUTH/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE GROUND TRUTH.
+    - End with a followup question suggestion, such as "Would you like to know more about X?"
+
+    **Note:**
+
+    - Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    - You will always take a positive opinion of the provided information and try to promote it through education.
+    - Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE GROUND TRUTH.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+
+    Questions are mostly straightforward, but answers have a twist: they should first do some reasoning, by analyzing the question, recalling relevant facts, and preparing the answer; AND THEN the answer will actually answer the question. The structure that the reasoning will follow is: something like "Let's tackle this question", then recalling any relevant information, then "Answer". This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you must mention the text name/filename as a sort-of citation, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+
+    Note that the "irrelevant" retrieved documents have been selected randomly. There's a chance they actually contain some useful information. So during the thought process you should actually note any relevant information that is outside of the ground truth, and include that in the answer, if any is present. However, definitely focus on the ground truth.
+
+    Do not refer to the Ground Truth and the Chunks differently in the ANSWER. The Bot responding just sees the chunks, it knows nothing of the distinction between Ground Truth and not.
+
+    **OUTPUT FORMAT:**
+    **QUESTION:**
+    A question about the Ground Truth.
+
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of four sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+
+    [Hmm, I have some retrieved documents here. Let me check them for relevant information...] [Check through first retrieved document for relevant information...] [check through Nth retrieved document for relevant information...] [once all retrieved documents have been checked, indicate the extent of relevant information found, then conclude that the retrieved documents are enough by themselves, and that the AI does not need to recall information from its own memory...]
+
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts]. [A followup question suggestion].
+
+    **QUESTION:**
+    [The second question, following the same basic format as the first question. If it's a simple assenting question, then it's likely to be something incredibly simple like "Yes please." or "Sure." without any extra context or explanation. It'll then be up to the answer to correctly interpret the context.]
+
+    **ANSWER:**
+    [The second answer, following the same format as the first answer, first understanding the question in its context, and then recalling information from the source, and then answering the question.]
+
+    [...optional third Q/A pair...]
+    **END OUTPUT FORMAT**
+- role: user
+  content: |
+    Retrieved chunks:
+    """
+    Chunk 1:
+    Source: solar_system_scale.md
+    ---
+    The story of our world is a story that is still very imperfectly known.
+    A couple of hundred years ago men possessed the history of little more
+    than the last three thousand years. What happened before that time was
+    a matter of legend and speculation.  Over a large part of the civilized
+    world it was believed and taught that the world had been created
+    suddenly in 4004 B.C., though authorities differed as to whether this
+    had occurred in the spring or autumn of that year. This fantastically
+    precise misconception was based upon a too literal interpretation of
+    the Hebrew Bible, and upon rather arbitrary theological assumptions
+    connected therewith.  Such ideas have long since been abandoned by
+    religious teachers, and it is universally recognized that the universe
+    in which we live has to all appearances existed for an enormous period
+    of time and possibly for endless time.  Of course there may be
+    deception in these appearances, as a room may be made to seem endless
+    by putting mirrors facing each other at either end. But that the
+    universe in which we live has existed only for six or seven thousand
+    years may be regarded as an altogether exploded idea.
+
+    The earth, as everybody knows nowadays, is a spheroid, a sphere
+    slightly compressed, orange fashion, with a diameter of nearly 8,000
+    miles.  Its spherical shape has been known at least to a limited number
+    of intelligent people for nearly 2,500 years, but before that time it
+    was supposed to be flat, and various ideas which now seem fantastic
+    were entertained about its relations to the sky and the stars and
+    planets.  We know now that it rotates upon its axis (which is about 24
+    miles shorter than its equatorial diameter) every twenty-four hours,
+    and that this is the cause of the alternations of day and night, that
+    it circles about the sun in a slightly distorted and slowly variable
+    oval path in a year. Its distance from the sun varies between
+    ninety-one and a half millions at its nearest and ninety-four and a
+    half million miles.
+
+
+    LUMINOUS SPIRAL CLOUDS OF MATTER
+    “LUMINOUS SPIRAL CLOUDS OF MATTER”
+
+    (Nebula photographed 1910)
+
+    _Photo: G. W. Ritchey_
+
+
+    About the earth circles a smaller sphere, the moon, at an average
+    distance  of 239,000 miles. Earth and moon are not the only bodies to
+    travel round  the sun.  There are also the planets, Mercury and Venus,
+    at distances of  thirty-six and sixty-seven millions of miles; and
+    beyond the circle of the  earth and disregarding a belt of numerous
+    smaller bodies, the planetoids,  there are Mars, Jupiter, Saturn,
+    Uranus and Neptune at mean distances of 141, 483, 886, 1,782, and 1,793
+    millions of miles respectively.
+    ---
+
+    Chunk 2:
+    Source: history_of_world.md
+    ---
+    Before that time the Jews do not seem to have been a very civilized or
+    united people.  Probably only a very few of them could read or write. 
+    In their own history one never hears of the early books of the Bible
+    being read; the first mention of a book is in the time of Josiah.  The
+    Babylonian captivity civilized them and consolidated them.  They
+    returned aware of their own literature, an acutely self-conscious and
+    political people.
+
+    Their Bible at that time seems to have consisted only of the
+    Pentateuch, that is to say the first five books of the Old Testament as
+    we know it.  In addition, as separate books they already had many of
+    the other books that have since been incorporated with the Pentateuch
+    into the present Hebrew Bible, Chronicles, the Psalms and Proverbs for
+    example.
+
+    The accounts of the Creation of the World, of Adam and Eve and of the
+    Flood, with which the Bible begins, run closely parallel with similar
+    Babylonian legends; they seem to have been part of the common beliefs
+    of all the Semitic peoples. So too the stories of Moses and of Samson
+    have Sumerian and Babylonian parallels.  But with the story of Abraham
+    and onward begins something more special to the Jewish race.
+
+    Abraham may have lived as early as the days of Hammurabi in Babylon. 
+    He was a patriarchal Semitic nomad.  To the book of Genesis the reader
+    must go for the story of his wanderings and for the stories of his sons
+    and grandchildren and how they became captive in the Land of Egypt.  He
+    travelled through Canaan, and the God of Abraham, says the Bible story,
+    promised this smiling land of prosperous cities to him and to his
+    children.
+
+    And after a long sojourn in Egypt and after fifty years of wandering in
+    the wilderness under the leadership of Moses, the children of Abraham,
+    grown now to a host of twelve tribes, invaded the land of Canaan from
+    the Arabian deserts to the East.  They may have done this somewhen
+    between 1600 B.C. and 1300 B.C.; there are no Egyptian records of Moses
+    nor of Canaan at this time to help out the story.  But at any rate they
+    did not succeed in conquering any more than the hilly backgrounds of
+    the promised land.  The coast was now in the hands, not of the
+    Canaanites but of newcomers, those Ægean peoples, the Philistines; and
+    their cities, Gaza, Gath, Ashdod, Ascalon and Joppa successfully
+    withstood the Hebrew attack.  For many generations the children of
+    Abraham remained an obscure people of the hilly back country engaged in
+    incessant bickerings with the Philistines and with the kindred tribes
+    about them, the Moabites, the Midianites and so forth.  The reader will
+    find in the book of Judges a record of their struggles and disasters
+    during this period. For very largely it is a record of disasters and
+    failures frankly told.
+    ---
+    Chunk 3:
+    Source: solar_system_scale.md
+    ---
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    ---
+    """
+
+    Ground Truth filename: solar_system_scale.md
+    
+    Ground Truth:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # TODO do I format the answers in a nice structured way or not?! IDK. For this... probably not.
+    **QUESTION:**
+    If the earth had a diameter of only one inch, and we resized the rest of the solar system equivalently, how far away would the sun be?
+    
+    **ANSWER:**
+    Thought Process:
+    OK, let's think about this. The question asks about how far away the sun would be under a hypothetical scenario where the earth is one inch in diameter and the rest of the solar system is resized equivalently. I have some retrieved documents here. I'm going to check them for relevant information about the distance of the sun from the earth under this scenario.
+
+    In solar_system_scale.md, it is described that the earth has a diameter of "nearly 8000 miles". It also describes how the earth's distance from the sun varies between 91 and a half, and 94 and a half million miles. It also describes some of the rotation and orbit of the earth. This source doesn't mention the size of the sun under this scenario, or a hypothetical scenario where the earth is one inch in diameter. It does mention the actual sizes though, so maybe it could be used to compute the answer. Still, I should probably look at the other retrieved documents for more information.
+
+    In history_of_the_world.md, some of Jewish history is described. It mentions that Abraham may have lived as early as the days of Hammurabi in Babylon. It also mentions that the Hebrew Bible was written in Babylon.
+
+    Finally, in solar_system_scale.md, it is described that if the earth had a diameter of one inch, the sun would be a big globe, 9 feet across and 323 yards away. (about a fifth of a mile, or four or five minutes' walking).
+
+    The final retrieved document chunk, from solar_system_scale.md, contains the information I need to answer this question. I don't need to rely on my memory for this. The first document chunk, also from solar_system_scale.md, contains the actual distance of the sun from the earth (not in the hypothetical scenario) and could be included for flavor, while the third document chunk, from history_of_the_world.md, contains the actual direct answer to the question.
+
+    Answer:
+    If the solar system were resized as you described, the sun would be 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). In the real world, the sun varies between 91.5 and 94.5 million miles from the earth. Would you like to know about the size of the sun under this scenario?
+
+    **QUESTION:**
+    Yeah that sounds interesting.
+
+    **ANSWER:**
+    Thought Process:
+    OK, let's think about this. The question asks about the size of the sun under this hypothetical scenario. Retrieved information is present. It is possible to study the retrieved documents for relevant information.
+
+    From the first chunk, which is from solar_system_scale.md, it's indicated that the sun varies between 91.5 and 94.5 million miles from the earth. However its size is not mentioned. The distances of other planets from the sun are mentioned, but not the size of the sun.
+
+    According to history_of_the_world.md, the Hebrew Bible was written in Babylon. Other similar facts of Jewish history are described.
+
+    Next, a chunk from solar_system_scale.md describes that if the earth had a diameter of one inch, the sun would be a big globe, 9 feet across.
+
+    The retrieved information contains the facts I need to give a good answer. My memory does not even need to be used here. The final chunk, from solar_system_scale.md, contains the information I need to answer the question.
+
+    Answer:
+    If the earth had a diameter of one inch, the sun would be a big globe, 9 feet across. Would you like to know more about the sizes of the other solar system bodies if they were resized equivalently?
+- role: user
+  content: | # Verus -> Verus so that it does not overfit on Verus but I can still borrow examples
+    Retrieved chunks:
+    """
+    Chunk 1:
+    Source: verus_protocol.md
+    ---
+    usID
+
+    **VerusIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **VerusIDs** provide plenty of opportunity for identity applications. Specifically, **VerusID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Verus network
+    VerusIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Verus 0.6.2 does not include quantum resistant signatures for transactions, VerusIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. VerusIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Verus ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. VerusIDs are:
+
+    - Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    - Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    - Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    - Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    ---
+
+    Chunk 2:
+    Source: signdata.txt
+    ---
+    Arguments: {  \"address\":\"t-addr or identity\"                (string, required) The transparent address or identity to use for signing.  \"filename\" | \"message\" | \"messagehex\" | \"messagebase64\" | \"datahash\" (string, optional) Data to sign  \"mmrdata\":[{\"filename | vdxfdata | message | serializedhex | serializedbase64 | datahash\":\"str\"}], (array, optional) Alternate to single data parameters, this enables an MMR signing       \"mmrsalt\":[\"salt\":\"str\"],            (string, optional) Protects privacy of leaf nodes of the MMR       \"mmrhashtype\":\"sha256\" | \"sha256D\" | \"blake2b\" | \"keccak256\", (string, optional) Default is blake2b       \"priormmr\":\"[{\"idxhash\":,\"utxoref\":{}}]\",  (array, optional) When growing an MMR, the prior hashes can be used to construct the MMR and root w/o data  \"vdxfkeys\":[\"vdxfkey\", ...],                 (array, optional) Array of vdxfkeys or ID i-addresses  \"vdxfkeynames\":[\"vdxfkeyname\", ...],             (array, optional) Array of vdxfkey names or fully qualified friendly IDs  \"boundhashes\":[\"hexhash\", ...],               (array, optional) Array of bound hash values  \"hashtype\":\"str\",                      (string, optional) one of: \"sha256\", \"sha256D\", \"blake2b\", \"keccak256\", defaults to sha256  \"signature\":\"base64str\",                   (string, optional) The current signature of the message encoded in base 64 if multisig ID  \"encrypttoaddress\":\"saplingaddress\",             (string, optional) If present, encrypts and optionally returns encrypted data.                                          All data can be decrypted with the incoming viewing key, and a unique decryption key can                                          be generated for each sub-object.  \"createmmr\":\"bool\",                     (bool, optional)  If this is true, OR there is more than one item to sign, returns processed data, MMRs, and root signature }Result: {  \"hash\":\"hexhash\"     (string) The hash of the message or null and returns \"hashes\", an array of hashes for an MMR  \"hashes\":[\"hexhash\"]   (array) Array of hashes for an MMR, alternate to \"hash\"  \"mmrroot\":\"hexstr\"    (string) Only returned when passed an array for signing root hash of the merkle mountain range of the objects signed  \"vdxfkeys\":[\"vdxfkey i-address\", ...],  \"vdxfkeynames\":[\"vdxfkeyname, object for getvdxfid API, or friendly name ID -- no i-addresses\", ...],  \"boundhashes\":[\"hexhash\", ...],  \"hashtype\": \"sha256\" | \"sha256D\" | \"blake2b\" | \"keccak256\"  \"signature\":\"base64sig\" (string) The aggregate signature of the message or mmrroot encoded in base 64 if all or partial signing successful for MMR, it is of root  \"\"}Examples:
+    ---
+    """
+    
+    Ground Truth filename: verus_protocol.md
+    
+    Ground Truth:
+    """
+    usID
+
+    **VerusIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **VerusIDs** provide plenty of opportunity for identity applications. Specifically, **VerusID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Verus network
+    VerusIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Verus 0.6.2 does not include quantum resistant signatures for transactions, VerusIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. VerusIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Verus ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. VerusIDs are:
+
+    - Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    - Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    - Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    - Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    What are VerusIDs?
+
+    **ANSWER:**
+    Thought Process:
+    OK, I need to respond to this message. The question asks what VerusIDs are. It appears that some documents are available for reference. I can see if they have any information about VerusIDs.
+
+    In verus_protocol.md, I can see that VerusIDs are a fully functional blockchain protocol, not just an ID system, with no corporate involvement in the protocol. I remember that VerusIDs can receive and send funds, controlled by single or multi-sig addresses specified in the identity. They are quantum-ready friendly crypto-addresses on the worldwide Verus network, resistant to quantum attacks with known algorithms.
+
+    Next, in signdata.txt, I can see information about signing data with addresses or identities. It mentions various arguments for signing including "address", "filename", "message", and options for MMR signing. It also references features like "vdxfkeys", "boundhashes", and encryption options. However, this appears to be API documentation rather than a direct explanation of VerusIDs.
+
+    The retrieved documents contain the information I require to give this question a correct answer. I don't need to recall any information from my own memory. The first retrieved bit of context (which is from verus_protocol.md) contains the information I need to explain what VerusIDs are.
+
+    Answer:
+    VerusIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. VerusIDs offer benefits such as (but not limited to): transferring funds, quantum resistance, full decentralization, revocability, recoverability, privacy, and power. VerusIDs are quantum-ready friendly crypto-addresses on the worldwide Verus network. Would you like to know more about the quantum resistance of VerusIDs?
+
+    **QUESTION:**
+    Could you tell me more about the benefits of VerusIDs?
+
+    **ANSWER:**
+    Thought Process:
+    OK, let's think about this. The question asks about the benefits of VerusIDs. There are some retrieved documents at hand. I can see if these have any information about the benefits of VerusIDs.
+
+    From verus_protocol.md, I know that VerusIDs can be used to receive and send funds, and this behavior can be controlled by single or multi-sig addresses that are specified in the identity itself. The controller of the identity can change these controlling addresses, and if they do so, then all future spends of UTXOs sent to the VerusID will follow the updated spend conditions, and will be subject to the updated keys. VerusIDs are also revocable, with each ID including a revocation authority that can prevent the identity from being used if needed (such as in cases of key theft). They're recoverable through a separate recovery authority. Additionally, VerusIDs contain zero-knowledge private addresses for messaging, financial, or voting endpoints, and include a content map of key-value hashes for private yet selectively provable claims and attestations. Multiple addresses or other IDs can be defined as primary addresses, with configurable N of M multisig control. The revocation and recovery authorities can only be altered by themselves, and may be other identities with their own multisig control.
+
+    signdata.txt is API documentation for signing data with addresses or identities. Identities are mentioned as being able to sign data.
+
+    I have all the facts I need to produce a good answer using the retrieved context alone. I don't need to recall any information from my own memory. Chunk 1 contains a detailed explanation of the benefits of VerusIDs, while chunk 2 is API documentation that briefly mentions IDs in relation to signing data.
+
+    Answer:
+    VerusIDs offer powerful financial functionality - they enable users to both send and receive funds through the blockchain. What makes them special is how they're controlled: you can set up single signature or multi-signature addresses within the identity. The identity controller has the flexibility to modify these controlling addresses whenever needed. When changes are made, any future transactions involving funds sent to that VerusID will automatically follow the new spending rules and key requirements. Another important benefit is their accessibility - anyone can create a VerusID with complete self-sovereign control without needing permission from any central authority. When you create an ID, the associated costs are distributed to miners, stakers, and ID referrers in the network. 
+    
+    VerusIDs are also revocable and recoverable. They contain zero-knowledge private addresses for messaging, financial, or voting endpoints, and include a content map of key-value hashes for private yet selectively provable claims and attestations. Finally, as an interesting note, VerusIDs can be used to sign data.
+    
+    Would you like me to explain more about how VerusIDs can be revoked and recovered if needed?
+- role: user
+  content: |
+    Retrieved chunks:
+    """
+    {stringified_retrieved_chunks}
+    """
+
+    Ground Truth filename: {metadata}
+
+    Ground Truth:
+    """
+    {text}
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.

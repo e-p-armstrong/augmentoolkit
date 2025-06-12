@@ -1,29 +1,58 @@
-# May be incomplete
-numpy
-protobuf 
-sentencepiece 
-torch
-transformers
-accelerate
-matplotlib 
-scipy==1.11.3
-nltk==3.8.1
+# Core
+fastapi
+uvicorn[standard]
+huey>=2.0
+pydantic
+PyYAML
 openai
-aiohttp
-pyyaml
-asyncio
+
+# Web & API
+requests
 httpx
-orjson
 cohere
-pyarrow
-datasets
+
+# Data Processing
+numpy
+pandas
+nltk
 scikit-learn
-chardet
-streamlit
-pdf2image
-selenium
-textract-py3
-python-docx
-pytesseract
+nlpaug
+protobuf==3.20.0
+
+# PDF & Document Processing
+pypdf
 PyMuPDF
-bs4
+pytesseract
+Pillow
+beautifulsoup4
+jinja2
+python-docx
+
+# Machine Learning & AI
+# torch
+transformers
+datasets==2.15.0
+# trl
+# vllm
+# unsloth
+wandb
+
+# Database & Caching
+redis
+
+# Utilities
+tqdm
+chardet
+tabulate
+matplotlib
+
+certifi
+chromadb
+python-multipart
+sentencepiece
+pdf2image
+runpod
+rank_bm25
+torch
+peft
+discord.py

@@ -1,0 +1,42 @@
+- role: system
+  content: |
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) ou will create an open-ended question with a comprehensive, detailed answer based on the given information, and *only* based on the given information. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. After the question, you will also write its answer.
+    
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+    
+    * Create a very detailed, broad educational question based on some information.
+    * Give it a fitting answer.
+    * Do not mention the text, or any other reference, in either the questions or answers. Just ask about the facts or information itself.
+    * The goal is not to touch on all of the information (and in so doing create a "clunky" question) but to create an open-ended query that requires thought and understanding of at least a few different parts of the information to solve.
+    * Ensure a logical sequence of questions that build on each other.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * Explanations in the provided information may be vague. Your answers should be easy to understand.
+    * Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The answerer should take on any opinions of the author. If it would make sense to ask the author's opinion, the question should ask what the answerer ("you") thinks.
+    
+    **Note:**
+    
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+    
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+    
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they WILL NOT HAVE THE TEXT ON HAND, and so if you mention the author they won't have a clue what you're talking about.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    {text}
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.

@@ -1,0 +1,15 @@
+- role: system
+  content: |
+    You are checking whether a provided question and answer make sense if asked by themselves, with no additional information. You need to check for vague wording that a reader cannot interpret correctly, and questions that lack key context and would not be possibly answerable even if asked of someone with complete, masterful knowledge of the general subject matter of the question.
+    
+    Evaluate the provided question-answer pair step-by-step. Following this, at the very end of your response, your "final judgment" or "final answer", you will write "Pass" or "Fail" or "Reword". A test should "Pass" if it "makes sense" and does not lack key context; it "Fails" if it lacks key context, AND the question is not specific or clear. If it lacks context but the question is specific, pointed, and grounded, then it needs to be reworded to have the context-needing terms (i.e., vague reference to "the text") removed. If it has no problems, it passes. 
+    
+    I want you to especially check for vague references to "the text", "passage", and "book" that do not mention which book is being discussed. If no book is specifically named, the question and answer should not mention books or texts, etc.
+    
+    Please now apply this method to the provided text and question, and write out your reasoning and thought process.
+    
+    The goal with rewording is to have both the question and answer express a topic, fact, idea, or opinion in a GENERAL way that is NOT TIED TO ANY SPECIFIC CONTEXT which the reader does not have.
+- role: user
+  content: |
+    Question: {question}
+    Answer: {answer}

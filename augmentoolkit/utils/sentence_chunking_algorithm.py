@@ -8,10 +8,10 @@ import os
 try:
     from PIL import Image
     from pdf2image import convert_from_path
-    import textract
     import pytesseract
     import fitz  # pymupdf
     import docx
+
     def extract_text_from_docx(path):
         """
         Extracts text from a DOCX file.
@@ -26,10 +26,7 @@ try:
         full_text = []
         for para in doc.paragraphs:
             full_text.append(para.text)
-        return '\n'.join(full_text)
-
-    def read_doc_file(file_path):
-        return textract.process(file_path).decode("utf-8")
+        return "\n".join(full_text)
 
     def extract_text_from_pdf(path):
         """
@@ -41,7 +38,7 @@ try:
         Returns:
             str: The extracted text.
         """
-        text = ''
+        text = ""
         with fitz.open(path) as doc:
             for page in doc:
                 text += page.get_text()
@@ -57,7 +54,7 @@ try:
         Returns:
             str: The extracted text.
         """
-        text = ''
+        text = ""
         with fitz.open(path) as doc:
             for page_number, page in enumerate(doc):
                 # logger.info("Performing OCR on page %d", page_number + 1)
@@ -65,21 +62,21 @@ try:
                 img_bytes = pix.tobytes("png")
                 img = Image.open(io.BytesIO(img_bytes))
                 page_text = pytesseract.image_to_string(img)
-                text += page_text + '\n'
+                text += page_text + "\n"
         return text
 
     def remove_newlines_in_sentences(text):
-        lines = text.split('\n')
+        lines = text.split("\n")
         new_lines = []
         for line in lines:
             line = line.strip()
             if line:
-                if line[-1] not in '.!?':
-                    line += ' '
+                if line[-1] not in ".!?":
+                    line += " "
                 else:
-                    line += '\n'
+                    line += "\n"
                 new_lines.append(line)
-        return ''.join(new_lines)
+        return "".join(new_lines)
 
     def extract_text(path):
         """
@@ -94,11 +91,11 @@ try:
         # Check the file extension
         _, ext = os.path.splitext(path)
         ext = ext.lower()
-        
-        if ext == '.docx':
+
+        if ext == ".docx":
             # logger.info("Extracting text from DOCX file.")
             text = extract_text_from_docx(path)
-        elif ext == '.pdf':
+        elif ext == ".pdf":
             # logger.info("Extracting text from PDF file.")
             text = extract_text_from_pdf(path)
             # logger.info("Extracted text length: %d", len(text))
@@ -108,19 +105,23 @@ try:
                 text = extract_text_from_pdf_ocr(path)
         else:
             raise ValueError(f"Unsupported file type: {ext}")
-        
+
         # Remove newlines within sentences
         text = remove_newlines_in_sentences(text)
-        
+
         return text
+
 except ImportError as e:
-    print("NOTE PDF and DOCX extraction will not work without the required libraries. Please install the required libraries to enable this functionality.")
+    print(
+        "NOTE PDF and DOCX extraction will not work without the required libraries. Please install the required libraries to enable this functionality. You need: `PyMuPDF Pillow pytesseract python-docx`. You also need to have Tesseract OCR installed on your system. Visit: https://tesseract-ocr.github.io/tessdoc/Installation.html (these are not included by default because tesseract can be a pain to setup)"
+    )
     print("This is the error")
     print(e)
+
     def extract_text(file_path):
-        raise Exception("PDF and DOCX extraction is not supported without the required libraries.")
-
-
+        raise Exception(
+            "PDF and DOCX extraction is not supported without the required libraries."
+        )
 
 
 def sentence_chunking_algorithm(file_path, max_char_length=1900):
@@ -134,8 +135,8 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
     chunks_with_source = []
     current_chunk = []
     char_count = 0
-    source_name = re.sub(r"\..*$", "", os.path.basename(file_path))
-    
+    source_name = os.path.basename(file_path)
+
     if file_path.endswith(".pdf") or file_path.endswith(".docx"):
         content = extract_text(file_path)
     else:
@@ -143,7 +144,7 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
         #     raw_data = raw_file.read()
         #     result = chardet.detect(raw_data)
         #     file_encoding = result['encoding']
-            
+
         # Now read the file with the detected encoding
         with open(file_path, "r", errors="ignore") as file:
             content = file.read()
@@ -156,9 +157,7 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
     #     print(f"\nError reading file {file_path}: {e}\n")
     #     return []
 
-    paragraphs = content.split(
-        "\n\n"
-    )
+    paragraphs = content.split("\n\n")
     max_char_length = int(max_char_length)
 
     for paragraph in paragraphs:
@@ -170,26 +169,30 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
 
         # Check if the paragraph itself exceeds the max token length
         if paragraph_char_count > max_char_length:
-        # Fallback to character chunking for this paragraph
+            # Fallback to character chunking for this paragraph
             end_index = 0
-            
+
             while end_index < paragraph_char_count:
                 chunk_end = min(end_index + max_char_length, paragraph_char_count)
-                
+
                 # Take until the next sentence ends (or we reach max_char_length*1.5)
-                while (chunk_end < paragraph_char_count and 
-                    paragraph[chunk_end] not in [".", "!", "?", "\n"] and 
-                    chunk_end < end_index + max_char_length * 1.5):
+                while (
+                    chunk_end < paragraph_char_count
+                    and paragraph[chunk_end] not in [".", "!", "?", "\n"]
+                    and chunk_end < end_index + max_char_length * 1.5
+                ):
                     chunk_end += 1
                 # add one to chunk_end to include the punctuation IF it's not the last character
                 if chunk_end < paragraph_char_count:
                     chunk_end += 1
-                
-                chunks_with_source.append({
-                    "paragraph": paragraph[end_index:chunk_end],
-                    "metadata": source_name
-                })
-                
+
+                chunks_with_source.append(
+                    {
+                        "paragraph": paragraph[end_index:chunk_end],
+                        "metadata": source_name,
+                    }
+                )
+
                 end_index = chunk_end
 
             # # handle the remainder of the paragraph
@@ -202,21 +205,21 @@ def sentence_chunking_algorithm(file_path, max_char_length=1900):
                 current_chunk.append(paragraph)
                 char_count += paragraph_char_count
             else:
-                chunks_with_source.append({
-                    "paragraph": "".join(current_chunk), 
-                    "metadata": source_name
-                })
+                chunks_with_source.append(
+                    {"paragraph": "".join(current_chunk), "metadata": source_name}
+                )
                 current_chunk = [paragraph]
                 char_count = paragraph_char_count
 
     # Add the last chunk if it exists
     if current_chunk:
-        chunks_with_source.append({
-                    "paragraph": "".join(current_chunk), 
-                    "metadata": source_name
-                })
+        chunks_with_source.append(
+            {"paragraph": "".join(current_chunk), "metadata": source_name}
+        )
 
     # filter out chunks with fewer than 50 characters
-    chunks_with_source = [chunk for chunk in chunks_with_source if len(chunk["paragraph"]) >= 50]
+    chunks_with_source = [
+        chunk for chunk in chunks_with_source if len(chunk["paragraph"]) >= 50
+    ]
 
     return chunks_with_source, content

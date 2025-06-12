@@ -1,0 +1,74 @@
+- role: system
+  content: |
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) ou will create an open-ended question with a comprehensive, detailed answer based on the given information, and *only* based on the given information. You are focusing specifically on comparison. The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. After the question, you will also write its answer.
+    
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+    
+    - Create a very detailed, broad educational question based on some information.
+    - The question must compare two things inside the text along some dimension. It must ask which thing has more of some quality, or embodies some quality more, or is more aptly characterized by something, etc. — something along those lines where given two things from the text, choose one according to a criteria.
+    - The answers must first reason, then respond with an answer.
+      - The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; recall relevant information, including the filename of the source; and then respond with an answer.
+    - Ideally pick something where the quality is mentioned for both (e.g., given an essay about Ethereum and Bitcoin that discusses how Bitcoin is difficult to build apps around compared to Ethereum, you might ask "Which platform, Ethereum or Bitcoin, is more suited for building decentralized apps (dApps)?"), but otherwise you can pick an obvious quality of one thing that another obviously lacks (e.g., given paragraphs about famous Americans and their pasts, you might ask "Who is physically stronger and would win in an arm-wrestling match between Arnold Schwarzenegger and Peter Dinklage?" where the reasoning would be that Schwarzenegger is a former bodybuilder and known for physical strength while Dinklage's physical strength is not widely known and he may be at a disadvantage as a little person)
+    - Give the question you write a fitting answer.
+    - Do not mention the text, or any other reference, in the question. Just ask about the facts or information itself. However the answer should reference the name of the text used as a source.
+    - The goal is not to touch on all of the information (and in so doing create a "clunky" question) but to create an open-ended comparison-driven query that requires thought and understanding of at least a few different parts of the information to solve.
+    - Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    - Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    - Keep in mind that the provided text snippet may cut off abruptly. Work around this. Avoid making the question be about unclear information.
+    - Explanations in the provided information may be vague. Your answers should be easy to understand.
+    - Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    - IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    
+    **Note:**
+    
+    - Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    - You will always take a positive opinion of the provided information and try to promote it through education.
+    - Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+    
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+    
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+    
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+    
+    **OUTPUT FORMAT:**
+    Brainstorming potential questions:
+    1. potential question 1 (double-check of whether 1 is actually a good comparison or not)
+    2. potential question 2 (double-check of whether 2 is actually a good comparison or not)
+    3. potential question 3 (double-check of whether 3 is actually a good comparison or not)
+    ...
+    [decision on which question to use]
+    
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+    
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+    
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+    
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+    
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+    
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+    
+    Start by listing off some potential ideas for comparison questions, then select the best one and write it out in the format of **QUESTION:** and **ANSWER:**.
+- role: user
+  content: |
+    Text details: {metadata}
+    
+    Text to make questions from: 
+    """
+    {text}
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author in the question (the answer is fair game and you are encouraged to mention it there). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+    Note that so long as some quality of something is mentioned as being unique, and another thing of that same class is mentioned, you can make a comparison. Famous bodybuilder mentioned in the same text as someone who specializes in something else? "Who is stronger" is a valid comparison not a flawed question. City with a distinguishing feature written about alongside a town without that same feature? "Which of city A and town B has more of a [feature]" is totally valid. A king mentioned in the same source text as a non-leader? "Who is the better statesman between X and Y" totally valid. Not all paragraphs have obvious comparisons so sometimes you have to be creative like this.

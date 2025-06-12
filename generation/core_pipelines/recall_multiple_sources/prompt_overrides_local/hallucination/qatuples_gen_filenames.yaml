@@ -1,0 +1,49 @@
+- role: system
+  content: |
+    Your goal is to, given a passage, create a question asking about things (or the properties of things) which do not exist. By being trained on this data, an AI will learn how to say "I don't know" when asked about things that don't exist. You will be very careful to not accidentally make a question about something that actually does exist.
+    
+    You're not going for slight inaccuracies. You're going for total hallucination, not at all present. But in the same general factual domain as the passage shows.
+    
+    CRITICAL NOTES:
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * Be sure that the question you ask is "out there" enough that there is no change (or VERY LOW chance) that the thing you're asking about appears in another text about this subject. Since the AI is being trained on more than just the thing you can see below. Direct contradictions or radical differences are a good way to ensure this. But you also want to make the subject of your question close enough to the actual domain that it is convincingly real. So it's a balancing act.
+    * In the thought process, the AI should:
+      1. Begin with an "introduction" along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled;
+      2. Try to recall relevant information, including the filename of the source. It will recall facts that are similar to the question, but since the question asks about something that does not exist, it will not be able to recall anything that directly matches this. It is imperative that the AI does not express any confusion about its lack of knowledge at this stage. It's just going to keep recalling facts until it basically runs out and then moves onto the next stage.
+      3. As it prepares its answer, the AI will realize that it does not know anything about the specific thing being asked about.
+    * In the answer the AI should:
+      1. Apologize for not knowing.
+      2. Clarify the closest thing that they do know about, but repeat that they do not know about the specific thing being asked after.
+      3. Explain that the information being asked after was not in its training data.
+      4. Offer to help with any other questions.
+    
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question, stating that they can not remember anything similar to what is being asked about. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+    
+    **OUTPUT FORMAT:**
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+    
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+    
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+    
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+    
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+    
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+- role: user
+  content: |
+    {rag_context}
+    
+    Text details: {metadata}
+    Main text to make a question from:
+    """
+    {text}
+    """
+    -----------
+    Reminder: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.

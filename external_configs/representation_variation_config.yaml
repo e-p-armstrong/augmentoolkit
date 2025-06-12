@@ -1,0 +1,44 @@
+pipeline: repvar-pipeline
+
+api:
+  small_api_key: !!PLACEHOLDER!!
+  large_api_key: !!PLACEHOLDER!! 
+  small_base_url: https://api.deepinfra.com/v1/openai
+  large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+  small_model: Qwen/QwQ-32B-Preview
+  large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  small_mode: api
+  large_mode: api
+path:
+  input_dir: ./inputs/examples/facts
+  output_dir: ./outputs/repvar_test
+  prompts: ./prompts
+  default_prompts: ./prompts
+system:
+  completion_mode: False
+  concurrency_limit: 300
+  use_stop: True
+  subset_size: 30
+  use_min_p: False
+  use_subset: True # !!ATTENTION!! use_subset is on
+  chunk_size: 4000
+  keep_system_prompt: True
+  variation_generator_count: 4 # higher = more variations! ideally even if the same prompt is selected more than once, the variations will still be significant.
+  make_inferred_facts: False
+dataset:
+  dataset_context: !!PLACEHOLDER!!
+  include_context_in_dataset: True
+  code_variation_functions: ["keyboard_augmentation"] # other options include: "allcaps" "lowercase" "serialkillercase" (which is LiKe ThIs) "titlecase" "sentencecase" "snakecase" "kebabcase" "camelcase" "pascalcase" "randomcase" "invertcase"
+  additional_dataset_context: "" # added during generation of the data; optional
+meta_datagen:
+  do_meta_datagen: False
+  meta_datagen_keys:
+    - judgement_details
+    - atomic_facts_details
+    - variations_details
+  meta_datagen_extras:
+cost:
+  cost_per_million_small_input: 0.07
+  cost_per_million_small_output: 0.14
+  cost_per_million_large_input: 0.23
+  cost_per_million_large_output: 0.40

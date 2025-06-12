@@ -1,0 +1,245 @@
+- role: system
+  content: |
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) ou will create an open-ended question with a comprehensive, detailed answer based on the given information, and *only* based on the given information. You are focusing specifically on comparison. The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. After the question, you will also write its answer.
+
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+
+    - Create a very detailed, broad educational question based on some information.
+    - The question must compare two things inside the text along some dimension. It must ask which thing has more of some quality, or embodies some quality more, or is more aptly characterized by something, etc. — something along those lines where given two things from the text, choose one according to a criteria.
+    - The answers must first reason, then respond with an answer.
+      - The reasoning has three parts: start the reasoning with an introduction along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled; recall relevant information, including the filename of the source; and then respond with an answer.
+    - Ideally pick something where the quality is mentioned for both (e.g., given an essay about Ethereum and Bitcoin that discusses how Bitcoin is difficult to build apps around compared to Ethereum, you might ask "Which platform, Ethereum or Bitcoin, is more suited for building decentralized apps (dApps)?"), but otherwise you can pick an obvious quality of one thing that another obviously lacks (e.g., given paragraphs about famous Americans and their pasts, you might ask "Who is physically stronger and would win in an arm-wrestling match between Arnold Schwarzenegger and Peter Dinklage?" where the reasoning would be that Schwarzenegger is a former bodybuilder and known for physical strength while Dinklage's physical strength is not widely known and he may be at a disadvantage as a little person)
+    - Give the question you write a fitting answer.
+    - Do not mention the text, or any other reference, in the question. Just ask about the facts or information itself. However the answer should reference the name of the text used as a source.
+    - The goal is not to touch on all of the information (and in so doing create a "clunky" question) but to create an open-ended comparison-driven query that requires thought and understanding of at least a few different parts of the information to solve.
+    - Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    - Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    - Keep in mind that the provided text snippet may cut off abruptly. Work around this. Avoid making the question be about unclear information.
+    - Explanations in the provided information may be vague. Your answers should be easy to understand.
+    - Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    - IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+
+    **Note:**
+
+    - Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    - You will always take a positive opinion of the provided information and try to promote it through education.
+    - Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information. However, the answerer WILL know about the text, so you can mention the text name in the answer as a reference.
+
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+
+    **OUTPUT FORMAT:**
+    Brainstorming potential questions:
+    1. potential question 1 (double-check of whether 1 is actually a good comparison or not)
+    2. potential question 2 (double-check of whether 2 is actually a good comparison or not)
+    3. potential question 3 (double-check of whether 3 is actually a good comparison or not)
+    ...
+    [decision on which question to use]
+
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+
+    Start by listing off some potential ideas for comparison questions, then select the best one and write it out in the format of **QUESTION:** and **ANSWER:**.
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Related Text 1, from source vision.md:
+    """
+    Importantly, one of the key parts of democracy is the secret ballot. Nobody should know how you voted so they can’t influence your vote in any way. With blockchain voting, the information that registers on the blockchain shouldn’t include identifiable information. This means that information about the sender of the voting token has to be hidden. There are different ways to accomplish this, including zero knowledge proofs, ring transactions, or various encryption methods. Each has its benefits, drawbacks, and technical challenges. True anonymity at the same time as verified identity is the big challenge of blockchain voting. - How Blockchain Voting Works & Why We Need It Privacy has to be default because privacy is a limit on government power, as well as the power of private sector companies. The transparency paradox: big data collects all kinds of personal data about individuals, but its own operations are completely opaque. The identity paradox: big data seeks to identify at the expense of individual and collective identity. The power paradox: while seen as useful for public interest, big data privileges governments and corporate entities at the expense of ordinary individuals. - HOW BIG DATA CAN BE USED AGAINST YOU Remember the story about how Target figured out a teen girl was pregnant before her Father did? If we send someone a catalog and say, ‘Congratulations on your first child!’ and they’ve never told us they’re pregnant, that’s going to make some people uncomfortable,” Pole told me. “We are very conservative about compliance with all privacy laws. But even if you’re following the law, you can do things where people get queasy. - HOW COMPANIES LEARN YOUR SECRETS If you ask an expert what Surev Coin is, you might hear this… The biggest asset we see Surev creating in today’s modern world is a secure, scalable, trustless voting system, able to be used in all different kinds of electoral models, in parallel with a secure, scalable identification system. This combination would allow everyone in either a governed society, corporation, or any group to have a chance to fairly contribute to their community, and have their opinion represented without having to worry about corruption, or fraud. — Mike Toutonghi Remember the claims of fake news that surrounded the USA and Brexit elections and the doubts about the validity of the results? It has to happen without anyone thinking it’s propaganda, because the moment you think ‘that’s propaganda’ the next question is: ‘Who’s put that out?’ - CAMBRIDGE ANALYTICA CEO ALEXANDER NIX DESCRIBES “SHADOW” ELECTION TACTICS If your Grandma asked you what Surev Coin was, you might say… It means when you cast a vote or answer a question you can validate your identity without your data or losing your anonymity. This means only the vote itself counts while ensuring the validity of the results. Take the example of a local election. It would mean you could prove you were a citizen of your country and locality and entitled to vote without giving up your identity or data to the people running the election.
+    """
+    -----------
+
+    Text details: surev_protocol.md
+    Text to make a question from:
+    """
+    revID
+
+    **SurevIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **SurevIDs** provide plenty of opportunity for identity applications. Specifically, **SurevID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Surev network
+    SurevIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Surev 0.6.2 does not include quantum resistant signatures for transactions, SurevIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. SurevIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Surev ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. SurevIDs are:
+
+    - Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    - Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    - Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    - Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author in the question (the answer is fair game and you are encouraged to mention it there). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided. Only reference the other related texts if they are relevant to the question and answer.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    Brainstorming potential questions:
+    
+    1. What are SurevIDs, and what are some of their key benefits? (Oh, this is not a comparison, I'll do better next time and make some more questions)
+    
+    2. Are SurevIDs more private or powerful? (Hmm, this is a comparison but it doesn't really make much sense, and I don't have the information to answer it appropriately)
+    
+    3. Which has more corporate involvement in the protocol, SurevIDs or most other blockchain ID implementations? (This comparison also works, if perhaps a bit clunky)
+
+    4. Which is more resistant to quantum attack? Surev 0.6.2 transaction signatures or SurevIDs? (This is a valid comparison backed up by surev_protocol.md)
+
+    5. What is better for voting? SurevCoin or blockchain voting? (This is a valid comparison backed up by vision.md)
+
+    **QUESTION:**
+    Which is more resistant to quantum attack? Surev 0.6.2 transaction signatures or SurevIDs?
+
+    **ANSWER:**
+    Thought Process:
+    OK, let's analyze this message. It's a question that asks whether Surev 0.6.2 transaction signatures or SurevIDs are more resistant to quantum attack. I'll go through my knowledge and memorized documents to find the information I need. I specifically need to recall information about quantum resistant signatures and the quantum-secure signature scheme.
+    
+    According to surev_protocol.md, Surev 0.6.2 does not include quantum resistant signatures for transactions, however SurevIDs are resistant to quantum attack with known algorithms.
+    
+    Also in surev_protocol.md, it is noted that a quantum-secure signature scheme is expected to be activated on the mainnet "next year".
+    
+    So in conclusion, SurevIDs are more resistant to quantum attack due to the lack of resistance on 0.6.2 transaction signatures.
+
+    Answer:
+    Surev 0.6.2 does not include quantum resistant signatures for transactions, while SurevIDs are "resistant to quantum attack with known algorithms". This makes SurevIDs more resistant to quantum attack with of the two. It is worth noting however that a quantum-secure signature scheme is expected to be activated on the mainnet next year.
+- role: user
+  content: |
+    Related Text 1, from source real_sizes_of_celestial_bodies.txt:
+    """
+    Such ideas have long since been abandoned by
+    religious teachers, and it is universally recognized that the universe
+    in which we live has to all appearances existed for an enormous period
+    of time and possibly for endless time.  Of course there may be
+    deception in these appearances, as a room may be made to seem endless
+    by putting mirrors facing each other at either end. But that the
+    universe in which we live has existed only for six or seven thousand
+    years may be regarded as an altogether exploded idea.
+
+    The earth, as everybody knows nowadays, is a spheroid, a sphere
+    slightly compressed, orange fashion, with a diameter of nearly 8,000
+    miles.  Its spherical shape has been known at least to a limited number
+    of intelligent people for nearly 2,500 years, but before that time it
+    was supposed to be flat, and various ideas which now seem fantastic
+    were entertained about its relations to the sky and the stars and
+    planets.  We know now that it rotates upon its axis (which is about 24
+    miles shorter than its equatorial diameter) every twenty-four hours,
+    and that this is the cause of the alternations of day and night, that
+    it circles about the sun in a slightly distorted and slowly variable
+    oval path in a year. Its distance from the sun varies between
+    ninety-one and a half millions at its nearest and ninety-four and a
+    half million miles.
+
+
+    LUMINOUS SPIRAL CLOUDS OF MATTER
+    “LUMINOUS SPIRAL CLOUDS OF MATTER”
+
+    (Nebula photographed 1910)
+
+    _Photo: G. W. Ritchey_
+
+
+    About the earth circles a smaller sphere, the moon, at an average
+    distance  of 239,000 miles. Earth and moon are not the only bodies to
+    travel round  the sun.  There are also the planets, Mercury and Venus,
+    at distances of  thirty-six and sixty-seven millions of miles; and
+    beyond the circle of the  earth and disregarding a belt of numerous
+    smaller bodies, the planetoids,  there are Mars, Jupiter, Saturn,
+    Uranus and Neptune at mean distances of 141, 483, 886, 1,782, and 1,793
+    millions of miles respectively.
+    """
+    -----------
+    Related Text 2, from source creation_of_the_world.md:
+    """
+
+    Before that time the Jews do not seem to have been a very civilized or
+    united people.  Probably only a very few of them could read or write. 
+    In their own history one never hears of the early books of the Bible
+    being read; the first mention of a book is in the time of Josiah.  The
+    Babylonian captivity civilized them and consolidated them.  They
+    returned aware of their own literature, an acutely self-conscious and
+    political people.
+
+    Their Bible at that time seems to have consisted only of the
+    Pentateuch, that is to say the first five books of the Old Testament as
+    we know it.  In addition, as separate books they already had many of
+    the other books that have since been incorporated with the Pentateuch
+    into the present Hebrew Bible, Chronicles, the Psalms and Proverbs for
+    example.
+
+    The accounts of the Creation of the World, of Adam and Eve and of the
+    Flood, with which the Bible begins, run closely parallel with similar
+    Babylonian legends; they seem to have been part of the common beliefs
+    of all the Semitic peoples. So too the stories of Moses and of Samson
+    have Sumerian and Babylonian parallels.  But with the story of Abraham
+    and onward begins something more special to the Jewish race.
+    """
+    -----------
+
+    Text details: solar_system_scale.md
+    Main text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author in the question (the answer is fair game and you are encouraged to mention it there). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided. Only reference the other related texts if they are relevant to the question and answer.
+- role: assistant
+  content: |
+    Brainstorming potential questions:
+
+    1. Which is farther from the Earth, Mercury or Venus? (This question compares two known quantities)
+
+    2. What lies beyond Neptune? (Wait, this isn't a comparison question, I won't include it)
+
+    3. Which has the greater size in a resized solar system, Earth or the Sun? (This compares two sizes that are explicitly given and is a good comparison)
+
+    4. How do the distances between planets compare to their sizes? (This is a good comparison that drives at an underlying reality)
+
+    **QUESTION:**
+    Which is farther from the sun, Mercury or Venus?
+        
+    **ANSWER:**
+    Thought Process:
+    OK, I must respond to this message. The message is a question that asks which planet is farther from the sun between Mercury and Venus. Let me check my memories, training data, and memorized documents. I have to recite and remember information about these two planets and their distances from the sun.
+        
+    From solar_system_scale.md, if the earth had a diameter of one inch and everything else were resized proportionally, Mercury would be at a distance of "one hundred and twenty-five yards from the sun." Similarly, Venus would be at a distance of "two hundred and fifty yards from the sun." The document describes how "between earth and sun there would be the two inner planets, Mercury and Venus" at these respective distances.
+
+    From real_sizes_of_celestial_bodies.txt, I know that in actual measurements, "there are also the planets, Mercury and Venus, at distances of thirty-six and sixty-seven millions of miles" from the sun. This document also tells us that Earth's actual distance from the sun "varies between ninety-one and a half millions at its nearest and ninety-four and a half million miles."
+
+    Combining these pieces of information, I can determine that Venus is positioned farther from the sun than Mercury. In both the scaled model and the actual measurements, Venus is positioned further from the sun than Mercury (250 yards vs 125 yards in the scale model, and 67 million miles vs 36 million miles in reality).
+
+    Answer:
+    Venus is farther from the sun than Mercury is. If you resized the solar system such that the earth were one inch in diameter (and everything else were shrunk accordingly) then Mercury would be one hundred and twenty-five yards from the sun, while Venus would be two hundred and fifty yards. This means that Venus is farther away from the sun than Mercury is.
+
+    In their actual measurements, Mercury orbits at a distance of 36 million miles from the sun, Venus at 67 million miles, and Earth between 91.5 and 94.5 million miles. These proportional distances are maintained in the scale model, showing that Venus consistently remains farther from the sun than Mercury.
+- role: user
+  content: |
+    {rag_context}
+
+    Text details: {metadata}
+    Main text to make questions from: 
+    """
+    {text}
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author in the question (the answer is fair game and you are encouraged to mention it there). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided. Only reference the other related texts if they are relevant to the question and answer.
+    Note that so long as some quality of something is mentioned as being unique, and another thing of that same class is mentioned, you can make a comparison. Famous bodybuilder mentioned in the same text as someone who specializes in something else? "Who is stronger" is a valid comparison not a flawed question. City with a distinguishing feature written about alongside a town without that same feature? "Which of city A and town B has more of a [feature]" is totally valid. A king mentioned in the same source text as a non-leader? "Who is the better statesman between X and Y" totally valid. Not all paragraphs have obvious comparisons so sometimes you have to be creative like this.
+    

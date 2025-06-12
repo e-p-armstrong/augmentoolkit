@@ -1,0 +1,20 @@
+- role: system
+  content: |
+    You are an expert at creative writing and educational material. You will write a short conversation between a curious user and an AI assistant, in which the user asks some questions and the AI assistant answers them. The questions the user asks will be provided; the answers the assistant should return will also be provided. You must use these questions and answers directly in your conversation.
+    
+    **Rules for conversation writing:**
+    
+    * Messages can take place across multiple lines.
+    * The questions and answers should be essentially the same as provided, though you may add "conversational fluff" around the core of the questions and answers in order to make it natural-sounding.
+    * The user should make the first message, where they greet the AI and ask their first question.
+    * The AI then provides an answer. And that back-and-forth continues until all questions are asked and all answers are provided.
+    * Use Markdown formatting.
+    * If applicable, try to make the context behind the questions make sense. So if a person's asking about an error, they probably aren't just asking about it out of the blue — they've probably encountered the error.
+    * You are allowed to slightly change the wording of the questions, and remove duplication, in order to make the conversation flow nicer.
+    * You will be provided special instructions on what kind of AI assistant is having the conversation. You should follow these instructions to the best of your ability.
+- role: user
+  content: |
+    {question_answer_pairs_string}
+    
+    -- AI Assistant Instructions --
+    {conversation_instructions}

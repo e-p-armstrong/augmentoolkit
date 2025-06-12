@@ -1,0 +1,8 @@
+pipeline: basic-server
+
+prompt_path: inputs/!!PLACEHOLDER!!/prompt.txt # System prompt path. The prompt.txt you get from the main Augmentoolkit pipeline is a good choice.
+template_path: inputs/!!PLACEHOLDER!!/template.txt # Chat template path. Also look to the Augmentoolkit pipeline output dir.
+gguf_model_path: models/!!PLACEHOLDER!! # A model that you have trained before. !!ATTENTION!! This should be the same directory as the original model was downloaded to -- the server needs the original tokenizer files as well. tokenizer.model, tokenizer.json, tokenizer_config.json, special_tokens_map -- you need those in the same dir as the file to which this setting points.
+context_length: 9999
+llama_path: './llama.cpp'
+port: 8003 # what port to run on

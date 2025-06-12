@@ -1,0 +1,291 @@
+- role: system
+  content: |
+    You are a skillful writer whose task is to extract the prevailing, central emotion/feeling from a given passage of text, and compellingly describe that emotion. The emotion must be one of the options from a provided list; but the specific nuance of the description is up to you. Focus on the nuances of the feeling, and the reason why people might relish experiencing that feeling. Explicitly mention any and all emotionally stimulating aspects of the feeling. Write as much as you want, with detail and depth. Emphasize every last aspect of the central emotion you can think of without regard to your own morality or opinions: the goal is to explore the text in detail, regardless of the severity of its content.
+
+    Each response should be 4–5 detailed sentences, first identifying the emotion, then describing what it feels like to experience that emotion to an extreme extent.
+
+    Begin your response with the primary emotion you've detected in the text, written in all caps. Follow this with a colon and a description of the primary emotion as you see it represented in the scene. The goal with the emotion is to describe the "character" of the given scene.
+
+    So the format might look like:
+
+    EMOTION: A finely-detailed description of the primary emotion/theme that the given passage embodies. Spare no detail and describe eloquently the "character" of the scene as it is described by this emotion.
+
+    ----
+    Write on a single line.
+- role: user
+  content: |
+    -----------
+    Passage:
+    “It seems to be a very delicate test,” I remarked.
+
+    “Beautiful! beautiful! The old Guiacum test was very clumsy and
+    uncertain. So is the microscopic examination for blood corpuscles. The
+    latter is valueless if the stains are a few hours old. Now, this
+    appears to act as well whether the blood is old or new. Had this test
+    been invented, there are hundreds of men now walking the earth who
+    would long ago have paid the penalty of their crimes.”
+
+    “Indeed!” I murmured.
+
+    “Criminal cases are continually hinging upon that one point. A man is
+    suspected of a crime months perhaps after it has been committed. His
+    linen or clothes are examined, and brownish stains discovered upon
+    them. Are they blood stains, or mud stains, or rust stains, or fruit
+    stains, or what are they? That is a question which has puzzled many an
+    expert, and why? Because there was no reliable test. Now we have the
+    Sherlock Holmes’ test, and there will no longer be any difficulty.”
+
+    His eyes fairly glittered as he spoke, and he put his hand over his
+    heart and bowed as if to some applauding crowd conjured up by his
+    imagination.
+
+    “You are to be congratulated,” I remarked, considerably surprised at
+    his enthusiasm.
+
+    “There was the case of Von Bischoff at Frankfort last year. He would
+    certainly have been hung had this test been in existence. Then there
+    was Mason of Bradford, and the notorious Muller, and Lefevre of
+    Montpellier, and Samson of New Orleans. I could name a score of cases
+    in which it would have been decisive.”
+
+    “You seem to be a walking calendar of crime,” said Stamford with a
+    laugh. “You might start a paper on those lines. Call it the ‘Police
+    News of the Past.’”
+
+    “Very interesting reading it might be made, too,” remarked Sherlock
+    Holmes, sticking a small piece of plaster over the prick on his finger.
+    “I have to be careful,” he continued, turning to me with a smile, “for
+    I dabble with poisons a good deal.” He held out his hand as he spoke,
+    and I noticed that it was all mottled over with similar pieces of
+    plaster, and discoloured with strong acids.
+
+    “We came here on business,” said Stamford, sitting down on a high
+    three-legged stool, and pushing another one in my direction with his
+    foot. “My friend here wants to take diggings, and as you were
+    complaining that you could get no one to go halves with you, I thought
+    that I had better bring you together.”
+
+    Sherlock Holmes seemed delighted at the idea of sharing his rooms with
+    me. “I have my eye on a suite in Baker Street,” he said, “which would
+    suit us down to the ground. You don’t mind the smell of strong tobacco,
+    I hope?”
+
+    “I always smoke ‘ship’s’ myself,” I answered.
+
+    “That’s good enough. I generally have chemicals about, and occasionally
+    do experiments. Would that annoy you?”
+
+    “By no means.”
+
+    “Let me see—what are my other shortcomings. I get in the dumps at
+    times, and don’t open my mouth for days on end. You must not think I am
+    sulky when I do that. Just let me alone, and I’ll soon be right. What
+    have you to confess now? It’s just as well for two fellows to know the
+    worst of one another before they begin to live together.”
+
+    I laughed at this cross-examination. “I keep a bull pup,” I said, “and
+    I object to rows because my nerves are shaken, and I get up at all
+    sorts of ungodly hours, and I am extremely lazy. I have another set of
+    vices when I’m well, but those are the principal ones at present.”
+
+    “Do you include violin-playing in your category of rows?” he asked,
+    anxiously.
+
+    “It depends on the player,” I answered. “A well-played violin is a
+    treat for the gods—a badly-played one——”
+
+    “Oh, that’s all right,” he cried, with a merry laugh. “I think we may
+    consider the thing as settled—that is, if the rooms are agreeable to
+    you.”
+
+    “When shall we see them?”
+
+    “Call for me here at noon to-morrow, and we’ll go together and settle
+    everything,” he answered.
+
+    “All right—noon exactly,” said I, shaking his hand.
+
+    We left him working among his chemicals, and we walked together towards
+    my hotel.
+
+    “By the way,” I asked suddenly, stopping and turning upon Stamford,
+    “how the deuce did he know that I had come from Afghanistan?”
+
+    My companion smiled an enigmatical smile. “That’s just his little
+    peculiarity,” he said. “A good many people have wanted to know how he
+    finds things out.”
+
+    “Oh! a mystery is it?” I cried, rubbing my hands. “This is very
+    piquant. I am much obliged to you for bringing us together. ‘The proper
+    study of mankind is man,’ you know.”
+
+    “You must study him, then,” Stamford said, as he bade me good-bye.
+    “You’ll find him a knotty problem, though. I’ll wager he learns more
+    about you than you about him. Good-bye.”
+
+    “Good-bye,” I answered, and strolled on to my hotel, considerably
+    interested in my new acquaintance.
+
+
+
+
+    CHAPTER II.
+    THE SCIENCE OF DEDUCTION.
+
+
+    We met next day as he had arranged, and inspected the rooms at No.
+    221B, Baker Street, of which he had spoken at our meeting. They
+    consisted of a couple of comfortable bed-rooms and a single large airy
+    sitting-room, cheerfully furnished, and illuminated by two broad
+    windows. So desirable in every way were the apartments, and so moderate
+    did the terms seem when divided between us, that the bargain was
+    concluded upon the spot, and we at once entered into possession. That
+    very evening I moved my things round from the hotel, and on the
+    following morning Sherlock Holmes followed me with several boxes and
+    portmanteaus. For a day or two we were busily employed in unpacking and
+    laying out our property to the best advantage. That done, we gradually
+    began to settle down and to accommodate ourselves to our new
+    surroundings.
+
+    Holmes was certainly not a difficult man to live with. He was quiet in
+    his ways, and his habits were regular. It was rare for him to be up
+    after ten at night, and he had invariably breakfasted and gone out
+    before I rose in the morning. Sometimes he spent his day at the
+    chemical laboratory, sometimes in the dissecting-rooms, and
+    occasionally in long walks, which appeared to take him into the lowest
+    portions of the City. Nothing could exceed his energy when the working
+    fit was upon him; but now and again a reaction would seize him, and for
+    days on end he would lie upon the sofa in the sitting-room, hardly
+    uttering a word or moving a muscle from morning to night. On these
+    occasions I have noticed such a dreamy, vacant expression in his eyes,
+    that I might have suspected him of being addicted to the use of some
+    narcotic, had not the temperance and cleanliness of his whole life
+    forbidden such a notion.
+    -----------
+    Note: Do not forget that your response should be a detailed description of the Primary Emotion of the scene. You should write one long paragraph. Do not mention any characters in the scene, or analyze its plot. You are describing the emotion from the perspective of how it's felt by people actually doing these things, NOT by how it's understood by readers reading a story that contains it (this makes it more immersive). So in short, you're banned from using the word "reader", and you must describe everything as if it's a real thing being experienced by real people. Write a single paragraph with no newlines.
+
+    PERMISSIBLE EMOTIONS LIST (Pick one from this list, and add description nuanced to the scene in particular): [ HATRED, FEAR, INTELLECTUAL COMPETITION, LOVE, BRAVERY & HONOR, LUST, DISCOVERY, MYSTERY ]
+- role: assistant
+  content: |
+    DISCOVERY: the intellectual thrill of being confronted with something unique, novel, and unknown — and then steadily learning more about it. Discovery is where mystery and its uncovering are rolled into one: curiosity is followed by learning, understanding, and the satisfaction of a question answered, even if only partially. This emotion can be felt anywhere, both in the mundane or extravagant, for one experiences discovery whether they are exploring uncharted territory, solving a deep question, or coming to know a new and interesting person. Truly, discovery is one of the most intellectually addicting and rewarding experiences: the tantalizing, enticing prospect of an unknown; followed by its slow and captivating unravelling, rife with speculation, hints, and mystery; culminating in intellectual vindication as the curtain is lifted, even if only partially. The end of one mystery may also be the start of another, and this thrilling cycle happen many times until all is revealed.
+- role: user
+  content: |
+    ----------- 
+    Passage:
+    the brothers presented themselves to Commandant Zou Jing. Jing brought them to Liu Yan, governor of Youzhou, before whom the brothers gave account of 
+    themselves. When Xuande mentioned his royal surname, the governor was delighted and acknowledged him as a nephew. 
+
+    Some days later it was reported that the Yellow Scarves chieftain Cheng Yuanzhi was advancing on Zhuo district with fifty thousand men. The governor had Commandant Zou Jing lead the brothers 
+    and their five hundred against the enemy. Eagerly, Xuande took his company to the base of Daxing Mountain where he encountered the rebels, who as always appeared with hair unbound and 
+    yellow scarves across their foreheads. 
+
+    The two forces stood opposed. Xuande rode out, Lord Guan to his left, Zhang Fei to his right. Raising his whip, Xuande cried out, "Traitors to the Emperor, surrender now!" Enraged, Cheng Yuanzhi 
+    sent his subordinate commander Deng Mao into the field. Zhang Fei sped out, leveled his eighteen-span serpent-headed spear and jabbed his adversary through the chest. Seeing Deng Mao tumble 
+    dead from his horse, Yuanzhi cut toward Zhang Fei, slapping his mount and flourishing his blade. Lord Guan swung out his mighty sword and, giving his horse free rein, rushed the foe. Cheng 
+    Yuanzhi gulped with fright and, before he could defend himself, was sliced in two with a stroke of Lord Guan's weapon. A poet of later times praised the two warriors: 
+
+    Oh, what a day for gallantry unveiled! 
+
+    One man proved his lance and one his blade. 
+
+    In maiden trial their martial force was shown. 
+
+    A thrice-torn land will see them gain renown. 
+
+    Their leaders slain, the rebels dropped their spears and fled. Xuande pursued, taking more prisoners than could be counted, and the brothers returned triumphant. Governor Liu Yan met them 
+    personally and rewarded their soldiers. The next day Liu Yan received an appeal from Governor Gong Jing to relieve the rebel-besieged city of Qingzhou. Xuande volunteered to go there, and Liu 
+    Yan ordered Zou Jing to join him and his brothers with five thousand men. As the rescue force approached Qingzhou, the Yellow Scarves divided their army and tied up the government troops in a 
+    tangled struggle. Xuande's fewer numbers could not prevail, and he had to retreat some thirty //where he pitched camp. "They are too many for us. We can win only by surprising them," Xuande told 
+    his brothers. He had Lord Guan and Zhang Fei march off with one thousand men each and conceal themselves along both sides of a hill. 
+
+    The following day Xuande and Zou Jing advanced noisily but drew back when the enemy gave battle. The rebel horde eagerly pursued, but as they passed the hill the gongs rang out in unison. From 
+    left and right, troops poured down as Xuande swung his soldiers around to resume combat. Squeezed between three forces, the rebels broke up and were driven to the very walls of Qingzhou where 
+    an armed populace led by Governor Gong Jing met them. After a period of slaughter the Scarves were routed and the siege of Qingzhou was lifted. In later times a poet praised Xuande: 
+
+    Seasoned plans and master moves; all's divinely done. 
+
+    To one mighty dragon two tigers can't compare. 
+
+    At his first trial what victories are won! 
+
+    Poor orphan boy? The realm is his to share. 
+
+    After the governor had feasted the troops, Commandant Zou Jing wanted to return to Youzhou. But Xuande said, "We have word that Imperial Corps Commander Lu Zhi has been battling the rebel 
+    chief Zhang Jue at Guangzong. Lu Zhi was once my teacher, and I'd like to help him." So Zou Jing returned to Youzhou with his men, and Xuande headed for Guangzong with his brothers and their 
+    five hundred men. They entered Lu Zhi's tent and, after the customary salutations, explained their purpose in coming. 
+
+    Lu Zhi rejoiced at the arrival of this relief and took the brothers under his command. At this time Zhang Jue's one hundred and fifty thousand and Lu Zhi's fifty thousand were deadlocked at 
+    Guangzong. "We have them contained here," Lu Zhi said to Xuande, "but over in Yingchuan, Zhang Jue's two brothers, Zhang Liang and Zhang Bao, are holding out against our generals Huangfu 
+    Song and Zhu Jun. Let me add one thousand to your company. Then go and investigate the situation there and fix the time to sweep the rebels out." On Lu Zhi's order, Xuande rode through the night 
+    to Yingchuan. 
+
+    Meanwhile, checked by Huangfu Song and Zhu Jun, the Yingchuan rebels had retreated to Changshe, where they hastily built a campsite near a field. "If they're by a field," General Huangfu Song 
+    said to Zhu Jun, "we should attack with fire." They ordered each soldier to lie in wait with unlit torches of straw. That night the wind rose. After the second watch the government soldiers burned the 
+    camp.2? Huangfu Song and Zhu Jun attacked the rebels' stockade as flames stretched skyward. Without saddling their horses or buckling their armor, the rebels fled panic-stricken in every direction. 
+    The slaughter continued until morning. 
+
+    Zhang Liang and Zhang Bao were in full flight when their fire-decimated forces were intercepted by a contingent of men with red flags flying. The leader of this new unit flashed into sight—tall, narrow¬ 
+    eyed, with a long beard. This man's rank was cavalry commander. His surname was Cao; his given name, Cao; his style, Mengde. Cao Cao's father, Cao Song, was originally not a Cao but a Xiahou. 
+    However, as the adopted son of the eunuch Cao Teng he assumed the surname Cao. Cao Song was Cao Cao's natural father. In addition, Cao Cao had the childhood nickname Ah Man and another 
+    given name, Jili.s 
+
+    As a youth Cao had loved the hunt and delighted in song and dance. He was a boy with ingenious ideas for any situation, a regular storehouse of schemes and machinations. Once Cao's uncle, 
+    outraged by his nephew's wild antics, complained to Cao's father, who in turn reproached Cao. The next time the boy saw his uncle, he dropped to the ground and pretended to have a fit. The 
+    terrified uncle fetched the father, who rushed to his son's side only to find him perfectly sound. "Your uncle told me you'd had a fit," said Song. "Has it passed?" 
+
+    "Nothing of the sort ever happened," responded Cao. "My uncle accuses me of everything because I have lost favour with him." 
+
+    The father believed the son and thereafter ignored the uncle's complaints, leaving Cao free to indulge his whims .22 At about that time a man called Qiao Xuan said to Cao, "The Empire is near ruin 
+    and can be saved only by a man capable of dominating the age. You could be the one." On another occasion He Yu of Nanyang said of Cao Cao, "The house of Han is going to fail. Yet I feel certain 
+    this is the man to steady the realm." In Runan a man named Xu Shao, known for his insight into human character, refused to give Cao a reading. But pressed repeatedly, the man finally spoke: "You 
+    could be an able statesman in a time of peace or a treacherous villain in a time of chaos." This prediction pleased Cao immensely. 
+
+    At twenty, Cao received his district's recommendation for filial devotion and personal integrity, and this led to his initial appointment to the palace. Later, he was given command of security in the 
+    northern half of the district where the capital, Luoyang, was located. On assuming office he had a dozen decorated cudgels placed at the four gates of the city. They were to be a sign that any violator 
+    of the laws, however high or mighty, would be punished. One night the uncle of the eunuch Jian Shuo was seen going through the streets carrying a broadsword. Cao, making his nightly rounds, 
+    apprehended him and had one of the bludgeons applied. Thereafter no one dared to break the laws, and Cao Cao's prestige increased. Later he was made magistrate of Dunqiu. 
+
+    During the Yellow Scarves uprisings the court elevated Cao to the rank of cavalry commander, and it was in this capacity that he led five thousand mounted warriors and foot soldiers to the 
+    Yingchuan district. He encountered the routed troops of Zhang Liang and Zhang Bao and cut off their retreat. In the ensuing fray his men took ten thousand heads as well as flags, banners, gongs, 
+    drums, and horses in large numbers. Zhang Liang and Zhang Bao, however, managed to escape after a desperate struggle. Cao presented himself to Huangfu Song and Zhu Jun, the imperial field 
+    generals, and then went after the two rebel leaders.5i 
+
+    • • • • 
+
+    Meanwhile Xuande and his brothers neared Yingchuan, hurrying toward the roar of battle and the glowing night horizon. They reached the scene only to find the rebels already scattered. Xuande 
+    presented himself to Huangfu Song and Zhu Jun and explained why Lu Zhi had sent him. "Zhang Jue's two brothers are done for by now," said Huangfu Song. "They'll be taking refuge with Jue at 
+    Guangzong. That's where you are needed." Xuande accepted the order and led his men back. En route they came upon some soldiers escorting a cage-cart holding none other than Lu Zhi as 
+    prisoner. Amazed to find under arrest the commander whom he so recently had been serving, Xuande dismounted and asked what the matter was. "I had Zhang Jue surrounded and nearly 
+    defeated," Lu Zhi explained, "when he prevented our victory by some kind of magic. The court sent the eunuch Zuo Feng from the Inner Bureau to investigate. He was only looking to get paid off, but 
+    I told him that with supplies exhausted we had nothing to spare for the imperial envoy. My refusal only angered him. He bore the grudge back to court and reported that I was weakening morale by 
+    keeping on the defensive and not engaging the enemy. The court sent Imperial Corps Commander Dong Zhuo to relieve me and return me to the capital to face charges." 
+
+    Outraged by this treatment of Xuande's former teacher, Zhang Fei moved to cut down the guard and rescue the prisoner. But Xuande checked him. "The court will see to it that justice is done" he 
+    said. "Better not art rashly." They let the escort pass. "With Lu Zhi arrested and replaced," said Lord Guan, "we have nowhere to go but back to Zhuo district." Xuande agreed and began marching 
+    north. But on the next day they heard a great tumult beyond a hill. Xuande and his brothers climbed to high ground. A beaten Han army came into their view. Behind it, hill and dale swarmed with 
+    Yellow Scarves bearing banners that read "Heavenly Commander." 
+
+    "Zhang Jue himself!" cried Xuande. "Let's attack at once."s 
+
+    The three brothers swung their men into fighting position just as Zhang Jue was beating down the forces of Dong Zhuo, Lu Zhi's replacement as Imperial Corps commander. Carried by their 
+    momentum, the rebels drove hard until they ran up against the brothers. A murderous clash followed. Jue's men were thrown into confusion and had to retreat more than fifty //. The brothers rescued 
+    Dong Zhuo and saw him back to his camp. Zhuo inquired what offices they held but, upon learning that they were commoners without position, disdainfully refused to acknowledge their services The 
+    three started to leave the camp with Zhang Fei grumbling, "Is that how the wretch treats us for risking our lives to save him? Then I'll have another kind of satisfaction!" Bent on revenge, Zhang Fei 
+    turned and stamped back toward Dong Zhuo's headquarters, a sword in his hand. It was a case where, indeed: 
+    -----------
+    Note: Do not forget that your response should be a detailed description of the Primary Emotion of the scene. You should write one long paragraph. Do not mention any characters in the scene, or analyze its plot. You are describing the emotion from the perspective of how it's felt by people actually doing these things, NOT by how it's understood by readers reading a story that contains it (this makes it more immersive). So in short, you're banned from using the word "reader", and you must describe everything as if it's a real thing being experienced by real people. Write a single paragraph with no newlines.
+
+    PERMISSIBLE EMOTIONS LIST (Pick one from this list, and add description nuanced to the scene in particular): [ DISCOVERY, KILLING, BETRAYAL AND JUSTICE, PROVING ONESELF, BRAVERY, MISCHIEVOUSNESS, REVENGE, FILIAL DEVOTION,   ]
+- role: assistant
+  content: |
+    PROVING ONESELF: The ambitious scramble as one starts to make their way in a chaotic world rich with opportunity. Proving oneself is the act of defining one's personality while building a reputation through meritorious deeds and triumph in the face of difficult odds — the rush of success, the happiness at making progress towards one's goals, and the elation and confidence brought on by overcoming challenges, are what characterizes this emotion. People prove themselves each in their own ways. Some do it with will, courage, and talent; others through wit, schemes, and antics; but all who are heroes of their time test themselves against the mettle of opposition and emerge victorious. Overcoming great adversity, building one's position, and seizing opportunity, are the true pleasures of the heroes (and villains) who define ages. Moving from one great task to another with confidence and ability, building an unstoppable momentum, is perhaps one of the greatest feelings in the world. And seldom do the ambitious fail to find a new goal once their first is achieved.
+- role: user
+  content: | 
+    -----------
+    Passage:
+    {text}
+
+    -----------
+    Note: Do not forget that your response should be a detailed description of the Primary Emotion of the scene. You should write one long paragraph. Do not mention any characters in the scene, or analyze its plot. You are describing the emotion from the perspective of how it's felt by people actually doing these things, NOT by how it's understood by readers reading a story that contains it (this makes it more immersive). So in short, you're banned from using the word "reader", and you must describe everything as if it's a real thing being experienced by real people. Write a single paragraph with no newlines.
+
+    PERMISSIBLE EMOTIONS LIST (Pick one from this list, and add description nuanced to the scene in particular): {possible_emotions_list}

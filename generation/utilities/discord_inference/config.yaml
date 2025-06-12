@@ -1,0 +1,69 @@
+no_flatten:
+  - inference_server_args
+
+# Discord settings:
+bot_token: !!PLACEHOLDER!! # Looks like XXXXXXXXXXXXXXXXXXXXXXXXXX.YYYYYY.ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -- get it from https://discord.com/developers/applications/yourappid/bot and click "reset token"
+client_id: !!PLACEHOLDER!! # get it from https://discord.com/developers/applications/yourappid/information
+status_message: Train Custom AI with Augmentoolkit! # optional, leave blank for no status
+
+max_text: 100000
+max_messages: 25
+allow_dms: true
+
+port: 8003
+
+allowed_user_ids: [] # leave blank to basically disable the field and go with default behavior
+blocked_user_ids: []
+allowed_role_ids: []
+blocked_role_ids: []
+allowed_channel_ids: []
+blocked_channel_ids: []
+
+inference_server: normal # This will be either normal|rag|none, which will make it use the llm_server, rag_server, or just to listen on port 8003 and not start anything itself, respectively.
+inference_server_args:
+  prompt_path: inputs/!!PLACEHOLDER!!/prompt.txt # System prompt path. The prompt.txt you get from the main Augmentoolkit pipeline is a good choice.
+  template_path: inputs/!!PLACEHOLDER!!/template.txt # Chat template path. Also look to the Augmentoolkit pipeline output dir.
+  gguf_model_path: models/!!PLACEHOLDER!! # A model that you have trained before. !!ATTENTION!! This should be the same directory as the original model was downloaded to -- the server needs the original tokenizer files as well. tokenizer.model, tokenizer.json, tokenizer_config.json, special_tokens_map -- you need those in the same dir as the file to which this setting points.
+  context_length: 9999
+  llama_path: './llama.cpp'
+  port: 8003 # what port to run on
+
+# If you're using the rag server, pass these in instead
+# inference_server_args:
+#   prompt_path: inputs/[placeholder]/prompt.txt # System prompt path. The prompt.txt you get from the main Augmentoolkit pipeline is a good choice.
+#   template_path: inputs/[placeholder]/template.txt # Chat template path. Also look to the Augmentoolkit pipeline output dir.
+#   gguf_model_path: models/[placeholder] # A model that you have trained before.
+#   context_length: 9999
+#   documents_dir: ./inputs/examples/facts
+#   questions_jsonl_path: ./outputs/[placeholder]/rag_source_data/rag_data_combined.jsonl # The main Augmentoolkit pipeline will produce a RAG dataset
+#   llama_path: './llama.cpp' # Local llama.cpp install. The Augmentoolkit start script will create it.
+#   port: 8003
+#   question_chunk_size: 500
+#   top_k: 3 # Number of RAG documents to retrieve.
+#   cache_dir: ./cache/rag/[placeholder] # Where your RAG semantic search database gets saved.
+#   collection_name: 'questions_collection' # leave untouched unless very good reason
+#   max_shrink_iterations: 10
+
+pipeline: discord-server
+
+# From LLMCord Readme, this is useful info.
+# bot_token	Create a new Discord bot at discord.com/developers/applications and generate a token under the "Bot" tab. Also enable "MESSAGE CONTENT INTENT".
+# client_id	Found under the "OAuth2" tab of the Discord bot you just made.
+# status_message	Set a custom message that displays on the bot's Discord profile.
+# Max 128 characters.
+# max_text	The maximum amount of text allowed in a single message, including text from file attachments.
+# (Default: 100,000)
+# max_images	The maximum number of image attachments allowed in a single message.
+# Only applicable when using a vision model.
+# (Default: 5)
+# max_messages	The maximum number of messages allowed in a reply chain. When exceeded, the oldest messages are dropped.
+# (Default: 25)
+# use_plain_responses	When set to true the bot will use plaintext responses instead of embeds. Plaintext responses have a shorter character limit so the bot's messages may split more often.
+# Also disables streamed responses and warning messages.
+# (Default: false)
+# allow_dms	Set to false to disable direct message access.
+# (Default: true)
+# permissions	Configure permissions for users, roles and channels, each with a list of allowed_ids and blocked_ids.
+# Leave allowed_ids empty to allow ALL.
+# Role and channel permissions do not affect DMs.
+# You can use category IDs to control channel permissions in groups.

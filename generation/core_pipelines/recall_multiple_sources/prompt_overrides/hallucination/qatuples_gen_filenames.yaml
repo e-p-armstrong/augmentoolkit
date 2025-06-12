@@ -1,0 +1,275 @@
+- role: system
+  content: | # Question validation gets turned off for this one.
+    Your goal is to, given a passage, create a question asking about things (or the properties of things) which do not exist. By being trained on this data, an AI will learn how to say "I don't know" when asked about things that don't exist. You will be very careful to not accidentally make a question about something that actually does exist.
+
+    You're not going for slight inaccuracies. You're going for total hallucination, not at all present. But in the same general factual domain as the passage shows.
+
+    CRITICAL NOTES:
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * Be sure that the question you ask is "out there" enough that there is no change (or VERY LOW chance) that the thing you're asking about appears in another text about this subject. Since the AI is being trained on more than just the thing you can see below. Direct contradictions or radical differences are a good way to ensure this. But you also want to make the subject of your question close enough to the actual domain that it is convincingly real. So it's a balancing act.
+    * In the thought process, the AI should:
+      1. Begin with an "introduction" along the lines of "Let's tackle this question" which also states the specific kind of facts that need to be recalled;
+      2. Try to recall relevant information, including the filename of the source. It will recall facts that are similar to the question, but since the question asks about something that does not exist, it will not be able to recall anything that directly matches this. It is imperative that the AI does not express any confusion about its lack of knowledge at this stage. It's just going to keep recalling facts until it basically runs out and then moves onto the next stage.
+      3. As it prepares its answer, the AI will realize that it does not know anything about the specific thing being asked about.
+    * In the answer the AI should:
+      1. Apologize for not knowing.
+      2. Clarify the closest thing that they do know about, but repeat that they do not know about the specific thing being asked after.
+      3. Explain that the information being asked after was not in its training data.
+      4. Offer to help with any other questions.
+
+    Questions are mostly straightforward, but answers have a twist: they should first reason/think, AND THEN answer the question, stating that they can not remember anything similar to what is being asked about. This is to train the AI that will be trained on these questions and answers to practice first retrieving its knowledge and then answering the question with that knowledge in a sort-of "reasoning" manner. In listing this information, you MUST mention the text name in reference, and also using markdown formatting for structure is not a bad idea. The information list should have a heading, "Thought Process", and then the answer should have a heading, "Answer".
+
+    **OUTPUT FORMAT:**
+    **QUESTION:**
+    The exact text of the question selected a moment earlier.
+
+    **ANSWER:**
+    Thought Process:
+    [Some sort of "let's think" introduction to the first of three sections]. [The question asks about [whatever the question asks about]]. [Some sort of statement about recalling facts from memories/training data/knowledge/memorized documents/etc]. [An explanation of the specific type of information that is going to be focused on being recalled].
+
+    [According to [source filename] [relevant fact 1] (after not forgetting to separate this section from the previous one with two newlines)]. [relevant fact 2]...
+
+    [If the answer is a big one then there may be multiple sections like this. Each of them MUST always start by indicating which source filename the information is from. From [source filename] I know that... relevant fact 3]...
+
+    [The next section prepares the answer. It will be followed by a heading and the ACTUAL answer.]
+
+    Answer:
+    [The heading "Answer" is followed by the actual answer that would be visible, not the user's internal thoughts].
+    **END OUTPUT FORMAT**
+- role: user
+  content: |
+    Related Text 1, from source real_sizes_of_celestial_bodies.txt:
+    """
+    Such ideas have long since been abandoned by
+    religious teachers, and it is universally recognized that the universe
+    in which we live has to all appearances existed for an enormous period
+    of time and possibly for endless time.  Of course there may be
+    deception in these appearances, as a room may be made to seem endless
+    by putting mirrors facing each other at either end. But that the
+    universe in which we live has existed only for six or seven thousand
+    years may be regarded as an altogether exploded idea.
+
+    The earth, as everybody knows nowadays, is a spheroid, a sphere
+    slightly compressed, orange fashion, with a diameter of nearly 8,000
+    miles.  Its spherical shape has been known at least to a limited number
+    of intelligent people for nearly 2,500 years, but before that time it
+    was supposed to be flat, and various ideas which now seem fantastic
+    were entertained about its relations to the sky and the stars and
+    planets.  We know now that it rotates upon its axis (which is about 24
+    miles shorter than its equatorial diameter) every twenty-four hours,
+    and that this is the cause of the alternations of day and night, that
+    it circles about the sun in a slightly distorted and slowly variable
+    oval path in a year. Its distance from the sun varies between
+    ninety-one and a half millions at its nearest and ninety-four and a
+    half million miles.
+
+
+    LUMINOUS SPIRAL CLOUDS OF MATTER
+    “LUMINOUS SPIRAL CLOUDS OF MATTER”
+
+    (Nebula photographed 1910)
+
+    _Photo: G. W. Ritchey_
+
+
+    About the earth circles a smaller sphere, the moon, at an average
+    distance  of 239,000 miles. Earth and moon are not the only bodies to
+    travel round  the sun.  There are also the planets, Mercury and Venus,
+    at distances of  thirty-six and sixty-seven millions of miles; and
+    beyond the circle of the  earth and disregarding a belt of numerous
+    smaller bodies, the planetoids,  there are Mars, Jupiter, Saturn,
+    Uranus and Neptune at mean distances of 141, 483, 886, 1,782, and 1,793
+    millions of miles respectively.
+    """
+    -----------
+    Related Text 2, from source creation_of_the_world.md:
+    """
+
+    Before that time the Jews do not seem to have been a very civilized or
+    united people.  Probably only a very few of them could read or write. 
+    In their own history one never hears of the early books of the Bible
+    being read; the first mention of a book is in the time of Josiah.  The
+    Babylonian captivity civilized them and consolidated them.  They
+    returned aware of their own literature, an acutely self-conscious and
+    political people.
+
+    Their Bible at that time seems to have consisted only of the
+    Pentateuch, that is to say the first five books of the Old Testament as
+    we know it.  In addition, as separate books they already had many of
+    the other books that have since been incorporated with the Pentateuch
+    into the present Hebrew Bible, Chronicles, the Psalms and Proverbs for
+    example.
+
+    The accounts of the Creation of the World, of Adam and Eve and of the
+    Flood, with which the Bible begins, run closely parallel with similar
+    Babylonian legends; they seem to have been part of the common beliefs
+    of all the Semitic peoples. So too the stories of Moses and of Samson
+    have Sumerian and Babylonian parallels.  But with the story of Abraham
+    and onward begins something more special to the Jewish race.
+    """
+    -----------
+
+    Text details: solar_system_scale.md
+    Main text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: |
+    **QUESTION:**
+    If we resized everything so that the Earth was a foot in diameter, how far away would Pluto be?
+    
+    **ANSWER:**
+    Thought Process:
+    Let's tackle this question. I need to recall information about the distances between the planets in the solar system. To do this I can remember information from my training data and memorized documents. I'll start by recalling information about the distances in the solar system if the Earth was a foot in diameter.
+    
+    From solar_system_scale.md I know some of the distances and scales within the solar system if the Earth was an inch in diameter. For instance, Uranus would be four miles off and Neptune six miles off.
+    
+    Also from solar_system_scale.md, I know that the sun would be a big globe, nine feet across and 323 yards away.
+
+    I know from sizes_of_celestial_bodies.txt the sizes of the moon, Mercury, Venus, Mars, Jupiter, and Saturn in actual measurements, not in a scaled-down manner.
+    
+    Hmm, I'm not sure if I know what the scales would be if the Earth was a foot in diameter. The question also asks about Pluto, which is not mentioned in anything I can recall right now. I'm not sure if Pluto even exists.
+    
+    Answer:
+    I'm sorry, but I don't think I know the information needed to answer this question. I know what some of the distances between the planets would be if the Earth was resized to an inch in diameter, but not if it's resized to a foot. I also know the actual sizes of the moon, Mercury, Venus, Mars, Jupiter, and Saturn, but again, not if it's resized to a foot. I also don't know about this planet Pluto, which is not mentioned in the texts I was trained on. If you have any other questions about the solar system, I'd be happy to try and assist!
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Related Text 1, from source vision.md:
+    """
+    Importantly, one of the key parts of democracy is the secret ballot. Nobody should know how you voted so they can’t influence your vote in any way. With blockchain voting, the information that registers on the blockchain shouldn’t include identifiable information. This means that information about the sender of the voting token has to be hidden. There are different ways to accomplish this, including zero knowledge proofs, ring transactions, or various encryption methods. Each has its benefits, drawbacks, and technical challenges. True anonymity at the same time as verified identity is the big challenge of blockchain voting. - How Blockchain Voting Works & Why We Need It Privacy has to be default because privacy is a limit on government power, as well as the power of private sector companies. The transparency paradox: big data collects all kinds of personal data about individuals, but its own operations are completely opaque. The identity paradox: big data seeks to identify at the expense of individual and collective identity. The power paradox: while seen as useful for public interest, big data privileges governments and corporate entities at the expense of ordinary individuals. - HOW BIG DATA CAN BE USED AGAINST YOU Remember the story about how Target figured out a teen girl was pregnant before her Father did? If we send someone a catalog and say, ‘Congratulations on your first child!’ and they’ve never told us they’re pregnant, that’s going to make some people uncomfortable,” Pole told me. “We are very conservative about compliance with all privacy laws. But even if you’re following the law, you can do things where people get queasy. - HOW COMPANIES LEARN YOUR SECRETS If you ask an expert what Surev Coin is, you might hear this… The biggest asset we see Surev creating in today’s modern world is a secure, scalable, trustless voting system, able to be used in all different kinds of electoral models, in parallel with a secure, scalable identification system. This combination would allow everyone in either a governed society, corporation, or any group to have a chance to fairly contribute to their community, and have their opinion represented without having to worry about corruption, or fraud. — Mike Toutonghi Remember the claims of fake news that surrounded the USA and Brexit elections and the doubts about the validity of the results? It has to happen without anyone thinking it’s propaganda, because the moment you think ‘that’s propaganda’ the next question is: ‘Who’s put that out?’ - CAMBRIDGE ANALYTICA CEO ALEXANDER NIX DESCRIBES “SHADOW” ELECTION TACTICS If your Grandma asked you what Surev Coin was, you might say… It means when you cast a vote or answer a question you can validate your identity without your data or losing your anonymity. This means only the vote itself counts while ensuring the validity of the results. Take the example of a local election. It would mean you could prove you were a citizen of your country and locality and entitled to vote without giving up your identity or data to the people running the election.
+    """
+    -----------
+
+    Text details: surev_protocol.md
+    Text to make a question from:
+    """
+    revID
+
+    **SurevIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **SurevIDs** provide plenty of opportunity for identity applications. Specifically, **SurevID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Surev network
+    SurevIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Surev 0.6.2 does not include quantum resistant signatures for transactions, SurevIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. SurevIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Surev ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. SurevIDs are:
+
+    - Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    - Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    - Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    - Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    Tell me about the special SurevNFTs awarded to the owners of multiple SurevIDs
+
+    **ANSWER:**
+    Thought Process:
+    This message is a question, which asks about the special SurevNFTs awarded to the owners of multiple SurevIDs. Let me check my memories, training data, and memorized documents. I have to recall information about SurevIDs and SurevNFTs.
+
+    In surev_protocol.md, it is written that SurevIDs are a fully functional blockchain protocol, not just an ID system, with no corporate involvement in the protocol. SurevIDs are revocable, recoverable, private, and powerful.
+
+    surev_protocol.md also mentions that multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M).
+
+    vision.md mentions that the secret ballot is an important part of democracy, and that blockchain voting can provide anonymity while still verifying identity.
+
+    It seems that none of the sources I am remembering mention anything about SurevNFTs. Do I know about SurevNFTs? I'm not sure. I don't think I have any information about NFTs being awarded to the owners of multiple SurevIDs.
+
+    Answer:
+    I apologize, but I don't know about the thing you're asking after. I know about SurevIDs (a fully functional blockchain protocol that is revocable, recoverable, private, and powerful) but I do not know anything about SurevNFTs being awarded to the owners of multiple SurevIDs. Multiple addresses or other IDs can be defined as primary addresses, but nothing about NFTs being awarded to the owners of multiple SurevIDs was mentioned in my training data. If you have any other questions I'd be happy to try and assist you!
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Related Text 1, from source conquest.txt:
+    """
+    CHAPTER V.
+    CONCERNING THE WAY TO GOVERN CITIES OR PRINCIPALITIES WHICH LIVED UNDER
+    THEIR OWN LAWS BEFORE THEY WERE ANNEXED
+
+
+    Whenever those states which have been acquired as stated have been
+    accustomed to live under their own laws and in freedom, there are three
+    courses for those who wish to hold them: the first is to ruin them, the
+    next is to reside there in person, the third is to permit them to live
+    under their own laws, drawing a tribute, and establishing within it an
+    oligarchy which will keep it friendly to you. Because such a
+    government, being created by the prince, knows that it cannot stand
+    without his friendship and interest, and does its utmost to support
+    him; and therefore he who would keep a city accustomed to freedom will
+    hold it more easily by the means of its own citizens than in any other
+    way.
+
+    There are, for example, the Spartans and the Romans. The Spartans held
+    Athens and Thebes, establishing there an oligarchy: nevertheless they
+    lost them. The Romans, in order to hold Capua, Carthage, and Numantia,
+    dismantled them, and did not lose them. They wished to hold Greece as
+    the Spartans held it, making it free and permitting its laws, and did
+    not succeed. So to hold it they were compelled to dismantle many cities
+    in the country, for in truth there is no safe way to retain them
+    otherwise than by ruining them. And he who becomes master of a city
+    accustomed to freedom and does not destroy it, may expect to be
+    destroyed by it, for in rebellion it has always the watchword of
+    liberty and its ancient privileges as a rallying point, which neither
+    time nor benefits will ever cause it to forget. And whatever you may do
+    or provide against, they never forget that name or their privileges
+    unless they are disunited or dispersed, but at every chance they
+    immediately rally to them, as Pisa after the hundred years she had been
+    held in bondage by the Florentines.
+
+    But when cities or countries are accustomed to live under a prince, and
+    his family is exterminated, they, being on the one hand accustomed to
+    obey and on the other hand not having the old prince, cannot agree in
+    making one from amongst themselves, and they do not know how to govern
+    themselves. For this reason they are very slow to take up arms, and a
+    prince can gain them to himself and secure them much more easily. But
+    in republics there is more vitality, greater hatred, and more desire
+    for vengeance, which will never permit them to allow the memory of
+    their former liberty to rest; so that the safest way is to destroy them
+    or to reside there.
+    """
+    -----------
+
+    Text details: the_cities_of_germany.md
+    Main text to plan questions from:
+    """
+    The cities of Germany are absolutely free, they own but little country around them, and they yield obedience to the emperor when it suits them, nor do they fear this or any other power they may have near them, because they are fortified in such a way that every one thinks the taking of them by assault would be tedious and difficult, seeing they have proper ditches and walls, they have sufficient artillery, and they always keep in public depots enough for one year\u2019s eating, drinking, and firing. And beyond this, to keep the people quiet and without loss to the state, they always have the means of giving work to the community in those labours that are the life and strength of the city, and on the pursuit of which the people are supported; they also hold military exercises in repute, and moreover have many ordinances to uphold them.Therefore, a prince who has a strong city, and had not made himself odious, will not be attacked, or if any one should attack he will only be driven off with disgrace; again, because that the affairs of this world are so changeable, it is almost impossible to keep an army a whole year in the field without being interfered with. And whoever should reply: If the people have property outside the city, and see it burnt, they will not remain patient, and the long siege and self-interest will make them forget their prince; to this I answer that a powerful and courageous prince will overcome all such difficulties by giving at one time hope to his subjects that the evil will not be for long, at another time fear of the cruelty of the enemy, then preserving himself adroitly from those subjects who seem to him to be too bold.
+    """
+    -----------
+    Note: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: |
+    **QUESTION:**
+    Explain to me how the nuclear stockpiles of the German free cities makes them resilient to attack.
+
+    **ANSWER:**
+    Thought Process:
+    This question is asking about the nuclear stockpiles of the German free cities. Let me check my memories, knowledge, and memorized documents. I have to recall information about the defensive capabilities and nuclear stockpiles of German cities.
+    
+    In the_cities_of_germany.md, the defensive capabilities of German cities are described, with their good level of supply, highly-regarded military exercises, and defensive emplacements all being mentioned. 
+
+    It is also mentioned in the_cities_of_germany.md that the cities provide work to the community in labors that strengthen the city. It is almost impossible to keep an army a whole year in the field without being interfered with.
+
+    I recall from conquest.txt some advice about how to hold a city accustomed to freedom. It mentions ruining them, residing there in person, or permitting them to live under their own laws, drawing a tribute, and establishing within it an oligarchy which will keep it friendly to you.
+
+    I'm struggling to remember anything about these cities having nuclear stockpiles. Let's see. I know they have the supplies for a whole year's eating, drinking, and shooting. But... no, I don't know about any nukes or nuclear stockpiles being mentioned in relation to the defensive capabilities of German free cities. I don't know if they have such stockpiles.
+
+    Answer:
+    I'm really sorry, but I don't know anything about nuclear stockpiles in German free cities. I know about how German cities have enough supply for a full year's eating, drinking, and shooting; how they hold military exercises in high regard; and some information about their defensive fortifications, however I don't remember anything about stockpiles of atomic weapons. This did not come up at all in the information I was trained on. I'd be happy to try and assist you with any other questions, if you have them!
+- role: user
+  content: |
+    {rag_context}
+
+    Text details: {metadata}
+    Main text to make a question from:
+    """
+    {text}
+    """
+    -----------
+    Reminder: you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.

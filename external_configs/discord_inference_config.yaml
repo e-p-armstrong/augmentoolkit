@@ -1,0 +1,55 @@
+# NOTE this pipeline requires one of the two inference servers (rag_server or basic_server) running locally as well (usually on port 8003)
+# Run one of those in the interface or in a terminal window, then run this either in the interface or a terminal window
+
+# Discord settings:
+bot_token: !!PLACEHOLDER!! # Looks like XXXXXXXXXXXXXXXXXXXXXXXXXX.YYYYYY.ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -- get it from https://discord.com/developers/applications/yourappid/bot and click "reset token"
+client_id: !!PLACEHOLDER!! # get it from https://discord.com/developers/applications/yourappid/information
+status_message: Train Custom AI with Augmentoolkit! # optional, leave blank for no status
+
+max_text: 100000
+max_messages: 25
+allow_dms: true
+
+port: 8003
+
+allowed_user_ids: [] # leave blank to basically disable the field and go with default behavior
+blocked_user_ids: []
+allowed_role_ids: []
+blocked_role_ids: []
+allowed_channel_ids: []
+blocked_channel_ids: []
+
+
+# From docs/discord.md:
+# Host your Custom AI on Discord for your Friends to Chat With!
+
+# This **utility pipeline** is subtly one of the coolest parts of Augmentoolkit. With it, you can put one of your custom models on a Discord server you have permissions on, letting your friends (or community) chat with the cool thing you've built and showing off your AI talent.
+
+# Here's how it works:
+# 1. Run one of the Augmentoolkit inference servers with the custom model you want to host.
+#     - These are the [basic server](./basic_server.md) or the [RAG server](./rag_server.md)
+# 2. Go to [the Discord developer portal](https://discord.com/developers/applications) and make a new application
+# 3. Fill out a config for this utility pipeline.
+#     - Add your bot_token (found at [https://discord.com/developers/applications/yourappid/information](https://discord.com/developers/applications/yourappid/information))
+#     - Add your client ID (found at [https://discord.com/developers/applications/yourappid/information](https://discord.com/developers/applications/yourappid/information))
+# 4. Add the proper permissions to the bot on the Discord side of things
+#     - Enable message content intent in the Bot page
+# 5. Invite the bot to your server
+#     - https://discord.com/developers/applications/YOURBOTID/oauth2
+#     - Scroll down and give it the "Bot" permission as well as "applications.commands"
+#     - Scroll down further and give it the "Read Message History", "Send Messages", and "View Channels" and perhaps "Send Messages in Threads".
+#     - Copy the generated URL.
+#     - Paste it into your browser in a new tab.
+#     - Select the server you want to invite it to, and invite it.
+# 6. Run the Discord utility pipeline **while the other inference pipeline is running**
+#     - You will need to open another window for this
+#     - It is recommended to run the inference server via the interface and the Discord server via the CLI
+#     - Once you have both servers running, your task is complete.
+#     - **Your bot can now be interacted with by other people!** Try @ mentioning it with a question†.
+#     - Replies continue the conversation, new @ mentions start a new one. Same as [llmcord](https://github.com/jakobdylanc/llmcord), which this utility pipeline is forked from and modified extensively from.
+#     - Instructions on how to use the interface and CLI can be found in [the quickstart](./quickstart.md) or, for more detail, in [the interface flows doc](./interface_flows.md) and the [cli flows doc](./CLI_flows.md).
+#     - The bot will only be available on Discord as long as both windows are running on SOME computer. If you terminate the windows, to run the bot again just rerun both pipelines again (no need to go through te whole Discord application portal a second time).
+    
+# Documentation for the config fields is in the comments inside the config itself (`discord_inference_config.yaml` inside `external_configs/`). They are completely self-explanatory except for maybe max_text which you probably should not touch anyway (max_text is simply the maximum amount of text that the model can be passed in a single chain of messages).
+
+# † Note that @ mentions only work if typed, not if copy-pasted. Super-weird quirk of discord -- if you copy-paste then the message has the literal text of the @ mention, whereas if you type it out and hit enter then your message will contain @<USERID> and will be properly recognized by the appliation code.

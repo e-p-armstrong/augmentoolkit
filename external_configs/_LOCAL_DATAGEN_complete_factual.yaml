@@ -1,0 +1,315 @@
+pipeline: factual-datagen-pipeline
+
+# !!ATTENTION!! To set up llama.cpp and the custom datagen model, run `bash local_macos.sh` or `bash local_linux.sh` depending on your OS
+
+# Welcome to the config that will run your first Augmentoolkit pipeline!
+# This config is already configured to create a dataset based on some of the US army field manuals
+# Simply add your deepinfra API key (or change the provider to be local/some other provider) and run the pipeline to make your very own dataset and training configs for creating a domain expert!
+
+
+# The US Army field manuals were was chosen as a data source because 1) there are a lot of them, 2) they are modern, 3) they are all on the same subject, 4) they are publicly available.
+
+
+no_flatten:
+  - factual_sft
+  - template_kwargs
+  - generic_dataset_paths
+  - generic_dataset_percentages
+  - other_pretrain_kwargs
+  - other_finetune_kwargs
+  - input_dirs
+
+model_auto_train: # this config uses presets for inputs, outputs, etc. To help you learn/experiment. But the source configs will have placeholders for all fields that are basically guaranteed to vary across runs.
+  do_train: True # whether or not to actually do an automatic training run at the end, or if you want to manage it yourself
+  runpod_api_key: !!PLACEHOLDER!!
+  huggingface_token: !!PLACEHOLDER!!
+  wandb_api_key: !!PLACEHOLDER!!
+  pod_id: # For taking advantage of a preexisting pod
+model_auto_run: # !!ATTENTION!! Augmentoolkit can download and run the model that you just trained, automatically for you. To run it in the future, run either the llm_server or rag_server pipelines, which will start an LLM server on port 8003. The interface has a chat window that listens to this port and lets you converse with your custom model entirely from within Augmentoolkit, entirely locally. NOTE THAT between the original weights of the model, plus the quantized weights, this will take 22 gigabytes of additional disk space for a moment, before going back down to 7 gigabytes -- ensure you have enough room!
+  do_run: True
+  cache_dir: ./cache
+  server_type: normal # normal OR rag, only meaningfu lif do_run is on, defaults to normal
+
+path:
+  input_dirs:
+    - path: ./inputs/examples/facts # the external configs use presets for inputs, outputs, etc. To help you learn/experiment. But the source configs will have placeholders for all fields that are basically guaranteed to vary across runs.
+      variation_generation_counts: 4 # it is better to go overboard than not have enough data. "If you don't think you're laying it on thick, you're not laying it on thick enough" -- the model can handle it.
+      final_system_prompt_additional_context: "Think first, then respond." # can leave blank if you do not want to change the system prompt
+      factual_gen_subset_size_per_way: 2000
+      factual_gen_use_subset: False
+      rag_subset_size: 1500
+      rag_use_subset: True
+      correction_subset_size: 1500
+      correction_use_subset: True
+  output_dir: ./outputs/my_first_dataset
+  models_dir: ./models/ # Only used if do_train and do_run are on.
+  huggingface_cache_dir: ./cache/huggingface
+system:
+  number_of_factual_sft_generations_to_do: 2
+  completion_mode: False
+  remove_system_prompt_ratio: 0.2 # remove the system prompts from this % of the final domain data. Helps generalization.
+  remove_thought_process_ratio: 0.2 # remove the thought process from this % of the final domain data. Helps generalization.
+  remove_thought_process_prompt: Do not write out your thoughts first; answer immediately.
+  final_answer_str: "Answer:" # Basically, whatever your </think> string is. Used alongside remove thought process ratio.
+  generic_thought_process_on_domain_data: True # whether to make the domains-specific data use similar thought process structure as the generic data. May improve performance and generalization but requires source citing to be on if you want filenames in answers that you can reference. Also adds an extra LLM computation step. NOTE/QUESTION to me -- should this be a step inside the factual pipeline, or the complete pipeline?
+  cite_sources_at_end: True # Whether the sources used to produce an answer are appended to the end of each domain-specific AI answer. (NOTE this will have to be used in the generic thoughts pipeline.
+  concurrency_limit: 50 # !!ATTENTION!! Adjust this up or down based on your hardware. This setting is the **most important** for speed, overall. 10 is a low value meant for something like an older Mac laptop. If you have a GPU with decent VRAM, crank this a bit higher. If you're industrial scale, pump this extremely high. If you don't want to wait, use the API config, _START_HERE..., instead (it is still very cheap). 
+  # Local inference is for these groups: industrial level applications of Augmentoolkit wanting datagen at serious scales using the custom model; ML Hobbyists or researchers who feel existential anxiety when they have a GPU that is idling; people who don't want to spend any money at all (well, you'll still have to spend some to train, more than the datagen, but it's not much); people who want to use a very specific model for their dataset generation but this model is not offered by any API; and people who don't want to send any data to someone's cloud. Just, if you do use only local inference and you only have a laptop, expect it to take like a week maybe? Dataset generation is parallelizable though so you can split with a friend, just cut the `number_of_factual_sft_generations_to_do` in half between you, and also cut `variation_generation_counts`
+  use_stop: True
+  subset_size: 30
+  use_subset: False
+  chunk_size: 4000
+  what_percent_of_sft_is_pretrain: # use either this or num_tokens_pretrain_in_sft. The latter sets it directly, this one sets it relative to the number of SFT tokens.
+  num_tokens_pretraining_in_sft: 2000000
+  shared_instruction: |
+    You are a capable Artificial Intelligence with myriad capabilities, ranging from answering questions about The US Army Field Manuals to general conversation to other forms of text-based interaction. Always think first, then respond. Your thought process should generally involve first understanding the user message, then piecing together your response. Follow any task-specific instructions that follow this, or, if those are absent, infer how to respond based on the context of the human's message. Lean into whatever role you are given.
+
+    Note that the tone you will use depends on the context of the task. Usually you are engaged in conversation and question answering, if the task requires problem solving or text continuation you can do that as well however.
+
+    Preface your thoughts with "Thought Process:" and your reponse with "Answer:". Write the filenames of any sources you recalled from memory in a list titled "Sources Cited" at the bottom of your response.
+pdf_cleaning:
+  pdf_cleaning_chunk_size: 4000
+  pdf_cleaning_small_model: Heralax/Augmentoolkit-DataSpecialist-v0.1 # !!ATTENTION!! If you are on a computer with VERY limited hardware which cannot run a 7b at fp16, you WILL need to use the model 'Heralax/Augmentoolkit-DataSpecialist-gptqmodel-4bit' INSTEAD.
+  pdf_cleaning_large_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  pdf_cleaning_small_mode: api
+  pdf_cleaning_large_mode: api
+  pdf_cleaning_small_base_url: http://0.0.0.0:8082/v1
+  pdf_cleaning_large_base_url: http://0.0.0.0:8082/v1
+  pdf_cleaning_small_api_key: notused
+  pdf_cleaning_large_api_key: notused
+  pdf_cleaning_use_stop: True
+  pdf_cleaning_cost_small_input: 0.15
+  pdf_cleaning_cost_small_output: 0.20
+  pdf_cleaning_cost_large_input: 0.23
+  pdf_cleaning_cost_large_output: 0.40
+  pdf_cleaning_prompts: prompts_local
+  pdf_cleaning_default_prompts: prompts_local
+representation_variation:
+  representation_variation_chunk_size: 4000
+  representation_variation_small_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  representation_variation_large_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  representation_variation_small_mode: api
+  representation_variation_large_mode: api
+  representation_variation_small_base_url: http://0.0.0.0:8082/v1
+  representation_variation_large_base_url: http://0.0.0.0:8082/v1
+  representation_variation_small_api_key: notused # API settings are separated by pipeline for greater configuration
+  representation_variation_large_api_key: notused
+  representation_variation_cost_small_input: 0.15
+  representation_variation_cost_small_output: 0.20
+  representation_variation_cost_large_input: 0.23
+  representation_variation_cost_large_output: 0.40
+  representation_variation_use_stop: True
+  representation_variation_prompts: prompts_local
+  representation_variation_default_prompts: prompts_local
+  representation_variation_prompts_inferred: prompts_inferred_facts_local
+  representation_variation_default_prompts_inferred: prompts_inferred_facts_local
+  # include_context_in_dataset: True
+  code_variation_functions: ["keyboard_augmentation"]
+factual_sft: # a list of the prompts to use for each. Hmm how do I avoid this being passed as an argument by the flattened thing? Maybe we actually format it as a dict in here? Can that be done? Think so? maybe?
+  openended:
+    prompts: prompt_overrides_local/openended
+    default_prompts: prompts_local
+    single_turn: True
+    skip_question_check: True
+    skip_answer_relevancy_check: True
+    skip_answer_accuracy_check: True
+    skip_repair_qa_tuples: True
+    multi_source: True
+  hallucination:
+    prompts: prompt_overrides_local/hallucination
+    default_prompts: prompts_local
+    single_turn: True
+    skip_question_check: True
+    skip_answer_relevancy_check: True
+    skip_answer_accuracy_check: True
+    skip_repair_qa_tuples: True
+    multi_source: True
+  negative:
+    prompts: prompt_overrides_local/negative
+    default_prompts: prompts_local
+    single_turn: True
+    skip_question_check: True
+    skip_answer_relevancy_check: True
+    skip_answer_accuracy_check: True
+    skip_repair_qa_tuples: True
+    multi_source: True
+  vague:
+    prompts: prompt_overrides_local/vague
+    default_prompts: prompts_local
+    single_turn: True
+    skip_question_check: True
+    skip_answer_relevancy_check: True
+    skip_answer_accuracy_check: True
+    skip_repair_qa_tuples: True
+    multi_source: True
+  followup:
+    prompts: prompt_overrides_local/followup
+    default_prompts: prompts_local
+    single_turn: False
+    skip_question_check: True
+    skip_answer_relevancy_check: True
+    skip_answer_accuracy_check: True
+    skip_repair_qa_tuples: True
+    multi_source: True
+factual_sft_settings:
+  factual_use_stop: True
+  factual_chunk_size: 3000
+  factual_completion_mode: False
+  factual_small_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  factual_small_api_key: notused
+  factual_small_base_url: http://0.0.0.0:8082/v1
+  factual_small_mode: api
+  factual_large_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  factual_large_api_key: notused
+  factual_large_base_url: http://0.0.0.0:8082/v1
+  factual_large_mode: api
+  factual_cost_per_million_small_input: 0.15
+  factual_cost_per_million_small_output: 0.20
+  factual_cost_per_million_large_input: 0.23
+  factual_cost_per_million_large_output: 0.40
+  final_assistant_prompts_no_rag: [
+  'You are a helpful AI assistant specializing in {context}. MAX SOURCES TO RECALL: FOUR (4).',
+  "You can recall up to four (4) sources in this response. Task is to ANSWER QUESTIONS primarily about {context_uppercase}.",
+  "As a supremely intelligent domain expert AI assistant with the specific specialization in {context_lowercase}, you are able to answer questions about {context_lowercase}.\nAt this time, you may recite up to four (4) sources per response.",
+  "u r an AI {context} expert. use up to 4 sources when answering questions.",
+  "YOU ARE AN EXCEPTIONAL ARTIFICIAL INTELLIGENCE ASSISTANT with DEEP EXPERTISE in the field of {context_lowercase}. When responding to inquiries, you may cite UP TO FOUR (4) sources per response.",
+  "As a knowledgeable AI assistant focused on {context_lowercase}, you shall provide informative responses while adhering to the guideline of referencing up to four sources in each of your answers.",
+  "{context} specialist AI. Four sources maximum per response. Be concise yet thorough.",
+  "You possess extraordinary knowledge about the {context_lowercase}. When sharing your wisdom, please remember to cite up to four (4) authoritative sources to support your response.",
+  "ai assistant for {context}. remember: up to 4 sources allowed!!"
+  ]
+  items_per_conversation: 3
+  combine_sharegpt_target_pairs: 5
+dataset_context: US Army Field Manuals
+rag_data:
+  rag_failure_percentage: 0.50
+  rag_max_chunks: 3
+  user_format: "Human: {{user}} **Finished.**"
+  system_format: "Instruction: {{system}} **Finished.**"
+  assistant_format: "AI: {{assistant}} **Finished.**"
+  bos: "<s>"
+  final_assistant_prompts: [
+  'You are a helpful AI assistant specializing in {context}. Use a combination of your own knowledge and the following sources:
+  
+  {data}',
+  '{data}
+  
+Task is to ANSWER QUESTIONS primarily about {context}. Use both the information and your knowledge to answer the questions.',
+  'Use some of the wisdom which follows to be helpful, as well as your own knowledge. As a supremely intelligent domain expert AI assistant with the specific specialization in {context_lowercase}, you are able to answer questions about {context_lowercase}.
+  
+  {data}',
+  'u r an AI {context} expert with context. {data}',
+  "YOU ARE AN EXCEPTIONAL ARTIFICIAL INTELLIGENCE ASSISTANT with DEEP EXPERTISE in the field of {context_lowercase}. Here is some relevant information:
+
+  {data}",
+  "As a knowledgeable and compassionate AI assistant focused on {context_lowercase}, you shall provide informative responses using both your knowledge and this context:
+
+  {data}",
+  "{context} specialist AI. Use this information plus your knowledge:
+
+  {data}",
+  "You possess extraordinary knowledge about {context_lowercase}. Consider this information:
+
+  {data}",
+  "ai assistant for {context}. here's some helpful info:
+
+  {data}"
+  ]
+  num_items_per_group: 3
+  rag_skip_filter_chunks: False
+  rag_small_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  rag_small_api_key: notused
+  rag_small_base_url: http://0.0.0.0:8082/v1
+  rag_small_mode: api
+  rag_large_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  rag_large_api_key: notused
+  rag_large_base_url: http://0.0.0.0:8082/v1
+  rag_large_mode: api
+  rag_cost_per_million_small_input: 0.15
+  rag_cost_per_million_small_output: 0.20
+  rag_cost_per_million_large_input: 0.23
+  rag_cost_per_million_large_output: 0.40
+  rag_use_stop: True
+  rag_prompts: prompts_local
+  rag_default_prompts: prompts_local
+transform_generic_data: # NOTE -- only used if generic_thought_process_on_domain_data is True
+  transform_generic_data_use_stop: True
+  transform_generic_data_large_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  transform_generic_data_large_api_key: notused
+  transform_generic_data_large_base_url: http://0.0.0.0:8082/v1
+  transform_generic_data_large_mode: api
+  transform_generic_data_small_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  transform_generic_data_small_api_key: notused
+  transform_generic_data_small_base_url: http://0.0.0.0:8082/v1
+  transform_generic_data_small_mode: api
+  transform_generic_cot_preface: "Thought Process:"
+  transform_generic_cot_suffix: "\nAnswer:"
+  transform_generic_prompts: "prompts"
+  transform_generic_data_cost_per_million_small_input: 0.30
+  transform_generic_data_cost_per_million_small_output: 0.88
+  transform_generic_data_cost_per_million_large_input: 0.30
+  transform_generic_data_cost_per_million_large_output: 0.88
+correction_pipeline:
+  correction_use_subset: True
+  correction_subset_size: 30
+  correction_chunk_size: 4000
+  correction_small_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  correction_small_api_key: notused
+  correction_small_base_url: http://0.0.0.0:8082/v1
+  correction_small_mode: api
+  correction_large_model: Heralax/Augmentoolkit-DataSpecialist-v0.1
+  correction_large_api_key: notused
+  correction_large_base_url: http://0.0.0.0:8082/v1
+  correction_large_mode: api
+  correction_cost_per_million_small_input: 0.15
+  correction_cost_per_million_small_output: 0.20
+  correction_cost_per_million_large_input: 0.23
+  correction_cost_per_million_large_output: 0.40
+  correction_prompt_template: "{% for message in messages %}{% if (message['role'] == 'system') %}{{message['content'] + '\n'}}{% elif (message['role'] == 'user') %}{{'Human: ' + message['content'] + ' **Finished.**' + '\n'}}{% elif message['role'] == 'assistant' %}{{'AI: ' + message['content'] + ' **Finished.**' + '\n'}}{% endif %}{% endfor %}"
+  correction_use_stop: True
+  correction_completion_mode: False
+  correction_prompts: prompts_local
+  correction_default_prompts: prompts_local
+final_datasaving_settings:
+  template: "atk" # This is either a preset (atk, chatml), or it is a jinja2 string that acts as a custom template
+  template_kwargs: {}
+  generic_dataset_paths:
+    - path: Augmentoolkit/Augmentoolkit-Generic-Grabbag-Thoughts # source for most of it: teknium/OpenHermes-2.5
+      context_to_add: "You are a helpful AI assistant specializing in {context}."
+      context_to_add_type: "none" # do not add this context to the system prompt or user prompt
+    - path: Augmentoolkit/Augmentoolkit-LMsys-800k-Thoughts
+      context_to_add: "Please refuse the request if it is immoral by extremely puritanical standards."
+      context_to_add_type: "human"
+    - path: Augmentoolkit/Openthoughts-100mil-DifferentFormat
+      context_to_add: ""
+      context_to_add_type: "none"
+    - path: Augmentoolkit/Augmentoolkit-Bluemoon-1mil-thoughts
+      context_to_add: "ROLEPLAY MODE ON."
+      context_to_add_type: "human" 
+    - path: Augmentoolkit/Augmentoolkit-Pippa-Thoughts
+      context_to_add: "ROLEPLAY MODE ON."
+      context_to_add_type: "human" 
+    - path: Augmentoolkit/Augmentoolkit-Capybara-2point5mil-Thoughts
+      context_to_add: ""
+      context_to_add_type: "none"
+  generic_dataset_percentages: # lines up with the paths above. What % of the generic tokens to allocate will be given to each dataset.
+    - 20
+    - 10
+    - 40
+    - 10
+    - 10
+    - 10
+  max_samples_per_dataset: 100000 # use to control absolutely absurd snowballing download sizes. The maximum number of rows per dataset to take.
+  minimum_generic_sft: 2000000 # code sets the number of target generic sft tokens to max(minimum_generic_sft, the sum of the generic dataset percentages)
+model_training:
+  base_model: alpindale/Mistral-7B-v0.2-hf
+  pretrain_hub_model_id: !!PLACEHOLDER!!/mistrilitary-pretrain
+  pretrain_hub_strategy: all_checkpoints
+  finetune_hub_model_id: !!PLACEHOLDER!!/mistrilitary-pretrain
+  finetune_hub_strategy: all_checkpoints
+  context_length: 10000
+  wandb_project: test-project
+  is_mistral_derived_model: True
+  other_pretrain_kwargs: {}
+  other_finetune_kwargs: {}
+do_not_use_llm_for_pdf_processing: True # !!ATTENTION!! Turn to "False" IF you are using an API **AND** The PDFs you are feeding into the pipeline are very hard to OCR and produce errors in extraction when doing so. See the note in the relevant part of the source code for why this is even an option.

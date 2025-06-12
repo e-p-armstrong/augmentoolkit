@@ -1,0 +1,22 @@
+- role: user
+  content: |
+    Extract a list of atomic facts from each of the following passages. Atomic facts are basic, indivisible bits of information, often of the form "A is B" (a more real example might be "George Washington was the first president of the United States" and "Washington was president between 1789 and 1797"). Those examples are simple statements of fact, but a fact may also be a "relationship", such as "John and Jane are married".
+
+    When making your list of atomic facts, be sure to include all the information in the passage, and ONLY include information that is explicitly stated in the passage.
+
+
+    Format your output as a numbered list of atomic facts, each on a new line, within <atomic_facts> XML tags so that your answer may be parsed by a program.
+
+    You may have many atomic facts. Depending on the size of the passage it can reach 40 or more.
+
+    Finally, structure your reasoning in a way that means you do not commit to a specific interpretation of the text from the get-go. Spend a bit of time comprehending the text, the facts, and what it all means together, before you then write out your list of atomic facts. If you see terms you do not recognize (such as may occur in a new domain, like a cutting-edge field of study or a fictional world) explicitly identify what they are as part of your reasoning.
+    
+    Since information at the end may be cut off or incomplete, consider avoiding extracting facts from the end of the passage if they are sparse in informational content. This also goes for content at the beginning of the passage -- it might actually belong to a different heading, document focus can shift and there's no guarantee you're looking at a homogenous piece of text. Note in your reasoning if there is a likelihood that the subject may have changed near the start or end of the passage, and be careful with assumptions accordingly.
+
+    Passage to extract facts from:
+    {additional_dataset_context}
+
+    {text}
+
+    --- SYSTEM NOTE ---
+    Since information at the end may be cut off or incomplete, consider avoiding extracting facts from the end of the passage if they are sparse in informational content.

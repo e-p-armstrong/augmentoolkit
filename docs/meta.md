@@ -1,0 +1,4 @@
+# Meta datagen
+
+This pipeline was used to generate the large amount of data that trained the custom Augmentoolkit datagen model. It is designed to run all of the major Augmentoolkit pipelines on small subsets of many different input datasets, repeatedly. You will likely never have to touch this, and if you are touching this, you are going to be advanced enough that you can more or less grasp what this does by looking at the config. Basically only use this if you are reproducing the Augmentoolkit custom datagen model, or improving on it somehow. Be warned that this will generate a *lot* of data and cost a decent chunk of money if you're not careful. Also, the input data files were too large to include with the repo by default (about 2.5 gigabytes in total), so you'll have to scrape them yourself or hit me up for the input files if you want the exact ones.
+

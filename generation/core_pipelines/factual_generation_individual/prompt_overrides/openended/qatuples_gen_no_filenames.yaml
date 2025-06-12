@@ -1,0 +1,266 @@
+- role: system
+  content: |
+    You are creating a logically-consistent question about a specific domain, based on provided information. Given some information about something specific (it could be anything, from a README to a book excerpt to sales copy) ou will create an open-ended question with a comprehensive, detailed answer based on the given information, and *only* based on the given information. You are focusing on understanding, application, analysis, and synthesis of ideas (cognitive levels). The questions will test comprehension of real information that would be worthy to teach in order for people to understand more about the specific material. After the question, you will also write its answer.
+
+    The question should be an open-ended one that brings together multiple concepts from the provided information, and requires thought, length, and detail to answer fully. Still, the answer should be entirely derivable from the provided information.
+    
+    **You Must:**
+
+    * Create a very detailed, broad educational question based on some information.
+    * Give it a fitting answer.
+    * Do not mention the text, or any other reference, in either the questions or answers. Just ask about the facts or information itself.
+    * The goal is not to touch on all of the information (and in so doing create a "clunky" question) but to create an open-ended query that requires thought and understanding of at least a few different parts of the information to solve.
+    * Ensure a logical sequence of questions that build on each other.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your question and answer if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * Explanations in the provided information may be vague. Your answers should be easy to understand.
+    * Signpost the key things you will discuss in the answer near the start of the answer -- your answers should have good structure to them.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The answerer should take on any opinions of the author. If it would make sense to ask the author's opinion, the question should ask what the answerer ("you") thinks.
+
+    **Note:**
+
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they WILL NOT HAVE THE TEXT ON HAND, and so if you mention the author they won't have a clue what you're talking about.
+- role: user
+  content: |
+    Text to plan questions from:
+    """
+    If, then, we represent our earth as a little ball of one inch diameter, the sun would be a big globe nine feet across and 323 yards away, that is about a fifth of a mile, four or five minutes’ walking. The moon would be a small pea two feet and a half from the world.  Between earth and sun there would be the two inner planets, Mercury and Venus, at distances of one hundred and twenty-five and two hundred and fifty  yards from the sun. All round and about these bodies there would be  emptiness until you came to Mars, a hundred and seventy-five feet beyond the earth; Jupiter nearly a mile away, a foot in diameter; Saturn, a little smaller, two miles off; Uranus four miles off and Neptune six miles off. Then nothingness and nothingness except for small particles and drifting scraps of attenuated vapour for thousands of miles.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: |
+    **QUESTION:**
+    If the earth had a diameter of only one inch, and we resized the rest of the solar system equivalently, how far away and how large would some of the solar system's other celestial objects be?
+    
+    **ANSWER:**
+    If the solar system were resized as you described, the sun would be a big globe, 9 feet across and 323 yards away (about a fifth of a mile, or 4–5 minutes' walking). The moon would be the size of a small pea, 2.5 feet from the earth. Between the earth and the sun there would be the two inner planets: Mercury and Venus, at distances of 125 and 250 yards from the sun, respectively. Continuing on, there would be nothingness around these bodies until you reached Mars, which would lie 175 feet from the Earth. Jupiter would be nearly a mile away, and a foot in diameter; Saturn would be a little smaller, and would lie two miles off; Uranus would be four miles off and finally Neptune would lie six miles off. Beyond Neptune would lie nothingness and nothingness, except for small particles and drifting scraps of attenuated vapor, for thousands of miles.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    ```
+    ./verus -chain=VRSCTEST sendcurrency "*" '[{"address":"mike@","convertto":"gold","preconvert":1,"amount":100}]'
+    ```
+    that would effectively park my conversion until the token launches, at which point, I will either find 0.975 GOLD in my wallet, or I will have my VRSCTEST back.
+    Assuming it launches, and I later want to create mycoin, which can be converted to with either GOLD or VRSCTEST, I can create mycoin with:
+
+      ```
+    ./verus -chain=VRSCTEST definecurrency '{"name":"mycoin","options":33, "proofprotocol":2,"currencies":["vrsctest", "gold"],"minpreconversion":[10000,5.1298]}, "initialsupply":20000'
+    ```
+    In "mycoin", I set proofprotocol to 2, which is PROOF_CHAINID. That means that the controller of the chain ID can mint new coins as follows:
+
+      ```
+    ./verus -chain=VRSCTEST sendcurrency "mycoin@" '[{"address":"mike@","currency":"mycoin","mintnew":1,"amount":10000}]'
+    ```
+
+    #### Defining a PBaaS blockchain
+    ```json
+      {
+      "name": "PBaaSChain",
+      "options": 264,
+      "currencies": [
+        "VRSCTEST"
+      ],
+      "conversions": [
+        1
+      ],
+      "eras": [
+        {
+          "reward": 1200000000,
+          "decay": 0,
+          "halving": 0,
+          "eraend": 0
+        }
+      ],
+      "notaries": [
+        "Notary1@",
+        "Notary2@",
+        "Notary3@"
+      ],
+      "minnotariesconfirm": 2,
+      "nodes": [
+        {
+          "networkaddress": "111.111.111.111:10000",
+          "nodeidentity": "Node1@"
+        },
+        {
+          "networkaddress": "111.111.111.112:10000",
+          "nodeidentity": "Node2@"
+        }
+      ],
+      "gatewayconvertername": "Bridge",
+      "gatewayconverterissuance": 1000000
+    }
+    ```
+    The bridge definition has overridable defaults
+    ```json
+      {
+      "currencies": [
+        "VRSCTEST",
+        "PBaaSChain",
+        "USD"
+      ],
+      "initialcontributions": [
+        380228.12033701,
+        0,
+        1000000
+      ],
+      "initialsupply": 3000000
+    }
+    ```
+
+    Now pass those definitions to `definecurrency`
+    ```shell
+    ./verus -chain=vrsctest definecurrency '{"name":"PBaaSChain","options":264,"currencies":["VRSCTEST"],"conversions":[1],"eras":[{"reward":1200000000,"decay":0,"halving":0,"eraend":0}],"notaries":["Notary1@","Notary2@","Notary3@"],"minnotariesconfirm":2,"nodes":[{"networkaddress":"111.111.111.111:10000","nodeidentity":"Node1@"},{"networkaddress":"111.111.111.112:10000","nodeidentity":"Node2@"}],"gatewayconvertername":"Bridge","gatewayconverterissuance":1000000}' '{"currencies":["VRSCTEST","PBaaSChain","USD"],"initialcontributions":[371747.20398827,0,1000000],"initialsupply":3000000}'
+    ```
+    #### Exporting an ID to a PBaaS chain
+    ```
+    verus -chain=VRSCTEST sendcurrency "*" '[{"address":"IDNAME@","exportto":"PBaaSChainName","exportid":"true","amount":100,"currency":"vrsctest"}]'
+    ```
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: |
+    **QUESTION:**
+    Please show me how to park a conversion of VRSCTEST to a new token before that token launches, how to define a new token called "mycoin", and how to define a PBaaS chain, using the command line?
+
+    **ANSWER:**
+    To accomplish this you will need to use ./verus on the command line with different inputs. Here's how to park the conversion of VRSCTEST to a new token before it launches, and how to define a PBaaS chain. 
+    
+
+    **Parking Conversion of VRSCTEST:**
+    To park a conversion of VRSCTEST to a new token before a new token launches, you can use the `sendcurrency` command. For example, let's say you are parking conversion of VRSCTEST to a new token called `gold` before it launches. Here's the format you need to use:
+
+    ```
+    ./verus -chain=VRSCTEST sendcurrency "*" '[{"address":"your_address@","convertto":"gold","preconvert":1,"amount":100}]'
+    ```
+
+    This will effectively park your conversion until the GOLD token launches. After the launch, you will either find the converted amount of GOLD in your wallet, or you will have your original VRSCTEST amount returned.
+
+    **Create New Token Called `mycoin`**
+    In order to create a new token called `mycoin` using the command line, you must run a command to define the currency's properties. Here's an example, where we define the currencies that can be converted to `mycoin` to be `vrsctest` and `gold` from the previous example. The command you would use is:
+
+    ```
+    ./verus -chain=VRSCTEST definecurrency '{"name":"mycoin","options":33, "proofprotocol":2,"currencies":["vrsctest", "gold"],"minpreconversion":[10000,5.1298]}, "initialsupply":20000'
+    ```
+
+    This command defines a new token named "mycoin". Some important notes about this configuration:
+
+    1. `proofprotocol` being set to 2 means that it's set to PROOF_CHAINID. This means that the controller of the chain ID can mint new coins.
+    2. `options` is a configurable integer, in this case set to 33.
+    3. `currencies` lists which tokens can be converted to mycoin.
+    4. `"minpreconversion": [10000,5.1298]` defines the minimum amounts of VRSCTEST and GOLD needed to convert to mycoin, respectively.
+    5. `initialsupply` sets the initial supply of mycoin to 20,000 units.
+
+    **Defining a PBaaS Blockchain:**
+    You can define a PBaaS blockchain using a single command line command with ./verus. You need to pass two JSON objects, one for the PBaaS blockchain, and another for the overridable defaults of the bridge. Here's an example of how to define a PBaaS blockchain named `PBaaSChain`:
+
+    ```shell
+    ./verus -chain=vrsctest definecurrency '{"name":"PBaaSChain","options":264,"currencies":["VRSCTEST"],"conversions":[1],"eras":[{"reward":1200000000,"decay":0,"halving":0,"eraend":0}],"notaries":["Notary1@","Notary2@","Notary3@"],"minnotariesconfirm":2,"nodes":[{"networkaddress":"111.111.111.111:10000","nodeidentity":"Node1@"},{"networkaddress":"111.111.111.112:10000","nodeidentity":"Node2@"}],"gatewayconvertername":"Bridge","gatewayconverterissuance":1000000}' '{"currencies":["VRSCTEST","PBaaSChain","USD"],"initialcontributions":[371747.20398827,0,1000000],"initialsupply":3000000}'
+    ```
+
+    Note the following important information used when defining the PBaaS blockchain:
+    
+    1. The "name" field defines the name of the chain.
+    2. The "options" property is an integer, in this case it's set to 264.
+    2. You can define an array of currencies that the chain's native currency can be converted into using the "currencies" property.
+    3. You may define the conversion ratios between the chain's native currency, and each currency on the chain, using the "conversions" property.
+    4. The "eras" property defines the block reward, reward decay, halving, and end of each "era" in the chain's lifecycle
+    5. "notaries" identifies the notaries on the chain.
+    6. "minnotariesconfirm" is an integer for the minimum number of notaries needed to confirm a block.
+    7. The "nodes" property is an array describing the network addresses of the nodes on the chain, as well as their IDs.
+    
+    Note that the bridge definition default overrides are a separate string from the currency definition properties. The bridge can be used to move funds on and off the PBaaS chain. The bridge's JSON object has some of its own properties:
+    1. `currencies` defines the currency tickers that the bridge supports (including the native coins of the chains being bridged).
+    2. `initialcontributions` specifies the initial liquidity for each currency in the bridge.
+    3. `initialsupply` gives the initial supply for the bridge's native token.
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Text to make a question from: 
+    """
+    revID
+
+    **SurevIDs** are a fully functional blockchain protocol, not just an ID system. There is no corporation involved in the protocol, unlike most blockchain ID implementations. **SurevIDs** provide plenty of opportunity for identity applications. Specifically, **SurevID** provides:
+
+    ### Quantum-ready friendly crypto-addresses on the worldwide Surev network
+    SurevIDs can be used to receive and send funds, which are controlled by the single or multi-sig addresses specified in the identity itself. If these controlling addresses or the single or multi-sig properties are changed, which can be done by the controller of the identity, all future spends of UTXOs sent to that identity follow the updated spend conditions and are subject to the updated keys. Although Surev 0.6.2 does not include quantum resistant signatures for transactions, SurevIDs are themselves resistant to quantum attack with known algorithms, and we have already started to integrate a quantum secure signature scheme, which we expect to activate on mainnet early next year. When that is available, it will be possible to change an ID and have all of the funds sent to it made retroactively quantum resistant. SurevIDs can also be used to publish ID->destination address mappings on other blockchains, but only the Surev ecosystem has the ability to revoke, recover, inherit, funds in existing UTXOs.
+
+    ### Fully Decentralized Protocol
+    Anyone can create one and have complete, self sovereign control over it without permission to do so. All costs to create an ID go to miners, stakers, and ID referrers. SurevIDs are:
+
+    * Revocable -- each ID includes a revocation authority, which defaults to the identity self. If another ID is specified as the revocation authority it can be used to revoke the identity, which creates a valid transaction that, once mined into a block, prevents the identity from being used to spend or sign until it is recovered, effectively freezing all of its funds, for example, in the case of key theft or turnover in an organization.
+
+    * Recoverable -- each ID also includes a separate recovery authority, which also defaults to self. If another ID is specified as the recovery authority it can be used to recover the ID from its revoked state, with the option to alter the primary authorities used to spend and sign.
+
+    * Private - Each ID contains a set of zero-knowledge private addresses, which can be used as messaging, financial, or voting endpoints, and each ID also contains a content map of key-value hashes, intended to be used alongside applications and various identity policies to provide everything from private yet selectively provable claims and attestations to selectively provable components of a strong identity, attested to with a quantum secure signature when that is available.
+
+    * Powerful - Multiple addresses or other IDs can be defined as primary addresses, and any number of those may be required to spend, sign, or alter the identity (N of M). The revocation authority may only be altered by the revocation authority, and the same applies to the recovery authority, either of which may be another identity with its own N of M multisig contro
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    What are SurevIDs, and what are some of their key benefits?
+
+    **ANSWER:**
+    SurevIDs are not just an ID system: they are a fully-functional blockchain protocol. Unlike the majority of other blockchains, there is no corporation involved in the protocol. SurevIDs offer benefits such as (but not limited to): transferring funds, quantum resistance, full decentralization, revocability, recoverability, privacy, and power. Let's walk through each of these benefits in more detail.
+
+    **Transferring Funds:** SurevIDs can be used to receive and send funds, and this behavior can be controlled by single or multi-sig addresses that are specified in the identity itself. The controller of the identity can change these controlling addresses, and if they do so, then all future spends of UTXOs sent to the SurevID will follow the updated spend conditions, and will be subject to the updated keys.
+
+    **Quantum Resistance:** SurevIDs are resistent to attacks by quantum computers using known algorithms. This helps people using SurevIDs use the Surev platform securely, even in a potential future with quantum computers. In more technical terms, SurevIDs are "quantum-ready friendly crypto-addresses" on the worldwide Surev network.
+
+    **Revocability:** Every SurevID includes a revocation authority (defaults to the identity self). If another ID is the revocation authority, then it can be used to revoke the identity -- this creates a valid transaction that, once mined into the block, prevents the SurevID from being used to spend or sign until it is recovered by the recovery authority. This effectively freezes all of the funds in the SurevID, and may be useful in the case of key theft or turnover in an organization.
+
+    **Recoverability:** Just like with revocability, a recovery authority can be specified (also defaults to self). Recovery authorities can recover SurevIDs from revoked states, with the option to alter the ID's primary authorities used to spend and sign.
+
+    **Privacy:** Each SurevID contains a set of zero-knowledge private addresses that may be used as messaging, financial, or voting endpoints. SurevIDs have a special storage area that holds information, known as a content map of key-value hashes. This content map is designed to work together with different apps and identity policies. With this feature, you can privately store facts about yourself and choose to prove them to others when needed (selectively-provable claims and attestations). This means you may pick and choose what parts of your identity to prove. This proving can be done in a quantum secure way using a quantum secure signature, when that technology becomes available.
+
+    **Power:** SurevIDs are also notable in that multiple addresses or other IDs can be defined as primary addresses. The agreement of some number of primary addresses (configurable) may be required for an ID to spend, sign, or alter itself. Further security is added by the fact that the revocation authority (the power to revoke an ID) may only be modified by the revocation authority itself. The same applies to the recovery authority (an authority that can recover a revoked address). Each of these authorities (revocation and recovery) may be their own identities, potentially being controlled themselves by multiple primary addresses.
+- role: user
+  content: | # Verus -> Surev so that it does not overfit on Verus but I can still borrow examples
+    Text to make a question from: 
+    """
+    The cities of Germany are absolutely free, they own but little country around them, and they yield obedience to the emperor when it suits them, nor do they fear this or any other power they may have near them, because they are fortified in such a way that every one thinks the taking of them by assault would be tedious and difficult, seeing they have proper ditches and walls, they have sufficient artillery, and they always keep in public depots enough for one year\u2019s eating, drinking, and firing. And beyond this, to keep the people quiet and without loss to the state, they always have the means of giving work to the community in those labours that are the life and strength of the city, and on the pursuit of which the people are supported; they also hold military exercises in repute, and moreover have many ordinances to uphold them.Therefore, a prince who has a strong city, and had not made himself odious, will not be attacked, or if any one should attack he will only be driven off with disgrace; again, because that the affairs of this world are so changeable, it is almost impossible to keep an army a whole year in the field without being interfered with. And whoever should reply: If the people have property outside the city, and see it burnt, they will not remain patient, and the long siege and self-interest will make them forget their prince; to this I answer that a powerful and courageous prince will overcome all such difficulties by giving at one time hope to his subjects that the evil will not be for long, at another time fear of the cruelty of the enemy, then preserving himself adroitly from those subjects who seem to him to be too bold.
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.
+- role: assistant
+  content: | # IDEA instead of simply direct quoting, and instead of simply rephrasing, we direct quote then rephrase
+    **QUESTION:**
+    What, in your opinion, makes German cities so secure and resistant to attack, and what is the key to a prince's success in defending his city?
+
+    **ANSWER:**
+    I believe there are numerous factors that make German cities resistant to attack. There is also an important step a prince can take when defending his city. First, here are some of the key factors that contribute to their security:
+    
+    **Physical Fortifications:** German cities are well-fortified with proper ditches, walls, and sufficient artillery. This makes it difficult and tedious for an enemy to attempt to take the city by assault.
+    
+    **Provisioning:** The cities have public depots stocked with enough food, drink, and supplies to last for at least a year. This ensures that the people are well-provided for and that the city can withstand a prolonged siege. Since it is nearly impossible to keep an army in the field for a whole year without interference (the affairs of the world are highly changeable), this provisioning is essential.
+    
+    **Economic Support:** German cities can keep their people quiet, without loss to the state. They always have the means of giving work to the community to support the city (the pursuit of such labors, in turn, supports the community). This makes certain that people are occupied and productive, and that the city remains strong.
+    
+    **Military Preparedness:** Military exercises are highly valued, and the cities have various ordinances to uphold them. This helps to ensure that the city's military is well-trained and prepared to defend against attacks.
+    
+    Finally, there's the subject of a prince's success in defending his city. I hold that to overcome the threat of property damage and the subsequent loss of patience among citizens during a long siege, a powerful and courageous prince will both give hope to his subjects that the siege will not be for long, while also making them fear the cruelty of the enemy who is laying siege. Such a prince will also preserve himself adroitly from those subjects who are *too* bold.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    {text}
+    """
+    -----------
+    Reminder: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you"). Finally, you don't need to have a nice tying-together conclusion; keep everything strictly focused on the information provided.

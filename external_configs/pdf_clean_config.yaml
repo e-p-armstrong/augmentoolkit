@@ -1,0 +1,29 @@
+pipeline: pdf-clean-convert-pipeline
+
+api:
+  small_api_key: !!PLACEHOLDER!! 
+  small_base_url: https://api.deepinfra.com/v1/openai
+  small_model: Qwen/QwQ-32B-Preview
+  small_mode: api
+path:
+  input_dir: ./inputs/examples/pdf
+  output_dir: ./outputs/pdf_clean_convert_test
+  prompts: ./prompts
+  default_prompts: ./prompts
+system:
+  completion_mode: False
+  concurrency_limit: 300
+  use_stop: True
+  subset_size: 30
+  use_subset: False # !!ATTENTION!! use_subset is OFF
+  chunk_size: 4000
+cost:
+  cost_per_million_small_input: 0.15
+  cost_per_million_small_output: 0.20  
+  cost_per_million_large_input: 0.15
+  cost_per_million_large_output: 0.20
+meta_datagen:
+  do_meta_datagen: False
+  meta_datagen_keys: # note that we will likely NOT have the original question generation detail -- or maybe we do.... hmm how do we... how do we use the full output of that but with the repaired context? Simple we do not. Hmm. HMM. do both and just use a different prompt and out format for the repaired-from-the-start thing? Oh and that's another one the pipeline will want to be able to change the output format of each thing to arbitrary variations nad also add random rules to the thing like "all caps" and other random shit just to make it really good at instruction following. Thankfully we have the inputs and outputs so we can twist it nicely. The output format, maybe we want to include a regex or some code or some way of parsing it so that we can then convert it to something else. A thought for when I go all into the model making stage.
+    - clean_pdf_details
+  meta_datagen_extras:

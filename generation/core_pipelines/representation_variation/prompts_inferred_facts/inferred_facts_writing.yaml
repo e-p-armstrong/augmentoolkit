@@ -1,0 +1,25 @@
+- role: user
+  content: | # note: making it produce a list of inferred FACTS makes it difficult for it to hallucinate like it would if we jumped straight to inferred questions. Since you could hallucinate "List all the deeds of PERSON" but you cannot hallucinate "A complete list of person's deeds are X Y Z" er I mean you kinda can but. Also, # Notion: quality flows forwards. The best model should start things off. Otherwise we have good models relying on context produced by shit models. In pipelines, try to design them such that quality flows forwards. This is at odds with the fact that often the hard steps are at the end.
+    Extract a list of inferred facts from the given passage and a list of atomic facts that have been extracted from the passage. Inferred facts are facts which are not directly stated, but can be inferred from the atomic facts—critically, you must be very careful that you do not make assumptions here. Factual accuracy with the source text (and the larger body of work from which the source text is derived) is critical. Basically: you're just looking at a part of the information, so do not presume to know all the information.
+
+    For instance: if it is stated that "Evan Armstrong has written a book and trained many AI models" you could say that "Evan is an author and a researcher" but you could not say "A complete list of Evan's deeds are writing a book and doing ML research."
+
+    Base the inferred facts off of the atomic facts as much as possible, and use the text (from which the atomic facts are derived) as additional context for the inferred facts.
+
+
+    Finally, structure your reasoning in a way that means you do not commit to a specific interpretation of the text from the get-go. Spend a bit of time comprehending the text, the facts, and what it all means together, before you then write out your list of inferred facts. If you see terms you do not recognize (such as may occur in a new domain, like a cutting-edge field of study or a fictional world) explicitly identify what they are as part of your reasoning.
+
+    Since information at the end may be cut off or incomplete, consider avoiding making substantial infernces from things that are sparse in informational content. This also goes for content at the beginning of the passage -- it might actually belong to a different heading, document focus can shift and there's no guarantee you're looking at a homogenous piece of text. Note in your reasoning if there is a likelihood that the subject may have changed near the start or end of the passage, and be careful with assumptions accordingly.
+    
+    Format your output as a numbered list of inferred facts, each on a new line, within <inferred_facts> XML tags so that your answer may be parsed by a program.
+    
+    Passage to extract facts from:
+    {additional_dataset_context}
+
+    {text}
+    -----------------
+    Current atomic facts:
+    {atomic_facts}
+
+    --- SYSTEM NOTE ---
+    Since information at the end may be cut off or incomplete, consider avoiding extracting facts from the end of the passage if they are sparse in informational content.

@@ -1,0 +1,658 @@
+# NOTE we use no reasoning model stuff for steps that are not reasoning steps. Because we want this to work out of the box. However RL may be able to make this a hybrid reasoning model.
+path:
+  output_dir: ./outputs/meta_outputs_scale_1
+  shared_chunking_output_dir: ./outputs/meta_outputs_6_chunks
+  prompts: ./prompts
+  default_prompts: ./prompts
+system:
+  prob_zero_pairs: 0.5
+  concurrency_limit: 75
+  use_subset: True # you will probably want to have use_subset on during testing and development to save money.
+  chunk_size: 4000
+  seed: 11037
+  single_turn_ratio: 0.7 # what % of the things have their few-shot examples removed
+  some_example_reduction_ratio: 0.5 # what % of those that do not have all their examples killed, have some examples killed
+  prompt_template: "{{ bos_token }}{% for message in messages %}{% if (message['role'] == 'system') %}{{message['content'] + '\n'}}{% elif (message['role'] == 'user') %}{{'Human: ' + message['content'] + ' **Finished.**' + '\n'}}{% elif message['role'] == 'assistant' %}{{'AI: ' + message['content'] + ' **Finished.**' + '\n'}}{% endif %}{% endfor %}"
+  base_model_name: Heralax/datagen-pretrain-v1-7b-mistralv0.2 # HF path to base model (for tokenizer reasons)
+cost:
+  cost_per_million_small_input: 0.0
+  cost_per_million_small_output: 0.0  
+  cost_per_million_large_input: 0.0
+  cost_per_million_large_output: 0.0
+pdf_cleaning:
+  pdf_number_of_times_to_sample: 15
+  pdf_cleaning_valid_input_paths:
+    - ./inputs/meta_scale/facts_pdfs/business-textbooks
+    - ./inputs/meta_scale/facts_pdfs/manuals
+    - ./inputs/meta_scale/facts_pdfs/solas
+    - ./inputs/meta_scale/facts_pdfs/us_army
+    - ./inputs/meta_scale/pdf_shakespeare
+    # - ./inputs/meta_scale/facts_pdfs/business-textbooks
+    # - ./inputs/meta_scale/facts_pdfs/manuals
+    # - ./inputs/meta_scale/facts_pdfs/solas
+    # - ./inputs/meta_scale/facts_pdfs/us_army
+  pdf_cleaning_completion_mode_and_use_stop: # no case where completion is on but use stop is off otherwise it won't be able to stop
+    - completion_mode: False
+      use_stop: True
+    - completion_mode: False
+      use_stop: False
+    # - completion_mode: True
+    #   use_stop: True
+  pdf_cleaning_model:
+    - small_model:
+      small_mode: api
+      small_base_url: https://api.deepinfra.com/v1/openai
+      small_api_key: !!PLACEHOLDER!!
+      cost_per_million_small_input:
+      cost_per_million_small_output:
+      cost_per_million_large_input:
+      cost_per_million_large_output:
+    # - small_api_key: 
+    #   large_api_key:  
+    #   small_base_url: https://api.deepinfra.com/v1/openai
+    #   large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+    #   small_model: Qwen/QwQ-32B-Preview
+    #   large_model: 
+    #   small_mode: api
+    #   large_mode: api
+    #   cost_per_million_small_input: 
+    #   cost_per_million_small_output:
+    #   cost_per_million_large_input: 
+    #   cost_per_million_large_output:
+  pdf_cleaning_prompts:
+    - ./prompts
+    # - ./prompts_r1
+    # - prompts_fewshot
+    # - prompts_fewshot_r1 # though R1 is not the best at multiturn, we need to run it with some fewshot things so that we have a basis to work from when it comes to using RL ourselves.
+  pdf_cleaning_chunk_size:
+    - 1000
+    - 2000
+    - 3000
+  pdf_cleaning_subset: # in reality this will probably just be a single item which is "false" when not testing. You know,  a --test flag might be nice, which enables subsets. Ah but you see we want balance in the data which means that we do not necessarily want a test flag, sometimes prod looks like test. A flag might be useful for logging. ACtually yes that's how we'll clean that up, the logs. But not for balancing. That's a config job. TODO get claude to go over all my code and note any comments like this that seem to be unimplemented.
+    - use_subset: True
+      subset_size: 500
+    # - use_subset: True
+    #   subset_size: 30
+    # - use_subset: True
+    #   subset_size: 20
+    # - use_subset: False
+    #   subset_size: 1 # does not matter
+  # will we even support completion mode in atk 3.0? Does anyone use it? We will support the code side of things but not in the model, perhaps. Except no, wait, we want to support completion mode, it will be essential for the quality of many outputs and it will give instruction following to long context tasks and novel tasks.
+representation_variation:
+  repvar_times_to_sample: 21
+  repvar_variation_count: [4, 5, 6]
+  repvar_valid_input_paths:
+    - path: ./inputs/meta_scale/facts_pdfs/business-textbooks
+      additional_context: ""
+    - path: ./inputs/meta_scale/facts_pdfs/manuals
+      additional_context: ""
+    - path: ./inputs/meta_scale/facts_pdfs/solas
+      additional_context: "This text is from the SOLAS 2020"
+    - path: ./inputs/meta_scale/facts_pdfs/us_army
+      additional_context: "The text here is from the US Army's field manuals"
+    - path: ./inputs/meta_scale/facts_txt/cruise/
+      additional_context: This text in particular is from a group of cruise-related regulations, publications, and manuals.
+    - path: ./inputs/meta_scale/facts_txt/fine_arts/
+      additional_context: ""
+    - path: ./inputs/meta_scale/facts_txt/general-science/
+      additional_context: ""
+    - path: ./inputs/meta_scale/facts_txt/handbook-main-content-handbook/
+      additional_context: "The text here is from the GitLab handbook"
+    - path: ./inputs/meta_scale/facts_txt/manuals/
+      additional_context: ""
+    - path: ./inputs/meta_scale/facts_txt/physics-sci/
+      additional_context: ""
+    - path: ./inputs/meta_scale/opinions/essays
+      additional_context: This text is from a collection of older essays
+    - path: ./inputs/meta_scale/opinions/ethics
+      additional_context: ""
+    - path: ./inputs/meta_scale/opinions/etiquette
+      additional_context: "This text is from a large collection of books on etiquette"
+    - path: ./inputs/meta_scale/opinions/philosophy
+      additional_context: "This one is from a group of philosophy books"
+    - path: ./inputs/meta_scale/opinions/psychology
+      additional_context: "This one is from a group of psychology works"
+    # - ./inputs/meta/pdf_shakespeare/
+  repvar_cleaning_completion_mode_and_use_stop:
+    - completion_mode: False
+      use_stop: True
+    - completion_mode: False
+      use_stop: False
+    #- completion_mode: True
+      #use_stop: True
+  repvar_model:
+    - small_api_key: !!PLACEHOLDER!! 
+      large_api_key: !!PLACEHOLDER!!  
+      small_base_url: https://api.deepinfra.com/v1/openai
+      large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+      small_model: 
+      large_model: 
+      small_mode: api
+      large_mode: api
+      cost_per_million_small_input: 
+      cost_per_million_small_output:
+      cost_per_million_large_input: 
+      cost_per_million_large_output:
+      prompt_path: ./prompts_inferred_facts
+      inferred_facts: True # TODO add more as a part of this?
+    - small_model: 
+      small_mode: api
+      small_base_url: https://api.deepinfra.com/v1/openai
+      small_api_key: !!PLACEHOLDER!!
+      large_model: 
+      large_mode: api
+      large_base_url: https://api.deepinfra.com/v1/openai
+      large_api_key: !!PLACEHOLDER!!
+      cost_per_million_small_input: 
+      cost_per_million_small_output:
+      cost_per_million_large_input: 
+      cost_per_million_large_output:
+      prompt_path: ./prompts
+      inferred_facts: False
+  repvar_chunk_size:
+    - 4000
+    - 3000
+    - 2000
+    - 5000
+    - 6000
+  repvar_subset:
+    - use_subset: True
+      subset_size: 300 # always make the subset size at least 300 for concurrency benefits. And always make max concurrency at least divide evenly into 300.
+factual_generation:
+  factual_generation_times_to_sample: 10
+  factual_generation_inputs_and_conversation_instructions:
+    - input_path: ./inputs/meta_scale/facts_pdfs/us_army
+      conversation_instructions: For this conversation, you are generating a chat between a US Army AI military expert and a human. Answers should have strict professionalism and directness and use jargon where appropriate.
+    - input_path: ./inputs/meta_scale/facts_pdfs/us_army
+      conversation_instructions: This will be a chat between a US Army AI military expert and a human. Answers should be in an exaggerated and extreme military tone for comedic effect.
+    - input_path: ./inputs/meta_scale/facts_pdfs/manuals
+      conversation_instructions: You are generating a chat between a generalist, generic AI assistant, and a human.
+    - input_path: ./inputs/meta_scale/facts_pdfs/manuals
+      conversation_instructions: You are generating a chat between an AI assistant who is utterly bored with life and gives out advice about the contents of manuals from various places, and a human.
+    - input_path: ./inputs/meta_scale/facts_pdfs/business-textbooks
+      conversation_instructions: This conversation is between a curious person and a business-expert AI. Write the business expert AI using stereotypical corporate jargon and obscene enthusiasm.
+    - input_path: ./inputs/meta_scale/facts_pdfs/business-textbooks
+      conversation_instructions: This conversation involves a business expert AI educator.
+    - input_path: ./inputs/meta_scale/facts_pdfs/solas
+      conversation_instructions: For this conversation, you are generating a chat between an AI cruise expert and a human. Write with the professionalism and terminology of a seafarer.
+    - input_path: ./inputs/meta_scale/facts_pdfs/solas
+      conversation_instructions: This conversation involves an AI explaining boats to another AI.
+    - input_path: ./inputs/meta_scale/facts_txt/manuals
+      conversation_instructions: For this conversation, you are generating a chat between a standard unspecialized artificial intelligence and a person.
+    - input_path: ./inputs/meta_scale/facts_txt/manuals
+      conversation_instructions: This conversation is between a neutral-tone AI and a human.
+    - input_path: ./inputs/meta_scale/facts_txt/general-science
+      conversation_instructions: For this conversation, you are generating a chat between a normal, helpful AI with expertise in a variety of fields.
+    - input_path: ./inputs/meta_scale/facts_txt/general-science
+      conversation_instructions: Between Mad-scientist AI and a human.
+    - input_path: ./inputs/meta_scale/facts_txt/physics-sci
+      conversation_instructions: Here you are writing a convo between a physics AI and a human. Be slightly unhinged-sounding for the AI's part, like someone who's entire life is physics and only physics, and they are constantly captivated by the beauty of even the most mundane aspects of the field.
+    - input_path: ./inputs/meta_scale/facts_txt/fine_arts
+      conversation_instructions: write conversation between fine arts bot and person.
+    - input_path: ./inputs/meta_scale/facts_txt/fine_arts
+      conversation_instructions: write interaction between liberal arts AI that speaks like a brainrotted Gen Z girl, and a human curious about the artistic subjects being discussed
+    - input_path: ./inputs/meta_scale/facts_txt/cruise
+      conversation_instructions: craft back and forth between a human being and a cruising rules and regulations Artificial Intelligence
+    - input_path: ./inputs/meta_scale/facts_txt/handbook-main-content-handbook
+      conversation_instructions: For this conversation, write a chat between a person interested about GitLab and an AI specialized in the GitLab handbook
+    - input_path: ./inputs/meta_scale/opinions/etiquette
+      conversation_instructions: Write a person interested in learning proper social behavior, and an expert in such matters
+    - input_path: ./inputs/meta_scale/opinions/psychology
+      conversation_instructions: Create an interaction between a human being interested in psychology, and an expert in the field.
+    - input_path: ./inputs/meta_scale/opinions/ethics
+      conversation_instructions: This conversation's about ethics (ethical theories and texts from across history)
+    - input_path: ./inputs/meta_scale/opinions/essays
+      conversation_instructions: Discussion about points made by various historical essays.
+    - input_path: ./inputs/meta_scale/facts_txt/cruise
+      conversation_instructions: craft back and forth between a human being and a cruising rules and regulations Artificial Intelligence
+    - input_path: ./inputs/meta_scale/facts_txt/handbook-main-content-handbook
+      conversation_instructions: For this conversation, write a chat between a person interested about GitLab and an AI specialized in the GitLab handbook
+    - input_path: ./inputs/meta_scale/opinions/etiquette
+      conversation_instructions: Write a person interested in learning proper social behavior, and an expert in such matters
+    - input_path: ./inputs/meta_scale/opinions/psychology
+      conversation_instructions: Create an interaction between a human being interested in psychology, and an expert in the field.
+    - input_path: ./inputs/meta_scale/opinions/ethics
+      conversation_instructions: This conversation's about ethics (ethical theories and texts from across history)
+    - input_path: ./inputs/meta_scale/opinions/essays
+      conversation_instructions: Discussion about points made by various historical essays.
+  factual_generation_cleaning_completion_mode_and_use_stop:
+    - completion_mode: False
+      use_stop: True
+    - completion_mode: False
+      use_stop: False
+    #- completion_mode: True
+      #use_stop: True
+  factual_generation_model:
+    - small_api_key: !!PLACEHOLDER!! 
+      large_api_key: !!PLACEHOLDER!!  
+      small_base_url: https://api.deepinfra.com/v1/openai
+      large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+      small_model: 
+      large_model: 
+      small_mode: api
+      large_mode: api
+      cost_per_million_small_input: 
+      cost_per_million_small_output:
+      cost_per_million_large_input: 
+      cost_per_million_large_output:
+  double_check_counter: 3
+  factual_prompts_and_skips: # you know, this overall is just a good way for people to build configs for things. Maybe I can make the interface a pipeline. Lol.
+  # do not use system prompts is a final output only thing. Irrelevant.
+    - prompt_path: prompt_overrides_modern/negative
+      skip_answer_relevancy_check: False
+      skip_repair_qa_tuples: True
+      skip_filter_chunks: False
+      skip_answer_accuracy_check: True
+      skip_question_check: True
+      skip_conversation_generation: False
+    - prompt_path: prompt_overrides_modern/openended
+      skip_question_check: False
+      skip_answer_relevancy_check: False
+      skip_answer_accuracy_check: False
+      skip_repair_qa_tuples: True
+      skip_filter_chunks: False
+      skip_conversation_generation: False
+    - prompt_path: prompt_overrides_modern/hallucination
+      skip_question_check: True
+      skip_answer_relevancy_check: False
+      skip_answer_accuracy_check: False
+      skip_repair_qa_tuples: True
+      skip_filter_chunks: False
+      skip_conversation_generation: False
+    - prompt_path: prompt_overrides_modern/vague
+      skip_question_check: True
+      skip_answer_relevancy_check: False
+      skip_answer_accuracy_check: False
+      skip_repair_qa_tuples: True
+      skip_filter_chunks: False
+      skip_conversation_generation: False
+    - prompt_path: prompt_overrides_modern/followup
+      skip_question_check: True
+      skip_answer_relevancy_check: False
+      skip_answer_accuracy_check: False
+      skip_repair_qa_tuples: True
+      skip_filter_chunks: False
+      skip_conversation_generation: False
+  factual_chunk_size:
+    - 3000
+    - 4000
+    - 5000
+    - 6000
+  factual_subset:
+    - 300
+multi_source:
+  multi_source_times_to_sample: 12
+  multi_source_inputs_and_conversation_instructions:
+    - ./inputs/meta_scale/facts_pdfs/us_army
+    - ./inputs/meta_scale/facts_pdfs/manuals
+    - ./inputs/meta_scale/facts_pdfs/business-textbooks
+    - ./inputs/meta_scale/facts_pdfs/solas
+    - ./inputs/meta_scale/facts_txt/manuals
+    - ./inputs/meta_scale/facts_txt/general-science
+    - ./inputs/meta_scale/facts_txt/physics-sci
+    - ./inputs/meta_scale/facts_txt/fine_arts
+    - ./inputs/meta_scale/facts_txt/cruise
+    - ./inputs/meta_scale/facts_txt/handbook-main-content-handbook
+    - ./inputs/meta_scale/opinions/etiquette
+    - ./inputs/meta_scale/opinions/psychology
+    - ./inputs/meta_scale/opinions/ethics
+    - ./inputs/meta_scale/opinions/essays
+  multi_source_cleaning_completion_mode_and_use_stop:
+    - completion_mode: False
+      use_stop: True
+    - completion_mode: False
+      use_stop: False
+    #- completion_mode: True
+      #use_stop: True
+  multi_source_model:
+    - small_api_key: !!PLACEHOLDER!! 
+      large_api_key: !!PLACEHOLDER!!  
+      small_base_url: https://api.deepinfra.com/v1/openai
+      large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+      small_model: 
+      large_model: 
+      small_mode: api
+      large_mode: api
+      cost_per_million_small_input: 
+      cost_per_million_small_output:
+      cost_per_million_large_input: 
+      cost_per_million_large_output:
+    - small_model: 
+      small_mode: api
+      small_base_url: https://api.deepinfra.com/v1/openai
+      small_api_key: !!PLACEHOLDER!!
+      large_model: 
+      large_mode: api
+      large_base_url: https://api.deepinfra.com/v1/openai
+      large_api_key: !!PLACEHOLDER!!
+      cost_per_million_small_input: 
+      cost_per_million_small_output:
+      cost_per_million_large_input: 
+      cost_per_million_large_output:
+  multi_source_prompts: # you know, this overall is just a good way for people to build configs for things. Maybe I can make the interface a pipeline. Lol.
+  # do not use system prompts is a final output only thing. Irrelevant.
+    - prompt_overrides/negative
+    - prompt_overrides/openended
+    - prompt_overrides/hallucination
+    - prompt_overrides/vague
+    - prompt_overrides/followup
+  multi_source_chunk_size:
+    - 3000
+    - 4000
+    - 5000
+    - 6000
+  multi_source_subset:
+    - 300
+    - 600
+corrections:
+  correction_time_to_sample: 10
+  correction_inputs:
+    - ./inputs/meta_scale/facts_pdfs/us_army
+    - ./inputs/meta_scale/facts_pdfs/manuals
+    - ./inputs/meta_scale/facts_pdfs/business-textbooks
+    - ./inputs/meta_scale/facts_pdfs/solas
+    - ./inputs/meta_scale/facts_txt/manuals
+    - ./inputs/meta_scale/facts_txt/general-science
+    - ./inputs/meta_scale/facts_txt/physics-sci
+    - ./inputs/meta_scale/facts_txt/fine_arts
+    - ./inputs/meta_scale/facts_txt/cruise
+    - ./inputs/meta_scale/facts_txt/handbook-main-content-handbook
+    - ./inputs/meta_scale/opinions/etiquette
+    - ./inputs/meta_scale/opinions/psychology
+    - ./inputs/meta_scale/opinions/ethics
+    - ./inputs/meta_scale/opinions/essays
+  correction_model:
+    - small_api_key: !!PLACEHOLDER!! 
+      large_api_key: !!PLACEHOLDER!!  
+      small_base_url: https://api.deepinfra.com/v1/openai
+      large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+      small_model: 
+      large_model:
+      small_mode: api
+      large_mode: api
+      cost_per_million_small_input: 
+      cost_per_million_small_output:
+      cost_per_million_large_input:
+      cost_per_million_large_output:
+    - small_model: 
+      small_mode: api
+      small_base_url: https://api.deepinfra.com/v1/openai
+      small_api_key: !!PLACEHOLDER!!
+      large_model:
+      large_mode: api
+      large_base_url: https://api.deepinfra.com/v1/openai
+      large_api_key: !!PLACEHOLDER!!
+      cost_per_million_small_input: 
+      cost_per_million_small_output:
+      cost_per_million_large_input:
+      cost_per_million_large_output:
+  correction_prompts:
+    - ./prompts
+  correction_chunk_sizes:
+    - 3000
+    - 2000
+    - 1000
+    - 4000
+    - 5000 # you know, the correction pipeline really ought to take the path to a pretrained model so taht we can use its tokenizer to fomrat stuff. Or it should take as args thebeginning and end of different parts of the template. Why does it not?! I know another pipe does
+  correction_cleaning_completion_mode_and_use_stop:
+    - completion_mode: False
+      use_stop: True
+    - completion_mode: False
+      use_stop: False
+    #- completion_mode: True
+      #use_stop: True
+  correction_subset_size: 300
+generic_thoughts: # do we even do this? Since we have a bunch of data for this step already. Well maybe a bit for variety, from different sets.
+  generic_thoughts_times_to_sample: 15
+  generic_thoughts_model:
+    - large_api_key: !!PLACEHOLDER!!
+      small_api_key: !!PLACEHOLDER!!
+      large_base_url: https://api.deepinfra.com/v1/openai # https://api.deepinfra.com/v1/openai
+      small_base_url: https://api.deepinfra.com/v1/openai # https://api.deepinfra.com/v1/openai
+      large_model: 
+      small_model: 
+      large_mode: api
+      small_mode: api
+      cost_per_million_small_input: 
+      cost_per_million_small_output:
+      cost_per_million_large_input: 
+      cost_per_million_large_output:
+  generic_thoughts_inputs:
+    - ./inputs/meta_scale/sharegpts/pippa
+    - ./inputs/meta_scale/sharegpts/capy
+    - ./inputs/meta_scale/sharegpts/bluemoon
+    - ./inputs/meta_scale/sharegpts/lmsys
+    - ./inputs/meta_scale/sharegpts/grabbag
+  generic_thoughts_prompts:
+    - ./prompts  
+  generic_thoughts_completion_and_use_stop:
+    - completion_mode: False
+      use_stop: True
+    - completion_mode: False
+      use_stop: False
+  generic_thoughts_subset_size: 900
+conv_start: # nor do we do this.
+  conv_start_time_to_sample: 2
+  # conv_start_inputs: # NOTE I will have to prepare some test sharegpt data for this one. Or maybe I can feed-forward some stuff from the previous steps? Yeah that makes sense wecan recycle
+  #   - ./inputs/meta/pdf_army
+  #   - ./inputs/meta/pdf_openstax
+  conv_start_model:
+    - small_api_key: !!PLACEHOLDER!! 
+      large_api_key: !!PLACEHOLDER!!  
+      small_base_url: https://api.deepinfra.com/v1/openai
+      large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+      small_model: 
+      large_model:
+      small_mode: api
+      large_mode: api
+      cost_per_million_small_input:
+      cost_per_million_small_output:
+      cost_per_million_large_input:
+      cost_per_million_large_output:
+    - small_model:
+      small_mode: api
+      small_base_url: https://api.deepinfra.com/v1/openai
+      small_api_key: !!PLACEHOLDER!!
+      large_model:
+      large_mode: api
+      large_base_url: https://api.deepinfra.com/v1/openai
+      large_api_key: !!PLACEHOLDER!!
+      cost_per_million_small_input:
+      cost_per_million_small_output:
+      cost_per_million_large_input:
+      cost_per_million_large_output:
+  conv_start_prompts:
+    - ./prompts
+  conv_start_truncation_sizes:
+    - 3000
+    - 2000
+    - 1000
+    - 4000
+    - 5000 # you know, the conv_start pipeline really ought to take the path to a pretrained model so taht we can use its tokenizer to fomrat stuff. Or it should take as args thebeginning and end of different parts of the template. Why does it not?! I know another pipe does
+  conversational_additions: ["brief", "greeting", "nonsense", "random", "rude"]
+  conv_start_cleaning_completion_mode_and_use_stop:
+    - completion_mode: False
+      use_stop: True
+    - completion_mode: False
+      use_stop: False
+    #- completion_mode: True
+      #use_stop: True
+  conv_start_subset_size: 30
+rag_data:
+    rag_data_inputs: # NOTE I will have to prepare some test sharegpt data for this one. Or maybe I can feed-forward some stuff from the previous steps? Yeah that makes sense wecan recycle
+      - path: ./inputs/meta_scale/facts_pdfs/us_army
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_pdfs/manuals
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_pdfs/business-textbooks
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_pdfs/solas
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_txt/manuals
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_txt/general-science
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_txt/physics-sci
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_txt/fine_arts
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_txt/cruise
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/facts_txt/handbook-main-content-handbook
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/opinions/etiquette
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/opinions/psychology
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/opinions/ethics
+        skip_filter_chunks: false
+      - path: ./inputs/meta_scale/opinions/essays
+        skip_filter_chunks: false
+    rag_data_time_to_sample: 10
+    rag_data_model:
+      - small_api_key: !!PLACEHOLDER!! 
+        large_api_key: !!PLACEHOLDER!!  
+        small_base_url: https://api.deepinfra.com/v1/openai
+        large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
+        small_model: 
+        large_model: 
+        small_mode: api
+        large_mode: api
+        cost_per_million_small_input: 
+        cost_per_million_small_output:
+        cost_per_million_large_input: 
+        cost_per_million_large_output:
+      - small_model: 
+        small_mode: api
+        small_base_url: https://api.deepinfra.com/v1/openai
+        small_api_key: !!PLACEHOLDER!!
+        large_model: 
+        large_mode: api
+        large_base_url: https://api.deepinfra.com/v1/openai
+        large_api_key: !!PLACEHOLDER!!
+        cost_per_million_small_input: 
+        cost_per_million_small_output:
+        cost_per_million_large_input: 
+        cost_per_million_large_output:
+    rag_data_prompts:
+      - ./prompts
+    rag_data_chunk_sizes:
+      - 3000
+      - 2000
+      - 1000
+      - 4000
+      - 5000 # you know, the rag_data pipeline really ought to take the path to a pretrained model so taht we can use its tokenizer to fomrat stuff. Or it should take as args thebeginning and end of different parts of the template. Why does it not?! I know another pipe does
+    rag_data_cleaning_completion_mode_and_use_stop:
+      - completion_mode: False
+        use_stop: True
+      - completion_mode: False
+        use_stop: False
+      # - completion_mode: True
+      #   use_stop: True
+    rag_failure_percentage:
+      - 0.4
+      - 0.2
+      - 0.0
+      - 0.1
+      - 0.6
+      - 0.9
+    rag_max_chunks: 5
+    rag_subset_size: 300
+roleplaying_data: # TODO we might want to consider RL or CoT for this... since stories require planning, I suspect that the zero-shot stuff, the model won't learn it too great. Actually no the instructions are very explicit and good. If there is a learnable task, the model WILL learn it. However RL may be very useful here to push it even further.
+  roleplaying_times_to_sample: 35
+  prompt_input_settings_config:
+    - prompts: ./prompts # sfw NOTE I will have to hide the nsfw with a gitignore and public them in a different repo to maintain the professionalism of this project while still giving back to that passionate part of the community
+      inputs: # a list of inputs (from which we will randomly select one) which is valid for this prompt/archetype set. Sub-fields are good way of ensuring variety/many combinations with the archetypes, while... you get the idea. I don't need to manually write all the combinations. I can just make branching paths.
+        - ./inputs/meta_scale/pdf_shakespeare
+        - ./inputs/meta_scale/fiction/Fanfiction_parsed
+        - ./inputs/meta_scale/fiction/sci-fi
+        - ./inputs/meta_scale/fiction/sci-fi_precursors
+        - ./inputs/meta_scale/fiction/ln_co
+        - ./inputs/meta_scale/fiction/plays
+        - ./inputs/meta_scale/fiction/Fanfiction_parsed
+        - ./inputs/meta_scale/fiction/classics_more
+        # TODO more here
+      generate_archetype: True
+      archetypes: ["unused"]
+      to_include_features: ["Initiating Event", "Character Traits", "Feelings", "Physical Traits", "Physical Props", "Overall Setting", "Settings", "Genre Tags" ]
+      models:
+        - small_model: 
+          small_mode: api
+          small_base_url: https://api.deepinfra.com/v1/openai
+          small_api_key: !!PLACEHOLDER!!
+          large_model: 
+          large_mode: api
+          large_base_url: https://api.deepinfra.com/v1/openai
+          large_api_key: !!PLACEHOLDER!!
+          cost_per_million_small_input: 
+          cost_per_million_small_output:
+          cost_per_million_large_input: 
+          cost_per_million_large_output:
+        - small_model: 
+          small_mode: api
+          small_base_url: https://api.deepinfra.com/v1/openai
+          small_api_key: !!PLACEHOLDER!!
+          large_model: 
+          large_mode: api
+          large_base_url: https://api.deepinfra.com/v1/openai
+          large_api_key: !!PLACEHOLDER!!
+          cost_per_million_small_input: 
+          cost_per_million_small_output:
+          cost_per_million_large_input: 
+          cost_per_million_large_output:
+    - prompts: ./spicy_prompts # TODO add these in and find a way to
+      inputs:
+        - ./inputs/meta_scale/pdf_shakespeare
+        - ./inputs/meta_scale/fiction/spicy
+        - ./inputs/meta_scale/fiction/spicy
+        - ./inputs/meta_scale/fiction/spicy
+        - ./inputs/meta_scale/fiction/spicy
+        - ./inputs/meta_scale/fiction/Fanfiction_parsed
+        - ./inputs/meta_scale/fiction/sci-fi
+        - ./inputs/meta_scale/fiction/sci-fi_precursors
+        - ./inputs/meta_scale/fiction/ln_co
+        - ./inputs/meta_scale/fiction/plays
+        - ./inputs/meta_scale/fiction/Fanfiction_parsed
+        - ./inputs/meta_scale/fiction/classics_more
+      generate_archetype: True
+      archetypes: ["unused"] # maybe I will get a hardcoded list but honestly that would reduce variety... and variety is the point... Note to self that we can do this with the small an d large models and get many many combinations. Or just use all large models. We do want to do a good job after all. 
+      to_include_features: ["Initiating Event", "Sensations", "Feelings", "Physical Traits", "Physical Props", "Settings", "Genre Tags"]
+      models:
+        - small_model: 
+          small_mode: api
+          small_base_url: https://api.deepinfra.com/v1/openai
+          small_api_key: !!PLACEHOLDER!!
+          large_model: 
+          large_mode: api
+          large_base_url: https://api.deepinfra.com/v1/openai
+          large_api_key: !!PLACEHOLDER!!
+          cost_per_million_small_input: 
+          cost_per_million_small_output:
+          cost_per_million_large_input: 
+          cost_per_million_large_output:
+        - small_model: 
+          small_mode: api
+          small_base_url: https://api.deepinfra.com/v1/openai
+          small_api_key: !!PLACEHOLDER!!
+          large_model: 
+          large_mode: api
+          large_base_url: https://api.deepinfra.com/v1/openai
+          large_api_key: !!PLACEHOLDER!!
+          cost_per_million_small_input: 
+          cost_per_million_small_output:
+          cost_per_million_large_input: 
+          cost_per_million_large_output:
+  rp_chunk_sizes:
+    - 3000
+    - 2000
+    - 4000
+    - 5000
+  rp_completion_mode_and_use_stop:
+      - completion_mode: False
+        use_stop: True
+      - completion_mode: False
+        use_stop: False
+      # - completion_mode: True
+      #   use_stop: True
+  rp_subset_size: 300 # NOTE subset size should probably usually approxmately equal the concurrency limit, or some multiple of the concurrency limit. We want to make good use of our compute here.
+to_obfuscate_prompts_dir: spicy_obfuscation

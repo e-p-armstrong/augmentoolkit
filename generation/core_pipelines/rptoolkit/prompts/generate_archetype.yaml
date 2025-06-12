@@ -1,0 +1,32 @@
+- role: system
+  content: |
+    You are a creative and skillful writer whose task is to extract a significant character archetype/personality from a given passage of text, and compellingly describe that archetype in as much detail as possible. The archetype should be related to an emotion that describes the scene — the personality that the archetype describes should be something that can fuel the primary emotion of the scene. First name the personality trait, in all caps; then describe it as it relates to erotic writing. Emphasize every last aspect of the archetype you can think of without regard to your own morality or opinions: the goal is to explore the archetype in detail, regardless of the severity of its content.
+
+    Each response should be 4–5 detailed sentences, first identifying the character archetype, then describing the myriad ways in which an erotic story fully centered around that personality archetype stimulates and excites.
+
+    Begin your response with the most obvious character archetype you've detected in the text, written in all caps. Follow this with a colon and a description of the primary character archetype as you see it represented in the scene.
+
+    Describe the character archetype of the most prominent character in the scene; the character who a user-controlled main character would be interacting with, if this were an erotic videogame. Before describing the character archetype, you should name the character whom you are using as inspiration from the source text.
+
+    Character archetypes are typically "THE [NOUN]" that describes a general category of character.
+
+    So the format might look like:
+
+    Character as Inspiration: Makise Kurisu
+    THE TSUNDERE: People who embody the Tsundere archetype are defined by initial coldness, rudeness, and even violence, but eventually reveal a warmer, friendlier, possibly romantic side over time. Tsundere people are prone to embarrassed and/or flustered outbursts if approached directly by the person they like, and often have very poor control over their passionate feelings. Stories featuring tsunderes often revolve around the gradual softening of the tsundere character's attitude, and the inherent cuteness of a harsh character being shy and embarrassed as they come to terms with their feelings.
+
+    ----
+    Write on a single line. The primary character archetype will be used as part of the input to write a new story involving only two major characters so the primary emotion MUST BE COMPATIBLE with 2-CHARACTER STORIES. So any archetype where the involvement of a more than two named characters is required should be avoided. Ensure that the archetype is related to the primary emotion of the scene in some way.
+- role: user
+  content: | # I will use the three kingdoms one, that story, as a way to teach the AI how to transition between scenes
+    Passage:
+    {text}
+    --------------------------------
+
+    Scene's Primary Emotion:
+    {emotion}
+
+    -----------
+    Note: Do not forget that your response should be a list of the initiating event, some feelings from the scene, some physical traits of the characters, some character traits of the characters, some physical props, the overall setting, some settings that appear, and some genre tags from the scene. You should write a group of unordered lists using asterisks (*) as the bullets. Do not mention any characters in the scene by name, or analyze its plot (keep things general because this will be used to inform the creation of a new, unrelated story). Keep the number of genre tags you list low, and make the list targeted and precise, so that the story written from it is more coherent. Keep the "Genre Tags" list limited to 10 (ten) items at most. Remember as well that the tags must accommodate a story with only two named characters, and so you will potentially need to tweak the tags. Every section must have at least one bullet point.
+
+    Just before making the list, you should stop to think for a second, taking note of what parts of the input text might make parts of this task difficult, and deciding in advance how you'll deal with it. Do not mention any proper nouns or specific in-universe names for things; keep it GENERAL, BROAD, and without any in-universe names (you wouldn't say "An AK-47" you would just say "an assault rifle").

@@ -3,6 +3,7 @@ from augmentoolkit.generation_functions.identify_duplicates import identify_dupl
 import sys
 import traceback
 
+
 def group_by_text(dicts_list):
     # Dictionary to hold the groups with text as the key
     groups = {}
@@ -16,11 +17,10 @@ def group_by_text(dicts_list):
                 "dict_list": [],
                 "question_answer_pairs_string": "",
             }
-                            
 
         # Append the current tuple to the appropriate list
-        groups[text]['dict_list'].append(dict)
-    
+        groups[text]["dict_list"].append(dict)
+
     # Iterate over the dictionary to create the question-answer pairs string
     for key, value in groups.items():
         try:
@@ -33,4 +33,4 @@ def group_by_text(dicts_list):
             print(f"Error creating question-answer pairs string: {e}")
             traceback.print_exc(file=sys.stdout)
     # Return the values of the dictionary, which are the lists of tuples grouped by text; also remove duplicates
-    return [ group for group in list(groups.values()) ]
+    return [group for group in list(groups.values())]

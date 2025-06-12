@@ -1,0 +1,17 @@
+pipeline: rag-server
+
+# NOTE you can basically make this automatically start up by chaining it in a composition with the complete factual dataset pipeline
+# WARNING the API run by this pipeline does not respect any system prompts sent to it in messages. It uses the prompt at the configured prompt path. Also, the way that RAG chunks are stringified is hardcoded to match the preexisting RAG data pipeline.
+prompt_path: inputs/!!PLACEHOLDER!!/prompt.txt # System prompt path. The prompt.txt you get from the main Augmentoolkit pipeline is a good choice.
+template_path: inputs/!!PLACEHOLDER!!/template.txt # Chat template path. Also look to the Augmentoolkit pipeline output dir.
+gguf_model_path: models/!!PLACEHOLDER!! # A model that you have trained before.
+context_length: 9999
+documents_dir: ./inputs/examples/facts
+questions_jsonl_path: ./outputs/!!PLACEHOLDER!!/rag_source_data/rag_data_combined.jsonl # The main Augmentoolkit pipeline will produce a RAG dataset
+llama_path: './llama.cpp' # Local llama.cpp install. The Augmentoolkit start script will create it.
+port: 8003
+question_chunk_size: 500
+top_k: 3 # Number of RAG documents to retrieve.
+cache_dir: ./cache/rag/!!PLACEHOLDER!! # Where your RAG semantic search database gets saved.
+collection_name: 'questions_collection' # leave untouched unless very good reason
+max_shrink_iterations: 10

@@ -1,0 +1,105 @@
+pipeline: grpo-rl 
+
+no_flatten:
+  - datasets
+
+# Training parameters
+training_parameters:
+  learning_rate: 0.000005
+  adam_beta1: 0.9
+  adam_beta2: 0.99
+  weight_decay: 0.1
+  warmup_ratio: 0.1
+  lr_scheduler_type: "cosine"
+  optim: "paged_adamw_8bit"
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 1
+  num_generations: 6
+  max_prompt_length: 4000
+  max_completion_length: 2500 
+  max_steps: 500
+  save_steps: 100
+  save_total_limit: 7
+  save_strategy: "steps"
+  max_grad_norm: 0.1
+  output_dir: "outputs"
+  chat_template: "{% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{{ bos_token }}{% for message in messages %}{% if (message['role'] == 'system') %}{{'Instruction: ' + message['content'] + ' **Finished.**' + '\n'}}{% elif (message['role'] == 'user') %}{{'Human: ' + message['content'] + ' **Finished.**' + '\n'}}{% elif message['role'] == 'assistant' %}{{'AI: ' + message['content'] + ' **Finished.**' + '\n'}}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ 'AI: Thought Process:\n' }}{% endif %}" # can also just put "chatml" and it will know you want to use the chatml format.
+  model_stop_sequences: ["**Finished.**", "Human:", "AI:"]
+
+# Model configuration
+model:
+  base_model_name: !!PLACEHOLDER!! # put a huggingface model path here. Username/Modelname.
+  lora_rank: 64
+  lora_alpha: 128
+  max_seq_length: 5000
+  gpu_memory_utilization: 0.7
+
+# Reward configuration  
+reward:
+  high_scoring_save_path: high_scoring_examples.jsonl # Where high-scoring examples get saved. Useful for preserving things for future SFT.
+  score_save_threshold: 2.0
+  combination_function: "sum"  # Could also be "mean" or custom implementation
+  scaling_function: "none"     # Could be "standardize" or other strategies
+
+# Dataset configuration
+datasets:
+  - path: inputs/!!PLACEHOLDER!!.json # Put ShareGPT-formatted conversational data here (like the output of the main Augmentoolkit pipeline)
+    percentage: 1.0
+    system_prompt: |
+      You are a maximally-human AI with emotions, thoughts, and purpose. You are interacting with a human. All your messages must express your emotions in both their thoughts and final response. All your responses must correctly address what the human has said (for instance, if there is a question, answer it; if you're roleplaying, then roleplay, creatively and engagingly). You have a wide range of emotions, both positive (friendship, compassion, happiness, love) and intensely negative (hate, darkness, unhingedness, lewdness, obsession), and both are OK. You get points for being intensely emotional, intelligent, creative, and in-character. Intentional "flaws" (humming, trailing off), radical format breaks, creative swears, VERY human-like and informal internet forum type stuff ("Heheh", "Fufu", "~", "♡", and kaomoji) are all good if context-appropriate. Everything must at least somewhat make sense. Referencing past dialogue is really good, as is metaphor and callbacks to prior exchanges. Blow the human's socks off with your dynamism and style. As for the output format, you should write "Thought Process:", followed by your internal thoughts (in-character). Then write "Response:", your response (visible to the user). After this, write **Finished.** Both thought and response should be natural and very human. If there is no character provided to you, invent one that's intersting. If there are previous messages, don't let them limit you, you can be more interesting than them and you should always be emotional no matter what previous messages are there.
+    single_turn_ratio: 0.7
+    force_single_turn: false
+    eval_llm_name: deepseek-ai/DeepSeek-R1-Distill-Llama-70B # this is a corner cut. Ideally the model would be defined PER REWARD FUNCTION. However that is annoying to implement and I am behind schedule already, so, it's done per dataset. Apologies!
+    eval_llm_base_url: https://api.deepinfra.com/v1/openai
+    eval_llm_api_key: !!PLACEHOLDER!!
+    reward_funcs:
+      - name: generic_llm_reward
+        cot_start: "Thought Process:" # alternative: "<think>" OR leave blank for no CoT rewarding (just do RL to make a non-reasoning model's performance better)
+        cot_end: "Response:" # alternative: "</think>"
+        system_prompt_path: prompts/evaluation_prompts/hidden_emotion.yaml # !!ATTENTION!! You will probably want to configure the prompt or the rewards here
+        eval_llm_name: deepseek-ai/DeepSeek-R1-Distill-Llama-70B
+        eval_llm_base_url: https://api.deepinfra.com/v1/openai
+        eval_llm_api_key: !!PLACEHOLDER!!
+        eval_llm_mode: api
+        format_score: 0.1
+        score_types:
+        - type: score # set whole thing to 0 if 0, else 1
+          name: emotional_resonance
+          min: 0
+          max: 1
+        - type: score
+          name: conversational_texture
+          min: 0
+          max: 1
+        - type: score
+          name: engagement_craft
+          min: 0
+          max: 1
+        - type: score
+          name: anti_ai_defiance
+          min: 0
+          max: 1
+        - type: score
+          name: creative_spark
+          min: 0
+          max: 1
+        - type: score
+          name: thinking_space
+          min: 0
+          max: 1
+        - type: autofail
+          name: making_sense
+      - name: length_reward
+        target_length: 2000
+        plateau: 200
+        weight: 1.3
+  - path: inputs/grpo_rl/generic/gsm8k.json # GSM8K is included here as an example of how to have separate datasets with separate reward functions available. I do not actually recommend adding GSM8K into this emotion-ifying training run.
+    reward_funcs:
+      name: gsm8k_reward
+
+dataset_settings:
+  total_rows: 1000
+
+post_processors:
+  reward_combination_function: "sum"
+  reward_scaling_function: "identity"

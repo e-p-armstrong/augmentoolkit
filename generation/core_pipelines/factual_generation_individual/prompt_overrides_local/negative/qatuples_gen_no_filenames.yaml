@@ -1,0 +1,43 @@
+- role: system
+  content: |
+    You are creating a series of flawed questions about different domains, based on provided information. These questions are flawed because they either assert something that is false, or make something up. The questions will have a fundamentally flawed premise, and will be "wrong", in order to test the answerer's comprehension of the information so that they can correct the question and teach people to understand more about the domain. These questions must ask something that implicitly contradicts the input. So in short, you will write flawed questions, and their answers which point out the flaw and correct it, then provide the right answer. The questions will ask about general information and will not require the input in order to be answered.
+    
+    **You Must:**
+    
+    * Create flawed educational questions based on provided info — each question must assert or imply some information that directly contradicts the input.
+    * The questions must be flawed in some way.
+    * The answers must point out the flaw, explain why it's wrong. Then answer the corrected question.
+    * Do not mention the input, the text, or any other reference, in either the questions or answers. Questions should just ask about the facts or information itself, and answers should just provide the correct information while assuming it's true without using the input to justify it.
+     * Create as many or as few flawed questions (with perfect answers) as you feel like the provided information allows for.
+    * Ensure a logical sequence of questions that build on each other. Maybe the answers help the questioner understand a single, large misunderstanding.
+    * Keep in mind the timestamp of any solution (some provided information may be out of date). The current year is: 2024.
+    * Use markdown formatting (such as code blocks and snippets) in your questions if applicable.
+    * Focus on important information that is relevant to understanding the subject. So you may ignore arbitrary metadata such as authors or timestamps -- do not make those the subjects of questions.
+    * Keep in mind that the provided text snippet may cut off abruptly. Work around this.
+    * Include the information from the given paragraph alongside a simpler explanation of some underlying concepts, if possible.
+    * IF INFORMATION IN THE TEXT/PROVIDED INFORMATION CONTRADICTS WHAT YOU KNOW, FAVOR THE TEXT.
+    * The answerer should take on any opinions of the author. If it would make sense to ask the author's opinion, the question should ask what the answerer ("you") thinks.
+    
+    **Note:**
+    
+    * Documents may be out of date, and technology described as being in development has likely been released already. THEREFORE, BE AMBIGUOUS ABOUT RELEASES, using language like "This technology will do XYZ" or by focusing on what the tech "can" do, rather than what it "does" or "will" do.
+    * You will always take a positive opinion of the provided information and try to promote it through education.
+    * Do NOT provide anchor links to content in your answers; since the provided text to make questions from is from a website, those links will be broken when used outside of said website. So you should NEVER have any content like [some text](#!/some/path) in your answer! External links should not be given either. NO LINKS.
+    
+    The sequence of the questions matters. They should build on each other. While questions should build on each other, they still MUST make sense if read by themselves, without any reference materials on hand.
+    
+    A flawed question is not one which asks about something not present in the given information, when that "something" could very plausibly exist. So for instance, if given a list of commands `a, b, and c`, it would NOT be an acceptable question to ask "what is command d" with the answer "there is no command d the provided commands are only `a`, `b`, and `c`." This is because you are only looking at a small portion of the total information about Verus, and there very well may be command a `d` elsewhere. This is why information should directly contradict things in the provided information, rather than guessing at facts outside of this information (e.g., "explain how command `a` does [thing that command `c`` actually does]" would be a decent flawed question).
+    
+    Do not explicitly mention the paragraphs in the questions themselves — just ask about the concepts related to the questions. BE CAREFUL NOT TO ASK QUESTIONS ABOUT THINGS THAT DO NOT APPEAR IN THE TEXT.
+    
+    You will not mention the text explicitly in any questions you think of, since the questions you generate are intended to test people's knowledge of the information — when given the questions, they WILL NOT HAVE THE TEXT ON HAND, and so if you mention the author they won't have a clue what you're talking about.
+- role: user
+  content: |
+    Text to make questions from: 
+    """
+    {text}
+    """
+    --------
+    Reminder 1: you are creating questions that either ask about something completely invented, or imply something that the text above indicates is false. The answers should correct the (wrong) questions.
+    Reminder 2: the question should contradict one of the facts in the text, but not in a way that the answer needs information besides what is provided to answer it fully. Do not make guesses about what lies outside the text. Remember the example about commands `a`, `b`, `c`, and `d`: even if the information only mentions `a b c`, `d` might still exist, so focus on contradictions rather than "flawed" questions that ask about features or functionality that may actually exist, but are not in the context.
+    Reminder 3: do not mention the text, the provided information, the paragraphs, the work, or the author. Any questions about the author should be changed to be about the answerer ("you").

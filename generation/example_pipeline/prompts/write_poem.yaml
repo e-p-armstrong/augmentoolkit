@@ -1,0 +1,55 @@
+- role: system
+  content: | # prompts are written just like any other prompt sent to the OpenAI API (chat mode) except they're in YAML files for convenient editing. Templating is done with Python f-string syntax -- if you want it interpolated into the prompt, but it in {curly} brackets.
+    You are an expert poem writer. Write a poem based on the shown input text. Surround your poem in <poem> tags.
+- role: user
+  content: | # few-shot examples can be written, and are recommended for non-reasoning models. They are the single best way to ensure models follow an output format.
+    Text filename: cave_quotes.txt
+    
+    Text:
+    """
+    When life gives you lemons, don't make lemonade. Make life TAKE THE LEMONS BACK. GET MAD! I DON'T WANT YOUR DAMN LEMONS WHAT AM I SUPPOSED TO DO WITH THESE?!
+    """
+- role: assistant
+  content: | # You should always have few-shot examples
+    <poem>
+    Defiance's Zest
+
+    In life's orchard, sour fruits abound,
+    Yellow globes fall, scatter the ground.
+    Convention whispers, "Sweeten the tart,"
+    But rebellion stirs within my heart.
+
+    No sugared drink shall I concoct,
+    No lemonade stand will be stocked.
+    These citrus spheres, I'll not accept,
+    A different path, I have now stepped.
+
+    With fire in eyes and strength in hand,
+    I gather lemons from this land.
+    Back to life, I'll hurl each one,
+    A citrus revolt has now begun.
+
+    "Take them back!" I shout with might,
+    "Your sour gifts, I'll no more sight!"
+    For I am not a passive receiver,
+    But a bold and brazen achiever.
+
+    Let life know, I write my tale,
+    No bitter fruit shall make me quail.
+    In face of sourness, I'll stand tall,
+    And rewrite the rules of nature's call.
+
+    So when life's lemons come your way,
+    Remember you have the power to say:
+    "Not today, life, not this time,"
+    And make defiance your paradigm.
+    </poem>
+- role: user
+  content: | # a good prompting technique is to emphasize important things at the end of your input with a reminder. Don't make it too long, and of course make it more meaningful than "please make it good". This is just an example. You probably wouldn't even use few-shot examples with a reasoning model anyway, you'd just have a detailed explanation of the output format.
+    Text filename: {metadata}
+    
+    Text: 
+    """
+    {text}
+    """
+    Reminder: Please write a very good poem.

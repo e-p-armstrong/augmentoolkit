@@ -1,0 +1,36 @@
+pipeline: correction-pipeline
+
+api:
+  large_model: deepseek-ai/DeepSeek-R1-Distill-Llama-70B
+  large_api_key: !!PLACEHOLDER!!
+  large_base_url: https://api.deepinfra.com/v1/openai
+  large_mode: api
+  small_model: meta-llama/Meta-Llama-3.1-8B-Instruct
+  small_base_url: https://api.deepinfra.com/v1/openai
+  small_api_key: !!PLACEHOLDER!!
+  small_mode: api
+path:
+  default_prompts: ./prompts
+  input_dir: ./inputs/examples/facts
+  output_dir: ./outputs/correction_data_test
+  prompts: ./prompts
+system:
+  completion_mode: False
+  concurrency_limit: 30
+  use_stop: True
+  subset_size: 30
+  use_min_p: False
+  use_subset: True # !!ATTENTION!! use_subset is on; you will probably want to have use_subset on during testing and development to save money. But off when generating stuff to actually train on.
+  chunk_size: 3000
+  prompt_template: "{{ bos_token }}{% for message in messages %}{% if (message['role'] == 'system') %}{{message['content'] + '\n'}}{% elif (message['role'] == 'user') %}{{'Human: ' + message['content'] + ' **Finished.**' + '\n'}}{% elif message['role'] == 'assistant' %}{{'AI: ' + message['content'] + ' **Finished.**' + '\n'}}{% endif %}{% endfor %}" # !!ATTENTION!! be sure to change this if you are training a model using a different prompt template.
+meta_datagen:
+  do_meta_datagen: False
+  meta_datagen_keys: # list of details_keys to make data from
+    - masked_conversation_details
+    - judgement_details
+  meta_datagen_extras: # list of prompt paths (strings) to format the end keys into for additional datagen. For each item at the end of the pipeline, format its keys into the prompt/conversation template at the path here. So for instance to get the exemplar qagen from ATK original, we would format the text into the input, and the context repaired question into the output. Also note that the presence of this may mean we want to do some input processing/add new keys. This will be a part of the saving function that we call at the end. There will be a list of input processor functions that get called on the wide dict first, and help add new keys to the items that contain info we may want (for instance, multiple questions formatted into a single string). Also the prompt paths should be templates, maybe jinja2, not yaml--since we want conditional logic in them. If judgement is false, do not use final output, for instance (for a thing that both judges and generates).
+cost: # configures cost estimation code.
+  cost_per_million_small_input: 0.03 # !!ATTENTION!! This is not *required* for pipeline operation, but the default values do not make sense if you are planning to use cost estimation
+  cost_per_million_small_output: 0.05   # !!ATTENTION!! This is not *required* for pipeline operation, but the default values do not make sense if you are planning to use cost estimation
+  cost_per_million_large_input: 0.23 # !!ATTENTION!! This is not *required* for pipeline operation, but the default values do not make sense if you are planning to use cost estimation
+  cost_per_million_large_output: 0.40 # !!ATTENTION!! This is not *required* for pipeline operation, but the default values do not make sense if you are planning to use cost estimation
