@@ -1,6 +1,9 @@
 # NOTE this pipeline requires one of the two inference servers (rag_server or basic_server) running locally as well (usually on port 8003)
 # Run one of those in the interface or in a terminal window, then run this either in the interface or a terminal window
 
+no_flatten:
+  - inference_server_Args
+
 # Discord settings:
 bot_token: !!PLACEHOLDER!! # Looks like XXXXXXXXXXXXXXXXXXXXXXXXXX.YYYYYY.ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ -- get it from https://discord.com/developers/applications/yourappid/bot and click "reset token"
 client_id: !!PLACEHOLDER!! # get it from https://discord.com/developers/applications/yourappid/information
@@ -19,6 +22,16 @@ blocked_role_ids: []
 allowed_channel_ids: []
 blocked_channel_ids: []
 
+inference_server: normal # This will be either normal|rag|none, which will make it use the llm_server, rag_server, or just to listen on port 8003 and not start anything itself, respectively.
+inference_server_args:
+  prompt_path: outputs/!!PLACEHOLDER!!/prompt.txt # System prompt path. The prompt.txt you get from the main Augmentoolkit pipeline is a good choice.
+  template_path: outputs/!!PLACEHOLDER!!/template.txt # Chat template path. Also look to the Augmentoolkit pipeline output dir.
+  gguf_model_path: models/!!PLACEHOLDER!!/test-model-4-sft.gguf # A model that you have trained before. !!ATTENTION!! This should be the same directory as the original model was downloaded to -- the server needs the original tokenizer files as well. tokenizer.model, tokenizer.json, tokenizer_config.json, special_tokens_map -- you need those in the same dir as the file to which this setting points.
+  context_length: 9999
+  llama_path: './llama.cpp'
+  port: 8003 # what port to run on
+
+pipeline: discord-server
 
 # From docs/discord.md:
 # Host your Custom AI on Discord for your Friends to Chat With!

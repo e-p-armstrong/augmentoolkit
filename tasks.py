@@ -91,7 +91,7 @@ def set_final_status(
     except Exception as e:
         print(
             f"Task {task_id}: Failed to set final status '{status}' in Redis ({redis_key}): {e}",
-            exc_info=True,
+            
         )
 
 
@@ -275,13 +275,13 @@ def run_pipeline_task(
         except TypeError as json_e:
             print(
                 f"Task {task_id}: Failed to serialize parameters to JSON: {json_e}. Parameters will not be stored in Redis.",
-                exc_info=True,
+                
             )
             # Consider if this should be a fatal error or just a warning
         except Exception as redis_e:
             print(
                 f"Task {task_id}: Failed to store parameters in Redis key {redis_params_key}: {redis_e}",
-                exc_info=True,
+                
             )
             # Consider if this should be a fatal error or just a warning
 
