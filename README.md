@@ -6,10 +6,13 @@ You upload documents, and press a button. And get a fully trained custom LLM. No
 Maybe you want AI to know the latest research papers in your field, or perhaps you want an LLM that understands your passion deeply and has learned from the same sources as you. Possibly, you dream of creating a lore expert for your favorite obscure fictional universe. Whatever the application is, Augmentoolkit lets you take text and make an LLM's brain inherently learn the information contained within. It also automatically creates a RAG-ready dataset (and can start up an inference server) if you want some traditional grounding as well.
 
 Get started now (the interface will guide you through generating your first dataset):
+
+(Be sure to use a either Python 3.10 or 3.11 when creating the virtual environment to be sure this'll work)
+
 ### MacOS (interface)
 ```bash
 git clone https://github.com/e-p-armstrong/augmentoolkit.git
-cd augmentoolkit
+cd augmentoolkit # Python <= 3.10 < 3.13
 bash macos.sh # NOTE: Will attempt to install valkey via brew if not found.
 # bash local_macos.sh # use this command if doing local dataset generation
 ```
@@ -17,14 +20,14 @@ bash macos.sh # NOTE: Will attempt to install valkey via brew if not found.
 ### Linux (interface)
 ```bash
 git clone https://github.com/e-p-armstrong/augmentoolkit.git
-cd augmentoolkit
+cd augmentoolkit # Python <= 3.10 < 3.13
 bash linux.sh # NOTE: will build Valkey from source if a Redis/Valkey server is not running
 ```
 
 **Or for local inference**
 ```bash
 git clone https://github.com/e-p-armstrong/augmentoolkit.git
-cd augmentoolkit
+cd augmentoolkit # Python <= 3.10 < 3.13
 bash local_linux.sh normal # or you can write "small" or a custom model name to serve the quantized version (for more consumer hardware) or a model of your choice, respectively
 ```
 
