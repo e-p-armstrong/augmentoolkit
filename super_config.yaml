@@ -1,7 +1,7 @@
 
 pipeline_order:
-  - node: discord-server # factual-datagen-pipeline
-    config: external:hidden_discord_supertest.yaml # external:_START_HERE_complete_factual.yaml
+  - node: factual-datagen-pipeline # discord-server factual-datagen-pipeline
+    config:  external:_START_HERE_complete_factual.yaml # external:hidden_discord_supertest.yaml
 
   # - node: rag-server # you can chain multiple pipelines. They will be executed sequentially.
   #   config: rag-config
