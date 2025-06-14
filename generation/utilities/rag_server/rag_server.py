@@ -719,7 +719,7 @@ async def rag_server(
             ["git", "clone", "https://github.com/ggml-org/llama.cpp.git"], check=True
         )
         subprocess.run(
-            ["git", "checkout", "b775345d788ac16260e7eef49e11fe57ee5677f7"],
+            ["git", "checkout", "3cb203c89f60483e349f841684173446ed23c28f"],
             cwd="llama.cpp",
             check=True
         )

@@ -439,7 +439,8 @@ if [ ! -d "$LLAMA_CPP_FULL_PATH" ]; then
     fi
     echo "Checking out specific commit..."
     cd "$LLAMA_CPP_FULL_PATH"
-    git checkout b775345d788ac16260e7eef49e11fe57ee5677f7
+    # git checkout 3cb203c89f60483e349f841684173446ed23c28f
+    git checkout 3cb203c89f60483e349f841684173446ed23c28f
     if [ $? -ne 0 ]; then
         echo "ERROR: Failed to checkout specific commit."
         cleanup
