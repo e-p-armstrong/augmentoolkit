@@ -426,7 +426,7 @@ def parse_chatlog(chatlog, charname):
     current_content = []
 
     for line in chatlog.split("\n"):
-        if line.startswith(charname + ":") or line.startswith("{user}:"):
+        if line.startswith(charname + ":") or line.startswith("{user}:") or line.startswith("{narrator}:"):
             if current_owner and current_content:
                 messages.append(
                     {"owner": current_owner, "content": "\n".join(current_content)}
