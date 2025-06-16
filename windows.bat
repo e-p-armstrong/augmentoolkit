@@ -82,87 +82,132 @@ echo ----------------------------------------
 goto :eof
 
 :main_script
+echo DEBUG: Entered main_script section
 REM --- 1. Python Virtual Environment & Dependencies ---
 echo ----------------------------------------
+echo DEBUG: Starting Python environment setup
 echo 1. Setting up Python virtual environment and installing dependencies...
 
+echo DEBUG: About to check if python command exists
 REM Check if python command exists
 where python >nul 2>nul
+echo DEBUG: 'where python' command completed, checking errorlevel
 if errorlevel 1 (
+    echo DEBUG: python command not found
     echo ERROR: python command not found. Please install Python 3 and ensure it's in your PATH.
     exit /b 1
 )
+echo DEBUG: python command found
 echo Python found.
 
 REM --- Check/Install uv ---
+echo DEBUG: Starting uv check section
 echo Checking for uv...
+echo DEBUG: About to run 'where uv' command
 where uv >nul 2>nul
+echo DEBUG: 'where uv' command completed, checking errorlevel
 if errorlevel 1 (
+    echo DEBUG: uv not found, entering if block
     echo uv command not found. Attempting to install uv using pip...
+    echo DEBUG: About to run second 'where python' command
     where python >nul 2>nul
+    echo DEBUG: Second 'where python' command completed, checking errorlevel
     if errorlevel 1 (
-         echo ERROR: python command not found. Cannot install uv.
-         exit /b 1
-    )
-    python -m pip install uv
-    if errorlevel 1 (
-        echo ERROR: Failed to install uv using pip. Please install uv manually (e.g., "pip install uv") and rerun the script.
+        echo DEBUG: python not found in nested if block
+        echo ERROR: python command not found. Cannot install uv.
         exit /b 1
     )
+    echo DEBUG: python found, about to install uv
+    python -m pip install uv
+    echo DEBUG: pip install uv command completed, checking errorlevel
+    if errorlevel 1 (
+        echo DEBUG: pip install failed, entering error block
+        echo ERROR: Failed to install uv using pip. Please install uv manually and rerun the script.
+        exit /b 1
+    )
+    echo DEBUG: uv installation successful
     echo uv installed successfully.
 ) else (
+    echo DEBUG: uv found, entering else block
     echo uv found.
 )
+echo DEBUG: Completed uv check section
 REM --- End Check/Install uv ---
 
+echo DEBUG: Starting virtual environment setup section
 REM Create virtual environment if it doesn't exist (check for activate script)
+echo DEBUG: Checking if venv activate script exists
 if not exist "%VENV_DIR%\Scripts\activate.bat" (
+    echo DEBUG: Venv does not exist, creating new one
     echo Creating virtual environment in "%VENV_DIR%"...
+    echo DEBUG: About to run python -m venv command
     python -m venv "%VENV_DIR%"
+    echo DEBUG: python -m venv command completed, checking errorlevel
     if errorlevel 1 (
+        echo DEBUG: venv creation failed
         echo ERROR: Failed to create Python virtual environment.
         exit /b 1
     )
+    echo DEBUG: venv creation successful
 ) else (
+    echo DEBUG: Venv already exists
     echo Virtual environment "%VENV_DIR%" already exists.
 )
 
+echo DEBUG: About to activate virtual environment
 REM Activate virtual environment
 echo Activating virtual environment...
+echo DEBUG: About to call activate.bat
 call "%VENV_DIR%\Scripts\activate.bat"
+echo DEBUG: activate.bat call completed, checking errorlevel
 if errorlevel 1 (
+    echo DEBUG: venv activation failed
     echo ERROR: Failed to activate Python virtual environment.
     exit /b 1
 )
+echo DEBUG: venv activation successful
 echo Virtual environment activated.
 
 REM --- Configure SSL Certificate Path ---
 echo ----------------------------------------
+echo DEBUG: Starting SSL certificate configuration section
 echo Configuring SSL certificate path...
 
+echo DEBUG: About to get certificate path from certifi
 REM Get the certificate path from certifi
 for /f "delims=" %%i in ('python -c "import certifi; print(certifi.where())" 2^>nul') do set "CERT_PATH=%%i"
+echo DEBUG: Certificate path retrieval completed
 
+echo DEBUG: Checking if CERT_PATH is defined
 if defined CERT_PATH (
+    echo DEBUG: CERT_PATH is defined, checking if path exists
     if exist "%CERT_PATH%" (
+        echo DEBUG: Certificate path exists, setting SSL_CERT_FILE
         echo Setting SSL_CERT_FILE environment variable to: %CERT_PATH%
         set "SSL_CERT_FILE=%CERT_PATH%"
         echo SSL_CERT_FILE set for this script session and its children.
     ) else (
+        echo DEBUG: Certificate path does not exist
         echo WARNING: Certificate path from certifi does not exist: %CERT_PATH%
     )
 ) else (
+    echo DEBUG: CERT_PATH is not defined
     echo WARNING: Could not determine certificate path using certifi. Certifi might not be installed yet.
     echo Attempting to proceed, but SSL errors may occur.
 )
 
+echo DEBUG: About to install dependencies using uv
 REM Install dependencies using uv
 echo Installing Python dependencies from requirements.txt using uv...
+echo DEBUG: About to run uv pip install command
 uv pip install -r requirements.txt
+echo DEBUG: uv pip install command completed, checking errorlevel
 if errorlevel 1 (
+    echo DEBUG: uv pip install failed
     echo ERROR: Failed to install Python dependencies using uv. Please check requirements.txt and uv logs.
     exit /b 1
 )
+echo DEBUG: uv pip install successful
 echo Python dependencies installed successfully.
 
 REM --- Helper Process Logging Setup ---
