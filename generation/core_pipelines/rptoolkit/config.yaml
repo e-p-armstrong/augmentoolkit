@@ -1,4 +1,4 @@
-pipeline: rptoolkit
+pipeline: rptoolkit-pipeline
 
 api:
   small_api_key: !!PLACEHOLDER!!
