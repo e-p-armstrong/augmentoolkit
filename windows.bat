@@ -197,18 +197,43 @@ if defined CERT_PATH (
 )
 
 echo DEBUG: About to install dependencies using uv
+echo DEBUG: Checking if uv is available after venv activation
+where uv >nul 2>nul
+if errorlevel 1 (
+    echo DEBUG: uv command not found after venv activation, attempting to install uv in venv
+    echo Installing uv in virtual environment...
+    python -m pip install uv
+    if errorlevel 1 (
+        echo DEBUG: Failed to install uv in venv
+        echo ERROR: Failed to install uv in virtual environment.
+        exit /b 1
+    )
+    echo DEBUG: uv installed successfully in venv
+) else (
+    echo DEBUG: uv command found after venv activation
+)
 REM Install dependencies using uv
 echo Installing Python dependencies from requirements.txt using uv...
 echo DEBUG: About to run uv pip install command
 uv pip install -r requirements.txt
 echo DEBUG: uv pip install command completed, checking errorlevel
 if errorlevel 1 (
-    echo DEBUG: uv pip install failed
-    echo ERROR: Failed to install Python dependencies using uv. Please check requirements.txt and uv logs.
-    exit /b 1
+    echo DEBUG: uv pip install failed, trying fallback to regular pip
+    echo WARNING: uv installation failed, falling back to regular pip...
+    echo DEBUG: About to run pip install command as fallback
+    python -m pip install -r requirements.txt
+    echo DEBUG: pip install command completed, checking errorlevel
+    if errorlevel 1 (
+        echo DEBUG: pip install also failed
+        echo ERROR: Failed to install Python dependencies using both uv and pip. Please check requirements.txt and logs.
+        exit /b 1
+    )
+    echo DEBUG: pip install successful as fallback
+    echo Python dependencies installed successfully using pip fallback.
+) else (
+    echo DEBUG: uv pip install successful
+    echo Python dependencies installed successfully.
 )
-echo DEBUG: uv pip install successful
-echo Python dependencies installed successfully.
 
 REM --- Helper Process Logging Setup ---
 echo ----------------------------------------
