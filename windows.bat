@@ -7,7 +7,7 @@ REM --- Get script directory and change to it ---
 set "SCRIPT_DIR=%~dp0"
 cd /d "%SCRIPT_DIR%"
 if errorlevel 1 (
-    echo ERROR: Failed to change directory to script location '%SCRIPT_DIR%'.
+    echo ERROR: Failed to change directory to script location "%SCRIPT_DIR%.
     exit /b 1
 )
 echo Running in directory: %CD%
@@ -117,14 +117,14 @@ REM --- End Check/Install uv ---
 
 REM Create virtual environment if it doesn't exist (check for activate script)
 if not exist "%VENV_DIR%\Scripts\activate.bat" (
-    echo Creating virtual environment in '%VENV_DIR%'...
+    echo Creating virtual environment in "%VENV_DIR%"...
     python -m venv "%VENV_DIR%"
     if errorlevel 1 (
         echo ERROR: Failed to create Python virtual environment.
         exit /b 1
     )
 ) else (
-    echo Virtual environment '%VENV_DIR%' already exists.
+    echo Virtual environment "%VENV_DIR%" already exists.
 )
 
 REM Activate virtual environment
@@ -217,7 +217,7 @@ if errorlevel 1 (
                 echo Found Package Manager: Chocolatey (choco)
                 echo Please install Valkey using Chocolatey in an ADMINISTRATOR terminal:
                 echo   choco install valkey
-                echo Then start the Valkey service (e.g., via services.msc or 'valkey-server --service-start')
+                echo Then start the Valkey service (e.g., via services.msc or "valkey-server --service-start")
                 echo Then re-run this script.
                 goto :exit_script
             )
@@ -227,7 +227,7 @@ if errorlevel 1 (
                 echo Found Package Manager: Scoop
                 echo Please install Valkey using Scoop:
                 echo   scoop install valkey
-                echo Then start the Valkey service (e.g., run 'valkey-server' in a separate terminal)
+                echo Then start the Valkey service (e.g., run "valkey-server" in a separate terminal)
                 echo Then re-run this script.
                 goto :exit_script
             )
@@ -245,7 +245,7 @@ if errorlevel 1 (
 
             echo No common package manager (choco, scoop, winget) found.
             echo Please install Valkey or Redis manually.
-            echo Option 1: Install Chocolatey (https://chocolatey.org/install) then run 'choco install valkey'
+            echo Option 1: Install Chocolatey (https://chocolatey.org/install) then run "choco install valkey"
             echo Option 2: Download from Valkey/Redis websites and follow their setup instructions.
             echo Ensure the service is running before re-running this script.
             echo See docs/quickstart.md for more details.
@@ -367,7 +367,7 @@ echo Output will be logged to: %FRONTEND_LOG_FILE%
 
 REM Ensure dist directory exists after build
 if not exist "dist\" (
-    echo ERROR: 'dist' directory not found in atk-interface after build.
+    echo ERROR: "dist" directory not found in atk-interface after build.
     call :cleanup_services
     cd "%SCRIPT_DIR%"
     exit /b 1
