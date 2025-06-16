@@ -114,7 +114,7 @@ def write_poetry_processor(output):
 
 def validate_poem(output, input_data):
     # ... returns True if output is valid, False otherwise ...
-    return True
+    return {"result": True, "message": "success"}
 
 def process_poem_input(input):
     # ... modifies input dict before LLM call ...
