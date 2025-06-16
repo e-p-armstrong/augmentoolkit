@@ -1,4 +1,4 @@
-pipeline: recall-multi-source
+pipeline: recall-multi-source-pipeline
 
 api:
   large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
