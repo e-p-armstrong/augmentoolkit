@@ -98,7 +98,7 @@ REM --- Check/Install uv ---
 echo Checking for uv...
 where uv >nul 2>nul
 if errorlevel 1 (
-    echo 'uv' command not found. Attempting to install uv using pip...
+    echo uv command not found. Attempting to install uv using pip...
     where python >nul 2>nul
     if errorlevel 1 (
          echo ERROR: python command not found. Cannot install uv.
@@ -106,7 +106,7 @@ if errorlevel 1 (
     )
     python -m pip install uv
     if errorlevel 1 (
-        echo ERROR: Failed to install uv using pip. Please install uv manually (e.g., 'pip install uv') and rerun the script.
+        echo ERROR: Failed to install uv using pip. Please install uv manually (e.g., "pip install uv") and rerun the script.
         exit /b 1
     )
     echo uv installed successfully.
