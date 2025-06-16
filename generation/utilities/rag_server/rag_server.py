@@ -721,7 +721,7 @@ async def rag_server(
         subprocess.run(
             ["git", "checkout", "3cb203c89f60483e349f841684173446ed23c28f"],
             cwd="llama.cpp",
-            check=True
+            check=True,
         )
 
         # Check if llama-server exists

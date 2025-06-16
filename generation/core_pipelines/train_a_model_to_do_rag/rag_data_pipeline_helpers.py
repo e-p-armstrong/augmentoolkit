@@ -159,6 +159,6 @@ def save_combined_conversations(
 
     # Save to file
     output_path = os.path.join(output_dir, "axolotl_rag_conversations.jsonl")
-    with open(output_path, "w", encoding='utf-8') as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         for conv in axolotl_conversations:
             f.write(json.dumps(conv) + "\n")

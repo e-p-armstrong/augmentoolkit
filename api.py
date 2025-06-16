@@ -687,12 +687,9 @@ def _find_and_kill_run_augmentoolkit_process() -> Optional[Dict[str, Any]]:
     try:
         # Use ps -ef to find run_augmentoolkit.py process
         result = subprocess.run(
-            ["ps", "-ef"],
-            capture_output=True,
-            text=True,
-            check=True
+            ["ps", "-ef"], capture_output=True, text=True, check=True
         )
-        
+
         # Look for lines containing "run_augmentoolkit.py"
         for line in result.stdout.splitlines():
             if "run_augmentoolkit.py" in line and "grep" not in line:
@@ -701,17 +698,21 @@ def _find_and_kill_run_augmentoolkit_process() -> Optional[Dict[str, Any]]:
                 if len(fields) >= 2:
                     try:
                         pid = int(fields[1])
-                        logger.warning(f"Found run_augmentoolkit.py process via ps -ef fallback: PID {pid}")
-                        
+                        logger.warning(
+                            f"Found run_augmentoolkit.py process via ps -ef fallback: PID {pid}"
+                        )
+
                         # Try SIGINT first for graceful shutdown
                         os.kill(pid, signal.SIGINT)
-                        logger.info(f"Sent SIGINT to run_augmentoolkit.py process (PID {pid}) via fallback")
-                        
+                        logger.info(
+                            f"Sent SIGINT to run_augmentoolkit.py process (PID {pid}) via fallback"
+                        )
+
                         # Wait for graceful termination
                         grace_period = 8  # seconds to wait for SIGINT
                         check_interval = 0.3  # seconds between checks
                         start_time = time.time()
-                        
+
                         # Poll to see if process terminates gracefully
                         while time.time() - start_time < grace_period:
                             try:
@@ -720,27 +721,37 @@ def _find_and_kill_run_augmentoolkit_process() -> Optional[Dict[str, Any]]:
                             except ProcessLookupError:
                                 # Process has terminated gracefully
                                 elapsed = time.time() - start_time
-                                logger.info(f"Process {pid} terminated gracefully after {elapsed:.1f}s via fallback")
+                                logger.info(
+                                    f"Process {pid} terminated gracefully after {elapsed:.1f}s via fallback"
+                                )
                                 return {"pid": pid, "killed": True, "method": "SIGINT"}
-                        
+
                         # Process didn't respond to SIGINT, escalate to SIGKILL
-                        logger.warning(f"Process {pid} did not respond to SIGINT after {grace_period}s. Escalating to SIGKILL via fallback.")
+                        logger.warning(
+                            f"Process {pid} did not respond to SIGINT after {grace_period}s. Escalating to SIGKILL via fallback."
+                        )
                         os.kill(pid, signal.SIGKILL)
-                        logger.info(f"Successfully killed run_augmentoolkit.py process (PID {pid}) with SIGKILL via fallback")
+                        logger.info(
+                            f"Successfully killed run_augmentoolkit.py process (PID {pid}) with SIGKILL via fallback"
+                        )
                         return {"pid": pid, "killed": True, "method": "SIGKILL"}
-                        
+
                     except (ValueError, ProcessLookupError, PermissionError) as e:
-                        logger.error(f"Failed to kill run_augmentoolkit.py process found via fallback: {e}")
+                        logger.error(
+                            f"Failed to kill run_augmentoolkit.py process found via fallback: {e}"
+                        )
                         continue
-        
+
         logger.info("No run_augmentoolkit.py process found via ps -ef fallback")
         return None
-        
+
     except subprocess.CalledProcessError as e:
         logger.error(f"Failed to run ps -ef command in fallback: {e}")
         return None
     except Exception as e:
-        logger.error(f"Unexpected error in run_augmentoolkit.py fallback kill mechanism: {e}")
+        logger.error(
+            f"Unexpected error in run_augmentoolkit.py fallback kill mechanism: {e}"
+        )
         return None
 
 
@@ -798,14 +809,20 @@ def interrupt_or_revoke_task(task_id: str):
                     redis_client.delete(redis_pid_key)  # Clean up invalid data
                     # Proceed to check if it's pending, maybe the PID was wrong but task exists
                     # Try fallback mechanism to find and kill run_augmentoolkit.py
-                    logger.info(f"Attempting fallback mechanism to find run_augmentoolkit.py process for task {task_id}")
+                    logger.info(
+                        f"Attempting fallback mechanism to find run_augmentoolkit.py process for task {task_id}"
+                    )
                     fallback_result = _find_and_kill_run_augmentoolkit_process()
                     if fallback_result and fallback_result.get("killed"):
                         set_final_status(
                             task_id,
                             "REVOKED",
                             f"Task {task_id} terminated via fallback mechanism (found PID {fallback_result['pid']}).",
-                            details={"source": "api_interrupt_fallback", "pid": fallback_result['pid'], "termination_method": f"{fallback_result.get('method', 'SIGKILL')}_FALLBACK"}
+                            details={
+                                "source": "api_interrupt_fallback",
+                                "pid": fallback_result["pid"],
+                                "termination_method": f"{fallback_result.get('method', 'SIGKILL')}_FALLBACK",
+                            },
                         )
                         return {
                             "message": f"Task {task_id} terminated via fallback mechanism after invalid Redis PID."
@@ -818,28 +835,32 @@ def interrupt_or_revoke_task(task_id: str):
                         f"Task {task_id} appears to be running (Subprocess PID {pid} found). Sending SIGINT."
                     )
                     os.kill(pid, signal.SIGINT)
-                    
+
                     # Wait for graceful termination
                     grace_period = 8  # seconds to wait for SIGINT
                     check_interval = 0.3  # seconds between checks
                     start_time = time.time()
-                    
+
                     # Poll to see if process terminates gracefully
                     process_terminated_gracefully = False
                     while time.time() - start_time < grace_period:
                         try:
-                            os.kill(pid, 0)  # Check if process still exists (signal 0 = no-op)
+                            os.kill(
+                                pid, 0
+                            )  # Check if process still exists (signal 0 = no-op)
                             time.sleep(check_interval)
                         except ProcessLookupError:
                             # Process has terminated
                             elapsed = time.time() - start_time
                             process_terminated_gracefully = True
-                            logger.info(f"Process {pid} terminated gracefully after {elapsed:.1f}s")
+                            logger.info(
+                                f"Process {pid} terminated gracefully after {elapsed:.1f}s"
+                            )
                             break
                         except PermissionError:
                             # Process exists but we can't check it - treat as still running
                             time.sleep(check_interval)
-                    
+
                     if process_terminated_gracefully:
                         # Graceful termination succeeded
                         elapsed = time.time() - start_time
@@ -847,64 +868,82 @@ def interrupt_or_revoke_task(task_id: str):
                             task_id,
                             "REVOKED",
                             f"Task {task_id} gracefully terminated with SIGINT after {elapsed:.1f}s.",
-                            details={"source": "api_interrupt", "pid": pid, "termination_method": "SIGINT"}
+                            details={
+                                "source": "api_interrupt",
+                                "pid": pid,
+                                "termination_method": "SIGINT",
+                            },
                         )
                         return {
                             "message": f"Task {task_id} gracefully terminated with SIGINT after {elapsed:.1f}s."
                         }
-                    
+
                     # --- Escalate to SIGKILL ---
                     logger.warning(
                         f"Process {pid} did not respond to SIGINT after {grace_period}s. Escalating to SIGKILL."
                     )
-                    
+
                     try:
                         os.kill(pid, signal.SIGKILL)
-                        logger.info(f"Sent SIGKILL to subprocess {pid} for task {task_id}")
-                        
+                        logger.info(
+                            f"Sent SIGKILL to subprocess {pid} for task {task_id}"
+                        )
+
                         # Brief wait for SIGKILL to take effect
                         time.sleep(2)
-                        
+
                         # Verify SIGKILL worked
                         try:
                             os.kill(pid, 0)
                             # If we get here, process is STILL running after SIGKILL
-                            logger.error(f"Process {pid} still exists after SIGKILL! This should not happen.")
+                            logger.error(
+                                f"Process {pid} still exists after SIGKILL! This should not happen."
+                            )
                             message = f"Task {task_id} may still be running despite SIGKILL (PID {pid}). Manual intervention may be required."
                             termination_method = "SIGKILL_FAILED"
                         except ProcessLookupError:
                             # SIGKILL succeeded
-                            logger.info(f"Process {pid} successfully terminated with SIGKILL")
+                            logger.info(
+                                f"Process {pid} successfully terminated with SIGKILL"
+                            )
                             message = f"Task {task_id} forcefully terminated with SIGKILL after SIGINT timeout."
                             termination_method = "SIGKILL"
-                            
+
                     except ProcessLookupError:
                         # Process terminated between our grace period check and SIGKILL attempt
-                        logger.info(f"Process {pid} terminated just before SIGKILL was sent")
+                        logger.info(
+                            f"Process {pid} terminated just before SIGKILL was sent"
+                        )
                         message = f"Task {task_id} terminated during escalation (process ended just after SIGINT timeout)."
                         termination_method = "SIGINT_DELAYED"
                     except PermissionError:
-                        logger.error(f"Permission denied sending SIGKILL to PID {pid} for task {task_id}")
+                        logger.error(
+                            f"Permission denied sending SIGKILL to PID {pid} for task {task_id}"
+                        )
                         message = f"Permission error escalating to SIGKILL for task {task_id} (PID {pid})."
                         termination_method = "PERMISSION_ERROR"
                     except Exception as kill_e:
-                        logger.error(f"Unexpected error sending SIGKILL to PID {pid}: {kill_e}")
-                        message = f"Error escalating to SIGKILL for task {task_id}: {kill_e}"
+                        logger.error(
+                            f"Unexpected error sending SIGKILL to PID {pid}: {kill_e}"
+                        )
+                        message = (
+                            f"Error escalating to SIGKILL for task {task_id}: {kill_e}"
+                        )
                         termination_method = "SIGKILL_ERROR"
-                    
+
                     # Set final status with escalation details
                     set_final_status(
                         task_id,
                         "REVOKED",
                         message,
                         details={
-                            "source": "api_interrupt", 
-                            "pid": pid, 
+                            "source": "api_interrupt",
+                            "pid": pid,
                             "termination_method": termination_method,
-                            "escalated_to_sigkill": True
-                        }
+                            "escalated_to_sigkill": True,
+                        },
                     )
-                    
+
                     return {"message": message}
 
             except ProcessLookupError:
@@ -913,14 +952,21 @@ def interrupt_or_revoke_task(task_id: str):
                 )
                 # Don't immediately raise 404, check final status / pending status below.
                 # Try fallback mechanism before falling through
-                logger.info(f"Attempting fallback mechanism to find run_augmentoolkit.py process for task {task_id}")
+                logger.info(
+                    f"Attempting fallback mechanism to find run_augmentoolkit.py process for task {task_id}"
+                )
                 fallback_result = _find_and_kill_run_augmentoolkit_process()
                 if fallback_result and fallback_result.get("killed"):
                     set_final_status(
                         task_id,
                         "REVOKED",
                         f"Task {task_id} terminated via fallback mechanism (found PID {fallback_result['pid']}).",
-                        details={"source": "api_interrupt_fallback", "pid": fallback_result['pid'], "termination_method": f"{fallback_result.get('method', 'SIGKILL')}_FALLBACK", "original_pid": pid}
+                        details={
+                            "source": "api_interrupt_fallback",
+                            "pid": fallback_result["pid"],
+                            "termination_method": f"{fallback_result.get('method', 'SIGKILL')}_FALLBACK",
+                            "original_pid": pid,
+                        },
                     )
                     return {
                         "message": f"Task {task_id} terminated via fallback mechanism after PID {pid} was not found."
@@ -946,14 +992,21 @@ def interrupt_or_revoke_task(task_id: str):
         # === Fallback: Try to find and kill run_augmentoolkit.py directly ===
         # This handles cases where Redis PID was missing or other failures occurred
         if not redis_client.exists(redis_pid_key):
-            logger.info(f"No PID found in Redis for task {task_id}. Attempting fallback mechanism.")
+            logger.info(
+                f"No PID found in Redis for task {task_id}. Attempting fallback mechanism."
+            )
             fallback_result = _find_and_kill_run_augmentoolkit_process()
             if fallback_result and fallback_result.get("killed"):
                 set_final_status(
                     task_id,
                     "REVOKED",
                     f"Task {task_id} terminated via fallback mechanism (found PID {fallback_result['pid']}).",
-                    details={"source": "api_interrupt_fallback", "pid": fallback_result['pid'], "termination_method": f"{fallback_result.get('method', 'SIGKILL')}_FALLBACK", "reason": "no_redis_pid"}
+                    details={
+                        "source": "api_interrupt_fallback",
+                        "pid": fallback_result["pid"],
+                        "termination_method": f"{fallback_result.get('method', 'SIGKILL')}_FALLBACK",
+                        "reason": "no_redis_pid",
+                    },
                 )
                 return {
                     "message": f"Task {task_id} terminated via fallback mechanism (no Redis PID available)."

@@ -188,7 +188,7 @@ def create_axolotl_conversations_modelname(
         print("Warning: No Axolotl conversations were successfully generated.")
         return
 
-    with open(output_path, "w", encoding='utf-8') as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(axolotl_conversations, f, indent=2)
     print(
         f"Successfully wrote {len(axolotl_conversations)} Axolotl conversations to {output_path}"
@@ -256,7 +256,7 @@ def create_axolotl_conversations(conversations, output_dir, template):
         axolotl_conversations.append({"segments": segments})
 
     output_path = os.path.join(output_dir, "axolotl_correction_conversations.json")
-    with open(output_path, "w", encoding='utf-8') as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(axolotl_conversations, f, indent=2)
 
 

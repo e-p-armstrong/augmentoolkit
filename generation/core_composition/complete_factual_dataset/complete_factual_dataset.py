@@ -14,7 +14,11 @@ import glob
 from generation.utilities.llm_server.llm_server import llm_server
 from generation.utilities.rag_server.rag_server import rag_server
 from huggingface_hub import HfApi, list_repo_files
-from generation.core_components.chunking import read_jsonl_completions, read_text, write_text
+from generation.core_components.chunking import (
+    read_jsonl_completions,
+    read_text,
+    write_text,
+)
 from generation.core_components.data_prep_operations import (
     completionify_sharegpt,
     count_item_tokens,
@@ -225,8 +229,8 @@ async def factual_datagen_full(  # there will be quite a few args here
     base_model=None,
     other_pretrain_kwargs={},
     other_finetune_kwargs={},
-    server_type="normal", # normal | rag | none, whether to use a rag server or normal one
-    do_not_use_llm_for_pdf_processing=True, 
+    server_type="normal",  # normal | rag | none, whether to use a rag server or normal one
+    do_not_use_llm_for_pdf_processing=True,
     *args,
     **kwargs,
 ):
@@ -584,7 +588,9 @@ async def factual_datagen_full(  # there will be quite a few args here
                 }
                 if factual_sft[way]["multi_source"]:
                     if factual_sft[way]["multi_source"] == None:
-                        raise Exception(f"PLEASE MANUALLY SPECIFY multi_source for way {way} as True or False, do not leave it blank! This will lead to unexpected behavior")
+                        raise Exception(
+                            f"PLEASE MANUALLY SPECIFY multi_source for way {way} as True or False, do not leave it blank! This will lead to unexpected behavior"
+                        )
                     this_output, _ = await generate_multi_source_dataset(
                         **this_kwargs, chunking_output_dir=output_dir
                     )
@@ -862,7 +868,11 @@ async def factual_datagen_full(  # there will be quite a few args here
             )
 
         # if there is a rephrase pipeline in the future, it will go here
-        set_progress(task_id=task_id, progress=0.50, message="All data pipeline steps completed; processing and preparing final set for training")
+        set_progress(
+            task_id=task_id,
+            progress=0.50,
+            message="All data pipeline steps completed; processing and preparing final set for training",
+        )
 
         deterministic_rand = random.Random(11037)
         # Apply system prompt and thought process removal based on ratios
@@ -1340,7 +1350,9 @@ async def factual_datagen_full(  # there will be quite a few args here
 
     if do_train:
         print("Automated training is enabled. Starting training process...")
-        set_progress(task_id=task_id, progress=0.51, message="Automatic training is starting!")
+        set_progress(
+            task_id=task_id, progress=0.51, message="Automatic training is starting!"
+        )
         await _run_automated_training(
             output_dir=output_dir,
             runpod_api_key=runpod_api_key,
@@ -1353,13 +1365,17 @@ async def factual_datagen_full(  # there will be quite a few args here
         )
     else:
         print("Automated training is disabled. Skipping training process.")
-        
+
     all_texts = []
     for k, v in text_chunks_dict.items():
         all_texts.extend(v)
-        
+
     # Then we download it from huggingface
-    set_progress(task_id=task_id, progress=0.99, message="Now that training is finished, automatic downloading and conversion for inference is starting. To change this, turn do_train off. Make sure you have enough disk space!")
+    set_progress(
+        task_id=task_id,
+        progress=0.99,
+        message="Now that training is finished, automatic downloading and conversion for inference is starting. To change this, turn do_train off. Make sure you have enough disk space!",
+    )
 
     api = HfApi()
     if (
@@ -1403,15 +1419,13 @@ async def factual_datagen_full(  # there will be quite a few args here
                 ["git", "clone", "https://github.com/ggml-org/llama.cpp.git"],
                 check=True,
             )
-        
+
         venv_path = os.path.join(llama_cpp_dir, ".lcpp_venv")
         if not os.path.exists(venv_path):
             # Create virtual environment inside llama.cpp folder
             print(f"Creating virtual environment at {venv_path}...")
-            subprocess.run([
-                sys.executable, "-m", "venv", venv_path
-            ], check=True)
-            
+            subprocess.run([sys.executable, "-m", "venv", venv_path], check=True)
+
         # Determine the python executable path for the virtual environment
         if platform.system() == "Windows":
             venv_python = os.path.join(venv_path, "Scripts", "python.exe")
@@ -1419,14 +1433,12 @@ async def factual_datagen_full(  # there will be quite a few args here
         else:
             venv_python = os.path.join(venv_path, "bin", "python")
             venv_pip = os.path.join(venv_path, "bin", "pip")
-        
+
         # Install requirements if requirements.txt exists
         requirements_path = os.path.join(llama_cpp_dir, "requirements.txt")
         if os.path.exists(requirements_path):
             print("Installing llama.cpp requirements in virtual environment...")
-            subprocess.run([
-                venv_pip, "install", "-r", requirements_path
-            ], check=True)
+            subprocess.run([venv_pip, "install", "-r", requirements_path], check=True)
         else:
             print("No requirements.txt found in llama.cpp, skipping pip install")
 
@@ -1479,14 +1491,14 @@ async def factual_datagen_full(  # there will be quite a few args here
                 finished_model_path,
                 finetune_hub_model_id.split("/")[1] + ".gguf",
             )
-            
+
             # Determine the python executable path for the virtual environment
             venv_path = os.path.join(llama_cpp_dir, ".lcpp_venv")
             if platform.system() == "Windows":
                 venv_python = os.path.join(venv_path, "Scripts", "python.exe")
             else:
                 venv_python = os.path.join(venv_path, "bin", "python")
-            
+
             # Use the virtual environment python if it exists, otherwise fall back to system python
             if os.path.exists(venv_python):
                 python_executable = venv_python
@@ -1494,7 +1506,7 @@ async def factual_datagen_full(  # there will be quite a few args here
             else:
                 python_executable = "python"
                 print("Virtual environment not found, using system python")
-            
+
             command_str = f'"{python_executable}" "{convert_script}" "{finished_model_path}" --outtype "q8_0" --outfile "{outfile}"'
             result = subprocess.run(
                 command_str,
@@ -1506,7 +1518,9 @@ async def factual_datagen_full(  # there will be quite a few args here
 
             if result.returncode != 0:
                 print(f"Error: {result.stderr}")
-                raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
+                raise subprocess.CalledProcessError(
+                    result.returncode, result.args, result.stdout, result.stderr
+                )
 
         print("Model conversion to GGUF complete!")
 
@@ -1520,10 +1534,10 @@ async def factual_datagen_full(  # there will be quite a few args here
             .replace("{context}", dataset_context)
         )  # No addition of the context which we already have. # + ' ' + input_dirs[0]['final_system_prompt_additional_context']
 
-        with open(os.path.join(output_dir, "prompt.txt"), "w", encoding='utf-8') as f:
+        with open(os.path.join(output_dir, "prompt.txt"), "w", encoding="utf-8") as f:
             f.write(system_prompt)  # save prompt
 
-        with open(os.path.join(output_dir, "template.txt"), "w", encoding='utf-8') as f:
+        with open(os.path.join(output_dir, "template.txt"), "w", encoding="utf-8") as f:
             f.write(correction_prompt_template)  # save template
 
         # Find the GGUF model file
@@ -1572,42 +1586,42 @@ async def factual_datagen_full(  # there will be quite a few args here
                     context_length,
                     finetune_hub_model_id,
                 )
-            else: # if we are on the interface, run the server
+            else:  # if we are on the interface, run the server
                 documents_dir = os.path.join(output_dir, "documents_all")
                 write_text(documents_dir, text_list=all_texts)
-                
+
                 if server_type == "rag":
                     await rag_server(
-                        prompt_path = os.path.join(output_dir, "prompt.txt"),
-                        template_path = os.path.join(output_dir, "template.txt"),
-                        gguf_model_path = os.path.join(
+                        prompt_path=os.path.join(output_dir, "prompt.txt"),
+                        template_path=os.path.join(output_dir, "template.txt"),
+                        gguf_model_path=os.path.join(
                             f"{finished_model_path}",
                             finetune_hub_model_id.split("/")[1] + ".gguf",
                         ),
                         context_length=context_length,
-                        documents_dir = documents_dir,
-                        questions_jsonl_path = combined_output_file_path,
-                        question_chunk_size = 500,
-                        top_k = 3,
-                        llama_path='./llama.cpp',
+                        documents_dir=documents_dir,
+                        questions_jsonl_path=combined_output_file_path,
+                        question_chunk_size=500,
+                        top_k=3,
+                        llama_path="./llama.cpp",
                         port=8003,
-                        cache_dir = cache_dir,
-                        collection_name = 'questions_collection',
-                        max_shrink_iterations = 10,
-                        task_id=task_id
+                        cache_dir=cache_dir,
+                        collection_name="questions_collection",
+                        max_shrink_iterations=10,
+                        task_id=task_id,
                     )
                 else:
                     await llm_server(
-                        prompt_path = os.path.join(output_dir, "prompt.txt"),
-                        template_path = os.path.join(output_dir, "template.txt"),
-                        gguf_model_path = os.path.join(
+                        prompt_path=os.path.join(output_dir, "prompt.txt"),
+                        template_path=os.path.join(output_dir, "template.txt"),
+                        gguf_model_path=os.path.join(
                             f"{finished_model_path}",
                             finetune_hub_model_id.split("/")[1] + ".gguf",
                         ),
                         context_length=context_length,
-                        llama_path='./llama.cpp',
+                        llama_path="./llama.cpp",
                         port=8003,
-                        task_id=task_id
+                        task_id=task_id,
                     )
         finally:
             # Clean up the llama-server process
@@ -1970,10 +1984,10 @@ async def _run_automated_training(
 
         raise
     finally:
-        if created_pod_id: # Only remove if this script created it AND it's the one we were using
-            print(
-                f"Cleaning up - removing pod {created_pod_id}."
-            )
+        if (
+            created_pod_id
+        ):  # Only remove if this script created it AND it's the one we were using
+            print(f"Cleaning up - removing pod {created_pod_id}.")
             set_progress(
                 task_id=task_id,
                 progress=0.99,

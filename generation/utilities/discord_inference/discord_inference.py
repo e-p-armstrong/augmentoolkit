@@ -118,27 +118,29 @@ async def discord_inference(
     task_id="11037",
     **kwargs,
 ):
-    
+
     # Start the inference server with subprocess if needed
     server_process = None
     server_task = None
-    
+
     if inference_server == "normal":
         print("Starting LLM server in background...")
         # Start llm_server as a background task
         server_task = asyncio.create_task(llm_server(**inference_server_args))
         # Give the server time to start up
         await asyncio.sleep(5)
-        
+
     elif inference_server == "rag":
         print("Starting RAG server in background...")
-        # Start rag_server as a background task  
+        # Start rag_server as a background task
         server_task = asyncio.create_task(rag_server(**inference_server_args))
         # Give the server time to start up
         await asyncio.sleep(10)  # RAG server needs more time for initialization
-        
+
     elif inference_server == "none":
-        print("No inference server will be started - assuming external server is running")
+        print(
+            "No inference server will be started - assuming external server is running"
+        )
     else:
         raise ValueError(f"Unknown inference_server type: {inference_server}")
 
@@ -184,7 +186,9 @@ async def discord_inference(
             ## NOTE Handle whether to reply or not
             # Get bot's member object for this guild
             bot_member = (
-                new_msg.guild.get_member(discord_client.user.id) if new_msg.guild else None
+                new_msg.guild.get_member(discord_client.user.id)
+                if new_msg.guild
+                else None
             )
             bot_roles = bot_member.roles if bot_member else []
 
@@ -204,7 +208,8 @@ async def discord_inference(
                 new_msg.role_mentions
             )  # This will give you the role objects that were mentioned
             print(
-                "DEBUG: role mentions: ", [(role.name, role.id) for role in role_mentions]
+                "DEBUG: role mentions: ",
+                [(role.name, role.id) for role in role_mentions],
             )
 
             if not is_dm and not is_mentioned:
@@ -214,7 +219,8 @@ async def discord_inference(
                 print("DEBUG: is_dm: ", is_dm)
                 print("DEBUG: is_mentioned: ", is_mentioned)
                 print(
-                    "DEBUG: bot roles: ", [f"{role.name}: {role.id}" for role in bot_roles]
+                    "DEBUG: bot roles: ",
+                    [f"{role.name}: {role.id}" for role in bot_roles],
                 )
                 return
 
@@ -338,7 +344,9 @@ async def discord_inference(
                                     ):
                                         curr_node.next_msg = referenced_msg
                                 except (discord.NotFound, discord.HTTPException):
-                                    logging.exception("Error fetching referenced message")
+                                    logging.exception(
+                                        "Error fetching referenced message"
+                                    )
                                     curr_node.fetch_next_failed = True
                             else:
                                 print("DEBUG: else")
@@ -374,7 +382,9 @@ async def discord_inference(
                                         )
 
                         except (discord.NotFound, discord.HTTPException):
-                            logging.exception("Error fetching next message in the chain")
+                            logging.exception(
+                                "Error fetching next message in the chain"
+                            )
                             curr_node.fetch_next_failed = True
 
                     content = (
@@ -434,7 +444,9 @@ async def discord_inference(
                     ]
 
                     for content in response_contents:
-                        reply_to_msg = new_msg if response_msgs == [] else response_msgs[-1]
+                        reply_to_msg = (
+                            new_msg if response_msgs == [] else response_msgs[-1]
+                        )
                         response_msg = await reply_to_msg.reply(
                             content=content, suppress_embeds=True
                         )
@@ -455,10 +467,12 @@ async def discord_inference(
                 for msg_id in sorted(msg_nodes.keys())[: num_nodes - max_message_nodes]:
                     async with msg_nodes.setdefault(msg_id, MsgNode()).lock:
                         msg_nodes.pop(msg_id, None)
-        
-        set_progress(task_id=task_id, progress=1.0, message="Discord client about to start!")
+
+        set_progress(
+            task_id=task_id, progress=1.0, message="Discord client about to start!"
+        )
         await discord_client.start(bot_token)
-        
+
     finally:
         # Clean up the server if it was started
         if server_task and not server_task.done():
@@ -470,4 +484,3 @@ async def discord_inference(
                 print("Inference server shut down successfully")
             except Exception as e:
                 print(f"Error during server shutdown: {e}")
-

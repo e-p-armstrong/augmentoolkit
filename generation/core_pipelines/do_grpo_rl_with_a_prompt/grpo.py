@@ -154,7 +154,7 @@ class MultiDataset(Dataset):
 
             # remove "conversations" column
             dataset = dataset.remove_columns("conversations")
-            
+
             # Filter out examples with empty prompts
             dataset = dataset.filter(lambda x: x.get("prompt", "") != "")
 
@@ -210,26 +210,38 @@ class MultiDataset(Dataset):
 
         # Token-based truncation to fit max_prompt_length
         # Ensure tokenizer.chat_template is set if not already (though it should be by the time this is called)
-        if self.tokenizer.chat_template is None and self.tokenizer.default_chat_template is not None:
+        if (
+            self.tokenizer.chat_template is None
+            and self.tokenizer.default_chat_template is not None
+        ):
             self.tokenizer.chat_template = self.tokenizer.default_chat_template
-        
-        if not truncated_conv: # Handle cases where initial truncation results in empty list
-            logging.warning(f"Initial turn-based truncation resulted in empty conversation for path: {conv.get('path', 'N/A')}")
+
+        if (
+            not truncated_conv
+        ):  # Handle cases where initial truncation results in empty list
+            logging.warning(
+                f"Initial turn-based truncation resulted in empty conversation for path: {conv.get('path', 'N/A')}"
+            )
             current_token_ids = []
         else:
             current_token_ids = self.tokenizer.apply_chat_template(
                 truncated_conv,
-                add_generation_prompt=True, # Consistent with trainer's generation step
-                tokenize=True
+                add_generation_prompt=True,  # Consistent with trainer's generation step
+                tokenize=True,
             )
 
-        max_truncation_attempts = len(truncated_conv) + 5 
+        max_truncation_attempts = len(truncated_conv) + 5
         attempts = 0
 
-        while len(current_token_ids) > self.max_prompt_length and attempts < max_truncation_attempts:
+        while (
+            len(current_token_ids) > self.max_prompt_length
+            and attempts < max_truncation_attempts
+        ):
             attempts += 1
             if not truncated_conv:
-                logging.warning("Truncated conversation became empty while trying to fit max_prompt_length.")
+                logging.warning(
+                    "Truncated conversation became empty while trying to fit max_prompt_length."
+                )
                 break
 
             original_len_truncated_conv = len(truncated_conv)
@@ -239,47 +251,60 @@ class MultiDataset(Dataset):
                 if len(truncated_conv) > 1:
                     # Remove the message after the system prompt (oldest conversational turn)
                     removed_message = truncated_conv.pop(1)
-                    logging.debug(f"Removed message to shorten prompt (after system): {removed_message.get('role', 'N/A')} from {conv.get('path', 'N/A')}")
+                    logging.debug(
+                        f"Removed message to shorten prompt (after system): {removed_message.get('role', 'N/A')} from {conv.get('path', 'N/A')}"
+                    )
                 else:
                     # Only system prompt is left and it's too long
                     logging.warning(
                         f"System prompt alone (approx {len(current_token_ids)} tokens) is too long for max_prompt_length={self.max_prompt_length} in {conv.get('path', 'N/A')}. "
                         f"Content snippet: {truncated_conv[0]['content'][:200]}"
                     )
-                    break 
-            elif len(truncated_conv) > 0: # No system prompt or system prompt already handled
+                    break
+            elif (
+                len(truncated_conv) > 0
+            ):  # No system prompt or system prompt already handled
                 # Remove the oldest message
                 removed_message = truncated_conv.pop(0)
-                logging.debug(f"Removed message to shorten prompt (no system or already handled): {removed_message.get('role', 'N/A')} from {conv.get('path', 'N/A')}")
-            else: # Should be caught by `if not truncated_conv:`
+                logging.debug(
+                    f"Removed message to shorten prompt (no system or already handled): {removed_message.get('role', 'N/A')} from {conv.get('path', 'N/A')}"
+                )
+            else:  # Should be caught by `if not truncated_conv:`
                 break
-            
-            if len(truncated_conv) == original_len_truncated_conv and original_len_truncated_conv > 0 :
+
+            if (
+                len(truncated_conv) == original_len_truncated_conv
+                and original_len_truncated_conv > 0
+            ):
                 # No message was removed, means we are stuck (e.g. single system prompt too long or truncated_conv became empty)
-                if truncated_conv: # check if still has content
-                    logging.warning(f"Could not shorten prompt further for {conv.get('path', 'N/A')}. Current length {len(current_token_ids)} tokens vs max {self.max_prompt_length}.")
+                if truncated_conv:  # check if still has content
+                    logging.warning(
+                        f"Could not shorten prompt further for {conv.get('path', 'N/A')}. Current length {len(current_token_ids)} tokens vs max {self.max_prompt_length}."
+                    )
                 break
-            
-            if not truncated_conv: # If all messages were removed
-                 current_token_ids = []
-                 break
+
+            if not truncated_conv:  # If all messages were removed
+                current_token_ids = []
+                break
 
             current_token_ids = self.tokenizer.apply_chat_template(
-                truncated_conv,
-                add_generation_prompt=True,
-                tokenize=True
+                truncated_conv, add_generation_prompt=True, tokenize=True
             )
-        
-        if attempts >= max_truncation_attempts and len(current_token_ids) > self.max_prompt_length:
-            logging.error(f"Failed to truncate prompt to {self.max_prompt_length} tokens after {max_truncation_attempts} attempts for {conv.get('path', 'N/A')}. Final length: {len(current_token_ids)}. Example prompt: {truncated_conv}")
+
+        if (
+            attempts >= max_truncation_attempts
+            and len(current_token_ids) > self.max_prompt_length
+        ):
+            logging.error(
+                f"Failed to truncate prompt to {self.max_prompt_length} tokens after {max_truncation_attempts} attempts for {conv.get('path', 'N/A')}. Final length: {len(current_token_ids)}. Example prompt: {truncated_conv}"
+            )
             # Potentially return an empty prompt or a specially marked error state if downstream can handle it.
             # For now, it will proceed with the overly long prompt, likely causing the original error.
             # Or, to be safer and prevent the error, make truncated_conv empty or raise an error.
             # Let's clear truncated_conv to prevent the error, though this loses the sample.
-            truncated_conv = [] # This would avoid the error but lose data.
-            answer = ""         # And its corresponding answer.
+            truncated_conv = []  # This would avoid the error but lose data.
+            answer = ""  # And its corresponding answer.
             # logging.error("Setting truncated_conv to empty to prevent downstream error.")
-
 
         return {
             "prompt": truncated_conv,  # we need to rename "conversations" to "prompt" so that it works with unsloth
@@ -638,7 +663,9 @@ def setup_trainer(
                 save_high_score_response(
                     prompt_messages=kwargs_at_idx["prompts"],
                     response_text=kwargs_at_idx["completions"],
-                    high_scoring_save_path=os.path.join(output_dir, high_scoring_save_path),
+                    high_scoring_save_path=os.path.join(
+                        output_dir, high_scoring_save_path
+                    ),
                     tokenizer=tokenizer,
                 )
             final_combined_rewards.append(combined_reward)
@@ -749,7 +776,7 @@ def grpo_rl_pipeline(
     # Load dataset(s) from config
     print("Loading datasets from config")
     dataset = MultiDataset(datasets, total_rows, tokenizer, max_prompt_length)
-    
+
     # Create full output directory path if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
 

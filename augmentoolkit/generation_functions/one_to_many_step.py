@@ -295,7 +295,7 @@ class OneToManyStep(
             )
             # print(f"[DEBUG {time.time():.2f}] save_dataset: Writing to temp file: '{temp_output_path}'.") # DEBUG
             try:
-                with open(temp_output_path, "w", encoding='utf-8') as f:
+                with open(temp_output_path, "w", encoding="utf-8") as f:
                     json.dump(
                         output_dict, f, indent=None, ensure_ascii=False
                     )  # Use indent for readability

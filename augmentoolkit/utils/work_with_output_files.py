@@ -20,7 +20,7 @@ def iterate_over_items(output_dir, output_file_name, func):
         func(key, value)
 
     # save data over input file
-    with open(output_path, "w", encoding='utf-8') as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
     return data
@@ -77,7 +77,7 @@ def save_data(input_dict, output_dir, output_file_name):
             existing_data[key] = value
 
     # Write the updated data back to the file
-    with open(output_path, "w", encoding='utf-8') as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(existing_data, f, indent=4)
 
 

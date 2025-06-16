@@ -81,7 +81,7 @@ class SingleGenerationStep(PipelineStep):
         # Use file lock for safe concurrent writes
         # Write to temporary file first then replace for atomic write
         temp_path = output_path + ".tmp"
-        with open(temp_path, "w", encoding='utf-8') as f:
+        with open(temp_path, "w", encoding="utf-8") as f:
             json.dump(obj, f)
         os.replace(temp_path, output_path)
 

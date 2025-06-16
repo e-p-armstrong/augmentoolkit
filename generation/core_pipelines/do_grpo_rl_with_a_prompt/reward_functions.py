@@ -104,12 +104,12 @@ def validate_cot_format(
     # Check if string is None or empty
     if not solution_str:
         return False
-    
+
     if cot_start == None:
         return True
-    
+
     if cot_end == None:
-        return True # vacuously true; good default for when COT is not being used
+        return True  # vacuously true; good default for when COT is not being used
 
     # Check for exactly one Answer section
     answer_count = solution_str.count(
@@ -140,9 +140,9 @@ def check_thought_answer_similarity(
     response, threshold=90, cot_end=None, cot_start=None
 ):
     """Check if thought process and answer sections are overly similar. True if similarity exceeds the given threshold percentage."""
-    
+
     if cot_end == None:
-        return False # vacuously (not) true; good default for when cot is not used
+        return False  # vacuously (not) true; good default for when cot is not used
 
     if cot_start == None:
         return False

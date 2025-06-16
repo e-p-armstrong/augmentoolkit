@@ -534,36 +534,36 @@ def read_text(
 def write_text(output_dir, text_list):
     """
     Writes a list of text objects to files in the specified output directory.
-    
+
     Args:
         output_dir (str): Directory where files will be written. Will be created if it doesn't exist.
         text_list (list): List of dictionaries with 'text' and 'metadata' keys, as returned by read_text.
                          The 'metadata' field should contain the relative file path.
-    
+
     Returns:
         int: Number of files successfully written.
     """
     # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
-    
+
     files_written = 0
-    
+
     for item in tqdm(text_list, desc="Writing files"):
         if "text" not in item or "metadata" not in item:
             print(f"Warning: Skipping item missing required fields: {item}")
             continue
-            
+
         # Get the relative file path from metadata
         relative_path = item["metadata"]
-        
+
         # Create the full output path
         full_path = os.path.join(output_dir, relative_path)
-        
+
         # Create any necessary subdirectories
         file_dir = os.path.dirname(full_path)
         if file_dir:
             os.makedirs(file_dir, exist_ok=True)
-        
+
         try:
             # Write the text content to the file
             with open(full_path, "w", encoding="utf-8") as f:
@@ -571,7 +571,7 @@ def write_text(output_dir, text_list):
             files_written += 1
         except Exception as e:
             print(f"Error writing file {full_path}: {e}")
-    
+
     print(f"Successfully wrote {files_written} files to {output_dir}")
     return files_written
 

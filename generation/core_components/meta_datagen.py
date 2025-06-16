@@ -163,7 +163,9 @@ def create_meta_dataset(
     # to a chat_lists directory under the output_dir
     os.makedirs(os.path.join(output_dir, "chat_lists"), exist_ok=True)
     for idx, chat_list in enumerate(chat_lists):
-        with open(os.path.join(output_dir, "chat_lists", f"{idx}.json"), "w", encoding='utf-8') as f:
+        with open(
+            os.path.join(output_dir, "chat_lists", f"{idx}.json"), "w", encoding="utf-8"
+        ) as f:
             json.dump(chat_list, f, indent=4)
 
 

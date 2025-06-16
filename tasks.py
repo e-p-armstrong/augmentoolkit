@@ -91,7 +91,6 @@ def set_final_status(
     except Exception as e:
         print(
             f"Task {task_id}: Failed to set final status '{status}' in Redis ({redis_key}): {e}",
-            
         )
 
 
@@ -119,9 +118,7 @@ def run_pipeline_task(
     log_file_path = ""  # Store path for logging
     final_status_set = False  # Flag to ensure final status is set only once
 
-    print(
-        f"Task {task_id}: Preparing to run pipeline subprocess for node: {node_path}"
-    )
+    print(f"Task {task_id}: Preparing to run pipeline subprocess for node: {node_path}")
 
     # Initialize progress early to indicate the task is starting
     try:
@@ -132,15 +129,21 @@ def run_pipeline_task(
 
     if parameters is None:
         parameters = {}
-    
-    print(f"Task {task_id}: Original parameters (first 500 chars): {str(parameters)[:500]}")
+
+    print(
+        f"Task {task_id}: Original parameters (first 500 chars): {str(parameters)[:500]}"
+    )
 
     # first, flatten parameters
     no_flatten_keys = parameters.get("no_flatten", [])
-    print(f"Task {task_id}: About to call flatten_config. No_flatten keys: {no_flatten_keys}")
+    print(
+        f"Task {task_id}: About to call flatten_config. No_flatten keys: {no_flatten_keys}"
+    )
     try:
         parameters_flat = flatten_config(parameters, no_flatten_keys=no_flatten_keys)
-        print(f"Task {task_id}: Successfully called flatten_config. Flat params (first 500 chars): {str(parameters_flat)[:500]}")
+        print(
+            f"Task {task_id}: Successfully called flatten_config. Flat params (first 500 chars): {str(parameters_flat)[:500]}"
+        )
     except Exception as fc_e:
         print(f"Task {task_id}: Error during flatten_config: {fc_e}", exc_info=True)
         # Set final status to FAILED
@@ -150,8 +153,8 @@ def run_pipeline_task(
             f"Task failed during parameter flattening: {fc_e}",
             details={"error": str(fc_e), "traceback": traceback.format_exc()},
         )
-        final_status_set = True # Mark as set
-        raise # Re-raise to be caught by the main handler
+        final_status_set = True  # Mark as set
+        raise  # Re-raise to be caught by the main handler
 
     if "task_id" not in parameters_flat:
         parameters_flat["task_id"] = task_id
@@ -184,9 +187,7 @@ def run_pipeline_task(
                         f"Task {task_id}: Config path '{config_path}' (resolved to {abs_config_path}) does not exist or is not a file."
                     )
                 else:
-                    print(
-                        f"Task {task_id}: Loading config file: {abs_config_path}"
-                    )
+                    print(f"Task {task_id}: Loading config file: {abs_config_path}")
                     with open(abs_config_path, "r", encoding="utf-8") as f:
                         config_data = yaml.safe_load(f)
                     if config_data:
@@ -240,7 +241,9 @@ def run_pipeline_task(
             # except Exception as mkdir_e:
             #     print(f"Task {task_id}: Failed to create default output directory {resolved_output_dir}: {mkdir_e}")
             #     raise Exception(f"Failed to create default output directory: {mkdir_e}")
-        print(f"Task {task_id}: Finished determining output directory. Resolved to: {resolved_output_dir}")
+        print(
+            f"Task {task_id}: Finished determining output directory. Resolved to: {resolved_output_dir}"
+        )
 
         # 4. Store in Redis
         if resolved_output_dir:
@@ -269,25 +272,21 @@ def run_pipeline_task(
             # Use the flattened 'parameters' dictionary
             params_json = json.dumps(parameters_flat)
             redis_client.set(redis_params_key, params_json, ex=PARAMETERS_TIMEOUT)
-            print(
-                f"Task {task_id}: Stored parameters in Redis key {redis_params_key}"
-            )
+            print(f"Task {task_id}: Stored parameters in Redis key {redis_params_key}")
         except TypeError as json_e:
             print(
                 f"Task {task_id}: Failed to serialize parameters to JSON: {json_e}. Parameters will not be stored in Redis.",
-                
             )
             # Consider if this should be a fatal error or just a warning
         except Exception as redis_e:
             print(
                 f"Task {task_id}: Failed to store parameters in Redis key {redis_params_key}: {redis_e}",
-                
             )
             # Consider if this should be a fatal error or just a warning
 
         # --- Prepare Subprocess Command ---
         print(f"Task {task_id}: Preparing subprocess command...")
-        command = [ # This is actually ideal. We get the same code as with the cli, with the API of the API mode, and the task queue management of huey. Everything fits. All we need to do is modify run_augmentoolkit to take those args. if provided and not rely on super_config only.
+        command = [  # This is actually ideal. We get the same code as with the cli, with the API of the API mode, and the task queue management of huey. Everything fits. All we need to do is modify run_augmentoolkit to take those args. if provided and not rely on super_config only.
             sys.executable,  # Use the current Python interpreter
             PIPELINE_RUNNER_SCRIPT,
             "--node",
@@ -299,20 +298,25 @@ def run_pipeline_task(
             print(f"Task {task_id}: Added config_path '{config_path}' to command.")
 
         if parameters_flat:
-            print(f"Task {task_id}: About to call json.dumps for parameters_flat in command extend.")
+            print(
+                f"Task {task_id}: About to call json.dumps for parameters_flat in command extend."
+            )
             try:
                 params_json_for_command = json.dumps(parameters_flat)
                 command.extend(["--override-json", params_json_for_command])
                 print(f"Task {task_id}: Added override-json to command.")
             except Exception as jd_e:
-                print(f"Task {task_id}: Error during json.dumps for command parameters: {jd_e}", exc_info=True)
+                print(
+                    f"Task {task_id}: Error during json.dumps for command parameters: {jd_e}",
+                    exc_info=True,
+                )
                 set_final_status(
                     task_id,
                     "FAILED",
                     f"Task failed during command parameter JSON serialization: {jd_e}",
                     details={"error": str(jd_e), "traceback": traceback.format_exc()},
                 )
-                final_status_set = True # Mark as set
+                final_status_set = True  # Mark as set
                 raise
 
         print(
@@ -335,7 +339,9 @@ def run_pipeline_task(
             log_file = None  # Ensure log_file is None if opening failed
 
         # --- Start Subprocess ---
-        print(f"Task {task_id}: Preparing to start subprocess. Log file object is: {log_file}")
+        print(
+            f"Task {task_id}: Preparing to start subprocess. Log file object is: {log_file}"
+        )
         # If log file opened successfully, pipe both stdout and stderr to it
         # Otherwise, let output go to devnull to avoid blocking
         if log_file:
@@ -348,31 +354,37 @@ def run_pipeline_task(
             )
         else:
             # Fallback: send output to devnull if log file couldn't be opened
-            print(f"Task {task_id}: Log file was not opened. Subprocess output will go to DEVNULL.")
+            print(
+                f"Task {task_id}: Log file was not opened. Subprocess output will go to DEVNULL."
+            )
             process = subprocess.Popen(
                 command,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 cwd=ATK3_DIRECTORY,
             )
-        print(f"Task {task_id}: Subprocess Popen call completed. Process object: {process}")
+        print(
+            f"Task {task_id}: Subprocess Popen call completed. Process object: {process}"
+        )
 
         # --- Store Subprocess PID ---
         # Add a check here:
         if process is None:
-            print(f"Task {task_id}: Subprocess.Popen appears to have failed, process object is None.")
+            print(
+                f"Task {task_id}: Subprocess.Popen appears to have failed, process object is None."
+            )
             # This state should ideally not be reached if Popen raises an error,
             # but as a safeguard:
             if not final_status_set:
-                 set_final_status(
+                set_final_status(
                     task_id,
                     "FAILED",
                     "Task failed: Subprocess.Popen resulted in a None process object.",
                     details={"error": "Popen returned None"},
                 )
-                 final_status_set = True
+                final_status_set = True
             raise RuntimeError("Subprocess.Popen failed, process object is None.")
-        
+
         subprocess_pid = process.pid
         redis_client.set(redis_pid_key, subprocess_pid, ex=PID_KEY_TIMEOUT)
         print(
@@ -391,9 +403,7 @@ def run_pipeline_task(
 
         # --- Determine Task Status from Exit Code and Set Final Status ---
         if exit_code == 0:
-            print(
-                f"Pipeline task {task_id} completed successfully via subprocess."
-            )
+            print(f"Pipeline task {task_id} completed successfully via subprocess.")
             set_final_status(
                 task_id, "COMPLETED", f"Pipeline task {task_id} completed successfully."
             )

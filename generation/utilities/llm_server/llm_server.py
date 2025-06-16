@@ -89,12 +89,12 @@ async def llm_server(
         print("llama.cpp directory not found. Cloning repository...")
         subprocess.run(
             ["git", "clone", "https://github.com/ggml-org/llama.cpp.git", llama_path],
-            check=True
+            check=True,
         )
         subprocess.run(
             ["git", "checkout", "3cb203c89f60483e349f841684173446ed23c28f"],
             cwd=llama_path,
-            check=True
+            check=True,
         )
 
         # Check if llama-server exists
@@ -319,16 +319,16 @@ async def llm_server(
                         yield chunk
                 except Exception as e:
                     # Send error as final chunk
-                    yield f"data: {{\"error\": \"{str(e)}\", \"done\": true}}\n\n"
+                    yield f'data: {{"error": "{str(e)}", "done": true}}\n\n'
 
             return StreamingResponse(
-                generate_stream(), 
+                generate_stream(),
                 media_type="text/plain",
                 headers={
                     "Cache-Control": "no-cache",
                     "Connection": "keep-alive",
                     "Content-Type": "text/event-stream",
-                }
+                },
             )
 
         set_progress(

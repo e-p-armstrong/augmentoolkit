@@ -143,7 +143,7 @@ def create_input_token_counter(
 
         # Persist counter to file if path was provided
         if json_path:
-            with open(json_path, "w", encoding='utf-8') as f:
+            with open(json_path, "w", encoding="utf-8") as f:
                 json.dump(counter, f)
 
     return input_token_counter
@@ -213,7 +213,7 @@ def create_output_token_counter(
 
         # Persist counter to file if path was provided
         if json_path:
-            with open(json_path, "w", encoding='utf-8') as f:
+            with open(json_path, "w", encoding="utf-8") as f:
                 json.dump(counter, f)
 
     return output_token_counter

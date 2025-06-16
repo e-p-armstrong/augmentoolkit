@@ -143,24 +143,34 @@ def validate_emotion_format(emotion_output, input_data):
     """
     # Check length
     if not emotion_length_validation(emotion_output, input_data):
-        return {"result": False, "message": "Emotion text exceeds maximum allowed length"}
+        return {
+            "result": False,
+            "message": "Emotion text exceeds maximum allowed length",
+        }
 
     # Check repetition
     if not emotion_repetition_callback(emotion_output, input_data):
         count, substr = find_frequent_substrings(emotion_output, 16, 3, 400)
-        return {"result": False, "message": f"Excessive repetition found: '{substr}' repeated {count} times"}
+        return {
+            "result": False,
+            "message": f"Excessive repetition found: '{substr}' repeated {count} times",
+        }
 
     # Check format (all caps before colon)
     colon_pos = emotion_output.find(":")
     if colon_pos == -1:
         if any(c.islower() for c in emotion_output):
-            return {"result": False, "message": "Emotion format incorrect: contains lowercase characters"}
+            return {
+                "result": False,
+                "message": "Emotion format incorrect: contains lowercase characters",
+            }
     else:
         before_colon = emotion_output[:colon_pos]
         if any(c.islower() for c in before_colon):
-            return {"result": False,
-                "message": 
-                "Emotion format incorrect: contains lowercase characters before colon"}
+            return {
+                "result": False,
+                "message": "Emotion format incorrect: contains lowercase characters before colon",
+            }
 
     return {"result": True, "message": "success"}
 
@@ -227,7 +237,10 @@ generate_emotion_pipeline_step = DepthFirstPipelineStep(
 ## Helpers
 def validate_emotion_key_contained(emotions):
     def inner(text):
-        return {"result": any(emotion in text for emotion in emotions), "message": "default message"}
+        return {
+            "result": any(emotion in text for emotion in emotions),
+            "message": "default message",
+        }
 
     return inner
 
@@ -425,7 +438,11 @@ def parse_chatlog(chatlog, charname):
     current_content = []
 
     for line in chatlog.split("\n"):
-        if line.startswith(charname + ":") or line.startswith("{user}:") or line.startswith("{narrator}:"):
+        if (
+            line.startswith(charname + ":")
+            or line.startswith("{user}:")
+            or line.startswith("{narrator}:")
+        ):
             if current_owner and current_content:
                 messages.append(
                     {"owner": current_owner, "content": "\n".join(current_content)}

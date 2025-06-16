@@ -428,7 +428,7 @@ def _build_sources_string(source_items_data):
     sources_string_parts = ["\n\nSources Used:"]
     currently_added = set()
     for original_meta, rag_metas_list in source_items_data:
-        
+
         if str(original_meta) not in currently_added:
             sources_string_parts.append(f"- {str(original_meta)}")
             currently_added.add(str(original_meta))

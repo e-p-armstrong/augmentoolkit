@@ -63,7 +63,7 @@ def process_yaml_directory(source_dir_path_str: str):
             else:
                 new_data = []
 
-            with open(dest_file_path, "w", encoding='utf-8') as outfile:
+            with open(dest_file_path, "w", encoding="utf-8") as outfile:
                 yaml.dump(
                     new_data,
                     outfile,
@@ -140,7 +140,7 @@ def process_yaml_directory(source_dir_path_str: str):
             if modified_content and not modified_content.endswith("\n"):
                 modified_content += "\n"
 
-            with open(dest_file_path, "w", encoding='utf-8') as outfile:
+            with open(dest_file_path, "w", encoding="utf-8") as outfile:
                 outfile.write(modified_content)
 
             print(f"  Successfully created and formatted '{relative_path}'.")

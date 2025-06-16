@@ -31,9 +31,9 @@ class EngineWrapper:
         input_observers=[],
         output_observers=[],
         timeout_total=500.0,  # Total operation timeout
-        timeout_read=240.0,   # Read timeout between chunks
+        timeout_read=240.0,  # Read timeout between chunks
         timeout_api_call=600,  # Timeout for individual API calls
-        **kwargs
+        **kwargs,
     ):
         self.mode = mode
         self.model = model
@@ -46,10 +46,10 @@ class EngineWrapper:
             self.client = AsyncOpenAI(
                 timeout=Timeout(
                     timeout=timeout_total,  # Total operation timeout
-                    connect=10.0,          # Connection timeout
-                    read=timeout_read,     # Read timeout between chunks (increased for streaming)
-                    write=30.0,            # Write timeout
-                    pool=10.0              # Pool timeout
+                    connect=10.0,  # Connection timeout
+                    read=timeout_read,  # Read timeout between chunks (increased for streaming)
+                    write=30.0,  # Write timeout
+                    pool=10.0,  # Pool timeout
                 ),
                 api_key=api_key,
                 base_url=base_url,
@@ -246,9 +246,7 @@ class EngineWrapper:
         if "max_tokens" not in sampling_params:
             sampling_params["max_tokens"] = 3000
         if "stop" not in sampling_params:
-            sampling_params["stop"] = [
-                "<|im_end|>"
-            ]
+            sampling_params["stop"] = ["<|im_end|>"]
         else:
             if "<|im_end|>" not in sampling_params["stop"]:
                 sampling_params["stop"].append("<|im_end|>")
@@ -265,7 +263,7 @@ class EngineWrapper:
         if self.mode == "api":
             timed_out = False
             completion = ""
-            
+
             if use_min_p:
                 stream = await self.client.completions.create(
                     model=self.model,
@@ -289,7 +287,7 @@ class EngineWrapper:
                     stream=True,
                     timeout=self.timeout_api_call,
                 )
-            
+
             async for chunk in stream:
                 try:
                     text_chunk = chunk.choices[0].text
@@ -306,9 +304,7 @@ class EngineWrapper:
                 yield f"data: {json.dumps({'text': '', 'done': True})}\n\n"
 
             for output_observer in self.output_observers:
-                output_observer(
-                    prompt, completion, True
-                )
+                output_observer(prompt, completion, True)
 
         if self.mode == "cohere":
             raise Exception("Cohere not compatible with completion mode!")
@@ -337,7 +333,7 @@ class EngineWrapper:
         if self.mode == "api":
             completion = ""
             timed_out = False
-            
+
             if use_min_p:
                 stream = await self.client.chat.completions.create(
                     model=self.model,
@@ -361,7 +357,7 @@ class EngineWrapper:
                     stream=True,
                     timeout=self.timeout_api_call,
                 )
-            
+
             async for chunk in stream:
                 try:
                     try:
