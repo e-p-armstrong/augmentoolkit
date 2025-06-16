@@ -20,6 +20,9 @@ set "HUEY_PID="
 set "UVICORN_PID="
 set "SERVE_PID="
 
+REM --- Skip cleanup function and go to main script ---
+goto :main_script
+
 REM --- Cleanup Function ---
 REM Note: Batch file cleanup on Ctrl+C is limited. Background tasks started with 'start /b'
 REM might persist if the script is interrupted before the foreground task (serve) ends.
@@ -78,6 +81,7 @@ echo Services stopped. Terminal ready for new commands.
 echo ----------------------------------------
 goto :eof
 
+:main_script
 REM --- 1. Python Virtual Environment & Dependencies ---
 echo ----------------------------------------
 echo 1. Setting up Python virtual environment and installing dependencies...
