@@ -31,7 +31,6 @@ from generation.core_pipelines.rptoolkit.rptoolkit_helpers import (
     is_story_awesome,
     is_story_ok,
     parse_string_to_dict,
-    scrape_novels,
     write_final_dataset_files,
     generate_emotion_pipeline_step,
     rate_story_step,
@@ -257,34 +256,6 @@ async def rptoolkit_inner_function(
     return stories
 
 
-# TODO put this in the bloody damned main function
-
-
-def scrape_from_lnco(
-    use_lightnovelco,
-    lnco_base_url,
-    lnco_ranking_url,
-    lnco_chapter_count,
-    lnco_novel_count,
-    lnco_wait_time,
-    lnco_max_workers,
-    input_dir,
-):
-    print("began to run")
-    if use_lightnovelco:
-        print("Using LightNovelCo for fiction data scraping.")
-        scrape_novels(
-            base_url=lnco_base_url,
-            ranking_url=lnco_ranking_url,
-            chapter_count=lnco_chapter_count,
-            novel_count=lnco_novel_count,
-            wait_time=lnco_wait_time,
-            max_workers=lnco_max_workers,
-            output_dir_for_scrapes=input_dir,
-        )
-        print("Data scraped from LightNovelCo. Continuing with the pipeline.")
-
-
 # pick_emotion = bool(config["SYSTEM"]["pick_emotion"])
 # work_in_phases = bool(config["PHASES"]["work_in_phases"])
 # phase_index = int(config["PHASES"]["phase_index"])
@@ -328,13 +299,6 @@ async def rptoolkit_pipeline(
     use_subset,
     subset_size,
     chunk_size,
-    use_lightnovelco,
-    lnco_base_url,
-    lnco_ranking_url,
-    lnco_chapter_count,
-    lnco_novel_count,
-    lnco_wait_time,
-    lnco_max_workers,
     output_dir,
     input_dir,
     default_prompts,
@@ -419,18 +383,6 @@ async def rptoolkit_pipeline(
         output_file="story_generation",
         result_key="features",
         details_key="features_details",
-    )
-
-    # Scrape LNCO if that is on
-    scrape_from_lnco(
-        use_lightnovelco=use_lightnovelco,
-        lnco_base_url=lnco_base_url,
-        lnco_ranking_url=lnco_ranking_url,
-        lnco_chapter_count=lnco_chapter_count,
-        lnco_novel_count=lnco_novel_count,
-        lnco_wait_time=lnco_wait_time,
-        lnco_max_workers=lnco_max_workers,
-        input_dir=input_dir,
     )
 
     prompts = make_relative_to_self(prompts)

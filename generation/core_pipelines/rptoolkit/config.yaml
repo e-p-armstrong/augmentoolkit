@@ -36,14 +36,6 @@ system:
 archetypes:
   generate_archetype: True # whether to generate an archetype or use a random one from the list below
   archetypes: ["THE TSUNDERE: People who embody the Tsundere archetype are defined by initial coldness, rudeness, and even violence, but eventually reveal a warmer, friendlier, possibly romantic side over time. Tsundere people are prone to embarrassed and/or flustered outbursts if approached directly by the person they like, and often have very poor control over their passionate feelings. Stories featuring tsunderes often revolve around the gradual softening of the tsundere character's attitude, and the inherent cuteness of a harsh character being shy and embarrassed as they come to terms with their feelings."] # NOTE only used with certain prompt sets. Otherwise this key will contain a meaningless, unused value.
-scraping:
-  use_lightnovelco: False
-  lnco_base_url: https://www.lightnovelworld.co
-  lnco_ranking_url: https://www.lightnovelworld.co/ranking
-  lnco_chapter_count: 5
-  lnco_novel_count: 5
-  lnco_wait_time: 10
-  lnco_max_workers: 5
 cost_estimation:
   cost_per_million_small_input: 0.12
   cost_per_million_small_output: 0.30
