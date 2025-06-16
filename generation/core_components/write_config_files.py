@@ -103,7 +103,7 @@ def write_training_config(
         pass
 
     # Write configuration to file
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding='utf-8') as f:
         yaml.dump(config, f, default_flow_style=False, sort_keys=False)
 
     return output_path

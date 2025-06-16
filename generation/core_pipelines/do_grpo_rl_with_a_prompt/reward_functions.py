@@ -241,7 +241,7 @@ def llm_reward_func(
     )
     system_prompt_path = make_relative_to_self(system_prompt_path)
     # load the prompt (yaml file)
-    with open(system_prompt_path, "r") as f:
+    with open(system_prompt_path, "r", encoding="utf-8") as f:
         prompt_data = yaml.safe_load(
             f
         )  # list of message objects. This is what we will use.

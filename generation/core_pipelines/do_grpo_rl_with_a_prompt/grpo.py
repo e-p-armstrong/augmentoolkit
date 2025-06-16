@@ -388,7 +388,7 @@ def setup_model(
 def load_jsonl_dataset(path: str) -> Dataset:
     """Load a dataset from a JSONL file."""
     data = []
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         for line in f:
             data.append(json.loads(line))
 
@@ -404,7 +404,7 @@ def load_general_dataset(path: str) -> Dataset:
     if ext == "jsonl":
         return load_jsonl_dataset(path)
     elif ext == "json":
-        with open(path, "r") as f:
+        with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
             # Handle both list and dict formats
             if isinstance(data, dict):

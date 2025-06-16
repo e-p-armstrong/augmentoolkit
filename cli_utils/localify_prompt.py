@@ -48,7 +48,7 @@ def process_yaml_directory(source_dir_path_str: str):
         try:
             dest_file_path.parent.mkdir(parents=True, exist_ok=True)
 
-            with open(source_file_path, "r") as infile:
+            with open(source_file_path, "r", encoding="utf-8") as infile:
                 data = yaml.safe_load(infile)
 
             if not isinstance(data, list):
@@ -63,7 +63,7 @@ def process_yaml_directory(source_dir_path_str: str):
             else:
                 new_data = []
 
-            with open(dest_file_path, "w") as outfile:
+            with open(dest_file_path, "w", encoding='utf-8') as outfile:
                 yaml.dump(
                     new_data,
                     outfile,
@@ -72,7 +72,7 @@ def process_yaml_directory(source_dir_path_str: str):
                     sort_keys=False,
                 )
 
-            with open(dest_file_path, "r") as infile:
+            with open(dest_file_path, "r", encoding="utf-8") as infile:
                 content_after_dump = infile.read()
 
             def format_yaml_strings_to_block(match_obj):
@@ -140,7 +140,7 @@ def process_yaml_directory(source_dir_path_str: str):
             if modified_content and not modified_content.endswith("\n"):
                 modified_content += "\n"
 
-            with open(dest_file_path, "w") as outfile:
+            with open(dest_file_path, "w", encoding='utf-8') as outfile:
                 outfile.write(modified_content)
 
             print(f"  Successfully created and formatted '{relative_path}'.")

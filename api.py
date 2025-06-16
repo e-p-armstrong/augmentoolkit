@@ -72,7 +72,7 @@ SUPER_CONFIG_PATH = PyPath("super_config.yaml")
 PATH_ALIASES = {}
 
 try:
-    with open(SUPER_CONFIG_PATH, "r") as f:
+    with open(SUPER_CONFIG_PATH, "r", encoding="utf-8") as f:
         super_config = yaml.safe_load(f)
     PATH_ALIASES = super_config.get("path_aliases", {})
 except FileNotFoundError:
@@ -281,7 +281,7 @@ def get_available_pipelines():
         # Alternatively: raise HTTPException(status_code=500, detail="Super configuration file not found.")
 
     try:
-        with open(SUPER_CONFIG_PATH, "r") as f:
+        with open(SUPER_CONFIG_PATH, "r", encoding="utf-8") as f:
             super_config = yaml.safe_load(f) or {}  # Handle empty file case
 
         aliases = super_config.get("path_aliases", {})
@@ -339,7 +339,7 @@ def get_available_config_aliases():
         return []  # Graceful empty list if file is missing
 
     try:
-        with open(SUPER_CONFIG_PATH, "r") as f:
+        with open(SUPER_CONFIG_PATH, "r", encoding="utf-8") as f:
             super_config = yaml.safe_load(f) or {}  # Handle empty file case
 
         aliases = super_config.get("path_aliases", {})
@@ -1534,7 +1534,7 @@ async def _save_uploaded_files(
                 )
 
                 try:
-                    with zipfile.ZipFile(file_path, "r") as zip_ref:
+                    with zipfile.ZipFile(file_path, "r", encoding="utf-8") as zip_ref:
                         # Extract into the subdirectory
                         zip_ref.extractall(extraction_path)
                     logger.info(

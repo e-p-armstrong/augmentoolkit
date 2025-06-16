@@ -111,7 +111,7 @@ def create_meta_dataset(
                     # Use the flattened dictionary for template rendering
                     value = flattened_value
 
-                    with open(extra, "r") as f:
+                    with open(extra, "r", encoding="utf-8") as f:
                         prompt = f.read()
                     if extra.endswith(".yaml"):
                         # set prompt to the yaml
@@ -163,7 +163,7 @@ def create_meta_dataset(
     # to a chat_lists directory under the output_dir
     os.makedirs(os.path.join(output_dir, "chat_lists"), exist_ok=True)
     for idx, chat_list in enumerate(chat_lists):
-        with open(os.path.join(output_dir, "chat_lists", f"{idx}.json"), "w") as f:
+        with open(os.path.join(output_dir, "chat_lists", f"{idx}.json"), "w", encoding='utf-8') as f:
             json.dump(chat_list, f, indent=4)
 
 

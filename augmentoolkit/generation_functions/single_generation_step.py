@@ -28,7 +28,7 @@ class SingleGenerationStep(PipelineStep):
         output_path = self.make_output_path(output_dir, input_hash)
 
         if os.path.exists(output_path):
-            with open(output_path, "r") as f:
+            with open(output_path, "r", encoding="utf-8") as f:
                 return json.load(f)
         return None
 
@@ -81,7 +81,7 @@ class SingleGenerationStep(PipelineStep):
         # Use file lock for safe concurrent writes
         # Write to temporary file first then replace for atomic write
         temp_path = output_path + ".tmp"
-        with open(temp_path, "w") as f:
+        with open(temp_path, "w", encoding='utf-8') as f:
             json.dump(obj, f)
         os.replace(temp_path, output_path)
 

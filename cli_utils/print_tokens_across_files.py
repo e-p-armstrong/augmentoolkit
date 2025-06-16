@@ -19,7 +19,7 @@ def process_jsonl(file_path, count_all_turns):
     total_tokens = 0
     file_size = os.path.getsize(file_path)
 
-    with open(file_path, "r") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         with tqdm(
             total=file_size,
             desc=f"Processing {os.path.basename(file_path)}",

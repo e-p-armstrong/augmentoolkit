@@ -384,7 +384,7 @@ async def rag_data_pipeline(
 
         # Save with keys preserved
         # print(f"[RAG Prep] Saving prepared data to {rag_prepared_path}")
-        with open(rag_prepared_path, "w") as f:
+        with open(rag_prepared_path, "w", encoding='utf-8') as f:
             for key, item in rag_prepared_data.items():
                 item["_key"] = key  # Store key in the item
                 f.write(json.dumps(item, ensure_ascii=False) + "\n")
@@ -394,7 +394,7 @@ async def rag_data_pipeline(
     else:
         # print(f"[RAG Prep] Loading existing prepared data from {rag_prepared_path}")
         rag_prepared_data = {}
-        with open(rag_prepared_path, "r") as f:
+        with open(rag_prepared_path, "r", encoding="utf-8") as f:
             for line in f:
                 item = json.loads(line)
                 key = item.pop("_key")  # Retrieve stored key

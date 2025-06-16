@@ -30,7 +30,7 @@ except ImportError:
 def load_dataset_func(input_dict, output_path):
     if os.path.exists(output_path):
         # this dataset exists
-        with open(output_path, "r") as f:
+        with open(output_path, "r", encoding="utf-8") as f:
             try:
                 print(f"Loading file at {output_path}")
                 file_contents = json.load(f)
@@ -102,7 +102,7 @@ def save_dataset(input_dict, output_path):
         if not os.path.exists(output_path):
             # Ensure directory exists before creating file
             os.makedirs(os.path.dirname(output_path), exist_ok=True)
-            with open(output_path, "w") as f:
+            with open(output_path, "w", encoding='utf-8') as f:
                 json.dump({}, f)
 
         # Create a temporary file with a similar name
@@ -110,7 +110,7 @@ def save_dataset(input_dict, output_path):
 
         try:
             # Write to the temporary file first
-            with open(temp_output_path, "w") as f:
+            with open(temp_output_path, "w", encoding='utf-8') as f:
                 json.dump(input_dict, f)
 
             # Replace the original file with the temporary file

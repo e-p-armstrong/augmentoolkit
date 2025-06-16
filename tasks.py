@@ -163,7 +163,7 @@ def run_pipeline_task(
         output_dir_value = None
         resolved_output_dir = None
 
-        with open("super_config.yaml", "r") as f:
+        with open("super_config.yaml", "r", encoding="utf-8") as f:
             super_config = yaml.safe_load(f)
         path_aliases = super_config.get("path_aliases", {})
 

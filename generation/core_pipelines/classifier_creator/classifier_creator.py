@@ -254,7 +254,7 @@ async def classifier_creator(
         path_to_dataset = os.path.join(
             output_dir, "datasets", f"dataset_{classifier_counter}.jsonl"
         )
-        with open(path_to_dataset, "w") as f:
+        with open(path_to_dataset, "w", encoding='utf-8') as f:
             for key, value in text_label_dicts.items():
                 json_obj = {"text": value["text"], "label": value["label"]}
                 f.write(json.dumps(json_obj, ensure_ascii=False) + "\n")

@@ -121,11 +121,11 @@ def save_dict_to_jsonl(
             file_conversations_list.append(conversation_obj)
             all_conversations.append(conversation_obj)
 
-        with open(os.path.join(output_path, os.path.basename(file)), "w") as f:
+        with open(os.path.join(output_path, os.path.basename(file)), "w", encoding='utf-8') as f:
             for obj in file_conversations_list:
                 f.write(json.dumps(obj, ensure_ascii=False) + "\n")
 
-    with open(os.path.join(output_path, "final_total_output.jsonl"), "w") as f:
+    with open(os.path.join(output_path, "final_total_output.jsonl"), "w", encoding='utf-8') as f:
         for obj in all_conversations:
             f.write(json.dumps(obj, ensure_ascii=False) + "\n")
 

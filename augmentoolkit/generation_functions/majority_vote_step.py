@@ -214,7 +214,7 @@ class MajorityVoteStep(
         try:
             # print(f"[DEBUG MajorityVoteStep run] Acquired lock for '{output_path}.lock'. Reading file.")
             try:
-                with open(output_path, "r") as f:
+                with open(output_path, "r", encoding="utf-8") as f:
                     existing_data = json.load(f)
                     existing_variations = existing_data.get(str(key), {}).get(
                         self.result_key, []

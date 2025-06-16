@@ -1520,10 +1520,10 @@ async def factual_datagen_full(  # there will be quite a few args here
             .replace("{context}", dataset_context)
         )  # No addition of the context which we already have. # + ' ' + input_dirs[0]['final_system_prompt_additional_context']
 
-        with open(os.path.join(output_dir, "prompt.txt"), "w") as f:
+        with open(os.path.join(output_dir, "prompt.txt"), "w", encoding='utf-8') as f:
             f.write(system_prompt)  # save prompt
 
-        with open(os.path.join(output_dir, "template.txt"), "w") as f:
+        with open(os.path.join(output_dir, "template.txt"), "w", encoding='utf-8') as f:
             f.write(correction_prompt_template)  # save template
 
         # Find the GGUF model file
@@ -1758,7 +1758,7 @@ async def _run_automated_training(
     public_key_path = os.path.expanduser("~/.ssh/id_ed25519.pub")
     my_public_key = ""
     try:
-        with open(public_key_path, "r") as f:
+        with open(public_key_path, "r", encoding="utf-8") as f:
             my_public_key = f.read().strip()
     except FileNotFoundError:
         print(

@@ -386,7 +386,7 @@ async def meta_datagen_compositionpipeline(
         print(f"Found {len(yaml_files)} YAML files for obfuscation.")
         for yaml_file in yaml_files:
             try:
-                with open(yaml_file, "r") as f:
+                with open(yaml_file, "r", encoding="utf-8") as f:
                     data = yaml.safe_load(f)
                     if (
                         isinstance(data, dict)
@@ -1972,7 +1972,7 @@ async def meta_datagen_compositionpipeline(
                 print(f"\nAttempting to load: {file_path}")
 
                 try:
-                    with open(file_path, "r") as f:
+                    with open(file_path, "r", encoding="utf-8") as f:
                         print(f"File opened successfully, determining format...")
 
                         chats = []
@@ -2172,14 +2172,14 @@ async def meta_datagen_compositionpipeline(
         # Save single-turn chats
         # if all_singleturn_chats:
         #     singleturn_output_path = os.path.join(output_dir, "singleturn_chats.json")
-        #     with open(singleturn_output_path, "w") as f:
+        #     with open(singleturn_output_path, "w", encoding='utf-8') as f:
         #         json.dump(all_singleturn_chats, f)
         #     print(f"Saved {len(all_singleturn_chats)} single-turn chats to {singleturn_output_path}")
 
         # # Save multi-turn chats with segments
         # if all_multiturn_segment_chats:
         #     multiturn_output_path = os.path.join(output_dir, "multiturn_segment_chats.json")
-        #     with open(multiturn_output_path, "w") as f:
+        #     with open(multiturn_output_path, "w", encoding='utf-8') as f:
         #         json.dump(all_multiturn_segment_chats, f)
         #     print(f"Saved {len(all_multiturn_segment_chats)} multi-turn segment chats to {multiturn_output_path}")
 
@@ -2226,7 +2226,7 @@ async def meta_datagen_compositionpipeline(
             singleturn_segments_path = os.path.join(
                 output_dir, "singleturn_segments.json"
             )
-            with open(singleturn_segments_path, "w") as f:
+            with open(singleturn_segments_path, "w", encoding='utf-8') as f:
                 json.dump([s for s in singleturn_segments if s is not None], f)
             print(
                 f"Saved {len([s for s in singleturn_segments if s is not None])} single-turn segments to {singleturn_segments_path}"
@@ -2237,7 +2237,7 @@ async def meta_datagen_compositionpipeline(
             multiturn_segments_path = os.path.join(
                 output_dir, "multiturn_segments.json"
             )
-            with open(multiturn_segments_path, "w") as f:
+            with open(multiturn_segments_path, "w", encoding='utf-8') as f:
                 json.dump([s for s in multiturn_segments if s is not None], f)
             print(
                 f"Saved {len([s for s in multiturn_segments if s is not None])} multi-turn segments to {multiturn_segments_path}"

@@ -202,7 +202,7 @@ class OneToManyStep(
         # print(f"[DEBUG {time.time():.2f}] load_dataset: Attempting to load dataset for '{self.output_file}' from '{output_path}'.") # DEBUG
         if os.path.exists(output_path):
             # Use file lock for reading, although less critical than writing
-            with open(output_path, "r") as f:
+            with open(output_path, "r", encoding="utf-8") as f:
                 try:
                     print(
                         f"Loading existing output file for {self.output_file} at {output_path}"
@@ -295,7 +295,7 @@ class OneToManyStep(
             )
             # print(f"[DEBUG {time.time():.2f}] save_dataset: Writing to temp file: '{temp_output_path}'.") # DEBUG
             try:
-                with open(temp_output_path, "w") as f:
+                with open(temp_output_path, "w", encoding='utf-8') as f:
                     json.dump(
                         output_dict, f, indent=None, ensure_ascii=False
                     )  # Use indent for readability

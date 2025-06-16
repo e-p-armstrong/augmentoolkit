@@ -29,10 +29,10 @@ def chat(  # this is useful for chatting with trained models in the command line
     **kwargs,
 ):
 
-    with open(prompt_path, "r") as f:
+    with open(prompt_path, "r", encoding="utf-8") as f:
         prompt = f.read()
 
-    with open(template_path, "r") as f:
+    with open(template_path, "r", encoding="utf-8") as f:
         template = f.read()
 
     # llama.cpp

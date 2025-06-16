@@ -60,10 +60,10 @@ async def llm_server(
     **kwargs,
 ):
 
-    with open(prompt_path, "r") as f:
+    with open(prompt_path, "r", encoding="utf-8") as f:
         prompt = f.read()
 
-    with open(template_path, "r") as f:
+    with open(template_path, "r", encoding="utf-8") as f:
         template = f.read()
 
     # Get parent directory of gguf model path

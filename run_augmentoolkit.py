@@ -47,7 +47,7 @@ def flatten_config(config, no_flatten_keys=None):
 
 
 try:
-    with open("super_config.yaml", "r") as f:
+    with open("super_config.yaml", "r", encoding="utf-8") as f:
         super_config = yaml.safe_load(f)
     path_aliases = super_config.get(
         "path_aliases", {}
@@ -91,7 +91,7 @@ def run_pipeline(node, config, override_fields={}):
         config_path = (script_dir / resolved_config_path_str).resolve()
         # print(f"DEBUG: Final resolved config path: {config_path}")
         try:
-            with open(config_path, "r") as f:
+            with open(config_path, "r", encoding="utf-8") as f:
                 config = (
                     yaml.safe_load(f) or {}
                 )  # Ensure config is at least an empty dict

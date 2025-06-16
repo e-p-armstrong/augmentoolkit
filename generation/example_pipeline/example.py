@@ -318,7 +318,7 @@ async def example_pipeline(  # NOTE requirement: the pipeline must have the same
             sharegpt_format_items.append(sharegpt_item)
 
     sharegpt_output_path = os.path.join(output_dir, "sharegpt_format.jsonl")
-    with open(sharegpt_output_path, "w") as f:
+    with open(sharegpt_output_path, "w", encoding='utf-8') as f:
         for sharegpt_item in sharegpt_format_items:
             f.write(json.dumps(sharegpt_item) + "\n")
 

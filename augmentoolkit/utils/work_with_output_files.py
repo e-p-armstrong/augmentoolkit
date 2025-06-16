@@ -9,7 +9,7 @@ def iterate_over_items(output_dir, output_file_name, func):
     if not os.path.exists(output_path):
         return {}
 
-    with open(output_path, "r") as f:
+    with open(output_path, "r", encoding="utf-8") as f:
         try:
             data = json.load(f)
         except json.JSONDecodeError:
@@ -20,7 +20,7 @@ def iterate_over_items(output_dir, output_file_name, func):
         func(key, value)
 
     # save data over input file
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding='utf-8') as f:
         json.dump(data, f, indent=4)
 
     return data
@@ -37,7 +37,7 @@ def load_data(output_dir, output_file_name):
     if not os.path.exists(output_path):
         return {}
 
-    with open(output_path, "r") as f:
+    with open(output_path, "r", encoding="utf-8") as f:
         try:
             data = json.load(f)
         except json.JSONDecodeError:
@@ -56,7 +56,7 @@ def save_data(input_dict, output_dir, output_file_name):
     # Load existing data if file exists
     existing_data = {}
     if os.path.exists(output_path):
-        with open(output_path, "r") as f:
+        with open(output_path, "r", encoding="utf-8") as f:
             try:
                 existing_data = json.load(f)
             except json.JSONDecodeError:
@@ -77,7 +77,7 @@ def save_data(input_dict, output_dir, output_file_name):
             existing_data[key] = value
 
     # Write the updated data back to the file
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding='utf-8') as f:
         json.dump(existing_data, f, indent=4)
 
 
