@@ -11,7 +11,7 @@ api:
   large_mode: api
 path:
   default_prompts: ./prompts
-  input_dir: ./inputs/examples/fiction
+  input_dir: ./inputs/examples/stories
   output_dir: ./outputs/rptoolkit_demo_sfw
   prompts: ./prompts
 phases:
