@@ -133,27 +133,6 @@ if ! command -v python3 &> /dev/null; then
     exit 1
 fi
 
-# --- Check/Install uv ---
-echo "Checking for uv..."
-if ! command -v uv &> /dev/null; then
-    echo "'uv' command not found. Attempting to install uv using pip..."
-    # Ensure pip is available (it should be with python3)
-    if ! python3 -m pip --version &> /dev/null; then
-        echo "ERROR: python3 -m pip command failed. Cannot install uv."
-        exit 1
-    fi
-    python3 -m pip install uv
-    if [ $? -ne 0 ]; then
-        echo "ERROR: Failed to install uv using pip. Please install uv manually (e.g., 'pip install uv' or using your system package manager like 'sudo apt install uv') and rerun the script."
-        exit 1
-    fi
-    echo "uv installed successfully."
-else
-    echo "uv found."
-fi
-# --- End Check/Install uv ---
-
-
 # Create virtual environment if it doesn't exist
 if [ ! -d "$VENV_DIR" ]; then
     echo "Creating virtual environment in '$VENV_DIR'..."
@@ -174,6 +153,26 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 echo "Virtual environment activated. Python executable: $(which python)"
+
+# --- Check/Install uv ---
+echo "Checking for uv..."
+if ! command -v uv &> /dev/null; then
+    echo "'uv' command not found. Attempting to install uv using pip..."
+    # Ensure pip is available (it should be with python3)
+    if ! python -m pip --version &> /dev/null; then
+        echo "ERROR: python -m pip command failed. Cannot install uv."
+        exit 1
+    fi
+    python -m pip install uv
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Failed to install uv using pip. Please install uv manually (e.g., 'pip install uv') and rerun the script."
+        exit 1
+    fi
+    echo "uv installed successfully."
+else
+    echo "uv found."
+fi
+# --- End Check/Install uv ---
 
 
 # Install dependencies using uv
