@@ -371,7 +371,7 @@ echo "----------------------------------------"
 echo "4. Checking for npm..."
 if ! command -v npm &> /dev/null; then
     echo "ERROR: npm command not found."
-    echo "Please install Node.js and npm (e.g., via your system package manager like 'sudo apt install nodejs npm') and run this script again."
+    echo "Please install Node.js and npm (e.g., via your system package manager like 'sudo apt install nodejs npm' or better still, install nvm and use that to get node (ask an AI how to get nodejs via nvm)) and run this script again."
     echo "Stopping background services (PIDs $HUEY_PID, $UVICORN_PID)..."
     kill $HUEY_PID $UVICORN_PID
     exit 1
@@ -550,7 +550,7 @@ if ! command -v xdg-open &> /dev/null; then
     echo "Please install xdg-utils (e.g., 'sudo apt install xdg-utils' or 'sudo dnf install xdg-utils') or open http://localhost:5173 manually."
     # Not exiting, just warning
 else
-    echo "xdg-open found. Opening http://localhost:5173 in default browser..."
+    echo "xdg-open found. Opening http://localhost:5173 in default browser... (if this fails, open http://localhost:5173 in a web browser of your choice)"
     xdg-open http://localhost:5173
 fi
 
