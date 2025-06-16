@@ -35,13 +35,8 @@ bash local_linux.sh normal # or you can write "small" or a custom model name to 
 ### Windows (interface)
 > [!NOTE]
 >
-> The interface requires Valkey (or Redis) to be installed and running MANUALLY. [The CLI is easier to get running on windows honestly.](docs/quickstart.md#windows-cli)
+> If you're on windows, your best bet is to use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install). [The CLI is easier to get running on windows honestly.](docs/quickstart.md#windows-cli)
 Running the bat command will give you install instructions. Alternatively, see [`docs/quickstart.md`](./docs/quickstart.md)
-```bash
-git clone https://github.com/e-p-armstrong/augmentoolkit.git
-cd augmentoolkit
-./windows.bat # see above note about valkey/redis
-```
 
 <sub>*Note that datagen can take a while on a lot of hardware however, don't expect fast datagen on an old mac for instance. And for training you will need either a powerful machine of your own, or to rent (latter is done automatically for you if you so choose).</sub>
 

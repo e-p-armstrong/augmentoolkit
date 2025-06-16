@@ -133,27 +133,6 @@ if ! command -v python3 &> /dev/null; then
     exit 1
 fi
 
-# --- Check/Install uv ---
-echo "Checking for uv..."
-if ! command -v uv &> /dev/null; then
-    echo "'uv' command not found. Attempting to install uv using pip..."
-    # Ensure pip is available (it should be with python3)
-    if ! python3 -m pip --version &> /dev/null; then
-        echo "ERROR: python3 -m pip command failed. Cannot install uv."
-        exit 1
-    fi
-    python3 -m pip install uv
-    if [ $? -ne 0 ]; then
-        echo "ERROR: Failed to install uv using pip. Please install uv manually (e.g., 'pip install uv' or using your system package manager like 'sudo apt install uv') and rerun the script."
-        exit 1
-    fi
-    echo "uv installed successfully."
-else
-    echo "uv found."
-fi
-# --- End Check/Install uv ---
-
-
 # Create virtual environment if it doesn't exist
 if [ ! -d "$VENV_DIR" ]; then
     echo "Creating virtual environment in '$VENV_DIR'..."
@@ -174,6 +153,26 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 echo "Virtual environment activated. Python executable: $(which python)"
+
+# --- Check/Install uv ---
+echo "Checking for uv..."
+if ! command -v uv &> /dev/null; then
+    echo "'uv' command not found. Attempting to install uv using pip..."
+    # Ensure pip is available (it should be with python3)
+    if ! python -m pip --version &> /dev/null; then
+        echo "ERROR: python -m pip command failed. Cannot install uv."
+        exit 1
+    fi
+    python -m pip install uv
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Failed to install uv using pip. Please install uv manually (e.g., 'pip install uv') and rerun the script."
+        exit 1
+    fi
+    echo "uv installed successfully."
+else
+    echo "uv found."
+fi
+# --- End Check/Install uv ---
 
 
 # Install dependencies using uv
@@ -294,44 +293,37 @@ else
 fi
 echo "Found $SERVER_CMD."
 
-# Check if systemctl exists
-if ! command -v systemctl &> /dev/null; then
-    echo "WARNING: 'systemctl' command not found. Cannot verify if $SERVICE_NAME service is active."
-    # Check if something is listening on port 6379 as fallback
-    if command -v ss &> /dev/null; then
-        PORT_CHECK_CMD="ss -ltn"
-    else
-        PORT_CHECK_CMD="netstat -ltn"
-    fi
-
-    if $PORT_CHECK_CMD | grep -q ':6379'; then
-        echo "However, something is listening on port 6379. Assuming a compatible Valkey/Redis server is running."
-    else
-        echo "Please ensure the $SERVICE_NAME service is running manually in another window before proceeding."
-        # Add a small pause to let user read the warning
-        sleep 5
-    fi
-else
-    # Check if the service is active
-    if ! systemctl is-active --quiet $SERVICE_NAME; then
-        echo "WARNING: The $SERVICE_NAME service is not active according to systemctl."
-        # Check if something is listening on port 6379 as fallback
-        if command -v ss &> /dev/null; then
-            PORT_CHECK_CMD="ss -ltn"
+# If we didn't just start Valkey server locally, perform service checks
+if [ -z "$VALKEY_PID" ]; then
+    # Check if systemctl exists and is usable
+    if command -v systemctl &> /dev/null && systemctl status &> /dev/null; then
+        # systemctl seems to be working, so let's use it
+        if ! systemctl is-active --quiet $SERVICE_NAME; then
+            echo "WARNING: The $SERVICE_NAME service is not active according to systemctl."
+            # Check if something is listening on port 6379 as fallback
+            if ss -ltn | grep -q ':6379' 2>/dev/null; then
+                echo "However, something is listening on port 6379. Assuming a compatible Valkey/Redis server is running."
+            else
+                echo "ERROR: The $SERVICE_NAME service is not active and nothing is listening on port 6379."
+                echo "Please start the service, e.g., 'sudo systemctl start $SERVICE_NAME' and ensure it's enabled to start on boot, e.g., 'sudo systemctl enable $SERVICE_NAME'."
+                exit 1
+            fi
         else
-            PORT_CHECK_CMD="netstat -ltn"
+            echo "The $SERVICE_NAME service is active."
         fi
-
-        if $PORT_CHECK_CMD | grep -q ':6379'; then
-            echo "However, something is listening on port 6379. Assuming a compatible Valkey/Redis server is running."
+    else
+        # systemctl not available or not working, fall back to simple port check
+        echo "WARNING: 'systemctl' not available/running. Checking for service via port."
+        if ss -ltn | grep -q ':6379' 2>/dev/null; then
+            echo "A service is listening on port 6379. Assuming a compatible Valkey/Redis server is running."
         else
-            echo "ERROR: The $SERVICE_NAME service is not active and nothing is listening on port 6379."
-            echo "Please start the service, e.g., 'sudo systemctl start $SERVICE_NAME' and ensure it's enabled to start on boot, e.g., 'sudo systemctl enable $SERVICE_NAME'."
+            echo "ERROR: No running Valkey/Redis service detected on port 6379, and could not start one automatically as it was expected to be running."
+            echo "Please start valkey-server or redis-server manually in another terminal."
             exit 1
         fi
-    else
-        echo "The $SERVICE_NAME service is active."
     fi
+else
+    echo "Valkey server was started by this script (PID $VALKEY_PID), skipping system service check."
 fi
 # --- End Valkey/Redis Check ---
 
@@ -379,7 +371,7 @@ echo "----------------------------------------"
 echo "4. Checking for npm..."
 if ! command -v npm &> /dev/null; then
     echo "ERROR: npm command not found."
-    echo "Please install Node.js and npm (e.g., via your system package manager like 'sudo apt install nodejs npm') and run this script again."
+    echo "Please install Node.js and npm (e.g., via your system package manager like 'sudo apt install nodejs npm' or better still, install nvm and use that to get node (ask an AI how to get nodejs via nvm)) and run this script again."
     echo "Stopping background services (PIDs $HUEY_PID, $UVICORN_PID)..."
     kill $HUEY_PID $UVICORN_PID
     exit 1
@@ -558,7 +550,7 @@ if ! command -v xdg-open &> /dev/null; then
     echo "Please install xdg-utils (e.g., 'sudo apt install xdg-utils' or 'sudo dnf install xdg-utils') or open http://localhost:5173 manually."
     # Not exiting, just warning
 else
-    echo "xdg-open found. Opening http://localhost:5173 in default browser..."
+    echo "xdg-open found. Opening http://localhost:5173 in default browser... (if this fails, open http://localhost:5173 in a web browser of your choice)"
     xdg-open http://localhost:5173
 fi
 

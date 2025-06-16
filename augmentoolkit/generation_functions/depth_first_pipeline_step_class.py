@@ -99,6 +99,7 @@ class DepthFirstPipelineStep(PipelineStep):
                 if validation_result["result"]:
                     complete = True
                 else:
+                    max_retries -= 1
                     error_message = validation_result["message"]
             except Exception as e:
                 print(e)

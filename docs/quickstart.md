@@ -41,11 +41,7 @@ bash local_linux.sh small
 ```
 
 ### Windows (interface)
-```bash
-git clone https://github.com/e-p-armstrong/augmentoolkit.git
-cd augmentoolkit
-./start_windows.bat
-```
+Use WSL and then run the Linux command in your Linux terminal on Windows.
 
 
 
