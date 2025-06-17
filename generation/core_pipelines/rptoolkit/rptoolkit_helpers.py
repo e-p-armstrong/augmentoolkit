@@ -723,7 +723,7 @@ def parse_story_ratings(story_ratings):
             # Clean asterisks and strip whitespace
             cleaned_value = value.replace("*", "").strip()
             # Validate the rating value
-            if cleaned_value not in ["good", "awful", "incredible"]:
+            if cleaned_value not in ["good", "awful", "incredible", "poor"]:
                 raise ValueError(f"Invalid rating value for {key}: {cleaned_value}")
             # Update the ratings object with the cleaned value
             ratings_obj[key] = cleaned_value
