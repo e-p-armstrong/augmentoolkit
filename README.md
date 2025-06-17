@@ -31,12 +31,14 @@ cd augmentoolkit # Python <= 3.10 < 3.13
 bash local_linux.sh normal # or you can write "small" or a custom model name to serve the quantized version (for more consumer hardware) or a model of your choice, respectively
 ```
 
+> [!IMPORTANT]
+>
+> Please star the repo.
 
 ### Windows (interface)
 > [!NOTE]
 >
 > If you're on windows, your best bet is to use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install). [The CLI is easier to get running on windows honestly.](docs/quickstart.md#windows-cli)
-Running the bat command will give you install instructions. Alternatively, see [`docs/quickstart.md`](./docs/quickstart.md)
 
 <sub>*Note that datagen can take a while on a lot of hardware however, don't expect fast datagen on an old mac for instance. And for training you will need either a powerful machine of your own, or to rent (latter is done automatically for you if you so choose).</sub>
 
