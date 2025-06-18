@@ -5,8 +5,8 @@ This is the primary **composition pipeline** in Augmentoolkit, designed to be th
 Running this single pipeline provides:
 
 1.  **Cleaned Text:** Processes input documents, including cleaning PDFs.
-2.  **Rich Pretraining Data:** Generates varied representations and inferred facts from the cleaned text using the [Representation Variation pipeline](../representation_variation.md).
-3.  **Diverse SFT Data:** Creates factual question-answering datasets using multiple prompt styles (open-ended, negative, hallucination-focused, etc.) via the [Multi-Source Recall pipeline](../multi_source_facts.md), RAG-focused training data via the [RAG Data pipeline](../rag_data.md), and self-correction examples via the [Correction Data pipeline](../corrections.md).
+2.  **Rich Pretraining Data:** Generates varied representations and inferred facts from the cleaned text using the [Representation Variation pipeline](./representation_variation.md).
+3.  **Diverse SFT Data:** Creates factual question-answering datasets using multiple prompt styles (open-ended, negative, hallucination-focused, etc.) via the [Multi-Source Recall pipeline](./multi_source_facts.md), RAG-focused training data via the [RAG Data pipeline](./rag_data.md), and self-correction examples via the [Correction Data pipeline](./corrections.md).
 4.  **Balanced Training Mix:** Combines the generated domain SFT data with specified generic SFT datasets, automatically balancing the token counts.
 5.  **Training Configuration:** Produces Axolotl YAML configuration files for both the continued pretraining and the final supervised fine-tuning steps.
 
@@ -76,34 +76,34 @@ This composition's configuration (`config.yaml`) aggregates settings for the und
 ### Sub-Pipeline Config Sections
 
 **`pdf_cleaning` section:**
-*   Configures the [PDF Cleaning Pipeline (TODO: Link)](../pdf_cleaning.md).
+*   Configures the [PDF Cleaning Pipeline (TODO: Link)](./pdf_cleaning.md).
 *   **Available Options:** `pdf_cleaning_chunk_size`, API details (`small_model`, `large_model`, modes, URLs, keys), `pdf_cleaning_use_stop`, cost estimation args.
 *   **Missing/Hardcoded:** `input_dir`, `output_dir`, `prompts`, `default_prompts`, `concurrency_limit`, `completion_mode`, `use_subset`, `subset_size` are handled by the composition pipeline.
 
 **`representation_variation` section:**
-*   Configures the [Representation Variation Pipeline](../representation_variation.md).
+*   Configures the [Representation Variation Pipeline](./representation_variation.md).
 *   **Available Options:** `representation_variation_chunk_size`, API details, `representation_variation_use_stop`, `dataset_context`, `code_variation_functions`, cost estimation args.
 *   **Missing/Hardcoded:** `input_dir`, `output_dir`, `prompts`, `default_prompts`, `concurrency_limit`, `completion_mode`, `use_subset`, `subset_size`, `variation_generator_count` (set per-input-dir), `include_context_in_dataset` (hardcoded `True`), `make_inferred_facts` (run once with `False`, once with `True`).
 
 **`factual_sft` section:**
-*   Defines *multiple* configurations for running the [Multi-Source Recall Pipeline](../multi_source_facts.md).
+*   Defines *multiple* configurations for running the [Multi-Source Recall Pipeline](./multi_source_facts.md).
 *   Each key (e.g., `openended`, `negative`) represents a separate run with specific settings.
 *   **Available Options (per key):** `prompts`, `default_prompts`, `single_turn`, `skip_question_check`, `skip_answer_relevancy_check`, `skip_answer_accuracy_check`, `skip_repair_qa_tuples`, `multi_source` (should typically be `True`).
 *   **Missing/Hardcoded:** All other arguments (API, paths, system settings) are taken from the `factual_sft_settings` section or the main composition config.
 
 **`factual_sft_settings` section:**
 *   Provides the *shared* settings for all factual SFT runs defined in the `factual_sft` section.
-*   Configures the [Multi-Source Recall Pipeline](../multi_source_facts.md).
+*   Configures the [Multi-Source Recall Pipeline](./multi_source_facts.md).
 *   **Available Options:** `factual_use_stop`, `factual_chunk_size`, `factual_completion_mode`, API details, cost estimation args, `final_assistant_prompts_no_rag`, `items_per_conversation`, `combine_sharegpt_target_pairs`.
 *   **Missing/Hardcoded:** `input_dir`, `output_dir`, `prompts`, `default_prompts`, `concurrency_limit`, `use_subset`, `subset_size`, `final_assistant_prompts_rag`, `rag_failure_percentage` (RAG data generation is handled by the dedicated `rag_data` step).
 
 **`rag_data` section:**
-*   Configures the [RAG Data Pipeline](../rag_data.md).
+*   Configures the [RAG Data Pipeline](./rag_data.md).
 *   **Available Options:** `rag_failure_percentage`, `rag_max_chunks`, formatting (`user_format`, `system_format`, `assistant_format`, `bos`), `final_assistant_prompts`, `num_items_per_group`, API details, cost estimation args, `rag_use_stop`.
 *   **Missing/Hardcoded:** `input_dir`, `output_dir`, `prompts`, `default_prompts`, `concurrency_limit`, `completion_mode`, `use_subset`, `subset_size`, `chunk_size` (uses `factual_chunk_size`), `skip_filter_chunks` (uses default `False`).
 
 **`correction_pipeline` section:**
-*   Configures the [Correction Data Pipeline](../corrections.md).
+*   Configures the [Correction Data Pipeline](./corrections.md).
 *   **Available Options:** `correction_chunk_size`, API details, cost estimation args, `correction_prompt_template`, `correction_use_stop`, `correction_completion_mode`.
 *   **Missing/Hardcoded:** `input_dir`, `output_dir`, `prompts`, `default_prompts`, `concurrency_limit`, `use_subset`, `subset_size`.
 
@@ -152,10 +152,10 @@ This pipeline automates the best-practice workflow for creating highly capable d
 
 *   **Continued Pretraining:** Exposing the model to the domain's core information in varied formats.
 *   **Multi-faceted SFT:** Training the model on:
-    *   Recalling facts from multiple sources ([Multi-Source Recall](../multi_source_facts.md)).
+    *   Recalling facts from multiple sources ([Multi-Source Recall](./multi_source_facts.md)).
     *   Handling diverse question types (open-ended, negative, vague, follow-up).
-    *   Utilizing RAG context ([RAG Data](../rag_data.md)).
-    *   Correcting its own mistakes ([Correction Data](../corrections.md)).
+    *   Utilizing RAG context ([RAG Data](./rag_data.md)).
+    *   Correcting its own mistakes ([Correction Data](./corrections.md)).
 *   **Generic Data Balancing:** Ensuring the model retains general capabilities by mixing in processed generic data.
 
 By running this single composition, users can go from raw documents to ready-to-train Axolotl configurations, significantly simplifying the process of building specialized LLMs.
