@@ -4,7 +4,7 @@ The Interface is meant to be a powerful and easy way to use Augmentoolkit. It is
 
 It's also had some effort put into making it visually charming and fun to use.
 
-To run the interface, you want to run one of the OS-specific start scripts, so that all the services are started. `macos.sh`, `linux.sh`, or `windows.bat`. You don't want to run `run_augmentoolkit.py` like you do with the CLI.
+To run the interface, you want to run one of the OS-specific start scripts, so that all the services are started. `macos.sh`, or `linux.sh` (or their local equivalents, `local_macos.sh` and `local_linux.sh`). You don't want to run `run_augmentoolkit.py` like you do with the CLI.
 
 ## Flows
 

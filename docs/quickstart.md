@@ -116,17 +116,7 @@ If you prefer to run each component manually instead of using the start scripts,
 *   Redis (or Valkey, preferably): Huey uses Redis as a message broker. You need to install and run it separately.
     *   **macOS (using Homebrew):** `brew install valkey`, then ensure the service is running (`brew services start valkey`).
     *   **Linux (Debian/Ubuntu):** Install via package manager (`sudo apt update && sudo apt install valkey-server` or `redis-server`) and ensure the service is running (`sudo systemctl start valkey-server` or `redis-server`). The `linux.sh` script checks for this.
-    *   **Windows:** Requires manual setup. Valkey/Redis must be installed and running.
-        1.  **Check if running:** Look for `valkey-server.exe` or `redis-server.exe` in Task Manager, or check `services.msc`.
-        2.  **If not running, install:**
-            *   **Option 1 (Recommended): Use a Package Manager.** Open an **Administrator** PowerShell/CMD prompt.
-                *   If you have **Chocolatey** (find out with `choco --version`): Run `choco install valkey`. Then start the service (via `services.msc` or `valkey-server --service-start`).
-                *   If you have **Scoop** (`scoop --version`): Run `scoop install valkey`. Then start Valkey (e.g., run `valkey-server` in a separate terminal).
-                *   If you have **Winget** (`winget --version`): Run `winget install Redis.Redis` (Valkey might not be available yet). Then start the Redis service (via `services.msc`).
-            *   **Option 2: No Package Manager?**
-                *   Consider installing one first (e.g., Chocolatey: [https://chocolatey.org/install](https://chocolatey.org/install)) and then use Option 1.
-                *   Alternatively, download the `.msi` or binaries directly from [Valkey.io](https://valkey.io/) or [Redis.io](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-windows/) and follow their installation instructions.
-        3.  **Verify:** Ensure the service is running before starting Augmentoolkit components. From this position, the `windows.bat` start script should work.
+    *   **Windows:** Set up WSL (Windows Subsystem for Linux) and then clone Augmentoolkit there and run one of the Linux start scripts. **You'll need to manually open up the localhost url in your browser of choice after it runs**
 
 **Steps:**
 

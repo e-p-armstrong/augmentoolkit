@@ -2,7 +2,7 @@ pipeline: rptoolkit-pipeline
 
 api:
   small_api_key: !!PLACEHOLDER!!
-  large_api_key: !!PLACEHOLDER!! 
+  large_api_key: !!PLACEHOLDER!!
   small_base_url: https://api.deepinfra.com/v1/openai
   large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
   small_model: deepseek-ai/DeepSeek-V3-0324
@@ -30,7 +30,7 @@ system:
   use_stop: True
   subset_size: 3
   use_min_p: True
-  use_subset: False
+  use_subset: True
   chunk_size: 2000
   to_include_features: ["Initiating Event", "Character Traits", "Feelings", "Physical Traits", "Physical Props", "Overall Setting", "Settings", "Genre Tags", ] # NOTE must include genre tags or else will break
 archetypes:
@@ -42,7 +42,7 @@ cost_estimation:
   cost_per_million_large_input: 0.30
   cost_per_million_large_output: 0.88
 meta_datagen:
-  do_meta_datagen: False
+  do_meta_datagen: True
   meta_datagen_keys:
     - emotion_details
     - features_details

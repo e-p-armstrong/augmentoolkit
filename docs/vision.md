@@ -108,13 +108,6 @@ cd augmentoolkit
 bash start_linux.sh
 ```
 
-#### Windows (interface)
-```
-git clone https://github.com/e-p-armstrong/augmentoolkit.git
-cd augmentoolkit
-./start_windows.bat
-```
-
 ---
 
 \* Despite the use of em dashes (–) here, I actually did write this myself. I've been doing this before AI started using them all over the place — long before. It's just shift+alt+dash on the mac keyboard, you know? "—" is way better looking <!--sexier--> than "()"
