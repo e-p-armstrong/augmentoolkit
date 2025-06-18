@@ -31,6 +31,8 @@ cd augmentoolkit # Python == 3.11
 bash local_linux.sh normal # or you can write "small" or a custom model name to serve the quantized version (for more consumer hardware) or a model of your choice, respectively. See the quickstart page linked just a bit farther down for a full reference here.
 ```
 
+If you have multiple GPUs, run `local_linux.sh` with the `--tensor-parallelism N` argument. N == number of GPUs you have (even). So: 1, 2, 4, 8... etc.
+
 > [!IMPORTANT]
 >
 > Please star the repo.

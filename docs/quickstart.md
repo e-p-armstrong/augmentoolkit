@@ -53,6 +53,10 @@ bash local_linux.sh small # runs quantized model
 # bash local_linux.sh --help # get help. But you're already here, so you don't need that!
 ```
 
+> [!IMPORTANT]
+>
+> If you have multiple GPUs, run `local_linux.sh` with the `--tensor-parallelism N` argument. N == number of GPUs you have (even). So: 1, 2, 4, 8... etc.
+
 Mac also has local datagen, but much slower and without the parameter choice of Linux:
 ```bash
 git clone https://github.com/e-p-armstrong/augmentoolkit.git
