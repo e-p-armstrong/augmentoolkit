@@ -66,6 +66,10 @@ bash local_macos.sh
 
 ## The CLI:
 
+> [!NOTE]
+>
+> To run **local models** with the CLI, all you have to do is, in another window, run some kind of **local LLM server** and then you can point the **base_url** in your dataset generation config to that local server. Using the [custom 7b dataset generation model](https://huggingface.co/Heralax/Augmentoolkit-DataSpecialist-v0.1) or its [quantized version](https://huggingface.co/Heralax/Augmentoolkit-DataSpecialist-gptqmodel-4bit) is recommended. **vLLM or Aphrodite is recommended.** Ollama will be comparatively very slow.
+
 ### MacOS (CLI)
 ```bash
 # get project
