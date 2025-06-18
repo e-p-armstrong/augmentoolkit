@@ -28,7 +28,7 @@ bash linux.sh # NOTE: will build Valkey from source if a Redis/Valkey server is 
 ```bash
 git clone https://github.com/e-p-armstrong/augmentoolkit.git
 cd augmentoolkit # Python == 3.11
-bash local_linux.sh normal # or you can write "small" or a custom model name to serve the quantized version (for more consumer hardware) or a model of your choice, respectively
+bash local_linux.sh normal # or you can write "small" or a custom model name to serve the quantized version (for more consumer hardware) or a model of your choice, respectively. See the quickstart page linked just a bit farther down for a full reference here.
 ```
 
 > [!IMPORTANT]
