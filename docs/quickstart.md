@@ -2,6 +2,8 @@
 
 This isn't quite as "quick" as the simple start scripts shown at the start, but it's still pretty fast.
 
+**Local inference has separate start scripts that set up the LLM for datagen locally for you. Do not use the commands immediately below if you want to do things locally.**
+
 Here are those scripts again for reference, because they are the recommended way to start:
 
 ### MacOS (interface)
@@ -29,21 +31,34 @@ cd augmentoolkit
 bash linux.sh
 ```
 
-Linux offers fast and effective local dataset generation using vLLM. You can pick what model you want to use. **On systems with less VRAM that cannot run the FP16 7b datagen model, you should give the argument "small" to the script
+### Windows (interface)
+Use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and then run the Linux command in your Linux terminal on Windows. Or use the CLI.
+
+### Local Datagen
+
+Linux offers fast and effective local dataset generation using vLLM. You can pick what model you want to use. 
+
+> [!NOTE]
+> 
+> **On systems with less VRAM that cannot run the FP16 7b datagen model, you should give the argument "small" to the script. You will also have to change the model name to the quantized model (`Heralax/Augmentoolkit-DataSpecialist-gptqmodel-4bit`) in your config.**
+
+See the comments in this runnable thing for how the arguments to `local_linux.sh` work.
 ```bash
 git clone https://github.com/e-p-armstrong/augmentoolkit.git
 cd augmentoolkit
-bash local_linux.sh small
+bash local_linux.sh small # runs quantized model
 # bash local_linux.sh # defaults to "normal"
-# bash local_linux.sh normal
+# bash local_linux.sh normal # runs FP16 model (fastest and highest quality but requires more powerful computer)
 # bash local_linux.sh deepseek-ai/DeepSeek-R1 # or you can pass in any model name you want so long as it is on huggingface or is available locally and will work with vLLM
 # bash local_linux.sh --help # get help. But you're already here, so you don't need that!
 ```
 
-### Windows (interface)
-Use WSL and then run the Linux command in your Linux terminal on Windows.
-
-
+Mac also has local datagen, but much slower and without the parameter choice of Linux:
+```bash
+git clone https://github.com/e-p-armstrong/augmentoolkit.git
+cd augmentoolkit
+bash local_macos.sh
+```
 
 ## The CLI:
 
