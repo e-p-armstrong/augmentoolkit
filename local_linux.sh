@@ -5,28 +5,62 @@
 
 # Parse command line arguments
 MODEL_TYPE="normal"
-if [ $# -gt 0 ]; then
-    MODEL_TYPE="$1"
-fi
+TENSOR_PARALLELISM=1
 
-# Display usage if help is requested
-if [ "$MODEL_TYPE" = "-h" ] || [ "$MODEL_TYPE" = "--help" ]; then
-    echo "Usage: $0 [MODEL_TYPE]"
-    echo ""
-    echo "MODEL_TYPE options:"
-    echo "  normal                   - Use default model (Heralax/Augmentoolkit-DataSpecialist-v0.1)"
-    echo "  small                    - Use quantized model (Heralax/Augmentoolkit-DataSpecialist-gptqmodel-4bit)"
-    echo "  path/to/custom/model     - Use custom model path"
-    echo ""
-    echo "Examples:"
-    echo "  $0                       # Use normal model (default)"
-    echo "  $0 small                 # Use quantized model"
-    echo "  $0 deepseek-ai/DeepSeek-R1  # Use custom model"
-    echo ""
-    exit 0
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --tensor-parallelism)
+            TENSOR_PARALLELISM="$2"
+            shift 2
+            ;;
+        -h|--help)
+            echo "Usage: $0 [MODEL_TYPE] [OPTIONS]"
+            echo ""
+            echo "MODEL_TYPE options:"
+            echo "  normal                   - Use default model (Heralax/Augmentoolkit-DataSpecialist-v0.1)"
+            echo "  small                    - Use quantized model (Heralax/Augmentoolkit-DataSpecialist-gptqmodel-4bit)"
+            echo "  path/to/custom/model     - Use custom model path"
+            echo ""
+            echo "OPTIONS:"
+            echo "  --tensor-parallelism INT - Number of tensor parallel processes for vLLM (default: 1)"
+            echo ""
+            echo "Examples:"
+            echo "  $0                                    # Use normal model (default)"
+            echo "  $0 small                              # Use quantized model"
+            echo "  $0 deepseek-ai/DeepSeek-R1            # Use custom model"
+            echo "  $0 normal --tensor-parallelism 2      # Use normal model with 2 tensor parallel processes"
+            echo "  $0 --tensor-parallelism 4             # Use default model with 4 tensor parallel processes"
+            echo ""
+            exit 0
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information."
+            exit 1
+            ;;
+        *)
+            # This is the MODEL_TYPE (positional argument)
+            if [ "$MODEL_TYPE" = "normal" ]; then
+                MODEL_TYPE="$1"
+            else
+                echo "Error: Multiple model types specified"
+                echo "Use --help for usage information."
+                exit 1
+            fi
+            shift
+            ;;
+    esac
+done
+
+# Validate tensor parallelism value
+if ! [[ "$TENSOR_PARALLELISM" =~ ^[0-9]+$ ]] || [ "$TENSOR_PARALLELISM" -lt 1 ]; then
+    echo "Error: --tensor-parallelism must be a positive integer (got: $TENSOR_PARALLELISM)"
+    exit 1
 fi
 
 echo "Starting Augmentoolkit services with model type: $MODEL_TYPE"
+echo "Tensor parallelism: $TENSOR_PARALLELISM"
 echo "(Use '$0 --help' to see available model options)"
 
 # --- Get script directory and change to it ---
@@ -402,7 +436,7 @@ else
 fi
 
 # Start vllm server with output redirection
-vllm serve "$MODEL_NAME" --port 8082 --max-model-len 20000 > "$LLAMA_SERVER_LOG_FILE" 2>&1 &
+vllm serve "$MODEL_NAME" --port 8082 --max-model-len 20000 --tensor-parallel-size "$TENSOR_PARALLELISM" > "$LLAMA_SERVER_LOG_FILE" 2>&1 &
 LLAMA_SERVER_PID=$!
 sleep 5 # Give it a moment to start/fail
 
