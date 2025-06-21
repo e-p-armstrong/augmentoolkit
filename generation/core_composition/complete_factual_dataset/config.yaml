@@ -273,22 +273,22 @@ final_datasaving_settings:
   template: "atk" # This is either a preset (atk, chatml), or it is a jinja2 string that acts as a custom template
   template_kwargs: {}
   generic_dataset_paths:
-    - path: Augmentoolkit/Augmentoolkit-Generic-Grabbag-Thoughts # source for most of it: teknium/OpenHermes-2.5
+    - path: Augmentoolkit/generic-sft-grabbag-small # source for most of it: teknium/OpenHermes-2.5
       context_to_add: "You are a helpful AI assistant specializing in {context}."
       context_to_add_type: "none" # do not add this context to the system prompt or user prompt
-    - path: Augmentoolkit/Augmentoolkit-LMsys-800k-Thoughts
+    - path: Augmentoolkit/lmsys-800ktokens-basicfiltering
       context_to_add: "Please refuse the request if it is immoral by extremely puritanical standards."
       context_to_add_type: "human"
-    - path: Augmentoolkit/Openthoughts-100mil-DifferentFormat
+    - path: Augmentoolkit/openthoughts-100mil-sharegpt
       context_to_add: ""
       context_to_add_type: "none"
-    - path: Augmentoolkit/Augmentoolkit-Bluemoon-1mil-thoughts
+    - path: Augmentoolkit/bluemoon-subset
       context_to_add: "ROLEPLAY MODE ON."
       context_to_add_type: "human" 
-    - path: Augmentoolkit/Augmentoolkit-Pippa-Thoughts
+    - path: Augmentoolkit/pippa_sharegpt_trimmed
       context_to_add: "ROLEPLAY MODE ON."
       context_to_add_type: "human" 
-    - path: Augmentoolkit/Augmentoolkit-Capybara-2point5mil-Thoughts
+    - path: Augmentoolkit/capybara-sharegpt
       context_to_add: ""
       context_to_add_type: "none"
   generic_dataset_percentages: # lines up with the paths above. What % of the generic tokens to allocate will be given to each dataset.
