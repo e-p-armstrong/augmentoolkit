@@ -1,5 +1,6 @@
 import random
 import traceback
+import asyncio
 from augmentoolkit.generation_functions.depth_first_pipeline_step_class import (
     DepthFirstPipelineStep,
     create_depth_first_executor,
@@ -35,6 +36,9 @@ from generation.core_pipelines.rptoolkit.rptoolkit_helpers import (
     generate_emotion_pipeline_step,
     rate_story_step,
     create_archetype_step,
+    manage_character_consistency_from_file,
+    validate_emotion_key_contained,
+    stringify_emotion_list,
 )
 from tqdm import tqdm
 from augmentoolkit.utils.observers import *
@@ -66,12 +70,16 @@ async def generate_data(
     use_min_p,
     large_mode,
     input_dict,
+    bible_path,
+    bible_lock,
     include_details=False,
     generate_archetype=False,
     archetypes=[""],
     extract_features_pipeline_step=None,
     output_path="",
-):  # This is a PRIME example of a node. This'll let us test the node and composition plan for this whole thing.
+):
+    final_result = None   
+    # This is a PRIME example of a node. This'll let us test the node and composition plan for this whole thing.
     # NOTE Generate emotions, or pick
     # print("Started datagen")
     # print("DEBUG: INCLUDE DETAILS")
@@ -89,11 +97,9 @@ async def generate_data(
                 use_stop=use_stop,
                 include_details=include_details,
             )
-            if emotion_data:
-                emotion_data["emotion"] = emotion_data["emotion"].split("\n")[0]
             if not emotion_data:
                 print(f"Emotion {key} failed checks.")
-                return None, None, None
+                return None
         else:
             constrained_emotion_step = create_generate_constrained_emotion_step(
                 emotions=emotions
@@ -139,6 +145,9 @@ async def generate_data(
             use_stop=use_stop,
             include_details=include_details,
         )
+        if not features_data:
+            print(f"[{key}] Features step failed. Skipping.")
+            return
 
         scene_data = await generate_scene_card.run(
             input_data=features_data,
@@ -151,11 +160,20 @@ async def generate_data(
             use_stop=use_stop,
             include_details=include_details,
         )
-        charname = extract_charname(scene_data["scene_card"])
-        print("DEBUG: CHARNAME")
-        print(charname)
+        if not scene_data:
+            print(f"[{key}] Scene card step failed. Skipping.")
+            return
+
+        consistent_data = None
+        async with bible_lock:
+            consistent_data = manage_character_consistency_from_file(scene_data, bible_path)
+
+        if consistent_data is None:
+            print(f"[{key}] Character consistency management failed. Skipping.")
+            return
 
         if phase_index == 0 and work_in_phases:
+            final_result = consistent_data
             return
 
         generate_story_pipeline_step = create_generate_story_pipeline_step(
@@ -165,7 +183,7 @@ async def generate_data(
         )
 
         outs = await generate_story_pipeline_step.run(
-            input_data=scene_data,
+            input_data=consistent_data,
             engine_wrapper=engine_wrapper_large,
             input_dict=input_dict,
             key=key,
@@ -175,8 +193,12 @@ async def generate_data(
             use_stop=use_stop,
             include_details=include_details,
         )
+        if not outs:
+            print(f"[{key}] Story generation step failed. Skipping.")
+            return
 
         if phase_index == 1 and work_in_phases:
+            final_result = outs
             return
 
         out_story_ratings = await rate_story_step.run(
@@ -190,17 +212,33 @@ async def generate_data(
             use_stop=use_stop,
             include_details=include_details,
         )
-        # data["story_ratings"] = out_story_ratings
+        if out_story_ratings is None:
+            print(f"[{key}] Rating step failed. Skipping.")
+            return
+
         out_story_ratings["id"] = key
+        charname = extract_charname(out_story_ratings.get('scene_card', ''))
+        if not charname:
+            print(f"[{key}] Could not extract charname from final object. Skipping.")
+            return
+            
         out_story_ratings["charname"] = charname
-        # print("DEBUG--OUT STORY RATINGS")
-        # print(out_story_ratings)
+        
+        final_result = out_story_ratings
+
     except Exception as e:
-        print(f"\n\n\nTHIS CHUNK STORYGEN FAILED -- EXCEPTION ENCOUNTERED: {e}")
-        print("Cutting losses and moving on to the next chunk.")
+        print(f"\n\n\n[{key}] THIS CHUNK STORYGEN FAILED -- UNHANDLED EXCEPTION: {e}")
         traceback.print_exc()
+        final_result = None
 
-
+    finally:
+        if final_result:
+            charname_log = final_result.get('charname', 'Unknown')
+            print(f"[{key}] SUCCESS: Returning data object for charname '{charname_log}'.")
+        else:
+            print(f"[{key}] FAILURE: Returning None.")
+        
+        return final_result
 async def rptoolkit_inner_function(
     paragraphs_processed,
     engine_wrapper: EngineWrapper,
@@ -287,7 +325,7 @@ async def rptoolkit_inner_function(
 # USE_STOP = parse_bool(obj_conf["SYSTEM"]["STOP"])
 # EMOTIONS = parse_string_list.parse_string_list(obj_conf["SYSTEM"]["EMOTIONS"])
 # INCLUDE_CHUNK_IN_PROMPT = parse_bool(obj_conf["SYSTEM"]["INCLUDE_CHUNK_IN_PROMPT"])
-# USE_MIN_P = parse_bool(obj_conf["SYSTEM"]["USE_MIN_P"])
+# USE_MIN_P = parse_bool(obj_conf["SYSTEM"]["USE_MIN_P"])  
 
 
 async def rptoolkit_pipeline(
@@ -489,6 +527,9 @@ async def rptoolkit_pipeline(
     else:
         print("No paragraphs found.")
         sys.exit(1)
+        
+    bible_path = os.path.join(output_dir, "character_bible.json")
+    bible_lock = asyncio.Lock()
 
     print(
         "\n\n\n================== RPToolkit: Running the pipeline ==================\n\n\n"
@@ -539,7 +580,9 @@ async def rptoolkit_pipeline(
         extract_features_pipeline_step=extract_features_pipeline_step,
         total_items=total_items,
         task_id=task_id,
-    )
+        bible_path=bible_path,
+        bible_lock=bible_lock,
+        )
 
     # turn the dict into a list so that we can do things with it that are list operations
     story_data = [
@@ -566,7 +609,7 @@ async def rptoolkit_pipeline(
         progress=1.0,
         message="Saving final dataset to files based on grading",
     )
-
+    
     if (
         phase_index == 2 and work_in_phases
     ) or not work_in_phases:  # TODO fix final saving
