@@ -753,7 +753,7 @@ def get_base_name(full_name):
         return ""
         
     # List of prefixes to remove from the beginning of the name
-    prefix_titles = ["Queen", "King", "Princess", "Prince", "General", "Lord", "Lady", "Captain", "Commander", "Warden", "professor", "Elder", "Magistrate", "Chancellor", "Archivist", "Overseer", "Scholar", "Vizier", "Dr.", "Master", "Regent", "Councillor", "Heir", "Imperator", "Empress", "Principal"]
+    prefix_titles = ["Queen", "King", "Princess", "Prince", "General", "Lord", "Lady", "Captain", "Commander", "Warden", "professor", "Elder", "Magistrate", "Chancellor", "Archivist", "Overseer", "Scholar", "Vizier", "Dr.", "Master", "Regent", "Councillor", "Heir", "Imperator", "Empress", "Principal"] # TODO expand beyond fantasy
     
     normalized_name = full_name.strip()
 
