@@ -131,16 +131,239 @@ emotion_length_validation = validate_length_callback(600)
 emotion_repetition_callback = validate_repetition_callback(16, 3, 400)
 
 
+
+def load_character_bible(bible_path="character_bible.json"):
+    """Loads the character bible (name -> data) from a file."""
+    if not os.path.exists(bible_path):
+        return {}
+    with open(bible_path, "r", encoding="utf-8") as f:
+        try:
+            # Handle empty file case
+            content = f.read()
+            if not content:
+                return {}
+            return json.loads(content)
+        except json.JSONDecodeError:
+            print(f"Warning: Could not decode JSON from {bible_path}. Returning empty bible.")
+            return {}
+
+def save_character_bible(bible_dict, bible_path="character_bible.json"):
+    """Saves the character bible to a file using a robust, atomic write operation."""
+    temp_path = f"{bible_path}.tmp"
+    try:
+        # Ensure the directory exists.
+        # This prevents errors if the output directory doesn't exist yet.
+        parent_dir = os.path.dirname(bible_path)
+        if parent_dir:
+            os.makedirs(parent_dir, exist_ok=True)
+            
+        # 1. Write to a temporary file first.
+        with open(temp_path, "w", encoding="utf-8") as f:
+            json.dump(bible_dict, f, indent=4)
+            
+        # 2. Atomically replace the original file with the temporary one.
+        # This is much safer than writing directly to the original file.
+        os.replace(temp_path, bible_path)
+        
+    except Exception as e:
+        print(f"FATAL: Error saving character bible to {bible_path}: {e}")
+        # If something went wrong, try to clean up the temporary file.
+        if os.path.exists(temp_path):
+            try:
+                os.remove(temp_path)
+            except OSError as remove_error:
+                print(f"Error removing temporary bible file {temp_path}: {remove_error}")
+        # Re-raise the exception so the pipeline is aware of the failure.
+        raise
+
+def manage_character_consistency_from_file(data_object, bible_path):
+    """
+    Manages character consistency by normalizing names to a "base name" for lookups,
+    ensuring that 'Queen Scarlet' and 'Scarlet' are treated as the same entity.
+    This function now uses the dedicated load/save helpers.
+    """
+    try:
+        current_scene_card_text = data_object.get('scene_card')
+        if not current_scene_card_text:
+            raise ValueError("Input data object is missing 'scene_card'.")
+
+        full_charname = extract_charname(current_scene_card_text)
+        if not full_charname:
+            print("Consistency Error: Could not extract a valid full character name. Skipping.")
+            return None
+
+        # Get the normalized base name to use as the key for the bible.
+        base_charname = get_base_name(full_charname)
+
+        # Load the bible using the dedicated helper function. This will correctly
+        # handle missing or empty/corrupt files.
+        character_bible = load_character_bible(bible_path)
+
+        # Perform the consistency check using the normalized BASE name
+        if base_charname in character_bible:
+            print(f"CONSISTENCY HIT: Found base name '{base_charname}' for full name '{full_charname}'.")
+            
+            canonical_card_dict = character_bible[base_charname]
+            new_card_dict = parse_scene_card_to_dict(current_scene_card_text)
+            
+            fields_to_keep = [
+                "Name", "Age", "Occupation/Role", "Personality", 
+                "Appearance and Traits", "Backstory", "Likes", "Dislikes"
+            ]
+            
+            # Overwrite fields with the canonical data. This ensures if the bible has
+            # "Queen Scarlet" and the new card just says "Scarlet", the final card
+            # will correctly use "Queen Scarlet".
+            for field in fields_to_keep:
+                if field in canonical_card_dict:
+                    new_card_dict[field] = canonical_card_dict[field]
+
+            reconstructed_card_text = reconstruct_scene_card_from_dict(new_card_dict, current_scene_card_text)
+            data_object['scene_card'] = reconstructed_card_text
+
+        else:
+            print(f"NEW CHARACTER: Adding base name '{base_charname}' (from full name '{full_charname}') to bible.")
+            new_card_dict = parse_scene_card_to_dict(current_scene_card_text)
+            # Use the BASE name as the key, but store the full data dictionary.
+            character_bible[base_charname] = new_card_dict
+
+        # Save the updated bible back to disk using the dedicated helper.
+        save_character_bible(character_bible, bible_path)
+            
+        return data_object
+
+    except Exception as e:
+        print(f"\n--- UNHANDLED EXCEPTION IN manage_character_consistency_from_file ---")
+        print(f"Error: {e}")
+        traceback.print_exc()
+        return None
+        
+def parse_scene_card_to_dict(scene_card_text):
+    """
+    Parses the raw text of a scene card into a structured dictionary.
+    This version is much stricter and will not parse a {user} block as a main character.
+    """
+    if not scene_card_text:
+        return {}
+
+    # Find the start of the {user} block by looking for "Name: {user}"
+    user_block_start_index = scene_card_text.find("Name: {user}")
+
+    if user_block_start_index != -1:
+        main_content = scene_card_text[:user_block_start_index].strip()
+        user_info_raw = scene_card_text[user_block_start_index:].strip()
+    else:
+        # If we can't find the {user} block, check if the whole block is just a user.
+        # This prevents a user-only card from being parsed as a main character.
+        if re.search(r'Name:\s*{user}', scene_card_text, re.IGNORECASE):
+             print("Warning: Card contains ONLY a {user} block. Treating as empty main character.")
+             main_content = ""
+             user_info_raw = scene_card_text.strip()
+        else:
+             print("Warning: Could not find 'Name: {user}' block. Assuming entire card is main character.")
+             main_content = scene_card_text.strip()
+             user_info_raw = ""
+
+    canonical_headings = [
+        "Scene", "Name", "Age", "Occupation/Role", "Personality", 
+        "Appearance and Traits", "Backstory", "Likes", "Dislikes"
+    ]
+    
+    card_dict = {}
+    lines = main_content.split('\n')
+    current_heading = None
+    current_content = []
+
+    for line in lines:
+        stripped_line = line.strip()
+        
+        found_heading = None
+        for heading in canonical_headings:
+            if re.match(rf'^(character\s+)?{re.escape(heading)}\s*:', stripped_line, re.IGNORECASE):
+                found_heading = heading
+                break
+        
+        if found_heading:
+            if current_heading and current_content:
+                card_dict[current_heading] = '\n'.join(current_content).strip()
+            
+            current_heading = found_heading
+            after_colon = re.split(r':', stripped_line, 1)[-1].strip()
+            current_content = [after_colon] if after_colon else []
+        elif current_heading:
+            current_content.append(stripped_line)
+
+    if current_heading and current_content:
+        card_dict[current_heading] = '\n'.join(current_content).strip()
+
+    if 'Personality' in card_dict:
+        personality_text = card_dict.get('Personality', '')
+        card_dict['Personality'] = [line.strip('* ').strip() for line in personality_text.split('\n') if line.strip()]
+
+    # card_dict["{user}_info"] = user_info_raw
+
+    # FINAL SAFETY CHECK: If the parsed name is {user}, invalidate the card.
+    if card_dict.get("Name", "").strip() == "{user}":
+        # Return an empty dictionary to signify a parse failure for the main character.
+        return {} 
+
+    return card_dict
+
+
+def reconstruct_scene_card_from_dict(card_dict, original_scene_card_text):
+    """
+    Reconstructs the raw scene card text from a structured dictionary,
+    re-attaching the original {user} info block.
+    """
+    # Define a consistent order for the output
+    order = [
+        "Scene", "Name", "Age", "Occupation/Role", "Personality", 
+        "Appearance and Traits", "Backstory", "Likes", "Dislikes"
+    ]
+    
+    text_parts = []
+    for key in order:
+        if key in card_dict:
+            content = card_dict[key]
+            text_parts.append(f"{key}:")
+            if isinstance(content, list):
+                for item in content:
+                    text_parts.append(f"* {item}")
+            else:
+                text_parts.append(content)
+            text_parts.append("")
+
+    main_content = "\n".join(text_parts)
+
+    # Extract the original {user} info from the original card text
+    user_info = ""
+    user_block_start_index = original_scene_card_text.find("Name: {user}")
+    if user_block_start_index != -1:
+        user_info = original_scene_card_text[user_block_start_index:].strip()
+    
+    # Reconstruct the full text, combining the canonical main character
+    # with the newly generated {user} block and scene intro.
+    return f"{main_content.strip()}\n\n{user_info}\n\n-- END CHARACTER INFO --"
+
 def validate_emotion_format(emotion_output, input_data):
     """
-    Combines length validation, repetition validation, and format checking for emotions.
+    Combines length and repetition validation for emotions.
+    The strict format check (all-caps) has been removed.
 
     Args:
         emotion_output (str): The emotion text to validate
+        input_data (dict): The input data for context (if needed by callbacks)
 
     Returns:
-        tuple: (bool, str) - (is_valid, reason_if_invalid)
+        dict: A dictionary containing the validation result.
     """
+    # Check for empty or whitespace-only strings, which is a common failure mode.
+    if not emotion_output or not emotion_output.strip():
+        return {
+            "result": False,
+            "message": "Validation failed: Emotion output is empty."
+        }
+
     # Check length
     if not emotion_length_validation(emotion_output, input_data):
         return {
@@ -156,21 +379,8 @@ def validate_emotion_format(emotion_output, input_data):
             "message": f"Excessive repetition found: '{substr}' repeated {count} times",
         }
 
-    # Check format (all caps before colon)
-    colon_pos = emotion_output.find(":")
-    if colon_pos == -1:
-        if any(c.islower() for c in emotion_output):
-            return {
-                "result": False,
-                "message": "Emotion format incorrect: contains lowercase characters",
-            }
-    else:
-        before_colon = emotion_output[:colon_pos]
-        if any(c.islower() for c in before_colon):
-            return {
-                "result": False,
-                "message": "Emotion format incorrect: contains lowercase characters before colon",
-            }
+    # The strict format check (all caps before colon) was removed as it was too strict for many models.
+    # The output processor will handle any necessary formatting.
 
     return {"result": True, "message": "success"}
 
@@ -189,11 +399,23 @@ def check_start_format(s):
 
 
 def emotion_output_processor(emotion_output):
-    # check_1 = emotion_length_validation(emotion_output)
-    # check_2 = emotion_repetition_callback(emotion_output)
-    # check_3 = check_start_format(emotion_output)
-    # if all([check_1, check_2, check_3]):
-    return emotion_output
+    """
+    Cleans and formats the raw emotion output from the model.
+    1. Takes only the first line of the output.
+    2. Enforces the "ALL CAPS: content" format if a colon is present.
+    """
+    # 1. Take only the first line and strip whitespace.
+    processed_output = emotion_output.split('\n')[0].strip()
+    
+    # 2. Enforce the "ALL CAPS: content" format if a colon exists.
+    colon_pos = processed_output.find(":")
+    if colon_pos != -1:
+        before_colon = processed_output[:colon_pos]
+        after_colon = processed_output[colon_pos:] # Includes the colon
+        # Uppercase the part before the colon and reconstruct the string
+        processed_output = before_colon.upper() + after_colon
+    
+    return processed_output
 
 
 generate_emotion_pipeline_step = DepthFirstPipelineStep(
@@ -343,12 +565,13 @@ def parse_string_to_dict(string, headings):
 
 
 def dict_to_string(features):
-    return "\n\n".join(
-        [
-            f"{key}:\n\n" + "\n".join([f"* {item}" for item in value])
-            for key, value in features.items()
-        ]
-    )
+    output_lines = []
+    for key, value in features.items():
+        # Default to an empty list if the value is None to prevent iteration errors.
+        items_to_join = value if value is not None else []
+        list_as_string = "\n".join([f"* {item}" for item in items_to_join])
+        output_lines.append(f"{key}:\n\n" + list_as_string)
+    return "\n\n".join(output_lines)
 
 
 ## Helpers
@@ -516,6 +739,46 @@ def split_last_message_at_note(
             }
         ]
     return chatlog_list
+    
+
+def get_base_name(full_name):
+    """
+    Strips common titles (prefixes) and epithets (suffixes) from a full name 
+    to get a canonical base name for use as a key.
+    e.g., "Queen Scarlet" -> "Scarlet"
+    e.g., "Qibli the Mad" -> "Qibli"
+    e.g., "Garnet, the Crimson Fury" -> "Garnet"
+    """
+    if not isinstance(full_name, str):
+        return ""
+        
+    # List of prefixes to remove from the beginning of the name
+    prefix_titles = ["Queen", "King", "Princess", "Prince", "General", "Lord", "Lady", "Captain", "Commander", "Warden", "professor", "Elder", "Magistrate", "Chancellor", "Archivist", "Overseer", "Scholar", "Vizier", "Dr.", "Master", "Regent", "Councillor", "Heir", "Imperator", "Empress", "Principal"]
+    
+    normalized_name = full_name.strip()
+
+    # --- Step 1: Handle Prefixes ---
+    for title in prefix_titles:
+        # This regex robustly matches a title at the start of the string, case-insensitively,
+        # followed by one or more spaces.
+        if re.match(rf'^{re.escape(title)}\s+', normalized_name, re.IGNORECASE):
+            # It then removes that title and space, returning the cleaned name.
+            normalized_name = re.sub(rf'^{re.escape(title)}\s+', '', normalized_name, flags=re.IGNORECASE).strip()
+            # We break after finding the first prefix, assuming there's only one (e.g., not "Queen General Scarlet")
+            break 
+            
+    # --- Step 2: Handle Suffixes (Epithets) ---
+    # Epithets often start with "the" or a comma. We'll look for these patterns.
+    # This regex looks for a comma or the word "the" followed by more text.
+    suffix_match = re.search(r'(,\s*the|,|\s+the\s+)', normalized_name, re.IGNORECASE)
+    
+    if suffix_match:
+        # If a suffix pattern is found, we take everything *before* it as the base name.
+        start_of_suffix = suffix_match.start()
+        normalized_name = normalized_name[:start_of_suffix].strip()
+
+    # If no titles were found, the original name is the base name.
+    return normalized_name
 
 
 def parse_story_messages(large_mode):
@@ -755,20 +1018,38 @@ rate_story_step = DepthFirstPipelineStep(
 ### End Rate Story
 
 
-def extract_charname(scene_card):  # used in imports
-    scene_card_lines = scene_card.split("\n")
-    for line in scene_card_lines:
-        if "Name:" in line:
-            if "{user}" not in line:
-                charnamelist = line.split(":")
-                if len(charnamelist) > 2:  # if the name contains a colon
-                    raise Exception(
-                        "Character name contains a colon, should skip this one!"
-                    )
-                charname = charnamelist[1]
-                # Remove formatting marks from the character name
-                charname = charname.replace("*", "").replace("-", "").replace("#", "")
-                return charname.strip()
+def extract_charname(scene_card):
+    """
+    Safely extracts a single-line character name from a scene card.
+    """
+    if not scene_card:
+        return None
+
+    user_block_start = scene_card.find(f"Name: {{user}}")
+    main_char_block = scene_card[:user_block_start] if user_block_start != -1 else scene_card
+
+    # Use a more powerful regex to find the name heading and capture the text
+    # This pattern handles name on same line or next line
+    match = re.search(r'^\s*Name\s*:\s*([^\n]+)', main_char_block, re.MULTILINE | re.IGNORECASE)
+    
+    if match:
+        charname = match.group(1).strip()
+        if "{user}" in charname:
+            return None # Ignore the user line explicitly
+        if ":" in charname:
+            return None # Invalid name
+        return charname
+        
+    # Fallback for cases where name is on the next line
+    lines = main_char_block.split('\n')
+    for i, line in enumerate(lines):
+        if re.match(r'^\s*Name\s*:', line, re.IGNORECASE) and (i + 1) < len(lines):
+            charname = lines[i+1].strip()
+            if charname and "{user}" not in charname and ":" not in charname:
+                return charname
+
+    return None
+
 
 
 def parse_scene_card(scene_card):

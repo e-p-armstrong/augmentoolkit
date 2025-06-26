@@ -154,6 +154,11 @@ def create_depth_first_executor(
             input_dict=input_dict, output_path=output_path
         )  # if it is at the start and end of every pipeline execution, we get the same behavior as before, past thing will load and save just fine, without constant reads/writes.
         # depth first funcs must also now take key as an arg
+        nonlocal counter # Ensure we modify the outer counter
+        # Initialize counter based on already completed items
+        completed_keys = {key for key, value in input_dict.items() if isinstance(value, dict) and final_result_key in value}
+        counter = len(completed_keys)
+
         try:
             data_generations_tasks = [
                 composition_func(
@@ -166,29 +171,44 @@ def create_depth_first_executor(
                 for key, value in input_dict.items()
             ]
             coroutines = [rtwl(task) for task in data_generations_tasks]
+            
+            # Use tqdm for progress bar
+            progress_bar = tqdmasyncio.tqdm(total=total_items, initial=counter, desc=f"Executing {output_file}")
+
             for future in tqdmasyncio.tqdm.as_completed(coroutines):
-                await future
-                nonlocal counter
-                counter = counter + 1
-                set_progress(
-                    task_id,
-                    progress=counter / total_items,
-                    message=f"{counter} out of {total_items} processed!",
-                )
+                result = await future
+                # Increment counter only if the task was successful and added the final key
+                if result and isinstance(result, dict) and final_result_key in result:
+                    if not any(isinstance(v, dict) and v.get(final_result_key) == result[final_result_key] for k, v in completed_keys):
+                        counter += 1
+                        progress_bar.update(1)
+                        if task_id:
+                            set_progress(
+                                task_id,
+                                progress=counter / total_items if total_items > 0 else 0,
+                                message=f"{counter} out of {total_items} processed!",
+                            )
 
-            # Print count before filtering
-            print(f"Items in dictionary before filtering: {len(input_dict)}")
+            progress_bar.close()
 
-            # Print count after filtering
-            print(f"Items in dictionary after filtering: {len(input_dict)}")
         except Exception as e:
             print(f"Exception occurred during task execution: {e}")
-            # traceback.print_exc()
-            raise e
+            traceback.print_exc()
+            # We still want to save progress in the finally block, so we don't re-raise here
+            # but you could if you want the whole pipeline to stop.
         finally:
+            # Print count before filtering
+            print(f"Items in dictionary before final save: {len(input_dict)}")
+
+            # FIX: Filter out incomplete entries BEFORE the final save
+            filter_out_nonpresent_keys(input_dict, key_to_check=final_result_key)
+            
+            # Print count after filtering
+            print(f"Items in dictionary after filtering (to be saved): {len(input_dict)}")
+
             # Robust save with interrupt handling
             save_dataset(input_dict=input_dict, output_path=output_path)
 
-        filter_out_nonpresent_keys(input_dict, key_to_check=final_result_key)
-
+        return input_dict
+        
     return executor
