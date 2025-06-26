@@ -136,7 +136,7 @@ async def example_pipeline(  # NOTE requirement: the pipeline must have the same
                         output_dir, "small_model_tokens.json"
                     ),
                 ),
-                create_log_observer(output_dir),
+                create_log_observer(output_dir, do_meta_datagen),
             ],  # output observers are called on the LLM API responses right after they are received
             large_engine_input_observers=[
                 create_input_token_counter(
@@ -157,7 +157,7 @@ async def example_pipeline(  # NOTE requirement: the pipeline must have the same
                         output_dir, "large_model_tokens.json"
                     ),
                 ),
-                create_log_observer(output_dir),
+                create_log_observer(output_dir, do_meta_datagen),
             ],
         )
     )

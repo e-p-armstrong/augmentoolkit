@@ -7,7 +7,7 @@ from typing import Callable, Dict, List, Any, Union
 
 
 def create_log_observer(
-    log_dir: str,
+    log_dir: str, active: bool = False
 ) -> (
     Callable
 ):  # TODO maybe put these in a class so that I can have type checking and warn when I am putting an input observer in an output observer list?
@@ -37,6 +37,8 @@ def create_log_observer(
             output: The model's response
             completion_mode: Whether this was a completion (True) or chat (False) request
         """
+        if not active:
+            return
         # Extract prefix from input_data
         prefix = ""
         if completion_mode:

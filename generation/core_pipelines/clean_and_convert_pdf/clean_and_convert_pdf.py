@@ -124,7 +124,7 @@ async def pdf_clean_and_convert_pipeline(
                 )
             ],
             engine_output_observers=[
-                create_log_observer(output_dir),
+                create_log_observer(output_dir, do_meta_datagen),
                 create_output_token_counter(
                     counter=small_token_counter,
                     cost_per_million=cost_per_million_small_output,
@@ -145,7 +145,7 @@ async def pdf_clean_and_convert_pipeline(
                 )
             ],
             large_engine_output_observers=[
-                create_log_observer(output_dir),
+                create_log_observer(output_dir, do_meta_datagen),
                 create_output_token_counter(
                     counter=large_token_counter,
                     cost_per_million=cost_per_million_large_output,

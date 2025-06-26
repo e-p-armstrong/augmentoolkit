@@ -349,7 +349,7 @@ async def correction_pipeline(  # requirement: the node must have the same argum
                         output_dir, "small_model_tokens.json"
                     ),
                 ),
-                create_log_observer(output_dir),
+                create_log_observer(output_dir, do_meta_datagen),
             ],
             large_engine_input_observers=[
                 create_input_token_counter(
