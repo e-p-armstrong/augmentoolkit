@@ -1799,7 +1799,7 @@ async def _run_automated_training(
         set_progress(task_id=task_id, progress=0.51, message="Creating RunPod pod...")
         created_pod = runpod.create_pod(
             "trainingtest",
-            "axolotlai/axolotl-cloud:main-latest",
+            "axolotlai/axolotlai/axolotl-cloud:latest-py3.11-cu128-2.7.1",
             gpu_type_id="NVIDIA H100 80GB HBM3",
             gpu_count=1,
             volume_in_gb=500,

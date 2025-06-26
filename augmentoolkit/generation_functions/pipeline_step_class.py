@@ -390,6 +390,8 @@ class PipelineStep:
         self.load_dataset(
             input_dict=input_dict, output_dir=output_dir
         )  # if it is at the start and end of every pipeline execution, we get the same behavior as before, past thing will load and save just fine, without constant reads/writes.
+        
+        task_completed_successfully = False
         try:
             data_generations_tasks = [
                 self.run(
@@ -426,15 +428,15 @@ class PipelineStep:
                         f"\nError processing task {processed_count}/{total_tasks}: {e_inner}"
                     )
                     traceback.print_exc()  # Optionally log traceback
-
-            filter_out_nonpresent_keys(input_dict, key_to_check=self.result_key)
+            task_completed_successfully = True
         except Exception as e:
             print(f"Exception occurred during task execution: {e}")
             traceback.print_exc()
             raise e
         finally:
             # Robust save with interrupt handling
-            filter_out_nonpresent_keys(input_dict, key_to_check=self.result_key)
+            if task_completed_successfully:
+                filter_out_nonpresent_keys(input_dict, key_to_check=self.result_key)
             self.save_dataset(input_dict=input_dict, output_dir=output_dir)
 
 
