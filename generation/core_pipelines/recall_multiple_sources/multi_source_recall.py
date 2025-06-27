@@ -128,6 +128,7 @@ async def generate_multi_source_dataset(
     cleanup_embedding_dir=False,
     task_id=None,  # The good thing is that the task id requirement does not complicate the execution of pipelines inside other pipelines, and you don't need to think about THEIR progress as a part of THIS pipeline's progress. Thoug if we eid have away of peeking that progress it might be helpful since we coulddo th same with pipelinestep executions... no, because the policy is to favor API simplicity over fine control to make adoption/pipeline creation easier. Also the goal of the client is to make using this easier too. So gotchas like changing the node but not the config etc., editing things and mistakes -- these can be watched for and caught. Whether the path exists can be caught and shown as a specific warning. How will we record the rate oferrors? Simple, I guess we could how the % of things that made it to the end compared to how many we started with to get the percent.
     seed=1048596,
+    uncap_retrieved_doc_length = False,
     **kwargs,
 ):
 
@@ -502,7 +503,7 @@ async def generate_multi_source_dataset(
 
                     chunks.append(
                         {
-                            "text": doc,
+                            "text": doc if uncap_retrieved_doc_length else doc[:6000],
                             "metadata": results["metadatas"][0][i]["source"],
                         }
                     )
