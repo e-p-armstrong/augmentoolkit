@@ -297,8 +297,8 @@ class OneToManyStep(
             try:
                 with open(temp_output_path, "w", encoding="utf-8") as f:
                     json.dump(
-                        output_dict, f, indent=None, ensure_ascii=False
-                    )  # Use indent for readability
+                        output_dict, f, indent=None, ensure_ascii=True
+                    )  # Use ensure_ascii=True for cross-platform compatibility
                 # print(f"[DEBUG {time.time():.2f}] save_dataset: Temp file write complete. Replacing original file.") # DEBUG
 
                 os.replace(temp_output_path, output_path)  # Atomic rename/replace
@@ -386,7 +386,10 @@ class OneToManyStep(
         # print(f"[DEBUG {time.time():.2f}] run: No previous output found for key '{key}'. Proceeding.") # DEBUG
 
         # print(f"[DEBUG {time.time():.2f}] run: Processing input data for key '{key}'.") # DEBUG
-        processed_data, additional_kwargs = self.process_input_data(input_data)
+        if asyncio.iscoroutinefunction(self.process_input_data):
+            processed_data, additional_kwargs = await self.process_input_data(input_data)
+        else:
+            processed_data, additional_kwargs = self.process_input_data(input_data)
         # print(f"[DEBUG {time.time():.2f}] run: Input data processed for key '{key}'.") # DEBUG
 
         error_message = ""

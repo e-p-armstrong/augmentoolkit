@@ -474,19 +474,24 @@ async def generate_multi_source_dataset(
     )
 
     # Function to retrieve relevant chunks based on a query
-    def retrieve_rag_chunks(query, top_k=3):
+    async def retrieve_rag_chunks(query, top_k=3, timeout_seconds=30):
         """
         Retrieve chunks from the RAG collection that are relevant to the query
 
         Args:
             query: The text to find relevant chunks for
             top_k: Number of chunks to retrieve (default 3)
+            timeout_seconds: Timeout for the query operation (default 30)
 
         Returns:
             A list of dictionaries with text and metadata
         """
         try:
-            results = collection.query(query_texts=[query], n_results=top_k)
+            # Wrap the synchronous collection.query call with a timeout
+            results = await asyncio.wait_for(
+                asyncio.to_thread(collection.query, query_texts=[query], n_results=top_k),
+                timeout=timeout_seconds
+            )
 
             chunks = []
             if results and results["documents"] and len(results["documents"]) > 0:
@@ -507,6 +512,10 @@ async def generate_multi_source_dataset(
                 )  # Log retrieval failure
 
             return chunks
+        except asyncio.TimeoutError:
+            logging.error(f"RAG Query for '{query[:50]}...' timed out after {timeout_seconds} seconds.")
+            print(f"RAG query timed out after {timeout_seconds} seconds for query: {query[:50]}...")
+            return []
         except Exception as e:
             print(f"Error retrieving RAG chunks: {str(e)}")
             import traceback
@@ -571,10 +580,10 @@ async def generate_multi_source_dataset(
     prompt_path_qatuples_gen = "qatuples_gen_filenames"
 
     class QGenStep(OneToManyStep):
-        def process_input_data(self, input_data):
+        async def process_input_data(self, input_data):
             # print(f"QGenStep: Processing item with text starting: {input_data['text'][:50]}...") # Log item start
             # print("QGenStep: Retrieving RAG chunks...")
-            related_chunks = retrieve_rag_chunks(input_data["text"], top_k=3)
+            related_chunks = await retrieve_rag_chunks(input_data["text"], top_k=3)
             # print(f"QGenStep: RAG retrieval complete. Found {len(related_chunks)} related chunks (excluding self).")
 
             # Skip self-referential chunks (same chunk retrieved for itself)

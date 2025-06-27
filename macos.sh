@@ -125,9 +125,24 @@ echo "----------------------------------------"
 echo "1. Setting up Python virtual environment and installing dependencies..."
 VENV_DIR=".venv"
 
-# Check if python3 command exists
-if ! command -v python3 &> /dev/null; then
-    echo "ERROR: python3 command not found. Please install Python 3."
+# Check if python3.11 command exists (preferred)
+if command -v python3.11 &> /dev/null; then
+    PYTHON_CMD="python3.11"
+    echo "Using Python 3.11: $(python3.11 --version)"
+elif command -v python3 &> /dev/null; then
+    PYTHON_CMD="python3"
+    PYTHON_VERSION=$(python3 --version 2>&1 | grep -oE '[0-9]+\.[0-9]+')
+    echo "Using Python: $(python3 --version)"
+    if [[ "$PYTHON_VERSION" != "3.11" ]]; then
+        echo "WARNING: Python 3.11 is recommended but not found. Using $PYTHON_VERSION instead."
+        echo "If you encounter issues, please install Python 3.11 specifically."
+    fi
+else
+    echo "ERROR: Neither python3.11 nor python3 command found."
+    echo "Please install Python 3.11 (recommended) or Python 3.x and rerun the script."
+    echo "On macOS, you can install Python 3.11 using:"
+    echo "  brew install python@3.11"
+    echo "Or download from: https://www.python.org/downloads/"
     exit 1
 fi
 
@@ -135,12 +150,12 @@ fi
 echo "Checking for uv..."
 if ! command -v uv &> /dev/null; then
     echo "'uv' command not found. Attempting to install uv using pip..."
-    # Ensure pip is available (it should be with python3)
-    if ! python3 -m pip --version &> /dev/null; then
-        echo "ERROR: python3 -m pip command failed. Cannot install uv."
+    # Ensure pip is available (it should be with the selected Python version)
+    if ! $PYTHON_CMD -m pip --version &> /dev/null; then
+        echo "ERROR: $PYTHON_CMD -m pip command failed. Cannot install uv."
         exit 1
     fi
-    python3 -m pip install uv
+    $PYTHON_CMD -m pip install uv
     if [ $? -ne 0 ]; then
         echo "ERROR: Failed to install uv using pip. Please install uv manually (e.g., 'pip install uv' or 'brew install uv') and rerun the script."
         exit 1
@@ -154,10 +169,10 @@ fi
 
 # Create virtual environment if it doesn't exist
 if [ ! -d "$VENV_DIR" ]; then
-    echo "Creating virtual environment in '$VENV_DIR'..."
-    python3 -m venv "$VENV_DIR"
+    echo "Creating virtual environment in '$VENV_DIR' using $PYTHON_CMD..."
+    $PYTHON_CMD -m venv "$VENV_DIR"
     if [ $? -ne 0 ]; then
-        echo "ERROR: Failed to create Python virtual environment."
+        echo "ERROR: Failed to create Python virtual environment using $PYTHON_CMD."
         exit 1
     fi
 else

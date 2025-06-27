@@ -365,7 +365,7 @@ def save_conversations(
     )
     with open(simplified_write_norag, "w", encoding="utf-8") as f:
         for item in simplified_conversation_list:
-            f.write(json.dumps(item, ensure_ascii=False) + "\n")
+            f.write(json.dumps(item, ensure_ascii=True) + "\n")
 
     # Write simplified conversation RAG JSONL
     simplified_write_rag = os.path.join(
@@ -373,7 +373,7 @@ def save_conversations(
     )
     with open(simplified_write_rag, "w", encoding="utf-8") as f:
         for item in simplified_conversation_rag_list:
-            f.write(json.dumps(item, ensure_ascii=False) + "\n")
+            f.write(json.dumps(item, ensure_ascii=True) + "\n")
 
     # Optional push to Hugging Face Hub
     if push_to_hub:
@@ -381,7 +381,7 @@ def save_conversations(
         temp_norag = os.path.join(output_dir, "temp_simplified_conversation.json")
         with open(temp_norag, "w", encoding="utf-8") as temp_file:
             json.dump(
-                {"train": simplified_conversation_list}, temp_file, ensure_ascii=False
+                {"train": simplified_conversation_list}, temp_file, ensure_ascii=True
             )
 
         dataset_norag = load_dataset("json", data_files=temp_norag, split="train")
@@ -396,7 +396,7 @@ def save_conversations(
             json.dump(
                 {"train": simplified_conversation_rag_list},
                 temp_file,
-                ensure_ascii=False,
+                ensure_ascii=True,
             )
 
         dataset_rag = load_dataset("json", data_files=temp_rag, split="train")
@@ -635,18 +635,18 @@ def save_plain_qatuples(
     write_plain = os.path.join(output_dir, "plain_qa_list.jsonl")
     with open(write_plain, "w", encoding="utf-8") as file:
         for item in plain_qa_list:
-            file.write(json.dumps(item, ensure_ascii=False) + "\n")
+            file.write(json.dumps(item, ensure_ascii=True) + "\n")
 
     write_rag = os.path.join(output_dir, "simplified_data_rag.jsonl")
     with open(write_rag, "w", encoding="utf-8") as file:
         for item in simplified_rag_list:
-            file.write(json.dumps(item, ensure_ascii=False) + "\n")
+            file.write(json.dumps(item, ensure_ascii=True) + "\n")
 
     if push_to_hub:
         # Push plain QA data to hub
         temp_plain = os.path.join(output_dir, "temp_plain_qa.json")
         with open(temp_plain, "w", encoding="utf-8") as temp_file:
-            json.dump({"train": plain_qa_list}, temp_file, ensure_ascii=False)
+            json.dump({"train": plain_qa_list}, temp_file, ensure_ascii=True)
 
         dataset_plain = load_dataset("json", data_files=temp_plain, split="train")
         dataset_plain.to_parquet(f"hf://datasets/{hub_path}/data/train-plain.parquet")
@@ -655,7 +655,7 @@ def save_plain_qatuples(
         # Push RAG data to hub
         temp_rag = os.path.join(output_dir, "temp_simplified_data_rag.json")
         with open(temp_rag, "w", encoding="utf-8") as temp_file:
-            json.dump({"train": simplified_rag_list}, temp_file, ensure_ascii=False)
+            json.dump({"train": simplified_rag_list}, temp_file, ensure_ascii=True)
 
         dataset_rag = load_dataset("json", data_files=temp_rag, split="train")
         dataset_rag.to_parquet(f"hf://datasets/{hub_path}/data/train-rag.parquet")
