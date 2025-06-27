@@ -7,7 +7,7 @@ Maybe you want AI to know the latest research papers in your field, or perhaps y
 
 Get started now (the interface will guide you through generating your first dataset):
 
-(Be sure to use a either Python 3.11 when creating the virtual environment to be sure this'll work)
+(Be sure to use Python 3.11 when creating the virtual environment to be sure this'll work)
 
 ### MacOS (interface)
 ```bash
