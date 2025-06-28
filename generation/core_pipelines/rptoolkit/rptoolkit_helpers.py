@@ -633,10 +633,20 @@ def get_character_name(scene_text, user_placeholder="{user}"):
             user_count += 1
         else:
             # Check if line starts with a character name pattern
+            
             if ":" in line:
-                character_name = line.split(":", 1)[0].strip()
-                if character_name != user_placeholder:
-                    character_counts[character_name] += 1
+                # First, get the speaker's name as it's written in the dialogue
+                # e.g., "Cinder (Menacing)"
+                dirty_speaker_name = line.split(":", 1)[0].strip()
+
+                # Make sure it's not the user and it's not an empty string
+                if dirty_speaker_name and dirty_speaker_name != user_placeholder:
+                    
+                    # This turns "Cinder (Menacing)" into just "Cinder"
+                    clean_speaker_name = get_base_name(dirty_speaker_name)
+
+                    # Add the vote to the CLEAN name's count
+                    character_counts[clean_speaker_name] += 1
 
     # Determine the threshold for minimum occurrences
     threshold = math.ceil(user_count / 2)
@@ -653,7 +663,6 @@ def get_character_name(scene_text, user_placeholder="{user}"):
     most_common_character = max(valid_characters, key=valid_characters.get)
 
     return most_common_character
-
 
 def parse_chatlog(chatlog, charname):
     messages = []
@@ -739,45 +748,71 @@ def split_last_message_at_note(
             }
         ]
     return chatlog_list
-    
 
-def get_base_name(full_name):
+
+_DEFAULT_PREFIX_TITLES = (
+    "Queen", "King", "Princess", "Prince", "General", "Lord",
+    "Lady", "Captain", "Commander", "Warden", "professor", "Elder", "Magistrate", "Chancellor", 
+    "Archivist", "Overseer", "Scholar", "Vizier", "Dr.", "Master", "Regent", 
+    "Councillor", "Heir", "Imperator", "Empress", "Principal", "The", "Oracle", "Lorekeeper"
+)
+
+def get_base_name(full_name: str) -> str:
     """
-    Strips common titles (prefixes) and epithets (suffixes) from a full name 
+    Strips common titles (prefixes) and epithets/suffixes from a full name 
     to get a canonical base name for use as a key.
     e.g., "Queen Scarlet" -> "Scarlet"
     e.g., "Qibli the Mad" -> "Qibli"
     e.g., "Garnet, the Crimson Fury" -> "Garnet"
+    e.g., "Morrowseer (Spirit)" -> "Morrowseer"
+    e.g., "Mastermind (formerly known as Obsidian)" -> "Mastermind"
+    e.g., "The Oracle (also known as Hemlock)" -> "The Oracle" (or "Oracle" if "The " is a defined prefix)
+    e.g., "Lorekeeper Nyx" -> "Nyx"
+    e.g., "Scarlet III" -> "Scarlet"
+    e.g., "Principal Boreas" -> "Boreas"
     """
     if not isinstance(full_name, str):
         return ""
-        
-    # List of prefixes to remove from the beginning of the name
-    prefix_titles = ["Queen", "King", "Princess", "Prince", "General", "Lord", "Lady", "Captain", "Commander", "Warden", "professor", "Elder", "Magistrate", "Chancellor", "Archivist", "Overseer", "Scholar", "Vizier", "Dr.", "Master", "Regent", "Councillor", "Heir", "Imperator", "Empress", "Principal"] # TODO expand beyond fantasy
-    
+
     normalized_name = full_name.strip()
 
-    # --- Step 1: Handle Prefixes ---
-    for title in prefix_titles:
-        # This regex robustly matches a title at the start of the string, case-insensitively,
-        # followed by one or more spaces.
-        if re.match(rf'^{re.escape(title)}\s+', normalized_name, re.IGNORECASE):
-            # It then removes that title and space, returning the cleaned name.
-            normalized_name = re.sub(rf'^{re.escape(title)}\s+', '', normalized_name, flags=re.IGNORECASE).strip()
-            # We break after finding the first prefix, assuming there's only one (e.g., not "Queen General Scarlet")
-            break 
-            
-    # --- Step 2: Handle Suffixes (Epithets) ---
-    # Epithets often start with "the" or a comma. We'll look for these patterns.
-    # This regex looks for a comma or the word "the" followed by more text.
-    suffix_match = re.search(r'(,\s*the|,|\s+the\s+)', normalized_name, re.IGNORECASE)
-    
-    if suffix_match:
-        # If a suffix pattern is found, we take everything *before* it as the base name.
-        start_of_suffix = suffix_match.start()
-        normalized_name = normalized_name[:start_of_suffix].strip()
+    # Create a working list of prefixes.
+    current_prefix_titles = list(_DEFAULT_PREFIX_TITLES)
 
-    # If no titles were found, the original name is the base name.
+    # --- Step 1: Handle Prefixes ---
+    # Sort prefixes by length descending to handle longer matches first (e.g., "Duke of" before "Duke").
+    sorted_prefix_titles = sorted(current_prefix_titles, key=len, reverse=True)
+    for title in sorted_prefix_titles:
+        # Regex: ^(title)\s+ (case insensitive)
+        pattern = rf'^{re.escape(title)}\s+'
+        if re.match(pattern, normalized_name, re.IGNORECASE):
+            normalized_name = re.sub(pattern, '', normalized_name, flags=re.IGNORECASE).strip()
+            # Assume only one main prefix title needs to be stripped.
+            break 
+
+    # --- Step 2: Handle Suffixes (in order of specificity) ---
+    # Order: Parenthetical -> General Epithets -> Roman Numerals
+
+    # 2a. Remove parenthetical suffixes, e.g., " (Spirit)", " (some detail)"
+    # Looks for: a space, then '(', then any non-')' characters (non-greedy), then ')', at the end of the string.
+    normalized_name = re.sub(r'\s+\([^)]*?\)$', '', normalized_name).strip()
+
+    # 2b. Remove general epithets (comma-based or " the " based)
+    # It looks for:
+    #   1. `,` (a comma) - indicating "Name, Epithet"
+    #   2. `,\s*the\b` (a comma, optional spaces, "the" as a whole word) - for "Name, the Epithet"
+    #   3. `\s+the\s+` (space-the-space) - for "Name the Epithet"
+    # It takes the part of the string *before* the earliest of these matches.
+    match_obj = re.search(r'(?:,\s*the\b)|(?:,)|(?:\s+the\s+)', normalized_name, re.IGNORECASE)
+    if match_obj:
+        # Ensure that if " the " is matched, it's not the *entire* remaining name starting with "The ".
+        # However, `\s+the\s+` inherently means "the" is not at the very start of `normalized_name`.
+        normalized_name = normalized_name[:match_obj.start()].strip()
+            
+    # 2c. Remove Roman numeral suffixes (e.g., " III", " IV") from the end of the (now possibly shorter) name.
+    # Looks for: a space, then one or more Roman numeral characters, at the end of the string.
+    normalized_name = re.sub(r'\s+([IVXLCDM]+)$', '', normalized_name, re.IGNORECASE).strip()
+            
     return normalized_name
 
 
