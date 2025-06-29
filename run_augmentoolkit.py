@@ -8,6 +8,19 @@ import yaml
 import argparse
 from pathlib import Path
 import json
+import io
+
+
+# ==============================================================================
+# FORCE UTF-8 FOR ALL I/O
+# where the default encoding is not UTF-8. It prevents UnicodeEncodeError
+# when printing characters that are not in the default system codepage.
+# ==============================================================================
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+if sys.stderr.encoding != 'utf-8':
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+# ==============================================================================
 
 from resolve_path import resolve_path
 
