@@ -4,6 +4,37 @@
 # It will also take as an additional argument the path to some input dir. That will be from where we draw the documents.
 # Assume all libraries are installed.
 
+# Configure onnxruntime for SLURM environments before any other imports that might use it
+import os
+try:
+    import onnxruntime as ort
+    
+    # Configure session options to avoid pthread_setaffinity_np errors in SLURM
+    def configure_onnxruntime_for_slurm():
+        """Configure onnxruntime for SLURM environments where OMP_NUM_THREADS may not be set"""
+        import multiprocessing
+        
+        # Get number of CPU cores, default to 8 if detection fails
+        try:
+            num_threads = multiprocessing.cpu_count()
+            # Cap at reasonable maximum to avoid resource issues
+            num_threads = min(num_threads, 16)
+        except:
+            num_threads = 8
+        
+        # Set environment variable if not already set (for any future onnxruntime sessions)
+        if "OMP_NUM_THREADS" not in os.environ:
+            os.environ["OMP_NUM_THREADS"] = str(num_threads)
+        
+        return num_threads
+    
+    # Configure onnxruntime early
+    configure_onnxruntime_for_slurm()
+    
+except ImportError:
+    # onnxruntime not available, which is fine
+    pass
+
 import copy
 import pickle
 import platform
@@ -13,7 +44,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from sys import argv
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseModel, conlist, constr, StringConstraints, Field
-import os
 import asyncio
 from nltk.tokenize import sent_tokenize
 from typing import Annotated, List, Dict

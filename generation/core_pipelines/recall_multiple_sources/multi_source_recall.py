@@ -1,11 +1,42 @@
-from tqdm import tqdm
-import re
-import sys
 import os
 import nltk
 import shutil
 import logging
 import hashlib
+
+# Configure onnxruntime for SLURM environments before any other imports that might use it
+try:
+    import onnxruntime as ort
+    
+    # Configure session options to avoid pthread_setaffinity_np errors in SLURM
+    def configure_onnxruntime_for_slurm():
+        """Configure onnxruntime for SLURM environments where OMP_NUM_THREADS may not be set"""
+        import multiprocessing
+        
+        # Get number of CPU cores, default to 8 if detection fails
+        try:
+            num_threads = multiprocessing.cpu_count()
+            # Cap at reasonable maximum to avoid resource issues
+            num_threads = min(num_threads, 16)
+        except:
+            num_threads = 8
+        
+        # Set environment variable if not already set (for any future onnxruntime sessions)
+        if "OMP_NUM_THREADS" not in os.environ:
+            os.environ["OMP_NUM_THREADS"] = str(num_threads)
+        
+        return num_threads
+    
+    # Configure onnxruntime early
+    configure_onnxruntime_for_slurm()
+    
+except ImportError:
+    # onnxruntime not available, which is fine
+    pass
+
+from tqdm import tqdm
+import re
+import sys
 
 from augmentoolkit.generation_functions.cleanup import cleanup_dir
 from augmentoolkit.generation_functions.hashing_and_ordering import hash_input_list
