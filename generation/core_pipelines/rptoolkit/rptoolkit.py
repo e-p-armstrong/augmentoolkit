@@ -1,6 +1,7 @@
 import random
 import traceback
 import asyncio
+import re
 from augmentoolkit.generation_functions.depth_first_pipeline_step_class import (
     DepthFirstPipelineStep,
     create_depth_first_executor,
@@ -344,8 +345,8 @@ async def rptoolkit_pipeline(
     completion_mode,
     small_model,
     large_model,
-    small_api_key,
-    large_api_key,
+    # small_api_key,
+    # large_api_key,
     small_base_url,
     large_base_url,
     small_mode,
@@ -365,6 +366,10 @@ async def rptoolkit_pipeline(
     meta_datagen_keys,
     meta_datagen_extras,
     to_include_features,
+    small_api_key=None,
+    large_api_key=None,
+    small_api_keys=None,
+    large_api_keys=None,
     chunking_output_dir=None,
     task_id=None,
     seed=1048596,
@@ -454,6 +459,8 @@ async def rptoolkit_pipeline(
             large_api_key,
             large_base_url,
             large_mode,
+            small_api_keys=small_api_keys,
+            large_api_keys=large_api_keys,
             engine_input_observers=[
                 create_input_token_counter(
                     counter=small_token_counter,

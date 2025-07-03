@@ -1,8 +1,12 @@
 pipeline: rptoolkit-pipeline
 
 api:
-  small_api_key: !!PLACEHOLDER!!
-  large_api_key: !!PLACEHOLDER!!
+  small_api_keys: # can also use use a single key
+    - "!!PLACEHOLDER!!"
+    - "!!PLACEHOLDER!!"
+  large_api_keys: # can also use use a single key
+    - "!!PLACEHOLDER!!"
+    - "!!PLACEHOLDER!!"
   small_base_url: https://api.deepinfra.com/v1/openai
   large_base_url: https://api.deepinfra.com/v1/openai # http://localhost:2242/v1
   small_model: deepseek-ai/DeepSeek-V3-0324
