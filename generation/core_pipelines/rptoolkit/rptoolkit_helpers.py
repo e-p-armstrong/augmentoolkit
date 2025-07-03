@@ -748,8 +748,8 @@ def split_last_message_at_note(
             }
         ]
     return chatlog_list
-
-
+    
+# Default name prefixes to be stripped
 _DEFAULT_PREFIX_TITLES = (
     "Queen", "King", "Princess", "Prince", "General", "Lord",
     "Lady", "Captain", "Commander", "Warden", "professor", "Elder", "Magistrate", "Chancellor", 
