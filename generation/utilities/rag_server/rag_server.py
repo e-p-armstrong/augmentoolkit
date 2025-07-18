@@ -6,34 +6,56 @@
 
 # Configure onnxruntime for SLURM environments before any other imports that might use it
 import os
-try:
-    import onnxruntime as ort
-    
-    # Configure session options to avoid pthread_setaffinity_np errors in SLURM
-    def configure_onnxruntime_for_slurm():
-        """Configure onnxruntime for SLURM environments where OMP_NUM_THREADS may not be set"""
+if "SLURM_JOB_ID" in os.environ:    
+    try:
+        import onnxruntime as ort
         import multiprocessing
+
+        _original_session = ort.InferenceSession
+
+        def patched_session(*args, **kwargs):
+            num_threads = min(multiprocessing.cpu_count(), 16)
+            # Thread-Settings setzen, falls nicht vorhanden
+            if 'sess_options' not in kwargs:
+                opts = ort.SessionOptions()
+                opts.inter_op_num_threads = num_threads
+                opts.intra_op_num_threads = num_threads
+                kwargs['sess_options'] = opts
+            else:
+                opts = kwargs['sess_options']
+                opts.inter_op_num_threads = num_threads
+                opts.intra_op_num_threads = num_threads
+
+            print(f"[Patch] ONNX session mit {num_threads} Threads")
+            return _original_session(*args, **kwargs)
+
+        class PatchedInferenceSession(_original_session):
+            def __init__(self, path_or_bytes, sess_options=None, providers=None, provider_options=None, **kwargs):
+                num_threads = min(multiprocessing.cpu_count(), 16)
+
+                if sess_options is None:
+                    sess_options = ort.SessionOptions()
+                sess_options.inter_op_num_threads = num_threads
+                sess_options.intra_op_num_threads = num_threads
+
+                print(f"[Patch] Init ONNX InferenceSession with {num_threads} threads")
+
+                # wichtig: super()-Konstruktor aufrufen
+                super().__init__(
+                    path_or_bytes,
+                    sess_options=sess_options,
+                    providers=providers,
+                    provider_options=provider_options,
+                    **kwargs
+                )
+
+        # Patch anwenden
+        ort.InferenceSession = PatchedInferenceSession
+
         
-        # Get number of CPU cores, default to 8 if detection fails
-        try:
-            num_threads = multiprocessing.cpu_count()
-            # Cap at reasonable maximum to avoid resource issues
-            num_threads = min(num_threads, 16)
-        except:
-            num_threads = 8
-        
-        # Set environment variable if not already set (for any future onnxruntime sessions)
-        if "OMP_NUM_THREADS" not in os.environ:
-            os.environ["OMP_NUM_THREADS"] = str(num_threads)
-        
-        return num_threads
-    
-    # Configure onnxruntime early
-    configure_onnxruntime_for_slurm()
-    
-except ImportError:
-    # onnxruntime not available, which is fine
-    pass
+    except ImportError:
+        # onnxruntime not available, which is fine
+        pass
 
 import copy
 import pickle
