@@ -21,9 +21,16 @@ def setup_semaphore_and_engines(
 ):
     semaphore = asyncio.Semaphore(concurrency_limit)
 
-    async def run_task_with_limit(task):
+    async def run_task_with_limit(task, timeout=60):
         async with semaphore:
-            return await task
+            try:
+                return await asyncio.wait_for(task, timeout=timeout)
+            except asyncio.TimeoutError:
+                print("[Timeout] A task exceeded the timeout limit.")
+                return None
+            except Exception as e:
+                print(f"[Error] Exception in task: {e}")
+                return None
 
     engine_wrapper = EngineWrapper(
         model=small_model,

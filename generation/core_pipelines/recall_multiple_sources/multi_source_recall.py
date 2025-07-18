@@ -280,9 +280,16 @@ async def generate_multi_source_dataset(
 
     semaphore = asyncio.Semaphore(concurrency_limit)
 
-    async def run_task_with_limit(task):
+    async def run_task_with_limit(task, timeout=60):
         async with semaphore:
-            return await task
+            try:
+                return await asyncio.wait_for(task, timeout=timeout)
+            except asyncio.TimeoutError:
+                print("[Timeout] A task exceeded the timeout limit.")
+                return None
+            except Exception as e:
+                print(f"[Error] Exception in task: {e}")
+                return None
 
     # notably, to be used as a node these things need to take their sentence chunks as input, not an input dir path. Which means that this step wouldn't actually fire. We won't be making a pretraining dataset in the original pipeline anymore since that's handled by repvar when run as part of a larger system.
     # We need to engineer better how to make pipelines vs nodes work. When in node mode, these things will behave different. When in pipeline mode they'll take a certain set of args vs when in node mode they'll take a certain other set. How do we represent this best? Perhaps ask AI. What is the cleanest and best way to engineer this such that pipelines can fulfill both the role of pipeline and node 1) without cluttering the code too much, 2) while maintaining the nice modularity of everything so far?
