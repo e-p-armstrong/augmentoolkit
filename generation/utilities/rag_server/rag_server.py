@@ -40,7 +40,6 @@ if "SLURM_JOB_ID" in os.environ:
 
                 print(f"[Patch] Init ONNX InferenceSession with {num_threads} threads")
 
-                # wichtig: super()-Konstruktor aufrufen
                 super().__init__(
                     path_or_bytes,
                     sess_options=sess_options,
@@ -49,7 +48,7 @@ if "SLURM_JOB_ID" in os.environ:
                     **kwargs
                 )
 
-        # Patch anwenden
+        # Overwrite function which is used by chroma db
         ort.InferenceSession = PatchedInferenceSession
 
         
