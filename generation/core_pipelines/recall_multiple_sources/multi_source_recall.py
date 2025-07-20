@@ -5,34 +5,55 @@ import logging
 import hashlib
 
 # Configure onnxruntime for SLURM environments before any other imports that might use it
-try:
-    import onnxruntime as ort
-    
-    # Configure session options to avoid pthread_setaffinity_np errors in SLURM
-    def configure_onnxruntime_for_slurm():
-        """Configure onnxruntime for SLURM environments where OMP_NUM_THREADS may not be set"""
+if "SLURM_JOB_ID" in os.environ:    
+    try:
+        import onnxruntime as ort
         import multiprocessing
+
+        _original_session = ort.InferenceSession
+
+        def patched_session(*args, **kwargs):
+            num_threads = min(multiprocessing.cpu_count(), 16)
+            # Thread-Settings setzen, falls nicht vorhanden
+            if 'sess_options' not in kwargs:
+                opts = ort.SessionOptions()
+                opts.inter_op_num_threads = num_threads
+                opts.intra_op_num_threads = num_threads
+                kwargs['sess_options'] = opts
+            else:
+                opts = kwargs['sess_options']
+                opts.inter_op_num_threads = num_threads
+                opts.intra_op_num_threads = num_threads
+
+            print(f"[Patch] ONNX session mit {num_threads} Threads")
+            return _original_session(*args, **kwargs)
+
+        class PatchedInferenceSession(_original_session):
+            def __init__(self, path_or_bytes, sess_options=None, providers=None, provider_options=None, **kwargs):
+                num_threads = min(multiprocessing.cpu_count(), 16)
+
+                if sess_options is None:
+                    sess_options = ort.SessionOptions()
+                sess_options.inter_op_num_threads = num_threads
+                sess_options.intra_op_num_threads = num_threads
+
+                print(f"[Patch] Init ONNX InferenceSession with {num_threads} threads")
+
+                super().__init__(
+                    path_or_bytes,
+                    sess_options=sess_options,
+                    providers=providers,
+                    provider_options=provider_options,
+                    **kwargs
+                )
+
+        # Overwrite function which is used by chroma db
+        ort.InferenceSession = PatchedInferenceSession
+
         
-        # Get number of CPU cores, default to 8 if detection fails
-        try:
-            num_threads = multiprocessing.cpu_count()
-            # Cap at reasonable maximum to avoid resource issues
-            num_threads = min(num_threads, 16)
-        except:
-            num_threads = 8
-        
-        # Set environment variable if not already set (for any future onnxruntime sessions)
-        if "OMP_NUM_THREADS" not in os.environ:
-            os.environ["OMP_NUM_THREADS"] = str(num_threads)
-        
-        return num_threads
-    
-    # Configure onnxruntime early
-    configure_onnxruntime_for_slurm()
-    
-except ImportError:
-    # onnxruntime not available, which is fine
-    pass
+    except ImportError:
+        # onnxruntime not available, which is fine
+        pass
 
 from tqdm import tqdm
 import re
@@ -280,9 +301,16 @@ async def generate_multi_source_dataset(
 
     semaphore = asyncio.Semaphore(concurrency_limit)
 
-    async def run_task_with_limit(task):
+    async def run_task_with_limit(task, timeout=60):
         async with semaphore:
-            return await task
+            try:
+                return await asyncio.wait_for(task, timeout=timeout)
+            except asyncio.TimeoutError:
+                print("[Timeout] A task exceeded the timeout limit.")
+                return None
+            except Exception as e:
+                print(f"[Error] Exception in task: {e}")
+                return None
 
     # notably, to be used as a node these things need to take their sentence chunks as input, not an input dir path. Which means that this step wouldn't actually fire. We won't be making a pretraining dataset in the original pipeline anymore since that's handled by repvar when run as part of a larger system.
     # We need to engineer better how to make pipelines vs nodes work. When in node mode, these things will behave different. When in pipeline mode they'll take a certain set of args vs when in node mode they'll take a certain other set. How do we represent this best? Perhaps ask AI. What is the cleanest and best way to engineer this such that pipelines can fulfill both the role of pipeline and node 1) without cluttering the code too much, 2) while maintaining the nice modularity of everything so far?
