@@ -303,121 +303,122 @@ echo "  Uvicorn API: $UVICORN_LOG_FILE"
 echo "  Frontend serve: $FRONTEND_LOG_FILE"
 echo "Helper process logging setup complete."
 
-
-# --- 1.5 Valkey/Redis Check ---
-echo "----------------------------------------"
-echo "2 / 9. Checking for running Valkey/Redis service..."
-
-SERVER_CMD=""
-SERVICE_NAME=""
-
-# Check for valkey-server first
-if command -v valkey-server &> /dev/null; then
-    SERVER_CMD="valkey-server"
-    SERVICE_NAME="valkey-server"
-# Fallback to redis-server
-elif command -v redis-server &> /dev/null; then
-    SERVER_CMD="redis-server"
-    SERVICE_NAME="redis-server"
-else
-    # Check if something is listening on the default Valkey/Redis port (6379)
-    if command -v ss &> /dev/null; then
-        PORT_CHECK_CMD="ss -ltn"
-    else
-        PORT_CHECK_CMD="netstat -ltn"
-    fi
-
-    if $PORT_CHECK_CMD | grep -q ':6379'; then
-        echo "WARNING: Neither 'valkey-server' nor 'redis-server' found in PATH, but something is listening on port 6379."
-        echo "Assuming a compatible Valkey/Redis server is running (possibly built from source or custom install)."
-    else
-        echo "Neither 'valkey-server' nor 'redis-server' found in PATH."
-        echo "Building Valkey from source..."
-        
-        # Check if valkey directory already exists
-        if [ ! -d "valkey" ]; then
-            echo "Cloning Valkey repository..."
-            git clone https://github.com/valkey-io/valkey.git
-            if [ $? -ne 0 ]; then
-                echo "ERROR: Failed to clone Valkey repository. Please check your internet connection and git installation."
-                exit 1
-            fi
-        else
-            echo "Valkey directory already exists, skipping clone."
-        fi
-        
-        # Only build if valkey-server doesn't exist
-        if [ ! -f "valkey/src/valkey-server" ]; then
-            echo "Building Valkey..."
-            cd valkey
-            make
-            if [ $? -ne 0 ]; then
-                echo "ERROR: Failed to build Valkey. Please check build dependencies (gcc, make, etc.)."
-                cd "$SCRIPT_DIR"
-                exit 1
-            fi
-            cd "$SCRIPT_DIR"
-        else
-            echo "Valkey already built, skipping build."
-        fi
-        
-        echo "Starting Valkey server in background..."
-        echo "Output will be logged to: $VALKEY_LOG_FILE"
-        cd valkey/src
-        ./valkey-server > "../../$VALKEY_LOG_FILE" 2>&1 &
-        VALKEY_PID=$!
-        cd "$SCRIPT_DIR"
-        
-        # Give it a moment to start/fail
-        sleep 4
-        if ! kill -0 $VALKEY_PID &> /dev/null; then
-            echo "ERROR: Valkey server (PID $VALKEY_PID) failed to start or crashed immediately."
-            echo "Check the log file for details: $VALKEY_LOG_FILE"
-            exit 1
-        fi
-        echo "Valkey server started successfully with PID $VALKEY_PID."
-        
-        # Set SERVER_CMD and SERVICE_NAME for consistency with the rest of the script
-        SERVER_CMD="./valkey/src/valkey-server"
+#### if REDIS_HOST skip
+if [ -z "$REDIS_HOST" ]; then
+    # --- 1.5 Valkey/Redis Check ---
+    echo "----------------------------------------"
+    echo "2 / 9. Checking for running Valkey/Redis service..."
+    
+    SERVER_CMD=""
+    SERVICE_NAME=""
+    
+    # Check for valkey-server first
+    if command -v valkey-server &> /dev/null; then
+        SERVER_CMD="valkey-server"
         SERVICE_NAME="valkey-server"
-    fi
-fi
-echo "Found $SERVER_CMD."
-
-# If we didn't just start Valkey server locally, perform service checks
-if [ -z "$VALKEY_PID" ]; then
-    # Check if systemctl exists and is usable
-    if command -v systemctl &> /dev/null && systemctl status &> /dev/null; then
-        # systemctl seems to be working, so let's use it
-        if ! systemctl is-active --quiet $SERVICE_NAME; then
-            echo "WARNING: The $SERVICE_NAME service is not active according to systemctl."
-            # Check if something is listening on port 6379 as fallback
-            if ss -ltn | grep -q ':6379' 2>/dev/null; then
-                echo "However, something is listening on port 6379. Assuming a compatible Valkey/Redis server is running."
+    # Fallback to redis-server
+    elif command -v redis-server &> /dev/null; then
+        SERVER_CMD="redis-server"
+        SERVICE_NAME="redis-server"
+    else
+        # Check if something is listening on the default Valkey/Redis port (6379)
+        if command -v ss &> /dev/null; then
+            PORT_CHECK_CMD="ss -ltn"
+        else
+            PORT_CHECK_CMD="netstat -ltn"
+        fi
+    
+        if $PORT_CHECK_CMD | grep -q ':6379'; then
+            echo "WARNING: Neither 'valkey-server' nor 'redis-server' found in PATH, but something is listening on port 6379."
+            echo "Assuming a compatible Valkey/Redis server is running (possibly built from source or custom install)."
+        else
+            echo "Neither 'valkey-server' nor 'redis-server' found in PATH."
+            echo "Building Valkey from source..."
+            
+            # Check if valkey directory already exists
+            if [ ! -d "valkey" ]; then
+                echo "Cloning Valkey repository..."
+                git clone https://github.com/valkey-io/valkey.git
+                if [ $? -ne 0 ]; then
+                    echo "ERROR: Failed to clone Valkey repository. Please check your internet connection and git installation."
+                    exit 1
+                fi
             else
-                echo "ERROR: The $SERVICE_NAME service is not active and nothing is listening on port 6379."
-                echo "Please start the service, e.g., 'sudo systemctl start $SERVICE_NAME' and ensure it's enabled to start on boot, e.g., 'sudo systemctl enable $SERVICE_NAME'."
+                echo "Valkey directory already exists, skipping clone."
+            fi
+            
+            # Only build if valkey-server doesn't exist
+            if [ ! -f "valkey/src/valkey-server" ]; then
+                echo "Building Valkey..."
+                cd valkey
+                make
+                if [ $? -ne 0 ]; then
+                    echo "ERROR: Failed to build Valkey. Please check build dependencies (gcc, make, etc.)."
+                    cd "$SCRIPT_DIR"
+                    exit 1
+                fi
+                cd "$SCRIPT_DIR"
+            else
+                echo "Valkey already built, skipping build."
+            fi
+            
+            echo "Starting Valkey server in background..."
+            echo "Output will be logged to: $VALKEY_LOG_FILE"
+            cd valkey/src
+            ./valkey-server > "../../$VALKEY_LOG_FILE" 2>&1 &
+            VALKEY_PID=$!
+            cd "$SCRIPT_DIR"
+            
+            # Give it a moment to start/fail
+            sleep 4
+            if ! kill -0 $VALKEY_PID &> /dev/null; then
+                echo "ERROR: Valkey server (PID $VALKEY_PID) failed to start or crashed immediately."
+                echo "Check the log file for details: $VALKEY_LOG_FILE"
                 exit 1
             fi
-        else
-            echo "The $SERVICE_NAME service is active."
-        fi
-    else
-        # systemctl not available or not working, fall back to simple port check
-        echo "WARNING: 'systemctl' not available/running. Checking for service via port."
-        if ss -ltn | grep -q ':6379' 2>/dev/null; then
-            echo "A service is listening on port 6379. Assuming a compatible Valkey/Redis server is running."
-        else
-            echo "ERROR: No running Valkey/Redis service detected on port 6379, and could not start one automatically as it was expected to be running."
-            echo "Please start valkey-server or redis-server manually in another terminal."
-            exit 1
+            echo "Valkey server started successfully with PID $VALKEY_PID."
+            
+            # Set SERVER_CMD and SERVICE_NAME for consistency with the rest of the script
+            SERVER_CMD="./valkey/src/valkey-server"
+            SERVICE_NAME="valkey-server"
         fi
     fi
-else
-    echo "Valkey server was started by this script (PID $VALKEY_PID), skipping system service check."
+    echo "Found $SERVER_CMD."
+    
+    # If we didn't just start Valkey server locally, perform service checks
+    if [ -z "$VALKEY_PID" ]; then
+        # Check if systemctl exists and is usable
+        if command -v systemctl &> /dev/null && systemctl status &> /dev/null; then
+            # systemctl seems to be working, so let's use it
+            if ! systemctl is-active --quiet $SERVICE_NAME; then
+                echo "WARNING: The $SERVICE_NAME service is not active according to systemctl."
+                # Check if something is listening on port 6379 as fallback
+                if ss -ltn | grep -q ':6379' 2>/dev/null; then
+                    echo "However, something is listening on port 6379. Assuming a compatible Valkey/Redis server is running."
+                else
+                    echo "ERROR: The $SERVICE_NAME service is not active and nothing is listening on port 6379."
+                    echo "Please start the service, e.g., 'sudo systemctl start $SERVICE_NAME' and ensure it's enabled to start on boot, e.g., 'sudo systemctl enable $SERVICE_NAME'."
+                    exit 1
+                fi
+            else
+                echo "The $SERVICE_NAME service is active."
+            fi
+        else
+            # systemctl not available or not working, fall back to simple port check
+            echo "WARNING: 'systemctl' not available/running. Checking for service via port."
+            if ss -ltn | grep -q ':6379' 2>/dev/null; then
+                echo "A service is listening on port 6379. Assuming a compatible Valkey/Redis server is running."
+            else
+                echo "ERROR: No running Valkey/Redis service detected on port 6379, and could not start one automatically as it was expected to be running."
+                echo "Please start valkey-server or redis-server manually in another terminal."
+                exit 1
+            fi
+        fi
+    else
+        echo "Valkey server was started by this script (PID $VALKEY_PID), skipping system service check."
+    fi
+    # --- End Valkey/Redis Check (Step 2) ---
 fi
-# --- End Valkey/Redis Check (Step 2) ---
-
 
 # --- 1.6. VLLM Setup and Server ---
 echo "----------------------------------------"
