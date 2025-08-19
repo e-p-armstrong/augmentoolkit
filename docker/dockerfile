@@ -1,0 +1,56 @@
+FROM python:slim
+
+ENV VERSION=v3.0.0
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+
+WORKDIR /app
+
+# Basic system dependencies
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y git build-essential cmake pkg-config g++ curl libssl-dev net-tools nodejs npm
+
+# Clone augmentoolkit
+# RUN git clone https://github.com/e-p-armstrong/augmentoolkit.git --branch ${VERSION} --single-branch .
+
+COPY requirements.txt *.sh *.py super_config.yaml LICENSE /app/
+
+# Install Rust for outlines-core
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y --no-modify-path
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Optional: Set up venv (not strictly needed in Docker, but kept as-is)
+RUN python3 -m venv .venv
+ENV VIRTUAL_ENV=/app/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Install pip tools
+RUN pip install --upgrade pip
+RUN pip install uv
+
+# Install outlines first (will trigger Rust build, needs OpenSSL)
+RUN pip install outlines
+
+# Install torch first — this is critical
+RUN pip install torch --index-url https://download.pytorch.org/whl/cu121
+
+# Install xformers with NO build isolation so it can see torch
+RUN pip install --no-build-isolation xformers==0.0.29.post2
+
+# Install vllm (depends on xformers)
+RUN pip install vllm
+
+# Final dependencies from requirements.txt using uv (now safe)
+RUN uv pip install -r requirements.txt
+
+ADD atk-interface atk-interface
+ADD augmentoolkit augmentoolkit
+ADD cli_utils cli_utils
+ADD external_configs external_configs
+ADD generation generation
+ADD inputs inputs
+ADD logs logs
+
+RUN chmod +x entrypoint.sh && chmod +x *.sh
+
+# Entry point
+CMD ./entrypoint.sh
