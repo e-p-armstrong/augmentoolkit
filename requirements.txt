@@ -56,3 +56,4 @@ rank_bm25
 torch
 peft
 discord.py
+hf_transfer
