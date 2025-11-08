@@ -301,7 +301,7 @@ async def generate_multi_source_dataset(
 
     semaphore = asyncio.Semaphore(concurrency_limit)
 
-    async def run_task_with_limit(task, timeout=60):
+    async def run_task_with_limit(task, timeout=180):
         async with semaphore:
             try:
                 return await asyncio.wait_for(task, timeout=timeout)
@@ -534,7 +534,7 @@ async def generate_multi_source_dataset(
     )
 
     # Function to retrieve relevant chunks based on a query
-    async def retrieve_rag_chunks(query, top_k=3, timeout_seconds=30):
+    async def retrieve_rag_chunks(query, top_k=3, timeout_seconds=180):
         """
         Retrieve chunks from the RAG collection that are relevant to the query
 
