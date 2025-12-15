@@ -1100,3 +1100,233 @@ def process_sharegpt_pairs(conversations_list):
         output_convs[source_file].append(conversation)
 
     return output_pairs, output_convs
+
+
+# OpenSearch integration
+try:
+    from opensearchpy import OpenSearch
+    from opensearchpy.helpers import scan
+
+    def read_from_opensearch(
+        host="localhost",
+        port=9200,
+        index_name=None,
+        query=None,
+        fields_to_extract=None,
+        text_field="content",
+        max_documents=None,
+        username=None,
+        password=None,
+        use_ssl=True,
+        verify_certs=True,
+        chunk_opensearch_results=False,
+        chunk_size=1500,
+        output_dir=None,
+        api_key=None,
+        ca_certs=None,
+    ):
+        """
+        Reads documents from an OpenSearch index and returns them in standard AugmentToolkit format.
+
+        Args:
+            host (str): OpenSearch host address (default: 'localhost')
+            port (int): OpenSearch port (default: 9200)
+            index_name (str): Name of the index to query
+            query (dict): OpenSearch query DSL dict (default: match_all query)
+            fields_to_extract (list): List of field names to combine into text. If None, uses text_field only.
+            text_field (str): Primary field containing text content (default: 'content')
+            max_documents (int): Maximum number of documents to retrieve (default: unlimited)
+            username (str): Username for authentication (optional)
+            password (str): Password for authentication (optional)
+            use_ssl (bool): Use SSL/TLS for connection (default: True)
+            verify_certs (bool): Verify SSL certificates (default: True)
+            chunk_opensearch_results (bool): Whether to chunk the results (default: False)
+            chunk_size (int): Token size for chunks if chunking is enabled (default: 1500)
+            output_dir (str, optional): Directory to save/load cached results
+            api_key (str): API key for authentication (optional, alternative to username/password)
+            ca_certs (str): Path to CA certificates file (optional)
+
+        Returns:
+            list: List of dictionaries with 'text' and 'metadata' keys
+
+        Example usage:
+            >>> data = read_from_opensearch(
+            ...     host="search.example.com",
+            ...     port=443,
+            ...     index_name="documents",
+            ...     query={"match": {"category": "research"}},
+            ...     fields_to_extract=["title", "content", "summary"],
+            ...     max_documents=1000,
+            ...     username="user",
+            ...     password="pass"
+            ... )
+        """
+        if not index_name:
+            raise ValueError("index_name is required")
+
+        # Default query: match all documents
+        if query is None:
+            query = {"match_all": {}}
+
+        # Check cache
+        cache_path = None
+        if output_dir:
+            # Create a deterministic hash for caching
+            cache_data = {
+                "host": host,
+                "port": port,
+                "index": index_name,
+                "query": json.dumps(query, sort_keys=True),
+                "fields": sorted(fields_to_extract) if fields_to_extract else [text_field],
+                "max_docs": max_documents,
+                "chunk": chunk_opensearch_results,
+                "chunk_size": chunk_size if chunk_opensearch_results else 0,
+            }
+            cache_string = json.dumps(cache_data, sort_keys=True)
+            hasher = hashlib.md5(cache_string.encode())
+            cache_hash = hasher.hexdigest()
+            cache_filename = f"opensearch_cache_{cache_hash}.json"
+            cache_path = os.path.join(output_dir, cache_filename)
+
+            os.makedirs(output_dir, exist_ok=True)
+
+            if os.path.exists(cache_path):
+                print(f"Loading cached OpenSearch results from {cache_path}")
+                try:
+                    with open(cache_path, "r", encoding="utf-8") as f:
+                        return json.load(f)
+                except Exception as e:
+                    print(f"Warning: Could not load cache {cache_path}: {e}. Re-fetching.")
+
+        # Build authentication
+        auth = None
+        if api_key:
+            # API key authentication
+            auth = {"api_key": api_key}
+        elif username and password:
+            auth = (username, password)
+
+        # Create OpenSearch client
+        client_config = {
+            "hosts": [{"host": host, "port": port}],
+            "http_auth": auth,
+            "use_ssl": use_ssl,
+            "verify_certs": verify_certs,
+        }
+
+        if ca_certs:
+            client_config["ca_certs"] = ca_certs
+
+        try:
+            client = OpenSearch(**client_config)
+
+            # Test connection
+            if not client.ping():
+                raise ConnectionError(
+                    f"Could not connect to OpenSearch at {host}:{port}"
+                )
+
+            print(
+                f"Connected to OpenSearch at {host}:{port}, querying index '{index_name}'"
+            )
+
+            # Prepare search parameters
+            search_body = {"query": query}
+
+            # If specific fields requested, use _source filtering
+            if fields_to_extract:
+                search_body["_source"] = fields_to_extract
+            elif text_field != "*":
+                search_body["_source"] = [text_field]
+
+            # Use scan helper for efficient pagination
+            scroll_kwargs = {
+                "index": index_name,
+                "body": search_body,
+                "scroll": "5m",  # Keep scroll context for 5 minutes
+                "size": 1000,  # Batch size per scroll
+            }
+
+            output_list = []
+            doc_count = 0
+
+            # Scan through results
+            for hit in scan(client, **scroll_kwargs):
+                if max_documents and doc_count >= max_documents:
+                    break
+
+                # Extract document source
+                source = hit.get("_source", {})
+                doc_id = hit.get("_id", "unknown")
+
+                # Build text from fields
+                text_parts = []
+                if fields_to_extract:
+                    for field in fields_to_extract:
+                        if field in source:
+                            value = source[field]
+                            if isinstance(value, list):
+                                text_parts.extend([str(v) for v in value])
+                            else:
+                                text_parts.append(str(value))
+                else:
+                    # Use text_field only
+                    if text_field in source:
+                        value = source[text_field]
+                        if isinstance(value, list):
+                            text_parts.extend([str(v) for v in value])
+                        else:
+                            text_parts.append(str(value))
+
+                if not text_parts:
+                    continue  # Skip documents with no extractable text
+
+                combined_text = "\n\n".join(text_parts)
+
+                # Create metadata string with document ID and index
+                metadata = f"{index_name}:{doc_id}"
+
+                output_list.append({"text": combined_text, "metadata": metadata})
+                doc_count += 1
+
+            print(f"Retrieved {doc_count} documents from OpenSearch")
+
+            # Apply chunking if requested
+            if chunk_opensearch_results and output_list:
+                print(f"Chunking OpenSearch results with chunk size {chunk_size}")
+                output_list = chunk_text_list(
+                    output_list,
+                    chunk_size=chunk_size,
+                    keep_folder_structure=False,
+                    input_dir="",
+                    output_dir=None,  # Don't double-cache chunks
+                )
+
+            # Save to cache
+            if cache_path:
+                print(f"Saving OpenSearch results to cache: {cache_path}")
+                try:
+                    with open(cache_path, "w", encoding="utf-8") as f:
+                        json.dump(output_list, f, indent=4)
+                except Exception as e:
+                    print(f"Warning: Could not save cache {cache_path}: {e}")
+
+            return output_list
+
+        except Exception as e:
+            print(f"Error connecting to or querying OpenSearch: {e}")
+            raise
+
+    OPENSEARCH_AVAILABLE = True
+
+except ImportError:
+    print(
+        "NOTE: OpenSearch support requires opensearch-py. Install it to enable OpenSearch data ingestion."
+    )
+
+    def read_from_opensearch(*args, **kwargs):
+        raise ImportError(
+            "OpenSearch support is not available. Install opensearch-py: pip install opensearch-py"
+        )
+
+    OPENSEARCH_AVAILABLE = False

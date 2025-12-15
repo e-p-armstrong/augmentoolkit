@@ -1,0 +1,291 @@
+pipeline: factual-datagen-pipeline
+
+# Example configuration for using OpenSearch as an input source for AugmentToolkit
+# This shows how to read data from an OpenSearch index instead of local files
+
+no_flatten:
+  - factual_sft
+  - template_kwargs
+  - generic_dataset_paths
+  - generic_dataset_percentages
+  - other_pretrain_kwargs
+  - other_finetune_kwargs
+  - input_dirs
+  - opensearch_config
+
+# OpenSearch configuration
+# To use OpenSearch as an input source, you need to:
+# 1. Install opensearch-py: pip install opensearch-py
+# 2. Configure the opensearch_config section below
+# 3. Set use_opensearch_input: True in the input_dirs section
+
+opensearch_config:
+  host: "localhost"  # OpenSearch host
+  port: 9200         # OpenSearch port
+  index_name: "documents"  # Index to query
+
+  # Authentication (choose one method)
+  username: null  # Basic auth username (or null)
+  password: null  # Basic auth password (or null)
+  api_key: null   # API key authentication (alternative to username/password)
+
+  # SSL/TLS settings
+  use_ssl: true
+  verify_certs: true
+  ca_certs: null  # Path to CA certificates file (optional)
+
+  # Query configuration
+  query:  # OpenSearch query DSL (default: match_all)
+    match_all: {}
+  # Example custom query:
+  # query:
+  #   bool:
+  #     must:
+  #       - match:
+  #           category: "research"
+  #       - range:
+  #           date:
+  #             gte: "2023-01-01"
+
+  # Field extraction
+  text_field: "content"  # Primary field containing text
+  fields_to_extract: null  # List of fields to combine (e.g., ["title", "content", "summary"])
+                          # If null, uses text_field only
+
+  # Limits
+  max_documents: null  # Maximum documents to retrieve (null = unlimited)
+
+  # Chunking
+  chunk_opensearch_results: true  # Whether to chunk the results
+  chunk_size: 1500  # Token size for chunks if chunking is enabled
+
+model_auto_train:
+  do_train: False
+  runpod_api_key: !!PLACEHOLDER!!
+  huggingface_token: !!PLACEHOLDER!!
+  wandb_api_key: !!PLACEHOLDER!!
+  pod_id: null
+
+model_auto_run:
+  do_run: False
+  cache_dir: ./cache
+  server_type: normal
+
+path:
+  input_dirs:
+    # Example 1: Using OpenSearch as input source
+    - use_opensearch_input: true  # Set to true to use OpenSearch instead of file path
+      opensearch_config_ref: "opensearch_config"  # Reference to opensearch_config above
+      variation_generation_counts: 4
+      final_system_prompt_additional_context: "Think first, then respond."
+      factual_gen_subset_size_per_way: 2000
+      factual_gen_use_subset: False
+      rag_subset_size: 1500
+      rag_use_subset: True
+      correction_subset_size: 1500
+      correction_use_subset: True
+      input_dir_name: "opensearch_documents"  # Custom name for this input source
+
+    # Example 2: Mixing OpenSearch with file-based input
+    # - path: ./inputs/examples/facts
+    #   use_opensearch_input: false  # Default, uses file path
+    #   variation_generation_counts: 4
+    #   final_system_prompt_additional_context: ""
+    #   factual_gen_subset_size_per_way: 2000
+    #   factual_gen_use_subset: False
+    #   rag_subset_size: 1500
+    #   rag_use_subset: True
+    #   correction_subset_size: 1500
+    #   correction_use_subset: True
+
+  output_dir: ./outputs/opensearch_dataset
+  models_dir: ./models/
+  huggingface_cache_dir: ./cache/huggingface
+
+system:
+  number_of_factual_sft_generations_to_do: 2
+  remove_system_prompt_ratio: 0.2
+  remove_thought_process_ratio: 0.2
+  remove_thought_process_prompt: Do not write out your thoughts first; answer immediately.
+  final_answer_str: "Answer:"
+  generic_thought_process_on_domain_data: True
+  cite_sources_at_end: True
+  completion_mode: False
+  concurrency_limit: 100
+  use_stop: True
+  subset_size: 30
+  use_subset: False
+  chunk_size: 4000
+  what_percent_of_sft_is_pretrain: null
+  num_tokens_pretraining_in_sft: 2000000
+  shared_instruction: |
+    You are a capable Artificial Intelligence with myriad capabilities. Always think first, then respond. Your thought process should generally involve first understanding the user message, then piecing together your response.
+
+pdf_cleaning:
+  pdf_cleaning_chunk_size: 4000
+  pdf_cleaning_small_model: Qwen/QwQ-32B-Preview
+  pdf_cleaning_large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  pdf_cleaning_small_mode: api
+  pdf_cleaning_large_mode: api
+  pdf_cleaning_small_base_url: https://api.deepinfra.com/v1/openai
+  pdf_cleaning_large_base_url: https://api.deepinfra.com/v1/openai
+  pdf_cleaning_small_api_key: !!PLACEHOLDER!!
+  pdf_cleaning_large_api_key: !!PLACEHOLDER!!
+  pdf_cleaning_use_stop: True
+  pdf_cleaning_cost_small_input: 0.15
+  pdf_cleaning_cost_small_output: 0.20
+  pdf_cleaning_cost_large_input: 0.23
+  pdf_cleaning_cost_large_output: 0.40
+  pdf_cleaning_prompts: prompts
+  pdf_cleaning_default_prompts: prompts
+
+representation_variation:
+  representation_variation_chunk_size: 4000
+  representation_variation_small_model: Qwen/QwQ-32B-Preview
+  representation_variation_large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  representation_variation_small_mode: api
+  representation_variation_large_mode: api
+  representation_variation_small_base_url: https://api.deepinfra.com/v1/openai
+  representation_variation_large_base_url: https://api.deepinfra.com/v1/openai
+  representation_variation_small_api_key: !!PLACEHOLDER!!
+  representation_variation_large_api_key: !!PLACEHOLDER!!
+  representation_variation_cost_small_input: 0.15
+  representation_variation_cost_small_output: 0.20
+  representation_variation_cost_large_input: 0.23
+  representation_variation_cost_large_output: 0.40
+  representation_variation_use_stop: True
+  representation_variation_prompts: prompts
+  representation_variation_default_prompts: prompts
+  representation_variation_prompts_inferred: prompts_inferred_facts
+  representation_variation_default_prompts_inferred: prompts_inferred_facts
+  code_variation_functions: ["keyboard_augmentation"]
+
+factual_sft:
+  openended:
+    prompts: prompt_overrides/openended
+    default_prompts: prompts
+    single_turn: True
+    skip_question_check: True
+    skip_answer_relevancy_check: True
+    skip_answer_accuracy_check: True
+    skip_repair_qa_tuples: True
+    multi_source: True
+
+factual_sft_settings:
+  factual_use_stop: True
+  factual_chunk_size: 3000
+  factual_completion_mode: False
+  factual_small_model: Qwen/QwQ-32B-Preview
+  factual_small_api_key: !!PLACEHOLDER!!
+  factual_small_base_url: https://api.deepinfra.com/v1/openai
+  factual_small_mode: api
+  factual_large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  factual_large_api_key: !!PLACEHOLDER!!
+  factual_large_base_url: https://api.deepinfra.com/v1/openai
+  factual_large_mode: api
+  factual_cost_per_million_small_input: 0.15
+  factual_cost_per_million_small_output: 0.20
+  factual_cost_per_million_large_input: 0.23
+  factual_cost_per_million_large_output: 0.40
+  final_assistant_prompts_no_rag: [
+  'You are a helpful AI assistant.',
+  ]
+  items_per_conversation: 3
+  combine_sharegpt_target_pairs: 5
+
+dataset_context: OpenSearch Documents
+
+rag_data:
+  rag_failure_percentage: 0.50
+  rag_max_chunks: 3
+  user_format: "Human: {{user}} **Finished.**"
+  system_format: "Instruction: {{system}} **Finished.**"
+  assistant_format: "AI: {{assistant}} **Finished.**"
+  bos: "<s>"
+  final_assistant_prompts: [
+  'You are a helpful AI assistant.',
+  ]
+  num_items_per_group: 3
+  rag_skip_filter_chunks: False
+  rag_small_model: Qwen/QwQ-32B-Preview
+  rag_small_api_key: !!PLACEHOLDER!!
+  rag_small_base_url: https://api.deepinfra.com/v1/openai
+  rag_small_mode: api
+  rag_large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  rag_large_api_key: !!PLACEHOLDER!!
+  rag_large_base_url: https://api.deepinfra.com/v1/openai
+  rag_large_mode: api
+  rag_cost_per_million_small_input: 0.15
+  rag_cost_per_million_small_output: 0.20
+  rag_cost_per_million_large_input: 0.23
+  rag_cost_per_million_large_output: 0.40
+  rag_use_stop: True
+  rag_prompts: prompts
+  rag_default_prompts: prompts
+
+transform_generic_data:
+  transform_generic_data_use_stop: True
+  transform_generic_data_large_model: deepseek-ai/DeepSeek-V3
+  transform_generic_data_large_api_key: !!PLACEHOLDER!!
+  transform_generic_data_large_base_url: https://api.deepinfra.com/v1/openai
+  transform_generic_data_large_mode: api
+  transform_generic_data_small_model: deepseek-ai/DeepSeek-V3
+  transform_generic_data_small_api_key: !!PLACEHOLDER!!
+  transform_generic_data_small_base_url: https://api.deepinfra.com/v1/openai
+  transform_generic_data_small_mode: api
+  transform_generic_cot_preface: "Thought Process:"
+  transform_generic_cot_suffix: "\nAnswer:"
+  transform_generic_prompts: "prompts"
+  transform_generic_data_cost_per_million_small_input: 0.30
+  transform_generic_data_cost_per_million_small_output: 0.88
+  transform_generic_data_cost_per_million_large_input: 0.30
+  transform_generic_data_cost_per_million_large_output: 0.88
+
+correction_pipeline:
+  correction_use_subset: False
+  correction_subset_size: 30
+  correction_chunk_size: 4000
+  correction_small_model: Qwen/QwQ-32B-Preview
+  correction_small_api_key: !!PLACEHOLDER!!
+  correction_small_base_url: https://api.deepinfra.com/v1/openai
+  correction_small_mode: api
+  correction_large_model: meta-llama/Meta-Llama-3.1-70B-Instruct
+  correction_large_api_key: !!PLACEHOLDER!!
+  correction_large_base_url: https://api.deepinfra.com/v1/openai
+  correction_large_mode: api
+  correction_cost_per_million_small_input: 0.15
+  correction_cost_per_million_small_output: 0.20
+  correction_cost_per_million_large_input: 0.23
+  correction_cost_per_million_large_output: 0.40
+  correction_prompt_template: "{% for message in messages %}{% if (message['role'] == 'system') %}{{message['content'] + '\n'}}{% elif (message['role'] == 'user') %}{{'Human: ' + message['content'] + ' **Finished.**' + '\n'}}{% elif message['role'] == 'assistant' %}{{'AI: ' + message['content'] + ' **Finished.**' + '\n'}}{% endif %}{% endfor %}"
+  correction_use_stop: True
+  correction_completion_mode: False
+  correction_prompts: prompts
+  correction_default_prompts: prompts
+
+final_datasaving_settings:
+  template: "atk"
+  template_kwargs: {}
+  generic_dataset_paths:
+    - path: Augmentoolkit/Augmentoolkit-Generic-Grabbag-Thoughts
+      context_to_add: "You are a helpful AI assistant."
+      context_to_add_type: "none"
+  generic_dataset_percentages:
+    - 100
+  max_samples_per_dataset: 100000
+  minimum_generic_sft: 2000000
+
+model_training:
+  base_model: alpindale/Mistral-7B-v0.2-hf
+  pretrain_hub_model_id: !!PLACEHOLDER!!/opensearch-model-pretrain
+  pretrain_hub_strategy: all_checkpoints
+  finetune_hub_model_id: !!PLACEHOLDER!!/opensearch-model-sft
+  finetune_hub_strategy: all_checkpoints
+  context_length: 10000
+  wandb_project: opensearch-project
+  is_mistral_derived_model: True
+  other_pretrain_kwargs:
+    num_epochs: 5
+  other_finetune_kwargs: {}
+
+do_not_use_llm_for_pdf_processing: True

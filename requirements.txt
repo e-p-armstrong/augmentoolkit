@@ -39,6 +39,7 @@ wandb
 
 # Database & Caching
 redis
+opensearch-py
 
 # Utilities
 tqdm

@@ -18,6 +18,7 @@ from generation.core_components.chunking import (
     read_jsonl_completions,
     read_text,
     write_text,
+    read_from_opensearch,
 )
 from generation.core_components.data_prep_operations import (
     completionify_sharegpt,
@@ -254,19 +255,59 @@ async def factual_datagen_full(  # there will be quite a few args here
         per_pretrain_group_score / 3
     )  # rather than calculating what the progress should be at each step, in cases where things are complex, it is better to make progress a variable and add to it as appropriate. The replay will always catch it up to where it was.
     for input_dir in input_dirs:
-        input_dir["path"] = input_dir["path"].rstrip("/")  # footgun avoidance
-        input_path = input_dir["path"]
+        # Check if using OpenSearch as input source
+        use_opensearch = input_dir.get("use_opensearch_input", False)
+
+        if use_opensearch:
+            # Get OpenSearch configuration from kwargs (passed as nested dict due to no_flatten)
+            opensearch_config = kwargs.get("opensearch_config", {})
+
+            # Set input_dir_name for OpenSearch sources
+            input_dir["input_dir_name"] = input_dir.get("input_dir_name", "opensearch_data")
+
+            # Read from OpenSearch
+            print(f"Reading data from OpenSearch for {input_dir['input_dir_name']}")
+            opensearch_data = read_from_opensearch(
+                host=opensearch_config.get("host", "localhost"),
+                port=opensearch_config.get("port", 9200),
+                index_name=opensearch_config.get("index_name"),
+                query=opensearch_config.get("query"),
+                fields_to_extract=opensearch_config.get("fields_to_extract"),
+                text_field=opensearch_config.get("text_field", "content"),
+                max_documents=opensearch_config.get("max_documents"),
+                username=opensearch_config.get("username"),
+                password=opensearch_config.get("password"),
+                api_key=opensearch_config.get("api_key"),
+                use_ssl=opensearch_config.get("use_ssl", True),
+                verify_certs=opensearch_config.get("verify_certs", True),
+                ca_certs=opensearch_config.get("ca_certs"),
+                chunk_opensearch_results=opensearch_config.get("chunk_opensearch_results", False),
+                chunk_size=opensearch_config.get("chunk_size", 1500),
+                output_dir=output_dir,
+            )
+
+            # OpenSearch returns data already in the correct format, no PDF processing needed
+            texts_json = []
+            texts_txt = opensearch_data
+            texts_pdf = []
+
+        else:
+            # Use traditional file-based input
+            input_dir["path"] = input_dir["path"].rstrip("/")  # footgun avoidance
+            input_path = input_dir["path"]
+            variation_generation_counts = input_dir["variation_generation_counts"]
+
+            input_dir["input_dir_name"] = os.path.basename(input_path)
+
+            texts_json = read_jsonl_completions(input_dir=input_path)
+            texts_txt = read_text(
+                input_dir=input_path, extensions=[".txt", ".md", ".epub", ".html", ".docx"]
+            )
+            texts_pdf = read_text(
+                input_dir=input_path, extensions=[".pdf"]
+            )  # only this one will be passed to a pdf-cleaning pipeline
+
         variation_generation_counts = input_dir["variation_generation_counts"]
-
-        input_dir["input_dir_name"] = os.path.basename(input_path)
-
-        texts_json = read_jsonl_completions(input_dir=input_path)
-        texts_txt = read_text(
-            input_dir=input_path, extensions=[".txt", ".md", ".epub", ".html", ".docx"]
-        )
-        texts_pdf = read_text(
-            input_dir=input_path, extensions=[".pdf"]
-        )  # only this one will be passed to a pdf-cleaning pipeline
         # Notably we don't work with chunks in the orchestration; we work with full texts and then chunk inside
 
         # First, we clean the PDFs
